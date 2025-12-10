@@ -114,7 +114,6 @@ mkdir extern/pybind11
 git clone https://github.com/pybind/pybind11.git extern/pybind11
 ````
 
-
 ### 🔨 Build C++ Core
 Before building, ensure you have CMake installed and your environment is set up correctly.
 Download and install CMake https://cmake.org/download/
