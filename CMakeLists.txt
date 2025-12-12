@@ -47,6 +47,13 @@ include(cmake/embed_knot_files.cmake)
 set_source_files_properties(${CMAKE_BINARY_DIR}/generated/knot_files_embedded.cpp PROPERTIES GENERATED TRUE)
 set_source_files_properties(${CMAKE_BINARY_DIR}/generated/knot_files_embedded.h PROPERTIES GENERATED TRUE)
 
+# Create a custom target to ensure knot files are generated
+add_custom_target(knot_files_embedded ALL
+    DEPENDS ${CMAKE_BINARY_DIR}/generated/knot_files_embedded.cpp
+    ${CMAKE_BINARY_DIR}/generated/knot_files_embedded.h
+    COMMENT "Ensuring knot files are embedded"
+)
+
 # Core SST library sources
 add_library(swirl_string_core_lib STATIC
         src/biot_savart.cpp
@@ -131,6 +138,128 @@ if(IS_LINUX)
 endif()
 add_executable(test_frenet tests/test_frenet_helicity.cpp)
 target_link_libraries(test_frenet PRIVATE swirl_string_core_lib)
+
+# === Node.js Native Addon Build ===
+# Check if node-addon-api is available
+find_program(NODE_EXECUTABLE NAMES node)
+if(NODE_EXECUTABLE)
+    # Try to find node-addon-api include directory
+    execute_process(
+        COMMAND ${NODE_EXECUTABLE} -p "require('node-addon-api').include"
+        OUTPUT_VARIABLE NODE_ADDON_API_INCLUDE
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+        ERROR_QUIET
+    )
+    
+    if(NODE_ADDON_API_INCLUDE AND EXISTS ${NODE_ADDON_API_INCLUDE})
+        # Build Node.js native addon
+        add_library(swirl_string_core_node SHARED
+            src_bindings/node/module_node.cpp
+            src_bindings/node/node_biot_savart.cpp
+            src_bindings/node/node_field_kernels.cpp
+            src_bindings/node/node_field_ops.cpp
+            src_bindings/node/node_fluid_dynamics.cpp
+            src_bindings/node/node_knot.cpp
+            src_bindings/node/node_frenet_helicity.cpp
+            src_bindings/node/node_potential_timefield.cpp
+            src_bindings/node/node_hyperbolic_volume.cpp
+            src_bindings/node/node_radiation_flow.cpp
+            src_bindings/node/node_swirl_field.cpp
+            src_bindings/node/node_thermo_dynamics.cpp
+            src_bindings/node/node_time_evolution.cpp
+            src_bindings/node/node_vortex_ring.cpp
+            src_bindings/node/node_vorticity_dynamics.cpp
+            src_bindings/node/node_sst_gravity.cpp
+            src/biot_savart.cpp
+            src/fluid_dynamics.cpp
+            src/field_kernels.cpp
+            src/frenet_helicity.cpp
+            src/potential_timefield.cpp
+            src/hyperbolic_volume.cpp
+            src/knot_dynamics.cpp
+            src/radiation_flow.cpp
+            src/swirl_field.cpp
+            src/thermo_dynamics.cpp
+            src/time_evolution.cpp
+            src/vortex_ring.cpp
+            src/vorticity_dynamics.cpp
+            src/sst_gravity.cpp
+            ${CMAKE_BINARY_DIR}/generated/knot_files_embedded.cpp
+        )
+        
+        target_include_directories(swirl_string_core_node PRIVATE
+            ${NODE_ADDON_API_INCLUDE}
+            src
+            include
+            ${CMAKE_BINARY_DIR}/generated
+        )
+        
+        # Link against the core library (but we're including all sources, so this may not be needed)
+        # target_link_libraries(swirl_string_core_node PRIVATE swirl_string_core_lib)
+        
+        # Set C++ standard (use 20 for better compatibility with node-gyp)
+        set_target_properties(swirl_string_core_node PROPERTIES
+            CXX_STANDARD 20
+            CXX_STANDARD_REQUIRED ON
+        )
+        
+        if(IS_WINDOWS)
+            set_target_properties(swirl_string_core_node PROPERTIES
+                PREFIX ""
+                SUFFIX ".node"
+            )
+        else()
+            set_target_properties(swirl_string_core_node PROPERTIES
+                PREFIX ""
+                SUFFIX ".node"
+            )
+        endif()
+        
+        # Ensure generated files are created before building
+        add_dependencies(swirl_string_core_node knot_files_embedded)
+        
+        # Copy the built .node file to build/Release for node-gyp compatibility
+        add_custom_command(TARGET swirl_string_core_node POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy
+            $<TARGET_FILE:swirl_string_core_node>
+            ${CMAKE_BINARY_DIR}/Release/swirl_string_core.node
+            COMMENT "Copying Node.js addon to build/Release"
+        )
+        
+        message(STATUS "Node.js native addon build enabled")
+    else()
+        message(STATUS "node-addon-api not found, skipping Node.js addon build")
+    endif()
+endif()
+
+# === WebAssembly Build (Emscripten) ===
+# Check if Emscripten is available
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Emscripten" OR EMSCRIPTEN)
+    message(STATUS "Emscripten detected, building WASM module")
+    
+    # WASM bindings will be created in src_bindings/wasm/
+    # For now, we'll create a placeholder target
+    # Full WASM implementation requires Emscripten-specific bindings
+    
+    add_library(swirl_string_core_wasm STATIC
+        # WASM sources will go here
+        # src_bindings/wasm/module_wasm.cpp
+        # ... other WASM bindings
+    )
+    
+    # Emscripten-specific flags
+    target_compile_options(swirl_string_core_wasm PRIVATE
+        -O3
+        -s WASM=1
+        -s EXPORT_ES6=1
+        -s MODULARIZE=1
+        -s EXPORT_NAME="createSwirlStringCoreModule"
+    )
+    
+    message(STATUS "WASM build target created (requires Emscripten bindings)")
+else()
+    message(STATUS "Emscripten not detected, skipping WASM build")
+endif()
 
 
 # Install targets

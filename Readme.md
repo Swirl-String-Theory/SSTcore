@@ -14,6 +14,9 @@ We build the C++ SST-Bindings first, and then we can import it into benchmark Py
 - 🐍 **Python Frontend**  
   For visualization, parameter sweeps, and interactive experiments using `matplotlib`, `numpy`, and `PyBind11` integration.
 
+- 📦 **npm Package**  
+  Available for Node.js and browser (WebAssembly) via `npm install swirl-string-core`. Perfect for Angular and other JavaScript/TypeScript applications.
+
 - 🧲 **EM Field Simulations**  
   Supports generation and animation of **rotating 3-phase bivort** electric and magnetic field structures.
 
@@ -31,6 +34,22 @@ We build the C++ SST-Bindings first, and then we can import it into benchmark Py
 | Rotating EM Vortex | ![EM Vortices](examples/em_quiver.gif) |
 
 ---
+
+### Installation Options
+
+#### npm Package (Node.js / Browser)
+
+```bash
+npm install swirl-string-core
+```
+
+See [README_NPM.md](README_NPM.md) for detailed usage instructions.
+
+#### Python Package
+
+```bash
+pip install swirl-string-core
+```
 
 ### SSTCORE Installation Guide (Windows)
 
