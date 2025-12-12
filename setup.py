@@ -1,5 +1,6 @@
 # setup.py for Swirl_String_core pip package
 from setuptools import setup, Extension, find_packages
+from setuptools.command.build import build
 from pybind11.setup_helpers import Pybind11Extension, build_ext
 from pybind11 import get_cmake_dir
 import pybind11
@@ -8,6 +9,7 @@ import glob
 import subprocess
 import tempfile
 import shutil
+import sys
 
 __version__ = "0.1.3"
 
@@ -58,6 +60,119 @@ class CustomBuildExt(build_ext):
         
         # Now build extensions
         super().build_extensions()
+
+# Custom build command to also build npm package
+class CustomBuild(build):
+    """Custom build command that also builds the npm package."""
+    
+    def run(self):
+        # First, run the standard build
+        super().run()
+        
+        # Then build npm package
+        self.build_npm_package()
+    
+    def build_npm_package(self):
+        """Build the npm package (Node.js native addon)."""
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        package_json = os.path.join(base_dir, "package.json")
+        
+        # Check if package.json exists
+        if not os.path.exists(package_json):
+            print("Warning: package.json not found, skipping npm build")
+            return
+        
+        # Check if Node.js is available
+        try:
+            result = subprocess.run(
+                ["node", "--version"],
+                capture_output=True,
+                text=True,
+                timeout=5
+            )
+            if result.returncode != 0:
+                print("Warning: Node.js not available, skipping npm build")
+                return
+            print(f"Found Node.js: {result.stdout.strip()}")
+        except (FileNotFoundError, subprocess.TimeoutExpired):
+            print("Warning: Node.js not found, skipping npm build")
+            return
+        
+        # Check if npm is available
+        try:
+            result = subprocess.run(
+                ["npm", "--version"],
+                capture_output=True,
+                text=True,
+                timeout=5
+            )
+            if result.returncode != 0:
+                print("Warning: npm not available, skipping npm build")
+                return
+            print(f"Found npm: {result.stdout.strip()}")
+        except (FileNotFoundError, subprocess.TimeoutExpired):
+            print("Warning: npm not found, skipping npm build")
+            return
+        
+        print("\n" + "="*60)
+        print("Building npm package (Node.js native addon)...")
+        print("="*60)
+        
+        # Install npm dependencies
+        try:
+            print("\n[1/3] Installing npm dependencies...")
+            result = subprocess.run(
+                ["npm", "install"],
+                cwd=base_dir,
+                check=False,
+                capture_output=False
+            )
+            if result.returncode != 0:
+                print("Warning: npm install failed, continuing anyway...")
+        except Exception as e:
+            print(f"Warning: npm install failed: {e}")
+        
+        # Generate embedded knot files for Node.js build (if not already done)
+        try:
+            print("\n[2/3] Generating embedded knot files for Node.js...")
+            build_node_dir = os.path.join(base_dir, "build_node")
+            generated_dir = os.path.join(build_node_dir, "generated")
+            os.makedirs(generated_dir, exist_ok=True)
+            
+            # Run CMake to generate embedded files
+            result = subprocess.run(
+                ["cmake", "-B", "build_node", "-S", "."],
+                cwd=base_dir,
+                check=False,
+                capture_output=True,
+                text=True
+            )
+            if result.returncode == 0:
+                print("✓ Embedded knot files generated")
+            else:
+                print("Warning: CMake configuration failed (this is okay if CMake is not available)")
+        except Exception as e:
+            print(f"Warning: Failed to generate embedded files: {e}")
+        
+        # Build Node.js native addon
+        try:
+            print("\n[3/3] Building Node.js native addon...")
+            result = subprocess.run(
+                ["npm", "run", "build:node"],
+                cwd=base_dir,
+                check=False,
+                capture_output=False
+            )
+            if result.returncode == 0:
+                print("✓ Node.js native addon built successfully")
+            else:
+                print("Warning: Node.js native addon build failed (this is okay, package will use WASM fallback)")
+        except Exception as e:
+            print(f"Warning: Failed to build Node.js addon: {e}")
+        
+        print("\n" + "="*60)
+        print("npm package build completed")
+        print("="*60 + "\n")
 
 def generate_embedded_knot_files():
     """Generate embedded knot files C++ source during build."""
@@ -214,7 +329,10 @@ setup(
         "Source Code": "https://github.com/Swirl-String-Theory/SSTcore",
     },
     ext_modules=ext_modules,
-    cmdclass={"build_ext": CustomBuildExt},
+    cmdclass={
+        "build": CustomBuild,
+        "build_ext": CustomBuildExt
+    },
     zip_safe=False,
     python_requires=">=3.7",
     packages=find_packages(),
