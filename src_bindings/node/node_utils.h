@@ -15,7 +15,8 @@ namespace sst {
 static std::vector<sst::Vec3> js_array_to_vec3_list(const Napi::Array& arr) {
     std::vector<sst::Vec3> result;
     for (uint32_t i = 0; i < arr.Length(); i++) {
-        Napi::Value val = arr[i];
+        // Use Get() instead of operator[] to avoid ambiguity with node-addon-api v7
+        Napi::Value val = arr.Get(i);
         if (!val.IsArray()) {
             throw Napi::TypeError::New(arr.Env(), "Expected array of [x, y, z] arrays");
         }
@@ -24,9 +25,9 @@ static std::vector<sst::Vec3> js_array_to_vec3_list(const Napi::Array& arr) {
             throw Napi::TypeError::New(arr.Env(), "Each vector must have 3 elements [x, y, z]");
         }
         sst::Vec3 v;
-        v[0] = vec[0].As<Napi::Number>().DoubleValue();
-        v[1] = vec[1].As<Napi::Number>().DoubleValue();
-        v[2] = vec[2].As<Napi::Number>().DoubleValue();
+        v[0] = vec.Get((uint32_t)0u).As<Napi::Number>().DoubleValue();
+        v[1] = vec.Get((uint32_t)1u).As<Napi::Number>().DoubleValue();
+        v[2] = vec.Get((uint32_t)2u).As<Napi::Number>().DoubleValue();
         result.push_back(v);
     }
     return result;
@@ -62,10 +63,10 @@ static Napi::Array vec3_list_to_js_array(Napi::Env env, const std::vector<sst::V
     Napi::Array result = Napi::Array::New(env, vecs.size());
     for (size_t i = 0; i < vecs.size(); i++) {
         Napi::Array vec = Napi::Array::New(env, 3);
-        vec[0] = Napi::Number::New(env, vecs[i][0]);
-        vec[1] = Napi::Number::New(env, vecs[i][1]);
-        vec[2] = Napi::Number::New(env, vecs[i][2]);
-        result[i] = vec;
+        vec.Set((uint32_t)0u, Napi::Number::New(env, vecs[i][0]));
+        vec.Set((uint32_t)1u, Napi::Number::New(env, vecs[i][1]));
+        vec.Set((uint32_t)2u, Napi::Number::New(env, vecs[i][2]));
+        result.Set((uint32_t)i, vec);
     }
     return result;
 }
@@ -89,7 +90,8 @@ static Napi::TypedArray vec3_list_to_js_typedarray(Napi::Env env, const std::vec
 static std::vector<double> js_array_to_double_vector(const Napi::Array& arr) {
     std::vector<double> result;
     for (uint32_t i = 0; i < arr.Length(); i++) {
-        result.push_back(arr[i].As<Napi::Number>().DoubleValue());
+        Napi::Value v = arr.Get(i);
+        result.push_back(v.As<Napi::Number>().DoubleValue());
     }
     return result;
 }
@@ -98,10 +100,9 @@ static std::vector<double> js_array_to_double_vector(const Napi::Array& arr) {
 static Napi::Array double_vector_to_js_array(Napi::Env env, const std::vector<double>& vec) {
     Napi::Array result = Napi::Array::New(env, vec.size());
     for (size_t i = 0; i < vec.size(); i++) {
-        result[i] = Napi::Number::New(env, vec[i]);
+        result.Set((uint32_t)i, Napi::Number::New(env, vec[i]));
     }
     return result;
 }
 
 #endif // NODE_UTILS_H
-

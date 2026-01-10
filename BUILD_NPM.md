@@ -15,7 +15,14 @@ This guide explains how to build the npm package for local use or publication.
 
 ### Optional (for WASM)
 - **Emscripten SDK** (for browser/WebAssembly builds)
+# Still inside the session that has EMSDK set
+$env:EMSCRIPTEN = "$env:EMSDK\upstream\emscripten"
 
+# Sanity check: toolchain file should exist
+Test-Path "$env:EMSCRIPTEN\cmake\Modules\Platform\Emscripten.cmake"
+
+# Also quickly print to be sure
+echo "EMSCRIPTEN=$env:EMSCRIPTEN"
 ## Quick Start
 
 ### 1. Install Dependencies
@@ -37,9 +44,20 @@ npm run build:node
 ```
 
 This command:
-1. Runs CMake to generate embedded knot files
-2. Builds the Node.js native addon using CMake
+1. Runs CMake to generate embedded knot files and configure the Node addon target
+2. Uses a helper script (`scripts/build_node_target.js`) to **only** build the CMake Node addon target if it was generated (i.e., `HAVE_SWIRL_STRING_CORE_NODE=ON`)
 3. Builds the addon using node-gyp (creates `build/Release/swirl_string_core.node`)
+
+If `node-addon-api` is not available or CMake cannot detect it, the CMake Node addon target is skipped and the helper script will log a message and continue without failing the build. In that case, `node-gyp rebuild` will still attempt to build the native addon using `binding.gyp`.
+
+> **Windows note:** If CMake has trouble locating `node-addon-api`, you can override the include path explicitly when configuring:
+>
+> ```powershell
+> $nodeAddonApiInclude = node -p "require('node-addon-api').include"
+> cmake -B build_node -S . "-DNODE_ADDON_API_INCLUDE_DIR=$nodeAddonApiInclude"
+> ```
+>
+> Then re-run `npm run build:node`.
 
 **Note**: The first build may take several minutes as it compiles all C++ sources.
 
@@ -247,4 +265,3 @@ For CI/CD pipelines, you can use:
 - See `README_NPM.md` for usage examples
 - See `index.d.ts` for TypeScript API documentation
 - Check `tests/test_basic.js` for example usage
-

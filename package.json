@@ -19,8 +19,8 @@
     "include/"
   ],
   "scripts": {
-    "build": "npm run build:all",
-    "build:node": "cmake -B build_node -S . && cmake --build build_node --target swirl_string_core_node && node-gyp rebuild",
+    "build": "npm run build:node",
+    "build:node": "cmake -B build_node -S . && node scripts/build_node_target.js && node-gyp rebuild",
     "build:wasm": "node scripts/build_wasm.js",
     "build:all": "npm run build:node && npm run build:wasm",
     "install": "node scripts/prebuild.js || node-gyp rebuild || echo 'Native build failed, using WASM fallback'",
@@ -59,4 +59,3 @@
   },
   "gypfile": true
 }
-

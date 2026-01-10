@@ -142,16 +142,31 @@ target_link_libraries(test_frenet PRIVATE swirl_string_core_lib)
 # === Node.js Native Addon Build ===
 # Check if node-addon-api is available
 find_program(NODE_EXECUTABLE NAMES node)
+
+# Allow manual override of node-addon-api include dir for robustness (especially on Windows)
+set(NODE_ADDON_API_INCLUDE_DIR "" CACHE PATH "Path to node-addon-api include directory (optional override)")
+
+set(HAVE_SWIRL_STRING_CORE_NODE OFF CACHE BOOL "Node.js addon target is available")
+
 if(NODE_EXECUTABLE)
-    # Try to find node-addon-api include directory
-    execute_process(
-        COMMAND ${NODE_EXECUTABLE} -p "require('node-addon-api').include"
-        OUTPUT_VARIABLE NODE_ADDON_API_INCLUDE
-        OUTPUT_STRIP_TRAILING_WHITESPACE
-        ERROR_QUIET
-    )
-    
-    if(NODE_ADDON_API_INCLUDE AND EXISTS ${NODE_ADDON_API_INCLUDE})
+    # Try to find node-addon-api include directory if not provided explicitly
+    if(NOT NODE_ADDON_API_INCLUDE_DIR)
+        execute_process(
+            COMMAND ${NODE_EXECUTABLE} -p "require('node-addon-api').include"
+            OUTPUT_VARIABLE NODE_ADDON_API_INCLUDE_RAW
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+            ERROR_QUIET
+        )
+        set(NODE_ADDON_API_INCLUDE_DIR ${NODE_ADDON_API_INCLUDE_RAW})
+    endif()
+
+    # Normalize path and strip any quotes for CMake's EXISTS check (important on Windows)
+    if(NODE_ADDON_API_INCLUDE_DIR)
+        file(TO_CMAKE_PATH "${NODE_ADDON_API_INCLUDE_DIR}" NODE_ADDON_API_INCLUDE_NORM)
+        string(REPLACE "\"" "" NODE_ADDON_API_INCLUDE_NORM "${NODE_ADDON_API_INCLUDE_NORM}")
+    endif()
+
+    if(NODE_ADDON_API_INCLUDE_NORM AND EXISTS "${NODE_ADDON_API_INCLUDE_NORM}")
         # Build Node.js native addon
         add_library(swirl_string_core_node SHARED
             src_bindings/node/module_node.cpp
@@ -188,7 +203,7 @@ if(NODE_EXECUTABLE)
         )
         
         target_include_directories(swirl_string_core_node PRIVATE
-            ${NODE_ADDON_API_INCLUDE}
+            ${NODE_ADDON_API_INCLUDE_NORM}
             src
             include
             ${CMAKE_BINARY_DIR}/generated
@@ -226,9 +241,11 @@ if(NODE_EXECUTABLE)
             COMMENT "Copying Node.js addon to build/Release"
         )
         
+        set(HAVE_SWIRL_STRING_CORE_NODE ON CACHE BOOL "Node.js addon target is available")
         message(STATUS "Node.js native addon build enabled")
     else()
-        message(STATUS "node-addon-api not found, skipping Node.js addon build")
+        message(STATUS "node-addon-api not found or include dir invalid, skipping Node.js addon build")
+        set(HAVE_SWIRL_STRING_CORE_NODE OFF CACHE BOOL "Node.js addon target is available")
     endif()
 endif()
 

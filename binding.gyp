@@ -32,27 +32,18 @@
         "src/time_evolution.cpp",
         "src/vortex_ring.cpp",
         "src/vorticity_dynamics.cpp",
-        "src/sst_gravity.cpp"
+        "src/sst_gravity.cpp",
+        "build_node/generated/knot_files_embedded.cpp"
       ],
       "include_dirs": [
         "<!@(node -p \"require('node-addon-api').include\")",
         "src",
         "include",
-        "<(module_root_dir)/build/generated",
+        "<(module_root_dir)/build_node/generated",
         "<(module_root_dir)/extern/pybind11/include"
       ],
       "defines": [
         "NAPI_DISABLE_CPP_EXCEPTIONS"
-      ],
-      "conditions": [
-        ["'<(module_root_dir)/build/generated/knot_files_embedded.cpp' != ''", {
-          "sources": [
-            "<(module_root_dir)/build/generated/knot_files_embedded.cpp"
-          ],
-          "defines": [
-            "KNOT_FILES_EMBEDDED_H"
-          ]
-        }]
       ],
       "cflags!": [ "-fno-exceptions" ],
       "cflags_cc!": [ "-fno-exceptions" ],
@@ -81,4 +72,3 @@
     }
   ]
 }
-

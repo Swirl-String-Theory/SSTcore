@@ -64,10 +64,10 @@ void bind_biot_savart(Napi::Env env, Napi::Object exports) {
             throw Napi::TypeError::New(env, "shape must be [x, y, z]");
         }
         std::array<int, 3> shape;
-        shape[0] = shapeArr[0].As<Napi::Number>().Int32Value();
-        shape[1] = shapeArr[1].As<Napi::Number>().Int32Value();
-        shape[2] = shapeArr[2].As<Napi::Number>().Int32Value();
-        
+        shape[0] = shapeArr.Get((uint32_t)0u).As<Napi::Number>().Int32Value();
+        shape[1] = shapeArr.Get((uint32_t)1u).As<Napi::Number>().Int32Value();
+        shape[2] = shapeArr.Get((uint32_t)2u).As<Napi::Number>().Int32Value();
+
         double spacing = info[2].As<Napi::Number>().DoubleValue();
         
         std::vector<Vec3> result = BiotSavart::computeVorticity(velocity, shape, spacing);
@@ -95,10 +95,10 @@ void bind_biot_savart(Napi::Env env, Napi::Object exports) {
             throw Napi::TypeError::New(env, "shape must be [x, y, z]");
         }
         std::array<int, 3> shape;
-        shape[0] = shapeArr[0].As<Napi::Number>().Int32Value();
-        shape[1] = shapeArr[1].As<Napi::Number>().Int32Value();
-        shape[2] = shapeArr[2].As<Napi::Number>().Int32Value();
-        
+        shape[0] = shapeArr.Get((uint32_t)0u).As<Napi::Number>().Int32Value();
+        shape[1] = shapeArr.Get((uint32_t)1u).As<Napi::Number>().Int32Value();
+        shape[2] = shapeArr.Get((uint32_t)2u).As<Napi::Number>().Int32Value();
+
         int margin = info[2].As<Napi::Number>().Int32Value();
         
         std::vector<Vec3> result = BiotSavart::extractInterior(field, shape, margin);
@@ -153,9 +153,9 @@ void bind_biot_savart(Napi::Env env, Napi::Object exports) {
             if (rArr.Length() != 3) {
                 throw Napi::TypeError::New(env, "r must be [x, y, z]");
             }
-            r[0] = rArr[0].As<Napi::Number>().DoubleValue();
-            r[1] = rArr[1].As<Napi::Number>().DoubleValue();
-            r[2] = rArr[2].As<Napi::Number>().DoubleValue();
+            r[0] = rArr.Get((uint32_t)0u).As<Napi::Number>().DoubleValue();
+            r[1] = rArr.Get((uint32_t)1u).As<Napi::Number>().DoubleValue();
+            r[2] = rArr.Get((uint32_t)2u).As<Napi::Number>().DoubleValue();
         } else {
             throw Napi::TypeError::New(env, "r must be [x, y, z]");
         }
@@ -185,9 +185,9 @@ void bind_biot_savart(Napi::Env env, Napi::Object exports) {
         Vec3 result = BiotSavart::velocity(r, filament_points, tangent_vectors, circulation);
         
         Napi::Array resultArr = Napi::Array::New(env, 3);
-        resultArr[0] = Napi::Number::New(env, result[0]);
-        resultArr[1] = Napi::Number::New(env, result[1]);
-        resultArr[2] = Napi::Number::New(env, result[2]);
+        resultArr.Set((uint32_t)0u, Napi::Number::New(env, result[0]));
+        resultArr.Set((uint32_t)1u, Napi::Number::New(env, result[1]));
+        resultArr.Set((uint32_t)2u, Napi::Number::New(env, result[2]));
         return resultArr;
     }, "biotSavartVelocity"));
     
@@ -219,4 +219,3 @@ void bind_biot_savart(Napi::Env env, Napi::Object exports) {
         return vec3_list_to_js_typedarray(env, result);
     }, "biotSavartVelocityGrid"));
 }
-
