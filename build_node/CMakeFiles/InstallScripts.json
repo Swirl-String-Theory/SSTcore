@@ -1,8 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"C:/workspace/projects/SSTcore/build_node/cmake_install.cmake",
-		"C:/workspace/projects/SSTcore/build_node/extern/pybind11/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
