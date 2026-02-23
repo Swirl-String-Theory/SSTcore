@@ -21,7 +21,7 @@ import os
 from pathlib import Path
 
 # Python versions to build for
-PYTHON_VERSIONS = ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
+PYTHON_VERSIONS = ["3.9", "3.10", "3.11", "3.12", "3.13"]
 
 # Environment names (conda env names can't have dots)
 ENV_NAMES = {v: f"py{v.replace('.', '')}" for v in PYTHON_VERSIONS}
@@ -182,4 +182,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
