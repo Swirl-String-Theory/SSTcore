@@ -53,7 +53,9 @@ jobs:
         run: npm ci
       
       - name: Generate embedded knot files
+        shell: bash
         run: |
+          rm -rf build_node build
           mkdir -p build/generated
           cmake -B build_node -S .
       
@@ -129,7 +131,9 @@ jobs:
           fi
       
       - name: Generate embedded knot files
+        shell: bash
         run: |
+          rm -rf build_node build
           mkdir -p build/generated
           cmake -B build_node -S .
       

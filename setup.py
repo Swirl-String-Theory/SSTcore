@@ -16,34 +16,22 @@ __version__ = "0.1.3"
 # Custom build_ext to generate embedded files during build
 class CustomBuildExt(build_ext):
     def build_extensions(self):
-        # Generate embedded files before building extensions
+        # Generate embedded files before building extensions (always generates at least stub)
         header_file, source_file = generate_embedded_knot_files()
-        
-        if source_file and os.path.exists(source_file) and header_file and os.path.exists(header_file):
-            # Get absolute paths
-            header_dir = os.path.dirname(os.path.abspath(header_file))
-            abs_source = os.path.abspath(source_file)
-            
-            # Update include dirs and sources for all extensions
-            for ext in self.extensions:
-                # Header is now in src/, which is already in include_dirs, so no need to add
-                # But verify src is in include_dirs
-                base_dir = os.path.dirname(os.path.abspath(__file__))
-                src_dir = os.path.join(base_dir, "src")
-                ext_include_dirs = [os.path.abspath(d) for d in ext.include_dirs]
-                if os.path.abspath(src_dir) not in ext_include_dirs:
-                    ext.include_dirs.insert(0, src_dir)
-                    print(f"Ensured src directory in includes: {src_dir}")
-                
-                # Add source file - use relative path for build system
-                base_dir = os.path.dirname(os.path.abspath(__file__))
-                rel_source = os.path.relpath(abs_source, base_dir)
-                ext_sources = [os.path.abspath(s) if os.path.isabs(s) else os.path.abspath(os.path.join(base_dir, s)) for s in ext.sources]
-                if abs_source not in ext_sources:
-                    ext.sources.append(rel_source)
-                    print(f"Added source file: {rel_source}")
-        else:
-            print("Warning: Embedded knot files not generated, building without embedded knots")
+        if not source_file or not os.path.exists(source_file):
+            raise RuntimeError("generate_embedded_knot_files() did not produce source file")
+        abs_source = os.path.abspath(source_file)
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        src_dir = os.path.join(base_dir, "src")
+        rel_source = os.path.relpath(abs_source, base_dir)
+
+        for ext in self.extensions:
+            ext_include_dirs = [os.path.abspath(d) for d in ext.include_dirs]
+            if os.path.abspath(src_dir) not in ext_include_dirs:
+                ext.include_dirs.insert(0, src_dir)
+            ext_sources = [os.path.abspath(s) if os.path.isabs(s) else os.path.abspath(os.path.join(base_dir, s)) for s in ext.sources]
+            if abs_source not in ext_sources:
+                ext.sources.append(rel_source)
         
         # Add compiler-specific flags for better compatibility (apply to all extensions)
         for ext in self.extensions:
@@ -175,23 +163,24 @@ class CustomBuild(build):
         print("="*60 + "\n")
 
 def generate_embedded_knot_files():
-    """Generate embedded knot files C++ source during build."""
+    """Generate embedded knot files C++ source during build. Always writes header and
+    source so the linker has sst::get_embedded_knot_files(); uses empty map if no
+    .fseries files are present."""
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    knot_fseries_dir = os.path.join(base_dir, "src", "knot_fseries")
-    if not os.path.exists(knot_fseries_dir):
-        return None, None
-    
-    # Put generated files in build/temp for source, but header in src for easier inclusion
+    src_dir = os.path.join(base_dir, "src")
     build_temp = os.path.join(base_dir, "build", "temp")
     os.makedirs(build_temp, exist_ok=True)
-    
-    # Put header in src directory so it's found by relative includes
-    src_dir = os.path.join(base_dir, "src")
+    os.makedirs(src_dir, exist_ok=True)
+
     header_file = os.path.join(src_dir, "knot_files_embedded.h")
     source_file = os.path.join(build_temp, "knot_files_embedded.cpp")
-    
-    # Find all .fseries files
-    fseries_files = glob.glob(os.path.join(knot_fseries_dir, "*.fseries"))
+
+    knot_fseries_dir = os.path.join(base_dir, "src", "knot_fseries")
+    fseries_files = (
+        glob.glob(os.path.join(knot_fseries_dir, "*.fseries"))
+        if os.path.exists(knot_fseries_dir)
+        else []
+    )
     
     # Generate header file
     with open(header_file, 'w') as f:
