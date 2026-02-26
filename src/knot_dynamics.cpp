@@ -1,5 +1,6 @@
 #include "knot_dynamics.h"
 #include "biot_savart.h"
+#include "constants.h"
 #include <cmath>
 #include <random>
 #include <numeric>
@@ -30,7 +31,7 @@ namespace sst {
                                 W += dot(cross(t1, t2), r) / (r_norm * r_norm * r_norm);
                         }
                 }
-                return W / (2.0 * M_PI);
+                return W / (2.0 * sst::pi);
         }
 
         int KnotDynamics::compute_linking_number(const std::vector<Vec3>& X, const std::vector<Vec3>& Y) {
@@ -48,7 +49,7 @@ namespace sst {
                                 Lk += dot(cross(dx, dy), r) / (r_norm * r_norm * r_norm);
                         }
                 }
-                return static_cast<int>(std::round(Lk / (4.0 * M_PI)));
+                return static_cast<int>(std::round(Lk / (4.0 * sst::pi)));
         }
 
         double KnotDynamics::compute_twist(const std::vector<Vec3>& T, const std::vector<Vec3>& B) {
@@ -59,7 +60,7 @@ namespace sst {
                         Vec3 dB_ds = {dB[0]/2.0, dB[1]/2.0, dB[2]/2.0};
                         Tw += dot(cross(T[i], dB_ds), B[i]);
                 }
-                return Tw / (2.0 * M_PI);
+                return Tw / (2.0 * sst::pi);
         }
 
         double KnotDynamics::compute_centerline_helicity(const std::vector<Vec3>& curve,
@@ -75,7 +76,7 @@ namespace sst {
                         for (size_t j = i + 5; j < N; ++j) { // Skip close neighbors
                                 Vec3 d = diff(curve[i], curve[j]);
                                 if (norm(d) < threshold) {
-                                        candidates.emplace_back(i, j);
+                                        candidates.emplace_back(static_cast<int>(i), static_cast<int>(j));
                                 }
                         }
                 }

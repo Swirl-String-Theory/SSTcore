@@ -6,6 +6,7 @@
 namespace py = pybind11;
 
 // Forward declaration only!
+void bind_ab_initio(py::module_& m);
 void bind_biot_savart(py::module_& m);
 void bind_fluid_dynamics(py::module_ &m);
 void bind_field_kernels(py::module_ &m);
@@ -26,6 +27,7 @@ void bind_sst_gravity(py::module_& m);
 
 PYBIND11_MODULE(swirl_string_core, m) {
   m.doc() = "SST Core Bindings";
+  bind_ab_initio(m);
   bind_biot_savart(m);
   bind_fluid_dynamics(m);
   bind_field_kernels(m);

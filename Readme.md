@@ -219,3 +219,46 @@ This software may cause:
 Open an issue or whisper into the æther.
 This code is listening. Always.
 ---
+
+# 1. Installeer PyTorch en de specifieke Intel Extension for PyTorch (IPEX) voor Windows XPU
+```bash
+conda create -n SSTcore11 intelpython3_full python=3.11 -c https://software.repos.intel.com/python/conda -c conda-forge --override-channels
+conda activate SSTcore11
+conda config --add channels conda-forge
+conda config --set channel_priority flexible
+conda install scikit-learn-intelex xgboost numpy scipy numexpr -c https://software.repos.intel.com/python/conda/ -c conda-forge
+```
+# 2. Installeer de Coqui TTS bibliotheek (die XTTSv2 bevat) & Zorg ervoor dat de nieuwste versie van torchaudio's backend (soundfile) beschikbaar is. Toevoeging voor de GPU-acceleratie van Neurale Netwerken (XTTS)
+```bash
+python -m pip install torch==2.1.0.post3 torchvision==0.16.0.post3 torchaudio==2.1.0.post3 intel-extension-for-pytorch==2.1.10+xpu --extra-index-url https://pytorch-extension.intel.com/release-whl/stable/xpu/us/
+python -m pip install TTS soundfile
+```
+## 3. Other setup steps for Python dependencies (if needed)
+```bash
+conda create -n SSTcore11 intelpython3_full python=3.11 -c https://software.repos.intel.com/python/conda -c conda-forge --override-channels
+conda activate SSTcore11
+
+conda install conda -c https://software.repos.intel.com/python/conda/
+conda install conda -c conda-forge
+conda install conda -c main
+conda config --add channels conda-forge
+conda config --set channel_priority flexible
+
+conda install scikit-learn -c https://software.repos.intel.com/python/conda/
+conda install scikit-learn-intelex -c https://software.repos.intel.com/python/conda/
+conda install xgboost -c https://software.repos.intel.com/python/conda/
+conda install numpy -c https://software.repos.intel.com/python/conda/ -c conda-forge
+conda install scipy -c https://software.repos.intel.com/python/conda/ -c conda-forge
+conda install numexpr -c https://software.repos.intel.com/python/conda/ -c conda-forge
+```
+
+```bash
+# 1. Verwijder de gecorrumpeerde en verouderde installatie
+pip uninstall -y torch torchvision torchaudio intel-extension-for-pytorch
+
+# 2. Installeer de vereiste C-bibliotheek voor asynchrone I/O
+conda install libuv -c conda-forge -y
+
+# 3. Installeer de nieuwe PyTorch 2.5.1 XPU stack, geoptimaliseerd voor Intel Arc
+python -m pip install torch==2.5.1+cxx11.abi torchvision==0.20.1+cxx11.abi torchaudio==2.5.1+cxx11.abi intel-extension-for-pytorch==2.5.10+xpu --index-url https://pytorch-extension.intel.com/release-whl/stable/xpu/us/
+```

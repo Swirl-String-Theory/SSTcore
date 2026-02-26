@@ -1,23 +1,7 @@
 
 This document provides a summary of implemented functions in the SST C++/Python library along with their corresponding physical and mathematical formulas.
 
-```bash
-conda create -n SSTcore intelpython3_full python=3.11 -c https://software.repos.intel.com/python/conda -c conda-forge --override-channels
-conda activate SSTcore
 
-conda install conda -c https://software.repos.intel.com/python/conda/
-conda install conda -c conda-forge
-conda install conda -c main
-conda config --add channels conda-forge
-conda config --set channel_priority flexible
-
-conda install scikit-learn -c https://software.repos.intel.com/python/conda/
-conda install scikit-learn-intelex -c https://software.repos.intel.com/python/conda/
-conda install xgboost -c https://software.repos.intel.com/python/conda/
-conda install numpy -c https://software.repos.intel.com/python/conda/ -c conda-forge
-conda install scipy -c https://software.repos.intel.com/python/conda/ -c conda-forge
-conda install numexpr -c https://software.repos.intel.com/python/conda/ -c conda-forge
-```
 # Swirl String Theory (SST) Core Library Reference
 **Version:** 2.1.0 (Parser Upgrade) | **Generated:** 2025-11-21
 

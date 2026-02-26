@@ -6,8 +6,9 @@
 #define SWIRL_STRING_CORE_KNOT_DYNAMICS_H
 
 #include "../include/vec3_utils.h"
+#include "constants.h"
 #ifndef M_PI
-#define M_PI 3.14159265358979323846
+#define M_PI pi
 #endif
 // include/knot_dynamics.hpp
 #pragma once
@@ -190,8 +191,8 @@ namespace sst {
 
                 void evolve(double dt, size_t steps);
 
-                const std::vector<Vec3>& get_positions() const;
-                const std::vector<Vec3>& get_tangents() const;
+                [[nodiscard]] const std::vector<Vec3>& get_positions() const;
+                [[nodiscard]] const std::vector<Vec3>& get_tangents() const;
 
         private:
                 std::vector<Vec3> positions;

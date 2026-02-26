@@ -11,7 +11,7 @@ import tempfile
 import shutil
 import sys
 
-__version__ = "0.1.3"
+__version__ = "0.2.0"
 
 # Custom build_ext to generate embedded files during build
 class CustomBuildExt(build_ext):
@@ -183,7 +183,7 @@ def generate_embedded_knot_files():
     )
     
     # Generate header file
-    with open(header_file, 'w') as f:
+    with open(header_file, 'w', encoding='utf-8') as f:
         f.write("// Auto-generated header - do not edit manually\n")
         f.write("#ifndef KNOT_FILES_EMBEDDED_H\n")
         f.write("#define KNOT_FILES_EMBEDDED_H\n\n")
@@ -194,8 +194,8 @@ def generate_embedded_knot_files():
         f.write("}\n\n")
         f.write("#endif // KNOT_FILES_EMBEDDED_H\n")
     
-    # Generate source file
-    with open(source_file, 'w') as f:
+    # Generate source file (utf-8: .fseries files may contain Unicode e.g. Greek Σ)
+    with open(source_file, 'w', encoding='utf-8') as f:
         f.write("// Auto-generated file - do not edit manually\n")
         f.write("// This file contains embedded .fseries knot data\n\n")
         f.write('#include "knot_files_embedded.h"\n')

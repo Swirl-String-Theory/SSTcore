@@ -56,6 +56,7 @@ add_custom_target(knot_files_embedded ALL
 
 # Core SST library sources
 add_library(swirl_string_core_lib STATIC
+        src/ab_initio_mass.cpp
         src/biot_savart.cpp
         src/fluid_dynamics.cpp
         src/field_kernels.cpp
@@ -70,8 +71,8 @@ add_library(swirl_string_core_lib STATIC
         src/vortex_ring.cpp
         src/vorticity_dynamics.cpp
         src/sst_gravity.cpp
-        src/sst_gravity.h
         ${CMAKE_BINARY_DIR}/generated/knot_files_embedded.cpp
+        include/ab_initio_mass.h
 )
 
 target_include_directories(swirl_string_core_lib PUBLIC 
@@ -85,6 +86,7 @@ target_include_directories(swirl_string_core_lib PUBLIC
 # Main module: swirl_string_core
 pybind11_add_module(swirl_string_core src_bindings/module_sst.cpp)
 target_sources(swirl_string_core PRIVATE
+        src_bindings/py_ab_initio.cpp
         src_bindings/py_biot_savart.cpp
         src_bindings/py_field_kernels.cpp
         src_bindings/py_field_ops.cpp
