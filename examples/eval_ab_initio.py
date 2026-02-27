@@ -1,6 +1,35 @@
 import time
 import sys
 import math
+import pandas as pd
+# Tabel uit de afbeelding (Standard Model overzicht)
+particles = [
+    # Quarks (generaties I, II, III)
+    {"category": "quark", "generation": "I",   "symbol": "u",   "name": "up",              "mass": "2.4 MeV/c^2",    "charge":  2/3, "spin": 0.5},
+    {"category": "quark", "generation": "II",  "symbol": "c",   "name": "charm",           "mass": "1.27 GeV/c^2",   "charge":  2/3, "spin": 0.5},
+    {"category": "quark", "generation": "III", "symbol": "t",   "name": "top",             "mass": "171.2 GeV/c^2",  "charge":  2/3, "spin": 0.5},
+
+    {"category": "quark", "generation": "I",   "symbol": "d",   "name": "down",            "mass": "4.8 MeV/c^2",    "charge": -1/3, "spin": 0.5},
+    {"category": "quark", "generation": "II",  "symbol": "s",   "name": "strange",         "mass": "104 MeV/c^2",    "charge": -1/3, "spin": 0.5},
+    {"category": "quark", "generation": "III", "symbol": "b",   "name": "bottom",          "mass": "4.2 GeV/c^2",    "charge": -1/3, "spin": 0.5},
+
+    # Leptons (generaties I, II, III)
+    {"category": "lepton", "generation": "I",   "symbol": "νe",  "name": "electron neutrino", "mass": "<2.2 eV/c^2",   "charge":  0, "spin": 0.5},
+    {"category": "lepton", "generation": "II",  "symbol": "νμ",  "name": "muon neutrino",     "mass": "<0.17 MeV/c^2", "charge":  0, "spin": 0.5},
+    {"category": "lepton", "generation": "III", "symbol": "ντ",  "name": "tau neutrino",      "mass": "<15.5 MeV/c^2", "charge":  0, "spin": 0.5},
+
+    {"category": "lepton", "generation": "I",   "symbol": "e",   "name": "electron",        "mass": "0.511 MeV/c^2",  "charge": -1, "spin": 0.5},
+    {"category": "lepton", "generation": "II",  "symbol": "μ",   "name": "muon",            "mass": "105.7 MeV/c^2",  "charge": -1, "spin": 0.5},
+    {"category": "lepton", "generation": "III", "symbol": "τ",   "name": "tau",             "mass": "1.777 GeV/c^2",  "charge": -1, "spin": 0.5},
+
+    # Gauge bosons
+    {"category": "gauge boson", "generation": "-", "symbol": "γ",   "name": "photon",   "mass": "0",             "charge": 0,  "spin": 1},
+    {"category": "gauge boson", "generation": "-", "symbol": "g",   "name": "gluon",    "mass": "0",             "charge": 0,  "spin": 1},
+    {"category": "gauge boson", "generation": "-", "symbol": "Z^0", "name": "Z boson",  "mass": "91.2 GeV/c^2",  "charge": 0,  "spin": 1},
+    {"category": "gauge boson", "generation": "-", "symbol": "W±",  "name": "W boson",  "mass": "80.4 GeV/c^2",  "charge": "±1","spin": 1},
+]
+
+
 
 try:
     import swirl_string_core as sstcore
@@ -34,7 +63,20 @@ KNOT_INVARIANTS = {
 alpha_fs = 0.0072973525693  # 1 / 137.036
 ELECTRON_MASS_MEV = 0.51099895
 
-def evaluate_particle(knot_id, M0_calibration):
+# PDG referentiemassa's (MeV) voor vergelijking met SST voorspellingen
+KNOT_TO_PDG_MEV = {
+    "3:1:1":  0.51099895,    # electron
+    "5:1:1":  105.6583745,   # muon
+    "7:1:1":  1776.86,       # tau
+    "5:1:2":  2.4,           # up quark
+    "6:1:1":  4.8,           # down quark
+    "7:1:2":  104.0,         # strange quark
+    "8:1:1":  1270.0,        # charm quark
+    "9:1:2":  4180.0,        # bottom quark
+    "10:1:1": 171200.0,      # top quark
+}
+
+def evaluate_particle(knot_id, M0_calibration, collect=False):
     props = KNOT_INVARIANTS.get(knot_id)
     if not props: return None
 
@@ -59,9 +101,22 @@ def evaluate_particle(knot_id, M0_calibration):
     print(f"│ 🧮 Theorema Factors: k^-1.5 = {braid_suppression:.4f} | phi^-g = {genus_suppression:.4f}")
     print(f"│ 🛡️ Shielding (G)   : {props['G']} (Amplificatie = {amplification:.1e}x)")
     print(f"├──────────────────────────────────────────────────────────────────")
-    print(f"│ 🎯 SST Voorspelling: {mass_mev:.3f} MeV/c^2")
+    pdg_mev = KNOT_TO_PDG_MEV.get(knot_id)
+    if pdg_mev is not None:
+        ratio = mass_mev / pdg_mev
+        print(f"│ 🎯 SST Voorspelling: {mass_mev:.3f} MeV/c^2  |  PDG: {pdg_mev:.2f} MeV  |  Ratio: {ratio:.3f}")
+    else:
+        print(f"│ 🎯 SST Voorspelling: {mass_mev:.3f} MeV/c^2")
     print(f"└──────────────────────────────────────────────────────────────────")
 
+    if collect:
+        return {
+            "knot_id": knot_id,
+            "name": props["name"],
+            "L_tot": L_tot,
+            "mass_sst_mev": mass_mev,
+            "mass_pdg_mev": KNOT_TO_PDG_MEV.get(knot_id),
+        }
     return mass_mev
 
 if __name__ == "__main__":
@@ -81,14 +136,35 @@ if __name__ == "__main__":
 
     print(f"[+] Kalibratie voltooid. Globale M0 = {M0:.6f} MeV per L_tot")
 
-    # STAP B: Voorspel de rest van het Standaardmodel!
-    # Volgorde van executie (Leptonen, Quarks)
+    # STAP B: Voorspel de rest van het Standaardmodel en vergelijk met PDG
     targets = [
         "3:1:1", "5:1:1", "7:1:1",           # Leptonen
         "5:1:2", "6:1:1",                    # Quarks (Generatie 1)
-         "7:1:2", "8:1:1",                   # Quarks (Generatie 2)
+        "7:1:2", "8:1:1",                    # Quarks (Generatie 2)
         "9:1:2", "10:1:1"                    # Quarks (Generatie 3)
-        # Dark Matter  "4:1:1" & andere bosonen
     ]
+    sst_results = []
     for knot in targets:
-        evaluate_particle(knot, M0)
+        row = evaluate_particle(knot, M0, collect=True)
+        if row:
+            sst_results.append(row)
+
+    # Vergelijk SST voorspellingen met PDG in een DataFrame
+    df_sst = pd.DataFrame(sst_results)
+    if not df_sst.empty:
+        df_sst["ratio_sst_pdg"] = df_sst.apply(
+            lambda r: r["mass_sst_mev"] / r["mass_pdg_mev"] if r["mass_pdg_mev"] else float("nan"),
+            axis=1
+        )
+        df_sst = df_sst[["knot_id", "name", "L_tot", "mass_sst_mev", "mass_pdg_mev", "ratio_sst_pdg"]]
+        print("\n" + "=" * 80)
+        print("SST Voorspelling vs PDG (Standaardmodel)")
+        print("=" * 80)
+        print(df_sst.to_string(index=False))
+
+    # Originele particles-tabel (alleen voor referentie)
+    print("\n" + "=" * 80)
+    print("PDG Particle Overview (reference)")
+    print("=" * 80)
+    df_pdg = pd.DataFrame(particles)
+    print(df_pdg.to_string(index=False))
