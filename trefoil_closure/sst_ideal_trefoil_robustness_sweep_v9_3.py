@@ -150,9 +150,9 @@ SST_CORE_SCAN_AVAILABLE = False
 N_GEOM_LIST = [4000, 8000, 16000, 32000]
 N_INT_LIST = [2000, 4000, 8000, 16000, 32000]
 A_SCAN_COUNT = 24
-PLATEAU_FRACS = [0.08, 0.10, 0.12, 0.16]
+PLATEAU_FRACS = [0.01, 0.02, 0.04, 0.06, 0.08, 0.10, 0.12, 0.14, 0.16]
 REL_DE_THRESH = 1e-4
-PLATEAU_DIAGNOSTIC_FRACS = [0.06, 0.08, 0.10, 0.12, 0.14, 0.16]
+PLATEAU_DIAGNOSTIC_FRACS = [0.01, 0.02, 0.04, 0.06, 0.08, 0.10, 0.12, 0.14, 0.16]
 LAMBDA_LIST = [0.0, 1e-3, 3e-3, 1e-2]
 P_LIST = [2]
 BS_BLOCK = 512
@@ -185,8 +185,14 @@ TARGET_XNC_REL_TOL = 5e-3
 POSTCHECK_ROOT_SELECTION_MODE = "targeted_x_nc"
 POSTCHECK_CONTACT_MODEL = "barrier_flat_at_rc"
 
-PREFERRED_FIT_METHOD = "plateau_0.12"
-THEOREM_CANDIDATE_FIT_METHODS = ["plateau_0.08", "plateau_0.10", "plateau_0.12"]
+PREFERRED_FIT_METHOD = "plateau_0.8"
+THEOREM_CANDIDATE_FIT_METHODS = [
+    "plateau_0.04",
+    "plateau_0.06",
+    "plateau_0.08",
+    "plateau_0.10",
+    "plateau_0.12",
+]
 STABLE_TOL = 0.02
 DRIFT_TOL = 0.08
 A_STABLE_TOL = 0.02
@@ -1514,7 +1520,7 @@ def write_best_estimate(rows: List[dict], outdir: str) -> None:
             f.write(f"Asymptotic (two highest $N_{{\\mathrm{{int}}}}$): ")
             f.write(f"$A_K = {asym.get('A_K_mid', np.nan):.8f} \\pm {asym.get('A_K_half_range', np.nan):.8f}$, ")
             f.write(f"$a_{{\\mathrm{{nc}}}}/r_c = {asym.get('a_nc_over_rc_mid', np.nan):.8f} \\pm {asym.get('a_nc_over_rc_half_range', np.nan):.8f}$.\n")
-        f.write("Interpretation: numerical support for percent-level closure; v9.2 inherits v7 dimensionless-x root finding plus v6 theorem/continuation/barrier diagnostics, shift-free postcheck, and optional asymptotic extrapolation reports.\n")
+        f.write("Interpretation: numerical support for percent-level closure; v9.3 uses v7 dimensionless-x root finding plus v6 theorem/continuation/barrier diagnostics, shift-free postcheck, optional asymptotic extrapolation reports, and a parallel theorem-candidate comparison across plateau fit methods.\n")
 
 
 def parse_exact_pairs(text: str) -> List[Tuple[int, int]]:
@@ -2273,24 +2279,29 @@ def save_shiftfree_postcheck_plot(shift_rows: List[dict], outdir: str) -> None:
     if not shift_rows:
         return
     fig = plt.figure(figsize=(8, 5.5))
-    for key in sorted(set((r["N_geom"], r["N_int_actual"]) for r in shift_rows)):
-        N_geom, N_int = key
+    for key in sorted(set((r["fit_method"], r["N_geom"], r["N_int_actual"]) for r in shift_rows)):
+        fit_method, N_geom, N_int = key
         subset = sorted(
-            [r for r in shift_rows if r["N_geom"] == N_geom and r["N_int_actual"] == N_int],
+            [
+                r for r in shift_rows
+                if r["fit_method"] == fit_method
+                and r["N_geom"] == N_geom
+                and r["N_int_actual"] == N_int
+            ],
             key=lambda rr: rr["lambda_K"]
         )
         xs = np.array([r["lambda_K"] for r in subset], dtype=float)
         ys = np.array([r["a_star_over_rc"] for r in subset], dtype=float)
         xplot = np.where(xs > 0.0, xs, 1e-5)
-        plt.semilogx(xplot, ys, "o-", lw=1.3, label=f"Ng={N_geom}, Ni={N_int}")
+        plt.semilogx(xplot, ys, "o-", lw=1.3, label=f"{fit_method}, Ng={N_geom}, Ni={N_int}")
     plt.axhline(1.0, ls="--", lw=2, label="a*/r_c = 1")
     plt.xlabel("lambda_K  (lambda=0 shown at 1e-5)")
     plt.ylabel("a*/r_c")
-    plt.title(f"Shift-free barrier postcheck ({PREFERRED_FIT_METHOD})")
+    plt.title("Shift-free barrier postcheck (parallel fit methods)")
     plt.grid(True, alpha=0.3)
     plt.legend(fontsize=7, ncol=2)
     plt.tight_layout()
-    plt.savefig(os.path.join(outdir, "summary_astar_over_rc_vs_lambda_shiftfree_v9.png"), dpi=170, bbox_inches="tight")
+    plt.savefig(os.path.join(outdir, "summary_astar_over_rc_vs_lambda_shiftfree_v9_3.png"), dpi=170, bbox_inches="tight")
     plt.close(fig)
 
 
@@ -2426,9 +2437,17 @@ def run_v6_shiftfree_postcheck(rows: List[dict], outdir: str) -> List[dict]:
         write_csv(shift_rows, csv_path)
         save_shiftfree_postcheck_plot(shift_rows, outdir)
 
-        zero_rows = [r for r in shift_rows if abs(r["lambda_K"]) < 1e-15]
+        zero_rows = [
+            r for r in shift_rows
+            if abs(r["lambda_K"]) < 1e-15
+            and r["fit_method"] == PREFERRED_FIT_METHOD
+        ]
         high_lambda = max(LAMBDA_LIST) if LAMBDA_LIST else 0.0
-        max_rows = [r for r in shift_rows if abs(r["lambda_K"] - high_lambda) < 1e-15]
+        max_rows = [
+            r for r in shift_rows
+            if abs(r["lambda_K"] - high_lambda) < 1e-15
+            and r["fit_method"] == PREFERRED_FIT_METHOD
+        ]
 
         a_star0_mid, a_star0_half = _mid_half_from_top2(zero_rows, "a_star_over_rc")
         F10_mid, F10_half = _mid_half_from_top2(zero_rows, "F_at_x1")
@@ -2443,6 +2462,7 @@ def run_v6_shiftfree_postcheck(rows: List[dict], outdir: str) -> List[dict]:
             f.write("=" * 64 + "\n")
             f.write(f"Derived from legacy sweep rows only; no legacy outputs were modified.\n")
             f.write(f"Preferred fit method       : {PREFERRED_FIT_METHOD}\n")
+            f.write(f"Parallel seed fit methods  : {THEOREM_CANDIDATE_FIT_METHODS}\n")
             f.write(f"Shift-free contact model   : {POSTCHECK_CONTACT_MODEL}\n")
             f.write(f"Postcheck root selection   : {POSTCHECK_ROOT_SELECTION_MODE}\n")
             f.write(f"Seed rows                  : {len(seeds)}\n")
@@ -2712,7 +2732,7 @@ def main() -> None:
         print("[THEOREM] target=full_model exact closure requires F(1)=0 in the chosen contact model")
         print("[THEOREM] contact_model={} root_selection_mode={}".format(CONTACT_MODEL, ROOT_SELECTION_MODE))
         if RUN_V6_SHIFT_FREE_POSTCHECK:
-            print("[THEOREM] v6_postcheck will rerun preferred-fit rows with shift-free barrier after the legacy sweep")
+            print("[THEOREM] v6_postcheck will rerun theorem-candidate fit rows with shift-free barrier after the legacy sweep")
         print("[THEOREM] v7 root_solver_space={} xtol={} rtol={} ftol={}".format(
             ROOT_SOLVER_SPACE, ROOT_XTOL, ROOT_RTOL, ROOT_FTOL
         ))
