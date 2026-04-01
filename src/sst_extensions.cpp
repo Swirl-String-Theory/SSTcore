@@ -5,7 +5,18 @@
 #include <cmath>
 #include <stdexcept>
 #include <algorithm>
-#include <filesystem>
+#include <vector>
+#include <string>
+
+#if defined(_WIN32)
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+#include <windows.h>
+#else
+#include <sys/stat.h>
+#include <dirent.h>
+#endif
 
 #include "../src/knot_dynamics.h"
 #include "../src/biot_savart.h"
@@ -13,7 +24,121 @@
 namespace sst {
 
 namespace sstext {
-namespace fs = std::filesystem;
+
+namespace {
+
+bool ends_with_fseries(const std::string& path) {
+    static const char suf[] = ".fseries";
+    constexpr size_t n = sizeof(suf) - 1;
+    return path.size() >= n && path.compare(path.size() - n, n, suf) == 0;
+}
+
+std::string join_path(const std::string& a, const std::string& b) {
+    if (a.empty()) return b;
+#if defined(_WIN32)
+    if (a.back() == '\\' || a.back() == '/') return a + b;
+    return a + "\\" + b;
+#else
+    if (a.back() == '/') return a + b;
+    return a + "/" + b;
+#endif
+}
+
+#if defined(_WIN32)
+
+bool path_is_dir(const std::string& p) {
+    DWORD attr = GetFileAttributesA(p.c_str());
+    return attr != INVALID_FILE_ATTRIBUTES && (attr & FILE_ATTRIBUTE_DIRECTORY);
+}
+
+bool path_is_regular_file(const std::string& p) {
+    DWORD attr = GetFileAttributesA(p.c_str());
+    return attr != INVALID_FILE_ATTRIBUTES && !(attr & FILE_ATTRIBUTE_DIRECTORY);
+}
+
+void collect_fseries_recursive_win(const std::string& dir, std::vector<std::string>& paths) {
+    std::string pattern = join_path(dir, "*");
+    WIN32_FIND_DATAA fd;
+    HANDLE h = FindFirstFileA(pattern.c_str(), &fd);
+    if (h == INVALID_HANDLE_VALUE) return;
+    do {
+        std::string name = fd.cFileName;
+        if (name == "." || name == "..") continue;
+        std::string full = join_path(dir, name);
+        if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+            collect_fseries_recursive_win(full, paths);
+        else if (ends_with_fseries(full))
+            paths.push_back(full);
+    } while (FindNextFileA(h, &fd));
+    FindClose(h);
+}
+
+void collect_fseries_flat_win(const std::string& dir, std::vector<std::string>& paths) {
+    std::string pattern = join_path(dir, "*");
+    WIN32_FIND_DATAA fd;
+    HANDLE h = FindFirstFileA(pattern.c_str(), &fd);
+    if (h == INVALID_HANDLE_VALUE) return;
+    do {
+        std::string name = fd.cFileName;
+        if (name == "." || name == "..") continue;
+        std::string full = join_path(dir, name);
+        if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) && ends_with_fseries(full))
+            paths.push_back(full);
+    } while (FindNextFileA(h, &fd));
+    FindClose(h);
+}
+
+#else
+
+bool path_is_dir(const std::string& p) {
+    struct stat st;
+    return stat(p.c_str(), &st) == 0 && S_ISDIR(st.st_mode);
+}
+
+bool path_is_regular_file(const std::string& p) {
+    struct stat st;
+    return stat(p.c_str(), &st) == 0 && S_ISREG(st.st_mode);
+}
+
+void collect_fseries_recursive_posix(const std::string& dir, std::vector<std::string>& paths) {
+    DIR* d = opendir(dir.c_str());
+    if (!d) return;
+    while (dirent* e = readdir(d)) {
+        std::string name = e->d_name;
+        if (name == "." || name == "..") continue;
+        std::string full = join_path(dir, name);
+        bool is_dir = false;
+        if (e->d_type != DT_UNKNOWN) {
+            is_dir = (e->d_type == DT_DIR);
+        } else {
+            struct stat st;
+            if (stat(full.c_str(), &st) != 0) continue;
+            is_dir = S_ISDIR(st.st_mode);
+        }
+        if (is_dir)
+            collect_fseries_recursive_posix(full, paths);
+        else if (ends_with_fseries(full) && path_is_regular_file(full))
+            paths.push_back(full);
+    }
+    closedir(d);
+}
+
+void collect_fseries_flat_posix(const std::string& dir, std::vector<std::string>& paths) {
+    DIR* d = opendir(dir.c_str());
+    if (!d) return;
+    while (dirent* e = readdir(d)) {
+        std::string name = e->d_name;
+        if (name == "." || name == "..") continue;
+        std::string full = join_path(dir, name);
+        if (path_is_regular_file(full) && ends_with_fseries(full))
+            paths.push_back(full);
+    }
+    closedir(d);
+}
+
+#endif
+
+} // namespace
 
 std::optional<std::vector<double>> parse_floats_line(const std::string& line) {
     std::istringstream iss(line);
@@ -323,22 +448,27 @@ std::vector<HelicityResult> batch_helicity_from_dir(
     int nsamples,
     bool recurse
 ) {
-    std::vector<HelicityResult> out;
-    fs::path root(root_dir);
-    if (!fs::exists(root)) throw std::runtime_error("directory does not exist: " + root_dir);
+    if (!path_is_dir(root_dir)) throw std::runtime_error("directory does not exist: " + root_dir);
 
+    std::vector<std::string> fseries_paths;
     if (recurse) {
-        for (const auto& entry : fs::recursive_directory_iterator(root)) {
-            if (!entry.is_regular_file()) continue;
-            if (entry.path().extension() != ".fseries") continue;
-            out.push_back(helicity_from_fseries(entry.path().string(), grid_size, spacing, interior_margin, nsamples));
-        }
+#if defined(_WIN32)
+        collect_fseries_recursive_win(root_dir, fseries_paths);
+#else
+        collect_fseries_recursive_posix(root_dir, fseries_paths);
+#endif
     } else {
-        for (const auto& entry : fs::directory_iterator(root)) {
-            if (!entry.is_regular_file()) continue;
-            if (entry.path().extension() != ".fseries") continue;
-            out.push_back(helicity_from_fseries(entry.path().string(), grid_size, spacing, interior_margin, nsamples));
-        }
+#if defined(_WIN32)
+        collect_fseries_flat_win(root_dir, fseries_paths);
+#else
+        collect_fseries_flat_posix(root_dir, fseries_paths);
+#endif
+    }
+
+    std::vector<HelicityResult> out;
+    out.reserve(fseries_paths.size());
+    for (const std::string& p : fseries_paths) {
+        out.push_back(helicity_from_fseries(p, grid_size, spacing, interior_margin, nsamples));
     }
     std::sort(out.begin(), out.end(), [](const HelicityResult& a, const HelicityResult& b) {
         return a.path < b.path;
