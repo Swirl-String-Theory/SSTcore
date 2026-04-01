@@ -6,14 +6,17 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 
 try:
-    import sstcore as ssc
+    import SSTcore as ssc
 except ImportError:
     try:
-        import sstbindings as ssc
-    except ImportError as e:
-        print("ERROR: Could not import sstcore or sstbindings.")
-        print("Build the pybind module first.")
-        raise e
+        import sstcore as ssc
+    except ImportError:
+        try:
+            import sstbindings as ssc
+        except ImportError as e:
+            print("ERROR: Could not import SSTcore, sstcore, or sstbindings.")
+            print("Build the pybind module first.")
+            raise e
 
 
 def candidate_ideal_paths():
@@ -29,11 +32,11 @@ def candidate_ideal_paths():
         candidates.append(os.path.join(r.rstrip(os.sep), "ideal.txt"))
     # Source tree (repo root = parent of examples/)
     candidates.extend([
-        os.path.join(root, "resources", "ideal.txt"),
-        os.path.join(root, "resources", "Knots_FourierSeries", "ideal.txt"),
+        os.path.join(root, "SSTcore", "resources", "ideal.txt"),
+        os.path.join(root, "SSTcore", "resources", "Knots_FourierSeries", "ideal.txt"),
         os.path.join(root, "src", "Knots_FourierSeries", "ideal.txt"),
-        os.path.join("resources", "ideal.txt"),
-        os.path.join("resources", "Knots_FourierSeries", "ideal.txt"),
+        os.path.join("SSTcore", "resources", "ideal.txt"),
+        os.path.join("SSTcore", "resources", "Knots_FourierSeries", "ideal.txt"),
         os.path.join("src", "Knots_FourierSeries", "ideal.txt"),
         os.path.join(root, "build", "share", "sstcore", "resources", "ideal.txt"),
         os.path.join(root, "build", "share", "sstcore", "resources", "Knots_FourierSeries", "ideal.txt"),

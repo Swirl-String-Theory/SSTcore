@@ -1,7 +1,7 @@
 {
-  "name": "swirl-string-core",
-  "version": "0.1.9",
-  "description": "Swirl String Theory Canonical Core - High-performance C++ library for knot dynamics, vortex systems, and fluid mechanics",
+  "name": "SSTcore",
+  "version": "0.2.0",
+  "description": "SSTcore - Swirl String Theory Canonical Core. High-performance C++ library for knot dynamics, vortex systems, and fluid mechanics (Node native addon + optional WASM). Same project as pip install SSTcore.",
   "main": "index.js",
   "module": "index.js",
   "browser": "dist/swirl_string_core_wasm.js",
@@ -28,6 +28,9 @@
     "test": "node tests/test_basic.js || echo 'Tests not available'"
   },
   "keywords": [
+    "SSTcore",
+    "sstcore",
+    "swirl-string-theory",
     "physics",
     "fluid-dynamics",
     "knot-theory",
@@ -39,6 +42,10 @@
   ],
   "author": "Omar Iskandarani <info@omariskandarani.com>",
   "license": "CC-BY-NC-4.0",
+  "homepage": "https://github.com/Swirl-String-Theory/SSTcore#readme",
+  "bugs": {
+    "url": "https://github.com/Swirl-String-Theory/SSTcore/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Swirl-String-Theory/SSTcore.git"

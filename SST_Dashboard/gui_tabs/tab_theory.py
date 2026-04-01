@@ -3,12 +3,15 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 
 try:
-    import swirl_string_core as sstcore
+    import SSTcore as sstcore
 except ImportError:
     try:
-        import sstbindings as sstcore
+        import swirl_string_core as sstcore
     except ImportError:
-        sstcore = None
+        try:
+            import sstbindings as sstcore
+        except ImportError:
+            sstcore = None
 
 
 class TabTheory(QWidget):

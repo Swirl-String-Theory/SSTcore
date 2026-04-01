@@ -40,9 +40,12 @@ except ImportError:
     from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 
 try:
-    import swirl_string_core as ssc
+    import SSTcore as ssc
 except ImportError:
-    import sstbindings as ssc
+    try:
+        import swirl_string_core as ssc
+    except ImportError:
+        import sstbindings as ssc
 
 
 IDEAL_EMBEDDED_NAME = "ideal.txt"
@@ -157,18 +160,28 @@ def _ideal_txt_candidate_paths():
             seen.add(key)
             candidates.append(q)
 
-    # 1) sstcore-package (pip of dev met sys.path)
+    # 1) SSTcore package (pip of dev met sys.path)
     try:
-        import sstcore
-        p = sstcore.get_ideal_txt_path()
+        import SSTcore as _pkg
+        p = _pkg.get_ideal_txt_path()
         if p:
             add(p)
-        d = sstcore.get_resources_dir()
+        d = _pkg.get_resources_dir()
         if d:
             for name in ("ideal.txt", "Ideal.txt"):
                 add(d / name)
     except ImportError:
-        pass
+        try:
+            import sstcore as _pkg
+            p = _pkg.get_ideal_txt_path()
+            if p:
+                add(p)
+            d = _pkg.get_resources_dir()
+            if d:
+                for name in ("ideal.txt", "Ideal.txt"):
+                    add(d / name)
+        except ImportError:
+            pass
     # 2) SSTcore/resources: script in SSTcore/SST_Dashboard/gui_tabs OF dashboard naast SSTcore
     for root in (parent2, parent2 / "SSTcore", calculations.parent):
         for name in ("ideal.txt", "Ideal.txt"):
@@ -409,7 +422,7 @@ def parse_ab_by_id_embedded(ab_id, name="ideal.txt"):
                 has_multi = hasattr(ssc, "parse_ideal_txt_multi")
                 has_from_string = hasattr(ssc, "parse_ideal_ab_by_id_from_string")
                 raise RuntimeError(
-                    "Compare needs the full ideal block. Your swirl_string_core module does not expose "
+                    "Compare needs the full ideal block. Your SSTcore module does not expose "
                     "parse_ideal_txt_multi or parse_ideal_ab_by_id_from_string. "
                     "Rebuild: cd SSTcore/build && cmake --build . --config Release. "
                     "Then restart the dashboard so it loads the new .pyd (from build/Release or your Python env)."
@@ -461,7 +474,7 @@ def resolve_fremlin_4_1_dir():
     candidates = [
         r"C:\\workspace\\projects\\SSTcore\\resources\\Knots_FourierSeries",
         r"C:\\workspace\\projects\\SSTcore\\src\\Knots_FourierSeries",
-        os.path.join("resources", "Knots_FourierSeries"),
+        os.path.join("SSTcore", "resources", "Knots_FourierSeries"),
         os.path.join("src", "Knots_FourierSeries"),
     ]
     for p in candidates:

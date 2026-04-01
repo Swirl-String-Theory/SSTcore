@@ -25,8 +25,11 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     set(IS_MACOS TRUE)
 endif()
 
+# When OFF, CMake configure skips pybind11 (for CI/npm: only embed + Node targets).
+option(SST_BUILD_PYTHON_BINDINGS "Build pybind11 Python modules (sstcore, sstbindings)" ON)
+
 # === Runtime resource directories ===
-set(SST_RESOURCES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/resources")
+set(SST_RESOURCES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/SSTcore/resources")
 set(SST_KNOT_FSERIES_DIR "${SST_RESOURCES_DIR}/knot_fseries")
 set(SST_KNOTS_FOURIER_DIR "${SST_RESOURCES_DIR}/Knots_FourierSeries")
 
@@ -41,8 +44,16 @@ else()
         add_compile_options(-fPIC)  # Position-independent code for shared libraries
     endif()
 endif()
-# Use vendored pybind11 from extern/ directory
-add_subdirectory(extern/pybind11)
+
+if(SST_BUILD_PYTHON_BINDINGS)
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/extern/pybind11/CMakeLists.txt")
+        add_subdirectory(extern/pybind11)
+    else()
+        find_package(pybind11 CONFIG REQUIRED)
+    endif()
+else()
+    message(STATUS "SST_BUILD_PYTHON_BINDINGS=OFF: skipping pybind11 (embed/Node-only configure)")
+endif()
 
 # Embed .fseries files into C++ source (must run before building)
 # This generates knot_files_embedded.cpp and .h in the build directory
@@ -94,80 +105,81 @@ target_compile_definitions(sstcore_lib PRIVATE
     SST_DEFAULT_KNOTS_FOURIER_SUBDIR="share/sstcore/resources/Knots_FourierSeries"
 )
 
-# Python bindings
-# pybind11 will automatically use .pyd on Windows and .so on Linux/Mac
+# Python bindings (optional; skipped when SST_BUILD_PYTHON_BINDINGS=OFF)
+if(SST_BUILD_PYTHON_BINDINGS)
+    # pybind11 will automatically use .pyd on Windows and .so on Linux/Mac
+    pybind11_add_module(sstcore src/module_sst.cpp)
+    target_sources(sstcore PRIVATE
+            src/ab_initio_mass_py.cpp
+            src/biot_savart_py.cpp
+            src/field_kernels_py.cpp
+            src/field_ops_py.cpp
+            src/fluid_dynamics_py.cpp
+            src/magnus_integrator_py.cpp
+            src/knot_dynamics_py.cpp
+            src/frenet_helicity_py.cpp
+            src/potential_timefield_py.cpp
+            src/hyperbolic_volume_py.cpp
+            src/radiation_flow_py.cpp
+            src/swirl_field_py.cpp
+            src/thermo_dynamics_py.cpp
+            src/time_evolution_py.cpp
+            src/vortex_ring_py.cpp
+            src/vorticity_dynamics_py.cpp
+            src/sst_gravity_py.cpp
+            src/sst_extensions_py.cpp
+            src/sst_integrator_py.cpp)
 
-# Main module: sstcore
-pybind11_add_module(sstcore src/module_sst.cpp)
-target_sources(sstcore PRIVATE
-        src/ab_initio_mass_py.cpp
-        src/biot_savart_py.cpp
-        src/field_kernels_py.cpp
-        src/field_ops_py.cpp
-        src/fluid_dynamics_py.cpp
-        src/magnus_integrator_py.cpp
-        src/knot_dynamics_py.cpp
-        src/frenet_helicity_py.cpp
-        src/potential_timefield_py.cpp
-        src/hyperbolic_volume_py.cpp
-        src/radiation_flow_py.cpp
-        src/swirl_field_py.cpp
-        src/thermo_dynamics_py.cpp
-        src/time_evolution_py.cpp
-        src/vortex_ring_py.cpp
-        src/vorticity_dynamics_py.cpp
-        src/sst_gravity_py.cpp
-        src/sst_extensions_py.cpp
-        src/sst_integrator_py.cpp)
-
-target_link_libraries(sstcore PRIVATE sstcore_lib)
-target_include_directories(sstcore PRIVATE extern/pybind11/include)
-target_compile_definitions(sstcore PRIVATE
-    SST_DEFAULT_RESOURCE_SUBDIR="share/sstcore/resources"
-    SST_DEFAULT_KNOT_FSERIES_SUBDIR="share/sstcore/resources/knot_fseries"
-    SST_DEFAULT_KNOTS_FOURIER_SUBDIR="share/sstcore/resources/Knots_FourierSeries"
-)
-
-# Backwards compatibility module: sstbindings
-pybind11_add_module(sstbindings src/module_sstbindings.cpp)
-target_sources(sstbindings PRIVATE
-        src/ab_initio_mass_py.cpp
-        src/biot_savart_py.cpp
-        src/field_kernels_py.cpp
-        src/field_ops_py.cpp
-        src/fluid_dynamics_py.cpp
-        src/magnus_integrator_py.cpp
-        src/knot_dynamics_py.cpp
-        src/frenet_helicity_py.cpp
-        src/potential_timefield_py.cpp
-        src/hyperbolic_volume_py.cpp
-        src/radiation_flow_py.cpp
-        src/swirl_field_py.cpp
-        src/thermo_dynamics_py.cpp
-        src/time_evolution_py.cpp
-        src/vortex_ring_py.cpp
-        src/vorticity_dynamics_py.cpp
-        src/sst_gravity_py.cpp
-        src/sst_extensions_py.cpp
-        src/sst_integrator_py.cpp)
-
-target_link_libraries(sstbindings PRIVATE sstcore_lib)
-target_include_directories(sstbindings PRIVATE extern/pybind11/include)
-target_compile_definitions(sstbindings PRIVATE
-    SST_DEFAULT_RESOURCE_SUBDIR="share/sstcore/resources"
-    SST_DEFAULT_KNOT_FSERIES_SUBDIR="share/sstcore/resources/knot_fseries"
-    SST_DEFAULT_KNOTS_FOURIER_SUBDIR="share/sstcore/resources/Knots_FourierSeries"
-)
-
-# Linux-specific linker settings
-if(IS_LINUX)
-    # Ensure proper linking on Linux
-    set_target_properties(sstcore PROPERTIES
-        LINK_FLAGS "-Wl,--no-undefined"
+    target_link_libraries(sstcore PRIVATE sstcore_lib)
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/extern/pybind11/include")
+        target_include_directories(sstcore PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/extern/pybind11/include")
+    endif()
+    target_compile_definitions(sstcore PRIVATE
+        SST_DEFAULT_RESOURCE_SUBDIR="share/sstcore/resources"
+        SST_DEFAULT_KNOT_FSERIES_SUBDIR="share/sstcore/resources/knot_fseries"
+        SST_DEFAULT_KNOTS_FOURIER_SUBDIR="share/sstcore/resources/Knots_FourierSeries"
     )
-    set_target_properties(sstbindings PROPERTIES
-        LINK_FLAGS "-Wl,--no-undefined"
+
+    pybind11_add_module(sstbindings src/module_sstbindings.cpp)
+    target_sources(sstbindings PRIVATE
+            src/ab_initio_mass_py.cpp
+            src/biot_savart_py.cpp
+            src/field_kernels_py.cpp
+            src/field_ops_py.cpp
+            src/fluid_dynamics_py.cpp
+            src/magnus_integrator_py.cpp
+            src/knot_dynamics_py.cpp
+            src/frenet_helicity_py.cpp
+            src/potential_timefield_py.cpp
+            src/hyperbolic_volume_py.cpp
+            src/radiation_flow_py.cpp
+            src/swirl_field_py.cpp
+            src/thermo_dynamics_py.cpp
+            src/time_evolution_py.cpp
+            src/vortex_ring_py.cpp
+            src/vorticity_dynamics_py.cpp
+            src/sst_gravity_py.cpp
+            src/sst_extensions_py.cpp
+            src/sst_integrator_py.cpp)
+
+    target_link_libraries(sstbindings PRIVATE sstcore_lib)
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/extern/pybind11/include")
+        target_include_directories(sstbindings PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/extern/pybind11/include")
+    endif()
+    target_compile_definitions(sstbindings PRIVATE
+        SST_DEFAULT_RESOURCE_SUBDIR="share/sstcore/resources"
+        SST_DEFAULT_KNOT_FSERIES_SUBDIR="share/sstcore/resources/knot_fseries"
+        SST_DEFAULT_KNOTS_FOURIER_SUBDIR="share/sstcore/resources/Knots_FourierSeries"
     )
+
+    if(IS_LINUX)
+        set_target_properties(sstcore PROPERTIES
+            LINK_FLAGS "-Wl,--no-undefined"
+        )
+        set_target_properties(sstbindings PROPERTIES
+            LINK_FLAGS "-Wl,--no-undefined"
+        )
+    endif()
 endif()
 
 # Copy runtime resources into build tree for local runs (examples/tests/python)
@@ -180,10 +192,12 @@ if(EXISTS "${SST_RESOURCES_DIR}")
                 "${CMAKE_BINARY_DIR}/share/sstcore/resources"
         COMMENT "Copying SST runtime resources to build tree"
     )
-    add_dependencies(sstcore copy_sst_resources)
     add_dependencies(sstcore_lib copy_sst_resources)
-    if(TARGET sstbindings)
-        add_dependencies(sstbindings copy_sst_resources)
+    if(SST_BUILD_PYTHON_BINDINGS)
+        add_dependencies(sstcore copy_sst_resources)
+        if(TARGET sstbindings)
+            add_dependencies(sstbindings copy_sst_resources)
+        endif()
     endif()
 endif()
 
@@ -461,10 +475,17 @@ endif()
 
 
 # Install targets
-install(TARGETS sstcore_lib sstcore sstbindings
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib
-        RUNTIME DESTINATION bin)
+if(SST_BUILD_PYTHON_BINDINGS)
+    install(TARGETS sstcore_lib sstcore sstbindings
+            LIBRARY DESTINATION lib
+            ARCHIVE DESTINATION lib
+            RUNTIME DESTINATION bin)
+else()
+    install(TARGETS sstcore_lib
+            LIBRARY DESTINATION lib
+            ARCHIVE DESTINATION lib
+            RUNTIME DESTINATION bin)
+endif()
 install(DIRECTORY include/ DESTINATION include)
 
 # Install all runtime knot resources (ideal databases + fseries + metadata)
@@ -480,35 +501,36 @@ endif()
 set(SWIRL_THEORY_DIR "${CMAKE_SOURCE_DIR}/../SwirlStringTheory")
 set(SST_DASHBOARD_DIR "${CMAKE_SOURCE_DIR}/../SST_Dashboard")
 
-add_custom_command(TARGET sstcore POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_pyd_fallback.cmake
-        -DSOURCE=$<TARGET_FILE:sstcore>
-        -DPROJECT_ROOT=${CMAKE_SOURCE_DIR}
-        -DBUILD_DIR=${CMAKE_BINARY_DIR}
-        COMMAND ${CMAKE_COMMAND} -E make_directory "${SWIRL_THEORY_DIR}"
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        $<TARGET_FILE:sstcore>
-        "${SWIRL_THEORY_DIR}/$<TARGET_FILE_NAME:sstcore>"
-        COMMAND ${CMAKE_COMMAND} -E make_directory "${SST_DASHBOARD_DIR}"
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        $<TARGET_FILE:sstcore>
-        "${SST_DASHBOARD_DIR}/$<TARGET_FILE_NAME:sstcore>"
-        COMMENT "Copying sstcore module for easy import (best-effort)"
-)
+if(SST_BUILD_PYTHON_BINDINGS)
+    add_custom_command(TARGET sstcore POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_pyd_fallback.cmake
+            -DSOURCE=$<TARGET_FILE:sstcore>
+            -DPROJECT_ROOT=${CMAKE_SOURCE_DIR}
+            -DBUILD_DIR=${CMAKE_BINARY_DIR}
+            COMMAND ${CMAKE_COMMAND} -E make_directory "${SWIRL_THEORY_DIR}"
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            $<TARGET_FILE:sstcore>
+            "${SWIRL_THEORY_DIR}/$<TARGET_FILE_NAME:sstcore>"
+            COMMAND ${CMAKE_COMMAND} -E make_directory "${SST_DASHBOARD_DIR}"
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            $<TARGET_FILE:sstcore>
+            "${SST_DASHBOARD_DIR}/$<TARGET_FILE_NAME:sstcore>"
+            COMMENT "Copying sstcore module for easy import (best-effort)"
+    )
 
-# Also copy sstcore when building sstbindings (same binary, different name for backwards compatibility)
-add_custom_command(TARGET sstbindings POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_pyd_fallback.cmake
-        -DSOURCE=$<TARGET_FILE:sstbindings>
-        -DPROJECT_ROOT=${CMAKE_SOURCE_DIR}
-        -DBUILD_DIR=${CMAKE_BINARY_DIR}
-        COMMAND ${CMAKE_COMMAND} -E make_directory "${SWIRL_THEORY_DIR}"
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        $<TARGET_FILE:sstcore>
-        "${SWIRL_THEORY_DIR}/$<TARGET_FILE_NAME:sstcore>"
-        COMMAND ${CMAKE_COMMAND} -E make_directory "${SST_DASHBOARD_DIR}"
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        $<TARGET_FILE:sstcore>
-        "${SST_DASHBOARD_DIR}/$<TARGET_FILE_NAME:sstcore>"
-        COMMENT "Copying sstcore/sstbindings for easy import (best-effort)"
-)
+    add_custom_command(TARGET sstbindings POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_pyd_fallback.cmake
+            -DSOURCE=$<TARGET_FILE:sstbindings>
+            -DPROJECT_ROOT=${CMAKE_SOURCE_DIR}
+            -DBUILD_DIR=${CMAKE_BINARY_DIR}
+            COMMAND ${CMAKE_COMMAND} -E make_directory "${SWIRL_THEORY_DIR}"
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            $<TARGET_FILE:sstcore>
+            "${SWIRL_THEORY_DIR}/$<TARGET_FILE_NAME:sstcore>"
+            COMMAND ${CMAKE_COMMAND} -E make_directory "${SST_DASHBOARD_DIR}"
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            $<TARGET_FILE:sstcore>
+            "${SST_DASHBOARD_DIR}/$<TARGET_FILE_NAME:sstcore>"
+            COMMENT "Copying sstcore/sstbindings for easy import (best-effort)"
+    )
+endif()

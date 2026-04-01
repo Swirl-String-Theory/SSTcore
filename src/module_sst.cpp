@@ -27,7 +27,12 @@ void bind_sst_integrator(py::module_& m);
 void bind_extensions(py::module_& m);
 
 
+// Pip/setuptools wheels use SSTcore._native; CMake builds keep the sstcore module name.
+#ifdef SSTCORE_PYBIND11_NATIVE_SUBMODULE
+PYBIND11_MODULE(_native, m) {
+#else
 PYBIND11_MODULE(sstcore, m) {
+#endif
   m.doc() = "SSTcore Bindings";
   bind_ab_initio(m);
   bind_biot_savart(m);
@@ -102,7 +107,7 @@ PYBIND11_MODULE(sstcore, m) {
         py::arg("pattern") = py::none(),
         py::arg("include_private") = false,
         R"pbdoc(
-        Return a dictionary of exported names in sstcore.
+        Return a dictionary of exported names in this module.
 
         Args:
           pattern (str|None): optional case-insensitive substring filter.

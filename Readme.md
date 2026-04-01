@@ -32,23 +32,23 @@ We build the C++ SST-Bindings first, and then we can import it into benchmark Py
 #### Python Package
 
 ```bash
-pip install sstcore
+pip install SSTcore
 ```
 
 **Resources na pip install (via import)**  
 Na `pip install` kun je het resources-pad (o.a. `Knots_FourierSeries`, `ideal.txt`) zo aanroepen:
 
 ```python
-import sstcore
+from SSTcore import get_ideal_txt_path, get_knots_fourier_series_dir, get_resources_dir
 
 # Basis resources-map (ideal.txt, Knots_FourierSeries, …)
-resources_dir = sstcore.get_resources_dir()
+resources_dir = get_resources_dir()
 
 # Alleen Knots_FourierSeries-map
-kfs_dir = sstcore.get_knots_fourier_series_dir()
+kfs_dir = get_knots_fourier_series_dir()
 
 # Pad naar ideal.txt
-ideal_path = sstcore.get_ideal_txt_path()
+ideal_path = get_ideal_txt_path()
 ```
 
 Optioneel: stel `SSTCORE_RESOURCES` in om een vaste map te forceren.

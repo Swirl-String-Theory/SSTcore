@@ -14,14 +14,18 @@ from PyQt5.QtCore import QThread, pyqtSignal
 using_cxx_backend = False
 sstcore = None
 try:
-    import swirl_string_core as sstcore
+    import SSTcore as sstcore
     using_cxx_backend = True
 except ImportError:
     try:
-        import sstbindings as sstcore
+        import swirl_string_core as sstcore
         using_cxx_backend = True
     except ImportError:
-        sstcore = None
+        try:
+            import sstbindings as sstcore
+            using_cxx_backend = True
+        except ImportError:
+            sstcore = None
 
 # Python fallback: prefer canonical module, then legacy shim
 try:

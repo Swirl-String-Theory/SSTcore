@@ -1,7 +1,7 @@
-# SSTcore: companion package for sstcore (resources and helpers).
-# The C++ extension is installed as sstcore / sstbindings.
-# Resource location follows CMake install (share/sstcore/resources) or dev layout.
-# Importing SSTcore also exposes the C extension API (same as sstcore / sstbindings / swirl_string_core).
+# SSTcore: canonical Python package (resources, helpers, native API).
+# Wheels ship extensions as SSTcore._native / SSTcore._bindings; top-level sstcore / sstbindings
+# are thin shims for older scripts. CMake dev builds still produce sstcore / sstbindings binaries.
+# Resource layout: data files live under SSTcore/resources/ in the repo and in wheels (package_data).
 
 from pathlib import Path
 import os
@@ -39,16 +39,16 @@ __all__ = [
     "get_knot_data_for_option",
 ]
 
-# Re-export C extension API so "import SSTcore" exposes the same as sstcore / sstbindings / swirl_string_core
+# Re-export native API (from SSTcore._native, or SSTcore._bindings if _native missing)
 try:
-    import sstcore as _sst_native
-    from sstcore import *  # noqa: F401, F403
+    import SSTcore._native as _sst_native
+    from SSTcore._native import *  # noqa: F401, F403
     _native_all = getattr(_sst_native, "__all__", [])
     __all__ = list(__all__) + [x for x in _native_all if x not in __all__]
 except ImportError:
     try:
-        import sstbindings as _sst_native
-        from sstbindings import *  # noqa: F401, F403
+        import SSTcore._bindings as _sst_native
+        from SSTcore._bindings import *  # noqa: F401, F403
         _native_all = getattr(_sst_native, "__all__", [])
         __all__ = list(__all__) + [x for x in _native_all if x not in __all__]
     except ImportError:
@@ -62,8 +62,7 @@ def get_resources_dir() -> Optional[Path]:
 
     - Uses SSTCORE_RESOURCES if set.
     - Else package-bundled resources/ (pip install with package_data).
-    - Else share/sstcore/resources (CMake/data_files install).
-    - Else resources/ next to the package (development).
+    - Else prefix/share/sstcore/resources (CMake install).
 
     Returns None if no resources directory is found.
     """
@@ -74,12 +73,12 @@ def get_resources_dir() -> Optional[Path]:
         if p.is_dir():
             return p.resolve()
 
-    # 2. Package-bundled resources (pip install with package_data: ideal.txt, Knots_FourierSeries, etc.)
+    # 2. Package directory SSTcore/resources/ (sdist, wheel, editable, and git checkout)
     _pkg_resources = Path(__file__).resolve().parent / "resources"
     if _pkg_resources.is_dir():
         return _pkg_resources
 
-    # 3. Pip install: data_files go to prefix/share/sstcore/resources
+    # 3. CMake / legacy pip install: prefix/share/sstcore/resources
     prefix = Path(sys.prefix)
     for candidate in [
         prefix / "share" / "sstcore" / "resources",
@@ -87,12 +86,6 @@ def get_resources_dir() -> Optional[Path]:
     ]:
         if candidate.is_dir():
             return candidate.resolve()
-
-    # 4. Development: resources/ next to this package (SSTcore repo root)
-    this_file = Path(__file__).resolve()
-    dev_resources = this_file.parent.parent / "resources"
-    if dev_resources.is_dir():
-        return dev_resources.resolve()
 
     return None
 

@@ -5,9 +5,12 @@ import time
 from datetime import datetime
 
 try:
-    import sstcore
+    import SSTcore as sstcore
 except ImportError:
-    import sstbindings as sstcore
+    try:
+        import sstcore
+    except ImportError:
+        import sstbindings as sstcore
 
 # =====================================================================
 # 1. STANDARD MODEL REFERENCE DATABASE

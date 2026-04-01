@@ -26,7 +26,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+        with:
+          submodules: recursive
+
+      - name: Use x64 native MSVC (Windows)
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -57,7 +65,7 @@ jobs:
         run: |
           rm -rf build_node build
           mkdir -p build/generated
-          cmake -B build_node -S .
+          cmake -B build_node -S . -DSST_BUILD_PYTHON_BINDINGS=OFF
       
       - name: Build native addon
         run: npm run build:node
@@ -88,7 +96,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+        with:
+          submodules: recursive
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -135,7 +145,7 @@ jobs:
         run: |
           rm -rf build_node build
           mkdir -p build/generated
-          cmake -B build_node -S .
+          cmake -B build_node -S . -DSST_BUILD_PYTHON_BINDINGS=OFF
       
       - name: Build package
         run: npm run build:all
@@ -179,7 +189,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+        with:
+          submodules: recursive
+
       - name: Setup Emscripten
         uses: mymindstorm/setup-emsdk@v14
         with:

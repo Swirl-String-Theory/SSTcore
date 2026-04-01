@@ -4,9 +4,12 @@ import math
 from datetime import datetime
 
 try:
-    import sstcore
+    import SSTcore as sstcore
 except ImportError:
-    import sstbindings as sstcore
+    try:
+        import sstcore
+    except ImportError:
+        import sstbindings as sstcore
 
 # Formules voor Alexander Root
 phi0 = (1 + math.sqrt(5)) / 2

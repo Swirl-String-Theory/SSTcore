@@ -27,7 +27,11 @@ void bind_sst_integrator(py::module_& m);
 void bind_extensions(py::module_& m);
 
 
+#ifdef SSTCORE_PYBIND11_BINDINGS_SUBMODULE
+PYBIND11_MODULE(_bindings, m) {
+#else
 PYBIND11_MODULE(sstbindings, m) {
+#endif
   m.doc() = "SST Core Bindings (backwards compatibility alias)";
   bind_ab_initio(m);
   bind_biot_savart(m);
@@ -103,7 +107,7 @@ PYBIND11_MODULE(sstbindings, m) {
         py::arg("pattern") = py::none(),
         py::arg("include_private") = false,
         R"pbdoc(
-        Return a dictionary of exported names in sstbindings.
+        Return a dictionary of exported names in this module.
 
         Args:
           pattern (str|None): optional case-insensitive substring filter.

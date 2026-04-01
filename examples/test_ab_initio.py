@@ -1,4 +1,10 @@
-import sstcore as sstbindings
+try:
+    import SSTcore as sstbindings
+except ImportError:
+    try:
+        import sstcore as sstbindings
+    except ImportError:
+        import sstbindings as sstbindings
 import time
 
 # De Catalogus beheert de vaste topologische invarianten

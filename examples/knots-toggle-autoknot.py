@@ -10,13 +10,13 @@ matplotlib.use('TkAgg')
 # --- Import C++ bindings (with fallback to Python) ---
 USE_CPP = False
 try:
-    import sstcore
-    from sstcore import load_all_knots
+    import SSTcore as sstcore
+    from SSTcore import load_all_knots
     USE_CPP = True
     print("[INFO] Using C++ bindings for calculations")
 except ImportError:
     try:
-        import sstcore as sstcore
+        import sstcore
         from sstcore import load_all_knots
         USE_CPP = True
         print("[INFO] Using C++ bindings (sstcore) for calculations")

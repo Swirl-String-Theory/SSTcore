@@ -1,8 +1,8 @@
 # CMake script to embed knot resources into C++ source
 # Embeds:
-#   - all .fseries files recursively from resources/Knots_FourierSeries
-#   - all ideal*.txt files recursively from resources/
-#   - all .txt files recursively from resources/ideal_12_data (if present)
+#   - all .fseries files recursively from SSTcore/resources/Knots_FourierSeries
+#   - all ideal*.txt files recursively from SSTcore/resources/
+#   - all .txt files recursively from SSTcore/resources/ideal_12_data (if present)
 #
 # Generates:
 #   - ${CMAKE_BINARY_DIR}/generated/knot_files_embedded.h
@@ -12,8 +12,8 @@
 #   sst::get_embedded_knot_files()   -> map<knot_id, fseries_text>
 #   sst::get_embedded_ideal_files()  -> map<relative_name, text>
 
-set(KNOTS_FOURIER_DIR "${CMAKE_SOURCE_DIR}/resources/Knots_FourierSeries")
-set(RESOURCES_DIR     "${CMAKE_SOURCE_DIR}/resources")
+set(KNOTS_FOURIER_DIR "${CMAKE_SOURCE_DIR}/SSTcore/resources/Knots_FourierSeries")
+set(RESOURCES_DIR     "${CMAKE_SOURCE_DIR}/SSTcore/resources")
 set(IDEAL12_DIR       "${RESOURCES_DIR}/ideal_12_data")
 
 set(OUTPUT_FILE "${CMAKE_BINARY_DIR}/generated/knot_files_embedded.cpp")
@@ -25,13 +25,13 @@ file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/generated")
 # Collect resource files
 # -------------------------
 
-# Recursive .fseries files under resources/Knots_FourierSeries
+# Recursive .fseries files under SSTcore/resources/Knots_FourierSeries
 set(FSERIES_FILES "")
 if(EXISTS "${KNOTS_FOURIER_DIR}")
     file(GLOB_RECURSE FSERIES_FILES RELATIVE "${KNOTS_FOURIER_DIR}" "${KNOTS_FOURIER_DIR}/*.fseries")
 endif()
 
-# Recursive ideal*.txt under resources/
+# Recursive ideal*.txt under SSTcore/resources/
 set(IDEAL_FILES "")
 if(EXISTS "${RESOURCES_DIR}")
     file(GLOB_RECURSE IDEAL_FILES RELATIVE "${RESOURCES_DIR}" "${RESOURCES_DIR}/ideal*.txt")

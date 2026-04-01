@@ -4,12 +4,15 @@ import os
 import sys
 
 try:
-    import sstcore
+    import SSTcore as sstcore
 except ImportError:
     try:
-        import swirl_string_core as sstcore  # backward compatibility
+        import sstcore as sstcore
     except ImportError:
-        import sstbindings as sstcore
+        try:
+            import swirl_string_core as sstcore
+        except ImportError:
+            import sstbindings as sstcore
 
 # Parameters
 gamma = 1.0     # circulation

@@ -17,14 +17,18 @@ from PyQt5.QtCore import QThread, pyqtSignal, Qt
 using_cxx_backend = False
 sstcore = None
 try:
-    import swirl_string_core as sstcore
+    import SSTcore as sstcore
     using_cxx_backend = True
 except ImportError:
     try:
-        import sstbindings as sstcore
+        import swirl_string_core as sstcore
         using_cxx_backend = True
     except ImportError:
-        sstcore = None
+        try:
+            import sstbindings as sstcore
+            using_cxx_backend = True
+        except ImportError:
+            sstcore = None
 
 # Python helicity fallback: prefer canonical module, then legacy shim
 try:
@@ -163,12 +167,18 @@ def _find_sstcore_resources():
     """Probeer SSTcore/resources (Knots_FourierSeries, ideal.txt) te vinden.
     Eerst via pip-install (sstcore.get_resources_dir()), anders dev-paden."""
     try:
-        import sstcore
-        p = sstcore.get_resources_dir()
+        import SSTcore as _pkg
+        p = _pkg.get_resources_dir()
         if p is not None and p.is_dir():
             return p
     except ImportError:
-        pass
+        try:
+            import sstcore as _pkg
+            p = _pkg.get_resources_dir()
+            if p is not None and p.is_dir():
+                return p
+        except ImportError:
+            pass
     base = Path(__file__).resolve().parent.parent
     if os.environ.get("SSTCORE_RESOURCES"):
         p = Path(os.environ["SSTCORE_RESOURCES"])

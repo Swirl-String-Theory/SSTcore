@@ -4,12 +4,15 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton
 from PyQt5.QtCore import QThread, pyqtSignal
 
 try:
-    import swirl_string_core as sstcore
+    import SSTcore as sstcore
 except ImportError:
     try:
-        import sstbindings as sstcore
+        import swirl_string_core as sstcore
     except ImportError:
-        pass
+        try:
+            import sstbindings as sstcore
+        except ImportError:
+            sstcore = None
 
 # =====================================================================
 # Constanten & Formules

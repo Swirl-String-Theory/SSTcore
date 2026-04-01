@@ -14,11 +14,15 @@ sys.path.insert(0, os.path.abspath("."))
 import os
 script_name = os.path.splitext(os.path.basename(__file__))[0]
 
-# Load the module dynamically from the compiled path
-module_path = os.path.abspath("sstcore.cp312-win_amd64.pyd")
-module_name = "sstcore"
-
-import sstcore
+# Prefer pip / editable SSTcore; else legacy local .pyd (CMake still names it sstcore.*.pyd).
+try:
+    import SSTcore as sstcore
+except ImportError:
+    module_path = os.path.abspath("sstcore.cp312-win_amd64.pyd")
+    module_name = "sstcore"
+    spec = importlib.util.spec_from_file_location(module_name, module_path)
+    sstcore = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(sstcore)
 
 
 

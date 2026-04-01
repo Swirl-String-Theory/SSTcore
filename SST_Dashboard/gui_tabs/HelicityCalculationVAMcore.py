@@ -15,17 +15,24 @@ from sst_exports import get_exports_dir
 
 # --- SSTCORE bindings (with safe fallbacks if module is missing) ---
 try:
-    import swirl_string_core as sstcore
+    import SSTcore as sstcore
 except ImportError:
     try:
-        import sstbindings as sstcore
+        import swirl_string_core as sstcore
     except ImportError:
-        sstcore = None
-try:
-    from sstcore import biot_savart_velocity_grid, curl3d_central
-    HAVE_SST = True
-except Exception:
-    HAVE_SST = False
+        try:
+            import sstbindings as sstcore
+        except ImportError:
+            sstcore = None
+HAVE_SST = False
+biot_savart_velocity_grid = curl3d_central = None  # type: ignore[assignment]
+if sstcore is not None:
+    try:
+        biot_savart_velocity_grid = sstcore.biot_savart_velocity_grid
+        curl3d_central = sstcore.curl3d_central
+        HAVE_SST = True
+    except Exception:
+        pass
 
 from fseries_compat import parse_fseries_multi, eval_fourier_block
 

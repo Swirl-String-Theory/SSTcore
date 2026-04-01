@@ -1,5 +1,5 @@
 # setup.py for SSTcore pip package
-from setuptools import setup, Extension, find_packages
+from setuptools import setup
 from setuptools.command.build import build
 from pybind11.setup_helpers import Pybind11Extension, build_ext
 from pybind11 import get_cmake_dir
@@ -15,6 +15,23 @@ import sys
 
 __version__ = "0.1.9"
 base_dir = os.path.dirname(os.path.abspath(__file__))
+# Knot / ideal databases and Fourier series (packaged under SSTcore/resources/)
+REPO_RESOURCES_DIR = os.path.join(base_dir, "SSTcore", "resources")
+
+
+def _sstcore_package_data_files():
+    """Paths relative to the SSTcore/ package dir for package_data (full resource tree in wheels)."""
+    root = REPO_RESOURCES_DIR
+    if not os.path.isdir(root):
+        return []
+    pkg_root = os.path.join(base_dir, "SSTcore")
+    out = []
+    for dp, _, fns in os.walk(root):
+        for fn in fns:
+            full = os.path.join(dp, fn)
+            rel = os.path.relpath(full, pkg_root).replace(os.sep, "/")
+            out.append(rel)
+    return out
 
 
 def _relative_path(path, base=base_dir):
@@ -62,6 +79,15 @@ class CustomBuildExt(build_ext):
                 if '-Wno-deprecated-declarations' not in ext.extra_compile_args:
                     ext.extra_compile_args.append('-Wno-deprecated-declarations')
         
+        # Windows: huge embedded TU; use 64-bit hosted cl + extra compiler heap if available
+        if sys.platform == "win32":
+            for ext in self.extensions:
+                if not hasattr(ext, "extra_compile_args") or ext.extra_compile_args is None:
+                    ext.extra_compile_args = []
+                for flag in ("/bigobj", "/Zm2000"):
+                    if flag not in ext.extra_compile_args:
+                        ext.extra_compile_args.append(flag)
+
         # Now build extensions
         super().build_extensions()
 
@@ -145,7 +171,14 @@ class CustomBuild(build):
             
             # Run CMake to generate embedded files
             result = subprocess.run(
-                ["cmake", "-B", "build_node", "-S", "."],
+                [
+                    "cmake",
+                    "-B",
+                    "build_node",
+                    "-S",
+                    ".",
+                    "-DSST_BUILD_PYTHON_BINDINGS=OFF",
+                ],
                 cwd=base_dir,
                 check=False,
                 capture_output=True,
@@ -261,8 +294,8 @@ def generate_embedded_knot_files():
     header_file = os.path.join(src_dir, "knot_files_embedded.h")
     source_file = os.path.join(build_temp, "knot_files_embedded.cpp")
 
-    knots_fourier = Path(base_dir) / "resources" / "Knots_FourierSeries"
-    resources_dir = Path(base_dir) / "resources"
+    knots_fourier = Path(REPO_RESOURCES_DIR) / "Knots_FourierSeries"
+    resources_dir = Path(REPO_RESOURCES_DIR)
 
     fseries_paths = sorted(knots_fourier.rglob("*.fseries")) if knots_fourier.is_dir() else []
     ideal_rel_paths = _collect_ideal_rel_paths(resources_dir)
@@ -361,34 +394,46 @@ include_dirs = ["src", pybind11.get_include()]
 import sys
 cxx_std = 20  # Use C++20 for maximum compatibility
 
-# Main module: sstcore
+# Native extensions live under the SSTcore package (SSTcore._native / SSTcore._bindings).
+# CMake builds omit SSTCORE_PYBIND11_*_SUBMODULE and keep module names sstcore / sstbindings.
+_ext_macros = [
+    ("VERSION_INFO", __version__),
+    ("KNOT_FILES_EMBEDDED_H", "1"),
+    ("SSTCORE_PYBIND11_NATIVE_SUBMODULE", "1"),
+]
+_ext_macros_bindings = [
+    ("VERSION_INFO", __version__),
+    ("KNOT_FILES_EMBEDDED_H", "1"),
+    ("SSTCORE_PYBIND11_BINDINGS_SUBMODULE", "1"),
+]
+
 ext_modules = [
     Pybind11Extension(
-        "sstcore",
+        "SSTcore._native",
         sources=["src/module_sst.cpp"] + binding_files + src_files,
         include_dirs=include_dirs,
         cxx_std=cxx_std,
-        define_macros=[('VERSION_INFO', __version__), ('KNOT_FILES_EMBEDDED_H', '1')],
-        language='c++',
+        define_macros=_ext_macros,
+        language="c++",
     ),
-    # Backwards compatibility module
     Pybind11Extension(
-        "sstbindings",
+        "SSTcore._bindings",
         sources=["src/module_sstbindings.cpp"] + binding_files + src_files,
         include_dirs=include_dirs,
         cxx_std=cxx_std,
-        define_macros=[('VERSION_INFO', __version__), ('KNOT_FILES_EMBEDDED_H', '1')],
-        language='c++',
+        define_macros=_ext_macros_bindings,
+        language="c++",
     ),
 ]
 
 # Get all .fseries files for package data (for fallback access)
 # Use relative paths with / so setuptools never sees absolute paths
 fseries_files = []
-for root, dirs, files in os.walk("resources/knot_fseries"):
+_knot_fseries_dir = os.path.join(REPO_RESOURCES_DIR, "knot_fseries")
+for root, dirs, files in (os.walk(_knot_fseries_dir) if os.path.isdir(_knot_fseries_dir) else ()):
     for file in files:
         if file.endswith(('.fseries', '.short')):
-            full = os.path.join(base_dir, root, file)
+            full = os.path.join(root, file)
             rel = _relative_path(full)
             if rel:
                 fseries_files.append(rel)
@@ -406,7 +451,7 @@ if os.path.exists("Readme.md"):
         long_description = f.read()
 
 setup(
-    name="sstcore",
+    name="SSTcore",
     version=__version__,
     author="Omar Iskandarani",
     author_email="info@omariskandarani.com",
@@ -423,13 +468,12 @@ setup(
     ext_modules=ext_modules,
     cmdclass={
         "build": CustomBuild,
-        "build_ext": CustomBuildExt
+        "build_ext": CustomBuildExt,
     },
     zip_safe=False,
     python_requires=">=3.9",
-    packages=find_packages() + ["SSTcore"],
-    package_dir={"SSTcore": "."},
-    py_modules=["swirl_string_core"],  # backward compat: import swirl_string_core -> same as sstcore
+    packages=["SSTcore"],
+    py_modules=["swirl_string_core", "sstcore", "sstbindings"],
     include_package_data=True,
     # Data files installed to share/sstcore/knot_fseries/ for CMake compatibility
     # Also accessible via package_data for pip install
@@ -437,21 +481,8 @@ setup(
         ([('share/sstcore/knot_fseries', fseries_files)] if fseries_files else [])
         + resource_data_files
     ),
-    # Package data for pip installs (accessible via importlib.resources)
-    package_data={
-        '': [
-            'resources/knot_fseries/**/*.fseries',
-            'resources/knot_fseries/**/*.short',
-            'resources/Knots_FourierSeries/**/*.fseries',
-            'resources/Knots_FourierSeries/**/*.short',
-            'resources/ideal.txt',
-            'resources/ideal_11a.txt',
-            'resources/ideal_11n.txt',
-            'resources/idealLinks.txt',
-            'resources/idealLinks_10a.txt',
-            'resources/idealLinks_10n.txt',
-        ],
-    },
+    # Full resource tree ships inside the SSTcore package (SSTcore/resources/ in the repo).
+    package_data={"SSTcore": _sstcore_package_data_files()},
     install_requires=[
         "pybind11>=2.6.0",
         "numpy>=1.19.0",

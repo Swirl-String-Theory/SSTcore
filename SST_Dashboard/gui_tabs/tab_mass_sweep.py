@@ -14,12 +14,15 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import QObject, QThread, pyqtSignal, pyqtSlot, Qt
 
 try:
-    import swirl_string_core as sstcore
+    import SSTcore as sstcore
 except ImportError:
     try:
-        import sstbindings as sstcore
+        import swirl_string_core as sstcore
     except ImportError:
-        sstcore = None
+        try:
+            import sstbindings as sstcore
+        except ImportError:
+            sstcore = None
 
 # Import sweep logic from examples (portable whether run from repo root or examples/)
 _root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

@@ -13,9 +13,12 @@ if str(_parent) not in sys.path:
 import numpy as np
 
 try:
-    import sstcore
+    import SSTcore as sstcore
 except ImportError:
-    import sstbindings as sstcore
+    try:
+        import sstcore
+    except ImportError:
+        import sstbindings as sstcore
 
 def vector_magnitude(v):
     return math.sqrt(sum(x**2 for x in v))

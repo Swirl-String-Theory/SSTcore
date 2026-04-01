@@ -21,13 +21,16 @@ except Exception:
     np = None
 
 try:
-    # Provided by your PyBind11 module
-    from sstcore import pd_from_curve, hyperbolic_volume_from_pd
-except Exception as e:
-    raise SystemExit(
-        "ERROR: Could not import 'sstcore'. Build & install the module first.\n"
-        f"Details: {e}"
-    )
+    from SSTcore import pd_from_curve, hyperbolic_volume_from_pd
+except Exception:
+    try:
+        from sstcore import pd_from_curve, hyperbolic_volume_from_pd
+    except Exception as e:
+        raise SystemExit(
+            "ERROR: Could not import SSTcore/sstcore (pd_from_curve, hyperbolic_volume_from_pd). "
+            "Build & install the module first.\n"
+            f"Details: {e}"
+        ) from e
 
 def torus_knot_points(p=2, q=3, R=2.0, r=1.0, M=800):
     """

@@ -6,9 +6,12 @@ from datetime import datetime
 import numpy as np
 
 try:
-    import sstcore
+    import SSTcore as sstcore
 except ImportError:
-    import sstbindings as sstcore
+    try:
+        import sstcore
+    except ImportError:
+        import sstbindings as sstcore
 
 class SSTFoundation:
     """

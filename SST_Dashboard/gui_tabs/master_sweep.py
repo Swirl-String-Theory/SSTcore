@@ -8,9 +8,12 @@ from datetime import datetime
 from sst_exports import get_exports_dir
 
 try:
-    import swirl_string_core as sstcore
+    import SSTcore as sstcore
 except ImportError:
-    import sstbindings as sstcore
+    try:
+        import swirl_string_core as sstcore
+    except ImportError:
+        import sstbindings as sstcore
 
 # =====================================================================
 # 1. CONSTANTS & PHYSICS FUNCTIONS

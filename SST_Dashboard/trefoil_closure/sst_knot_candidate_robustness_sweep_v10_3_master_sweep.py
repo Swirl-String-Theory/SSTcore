@@ -554,13 +554,14 @@ def build_sstcore_via_cmake(
 
 
 def _try_import_sstcore_scan() -> Tuple[Optional[object], bool]:
-    """Import CMake/package module `sstcore` if it exposes calculate_bs_cutoff_energy_scan."""
-    try:
-        mod = importlib.import_module("sstcore")
-    except Exception:
-        return None, False
-    if hasattr(mod, "calculate_bs_cutoff_energy_scan"):
-        return mod, True
+    """Import ``SSTcore`` (pip) or ``sstcore`` (CMake) if ``calculate_bs_cutoff_energy_scan`` exists."""
+    for modname in ("SSTcore", "sstcore"):
+        try:
+            mod = importlib.import_module(modname)
+        except Exception:
+            continue
+        if hasattr(mod, "calculate_bs_cutoff_energy_scan"):
+            return mod, True
     return None, False
 
 
@@ -590,7 +591,7 @@ def _build_local_sst_core() -> None:
 
 
 def resolve_bs_cutoff_scan_module(use_local: bool, auto_compile: bool) -> Tuple[Optional[object], bool]:
-    """Load native BS cutoff scan: prefer `sstcore` (CMake wheel or SSTCORE_EXTRA_PATHS), else trefoil `sst_core`."""
+    """Load native BS cutoff scan: prefer ``SSTcore`` / ``sstcore`` (pip or CMake), else trefoil ``sst_core``."""
     global sst_core, _SST_CORE_AVAILABLE, SST_CORE_SCAN_AVAILABLE, SST_CORE_SCAN_PROVIDER
     sst_core = None
     _SST_CORE_AVAILABLE = False
@@ -606,7 +607,7 @@ def resolve_bs_cutoff_scan_module(use_local: bool, auto_compile: bool) -> Tuple[
         sst_core = mod
         _SST_CORE_AVAILABLE = True
         SST_CORE_SCAN_AVAILABLE = True
-        SST_CORE_SCAN_PROVIDER = "sstcore"
+        SST_CORE_SCAN_PROVIDER = getattr(mod, "__name__", "SSTcore")
         return mod, True
 
     if not os.path.exists(SST_CORE_CPP_PATH):
@@ -3691,7 +3692,7 @@ def build_robustness_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--sstcore-cmake-build",
         action="store_true",
-        help="Run CMake configure+build for target sstcore (repo src/) using this Python, then prefer import sstcore",
+        help="Run CMake configure+build for target sstcore (repo src/) using this Python, then prefer import SSTcore or sstcore",
     )
     parser.add_argument(
         "--sst-project-root",

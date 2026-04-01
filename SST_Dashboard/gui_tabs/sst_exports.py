@@ -24,18 +24,30 @@ def _local_ideal_txt_sources() -> list:
     """Paden waar lokaal ideal.txt kan staan (SSTcore/resources of sstcore-package)."""
     sources = []
     try:
-        import sstcore
-        p = sstcore.get_ideal_txt_path()
+        import SSTcore as _sst_pkg
+        p = _sst_pkg.get_ideal_txt_path()
         if p and p.exists():
             sources.append(p)
-        d = sstcore.get_resources_dir()
+        d = _sst_pkg.get_resources_dir()
         if d:
             for name in ("ideal.txt", "Ideal.txt"):
                 q = d / name
                 if q.exists() and q not in sources:
                     sources.append(q)
     except ImportError:
-        pass
+        try:
+            import sstcore as _sst_pkg
+            p = _sst_pkg.get_ideal_txt_path()
+            if p and p.exists():
+                sources.append(p)
+            d = _sst_pkg.get_resources_dir()
+            if d:
+                for name in ("ideal.txt", "Ideal.txt"):
+                    q = d / name
+                    if q.exists() and q not in sources:
+                        sources.append(q)
+        except ImportError:
+            pass
     base = Path(__file__).resolve().parent.parent  # SST_Dashboard
     sstcore_root = base.parent  # SSTcore
     for name in ("ideal.txt", "Ideal.txt"):

@@ -39,8 +39,7 @@
         "<!@(node -p \"require('node-addon-api').include\")",
         "src",
         "include",
-        "<(module_root_dir)/build_node/generated",
-        "<(module_root_dir)/extern/pybind11/include"
+        "<(module_root_dir)/build_node/generated"
       ],
       "defines": [
         "NAPI_DISABLE_CPP_EXCEPTIONS"
@@ -53,7 +52,7 @@
           "msvs_settings": {
             "VCCLCompilerTool": {
               "ExceptionHandling": 1,
-              "AdditionalOptions": [ "/std:c++20" ]
+              "AdditionalOptions": [ "/std:c++20", "/bigobj", "/Zm2000" ]
             }
           }
         }],

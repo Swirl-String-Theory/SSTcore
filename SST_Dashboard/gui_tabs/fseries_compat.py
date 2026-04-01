@@ -8,10 +8,18 @@ import os
 import numpy as np
 
 try:
-    from sstbindings import fourier_knot_eval
+    from SSTcore import fourier_knot_eval
     HAVE_SST = True
 except Exception:
-    HAVE_SST = False
+    try:
+        from swirl_string_core import fourier_knot_eval
+        HAVE_SST = True
+    except Exception:
+        try:
+            from sstbindings import fourier_knot_eval
+            HAVE_SST = True
+        except Exception:
+            HAVE_SST = False
 
 
 def _parse_floats_from_line(line: str):

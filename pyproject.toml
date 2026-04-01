@@ -3,7 +3,7 @@ requires = ["setuptools>=65.0", "wheel", "pybind11>=2.6.0", "numpy>=1.19.0", "pa
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sstcore"
+name = "SSTcore"
 version = "0.1.9"
 description = "SSTcore - Swirl String Theory Canonical Core. High-performance C++ library for knot dynamics, vortex systems, and fluid mechanics"
 readme = "Readme.md"
@@ -42,18 +42,4 @@ Repository = "https://github.com/Swirl-String-Theory/SSTcore"
 "Bug Tracker" = "https://github.com/Swirl-String-Theory/SSTcore/issues"
 
 [tool.setuptools]
-packages = {find = {}}
-
-[tool.setuptools.package-data]
-"*" = [
-    "resources/knot_fseries/**/*.fseries",
-    "resources/knot_fseries/**/*.short",
-    "resources/Knots_FourierSeries/**/*.fseries",
-    "resources/Knots_FourierSeries/**/*.short",
-    "resources/ideal.txt",
-    "resources/ideal_11a.txt",
-    "resources/ideal_11n.txt",
-    "resources/idealLinks.txt",
-    "resources/idealLinks_10a.txt",
-    "resources/idealLinks_10n.txt",
-]
+packages = ["SSTcore"]

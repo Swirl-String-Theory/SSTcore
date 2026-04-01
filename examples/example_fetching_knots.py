@@ -4,7 +4,7 @@ Example: fetching knot data from resources/**/*.fseries and ideal.txt.
 All paths are resolved at runtime (script-relative, package-relative, or env).
 No absolute paths in source — works on any computer after clone/pip install.
 
-  1. Locate resources via SSTcore.get_resources_dir() or fallbacks (examples/../resources, SSTCORE_RESOURCES).
+  1. Locate resources via SSTcore.get_resources_dir() or fallbacks (repo SSTcore/resources, SSTCORE_RESOURCES).
   2. List and read .fseries files under Knots_FourierSeries/.
   3. Read ideal.txt (ideal knot database with <AB> blocks).
 
@@ -258,17 +258,25 @@ def main():
             for b in blocks[:3]:
                 print(f"      Id={b['id']}  Conway={b['conway']}  L={b['L']}  D={b['D']}  n={b['n']}")
 
-    # --- 5. Optional: use sstcore for ideal ---
+    # --- 5. Optional: native ideal parser (SSTcore / legacy sstcore) ---
     try:
-        import sstcore as ssc
-        if ideal_path and hasattr(ssc, "parse_ideal_txt_multi"):
+        import SSTcore as ssc
+    except ImportError:
+        try:
+            import sstcore as ssc
+        except ImportError:
+            ssc = None
+    if ssc is not None and ideal_path and hasattr(ssc, "parse_ideal_txt_multi"):
+        try:
             blocks_cpp = ssc.parse_ideal_txt_multi(str(ideal_path))
-            print(f"\n[5] sstcore.parse_ideal_txt_multi: {len(blocks_cpp)} blocks")
+            print(f"\n[5] parse_ideal_txt_multi: {len(blocks_cpp)} blocks")
             if blocks_cpp:
                 first = blocks_cpp[0]
                 print(f"    First: id={getattr(first,'id',first)}  L={getattr(first,'L',None)}  D={getattr(first,'D',None)}")
-    except ImportError:
-        print("\n[5] sstcore not available (optional for full ideal parsing).")
+        except Exception as ex:
+            print(f"\n[5] parse_ideal_txt_multi failed: {ex}")
+    elif ssc is None:
+        print("\n[5] SSTcore/sstcore not available (optional for full ideal parsing).")
 
     # --- 6. Knot counts by crossing (for overnight sweep planning) ---
     if HAS_SSTCORE:

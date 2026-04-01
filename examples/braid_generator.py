@@ -97,9 +97,12 @@ class BraidTo3D:
 # --- TEST THE NEW ENGINE ---
 if __name__ == "__main__":
     try:
-        import sstcore
+        import SSTcore as sstcore
     except ImportError:
-        import sstbindings as sstcore
+        try:
+            import sstcore
+        except ImportError:
+            import sstbindings as sstcore
 
     # Dictionary of fundamental particles and their Braid Words
     test_braids = {

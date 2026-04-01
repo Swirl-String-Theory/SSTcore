@@ -1,9 +1,16 @@
 import numpy as np
-from swirl_string_core import (
-    evaluate_fourier_series,
-    writhe_gauss_curve,
-    estimate_crossing_number
-)
+try:
+    from SSTcore import (
+        evaluate_fourier_series,
+        writhe_gauss_curve,
+        estimate_crossing_number,
+    )
+except ImportError:
+    from swirl_string_core import (
+        evaluate_fourier_series,
+        writhe_gauss_curve,
+        estimate_crossing_number,
+    )
 
 # Sample Fourier coefficients: 5 harmonics, shape (5,6)
 N = 5

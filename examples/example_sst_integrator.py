@@ -18,12 +18,15 @@ if str(_parent) not in sys.path:
     sys.path.insert(0, str(_parent))
 
 try:
-    import sstcore
+    import SSTcore as sstcore
 except ImportError:
     try:
-        import swirl_string_core as sstcore  # backward compatibility
+        import sstcore
     except ImportError:
-        import sstbindings as sstcore
+        try:
+            import swirl_string_core as sstcore
+        except ImportError:
+            import sstbindings as sstcore
 
 if not getattr(sstcore, "compute_sst_mass", None):
     print(

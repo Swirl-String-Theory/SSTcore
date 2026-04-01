@@ -9,10 +9,13 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 
 try:
-    import sstcore as ssc
+    import SSTcore as ssc
 except ImportError:
-    print("ERROR: build/install sstcore first.")
-    raise
+    try:
+        import sstcore as ssc
+    except ImportError:
+        print("ERROR: build/install SSTcore first.")
+        raise
 
 try:
     from PyQt5.QtWidgets import (
@@ -30,9 +33,9 @@ def _candidate_fseries_roots():
     root = os.path.abspath(os.path.join(here, ".."))
     candidates = [
         os.environ.get("SSTCORE_RESOURCES", "").rstrip(os.sep) + os.sep + "Knots_FourierSeries" if os.environ.get("SSTCORE_RESOURCES") else "",
-        os.path.join(root, "resources", "Knots_FourierSeries"),
+        os.path.join(root, "SSTcore", "resources", "Knots_FourierSeries"),
         os.path.join(root, "src", "Knots_FourierSeries"),
-        os.path.join("resources", "Knots_FourierSeries"),
+        os.path.join("SSTcore", "resources", "Knots_FourierSeries"),
         os.path.join("src", "Knots_FourierSeries"),
     ]
     for p in candidates:

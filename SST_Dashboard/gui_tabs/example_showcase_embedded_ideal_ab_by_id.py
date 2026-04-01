@@ -6,9 +6,12 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 
 try:
-    import swirl_string_core as ssc
+    import SSTcore as ssc
 except ImportError:
-    import sstbindings as ssc
+    try:
+        import swirl_string_core as ssc
+    except ImportError:
+        import sstbindings as ssc
 
 # Optional Qt for GUI
 try:
