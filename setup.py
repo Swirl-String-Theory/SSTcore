@@ -49,6 +49,9 @@ def _relative_path(path, base=base_dir):
 # Custom build_ext to generate embedded files during build
 class CustomBuildExt(build_ext):
     def build_extensions(self):
+        if sys.platform == "win32":
+            # Prefer 64-bit-hosted MSVC for child cl.exe (PEP 517 often skips shell vcvars)
+            os.environ.setdefault("PreferredToolArchitecture", "x64")
         # Generate embedded files before building extensions (always generates at least stub)
         header_file, cpp_sources = generate_embedded_knot_files()
         if not cpp_sources:
@@ -86,12 +89,12 @@ class CustomBuildExt(build_ext):
                 if '-Wno-deprecated-declarations' not in ext.extra_compile_args:
                     ext.extra_compile_args.append('-Wno-deprecated-declarations')
         
-        # Windows: huge embedded TU; use 64-bit hosted cl + extra compiler heap if available
+        # Windows: huge generated TUs; /GL raises compile memory — disable; keep bigobj + heap
         if sys.platform == "win32":
             for ext in self.extensions:
                 if not hasattr(ext, "extra_compile_args") or ext.extra_compile_args is None:
                     ext.extra_compile_args = []
-                for flag in ("/bigobj", "/Zm2000"):
+                for flag in ("/bigobj", "/Zm2000", "/GL-"):
                     if flag not in ext.extra_compile_args:
                         ext.extra_compile_args.append(flag)
 
@@ -285,8 +288,30 @@ def _collect_ideal_rel_paths(resources_dir: Path):
     return rels
 
 
+def _assign_ideal_paths_to_shards(
+    rel_paths: list, resources_dir: Path, num_shards: int
+) -> list:
+    """Greedy load balance by file size so no single TU gets most of the bytes (round-robin fails badly)."""
+    weighted = []
+    for rel in rel_paths:
+        p = resources_dir / rel
+        try:
+            sz = p.stat().st_size
+        except OSError:
+            sz = 0
+        weighted.append((sz, rel))
+    weighted.sort(key=lambda x: -x[0])
+    loads = [0] * num_shards
+    buckets = [[] for _ in range(num_shards)]
+    for sz, rel in weighted:
+        j = min(range(num_shards), key=lambda i: loads[i])
+        buckets[j].append(rel)
+        loads[j] += sz
+    return buckets
+
+
 # Split ideal embeddings across TUs so MSVC (esp. 32-bit-hosted cl) does not hit C1060 heap limits.
-_NUM_IDEAL_EMBED_SHARDS = 20
+_NUM_IDEAL_EMBED_SHARDS = 256
 
 
 def generate_embedded_knot_files():
@@ -316,9 +341,7 @@ def generate_embedded_knot_files():
     ideal_rel_paths = _collect_ideal_rel_paths(resources_dir)
 
     nsh = _NUM_IDEAL_EMBED_SHARDS
-    ideal_buckets = [[] for _ in range(nsh)]
-    for i, rel_txt in enumerate(ideal_rel_paths):
-        ideal_buckets[i % nsh].append(rel_txt)
+    ideal_buckets = _assign_ideal_paths_to_shards(ideal_rel_paths, resources_dir, nsh)
 
     # Generate header file (must match knot_dynamics.h: get_embedded_knot_files + get_embedded_ideal_files)
     with open(header_file, 'w', encoding='utf-8') as f:
@@ -401,9 +424,11 @@ def generate_embedded_knot_files():
 
     cpp_sources = [fseries_cpp, ideal_main_cpp] + ideal_shard_cpps
 
+    max_bucket = max((len(b) for b in ideal_buckets), default=0)
     print(
         f"Generated embedded resources: {len(fseries_paths)} .fseries, "
-        f"{len(ideal_rel_paths)} ideal text files in {nsh} shards (setuptools)"
+        f"{len(ideal_rel_paths)} ideal text files in {nsh} shards "
+        f"(max {max_bucket} files/shard, size-balanced) (setuptools)"
     )
     return header_file, cpp_sources
 
