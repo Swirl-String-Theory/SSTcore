@@ -486,6 +486,7 @@ header_file, _generated_embed_cpp_sources = generate_embedded_knot_files()
 # Get all source files (must match CMakeLists sstcore_lib)
 src_files = [
     "src/ab_initio_mass.cpp",
+    "src/trefoil_closure_kernels.cpp",
     "src/biot_savart.cpp",
     "src/fluid_dynamics.cpp",
     "src/field_kernels.cpp",

@@ -24,6 +24,7 @@
         "src/node/node_vortex_ring.cpp",
         "src/node/node_vorticity_dynamics.cpp",
         "src/ab_initio_mass.cpp",
+        "src/trefoil_closure_kernels.cpp",
         "src/biot_savart.cpp",
         "src/fluid_dynamics.cpp",
         "src/field_kernels.cpp",
