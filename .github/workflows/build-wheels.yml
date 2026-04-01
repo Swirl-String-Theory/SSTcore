@@ -42,6 +42,9 @@ jobs:
         shell: bash
 
       - name: Build wheel
+        env:
+          # Use 64-bit-hosted MSVC inside PEP 517 env (avoids C1060 on huge generated TU)
+          PreferredToolArchitecture: x64
         run: |
           python -m build --wheel
         shell: bash

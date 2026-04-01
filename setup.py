@@ -50,21 +50,28 @@ def _relative_path(path, base=base_dir):
 class CustomBuildExt(build_ext):
     def build_extensions(self):
         # Generate embedded files before building extensions (always generates at least stub)
-        header_file, source_file = generate_embedded_knot_files()
-        if not source_file or not os.path.exists(source_file):
-            raise RuntimeError("generate_embedded_knot_files() did not produce source file")
-        abs_source = os.path.abspath(source_file)
+        header_file, cpp_sources = generate_embedded_knot_files()
+        if not cpp_sources:
+            raise RuntimeError("generate_embedded_knot_files() did not produce source files")
         base_dir = os.path.dirname(os.path.abspath(__file__))
         src_dir = os.path.join(base_dir, "src")
-        rel_source = os.path.relpath(abs_source, base_dir)
+        build_temp = os.path.join(base_dir, "build", "temp")
+        abs_cpps = [os.path.abspath(p) for p in cpp_sources]
+        for p in abs_cpps:
+            if not os.path.exists(p):
+                raise RuntimeError(f"generate_embedded_knot_files() missing: {p}")
+        rel_cpps = [os.path.relpath(p, base_dir) for p in abs_cpps]
 
         for ext in self.extensions:
             ext_include_dirs = [os.path.abspath(d) for d in ext.include_dirs]
             if os.path.abspath(src_dir) not in ext_include_dirs:
                 ext.include_dirs.insert(0, src_dir)
+            if os.path.abspath(build_temp) not in ext_include_dirs:
+                ext.include_dirs.append(build_temp)
             ext_sources = [os.path.abspath(s) if os.path.isabs(s) else os.path.abspath(os.path.join(base_dir, s)) for s in ext.sources]
-            if abs_source not in ext_sources:
-                ext.sources.append(rel_source)
+            for abs_source, rel_source in zip(abs_cpps, rel_cpps):
+                if abs_source not in ext_sources:
+                    ext.sources.append(rel_source)
         
         # Add compiler-specific flags for better compatibility (apply to all extensions)
         for ext in self.extensions:
@@ -278,12 +285,18 @@ def _collect_ideal_rel_paths(resources_dir: Path):
     return rels
 
 
+# Split ideal embeddings across TUs so MSVC (esp. 32-bit-hosted cl) does not hit C1060 heap limits.
+_NUM_IDEAL_EMBED_SHARDS = 20
+
+
 def generate_embedded_knot_files():
     """Generate embedded knot / ideal C++ source for setuptools builds.
 
     Must stay aligned with cmake/embed_knot_files.cmake: recursive .fseries under
     resources/Knots_FourierSeries, ideal*.txt + ideal_12_data under resources/.
     (The old resources/knot_fseries flat path was wrong and produced empty maps.)
+
+    Ideal data is sharded into multiple .cpp files; knot .fseries live in one TU.
     """
     base_dir = os.path.dirname(os.path.abspath(__file__))
     src_dir = os.path.join(base_dir, "src")
@@ -292,13 +305,20 @@ def generate_embedded_knot_files():
     os.makedirs(src_dir, exist_ok=True)
 
     header_file = os.path.join(src_dir, "knot_files_embedded.h")
-    source_file = os.path.join(build_temp, "knot_files_embedded.cpp")
+    fwd_header = os.path.join(build_temp, "knot_embed_shards_fwd.h")
+    fseries_cpp = os.path.join(build_temp, "knot_embed_fseries.cpp")
+    ideal_main_cpp = os.path.join(build_temp, "knot_files_embedded.cpp")
 
     knots_fourier = Path(REPO_RESOURCES_DIR) / "Knots_FourierSeries"
     resources_dir = Path(REPO_RESOURCES_DIR)
 
     fseries_paths = sorted(knots_fourier.rglob("*.fseries")) if knots_fourier.is_dir() else []
     ideal_rel_paths = _collect_ideal_rel_paths(resources_dir)
+
+    nsh = _NUM_IDEAL_EMBED_SHARDS
+    ideal_buckets = [[] for _ in range(nsh)]
+    for i, rel_txt in enumerate(ideal_rel_paths):
+        ideal_buckets[i % nsh].append(rel_txt)
 
     # Generate header file (must match knot_dynamics.h: get_embedded_knot_files + get_embedded_ideal_files)
     with open(header_file, 'w', encoding='utf-8') as f:
@@ -313,48 +333,82 @@ def generate_embedded_knot_files():
         f.write("}\n\n")
         f.write("#endif // KNOT_FILES_EMBEDDED_H\n")
 
-    # Generate source (utf-8: .fseries may contain Unicode)
-    with open(source_file, 'w', encoding='utf-8') as f:
-        f.write("// Auto-generated file - do not edit manually\n")
-        f.write("// Embedded knot .fseries and ideal database (setuptools; mirrors cmake/embed_knot_files.cmake)\n\n")
+    with open(fwd_header, 'w', encoding='utf-8') as f:
+        f.write("#pragma once\n")
+        f.write("#include <map>\n")
+        f.write("#include <string>\n\n")
+        f.write("namespace sst { namespace detail {\n")
+        for si in range(nsh):
+            f.write(
+                f"void append_embedded_ideal_shard_{si}(std::map<std::string, std::string>& files);\n"
+            )
+        f.write("} }\n")
+
+    # One TU for all .fseries (typically small vs. thousands of ideal files)
+    with open(fseries_cpp, 'w', encoding='utf-8') as f:
+        f.write("// Auto-generated — setuptools; do not edit\n")
         f.write('#include "knot_files_embedded.h"\n')
         f.write("#include <map>\n")
         f.write("#include <string>\n\n")
         f.write("namespace sst {\n\n")
         f.write("std::map<std::string, std::string> get_embedded_knot_files() {\n")
         f.write("    std::map<std::string, std::string> files;\n\n")
-
         for abs_path in fseries_paths:
             rel = abs_path.relative_to(knots_fourier).as_posix()
             filename = abs_path.name
             knot_id = _knot_id_for_fseries(rel, filename)
             file_content = abs_path.read_text(encoding='utf-8')
             _write_chunked_map_assign(f, knot_id, file_content)
-
-        f.write("\n    return files;\n")
-        f.write("}\n\n")
-        f.write("std::map<std::string, std::string> get_embedded_ideal_files() {\n")
-        f.write("    std::map<std::string, std::string> files;\n\n")
-
-        for rel_txt in ideal_rel_paths:
-            abs_txt = resources_dir / rel_txt
-            if not abs_txt.is_file():
-                continue
-            txt_content = abs_txt.read_text(encoding='utf-8')
-            _write_chunked_map_assign(f, rel_txt.replace("\\", "/"), txt_content)
-
         f.write("\n    return files;\n")
         f.write("}\n\n")
         f.write("} // namespace sst\n")
 
+    ideal_shard_cpps = []
+    for si in range(nsh):
+        path_si = os.path.join(build_temp, f"knot_embed_ideal_{si}.cpp")
+        ideal_shard_cpps.append(path_si)
+        with open(path_si, 'w', encoding='utf-8') as f:
+            f.write("// Auto-generated — setuptools; do not edit\n")
+            f.write("#include <map>\n")
+            f.write("#include <string>\n\n")
+            f.write("namespace sst { namespace detail {\n\n")
+            f.write(
+                f"void append_embedded_ideal_shard_{si}(std::map<std::string, std::string>& files) {{\n"
+            )
+            for rel_txt in ideal_buckets[si]:
+                abs_txt = resources_dir / rel_txt
+                if not abs_txt.is_file():
+                    continue
+                txt_content = abs_txt.read_text(encoding='utf-8')
+                _write_chunked_map_assign(f, rel_txt.replace("\\", "/"), txt_content)
+            f.write("}\n\n")
+            f.write("} }\n")
+
+    with open(ideal_main_cpp, 'w', encoding='utf-8') as f:
+        f.write("// Auto-generated — setuptools; do not edit\n")
+        f.write('#include "knot_files_embedded.h"\n')
+        f.write('#include "knot_embed_shards_fwd.h"\n')
+        f.write("#include <map>\n")
+        f.write("#include <string>\n\n")
+        f.write("namespace sst {\n\n")
+        f.write("std::map<std::string, std::string> get_embedded_ideal_files() {\n")
+        f.write("    std::map<std::string, std::string> files;\n")
+        for si in range(nsh):
+            f.write(f"    detail::append_embedded_ideal_shard_{si}(files);\n")
+        f.write("    return files;\n")
+        f.write("}\n\n")
+        f.write("} // namespace sst\n")
+
+    cpp_sources = [fseries_cpp, ideal_main_cpp] + ideal_shard_cpps
+
     print(
         f"Generated embedded resources: {len(fseries_paths)} .fseries, "
-        f"{len(ideal_rel_paths)} ideal text files (setuptools)"
+        f"{len(ideal_rel_paths)} ideal text files in {nsh} shards (setuptools)"
     )
-    return header_file, source_file
+    return header_file, cpp_sources
 
-# Generate embedded files before building
-header_file, source_file = generate_embedded_knot_files()
+# Generate embedded files before building (sdist / metadata)
+header_file, _generated_embed_cpp_sources = generate_embedded_knot_files()
 
 # Get all source files (must match CMakeLists sstcore_lib)
 src_files = [
