@@ -28,7 +28,9 @@
 /build_wasm/
 /cmake-build-debug-mingw/
 /cmake-build-relwithdebinfo-mingw/
-/extern/
+# Ignore other extern trees but keep pybind11 submodule path trackable
+/extern/*
+!/extern/pybind11
 
 # Example output files
 /examples/output/
