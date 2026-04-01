@@ -16,16 +16,24 @@
     "src/",
     "src_bindings/",
     "extern/",
-    "include/"
+    "include/",
+    "docs/",
+    "node_examples/",
+    "scripts/ensure_knot_embedded.js",
+    "scripts/run_node_examples.js"
   ],
   "scripts": {
     "build": "npm run build:node",
-    "build:node": "cmake -B build_node -S . && node scripts/build_node_target.js && node-gyp rebuild",
+    "build:node": "node scripts/ensure_knot_embedded.js && node scripts/build_node_target.js && node-gyp rebuild",
     "build:wasm": "node scripts/build_wasm.js",
     "build:all": "npm run build:node && npm run build:wasm",
     "install": "node scripts/prebuild.js || node-gyp rebuild || echo 'Native build failed, using WASM fallback'",
     "prepublishOnly": "npm run build:all",
-    "test": "node tests/test_basic.js || echo 'Tests not available'"
+    "test": "node tests/test_basic.js || echo 'Tests not available'",
+    "example:biot": "tsx node_examples/biot_savart.example.ts",
+    "example:fluid": "tsx node_examples/fluid_dynamics.example.ts",
+    "example:frenet": "tsx node_examples/frenet_helicity.example.ts",
+    "examples:node:all": "node scripts/run_node_examples.js"
   },
   "keywords": [
     "SSTcore",
@@ -62,6 +70,7 @@
   },
   "devDependencies": {
     "node-gyp": "^10.0.0",
+    "tsx": "^4.19.0",
     "typescript": "^5.0.0"
   },
   "gypfile": true

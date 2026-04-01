@@ -191,6 +191,38 @@ export interface SwirlStringCore {
     vorticityDynamicsAvailable?: boolean;
     sstGravityAvailable?: boolean;
     sstExtensionsAvailable?: boolean;
+    magnusIntegratorAvailable?: boolean;
+    sstIntegratorAvailable?: boolean;
+    abInitioAvailable?: boolean;
+    nativeAddonName?: string;
+
+    listBindings(pattern?: string, includePrivate?: boolean): {
+        functions: string[];
+        classes: string[];
+        attributes: string[];
+        counts: { functions: number; classes: number; attributes: number };
+    };
+
+    computeSstMass?(points: Vec3Array, chiSpin: number): [number, number];
+    createMagnusBernoulliIntegrator?(rho_f: number, v_swirl: number, r_c: number, Gamma: number): unknown;
+    magnusComputeForce?(integrator: unknown, tangent: Vec3, normal: Vec3, R: number, v_knot: Vec3, v_bg: Vec3): number[];
+    magnusComputeSwirlCoulombAccel?(integrator: unknown, eval_pos: Vec3, source_pos: Vec3): number[];
+
+    ParticleEvaluator?: new (knotId: string, resolution?: number) => {
+        relax(iterations?: number, timestep?: number): void;
+        getMassMevAbInitio(includeTail?: boolean): number;
+        getFilaments(): number[][][];
+    };
+
+    TimeEvolution?: new (positions: Vec3Array, tangents: Vec3Array, gamma?: number) => {
+        evolve(dt: number, steps: number): void;
+        getPositions(): Float64Array;
+        getTangents(): Float64Array;
+    };
+
+    GoldenNLSClosure?: new (regime?: number) => {
+        calculateLoopMass(R: number): number;
+    };
 }
 
 declare const swirlStringCore: SwirlStringCore;
