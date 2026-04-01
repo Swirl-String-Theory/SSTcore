@@ -13,7 +13,7 @@ import tempfile
 import shutil
 import sys
 
-__version__ = "0.1.9"
+__version__ = "0.2.0"
 base_dir = os.path.dirname(os.path.abspath(__file__))
 # Knot / ideal databases and Fourier series (packaged under SSTcore/resources/)
 REPO_RESOURCES_DIR = os.path.join(base_dir, "SSTcore", "resources")

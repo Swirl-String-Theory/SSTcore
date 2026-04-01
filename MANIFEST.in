@@ -1,6 +1,11 @@
 # Resource tree bundled as SSTcore/resources (package_data)
 graft SSTcore/resources
 
+# Native extension sources (required for sdist → wheel; must match setup.py src_files + bindings)
+recursive-include src *.cpp
+recursive-include src *.h
+recursive-include src *.hpp
+
 # Include all .fseries knot data files
 recursive-include src/knot_fseries *.fseries
 recursive-include src/knot_fseries *.short

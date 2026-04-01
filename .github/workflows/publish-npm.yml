@@ -25,7 +25,7 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           submodules: recursive
@@ -37,7 +37,7 @@ jobs:
           arch: x64
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
@@ -78,7 +78,7 @@ jobs:
       
       - name: Upload build artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: build-${{ matrix.os }}-node${{ matrix.node-version }}
           path: |
@@ -96,13 +96,13 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           submodules: recursive
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
@@ -190,7 +190,7 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           submodules: recursive
@@ -201,7 +201,7 @@ jobs:
           version: 'latest'
       
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '20.x'
           cache: 'npm'
@@ -215,7 +215,7 @@ jobs:
       
       - name: Upload WASM artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: wasm-build
           path: dist/
