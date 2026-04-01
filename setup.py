@@ -251,6 +251,78 @@ def _write_chunked_map_assign(f, map_key: str, file_content: str, chunk_size: in
     f.write("    ;\n")
 
 
+def _write_chunked_map_iadd(f, map_key: str, file_content: str, chunk_size: int = 8192) -> None:
+    """Continuation for same map key after a prior slab used = (ordered packs only)."""
+    esc = _escape_cpp_key(map_key)
+    f.write(f'    files["{esc}"] +=\n')
+    n = len(file_content)
+    offset = 0
+    while offset < n:
+        chunk = file_content[offset : offset + chunk_size]
+        delim = _pick_raw_delim(chunk)
+        f.write(f"        R\"{delim}({chunk}){delim}\"\n")
+        offset += chunk_size
+    f.write("    ;\n")
+
+
+def _split_utf8_slab(s: str, max_bytes: int) -> list:
+    """Split text into segments each <= max_bytes UTF-8 encoded (no broken code points)."""
+    if max_bytes <= 0:
+        return [s]
+    out = []
+    buf = []
+    size = 0
+    for ch in s:
+        enc = ch.encode("utf-8")
+        if size + len(enc) > max_bytes and buf:
+            out.append("".join(buf))
+            buf = []
+            size = 0
+        buf.append(ch)
+        size += len(enc)
+    if buf:
+        out.append("".join(buf))
+    return out if out else [""]
+
+
+def _ideal_slabs_ordered(rel_paths: list, resources_dir: Path, max_slab_raw: int) -> list:
+    """Ordered (map_key, slice, use_assign) with large files split so += order is preserved."""
+    slabs = []
+    for rel_txt in rel_paths:
+        abs_txt = resources_dir / rel_txt
+        if not abs_txt.is_file():
+            continue
+        key = rel_txt.replace("\\", "/")
+        text = abs_txt.read_text(encoding="utf-8")
+        parts = _split_utf8_slab(text, max_slab_raw)
+        for i, part in enumerate(parts):
+            slabs.append((key, part, i == 0))
+    return slabs
+
+
+def _pack_ideal_slabs_into_bins(slabs: list, max_bin_raw: int) -> list:
+    """Sequential bins: preserves global slab order for = / += chains."""
+    bins = []
+    cur = []
+    cur_sz = 0
+    for key, content, use_assign in slabs:
+        sz = len(content.encode("utf-8"))
+        if cur_sz + sz > max_bin_raw and cur:
+            bins.append(cur)
+            cur = []
+            cur_sz = 0
+        cur.append((key, content, use_assign))
+        cur_sz += sz
+    if cur:
+        bins.append(cur)
+    return bins
+
+
+# Ideal embedding: slab + pack limits (MSVC 32-bit-hosted cl heap)
+_IDEAL_SLAB_MAX_RAW = 120_000
+_IDEAL_PACK_MAX_RAW = 400_000
+
+
 def _knot_id_for_fseries(rel_under_knots: str, filename: str) -> str:
     """Same knot_id rules as cmake/embed_knot_files.cmake."""
     m = re.fullmatch(r"knot\.(.+)\.fseries", filename, flags=re.IGNORECASE)
@@ -288,32 +360,6 @@ def _collect_ideal_rel_paths(resources_dir: Path):
     return rels
 
 
-def _assign_ideal_paths_to_shards(
-    rel_paths: list, resources_dir: Path, num_shards: int
-) -> list:
-    """Greedy load balance by file size so no single TU gets most of the bytes (round-robin fails badly)."""
-    weighted = []
-    for rel in rel_paths:
-        p = resources_dir / rel
-        try:
-            sz = p.stat().st_size
-        except OSError:
-            sz = 0
-        weighted.append((sz, rel))
-    weighted.sort(key=lambda x: -x[0])
-    loads = [0] * num_shards
-    buckets = [[] for _ in range(num_shards)]
-    for sz, rel in weighted:
-        j = min(range(num_shards), key=lambda i: loads[i])
-        buckets[j].append(rel)
-        loads[j] += sz
-    return buckets
-
-
-# Split ideal embeddings across TUs so MSVC (esp. 32-bit-hosted cl) does not hit C1060 heap limits.
-_NUM_IDEAL_EMBED_SHARDS = 256
-
-
 def generate_embedded_knot_files():
     """Generate embedded knot / ideal C++ source for setuptools builds.
 
@@ -321,7 +367,8 @@ def generate_embedded_knot_files():
     resources/Knots_FourierSeries, ideal*.txt + ideal_12_data under resources/.
     (The old resources/knot_fseries flat path was wrong and produced empty maps.)
 
-    Ideal data is sharded into multiple .cpp files; knot .fseries live in one TU.
+    Ideal data is split into UTF-8 slabs, packed in order into .cpp files (huge single
+    files no longer blow one TU); knot .fseries stay in one TU.
     """
     base_dir = os.path.dirname(os.path.abspath(__file__))
     src_dir = os.path.join(base_dir, "src")
@@ -339,9 +386,11 @@ def generate_embedded_knot_files():
 
     fseries_paths = sorted(knots_fourier.rglob("*.fseries")) if knots_fourier.is_dir() else []
     ideal_rel_paths = _collect_ideal_rel_paths(resources_dir)
-
-    nsh = _NUM_IDEAL_EMBED_SHARDS
-    ideal_buckets = _assign_ideal_paths_to_shards(ideal_rel_paths, resources_dir, nsh)
+    ideal_slabs = _ideal_slabs_ordered(
+        ideal_rel_paths, resources_dir, _IDEAL_SLAB_MAX_RAW
+    )
+    ideal_bins = _pack_ideal_slabs_into_bins(ideal_slabs, _IDEAL_PACK_MAX_RAW)
+    npack = len(ideal_bins)
 
     # Generate header file (must match knot_dynamics.h: get_embedded_knot_files + get_embedded_ideal_files)
     with open(header_file, 'w', encoding='utf-8') as f:
@@ -361,9 +410,9 @@ def generate_embedded_knot_files():
         f.write("#include <map>\n")
         f.write("#include <string>\n\n")
         f.write("namespace sst { namespace detail {\n")
-        for si in range(nsh):
+        for pi in range(npack):
             f.write(
-                f"void append_embedded_ideal_shard_{si}(std::map<std::string, std::string>& files);\n"
+                f"void append_embedded_ideal_pack_{pi}(std::map<std::string, std::string>& files);\n"
             )
         f.write("} }\n")
 
@@ -386,24 +435,23 @@ def generate_embedded_knot_files():
         f.write("}\n\n")
         f.write("} // namespace sst\n")
 
-    ideal_shard_cpps = []
-    for si in range(nsh):
-        path_si = os.path.join(build_temp, f"knot_embed_ideal_{si}.cpp")
-        ideal_shard_cpps.append(path_si)
-        with open(path_si, 'w', encoding='utf-8') as f:
+    ideal_pack_cpps = []
+    for pi in range(npack):
+        path_pi = os.path.join(build_temp, f"knot_embed_ideal_pack_{pi}.cpp")
+        ideal_pack_cpps.append(path_pi)
+        with open(path_pi, 'w', encoding='utf-8') as f:
             f.write("// Auto-generated — setuptools; do not edit\n")
             f.write("#include <map>\n")
             f.write("#include <string>\n\n")
             f.write("namespace sst { namespace detail {\n\n")
             f.write(
-                f"void append_embedded_ideal_shard_{si}(std::map<std::string, std::string>& files) {{\n"
+                f"void append_embedded_ideal_pack_{pi}(std::map<std::string, std::string>& files) {{\n"
             )
-            for rel_txt in ideal_buckets[si]:
-                abs_txt = resources_dir / rel_txt
-                if not abs_txt.is_file():
-                    continue
-                txt_content = abs_txt.read_text(encoding='utf-8')
-                _write_chunked_map_assign(f, rel_txt.replace("\\", "/"), txt_content)
+            for map_key, content, use_assign in ideal_bins[pi]:
+                if use_assign:
+                    _write_chunked_map_assign(f, map_key, content)
+                else:
+                    _write_chunked_map_iadd(f, map_key, content)
             f.write("}\n\n")
             f.write("} }\n")
 
@@ -416,19 +464,19 @@ def generate_embedded_knot_files():
         f.write("namespace sst {\n\n")
         f.write("std::map<std::string, std::string> get_embedded_ideal_files() {\n")
         f.write("    std::map<std::string, std::string> files;\n")
-        for si in range(nsh):
-            f.write(f"    detail::append_embedded_ideal_shard_{si}(files);\n")
+        for pi in range(npack):
+            f.write(f"    detail::append_embedded_ideal_pack_{pi}(files);\n")
         f.write("    return files;\n")
         f.write("}\n\n")
         f.write("} // namespace sst\n")
 
-    cpp_sources = [fseries_cpp, ideal_main_cpp] + ideal_shard_cpps
+    cpp_sources = [fseries_cpp, ideal_main_cpp] + ideal_pack_cpps
 
-    max_bucket = max((len(b) for b in ideal_buckets), default=0)
+    max_slabs_in_pack = max((len(b) for b in ideal_bins), default=0)
     print(
         f"Generated embedded resources: {len(fseries_paths)} .fseries, "
-        f"{len(ideal_rel_paths)} ideal text files in {nsh} shards "
-        f"(max {max_bucket} files/shard, size-balanced) (setuptools)"
+        f"{len(ideal_rel_paths)} ideal files -> {len(ideal_slabs)} slabs in {npack} cpp packs "
+        f"(max {max_slabs_in_pack} slabs/pack) (setuptools)"
     )
     return header_file, cpp_sources
 
