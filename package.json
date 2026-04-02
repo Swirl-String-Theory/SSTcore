@@ -35,8 +35,8 @@
     "example:fluid": "tsx node_examples/fluid_dynamics.example.ts",
     "example:frenet": "tsx node_examples/frenet_helicity.example.ts",
     "examples:node:all": "node scripts/run_node_examples.js",
-    "wheel:preflight:deps": "python -m pip install --upgrade pip && python -m pip install \"setuptools>=69\" build wheel pybind11 numpy",
-    "wheel:preflight:build": "python -m build --wheel --no-isolation -v",
+    "wheel:preflight:deps": "python -m pip install --upgrade pip && python -m pip install \"setuptools>=69\" wheel pybind11 numpy",
+    "wheel:preflight:build": "python setup.py bdist_wheel --dist-dir dist",
     "wheel:preflight:check": "python scripts/preflight_wheel_check.py",
     "wheel:preflight": "npm run wheel:preflight:deps && npm run wheel:preflight:build && npm run wheel:preflight:check"
   },

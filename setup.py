@@ -15,6 +15,29 @@ from pathlib import Path
 import tempfile
 import shutil
 import sys
+import sysconfig
+
+
+def _windows_msvc_toolset_defaults() -> None:
+    """On 64-bit Windows CPython, force the x64 MSVC toolset.
+
+    If ``VSCMD_ARG_TGT_ARCH`` is left at ``x86`` (e.g. from a generic Developer Prompt),
+    distutils picks ``HostX86\\x86\\link.exe`` and ``plat_name`` can become ``win32``. The
+    extension is still built for ``cp*-win_amd64``, so the link step omits ``python3xx.lib``
+    and every ``__imp__Py*`` symbol is unresolved (LNK2001 / LNK1120).
+
+    We **overwrite** these for 64-bit interpreters so ``setdefault`` cannot preserve a
+    wrong ``x86`` from the parent environment.
+    """
+    if sys.platform != "win32":
+        return
+    if sys.maxsize <= 2**32:
+        return
+    os.environ["VSCMD_ARG_TGT_ARCH"] = "x64"
+    os.environ["PreferredToolArchitecture"] = "x64"
+
+
+_windows_msvc_toolset_defaults()
 
 __version__ = "0.2.0"
 base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -51,10 +74,18 @@ def _relative_path(path, base=base_dir):
 
 # Custom build_ext to generate embedded files during build
 class CustomBuildExt(build_ext):
+    def finalize_options(self):
+        super().finalize_options()
+        # Keep MSVC plat_name aligned with the running interpreter (see _windows_msvc_toolset_defaults).
+        if sys.platform == "win32" and sys.maxsize > 2**32:
+            _windows_msvc_toolset_defaults()
+            plat = sysconfig.get_platform()
+            if not self.plat_name or self.plat_name == "win32":
+                self.plat_name = plat
+
     def build_extensions(self):
-        if sys.platform == "win32":
-            # Prefer 64-bit-hosted MSVC for child cl.exe (PEP 517 often skips shell vcvars)
-            os.environ.setdefault("PreferredToolArchitecture", "x64")
+        if sys.platform == "win32" and sys.maxsize > 2**32:
+            _windows_msvc_toolset_defaults()
         # Generate embedded files before building extensions (always generates at least stub)
         header_file, cpp_sources = generate_embedded_knot_files()
         if not cpp_sources:
@@ -525,7 +556,6 @@ include_dirs = ["src", pybind11.get_include()]
 
 # C++ standard - use 20 for better compatibility across platforms
 # C++23 is not fully supported on all compilers (especially older GCC versions)
-import sys
 cxx_std = 20  # Use C++20 for maximum compatibility
 
 # Native extensions live under the SSTcore package (SSTcore._native / SSTcore._bindings).
@@ -583,8 +613,17 @@ if os.path.exists("Readme.md"):
     with open("Readme.md", "r", encoding="utf-8") as f:
         long_description = f.read()
 
-# All metadata and package layout here (pyproject.toml has only [build-system]) so
-# PEP 517 does not merge [project] + setup() into an empty install tree on Linux.
+# Fail fast on Linux/macOS if the package tree is missing (case-sensitive FS / bad clone).
+_sstcore_init = os.path.join(base_dir, "SSTcore", "__init__.py")
+if not os.path.isfile(_sstcore_init):
+    raise RuntimeError(
+        f"Missing Python package file {_sstcore_init!r}. "
+        "Use a case-sensitive checkout (directory must be SSTcore/, not sstcore/)."
+    )
+
+# All metadata, extensions, and package_data here. pyproject.toml is [build-system] only
+# (no [project], no [tool.setuptools]) so older setuptools / PlatformIO venvs do not
+# require a PEP 621 `project.name` when running `setup.py bdist_wheel`.
 setup(
     name="SSTcore",
     version=__version__,
@@ -607,6 +646,7 @@ setup(
     },
     zip_safe=False,
     python_requires=">=3.9",
+    package_dir={"": "."},
     packages=["SSTcore"],
     py_modules=["swirl_string_core", "sstcore", "sstbindings"],
     include_package_data=True,

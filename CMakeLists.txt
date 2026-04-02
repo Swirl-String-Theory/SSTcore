@@ -502,11 +502,13 @@ set(SWIRL_THEORY_DIR "${CMAKE_SOURCE_DIR}/../SwirlStringTheory")
 set(SST_DASHBOARD_DIR "${CMAKE_SOURCE_DIR}/../SST_Dashboard")
 
 if(SST_BUILD_PYTHON_BINDINGS)
+    # -D definitions MUST appear before -P <script> or cmake -P never sees SOURCE/BUILD_DIR.
     add_custom_command(TARGET sstcore POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_pyd_fallback.cmake
-            -DSOURCE=$<TARGET_FILE:sstcore>
-            -DPROJECT_ROOT=${CMAKE_SOURCE_DIR}
-            -DBUILD_DIR=${CMAKE_BINARY_DIR}
+            COMMAND ${CMAKE_COMMAND}
+                "-DSOURCE=$<TARGET_FILE:sstcore>"
+                "-DPROJECT_ROOT=${CMAKE_SOURCE_DIR}"
+                "-DBUILD_DIR=${CMAKE_BINARY_DIR}"
+                -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_pyd_fallback.cmake"
             COMMAND ${CMAKE_COMMAND} -E make_directory "${SWIRL_THEORY_DIR}"
             COMMAND ${CMAKE_COMMAND} -E copy_if_different
             $<TARGET_FILE:sstcore>
@@ -519,18 +521,19 @@ if(SST_BUILD_PYTHON_BINDINGS)
     )
 
     add_custom_command(TARGET sstbindings POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_pyd_fallback.cmake
-            -DSOURCE=$<TARGET_FILE:sstbindings>
-            -DPROJECT_ROOT=${CMAKE_SOURCE_DIR}
-            -DBUILD_DIR=${CMAKE_BINARY_DIR}
+            COMMAND ${CMAKE_COMMAND}
+                "-DSOURCE=$<TARGET_FILE:sstbindings>"
+                "-DPROJECT_ROOT=${CMAKE_SOURCE_DIR}"
+                "-DBUILD_DIR=${CMAKE_BINARY_DIR}"
+                -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/copy_pyd_fallback.cmake"
             COMMAND ${CMAKE_COMMAND} -E make_directory "${SWIRL_THEORY_DIR}"
             COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            $<TARGET_FILE:sstcore>
-            "${SWIRL_THEORY_DIR}/$<TARGET_FILE_NAME:sstcore>"
+            $<TARGET_FILE:sstbindings>
+            "${SWIRL_THEORY_DIR}/$<TARGET_FILE_NAME:sstbindings>"
             COMMAND ${CMAKE_COMMAND} -E make_directory "${SST_DASHBOARD_DIR}"
             COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            $<TARGET_FILE:sstcore>
-            "${SST_DASHBOARD_DIR}/$<TARGET_FILE_NAME:sstcore>"
-            COMMENT "Copying sstcore/sstbindings for easy import (best-effort)"
+            $<TARGET_FILE:sstbindings>
+            "${SST_DASHBOARD_DIR}/$<TARGET_FILE_NAME:sstbindings>"
+            COMMENT "Copying sstbindings module for easy import (best-effort)"
     )
 endif()

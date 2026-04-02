@@ -44,16 +44,17 @@ jobs:
       - name: Install build dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install "setuptools>=69" build wheel pybind11 numpy
+          python -m pip install "setuptools>=69" wheel pybind11 numpy
         shell: bash
 
       - name: Build wheel
         env:
           PreferredToolArchitecture: x64
         run: |
-          # --no-isolation: use the same env as above and the full checkout (PEP 517
-          # isolated builds can omit files needed for the C++ extensions / resources).
-          python -m build --wheel --no-isolation -v
+          # Use setup.py bdist_wheel so the legacy backend always runs the same distutils
+          # install graph as a local `python setup.py bdist_wheel` (avoids rare PEP 517 /
+          # frontend paths that produced metadata-only wheels on Linux).
+          python setup.py bdist_wheel --dist-dir dist
         shell: bash
 
       - name: Repair Linux wheels with auditwheel
