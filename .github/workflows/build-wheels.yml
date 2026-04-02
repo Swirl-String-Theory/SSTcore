@@ -103,7 +103,9 @@ jobs:
           # Import from outside the repo: cwd on sys.path would load ./SSTcore (sources only,
           # no .so) and shadow the wheel installed in site-packages.
           cd "$(mktemp -d)"
-          python -c "import SSTcore._native; import SSTcore._bindings"
+          # _native and _bindings each register the same pybind11 types; one process cannot import both.
+          python -c "import SSTcore._native"
+          python -c "import SSTcore._bindings"
         shell: bash
 
       - name: Store wheel artifact
