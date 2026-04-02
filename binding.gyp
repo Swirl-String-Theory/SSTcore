@@ -73,8 +73,7 @@
           }
         }],
         ["OS=='linux'", {
-          "cflags_cc": [ "-std=c++20", "-O3", "-fPIC" ],
-          "ldflags": [ "-Wl,--no-undefined" ]
+          "cflags_cc": [ "-std=c++20", "-O3", "-fPIC" ]
         }]
       ]
     }

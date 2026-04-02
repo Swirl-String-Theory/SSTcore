@@ -16,6 +16,7 @@ concurrency:
 env:
   # Pinned for reproducible CI (see plan / CONTRIBUTING)
   SETUPTOOLS_PIN: "setuptools==75.8.2"
+  SST_SKIP_NPM_FOR_PYTHON_BUILD: "1"
 
 jobs:
   approach-a:
@@ -59,7 +60,7 @@ jobs:
         env:
           PreferredToolArchitecture: x64
         run: |
-          rm -rf dist build
+          rm -rf dist build python_build
           set -o pipefail
           python setup.py bdist_wheel --dist-dir dist --keep-temp 2>&1 | tee bdist_wheel.log
         shell: bash
@@ -144,7 +145,7 @@ jobs:
         env:
           PreferredToolArchitecture: x64
         run: |
-          rm -rf dist build
+          rm -rf dist build python_build
           python setup.py bdist_wheel --dist-dir dist
         shell: bash
 
@@ -204,7 +205,7 @@ jobs:
         env:
           PreferredToolArchitecture: x64
         run: |
-          rm -rf dist build
+          rm -rf dist build python_build
           python -m build --wheel -o dist
         shell: bash
 
@@ -264,7 +265,7 @@ jobs:
         env:
           PreferredToolArchitecture: x64
         run: |
-          rm -rf dist build
+          rm -rf dist build python_build
           python -m pip wheel . --no-deps -w dist
         shell: bash
 

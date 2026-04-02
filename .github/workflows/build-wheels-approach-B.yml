@@ -12,6 +12,7 @@ concurrency:
 
 env:
   SETUPTOOLS_PIN: "setuptools==75.8.2"
+  SST_SKIP_NPM_FOR_PYTHON_BUILD: "1"
 
 jobs:
   linux-bdist:
@@ -43,7 +44,7 @@ jobs:
         env:
           PreferredToolArchitecture: x64
         run: |
-          rm -rf dist
+          rm -rf dist python_build
           python setup.py bdist_wheel --dist-dir dist
         shell: bash
 

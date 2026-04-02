@@ -38,6 +38,7 @@
 # Python packaging artifacts
 /dist/
 /*.egg-info/
+/python_build/
 /build/temp/
 /build/lib/
 *.egg

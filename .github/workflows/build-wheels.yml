@@ -4,6 +4,7 @@ name: Build Wheels
 
 env:
   SETUPTOOLS_PIN: "setuptools==75.8.2"
+  SST_SKIP_NPM_FOR_PYTHON_BUILD: "1"
 
 on:
   release:
