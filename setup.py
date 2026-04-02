@@ -1,6 +1,9 @@
 # setup.py for SSTcore pip package
 from setuptools import setup
-from setuptools.command.build import build
+try:
+    from setuptools.command.build import build
+except ModuleNotFoundError:  # partial setuptools / mixed env layouts
+    from setuptools._distutils.command.build import build
 from pybind11.setup_helpers import Pybind11Extension, build_ext
 from pybind11 import get_cmake_dir
 import pybind11

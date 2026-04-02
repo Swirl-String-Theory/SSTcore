@@ -38,7 +38,7 @@ jobs:
       - name: Install build dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install build wheel setuptools pybind11 numpy
+          python -m pip install "setuptools>=69" build wheel pybind11 numpy
         shell: bash
 
       - name: Install Linux toolchain
@@ -61,7 +61,7 @@ jobs:
       - name: Repair Linux wheels with auditwheel
         if: matrix.os == 'ubuntu-latest'
         run: |
-          pip install auditwheel
+          python -m pip install auditwheel
           python - <<'PY'
           import glob, sys, zipfile
           for whl in glob.glob("dist/*.whl"):
@@ -78,7 +78,7 @@ jobs:
       - name: Repair macOS wheels with delocate
         if: matrix.os == 'macos-latest'
         run: |
-          pip install delocate
+          python -m pip install delocate
           delocate-wheel -w dist/fixed -v dist/*.whl
           mv dist/fixed/*.whl dist/
           rm -rf dist/fixed
@@ -109,7 +109,7 @@ jobs:
       - name: Install build dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install build setuptools
+          python -m pip install build "setuptools>=69"
 
       - name: Build source distribution
         run: |
