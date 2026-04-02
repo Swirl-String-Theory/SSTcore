@@ -1,0 +1,70 @@
+# Experimental: production-like `setup.py bdist_wheel`.
+# Does not upload to PyPI. See build-wheels.yml for release builds.
+name: "Wheels experiment B (setup.py bdist_wheel)"
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+
+jobs:
+  linux-bdist:
+    name: Approach B — setup.py bdist_wheel
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Linux toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+        shell: bash
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "setuptools>=69" wheel pybind11 numpy
+        shell: bash
+
+      - name: Build wheel
+        env:
+          PreferredToolArchitecture: x64
+        run: |
+          rm -rf dist
+          python setup.py bdist_wheel --dist-dir dist
+        shell: bash
+
+      - name: Assert wheel contains at least one .so
+        run: |
+          python - <<'PY'
+          import glob, sys, zipfile
+          wheels = sorted(glob.glob("dist/*.whl"))
+          if not wheels:
+              print("error: no wheel in dist/", file=sys.stderr)
+              sys.exit(1)
+          for whl in wheels:
+              with zipfile.ZipFile(whl) as z:
+                  names = z.namelist()
+                  sos = [n for n in names if n.endswith(".so")]
+              if not sos:
+                  print(f"error: wheel has no .so: {whl}", file=sys.stderr)
+                  for n in names[:80]:
+                      print(f"  {n}", file=sys.stderr)
+                  sys.exit(1)
+              print(f"ok: {whl} has {len(sos)} .so file(s)")
+          PY
+        shell: bash
+
+      - name: Upload wheel artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wheel-approach-B-py3.12-linux
+          path: dist/*.whl
+          retention-days: 14

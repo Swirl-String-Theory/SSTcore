@@ -1,3 +1,6 @@
+# Release wheel matrix (Linux / Windows / macOS) and PyPI upload on tags/releases.
+# Linux build experiments live in build-wheels-approach-{A,B,C,D}.yml; promote a winning
+# Linux command here after CI comparison (then remove or narrow the experiment workflows).
 name: Build Wheels
 
 on:

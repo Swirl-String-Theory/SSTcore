@@ -1,0 +1,29 @@
+{
+  "name": "taxonomy_validation",
+  "primary_key": [
+    "run_id",
+    "id",
+    "N_geom",
+    "N_int"
+  ],
+  "fields": {
+    "run_id": "string",
+    "id": "string",
+    "backend": "string|null",
+    "N_geom": "integer|null",
+    "N_int": "integer|null",
+    "A_K": "number|null",
+    "A_ratio_1_over_4pi": "number|null",
+    "a_nc_over_rc": "number|null",
+    "a_star_over_rc": "number|null",
+    "contact_model": "string|null",
+    "fit_window": "string|null",
+    "lambda_K": "number|null",
+    "root_choice": "string|null",
+    "jump": "number|null",
+    "postcheck_status": "string|null",
+    "continuation_status": "string|null",
+    "source_script": "string|null",
+    "notes": "string|null"
+  }
+}

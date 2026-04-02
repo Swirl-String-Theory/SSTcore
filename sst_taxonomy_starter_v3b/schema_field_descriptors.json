@@ -1,0 +1,24 @@
+{
+  "name": "taxonomy_field_descriptors",
+  "primary_key": [
+    "embedding_id",
+    "grid_size",
+    "spacing",
+    "interior"
+  ],
+  "fields": {
+    "embedding_id": "string",
+    "id": "string",
+    "grid_size": "integer|null",
+    "spacing": "number|null",
+    "interior": "integer|null",
+    "polyline_samples": "integer|null",
+    "Hc": "number|null",
+    "Hm": "number|null",
+    "a_mu": "number|null",
+    "descriptor_backend": "string|null",
+    "status": "string",
+    "provenance": "string|null",
+    "notes": "string|null"
+  }
+}
