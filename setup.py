@@ -92,8 +92,12 @@ class SSTBdistWheel(_BdistWheelBase):
     ``setattr(..., basedir_observed)`` while ``basedir_observed`` is only assigned
     inside ``if os.name == \"nt\"``. On Linux/macOS that overwrites platlib/purelib
     with ``\"\"``, so ``install`` drops all payload and the wheel contains only
-    ``*.dist-info`` (no ``SSTcore/``, no ``.so``). Always use the same wheel-root
-    layout as Windows.
+    ``*.dist-info`` (no ``SSTcore/``, no ``.so``).
+
+    We stage **all** importable payload (pure + extensions) under a single
+    wheel root (``install.root``): both ``install_purelib`` and
+    ``install_platlib`` are ``.`` so ``change_root(bdist_dir, ...)`` resolves
+    them to ``bdist_dir`` without splitting plat vs pure across ``.data/``.
     """
 
     def run(self):
@@ -119,17 +123,26 @@ class SSTBdistWheel(_BdistWheelBase):
         for key in ("headers", "scripts", "data", "purelib", "platlib"):
             setattr(install, "install_" + key, os.path.join(self.data_dir, key))
 
-        basedir_observed = os.path.normpath(os.path.join(self.data_dir, ".."))
-        self.install_libbase = self.install_lib = basedir_observed
-        setattr(
-            install,
-            "install_purelib" if self.root_is_pure else "install_platlib",
-            basedir_observed,
-        )
+        # Relative to install.root (bdist_dir): change_root joins root + "." -> bdist_dir.
+        install.install_purelib = "."
+        install.install_platlib = "."
 
-        _wheel_log.info("installing to %s", self.bdist_dir)
+        _wheel_log.info("installing to %s (purelib/platlib=.)", self.bdist_dir)
 
         self.run_command("install")
+
+        if not self.skip_build and not self.root_is_pure:
+            bdist_path = Path(self.bdist_dir)
+            has_binary = any(
+                p.suffix in (".so", ".pyd")
+                for p in bdist_path.rglob("*")
+                if p.is_file()
+            )
+            if not has_binary:
+                raise RuntimeError(
+                    "bdist_wheel: extension build staged no .so/.pyd under "
+                    f"{self.bdist_dir!r} (metadata-only wheel — check install_lib / build_lib)."
+                )
 
         impl_tag, abi_tag, plat_tag = self.get_tag()
         archive_basename = f"{self.wheel_dist_name}-{impl_tag}-{abi_tag}-{plat_tag}"

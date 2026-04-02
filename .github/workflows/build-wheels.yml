@@ -1,7 +1,9 @@
 # Release wheel matrix (Linux / Windows / macOS) and PyPI upload on tags/releases.
-# Linux build experiments live in build-wheels-approach-{A,B,C,D}.yml; promote a winning
-# Linux command here after CI comparison (then remove or narrow the experiment workflows).
+# Linux experiments: build-wheels-experiments-parallel.yml (push). Manual: build-wheels-approach-{A..D}.yml.
 name: Build Wheels
+
+env:
+  SETUPTOOLS_PIN: "setuptools==75.8.2"
 
 on:
   release:
@@ -47,7 +49,7 @@ jobs:
       - name: Install build dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install "setuptools>=69" wheel pybind11 numpy
+          python -m pip install "${{ env.SETUPTOOLS_PIN }}" wheel pybind11 numpy
         shell: bash
 
       - name: Build wheel
@@ -120,7 +122,7 @@ jobs:
       - name: Install build dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install build "setuptools>=69"
+          python -m pip install build "${{ env.SETUPTOOLS_PIN }}"
 
       - name: Build source distribution
         run: |

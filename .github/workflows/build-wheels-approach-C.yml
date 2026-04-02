@@ -1,11 +1,17 @@
 # Experimental: PEP 517 `python -m build --wheel` (setuptools.build_meta:__legacy__).
+# Manual only — parallel suite on push: build-wheels-experiments-parallel.yml
 # Does not upload to PyPI. See build-wheels.yml for release builds.
 name: "Wheels experiment C (PEP 517 build)"
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main, master]
+
+concurrency:
+  group: wheels-exp-C-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  SETUPTOOLS_PIN: "setuptools==75.8.2"
 
 jobs:
   linux-pep517:
@@ -30,7 +36,7 @@ jobs:
       - name: Install build dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install build "setuptools>=69" wheel pybind11 numpy
+          python -m pip install build "${{ env.SETUPTOOLS_PIN }}" wheel pybind11 numpy
         shell: bash
 
       - name: Build wheel (PEP 517)
