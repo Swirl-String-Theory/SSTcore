@@ -42,3 +42,11 @@ Homepage = "https://github.com/Swirl-String-Theory/SSTcore"
 Documentation = "https://github.com/Swirl-String-Theory/SSTcore#readme"
 Repository = "https://github.com/Swirl-String-Theory/SSTcore"
 "Bug Tracker" = "https://github.com/Swirl-String-Theory/SSTcore/issues"
+
+# Explicit layout: PEP 503 normalizes the distribution name to "sstcore". On Linux
+# (case-sensitive FS), auto-discovery looks for a lowercase package dir and finds
+# nothing, producing a wheel with only .dist-info. Pin the real package/module names.
+[tool.setuptools]
+packages = ["SSTcore"]
+py-modules = ["swirl_string_core", "sstcore", "sstbindings"]
+include-package-data = true
