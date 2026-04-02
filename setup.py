@@ -578,62 +578,21 @@ for root, dirs, files in (os.walk(_knot_fseries_dir) if os.path.isdir(_knot_fser
 # directory at runtime if needed (e.g. via path relative to package or env).
 resource_data_files = []
 
-# Read long description
-long_description = ""
-if os.path.exists("Readme.md"):
-    with open("Readme.md", "r", encoding="utf-8") as f:
-        long_description = f.read()
-
+# Metadata, packages, and dependencies live in pyproject.toml ([project] + [tool.setuptools]).
+# Passing the same fields here again can confuse setuptools' PEP 621 merge and yield wheels
+# that contain only .dist-info (no SSTcore/, no .so) on Linux.
 setup(
-    name="SSTcore",
-    version=__version__,
-    author="Omar Iskandarani",
-    author_email="info@omariskandarani.com",
-    description="SSTcore - Swirl String Theory Canonical Core. High-performance C++ library for knot dynamics, vortex systems, and fluid mechanics",
-    long_description=long_description,
-    long_description_content_type="text/markdown",
-    license="CC BY-NC 4.0",
-    url="https://github.com/Swirl-String-Theory/SSTcore",
-    project_urls={
-        "Bug Tracker": "https://github.com/Swirl-String-Theory/SSTcore/issues",
-        "Documentation": "https://github.com/Swirl-String-Theory/SSTcore#readme",
-        "Source Code": "https://github.com/Swirl-String-Theory/SSTcore",
-    },
     ext_modules=ext_modules,
     cmdclass={
         "build": CustomBuild,
         "build_ext": CustomBuildExt,
     },
     zip_safe=False,
-    python_requires=">=3.9",
-    packages=["SSTcore"],
-    py_modules=["swirl_string_core", "sstcore", "sstbindings"],
-    include_package_data=True,
     # Data files installed to share/sstcore/knot_fseries/ for CMake compatibility
-    # Also accessible via package_data for pip install
     data_files=(
         ([('share/sstcore/knot_fseries', fseries_files)] if fseries_files else [])
         + resource_data_files
     ),
     # Full resource tree ships inside the SSTcore package (SSTcore/resources/ in the repo).
     package_data={"SSTcore": _sstcore_package_data_files()},
-    install_requires=[
-        "pybind11>=2.6.0",
-        "numpy>=1.19.0",
-    ],
-    classifiers=[
-        "Development Status :: 3 - Alpha",
-        "Intended Audience :: Science/Research",
-        "Topic :: Scientific/Engineering :: Physics",
-        "Topic :: Scientific/Engineering :: Mathematics",
-        "License :: Other/Proprietary License",  # CC BY-NC 4.0 (non-commercial)
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: 3.10",
-        "Programming Language :: Python :: 3.11",
-        "Programming Language :: Python :: 3.12",
-        "Programming Language :: C++",
-        "Operating System :: OS Independent",
-    ],
-    keywords="physics, fluid-dynamics, knot-theory, vortex, computational-physics, cpp",
 )
