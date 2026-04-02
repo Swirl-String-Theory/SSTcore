@@ -1,56 +1,6 @@
 [build-system]
-requires = ["setuptools>=65.0", "wheel", "pybind11>=2.6.0", "numpy>=1.19.0", "packaging"]
-# __legacy__: same path/sys.path behavior as `setup.py` CLI (non-legacy backend can miss
-# package layout / extension wiring in some PEP 517 subprocess layouts).
+requires = ["setuptools>=69", "wheel", "pybind11>=2.6.0", "numpy>=1.19.0", "packaging"]
+# Legacy backend matches classic `setup.py` path behavior. Project metadata and packages
+# are defined only in setup.py — a [project] table + split config was producing Linux
+# wheels that contained only .dist-info (no SSTcore/, no .so) under PEP 517.
 build-backend = "setuptools.build_meta:__legacy__"
-
-[project]
-name = "SSTcore"
-version = "0.2.0"
-description = "SSTcore - Swirl String Theory Canonical Core. High-performance C++ library for knot dynamics, vortex systems, and fluid mechanics"
-readme = "Readme.md"
-requires-python = ">=3.9"
-license = {text = "CC BY-NC 4.0"}
-authors = [
-    {name = "Omar Iskandarani", email = "info@omariskandarani.com"}
-]
-maintainers = [
-    {name = "Omar Iskandarani", email = "info@omariskandarani.com"}
-]
-keywords = ["physics", "fluid-dynamics", "knot-theory", "vortex", "computational-physics", "cpp"]
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Intended Audience :: Science/Research",
-    "Topic :: Scientific/Engineering :: Physics",
-    "Topic :: Scientific/Engineering :: Mathematics",
-    "License :: Other/Proprietary License",  # CC BY-NC 4.0 (non-commercial)
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
-    "Programming Language :: C++",
-    "Operating System :: OS Independent",
-]
-dependencies = [
-    "pybind11>=2.6.0",
-    "numpy>=1.19.0",
-]
-
-[project.urls]
-Homepage = "https://github.com/Swirl-String-Theory/SSTcore"
-Documentation = "https://github.com/Swirl-String-Theory/SSTcore#readme"
-Repository = "https://github.com/Swirl-String-Theory/SSTcore"
-"Bug Tracker" = "https://github.com/Swirl-String-Theory/SSTcore/issues"
-
-# Explicit layout: PEP 503 normalizes the distribution name to "sstcore". On Linux
-# (case-sensitive FS), auto-discovery looks for a lowercase package dir and finds
-# nothing, producing a wheel with only .dist-info. Pin the real package/module names.
-[tool.setuptools]
-packages = ["SSTcore"]
-py-modules = ["swirl_string_core", "sstcore", "sstbindings"]
-include-package-data = true
-
-[tool.setuptools.package-dir]
-"" = "."
