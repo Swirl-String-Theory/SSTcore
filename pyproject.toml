@@ -1,6 +1,8 @@
 [build-system]
 requires = ["setuptools>=65.0", "wheel", "pybind11>=2.6.0", "numpy>=1.19.0", "packaging"]
-build-backend = "setuptools.build_meta"
+# __legacy__: same path/sys.path behavior as `setup.py` CLI (non-legacy backend can miss
+# package layout / extension wiring in some PEP 517 subprocess layouts).
+build-backend = "setuptools.build_meta:__legacy__"
 
 [project]
 name = "SSTcore"
@@ -40,6 +42,3 @@ Homepage = "https://github.com/Swirl-String-Theory/SSTcore"
 Documentation = "https://github.com/Swirl-String-Theory/SSTcore#readme"
 Repository = "https://github.com/Swirl-String-Theory/SSTcore"
 "Bug Tracker" = "https://github.com/Swirl-String-Theory/SSTcore/issues"
-
-[tool.setuptools]
-packages = ["SSTcore"]

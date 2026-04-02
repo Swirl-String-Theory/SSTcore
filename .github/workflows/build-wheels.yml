@@ -24,6 +24,13 @@ jobs:
           fetch-depth: 0
           submodules: recursive
 
+      - name: Install Linux toolchain
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+        shell: bash
+
       - name: Use x64 native MSVC (Windows)
         if: matrix.os == 'windows-latest'
         uses: ilammy/msvc-dev-cmd@v1
@@ -41,13 +48,6 @@ jobs:
           python -m pip install "setuptools>=69" build wheel pybind11 numpy
         shell: bash
 
-      - name: Install Linux toolchain
-        if: matrix.os == 'ubuntu-latest'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential
-        shell: bash
-
       - name: Build wheel
         env:
           # Use 64-bit-hosted MSVC inside PEP 517 env (avoids C1060 on huge generated TU)
@@ -55,7 +55,9 @@ jobs:
         run: |
           # --no-isolation: build from full checkout on the runner (isolated PEP 517
           # copies via git archive and can omit files needed for the C++ extension).
-          python -m build --wheel --no-isolation
+          rm -rf build dist .eggs
+          find . -maxdepth 1 -type d -name '*.egg-info' -exec rm -rf {} +
+          python -m build --wheel --no-isolation -v
         shell: bash
 
       - name: Repair Linux wheels with auditwheel
@@ -64,11 +66,15 @@ jobs:
           python -m pip install auditwheel
           python - <<'PY'
           import glob, sys, zipfile
-          for whl in glob.glob("dist/*.whl"):
+          for whl in sorted(glob.glob("dist/*.whl")):
               with zipfile.ZipFile(whl) as z:
-                  sos = [n for n in z.namelist() if n.endswith(".so")]
+                  names = z.namelist()
+                  sos = [n for n in names if n.endswith(".so")]
               if not sos:
                   print(f"error: wheel has no .so (extensions missing): {whl}", file=sys.stderr)
+                  print("Wheel contents (first 100 entries):", file=sys.stderr)
+                  for n in names[:100]:
+                      print(f"  {n}", file=sys.stderr)
                   sys.exit(1)
           PY
           auditwheel repair dist/*.whl -w dist/

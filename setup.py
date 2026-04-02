@@ -512,8 +512,11 @@ src_files = [
 # Generated embedded files will be added by CustomBuildExt during build
 # Don't add here to avoid path issues during sdist
 
-# Get all binding files
-binding_files = glob.glob("src/*_py.cpp")
+# Get all binding files (anchor to setup.py dir; PEP 517 cwd is not guaranteed to be repo root)
+binding_files = sorted(
+    os.path.relpath(p, base_dir).replace(os.sep, "/")
+    for p in glob.glob(os.path.join(base_dir, "src", "*_py.cpp"))
+)
 
 # Include directories
 # For sdist builds, paths are relative to the extracted source directory
