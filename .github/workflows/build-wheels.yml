@@ -99,7 +99,10 @@ jobs:
       - name: Smoke test wheel (import extensions)
         run: |
           python -m pip install --upgrade pip
-          python -m pip install dist/*.whl
+          python -m pip install "${GITHUB_WORKSPACE}"/dist/*.whl
+          # Import from outside the repo: cwd on sys.path would load ./SSTcore (sources only,
+          # no .so) and shadow the wheel installed in site-packages.
+          cd "$(mktemp -d)"
           python -c "import SSTcore._native; import SSTcore._bindings"
         shell: bash
 
