@@ -3,4 +3,5 @@ requires = ["setuptools>=69", "wheel", "pybind11>=2.6.0", "numpy>=1.19.0", "pack
 # Legacy backend matches classic `setup.py` path behavior. Project metadata and packages
 # are defined only in setup.py — a [project] table + split config was producing Linux
 # wheels that contained only .dist-info (no SSTcore/, no .so) under PEP 517.
+# Do not reintroduce [project] without reconciling with setup(); see CONTRIBUTING.md.
 build-backend = "setuptools.build_meta:__legacy__"

@@ -20,6 +20,21 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Linux toolchain
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+        shell: bash
+
+      - name: Use x64 native MSVC (Windows)
+        if: matrix.os == 'windows-latest'
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
@@ -29,30 +44,53 @@ jobs:
       - name: Install build dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install build wheel setuptools pybind11 numpy
+          python -m pip install "setuptools>=69" build wheel pybind11 numpy
         shell: bash
 
       - name: Build wheel
+        env:
+          PreferredToolArchitecture: x64
         run: |
-          python -m build --wheel
+          # --no-isolation: use the same env as above and the full checkout (PEP 517
+          # isolated builds can omit files needed for the C++ extensions / resources).
+          python -m build --wheel --no-isolation -v
         shell: bash
 
       - name: Repair Linux wheels with auditwheel
         if: matrix.os == 'ubuntu-latest'
         run: |
-          pip install auditwheel
+          python -m pip install auditwheel
+          python - <<'PY'
+          import glob, sys, zipfile
+          for whl in sorted(glob.glob("dist/*.whl")):
+              with zipfile.ZipFile(whl) as z:
+                  names = z.namelist()
+                  sos = [n for n in names if n.endswith(".so")]
+              if not sos:
+                  print(f"error: wheel has no .so (auditwheel will fail): {whl}", file=sys.stderr)
+                  for n in names[:80]:
+                      print(f"  {n}", file=sys.stderr)
+                  sys.exit(1)
+          PY
           auditwheel repair dist/*.whl -w dist/
-          rm dist/*-linux_*.whl
+          rm -f dist/*-linux_*.whl
         shell: bash
 
       - name: Repair macOS wheels with delocate
         if: matrix.os == 'macos-latest'
         run: |
-          pip install delocate
+          python -m pip install delocate
           delocate-wheel -w dist/fixed -v dist/*.whl
           mv dist/fixed/*.whl dist/
           rm -rf dist/fixed
-          rm dist/*-macosx_*.whl || true
+          rm -f dist/*-macosx_*.whl || true
+        shell: bash
+
+      - name: Smoke test wheel (import extensions)
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install dist/*.whl
+          python -c "import SSTcore._native; import SSTcore._bindings"
         shell: bash
 
       - name: Store wheel artifact
@@ -67,6 +105,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -76,7 +116,7 @@ jobs:
       - name: Install build dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install build setuptools
+          python -m pip install build "setuptools>=69"
 
       - name: Build source distribution
         run: |
