@@ -17,6 +17,99 @@ import shutil
 import sys
 import sysconfig
 
+from distutils import log
+from setuptools import _shutil
+from setuptools.command.bdist_wheel import bdist_wheel as _BdistWheelBase
+from setuptools.command.bdist_wheel import safer_name, safer_version
+from wheel.wheelfile import WheelFile
+
+
+class SSTBdistWheel(_BdistWheelBase):
+    """Work around setuptools bdist_wheel: posix leaves ``basedir_observed`` as \"\".
+
+    Upstream ``bdist_wheel.run`` sets ``install_{platlib,purelib}`` under
+    ``<name>.data/platlib``, then *unconditionally* runs
+    ``setattr(..., basedir_observed)`` while ``basedir_observed`` is only assigned
+    inside ``if os.name == \"nt\"``. On Linux/macOS that overwrites platlib/purelib
+    with ``\"\"``, so ``install`` drops all payload and the wheel contains only
+    ``*.dist-info`` (no ``SSTcore/``, no ``.so``). Always use the same wheel-root
+    layout as Windows.
+    """
+
+    def run(self):
+        build_scripts = self.reinitialize_command("build_scripts")
+        build_scripts.executable = "python"
+        build_scripts.force = True
+
+        build_ext = self.reinitialize_command("build_ext")
+        build_ext.inplace = False
+
+        if not self.skip_build:
+            self.run_command("build")
+
+        install = self.reinitialize_command("install", reinit_subcommands=True)
+        install.root = self.bdist_dir
+        install.compile = False
+        install.skip_build = self.skip_build
+        install.warn_dir = False
+
+        install_scripts = self.reinitialize_command("install_scripts")
+        install_scripts.no_ep = True
+
+        for key in ("headers", "scripts", "data", "purelib", "platlib"):
+            setattr(install, "install_" + key, os.path.join(self.data_dir, key))
+
+        basedir_observed = os.path.normpath(os.path.join(self.data_dir, ".."))
+        self.install_libbase = self.install_lib = basedir_observed
+        setattr(
+            install,
+            "install_purelib" if self.root_is_pure else "install_platlib",
+            basedir_observed,
+        )
+
+        log.info("installing to %s", self.bdist_dir)
+
+        self.run_command("install")
+
+        impl_tag, abi_tag, plat_tag = self.get_tag()
+        archive_basename = f"{self.wheel_dist_name}-{impl_tag}-{abi_tag}-{plat_tag}"
+        if not self.relative:
+            archive_root = self.bdist_dir
+        else:
+            archive_root = os.path.join(
+                self.bdist_dir, self._ensure_relative(install.install_base)
+            )
+
+        self.set_undefined_options("install_egg_info", ("target", "egginfo_dir"))
+        distinfo_dirname = (
+            f"{safer_name(self.distribution.get_name())}-"
+            f"{safer_version(self.distribution.get_version())}.dist-info"
+        )
+        distinfo_dir = os.path.join(self.bdist_dir, distinfo_dirname)
+        if self.dist_info_dir:
+            log.debug("reusing %s", self.dist_info_dir)
+            shutil.copytree(self.dist_info_dir, distinfo_dir)
+            _shutil.rmtree(self.egginfo_dir)
+        else:
+            self.egg2dist(self.egginfo_dir, distinfo_dir)
+
+        self.write_wheelfile(distinfo_dir)
+
+        if not os.path.exists(self.dist_dir):
+            os.makedirs(self.dist_dir)
+
+        wheel_path = os.path.join(self.dist_dir, archive_basename + ".whl")
+        with WheelFile(wheel_path, "w", self._zip_compression()) as wf:
+            wf.write_files(archive_root)
+
+        getattr(self.distribution, "dist_files", []).append(
+            ("bdist_wheel", f"{sys.version_info.major}.{sys.version_info.minor}", wheel_path)
+        )
+
+        if not self.keep_temp:
+            log.info("removing %s", self.bdist_dir)
+            _shutil.rmtree(self.bdist_dir)
+
 
 def _windows_msvc_toolset_defaults() -> None:
     """On 64-bit Windows CPython, force the x64 MSVC toolset.
@@ -643,6 +736,7 @@ setup(
     cmdclass={
         "build": CustomBuild,
         "build_ext": CustomBuildExt,
+        "bdist_wheel": SSTBdistWheel,
     },
     zip_safe=False,
     python_requires=">=3.9",
