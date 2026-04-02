@@ -14,14 +14,74 @@ import subprocess
 from pathlib import Path
 import tempfile
 import shutil
+import stat
+import logging
 import sys
 import sysconfig
 
-from distutils import log
-from setuptools import _shutil
+import packaging.version
 from setuptools.command.bdist_wheel import bdist_wheel as _BdistWheelBase
-from setuptools.command.bdist_wheel import safer_name, safer_version
 from wheel.wheelfile import WheelFile
+
+_wheel_log = logging.getLogger(__name__)
+
+
+def _wheel_safe_name(component: str) -> str:
+    """Like ``setuptools._normalization.safe_name`` (ASCII filename-safe project name)."""
+    return re.sub(r"[^A-Za-z0-9._-]+", "-", component, flags=re.IGNORECASE)
+
+
+def _wheel_safer_name(value: str) -> str:
+    """Like ``setuptools._normalization.safer_name`` (dist-info / wheel filename component)."""
+    return re.sub(r"[-_.]+", "-", _wheel_safe_name(value)).lower().replace("-", "_")
+
+
+def _wheel_safe_version(version: str) -> str:
+    """Like ``setuptools.command.bdist_wheel.safe_version``."""
+    try:
+        return str(packaging.version.Version(version))
+    except packaging.version.InvalidVersion:
+        v = version.replace(" ", ".")
+        return re.sub(r"[^A-Za-z0-9.]+", "-", v)
+
+
+def _wheel_safer_version(version: str) -> str:
+    """Like ``setuptools.command.bdist_wheel.safer_version``."""
+    return _wheel_safe_version(version).replace("-", "_")
+
+
+def _rmtree_staging(path: str) -> None:
+    """Remove a build tree; on Windows retry after chmod (same idea as ``setuptools._shutil``)."""
+
+    def _onerror(func, pth, exc_info):
+        if func in (os.unlink, os.remove) and os.name == "nt":
+            try:
+                os.chmod(pth, stat.S_IWRITE)
+            except OSError:
+                pass
+            try:
+                func(pth)
+            except OSError:
+                raise exc_info[1]
+        else:
+            raise exc_info[1]
+
+    def _onexc(func, pth, exc):
+        if func in (os.unlink, os.remove) and os.name == "nt":
+            try:
+                os.chmod(pth, stat.S_IWRITE)
+            except OSError:
+                raise exc
+            try:
+                func(pth)
+            except OSError:
+                raise exc
+        raise exc
+
+    if sys.version_info >= (3, 12):
+        shutil.rmtree(path, onexc=_onexc)
+    else:
+        shutil.rmtree(path, onerror=_onerror)
 
 
 class SSTBdistWheel(_BdistWheelBase):
@@ -67,7 +127,7 @@ class SSTBdistWheel(_BdistWheelBase):
             basedir_observed,
         )
 
-        log.info("installing to %s", self.bdist_dir)
+        _wheel_log.info("installing to %s", self.bdist_dir)
 
         self.run_command("install")
 
@@ -82,14 +142,14 @@ class SSTBdistWheel(_BdistWheelBase):
 
         self.set_undefined_options("install_egg_info", ("target", "egginfo_dir"))
         distinfo_dirname = (
-            f"{safer_name(self.distribution.get_name())}-"
-            f"{safer_version(self.distribution.get_version())}.dist-info"
+            f"{_wheel_safer_name(self.distribution.get_name())}-"
+            f"{_wheel_safer_version(self.distribution.get_version())}.dist-info"
         )
         distinfo_dir = os.path.join(self.bdist_dir, distinfo_dirname)
         if self.dist_info_dir:
-            log.debug("reusing %s", self.dist_info_dir)
+            _wheel_log.debug("reusing %s", self.dist_info_dir)
             shutil.copytree(self.dist_info_dir, distinfo_dir)
-            _shutil.rmtree(self.egginfo_dir)
+            _rmtree_staging(self.egginfo_dir)
         else:
             self.egg2dist(self.egginfo_dir, distinfo_dir)
 
@@ -107,8 +167,8 @@ class SSTBdistWheel(_BdistWheelBase):
         )
 
         if not self.keep_temp:
-            log.info("removing %s", self.bdist_dir)
-            _shutil.rmtree(self.bdist_dir)
+            _wheel_log.info("removing %s", self.bdist_dir)
+            _rmtree_staging(self.bdist_dir)
 
 
 def _windows_msvc_toolset_defaults() -> None:
