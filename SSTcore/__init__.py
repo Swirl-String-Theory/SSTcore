@@ -39,17 +39,33 @@ __all__ = [
     "get_knot_data_for_option",
 ]
 
+
+def _extension_star_export_names(ext_mod):
+    """
+    Public names from a pybind11 extension for merging into package __all__.
+
+    Pybind often leaves __all__ unset (or empty until list_bindings() runs). Plain
+    ``getattr(..., "__all__", [])`` then omits every binding from SSTcore.__all__,
+    so ``from SSTcore import *`` and ``swirl_string_core`` re-exports miss symbols
+    like biot_savart_velocity even though they exist on the extension module.
+    """
+    declared = getattr(ext_mod, "__all__", None)
+    if declared:
+        return list(declared)
+    return [n for n in dir(ext_mod) if not n.startswith("_")]
+
+
 # Re-export native API (from SSTcore._native, or SSTcore._bindings if _native missing)
 try:
     import SSTcore._native as _sst_native
     from SSTcore._native import *  # noqa: F401, F403
-    _native_all = getattr(_sst_native, "__all__", [])
+    _native_all = _extension_star_export_names(_sst_native)
     __all__ = list(__all__) + [x for x in _native_all if x not in __all__]
 except ImportError:
     try:
         import SSTcore._bindings as _sst_native
         from SSTcore._bindings import *  # noqa: F401, F403
-        _native_all = getattr(_sst_native, "__all__", [])
+        _native_all = _extension_star_export_names(_sst_native)
         __all__ = list(__all__) + [x for x in _native_all if x not in __all__]
     except ImportError:
         pass
