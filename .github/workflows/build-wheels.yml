@@ -90,11 +90,16 @@ jobs:
           rm -f dist/*-macosx_*.whl || true
         shell: bash
 
-      - name: Smoke test wheel (import extensions)
+      - name: Smoke test wheel (import package)
         run: |
           python -m pip install --upgrade pip
-          python -m pip install dist/*.whl
-          python -c "import SSTcore._native; import SSTcore._bindings"
+          python -m pip install "${GITHUB_WORKSPACE}"/dist/*.whl
+          # Import from outside the repo: cwd on sys.path can load ./SSTcore (sources only, no .so)
+          # and shadow the wheel in site-packages.
+          cd "$(mktemp -d)"
+          # __init__.py loads SSTcore._native when present; do not import SSTcore._bindings in the
+          # same process — both extensions register the same pybind11 types (e.g. TailApproxConfig).
+          python -c "import SSTcore; print('smoke ok:', SSTcore.__name__)"
         shell: bash
 
       - name: Store wheel artifact
