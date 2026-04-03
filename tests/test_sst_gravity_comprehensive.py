@@ -4,14 +4,8 @@ Comprehensive test suite for SST Gravity bindings.
 Tests all functions with LaTeX formulas, inputs, and results logged.
 """
 
-import sys
-import os
 import numpy as np
-
-# Add build directory to path
-build_dir = os.path.join(os.path.dirname(__file__), "../build/Debug")
-if os.path.exists(build_dir):
-    sys.path.insert(0, build_dir)
+import pytest
 
 try:
     import swirl_string_core
@@ -21,8 +15,10 @@ except ImportError:
         import sstbindings as swirl_string_core
         HAS_SST = True
     except ImportError:
-        print("ERROR: Could not import swirl_string_core or sstbindings")
-        sys.exit(1)
+        HAS_SST = False
+
+if not HAS_SST:
+    pytest.skip("Could not import swirl_string_core or sstbindings", allow_module_level=True)
 
 
 def log_test(func_name, latex_formula, inputs_dict, results, description=""):

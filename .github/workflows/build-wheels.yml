@@ -115,14 +115,8 @@ jobs:
           # Force reinstall so CI never keeps a stale site-packages SSTcore when the wheel path is unchanged.
           python -m pip install --force-reinstall "${GITHUB_WORKSPACE}"/dist/*.whl
           # Same empty cwd as smoke test; collect tests from repo but run against site-packages.
-          # *comprehensive* tests expect `import swirl_string_core` to be the legacy flat extension API.
-          # The wheel exposes that API via `sstbindings` / SSTcore._bindings; swirl_string_core.py is a
-          # thin `from SSTcore import *` shim and does not re-export those symbols — running the full
-          # comprehensive suite here always fails with AttributeError. Dev/CMake workflows should run them.
           pytest "${GITHUB_WORKSPACE}/tests" \
             --rootdir="${GITHUB_WORKSPACE}" \
-            --ignore-glob='*comprehensive*' \
-            --ignore="${GITHUB_WORKSPACE}/tests/test_knots_simple.py" \
             --ignore="${GITHUB_WORKSPACE}/tests/TestLibraryGravityModification.py" \
             --ignore="${GITHUB_WORKSPACE}/tests/TestLibraryTrefoil.py" \
             -q --tb=short

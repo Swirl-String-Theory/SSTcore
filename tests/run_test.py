@@ -1,30 +1,64 @@
-import pytest
-pytest.skip("example script", allow_module_level=True)
+"""
+Local dev smoke: Frenet frames + helicity via ``sstbindings``.
+
+- **Pytest**: no tests here (intentionally); nothing runs on import.
+- **Run directly** (needs bindings on the path): ``python tests/run_test.py``
+
+After ``pip install SSTcore``, you usually do not need a build dir; otherwise prepend
+your CMake output folder (the one containing ``sstbindings*.pyd`` / ``sstbindings*.so``)
+to ``PYTHONPATH``, or rely on the common relative paths tried below.
+
+Legacy note: older monolithic builds exposed the extension as ``swirl_string_core``;
+current SSTcore uses the ``sstbindings`` shim (``SSTcore._bindings`` in wheels).
+"""
+
+from __future__ import annotations
+
 import sys
-import os
+from pathlib import Path
 
-# (VAM) C:\workspace\projects\vamcore>set PYTHONPATH=build\Debug
-#
-# (VAM) C:\workspace\projects\vamcore>python -c "import sstbindings; print(swirl_string_core)"
-# <module 'swirl_string_core' from 'C:\\workspace\\projects\\vamcore\\build\\Debug\\sstbindings.cp311-win_amd64.pyd'>
-#
 
-# Adjust path if needed
-build_dir = os.path.join(os.path.dirname(__file__), "../build/Debug")
-sys.path.insert(0, build_dir)
+def _prepend_first_existing_build_dir() -> bool:
+    """If a typical CMake build output exists next to the repo root, prepend it to sys.path."""
+    here = Path(__file__).resolve().parent
+    root = here.parent
+    candidates = [
+        root / "build" / "Debug",
+        root / "build" / "Release",
+        root / "build" / "RelWithDebInfo",
+        root / "cmake-build-debug",
+        root / "cmake-build-release",
+        root / "cmake-build-relwithdebinfo",
+    ]
+    for d in candidates:
+        if d.is_dir():
+            p = str(d.resolve())
+            if p not in sys.path:
+                sys.path.insert(0, p)
+            return True
+    return False
 
-import sstbindings
-import numpy as np
 
-X = [[1.0, 0.0, 0.0],
-     [0.0, 1.0, 0.0],
-     [-1.0, 0.0, 0.0],
-     [0.0, -1.0, 0.0],
-     [1.0, 0.0, 0.0]]
+def main() -> None:
+    _prepend_first_existing_build_dir()
 
-T, N, B = sstbindings.compute_frenet_frames(X)
-kappa, tau = sstbindings.compute_curvature_torsion(T, N)
-print("Curvature:", kappa)
-print("Torsion:", tau)
+    import sstbindings
 
-print("Helicity:", sstbindings.compute_helicity(T, T))  # test w = v = T
+    X = [
+        [1.0, 0.0, 0.0],
+        [0.0, 1.0, 0.0],
+        [-1.0, 0.0, 0.0],
+        [0.0, -1.0, 0.0],
+        [1.0, 0.0, 0.0],
+    ]
+
+    T, N, B = sstbindings.compute_frenet_frames(X)
+    kappa, tau = sstbindings.compute_curvature_torsion(T, N)
+    print("Curvature:", kappa)
+    print("Torsion:", tau)
+
+    print("Helicity:", sstbindings.compute_helicity(T, T))  # toy: w = v = T
+
+
+if __name__ == "__main__":
+    main()

@@ -4,7 +4,6 @@
 /build/extern/
 /build/test_frenet.dir/
 /build/sstbindings.dir/
-/build/sstbindings.dir/
 /build/x64/
 /build/ALL_BUILD.vcxproj
 /build/ALL_BUILD.vcxproj.filters
@@ -43,3 +42,5 @@
 /build/lib/
 *.egg
 /Secrets.md
+/.github/job-logs.txt
+/.idea/runConfigurations/

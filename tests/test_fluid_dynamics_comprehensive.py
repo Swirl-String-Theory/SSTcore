@@ -4,14 +4,8 @@ Comprehensive test suite for Fluid Dynamics bindings.
 Tests all functions with LaTeX formulas, inputs, and results logged.
 """
 
-import sys
-import os
 import numpy as np
-
-# Add build directory to path
-build_dir = os.path.join(os.path.dirname(__file__), "../build/Debug")
-if os.path.exists(build_dir):
-    sys.path.insert(0, build_dir)
+import pytest
 
 try:
     import swirl_string_core
@@ -21,8 +15,10 @@ except ImportError:
         import sstbindings as swirl_string_core
         HAS_SST = True
     except ImportError:
-        print("ERROR: Could not import swirl_string_core or sstbindings")
-        sys.exit(1)
+        HAS_SST = False
+
+if not HAS_SST:
+    pytest.skip("Could not import swirl_string_core or sstbindings", allow_module_level=True)
 
 
 def log_test(func_name, latex_formula, inputs_dict, results, description=""):
@@ -138,10 +134,11 @@ def test_evolve_positions_euler():
 
 def test_compute_vorticity():
     """Test vorticity from gradient tensor."""
+    # Velocity Jacobian J[i][j] = ∂v_i/∂x_j (3×3). C++ API: std::array<std::array<double,3>,3>.
     grad = [
-        [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]],  # du/dx, du/dy, du/dz
-        [[0.0, 1.0, 0.0], [1.0, 0.0, 0.0], [0.0, 0.0, 0.0]],  # dv/dx, dv/dy, dv/dz
-        [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]   # dw/dx, dw/dy, dw/dz
+        [1.0, 0.0, 0.0],
+        [0.0, 1.0, 0.0],
+        [0.0, 0.0, 0.0],
     ]
     
     formula = r"$\boldsymbol{\omega} = \nabla \times \mathbf{v} = \left(\frac{\partial w}{\partial y} - \frac{\partial v}{\partial z}, \frac{\partial u}{\partial z} - \frac{\partial w}{\partial x}, \frac{\partial v}{\partial x} - \frac{\partial u}{\partial y}\right)$"
@@ -152,7 +149,7 @@ def test_compute_vorticity():
         "compute_vorticity",
         formula,
         {
-            "grad": "3x3 gradient tensor"
+            "grad": "3×3 velocity Jacobian ∂v_i/∂x_j"
         },
         result,
         "Compute vorticity vector ω = ∇ × v from the velocity gradient tensor"
