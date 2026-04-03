@@ -10,6 +10,17 @@ using sst::FourierKnot;
 using sst::Vec3;
 using sst::KnotDynamics;
 using sst::VortexKnotSystem;
+using sst::KnotInvariants;
+using sst::KnotPrediction;
+using sst::SectorGate;
+using sst::KnotParticleModel;
+using sst::CanonicalConstants;
+using sst::KnotDerived;
+using sst::SimpleInvariantXiModel;
+using sst::SSTCanonicalXiModel;
+using sst::MassFunctional;
+using sst::KnotState;
+using sst::KnotReportRow;
 using IdealABBlock = sst::FourierKnot::IdealABBlock;
 using IdealABComponent = sst::FourierKnot::IdealABComponent;
 
@@ -44,6 +55,128 @@ void bind_knot(py::module_& m) {
       .def_readwrite("b_y", &FourierBlock::b_y)
       .def_readwrite("a_z", &FourierBlock::a_z)
       .def_readwrite("b_z", &FourierBlock::b_z);
+
+  py::enum_<SectorGate>(m, "SectorGate")
+      .value("Shielded", SectorGate::Shielded)
+      .value("Exposed", SectorGate::Exposed)
+      .value("Unknown", SectorGate::Unknown)
+      .export_values();
+
+  py::class_<KnotInvariants>(m, "KnotInvariants")
+      .def(py::init<>())
+      .def_readwrite("name", &KnotInvariants::name)
+      .def_readwrite("crossing_number", &KnotInvariants::crossing_number)
+      .def_readwrite("braid_index", &KnotInvariants::braid_index)
+      .def_readwrite("seifert_genus", &KnotInvariants::seifert_genus)
+      .def_readwrite("chirality", &KnotInvariants::chirality)
+      .def_readwrite("hyperbolic", &KnotInvariants::hyperbolic)
+      .def_readwrite("hyperbolic_volume", &KnotInvariants::hyperbolic_volume)
+      .def_readwrite("ropelength_like", &KnotInvariants::ropelength_like)
+      .def_readwrite("hyperbolic_volume_opt", &KnotInvariants::hyperbolic_volume_opt)
+      .def_readwrite("ropelength", &KnotInvariants::ropelength)
+      .def_readwrite("writhe", &KnotInvariants::writhe)
+      .def_readwrite("min_self_distance", &KnotInvariants::min_self_distance)
+      .def_readwrite("bending_energy", &KnotInvariants::bending_energy);
+
+  py::class_<CanonicalConstants>(m, "CanonicalConstants")
+      .def(py::init<>())
+      .def_readwrite("r_c", &CanonicalConstants::r_c)
+      .def_readwrite("lambda_c", &CanonicalConstants::lambda_c)
+      .def_readwrite("m_e", &CanonicalConstants::m_e)
+      .def_readwrite("rho_m", &CanonicalConstants::rho_m);
+
+  py::class_<KnotDerived>(m, "KnotDerived")
+      .def(py::init<>())
+      .def_readwrite("gate", &KnotDerived::gate)
+      .def_readwrite("gate_factor", &KnotDerived::gate_factor)
+      .def_readwrite("xi", &KnotDerived::xi)
+      .def_readwrite("mass_ratio", &KnotDerived::mass_ratio)
+      .def_readwrite("mass_kg", &KnotDerived::mass_kg)
+      .def_readwrite("valid", &KnotDerived::valid)
+      .def_readwrite("note", &KnotDerived::note);
+
+  py::class_<SimpleInvariantXiModel::Params>(m, "SimpleInvariantXiModelParams")
+      .def(py::init<>())
+      .def_readwrite("a_k", &SimpleInvariantXiModel::Params::a_k)
+      .def_readwrite("a_b", &SimpleInvariantXiModel::Params::a_b)
+      .def_readwrite("a_g", &SimpleInvariantXiModel::Params::a_g)
+      .def_readwrite("a_vol", &SimpleInvariantXiModel::Params::a_vol)
+      .def_readwrite("a_L", &SimpleInvariantXiModel::Params::a_L)
+      .def_readwrite("a_chi", &SimpleInvariantXiModel::Params::a_chi);
+
+  py::class_<SimpleInvariantXiModel>(m, "SimpleInvariantXiModel")
+      .def(py::init<const SimpleInvariantXiModel::Params&>(), py::arg("params"))
+      .def("compute_xi", &SimpleInvariantXiModel::compute_xi, py::arg("K"))
+      .def("assign_gate", &SimpleInvariantXiModel::assign_gate, py::arg("K"));
+
+  py::class_<SSTCanonicalXiModel::Params>(m, "SSTCanonicalXiModelParams")
+      .def(py::init<>())
+      .def_readwrite("alpha_C", &SSTCanonicalXiModel::Params::alpha_C)
+      .def_readwrite("beta_L", &SSTCanonicalXiModel::Params::beta_L)
+      .def_readwrite("gamma_H", &SSTCanonicalXiModel::Params::gamma_H)
+      .def_readwrite("delta_V", &SSTCanonicalXiModel::Params::delta_V);
+
+  py::class_<SSTCanonicalXiModel>(m, "SSTCanonicalXiModel")
+      .def(py::init<const SSTCanonicalXiModel::Params&>(), py::arg("params"))
+      .def("compute_xi", &SSTCanonicalXiModel::compute_xi, py::arg("K"))
+      .def("assign_gate", &SSTCanonicalXiModel::assign_gate, py::arg("K"));
+
+  py::class_<MassFunctional>(m, "MassFunctional")
+      .def(py::init<const CanonicalConstants&>(), py::arg("constants") = CanonicalConstants{})
+      .def("baseline_mass_from_ropelength", &MassFunctional::baseline_mass_from_ropelength, py::arg("L_tot"))
+      .def("gate_factor", &MassFunctional::gate_factor, py::arg("G"))
+      .def("evaluate",
+           [](const MassFunctional& self, const KnotInvariants& K, const SimpleInvariantXiModel& model) {
+             return self.evaluate(K, model);
+           },
+           py::arg("K"), py::arg("model"));
+
+  py::class_<KnotState>(m, "KnotState")
+      .def(py::init<>())
+      .def_readwrite("inv", &KnotState::inv)
+      .def_readwrite("contact_score", &KnotState::contact_score)
+      .def_readwrite("hopf_like_score", &KnotState::hopf_like_score)
+      .def_readwrite("energy_score", &KnotState::energy_score)
+      .def_readwrite("derived", &KnotState::derived);
+
+  py::class_<KnotReportRow>(m, "KnotReportRow")
+      .def(py::init<>())
+      .def_readwrite("name", &KnotReportRow::name)
+      .def_readwrite("k", &KnotReportRow::k)
+      .def_readwrite("b", &KnotReportRow::b)
+      .def_readwrite("g", &KnotReportRow::g)
+      .def_readwrite("vol_h", &KnotReportRow::vol_h)
+      .def_readwrite("L_tot", &KnotReportRow::L_tot)
+      .def_readwrite("gate", &KnotReportRow::gate)
+      .def_readwrite("xi", &KnotReportRow::xi)
+      .def_readwrite("mass_ratio", &KnotReportRow::mass_ratio)
+      .def_readwrite("mass_kg", &KnotReportRow::mass_kg);
+
+  py::class_<KnotPrediction>(m, "KnotPrediction")
+      .def(py::init<>())
+      .def_readwrite("gate", &KnotPrediction::gate)
+      .def_readwrite("gate_factor", &KnotPrediction::gate_factor)
+      .def_readwrite("xi", &KnotPrediction::xi)
+      .def_readwrite("mass_ratio", &KnotPrediction::mass_ratio)
+      .def_readwrite("mass_kg", &KnotPrediction::mass_kg)
+      .def_readwrite("note", &KnotPrediction::note);
+
+  py::class_<KnotParticleModel::Params>(m, "KnotParticleModelParams")
+      .def(py::init<>())
+      .def_readwrite("a_k", &KnotParticleModel::Params::a_k)
+      .def_readwrite("a_b", &KnotParticleModel::Params::a_b)
+      .def_readwrite("a_g", &KnotParticleModel::Params::a_g)
+      .def_readwrite("a_vol", &KnotParticleModel::Params::a_vol)
+      .def_readwrite("a_L", &KnotParticleModel::Params::a_L)
+      .def_readwrite("a_wr", &KnotParticleModel::Params::a_wr)
+      .def_readwrite("a_sep", &KnotParticleModel::Params::a_sep);
+
+  py::class_<KnotParticleModel>(m, "KnotParticleModel")
+      .def(py::init<const KnotParticleModel::Params&>(),
+           py::arg("params") = KnotParticleModel::Params{})
+      .def("assign_gate", &KnotParticleModel::assign_gate, py::arg("K"))
+      .def("compute_xi", &KnotParticleModel::compute_xi, py::arg("K"))
+      .def("predict", &KnotParticleModel::predict, py::arg("K"));
 
   py::class_<IdealABComponent>(m, "IdealABComponent")
       .def(py::init<>())
@@ -137,6 +270,117 @@ void bind_knot(py::module_& m) {
         &FourierKnot::describe_fourier_block,
         py::arg("block"), py::arg("nsamples") = 2048, py::arg("exclude_window") = 4,
         "Compute geometric descriptors (length, bending energy, self-distance, writhe, mode energies) for a Fourier block.");
+
+  m.def("build_invariants_from_fourier_block",
+        &sst::build_invariants_from_fourier_block,
+        py::arg("block"),
+        py::arg("knot_name") = "",
+        py::arg("crossing_number") = 0,
+        py::arg("braid_index") = 0,
+        py::arg("seifert_genus") = 0,
+        py::arg("chirality") = 0,
+        py::arg("hyperbolic") = false,
+        py::arg("hyperbolic_volume") = 0.0,
+        py::arg("nsamples") = 2048,
+        py::arg("exclude_window") = 4,
+        "Build KnotInvariants from Fourier coefficients plus optional catalog metadata.");
+
+  m.def("build_invariants_from_fseries",
+        &sst::build_invariants_from_fseries,
+        py::arg("path"),
+        py::arg("knot_name") = "",
+        py::arg("crossing_number") = 0,
+        py::arg("braid_index") = 0,
+        py::arg("seifert_genus") = 0,
+        py::arg("chirality") = 0,
+        py::arg("hyperbolic") = false,
+        py::arg("hyperbolic_volume") = 0.0,
+        py::arg("nsamples") = 2048,
+        py::arg("exclude_window") = 4,
+        "Load a .fseries file, build KnotInvariants from its largest block, and return the payload.");
+
+  m.def("predict_particle_from_fourier_block",
+        &sst::predict_particle_from_fourier_block,
+        py::arg("block"),
+        py::arg("params") = KnotParticleModel::Params{},
+        py::arg("knot_name") = "",
+        py::arg("crossing_number") = 0,
+        py::arg("braid_index") = 0,
+        py::arg("seifert_genus") = 0,
+        py::arg("chirality") = 0,
+        py::arg("hyperbolic") = false,
+        py::arg("hyperbolic_volume") = 0.0,
+        py::arg("nsamples") = 2048,
+        py::arg("exclude_window") = 4,
+        "Predict particle quantities directly from a Fourier block and optional metadata.");
+
+  m.def("predict_particle_from_fseries",
+        &sst::predict_particle_from_fseries,
+        py::arg("path"),
+        py::arg("params") = KnotParticleModel::Params{},
+        py::arg("knot_name") = "",
+        py::arg("crossing_number") = 0,
+        py::arg("braid_index") = 0,
+        py::arg("seifert_genus") = 0,
+        py::arg("chirality") = 0,
+        py::arg("hyperbolic") = false,
+        py::arg("hyperbolic_volume") = 0.0,
+        py::arg("nsamples") = 2048,
+        py::arg("exclude_window") = 4,
+        "Predict particle quantities from a .fseries file using its largest Fourier block.");
+
+  m.def("make_knot_report_row",
+        &sst::make_knot_report_row,
+        py::arg("K"), py::arg("D"),
+        "Create a compact report row from invariants and derived quantities.");
+
+  m.def("evaluate_single_knot",
+        [](const KnotInvariants& K,
+           const SimpleInvariantXiModel::Params& params,
+           const CanonicalConstants& constants) {
+          SimpleInvariantXiModel model(params);
+          return sst::evaluate_single_knot(K, model, constants);
+        },
+        py::arg("K"),
+        py::arg("params") = SimpleInvariantXiModel::Params{},
+        py::arg("constants") = CanonicalConstants{},
+        "Evaluate one knot using SimpleInvariantXiModel and canonical constants.");
+
+  m.def("evaluate_single_knot_sst_canonical",
+        [](const KnotInvariants& K,
+           const SSTCanonicalXiModel::Params& params,
+           const CanonicalConstants& constants) {
+          SSTCanonicalXiModel model(params);
+          return sst::evaluate_single_knot(K, model, constants);
+        },
+        py::arg("K"),
+        py::arg("params") = SSTCanonicalXiModel::Params{},
+        py::arg("constants") = CanonicalConstants{},
+        "Evaluate one knot using SSTCanonicalXiModel and canonical constants.");
+
+  m.def("evaluate_knot_dataset",
+        [](const std::vector<KnotState>& dataset,
+           const SimpleInvariantXiModel::Params& params,
+           const CanonicalConstants& constants) {
+          SimpleInvariantXiModel model(params);
+          return sst::evaluate_knot_dataset(dataset, model, constants);
+        },
+        py::arg("dataset"),
+        py::arg("params") = SimpleInvariantXiModel::Params{},
+        py::arg("constants") = CanonicalConstants{},
+        "Evaluate a dataset of KnotState entries into report rows.");
+
+  m.def("evaluate_knot_dataset_sst_canonical",
+        [](const std::vector<KnotState>& dataset,
+           const SSTCanonicalXiModel::Params& params,
+           const CanonicalConstants& constants) {
+          SSTCanonicalXiModel model(params);
+          return sst::evaluate_knot_dataset(dataset, model, constants);
+        },
+        py::arg("dataset"),
+        py::arg("params") = SSTCanonicalXiModel::Params{},
+        py::arg("constants") = CanonicalConstants{},
+        "Evaluate a dataset of KnotState entries using SSTCanonicalXiModel.");
 
   m.def("fourier_knot_eval",
         [](py::array_t<double, py::array::c_style | py::array::forcecast> a_x,

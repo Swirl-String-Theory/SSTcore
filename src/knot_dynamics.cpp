@@ -38,6 +38,305 @@ namespace sst {
                 throw std::runtime_error("Embedded ideal text not found: " + name);
         }
 
+        KnotParticleModel::KnotParticleModel(const Params& p) : p_(p) {}
+
+        SectorGate KnotParticleModel::assign_gate(const KnotInvariants& K) const {
+                if (K.min_self_distance <= 0.0) {
+                        return SectorGate::Unknown;
+                }
+                // Simple v1 gate: tightly packed/highly bent knots are treated as exposed.
+                if (K.min_self_distance < 0.20 || K.bending_energy > 20.0 || K.crossing_number >= 8) {
+                        return SectorGate::Exposed;
+                }
+                return SectorGate::Shielded;
+        }
+
+        double KnotParticleModel::compute_xi(const KnotInvariants& K) const {
+                const double safe_sep = std::max(K.min_self_distance, 1e-9);
+                const double linear =
+                        p_.a_k * static_cast<double>(K.crossing_number) +
+                        p_.a_b * static_cast<double>(K.braid_index) +
+                        p_.a_g * static_cast<double>(K.seifert_genus) +
+                        p_.a_vol * K.hyperbolic_volume +
+                        p_.a_L * K.ropelength_like +
+                        p_.a_wr * K.writhe +
+                        p_.a_sep * (1.0 / safe_sep);
+
+                // Exponential map keeps Xi(T) positive and smooth under parameter updates.
+                const double xi = std::exp(linear);
+                if (xi < 1e-12) return 1e-12;
+                if (xi > 1e12) return 1e12;
+                return xi;
+        }
+
+        KnotPrediction KnotParticleModel::predict(const KnotInvariants& K) const {
+                KnotPrediction out;
+                out.gate = assign_gate(K);
+
+                const long double lambda_c = SST::Constants::H_BAR /
+                                             (SST::Constants::M_ELECTRON * SST::Constants::C_VACUUM);
+                const long double gate_base = lambda_c / (SST::Constants::PI * SST::Constants::RC_CORE);
+
+                int gate_exponent = 0;
+                if (out.gate == SectorGate::Exposed) gate_exponent = 1;
+                out.gate_factor = std::pow(static_cast<double>(gate_base), static_cast<double>(gate_exponent));
+                out.xi = compute_xi(K);
+                out.mass_ratio = out.gate_factor * out.xi;
+                out.mass_kg = out.mass_ratio * static_cast<double>(SST::Constants::M_ELECTRON);
+
+                if (out.gate == SectorGate::Exposed) out.note = "exposed-sector estimate";
+                else if (out.gate == SectorGate::Shielded) out.note = "shielded-sector estimate";
+                else out.note = "unknown-sector estimate (insufficient geometric separation)";
+
+                return out;
+        }
+
+        SimpleInvariantXiModel::SimpleInvariantXiModel(const Params& p) : p_(p) {}
+
+        double SimpleInvariantXiModel::compute_xi(const KnotInvariants& K) const {
+                const double vol = K.hyperbolic_volume_opt.has_value()
+                        ? K.hyperbolic_volume_opt.value()
+                        : K.hyperbolic_volume;
+                const double L = K.ropelength.has_value()
+                        ? K.ropelength.value()
+                        : K.ropelength_like;
+
+                const double log_xi =
+                        p_.a_k * static_cast<double>(K.crossing_number) +
+                        p_.a_b * static_cast<double>(K.braid_index) +
+                        p_.a_g * static_cast<double>(K.seifert_genus) +
+                        p_.a_vol * vol +
+                        p_.a_L * L +
+                        p_.a_chi * static_cast<double>(K.chirality);
+                return std::exp(log_xi);
+        }
+
+        SectorGate SimpleInvariantXiModel::assign_gate(const KnotInvariants& K) const {
+                return (K.crossing_number <= 4) ? SectorGate::Shielded : SectorGate::Exposed;
+        }
+
+        SSTCanonicalXiModel::SSTCanonicalXiModel(const Params& p) : p_(p) {}
+
+        double SSTCanonicalXiModel::compute_xi(const KnotInvariants& K) const {
+                const double L = K.ropelength.has_value() ? K.ropelength.value() : K.ropelength_like;
+                const double V = K.hyperbolic_volume_opt.has_value() ? K.hyperbolic_volume_opt.value() : K.hyperbolic_volume;
+
+                // C(T) and H(T) are carried by KnotState; invariants-only interface uses neutral placeholders.
+                const double C = 0.0;
+                const double H = 0.0;
+
+                return std::exp(p_.alpha_C * C + p_.beta_L * L + p_.gamma_H * H + p_.delta_V * V);
+        }
+
+        SectorGate SSTCanonicalXiModel::assign_gate(const KnotInvariants& K) const {
+                if (K.hyperbolic && K.crossing_number > 4) {
+                        return SectorGate::Exposed;
+                }
+                return SectorGate::Shielded;
+        }
+
+        MassFunctional::MassFunctional(const CanonicalConstants& c) : c_(c) {
+                if (c_.r_c <= 0.0 || c_.lambda_c <= 0.0 || c_.m_e <= 0.0 || c_.rho_m <= 0.0) {
+                        throw std::invalid_argument("Canonical constants must be positive.");
+                }
+        }
+
+        double MassFunctional::baseline_mass_from_ropelength(double L_tot) const {
+                constexpr double pi = 3.14159265358979323846;
+                return 2.0 * pi * pi * pi * c_.rho_m *
+                       std::pow(c_.r_c, 5) / std::pow(c_.lambda_c, 2) * L_tot;
+        }
+
+        double MassFunctional::gate_factor(SectorGate G) const {
+                constexpr double pi = 3.14159265358979323846;
+                const double factor = c_.lambda_c / (pi * c_.r_c);
+                switch (G) {
+                        case SectorGate::Shielded: return 1.0;
+                        case SectorGate::Exposed: return factor;
+                        default: return 1.0;
+                }
+        }
+
+        KnotDerived MassFunctional::evaluate(const KnotInvariants& K, const XiModel& model) const {
+                KnotDerived out;
+                out.gate = model.assign_gate(K);
+                out.xi = model.compute_xi(K);
+                out.gate_factor = gate_factor(out.gate);
+                out.mass_ratio = out.gate_factor * out.xi;
+                out.mass_kg = out.mass_ratio * c_.m_e;
+                out.valid = true;
+                out.note = "Mass ratio computed from gate and Xi model.";
+                return out;
+        }
+
+        KnotReportRow make_knot_report_row(const KnotInvariants& K, const KnotDerived& D) {
+                KnotReportRow row;
+                row.name = K.name;
+                row.k = K.crossing_number;
+                row.b = K.braid_index;
+                row.g = K.seifert_genus;
+                row.vol_h = K.hyperbolic_volume_opt.has_value() ? K.hyperbolic_volume_opt.value() : K.hyperbolic_volume;
+                row.L_tot = K.ropelength.has_value() ? K.ropelength.value() : K.ropelength_like;
+                row.gate = static_cast<int>(D.gate);
+                row.xi = D.xi;
+                row.mass_ratio = D.mass_ratio;
+                row.mass_kg = D.mass_kg;
+                return row;
+        }
+
+        KnotDerived evaluate_single_knot(const KnotInvariants& K,
+                                         const XiModel& model,
+                                         const CanonicalConstants& c) {
+                MassFunctional mass(c);
+                return mass.evaluate(K, model);
+        }
+
+        KnotState evaluate_knot_state(const KnotState& state,
+                                      const XiModel& model,
+                                      const CanonicalConstants& c) {
+                KnotState out = state;
+                out.derived = evaluate_single_knot(out.inv, model, c);
+                return out;
+        }
+
+        std::vector<KnotReportRow> evaluate_knot_dataset(const std::vector<KnotState>& dataset,
+                                                         const XiModel& model,
+                                                         const CanonicalConstants& c) {
+                std::vector<KnotReportRow> rows;
+                rows.reserve(dataset.size());
+                MassFunctional mass(c);
+                for (const KnotState& state : dataset) {
+                        const KnotDerived derived = mass.evaluate(state.inv, model);
+                        rows.push_back(make_knot_report_row(state.inv, derived));
+                }
+                return rows;
+        }
+
+        KnotInvariants build_invariants_from_fourier_block(
+                const FourierBlock& block,
+                const std::string& knot_name,
+                int crossing_number,
+                int braid_index,
+                int seifert_genus,
+                int chirality,
+                bool hyperbolic,
+                double hyperbolic_volume,
+                int nsamples,
+                int exclude_window) {
+                KnotInvariants K;
+                K.name = knot_name;
+                K.crossing_number = crossing_number;
+                K.braid_index = braid_index;
+                K.seifert_genus = seifert_genus;
+                K.chirality = std::max(-1, std::min(1, chirality));
+                K.hyperbolic = hyperbolic;
+                K.hyperbolic_volume = hyperbolic ? std::max(0.0, hyperbolic_volume) : 0.0;
+                K.hyperbolic_volume_opt = K.hyperbolic ? std::optional<double>(K.hyperbolic_volume) : std::nullopt;
+
+                FourierKnot::GeometricDescriptors g = FourierKnot::describe_fourier_block(
+                        block,
+                        std::max(64, nsamples),
+                        std::max(1, exclude_window));
+
+                K.writhe = g.writhe;
+                K.min_self_distance = g.min_self_distance;
+                K.bending_energy = g.bending_energy;
+                K.ropelength_like = (g.min_self_distance > 1e-12)
+                        ? (g.L / g.min_self_distance)
+                        : g.L;
+                K.ropelength = K.ropelength_like;
+                return K;
+        }
+
+        KnotInvariants build_invariants_from_fseries(
+                const std::string& path,
+                const std::string& knot_name,
+                int crossing_number,
+                int braid_index,
+                int seifert_genus,
+                int chirality,
+                bool hyperbolic,
+                double hyperbolic_volume,
+                int nsamples,
+                int exclude_window) {
+                const std::vector<FourierBlock> blocks = FourierKnot::parse_fseries_multi(path);
+                const int idx = FourierKnot::index_of_largest_block(blocks);
+                if (idx < 0) {
+                        throw std::runtime_error("build_invariants_from_fseries: no Fourier block in file: " + path);
+                }
+                std::string resolved_name = knot_name;
+                if (resolved_name.empty()) {
+                        resolved_name = path;
+                        const size_t slash = resolved_name.find_last_of("/\\");
+                        if (slash != std::string::npos) resolved_name = resolved_name.substr(slash + 1);
+                }
+                return build_invariants_from_fourier_block(
+                        blocks[static_cast<size_t>(idx)],
+                        resolved_name,
+                        crossing_number,
+                        braid_index,
+                        seifert_genus,
+                        chirality,
+                        hyperbolic,
+                        hyperbolic_volume,
+                        nsamples,
+                        exclude_window);
+        }
+
+        KnotPrediction predict_particle_from_fourier_block(
+                const FourierBlock& block,
+                const KnotParticleModel::Params& params,
+                const std::string& knot_name,
+                int crossing_number,
+                int braid_index,
+                int seifert_genus,
+                int chirality,
+                bool hyperbolic,
+                double hyperbolic_volume,
+                int nsamples,
+                int exclude_window) {
+                KnotInvariants K = build_invariants_from_fourier_block(
+                        block,
+                        knot_name,
+                        crossing_number,
+                        braid_index,
+                        seifert_genus,
+                        chirality,
+                        hyperbolic,
+                        hyperbolic_volume,
+                        nsamples,
+                        exclude_window);
+                KnotParticleModel model(params);
+                return model.predict(K);
+        }
+
+        KnotPrediction predict_particle_from_fseries(
+                const std::string& path,
+                const KnotParticleModel::Params& params,
+                const std::string& knot_name,
+                int crossing_number,
+                int braid_index,
+                int seifert_genus,
+                int chirality,
+                bool hyperbolic,
+                double hyperbolic_volume,
+                int nsamples,
+                int exclude_window) {
+                KnotInvariants K = build_invariants_from_fseries(
+                        path,
+                        knot_name,
+                        crossing_number,
+                        braid_index,
+                        seifert_genus,
+                        chirality,
+                        hyperbolic,
+                        hyperbolic_volume,
+                        nsamples,
+                        exclude_window);
+                KnotParticleModel model(params);
+                return model.predict(K);
+        }
+
         double KnotDynamics::compute_writhe(const std::vector<Vec3>& X) {
                 double W = 0.0;
                 size_t N = X.size();

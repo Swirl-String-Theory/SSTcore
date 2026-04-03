@@ -20,6 +20,7 @@
 #include <tuple>
 #include <map>
 #include <regex>
+#include <optional>
 
 namespace sst {
 
@@ -27,6 +28,7 @@ namespace sst {
 
 	// Forward declaration
 	struct FourierBlock;
+  class KnotParticleModel;
 
 	// Forward declaration for embedded knot files (generated during build)
 	std::map<std::string, std::string> get_embedded_knot_files();
@@ -42,6 +44,171 @@ namespace sst {
 	std::string find_knot_file_path(const std::string& knot_id, const std::string& explicit_base = "");
 	// Returns full path to ideal database file (e.g. "ideal.txt"), or empty if not found.
 	std::string find_ideal_file_path(const std::string& filename, const std::string& explicit_base = "");
+
+  struct KnotInvariants {
+    std::string name;
+    int crossing_number = 0;      // k
+    int braid_index = 0;          // b
+    int seifert_genus = 0;        // g
+    int chirality = 0;            // -1, 0, +1
+    bool hyperbolic = false;
+
+    double hyperbolic_volume = 0.0;  // Vol_H(T)
+    double ropelength_like = 0.0;    // L_tot(T) proxy
+    std::optional<double> hyperbolic_volume_opt; // preferred optional representation
+    std::optional<double> ropelength;            // preferred optional representation
+    double writhe = 0.0;
+    double min_self_distance = 0.0;
+    double bending_energy = 0.0;
+  };
+
+  enum class SectorGate : int {
+    Shielded = 0,
+    Exposed = 1,
+    Unknown = -1
+  };
+
+  struct KnotPrediction {
+    SectorGate gate = SectorGate::Unknown;
+    double gate_factor = 1.0;  // (lambda_c / (pi r_c))^G
+    double xi = 1.0;           // topology factor Xi(T)
+    double mass_ratio = 1.0;   // M(T)/M_e
+    double mass_kg = 0.0;      // M(T)
+    std::string note;
+  };
+
+  struct CanonicalConstants {
+    double r_c = static_cast<double>(SST::Constants::RC_CORE);
+    double lambda_c = static_cast<double>(SST::Constants::H_BAR /
+                                (SST::Constants::M_ELECTRON * SST::Constants::C_VACUUM));
+    double m_e = static_cast<double>(SST::Constants::M_ELECTRON);
+    double rho_m = static_cast<double>(SST::Constants::RHO_FLUID);
+  };
+
+  struct KnotDerived {
+    SectorGate gate = SectorGate::Unknown;
+    double gate_factor = 1.0;
+    double xi = 1.0;
+    double mass_ratio = 1.0;
+    double mass_kg = 0.0;
+    bool valid = false;
+    std::string note;
+  };
+
+  class XiModel {
+  public:
+    virtual ~XiModel() = default;
+    [[nodiscard]] virtual double compute_xi(const KnotInvariants& K) const = 0;
+    [[nodiscard]] virtual SectorGate assign_gate(const KnotInvariants& K) const = 0;
+  };
+
+  class SimpleInvariantXiModel final : public XiModel {
+  public:
+    struct Params {
+      double a_k = 0.0;
+      double a_b = 0.0;
+      double a_g = 0.0;
+      double a_vol = 0.0;
+      double a_L = 0.0;
+      double a_chi = 0.0;
+    };
+
+    explicit SimpleInvariantXiModel(const Params& p);
+
+    [[nodiscard]] double compute_xi(const KnotInvariants& K) const override;
+    [[nodiscard]] SectorGate assign_gate(const KnotInvariants& K) const override;
+
+  private:
+    Params p_;
+  };
+
+  class SSTCanonicalXiModel final : public XiModel {
+  public:
+    struct Params {
+      double alpha_C = 0.0;
+      double beta_L = 0.0;
+      double gamma_H = 0.0;
+      double delta_V = 0.0;
+    };
+
+    explicit SSTCanonicalXiModel(const Params& p);
+
+    [[nodiscard]] double compute_xi(const KnotInvariants& K) const override;
+    [[nodiscard]] SectorGate assign_gate(const KnotInvariants& K) const override;
+
+  private:
+    Params p_;
+  };
+
+  class MassFunctional {
+  public:
+    explicit MassFunctional(const CanonicalConstants& c = CanonicalConstants{});
+
+    [[nodiscard]] double baseline_mass_from_ropelength(double L_tot) const;
+    [[nodiscard]] double gate_factor(SectorGate G) const;
+    [[nodiscard]] KnotDerived evaluate(const KnotInvariants& K, const XiModel& model) const;
+
+  private:
+    CanonicalConstants c_;
+  };
+
+  struct KnotState {
+    KnotInvariants inv;
+    std::optional<double> contact_score;
+    std::optional<double> hopf_like_score;
+    std::optional<double> energy_score;
+    std::optional<KnotDerived> derived;
+  };
+
+  struct KnotReportRow {
+    std::string name;
+    int k = 0;
+    int b = 0;
+    int g = 0;
+    double vol_h = 0.0;
+    double L_tot = 0.0;
+    int gate = -1;
+    double xi = 1.0;
+    double mass_ratio = 1.0;
+    double mass_kg = 0.0;
+  };
+
+  KnotReportRow make_knot_report_row(const KnotInvariants& K, const KnotDerived& D);
+
+  // Stateless helpers for deterministic per-knot and dataset evaluation.
+  KnotDerived evaluate_single_knot(const KnotInvariants& K,
+                                   const XiModel& model,
+                                   const CanonicalConstants& c = CanonicalConstants{});
+
+  KnotState evaluate_knot_state(const KnotState& state,
+                                const XiModel& model,
+                                const CanonicalConstants& c = CanonicalConstants{});
+
+  std::vector<KnotReportRow> evaluate_knot_dataset(const std::vector<KnotState>& dataset,
+                                                   const XiModel& model,
+                                                   const CanonicalConstants& c = CanonicalConstants{});
+
+  class KnotParticleModel {
+  public:
+    struct Params {
+      double a_k = 0.0;
+      double a_b = 0.0;
+      double a_g = 0.0;
+      double a_vol = 0.0;
+      double a_L = 0.0;
+      double a_wr = 0.0;
+      double a_sep = 0.0;
+    };
+
+    explicit KnotParticleModel(const Params& p);
+
+    SectorGate assign_gate(const KnotInvariants& K) const;
+    double compute_xi(const KnotInvariants& K) const;
+    KnotPrediction predict(const KnotInvariants& K) const;
+
+  private:
+    Params p_;
+  };
 
         class KnotDynamics {
         public:
@@ -137,6 +304,59 @@ namespace sst {
                 std::vector<double> a_y, b_y;
                 std::vector<double> a_z, b_z;
         };
+
+  // Build a mixed metadata+geometry invariant payload from Fourier coefficients.
+  KnotInvariants build_invariants_from_fourier_block(
+    const FourierBlock& block,
+    const std::string& knot_name = "",
+    int crossing_number = 0,
+    int braid_index = 0,
+    int seifert_genus = 0,
+    int chirality = 0,
+    bool hyperbolic = false,
+    double hyperbolic_volume = 0.0,
+    int nsamples = 2048,
+    int exclude_window = 4);
+
+  // Convenience path-based builder using the largest block in a .fseries file.
+  KnotInvariants build_invariants_from_fseries(
+    const std::string& path,
+    const std::string& knot_name = "",
+    int crossing_number = 0,
+    int braid_index = 0,
+    int seifert_genus = 0,
+    int chirality = 0,
+    bool hyperbolic = false,
+    double hyperbolic_volume = 0.0,
+    int nsamples = 2048,
+    int exclude_window = 4);
+
+  // End-to-end helpers for Python/dashboard style workflows.
+  KnotPrediction predict_particle_from_fourier_block(
+    const FourierBlock& block,
+    const KnotParticleModel::Params& params,
+    const std::string& knot_name = "",
+    int crossing_number = 0,
+    int braid_index = 0,
+    int seifert_genus = 0,
+    int chirality = 0,
+    bool hyperbolic = false,
+    double hyperbolic_volume = 0.0,
+    int nsamples = 2048,
+    int exclude_window = 4);
+
+  KnotPrediction predict_particle_from_fseries(
+    const std::string& path,
+    const KnotParticleModel::Params& params,
+    const std::string& knot_name = "",
+    int crossing_number = 0,
+    int braid_index = 0,
+    int seifert_genus = 0,
+    int chirality = 0,
+    bool hyperbolic = false,
+    double hyperbolic_volume = 0.0,
+    int nsamples = 2048,
+    int exclude_window = 4);
 
         // Optional sparse Fourier representation (for ideal.txt / AB parsing / conversions)
         struct FourierBlockSparse {

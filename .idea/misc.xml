@@ -17,6 +17,7 @@
       <file path="$PROJECT_DIR$/cmake-build-debug-mingw" />
       <file path="$PROJECT_DIR$/emsdk" />
       <file path="$PROJECT_DIR$/extern/pybind11" />
+      <file path="$PROJECT_DIR$/shared" />
     </excludeRoots>
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (SSTcore)" project-jdk-type="Python SDK" />
