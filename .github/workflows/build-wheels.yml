@@ -109,12 +109,15 @@ jobs:
         shell: bash
 
       - name: Run Python tests (pytest against installed wheel)
+        env:
+          SST_WHEEL_TEST: "1"
         run: |
           python -m pip install pytest
           cd "$(mktemp -d)"
           # Force reinstall so CI never keeps a stale site-packages SSTcore when the wheel path is unchanged.
           python -m pip install --force-reinstall "${GITHUB_WORKSPACE}"/dist/*.whl
-          # Same empty cwd as smoke test; collect tests from repo but run against site-packages.
+          # Pytest prepends --rootdir to sys.path; without SST_WHEEL_TEST the checkout shadows the wheel
+          # (pure SSTcore/ tree, no .so). conftest strips repo root when SST_WHEEL_TEST=1.
           pytest "${GITHUB_WORKSPACE}/tests" \
             --rootdir="${GITHUB_WORKSPACE}" \
             --ignore="${GITHUB_WORKSPACE}/tests/TestLibraryGravityModification.py" \
