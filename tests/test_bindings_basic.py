@@ -1,6 +1,8 @@
 import pytest
 
-sstbindings = pytest.importorskip("sstbindings")
+# exc_type=ImportError: sstbindings may raise our shim ImportError when _bindings is unavailable;
+# pytest 9.1 treats that as a collection error unless constrained to ImportError.
+sstbindings = pytest.importorskip("sstbindings", exc_type=ImportError)
 
 
 def test_compute_helicity_simple():
