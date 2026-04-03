@@ -4,10 +4,10 @@ This guide explains how to set up automated npm publishing using GitHub Actions.
 
 ## Overview
 
-The repository includes two GitHub Actions workflows:
+The repository uses a single workflow, **`.github/workflows/npm.yml`** (workflow name: **NPM package**):
 
-1. **`test-npm.yml`** - Runs on every push/PR to test the package on multiple platforms
-2. **`publish-npm.yml`** - Publishes to npm when you create a release or push a version tag
+- Runs the **test matrix** on push/PR to `main`, `master`, and `develop` (and on `workflow_dispatch`).
+- **Publishes to npm** when you publish a **GitHub release** or push a **`v*` tag**, matching the pattern used for PyPI in `build-wheels.yml`.
 
 ## Prerequisites
 
@@ -56,13 +56,10 @@ If the name is taken, update `package.json`:
 ### Option A: Manual Trigger
 
 1. Go to **Actions** tab in your GitHub repository
-2. Click **"Build and Publish npm Package"** workflow
-3. Click **"Run workflow"** (on the right)
-4. Select branch (usually `main` or `master`)
-5. Optionally enter a version number
-6. Click **"Run workflow"**
+2. Open the **"NPM package"** workflow
+3. Click **"Run workflow"** (on the right), choose a branch, then **"Run workflow"**
 
-This will build and test the package but won't publish (since no tag/release exists).
+This runs the **test matrix only**. npm publish runs only on a **published release** or a **push of a `v*` tag** (same idea as PyPI in **Build Wheels**).
 
 ### Option B: Create a Test Release
 
@@ -113,30 +110,24 @@ This will build and test the package but won't publish (since no tag/release exi
 
 The workflow will automatically publish to npm.
 
-## Workflow Details
+## Workflow Details (`npm.yml`)
 
-### Test Workflow (`test-npm.yml`)
+**Test job** runs on:
+- Push to `main`, `master`, or `develop` (and on `v*` tag pushes — tests run before publish)
+- Pull requests targeting those branches
+- `workflow_dispatch` (tests only)
 
-Runs on:
-- Every push to `main`, `master`, or `develop`
-- Every pull request to these branches
+Matrix: Ubuntu, Windows, macOS × Node.js 18.x and 20.x.
 
-Tests on:
-- Ubuntu, Windows, macOS
-- Node.js 18.x and 20.x
+**Publish job** runs only when:
+- `release` event (`published`), or
+- `push` to a `refs/tags/v*` tag
 
-### Publish Workflow (`publish-npm.yml`)
+It depends on the test matrix passing, then builds with `build:all`, runs `npm test`, and runs `npm publish`.
 
-Runs on:
-- Push of tags starting with `v` (e.g., `v0.1.3`)
-- GitHub releases (published)
-- Manual trigger via workflow_dispatch
+**build-wasm job** runs on the same conditions as publish (after tests), uploads WASM artifacts.
 
-Steps:
-1. Builds and tests on multiple platforms
-2. Builds WASM version
-3. Publishes to npm (only on tags/releases)
-4. Creates GitHub release (if tag pushed)
+Pushing a **`v*` tag** also triggers **Create GitHub Release** (same behavior as the old `publish-npm.yml`); publishing from the **Releases** UI does not duplicate that step.
 
 ## Version Management
 

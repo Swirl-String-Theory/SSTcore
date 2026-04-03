@@ -93,7 +93,8 @@ jobs:
           delocate-wheel -w dist/fixed -v dist/*.whl
           mv dist/fixed/*.whl dist/
           rm -rf dist/fixed
-          rm -f dist/*-macosx_*.whl || true
+          # Do not `rm *-macosx_*.whl` here: unlike Linux (manylinux renames away `linux`),
+          # delocated wheels keep `macosx_…` in the filename (e.g. macosx_10_14_universal2).
         shell: bash
 
       - name: Smoke test wheel (import package)
@@ -105,6 +106,20 @@ jobs:
           cd "$(mktemp -d)"
           # _native and _bindings each register the same pybind11 types; one process cannot import both.
           python -c "import SSTcore; print('smoke ok:', SSTcore.__name__)"
+        shell: bash
+
+      - name: Run Python tests (pytest against installed wheel)
+        run: |
+          python -m pip install pytest
+          cd "$(mktemp -d)"
+          python -m pip install "${GITHUB_WORKSPACE}"/dist/*.whl
+          # Same empty cwd as smoke test; collect tests from repo but run against site-packages.
+          pytest "${GITHUB_WORKSPACE}/tests" \
+            --rootdir="${GITHUB_WORKSPACE}" \
+            --ignore="${GITHUB_WORKSPACE}/tests/test_knots_simple.py" \
+            --ignore="${GITHUB_WORKSPACE}/tests/TestLibraryGravityModification.py" \
+            --ignore="${GITHUB_WORKSPACE}/tests/TestLibraryTrefoil.py" \
+            -q --tb=short
         shell: bash
 
       - name: Store wheel artifact

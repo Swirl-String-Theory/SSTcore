@@ -1,6 +1,6 @@
 import pytest
 
-swirl_string_core = pytest.importorskip("swirl_string_core")
+sstbindings = pytest.importorskip("sstbindings")
 
 
 def test_compute_helicity_simple():
