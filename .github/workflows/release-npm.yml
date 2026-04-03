@@ -1,0 +1,88 @@
+# Manual npm publish only. Use when PyPI already succeeded (or you only want JS) so tag/release
+# events do not couple the two registries. Requires secrets.NPM_TOKEN.
+name: Release (npm — manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      git_ref:
+        description: 'Git ref to checkout and publish (branch, tag, or SHA, e.g. main, master, v0.2.0)'
+        required: true
+        default: 'main'
+      dry_run:
+        description: 'If true, build and npm pack --dry-run only (no npm publish)'
+        type: boolean
+        default: false
+
+concurrency:
+  group: release/npm-manual
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.git_ref }}
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake build-essential python3 ninja-build
+
+      - name: Setup Emscripten
+        uses: mymindstorm/setup-emsdk@v14
+        with:
+          version: latest
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Show version
+        id: meta
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Publishing SSTcore npm package version: $VERSION (ref: ${{ inputs.git_ref }})"
+
+      - name: Generate embedded knot files
+        shell: bash
+        run: |
+          rm -rf build_node build
+          mkdir -p build/generated
+          cmake -B build_node -S . -DSST_BUILD_PYTHON_BINDINGS=OFF
+
+      - name: Build package
+        run: npm run build:all
+
+      - name: Run tests
+        run: npm test
+
+      - name: Check package contents
+        run: npm pack --dry-run
+
+      - name: Publish to npm
+        if: ${{ inputs.dry_run == false }}
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Dry run summary
+        if: ${{ inputs.dry_run == true }}
+        run: |
+          echo "dry_run=true: skipped npm publish. Version ${{ steps.meta.outputs.version }} — verify with npm pack output above."
