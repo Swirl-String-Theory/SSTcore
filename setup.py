@@ -92,11 +92,18 @@ class SSTBdistWheel(_BdistWheelBase):
     ``setattr(..., basedir_observed)`` while ``basedir_observed`` is only assigned
     inside ``if os.name == \"nt\"``. On Linux/macOS that overwrites platlib/purelib
     with ``\"\"``, so ``install`` drops all payload and the wheel contains only
-    ``*.dist-info`` (no ``SSTcore/``, no ``.so``). Always use the same wheel-root
-    layout as Windows.
+    ``*.dist-info`` (no ``SSTcore/``, no ``.so``).
+
+    We stage **all** importable payload (pure + extensions) under a single
+    wheel root (``install.root``): both ``install_purelib`` and
+    ``install_platlib`` are ``.`` so ``change_root(bdist_dir, ...)`` resolves
+    them to ``bdist_dir`` without splitting plat vs pure across ``.data/``.
     """
 
     def run(self):
+        # One absolute staging root for install + zip (avoids cwd / relative-path drift on Linux CI).
+        self.bdist_dir = os.path.abspath(self.bdist_dir)
+
         build_scripts = self.reinitialize_command("build_scripts")
         build_scripts.executable = "python"
         build_scripts.force = True
@@ -106,6 +113,8 @@ class SSTBdistWheel(_BdistWheelBase):
 
         if not self.skip_build:
             self.run_command("build")
+
+        build_cmd = self.get_finalized_command("build")
 
         install = self.reinitialize_command("install", reinit_subcommands=True)
         install.root = self.bdist_dir
@@ -119,17 +128,46 @@ class SSTBdistWheel(_BdistWheelBase):
         for key in ("headers", "scripts", "data", "purelib", "platlib"):
             setattr(install, "install_" + key, os.path.join(self.data_dir, key))
 
-        basedir_observed = os.path.normpath(os.path.join(self.data_dir, ".."))
-        self.install_libbase = self.install_lib = basedir_observed
-        setattr(
-            install,
-            "install_purelib" if self.root_is_pure else "install_platlib",
-            basedir_observed,
-        )
+        # Relative to install.root (bdist_dir): change_root joins root + "." -> bdist_dir.
+        install.install_purelib = "."
+        install.install_platlib = "."
 
-        _wheel_log.info("installing to %s", self.bdist_dir)
+        _wheel_log.info("installing to %s (purelib/platlib=.)", self.bdist_dir)
 
         self.run_command("install")
+
+        if not self.skip_build and not self.root_is_pure:
+            bdist_path = Path(self.bdist_dir)
+            has_binary = any(
+                p.suffix in (".so", ".pyd")
+                for p in bdist_path.rglob("*")
+                if p.is_file()
+            )
+            # If install_lib failed to copy into the wheel tree (metadata-only .whl), merge
+            # build_lib directly. Same tree setuptools should have installed; avoids broken
+            # platlib/purelib resolution on some setuptools / install order combinations.
+            if not has_binary:
+                bl = getattr(build_cmd, "build_lib", None)
+                if bl and os.path.isdir(bl):
+                    bl = os.path.abspath(bl)
+                    _wheel_log.warning(
+                        "bdist_wheel: no .so/.pyd under staging after install; "
+                        "copying build_lib %s -> %s",
+                        bl,
+                        self.bdist_dir,
+                    )
+                    shutil.copytree(bl, self.bdist_dir, dirs_exist_ok=True)
+                    has_binary = any(
+                        p.suffix in (".so", ".pyd")
+                        for p in bdist_path.rglob("*")
+                        if p.is_file()
+                    )
+            if not has_binary:
+                raise RuntimeError(
+                    "bdist_wheel: extension build staged no .so/.pyd under "
+                    f"{self.bdist_dir!r} after install (and build_lib fallback). "
+                    "Check build_ext / build_lib path (e.g. CI log: find build -name '*.so')."
+                )
 
         impl_tag, abi_tag, plat_tag = self.get_tag()
         archive_basename = f"{self.wheel_dist_name}-{impl_tag}-{abi_tag}-{plat_tag}"
@@ -288,19 +326,43 @@ class CustomBuildExt(build_ext):
         # Now build extensions
         super().build_extensions()
 
+def _skip_npm_for_python_wheel_context():
+    """Avoid npm/node-gyp during CPython wheel builds (CI) or explicit opt-out.
+
+    node-gyp uses ./build by default; setuptools historically used the same tree.
+    Setuptools artifacts are now under python_build/ (see CustomBuild.initialize_options),
+    but skipping npm in wheel jobs still saves time and avoids redundant native builds.
+    """
+    v = os.environ.get("SST_SKIP_NPM_FOR_PYTHON_BUILD", "").strip().lower()
+    if v in ("1", "true", "yes", "on"):
+        return True
+    return "bdist_wheel" in sys.argv
+
+
 # Custom build command to also build npm package
 class CustomBuild(build):
     """Custom build command that also builds the npm package."""
-    
+
+    def initialize_options(self):
+        super().initialize_options()
+        # Isolate CPython build_lib/temp from node-gyp (./build/). Override with SST_PYTHON_BUILD_BASE.
+        self.build_base = os.environ.get("SST_PYTHON_BUILD_BASE", "python_build")
+
     def run(self):
         # First, run the standard build
         super().run()
-        
-        # Then build npm package
+
+        # Then build npm package (unless wheel-only / CI)
         self.build_npm_package()
-    
+
     def build_npm_package(self):
         """Build the npm package (Node.js native addon)."""
+        if _skip_npm_for_python_wheel_context():
+            print(
+                "Skipping npm native build (SST_SKIP_NPM_FOR_PYTHON_BUILD or bdist_wheel in argv)."
+            )
+            return
+
         base_dir = os.path.dirname(os.path.abspath(__file__))
         package_json = os.path.join(base_dir, "package.json")
         

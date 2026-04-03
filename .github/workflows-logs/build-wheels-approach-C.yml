@@ -1,15 +1,22 @@
-# Experimental: `pip wheel` frontend (alternate to setup.py CLI and `python -m build`).
+# Experimental: PEP 517 `python -m build --wheel` (setuptools.build_meta:__legacy__).
+# Manual only — parallel suite on push: build-wheels-experiments-parallel.yml
 # Does not upload to PyPI. See build-wheels.yml for release builds.
-name: "Wheels experiment D (pip wheel)"
+name: "Wheels experiment C (PEP 517 build)"
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main, master]
+
+concurrency:
+  group: wheels-exp-C-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  SETUPTOOLS_PIN: "setuptools==75.8.2"
+  SST_SKIP_NPM_FOR_PYTHON_BUILD: "1"
 
 jobs:
-  linux-pip-wheel:
-    name: Approach D — pip wheel . --no-deps
+  linux-pep517:
+    name: Approach C — python -m build --wheel
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -30,15 +37,15 @@ jobs:
       - name: Install build dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install "setuptools>=69" wheel pybind11 numpy
+          python -m pip install build "${{ env.SETUPTOOLS_PIN }}" wheel pybind11 numpy
         shell: bash
 
-      - name: Build wheel (pip wheel)
+      - name: Build wheel (PEP 517)
         env:
           PreferredToolArchitecture: x64
         run: |
-          rm -rf dist
-          python -m pip wheel . --no-deps -w dist
+          rm -rf dist python_build
+          python -m build --wheel -o dist
         shell: bash
 
       - name: Assert wheel contains at least one .so
@@ -65,6 +72,6 @@ jobs:
       - name: Upload wheel artifact
         uses: actions/upload-artifact@v4
         with:
-          name: wheel-approach-D-py3.12-linux
+          name: wheel-approach-C-py3.12-linux
           path: dist/*.whl
           retention-days: 14

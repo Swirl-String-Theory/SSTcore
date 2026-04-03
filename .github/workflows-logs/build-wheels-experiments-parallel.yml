@@ -1,0 +1,297 @@
+# Four parallel Linux jobs (A–D) in one workflow run for easy comparison.
+# Per-job manual runs: use build-wheels-approach-{A,B,C,D}.yml (workflow_dispatch only).
+# Release builds: build-wheels.yml
+name: Wheels experiments parallel (Linux A–D)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+
+# One run per ref; do not cancel in-progress experiment jobs when another push lands
+concurrency:
+  group: wheels-experiments-parallel-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  # Pinned for reproducible CI (see plan / CONTRIBUTING)
+  SETUPTOOLS_PIN: "setuptools==75.8.2"
+  SST_SKIP_NPM_FOR_PYTHON_BUILD: "1"
+
+jobs:
+  approach-a:
+    name: "Parallel A — diagnostics + bdist_wheel --keep-temp"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Linux toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+        shell: bash
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "${{ env.SETUPTOOLS_PIN }}" wheel pybind11 numpy
+        shell: bash
+
+      - name: Diagnostics (setuptools, ext_modules, build_lib probe)
+        run: |
+          python - <<'PY'
+          import setuptools
+          print("setuptools", setuptools.__version__)
+          import pathlib
+          text = pathlib.Path("setup.py").read_text(encoding="utf-8")
+          assert "SSTBdistWheel" in text
+          print("setup.py: SSTBdistWheel present")
+          PY
+        shell: bash
+
+      - name: Build wheel (keep temp tree)
+        env:
+          PreferredToolArchitecture: x64
+        run: |
+          rm -rf dist build python_build
+          set -o pipefail
+          python setup.py bdist_wheel --dist-dir dist --keep-temp 2>&1 | tee bdist_wheel.log
+        shell: bash
+
+      - name: CI diagnostics (install_lib warning + .so under build)
+        run: |
+          echo "=== grep install_lib / does not exist (metadata-only hint) ==="
+          grep -E "install_lib|does not exist|no Python modules" bdist_wheel.log || true
+          echo "=== find .so under build ==="
+          find build -name '*.so' -print 2>/dev/null || true
+          echo "=== dist ==="
+          ls -la dist || true
+        shell: bash
+
+      - name: List wheel members (zipfile)
+        run: |
+          python - <<'PY'
+          import glob, zipfile
+          for whl in sorted(glob.glob("dist/*.whl")):
+              print("---", whl)
+              with zipfile.ZipFile(whl) as z:
+                  for n in z.namelist()[:120]:
+                      print(" ", n)
+                  if len(z.namelist()) > 120:
+                      print("  ...")
+          PY
+        shell: bash
+
+      - name: Assert wheel contains at least one .so
+        run: |
+          python - <<'PY'
+          import glob, sys, zipfile
+          wheels = sorted(glob.glob("dist/*.whl"))
+          if not wheels:
+              print("error: no wheel in dist/", file=sys.stderr)
+              sys.exit(1)
+          for whl in wheels:
+              with zipfile.ZipFile(whl) as z:
+                  names = z.namelist()
+                  sos = [n for n in names if n.endswith(".so")]
+              if not sos:
+                  print(f"error: wheel has no .so: {whl}", file=sys.stderr)
+                  for n in names[:80]:
+                      print(f"  {n}", file=sys.stderr)
+                  sys.exit(1)
+              print(f"ok: {whl} has {len(sos)} .so file(s)")
+          PY
+        shell: bash
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheel-parallel-A-py3.12-linux
+          path: dist/*.whl
+          retention-days: 14
+
+  approach-b:
+    name: "Parallel B — setup.py bdist_wheel"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Linux toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+        shell: bash
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "${{ env.SETUPTOOLS_PIN }}" wheel pybind11 numpy
+        shell: bash
+
+      - name: Build wheel
+        env:
+          PreferredToolArchitecture: x64
+        run: |
+          rm -rf dist build python_build
+          python setup.py bdist_wheel --dist-dir dist
+        shell: bash
+
+      - name: Assert wheel contains at least one .so
+        run: |
+          python - <<'PY'
+          import glob, sys, zipfile
+          wheels = sorted(glob.glob("dist/*.whl"))
+          if not wheels:
+              print("error: no wheel in dist/", file=sys.stderr)
+              sys.exit(1)
+          for whl in wheels:
+              with zipfile.ZipFile(whl) as z:
+                  names = z.namelist()
+                  sos = [n for n in names if n.endswith(".so")]
+              if not sos:
+                  print(f"error: wheel has no .so: {whl}", file=sys.stderr)
+                  for n in names[:80]:
+                      print(f"  {n}", file=sys.stderr)
+                  sys.exit(1)
+              print(f"ok: {whl} has {len(sos)} .so file(s)")
+          PY
+        shell: bash
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheel-parallel-B-py3.12-linux
+          path: dist/*.whl
+          retention-days: 14
+
+  approach-c:
+    name: "Parallel C — python -m build --wheel"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Linux toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+        shell: bash
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build "${{ env.SETUPTOOLS_PIN }}" wheel pybind11 numpy
+        shell: bash
+
+      - name: Build wheel (PEP 517)
+        env:
+          PreferredToolArchitecture: x64
+        run: |
+          rm -rf dist build python_build
+          python -m build --wheel -o dist
+        shell: bash
+
+      - name: Assert wheel contains at least one .so
+        run: |
+          python - <<'PY'
+          import glob, sys, zipfile
+          wheels = sorted(glob.glob("dist/*.whl"))
+          if not wheels:
+              print("error: no wheel in dist/", file=sys.stderr)
+              sys.exit(1)
+          for whl in wheels:
+              with zipfile.ZipFile(whl) as z:
+                  names = z.namelist()
+                  sos = [n for n in names if n.endswith(".so")]
+              if not sos:
+                  print(f"error: wheel has no .so: {whl}", file=sys.stderr)
+                  for n in names[:80]:
+                      print(f"  {n}", file=sys.stderr)
+                  sys.exit(1)
+              print(f"ok: {whl} has {len(sos)} .so file(s)")
+          PY
+        shell: bash
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheel-parallel-C-py3.12-linux
+          path: dist/*.whl
+          retention-days: 14
+
+  approach-d:
+    name: "Parallel D — pip wheel . --no-deps"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Linux toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential
+        shell: bash
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "${{ env.SETUPTOOLS_PIN }}" wheel pybind11 numpy
+        shell: bash
+
+      - name: Build wheel (pip wheel)
+        env:
+          PreferredToolArchitecture: x64
+        run: |
+          rm -rf dist build python_build
+          python -m pip wheel . --no-deps -w dist
+        shell: bash
+
+      - name: Assert wheel contains at least one .so
+        run: |
+          python - <<'PY'
+          import glob, sys, zipfile
+          wheels = sorted(glob.glob("dist/*.whl"))
+          if not wheels:
+              print("error: no wheel in dist/", file=sys.stderr)
+              sys.exit(1)
+          for whl in wheels:
+              with zipfile.ZipFile(whl) as z:
+                  names = z.namelist()
+                  sos = [n for n in names if n.endswith(".so")]
+              if not sos:
+                  print(f"error: wheel has no .so: {whl}", file=sys.stderr)
+                  for n in names[:80]:
+                      print(f"  {n}", file=sys.stderr)
+                  sys.exit(1)
+              print(f"ok: {whl} has {len(sos)} .so file(s)")
+          PY
+        shell: bash
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheel-parallel-D-py3.12-linux
+          path: dist/*.whl
+          retention-days: 14

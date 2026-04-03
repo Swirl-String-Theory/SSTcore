@@ -1,7 +1,10 @@
 # Release wheel matrix (Linux / Windows / macOS) and PyPI upload on tags/releases.
-# Linux build experiments live in build-wheels-approach-{A,B,C,D}.yml; promote a winning
-# Linux command here after CI comparison (then remove or narrow the experiment workflows).
+# Linux experiments: build-wheels-experiments-parallel.yml (push). Manual: build-wheels-approach-{A..D}.yml.
 name: Build Wheels
+
+env:
+  SETUPTOOLS_PIN: "setuptools==75.8.2"
+  SST_SKIP_NPM_FOR_PYTHON_BUILD: "1"
 
 on:
   release:
@@ -47,13 +50,16 @@ jobs:
       - name: Install build dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install "setuptools>=69" wheel pybind11 numpy
+          python -m pip install "${{ env.SETUPTOOLS_PIN }}" wheel pybind11 numpy
         shell: bash
 
       - name: Build wheel
         env:
           PreferredToolArchitecture: x64
         run: |
+          # Match wheels-experiments-parallel / approach A-D: clean trees so setuptools + wheel
+          # staging never picks up stale python_build/ or node-gyp build/.
+          rm -rf dist build python_build
           # Use setup.py bdist_wheel so the legacy backend always runs the same distutils
           # install graph as a local `python setup.py bdist_wheel` (avoids rare PEP 517 /
           # frontend paths that produced metadata-only wheels on Linux).
@@ -94,11 +100,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install "${GITHUB_WORKSPACE}"/dist/*.whl
-          # Import from outside the repo: cwd on sys.path can load ./SSTcore (sources only, no .so)
-          # and shadow the wheel in site-packages.
+          # Import from outside the repo: cwd on sys.path would load ./SSTcore (sources only,
+          # no .so) and shadow the wheel installed in site-packages.
           cd "$(mktemp -d)"
-          # __init__.py loads SSTcore._native when present; do not import SSTcore._bindings in the
-          # same process — both extensions register the same pybind11 types (e.g. TailApproxConfig).
+          # _native and _bindings each register the same pybind11 types; one process cannot import both.
           python -c "import SSTcore; print('smoke ok:', SSTcore.__name__)"
         shell: bash
 
@@ -125,11 +130,16 @@ jobs:
       - name: Install build dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install build "setuptools>=69"
+          # Same imports as setup.py / pyproject build-system (needed to load setup.py for sdist).
+          python -m pip install build "${{ env.SETUPTOOLS_PIN }}" wheel pybind11 numpy packaging
 
       - name: Build source distribution
+        env:
+          SST_SKIP_NPM_FOR_PYTHON_BUILD: "1"
         run: |
+          rm -rf dist build python_build
           python -m build --sdist
+        shell: bash
 
       - name: Store sdist artifact
         uses: actions/upload-artifact@v4
