@@ -1,7 +1,7 @@
 import re
 from importlib.metadata import version, PackageNotFoundError
 
-input_path = "requirements.txt"
+input_path = "requirements_full.txt"
 output_path = "requirements_clean.txt"
 
 pkg_name_pattern = re.compile(

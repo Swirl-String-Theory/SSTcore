@@ -7,6 +7,7 @@ except ModuleNotFoundError:  # partial setuptools / mixed env layouts
 from pybind11.setup_helpers import Pybind11Extension, build_ext
 from pybind11 import get_cmake_dir
 import pybind11
+import hashlib
 import os
 import re
 import glob
@@ -278,12 +279,11 @@ class CustomBuildExt(build_ext):
         if sys.platform == "win32" and sys.maxsize > 2**32:
             _windows_msvc_toolset_defaults()
         # Generate embedded files before building extensions (always generates at least stub)
-        header_file, cpp_sources = generate_embedded_knot_files()
+        header_file, cpp_sources, embed_build_temp = generate_embedded_knot_files()
         if not cpp_sources:
             raise RuntimeError("generate_embedded_knot_files() did not produce source files")
         base_dir = os.path.dirname(os.path.abspath(__file__))
         src_dir = os.path.join(base_dir, "src")
-        build_temp = os.path.join(base_dir, "build", "temp")
         abs_cpps = [os.path.abspath(p) for p in cpp_sources]
         for p in abs_cpps:
             if not os.path.exists(p):
@@ -294,8 +294,8 @@ class CustomBuildExt(build_ext):
             ext_include_dirs = [os.path.abspath(d) for d in ext.include_dirs]
             if os.path.abspath(src_dir) not in ext_include_dirs:
                 ext.include_dirs.insert(0, src_dir)
-            if os.path.abspath(build_temp) not in ext_include_dirs:
-                ext.include_dirs.append(build_temp)
+            if os.path.abspath(embed_build_temp) not in ext_include_dirs:
+                ext.include_dirs.append(embed_build_temp)
             ext_sources = [os.path.abspath(s) if os.path.isabs(s) else os.path.abspath(os.path.join(base_dir, s)) for s in ext.sources]
             for abs_source, rel_source in zip(abs_cpps, rel_cpps):
                 if abs_source not in ext_sources:
@@ -609,19 +609,36 @@ def _collect_ideal_rel_paths(resources_dir: Path):
     return rels
 
 
-def generate_embedded_knot_files():
-    """Generate embedded knot / ideal C++ source for setuptools builds.
+def _embed_build_temp_candidates(base_dir: str) -> list:
+    """Directories to try for setuptools-generated embed .cpp (ideal packs, fseries TU).
 
-    Must stay aligned with cmake/embed_knot_files.cmake: recursive .fseries under
-    resources/Knots_FourierSeries, ideal*.txt + ideal_12_data under resources/.
-    (The old resources/knot_fseries flat path was wrong and produced empty maps.)
-
-    Ideal data is split into UTF-8 slabs, packed in order into .cpp files (huge single
-    files no longer blow one TU); knot .fseries stay in one TU.
+    Order: ``SSTCORE_SETUP_BUILD_TEMP`` if set, then ``<repo>/build/temp``, then a
+    per-clone directory under the system temp dir. The second can fail with
+    ``PermissionError`` when the repo is shared or ``build/temp`` has read-only
+    artifacts from another account.
     """
-    base_dir = os.path.dirname(os.path.abspath(__file__))
+    out = []
+    env = os.environ.get("SSTCORE_SETUP_BUILD_TEMP", "").strip()
+    if env:
+        out.append(os.path.normpath(os.path.abspath(os.path.expandvars(env))))
+    out.append(os.path.join(base_dir, "build", "temp"))
+    key = hashlib.sha1(
+        os.path.normpath(os.path.abspath(base_dir)).encode("utf-8", errors="replace")
+    ).hexdigest()[:16]
+    out.append(os.path.join(tempfile.gettempdir(), "sstcore_setup_embed", key))
+    seen = set()
+    uniq = []
+    for p in out:
+        ap = os.path.normpath(p)
+        if ap not in seen:
+            seen.add(ap)
+            uniq.append(ap)
+    return uniq
+
+
+def _generate_embedded_knot_files_impl(base_dir: str, build_temp: str):
+    """Write embed sources into ``build_temp``; returns ``(header_file, cpp_sources)``."""
     src_dir = os.path.join(base_dir, "src")
-    build_temp = os.path.join(base_dir, "build", "temp")
     os.makedirs(build_temp, exist_ok=True)
     os.makedirs(src_dir, exist_ok=True)
 
@@ -729,8 +746,50 @@ def generate_embedded_knot_files():
     )
     return header_file, cpp_sources
 
+
+def generate_embedded_knot_files():
+    """Generate embedded knot / ideal C++ source for setuptools builds.
+
+    Must stay aligned with cmake/embed_knot_files.cmake: recursive .fseries under
+    resources/Knots_FourierSeries, ideal*.txt + ideal_12_data under resources/.
+    (The old resources/knot_fseries flat path was wrong and produced empty maps.)
+
+    Ideal data is split into UTF-8 slabs, packed in order into .cpp files (huge single
+    files no longer blow one TU); knot .fseries stay in one TU.
+
+    Returns:
+        tuple: ``(header_path, cpp_source_paths, embed_build_temp_dir)``. The third path
+        must be passed to the compiler include path (see ``CustomBuildExt``).
+    """
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    candidates = _embed_build_temp_candidates(base_dir)
+    last_err = None
+    for i, build_temp in enumerate(candidates):
+        try:
+            os.makedirs(build_temp, exist_ok=True)
+            header_file, cpp_sources = _generate_embedded_knot_files_impl(base_dir, build_temp)
+            if i > 0:
+                print(
+                    f"SSTcore setup: embed C++ written under {build_temp!r} "
+                    "(earlier candidate paths were not writable)."
+                )
+            return header_file, cpp_sources, build_temp
+        except PermissionError as e:
+            last_err = e
+            if i < len(candidates) - 1:
+                print(
+                    f"warning: SSTcore embed write failed under {build_temp!r} ({e}); "
+                    "trying next candidate directory."
+                )
+            continue
+    raise PermissionError(
+        "Cannot write generated knot/ideal embed sources. Set SSTCORE_SETUP_BUILD_TEMP "
+        "to a writable directory, or fix permissions on build/temp."
+    ) from last_err
+
+
 # Generate embedded files before building (sdist / metadata)
-header_file, _generated_embed_cpp_sources = generate_embedded_knot_files()
+header_file, _generated_embed_cpp_sources, _embed_build_temp_used = generate_embedded_knot_files()
 
 # Get all source files (must match CMakeLists sstcore_lib)
 src_files = [
