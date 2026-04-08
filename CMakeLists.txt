@@ -80,6 +80,7 @@ add_library(sstcore_lib STATIC
         src/frenet_helicity.cpp
         src/potential_timefield.cpp
         src/magnus_integrator.cpp
+        src/multisector_fitter.cpp
         src/hyperbolic_volume.cpp
         src/knot_dynamics.cpp
         src/radiation_flow.cpp
@@ -116,6 +117,7 @@ if(SST_BUILD_PYTHON_BINDINGS)
             src/field_ops_py.cpp
             src/fluid_dynamics_py.cpp
             src/magnus_integrator_py.cpp
+            src/multisector_fitter_py.cpp
             src/knot_dynamics_py.cpp
             src/frenet_helicity_py.cpp
             src/potential_timefield_py.cpp
@@ -148,6 +150,7 @@ if(SST_BUILD_PYTHON_BINDINGS)
             src/field_ops_py.cpp
             src/fluid_dynamics_py.cpp
             src/magnus_integrator_py.cpp
+            src/multisector_fitter_py.cpp
             src/knot_dynamics_py.cpp
             src/frenet_helicity_py.cpp
             src/potential_timefield_py.cpp

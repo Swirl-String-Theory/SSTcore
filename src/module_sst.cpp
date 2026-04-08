@@ -14,6 +14,7 @@ void bind_field_ops(py::module_& m);
 void bind_knot(py::module_& m);
 void bind_frenet_helicity(py::module_& m);
 void bind_magnus_integrator(py::module_& m);
+void bind_multisector_fitter(py::module_& m);
 void bind_timefield(py::module_& m);
 void bind_hyperbolic_volume(py::module_& m);
 void bind_radiation_flow(py::module_& m);
@@ -42,6 +43,7 @@ PYBIND11_MODULE(sstcore, m) {
   bind_knot(m);
   bind_frenet_helicity(m);
   bind_magnus_integrator(m);
+  bind_multisector_fitter(m);
   bind_timefield(m);
   bind_hyperbolic_volume(m);
   bind_radiation_flow(m);

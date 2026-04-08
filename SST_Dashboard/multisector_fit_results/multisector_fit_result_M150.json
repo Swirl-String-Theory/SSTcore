@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "objective_value": 0.03950000084420989,
+  "fitted_params": {
+    "thetas": [
+      2.2612604415635063,
+      1.3875100794901614,
+      2.326545765839223
+    ],
+    "alpha": 0.0,
+    "beta": 0.0
+  },
+  "predicted_minima": [
+    25.05,
+    26.6,
+    32.79
+  ],
+  "target_near_nodes": [
+    25.18,
+    26.75,
+    32.8
+  ],
+  "config": {
+    "sectors": [
+      2,
+      3,
+      5
+    ],
+    "a_nc_over_rc": 1.00039865,
+    "ell_trefoil": 0.0003985705602004444,
+    "truncation_M": 150,
+    "completion_mode": "none",
+    "t_min": 20.0,
+    "t_max": 35.0,
+    "match_count": 3,
+    "fit_sector_weights": false
+  }
+}

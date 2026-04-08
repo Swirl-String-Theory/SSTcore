@@ -1,0 +1,73 @@
+Monopole test from .fseries geometry
+===================================
+File: C:\workspace\projects\SSTcore\sstcore\resources\knotplot\knot_6.3.2\knot_6.3.2.fseries
+Header L: None
+Harmonics: 100
+Curve samples: 4000
+Approx reconstructed length: 1.507347294331e+02
+
+Geometry scales
+---------------
+bbox_diag: 2.192316563667e+01
+rms_radius: 6.263844318364e+00
+max_radius: 9.392048691962e+00
+
+Grid / coarse-graining
+----------------------
+grid_n: 80
+dx, dy, dz: 2.765459021548e-01, 2.765459021548e-01, 2.765459021548e-01
+dV: 2.114957684190e-02
+tube_radius: 6.000000000000e-02
+padding_frac: 6.000000000000e-01
+
+Canonical SST constants used
+----------------------------
+rho_f: 7.000000000000e-07
+v_swirl: 1.093845630000e+06
+r_c: 1.408970170000e-15
+
+Pure tensor source moments
+--------------------------
+Q_tensor = -2.521226029622e-09
+D_tensor = [-3.78183904e-09  2.26910343e-08 -2.01698082e-08]
+M_tensor =
+[[ 9.18416487e+07 -1.84688590e+07  3.04440595e+04]
+ [-1.84688590e+07  8.79487902e+07 -5.27051647e+06]
+ [ 3.04440595e+04 -5.27051647e+06  7.95830065e+07]]
+Qtf_tensor =
+[[  5383833.60175994 -18468858.99024674     30444.0595418 ]
+ [-18468858.99024674   1490975.02561617  -5270516.47159215]
+ [    30444.0595418   -5270516.47159215  -6874808.62737611]]
+
+Mixed source moments
+--------------------
+alpha = 1.000000000000e+00
+beta = 1.000000000000e+01
+Q_mix = 1.296867227070e+08
+D_mix = [-11841604.03769276   7249362.67608728   5976636.97180512]
+M_mix =
+[[ 2.60214981e+09 -4.41049753e+08  3.80893602e+07]
+ [-4.41049753e+08  2.59608163e+09  1.98555710e+08]
+ [ 3.80893602e+07  1.98555710e+08  2.49848094e+09]]
+Qtf_mix =
+[[ 3.65790141e+07 -4.41049753e+08  3.80893602e+07]
+ [-4.41049753e+08  3.05108355e+07  1.98555710e+08]
+ [ 3.80893602e+07  1.98555710e+08 -6.70898496e+07]]
+
+Scalar organized reservoir
+--------------------------
+Integral rho_org dV = 1.296867227070e+08
+
+Interpretation
+--------------
+Pure tensor source |Q| = 2.521226e-09
+Pure tensor normalized dipole ratio = 5.535086e-01
+Pure tensor normalized quadrupole ratio = 2.357694e+13
+
+Mixed source |Q| = 1.296867e+08
+Mixed source normalized dipole ratio = 5.316692e-03
+Mixed source normalized quadrupole ratio = 1.108706e-02
+Scalar organized reservoir ∫rho_org dV = 1.296867e+08
+
+Pure tensor source: monopole is numerically suppressed relative to the scalar organized reservoir.
+Mixed source: plausible effective monopole candidate after coarse-graining; dipole/quadrupole contamination is moderate.
