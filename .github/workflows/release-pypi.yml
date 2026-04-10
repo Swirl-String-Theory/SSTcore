@@ -10,9 +10,9 @@ on:
   workflow_dispatch:
     inputs:
       git_ref:
-        description: 'Git ref to build and upload (branch, tag, or SHA, e.g. main, master, v0.8.0)'
+        description: 'Git ref to build and upload (branch, tag, or SHA, e.g. master, main, v0.8.0)'
         required: true
-        default: 'main'
+        default: 'master'
       dry_run:
         description: 'If true, build wheels/sdist and attach artifacts only (no PyPI upload)'
         type: boolean
