@@ -31,6 +31,10 @@
 # Example output files
 /examples/output/
 
+# Python bytecode (never commit; Linux CI is case-sensitive for SSTcore/)
+__pycache__/
+*.py[cod]
+
 # Python packaging artifacts
 /dist/
 /*.egg-info/
