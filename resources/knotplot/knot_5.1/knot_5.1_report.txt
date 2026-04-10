@@ -1,0 +1,26 @@
+source_file: knot_5.1.txt
+knot_id: 5:1:1
+num_harmonics: 100
+num_resample_points: 4000
+original_point_count: 69
+original_polygon_length: 83.823747895466
+resampled_spline_length: 84.177650486379
+original_closure_gap: 1.193888281434e+00
+
+# reconstruction error against centered resampled spline
+rms_error: 1.051134392492e-02
+mean_error: 2.178957272550e-03
+max_error: 8.877899462288e-02
+
+# geometric scales
+rms_radius: 5.352448985343e+00
+max_radius: 7.719401421975e+00
+bbox_diag: 1.995822187692e+01
+
+# relative errors
+rel_rms_vs_rms_radius: 1.963838226895e-03
+rel_rms_vs_bbox_diag: 5.266673549250e-04
+rel_max_vs_bbox_diag: 4.448241690587e-03
+
+# quick assessment
+assessment: very_good

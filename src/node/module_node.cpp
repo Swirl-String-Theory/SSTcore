@@ -23,7 +23,7 @@ void bind_extensions(Napi::Env env, Napi::Object exports);
 
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
     exports.Set(Napi::String::New(env, "nativeAddonName"), Napi::String::New(env, "sstcore"));
-    exports.Set(Napi::String::New(env, "version"), Napi::String::New(env, "0.2.0"));
+    exports.Set(Napi::String::New(env, "version"), Napi::String::New(env, "0.8.0"));
 
     bind_ab_initio(env, exports);
     bind_biot_savart(env, exports);

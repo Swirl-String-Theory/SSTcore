@@ -21,7 +21,7 @@ def get_exports_dir() -> Path:
 
 
 def _local_ideal_txt_sources() -> list:
-    """Paden waar lokaal ideal.txt kan staan (SSTcore/resources of sstcore-package)."""
+    """Paden waar lokaal ideal.txt kan staan (repo ``resources/`` of sstcore-package)."""
     sources = []
     try:
         import SSTcore as _sst_pkg
@@ -70,7 +70,7 @@ def ensure_ideal_txt(
         return _IDEAL_TXT_PATH
     d = get_exports_dir()
     txt_dest = d / "Ideal.txt"
-    # Eerst: kopieer uit lokale SSTcore/resources of sstcore als dat bestand er is
+    # Eerst: kopieer uit lokale resources/ of sstcore als dat bestand er is
     for src in _local_ideal_txt_sources():
         try:
             import shutil

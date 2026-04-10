@@ -48,6 +48,7 @@
         "<!@(node -p \"require('node-addon-api').include\")",
         "src",
         "include",
+        "include/generated",
         "<(module_root_dir)/build_node/generated"
       ],
       "defines": [

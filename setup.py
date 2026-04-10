@@ -4,6 +4,10 @@ try:
     from setuptools.command.build import build
 except ModuleNotFoundError:  # partial setuptools / mixed env layouts
     from setuptools._distutils.command.build import build
+try:
+    from setuptools.command.egg_info import egg_info as egg_info_cls
+except ModuleNotFoundError:
+    from setuptools._distutils.command.egg_info import egg_info as egg_info_cls
 from pybind11.setup_helpers import Pybind11Extension, build_ext
 from pybind11 import get_cmake_dir
 import pybind11
@@ -231,15 +235,82 @@ def _windows_msvc_toolset_defaults() -> None:
 
 _windows_msvc_toolset_defaults()
 
-__version__ = "0.2.0"
+__version__ = "0.8.0"
 base_dir = os.path.dirname(os.path.abspath(__file__))
-# Knot / ideal databases and Fourier series (packaged under SSTcore/resources/)
-REPO_RESOURCES_DIR = os.path.join(base_dir, "SSTcore", "resources")
+# Knot / ideal databases and Fourier series live at repo root: resources/
+REPO_RESOURCES_DIR = os.path.join(base_dir, "resources")
+
+
+def _ensure_sstcore_resources_junction():
+    """Expose repo-root ``resources/`` as ``SSTcore/resources`` for setuptools package_data."""
+    repo_res = os.path.normpath(REPO_RESOURCES_DIR)
+    pkg_res = os.path.normpath(os.path.join(base_dir, "SSTcore", "resources"))
+    if not os.path.isdir(repo_res):
+        return
+    os.makedirs(os.path.dirname(pkg_res), exist_ok=True)
+
+    def _usable_package_resources(path: str) -> bool:
+        """True if ``path`` looks like the SST resource tree (real checkout or junction)."""
+        return os.path.isdir(path) and (
+            os.path.isdir(os.path.join(path, "Knots_FourierSeries"))
+            or os.path.isdir(os.path.join(path, "knotplot"))
+        )
+
+    if os.path.lexists(pkg_res):
+        try:
+            if os.path.samefile(pkg_res, repo_res):
+                return
+        except OSError:
+            pass
+        if _usable_package_resources(pkg_res):
+            # Do not replace: avoids Windows file locks and duplicate trees under SSTcore/resources.
+            return
+
+    if os.path.lexists(pkg_res):
+        if os.name == "nt":
+            subprocess.run(["cmd", "/c", "rmdir", pkg_res], check=False, capture_output=True)
+            if os.path.lexists(pkg_res):
+                subprocess.check_call(
+                    ["cmd", "/c", "rmdir", "/s", "/q", pkg_res], cwd=base_dir
+                )
+        else:
+            if os.path.islink(pkg_res):
+                os.unlink(pkg_res)
+            elif os.path.isdir(pkg_res):
+                shutil.rmtree(pkg_res)
+            else:
+                try:
+                    os.remove(pkg_res)
+                except OSError:
+                    pass
+
+    if os.path.lexists(pkg_res):
+        if _usable_package_resources(pkg_res):
+            return
+        raise RuntimeError(
+            f"Could not replace {pkg_res!r} with a junction to {repo_res!r}; "
+            "close programs using that folder or remove it manually."
+        )
+
+    if os.name == "nt":
+        subprocess.check_call(
+            ["cmd", "/c", "mklink", "/J", pkg_res, repo_res], cwd=base_dir
+        )
+    else:
+        rel = os.path.relpath(repo_res, os.path.dirname(pkg_res))
+        os.symlink(rel, pkg_res, target_is_directory=True)
+
+
+class SSTEggInfo(egg_info_cls):
+    def run(self):
+        _ensure_sstcore_resources_junction()
+        super().run()
 
 
 def _sstcore_package_data_files():
     """Paths relative to the SSTcore/ package dir for package_data (full resource tree in wheels)."""
-    root = REPO_RESOURCES_DIR
+    _ensure_sstcore_resources_junction()
+    root = os.path.join(base_dir, "SSTcore", "resources")
     if not os.path.isdir(root):
         return []
     pkg_root = os.path.join(base_dir, "SSTcore")
@@ -294,6 +365,12 @@ class CustomBuildExt(build_ext):
             ext_include_dirs = [os.path.abspath(d) for d in ext.include_dirs]
             if os.path.abspath(src_dir) not in ext_include_dirs:
                 ext.include_dirs.insert(0, src_dir)
+            inc_dir = os.path.join(base_dir, "include")
+            if os.path.abspath(inc_dir) not in ext_include_dirs:
+                ext.include_dirs.insert(0, inc_dir)
+            inc_gen = os.path.join(base_dir, "include", "generated")
+            if os.path.abspath(inc_gen) not in ext_include_dirs:
+                ext.include_dirs.insert(0, inc_gen)
             if os.path.abspath(embed_build_temp) not in ext_include_dirs:
                 ext.include_dirs.append(embed_build_temp)
             ext_sources = [os.path.abspath(s) if os.path.isabs(s) else os.path.abspath(os.path.join(base_dir, s)) for s in ext.sources]
@@ -587,7 +664,7 @@ def _knot_id_for_fseries(rel_under_knots: str, filename: str) -> str:
 
 
 def _collect_ideal_rel_paths(resources_dir: Path):
-    """Relative paths under resources/ for ideal*.txt and ideal_12_data/*.txt (CMake parity)."""
+    """Relative paths under resources/ for ideal*.txt, ideal_12_data/*.txt, knotplot/**/knot_*_ideal.txt (CMake parity)."""
     rels = []
     seen = set()
     if not resources_dir.is_dir():
@@ -601,6 +678,14 @@ def _collect_ideal_rel_paths(resources_dir: Path):
     ideal12 = resources_dir / "ideal_12_data"
     if ideal12.is_dir():
         for p in sorted(ideal12.rglob("*.txt")):
+            if p.is_file():
+                rel = p.relative_to(resources_dir).as_posix()
+                if rel not in seen:
+                    seen.add(rel)
+                    rels.append(rel)
+    knotplot = resources_dir / "knotplot"
+    if knotplot.is_dir():
+        for p in sorted(knotplot.rglob("knot_*_ideal.txt")):
             if p.is_file():
                 rel = p.relative_to(resources_dir).as_posix()
                 if rel not in seen:
@@ -639,10 +724,11 @@ def _embed_build_temp_candidates(base_dir: str) -> list:
 def _generate_embedded_knot_files_impl(base_dir: str, build_temp: str):
     """Write embed sources into ``build_temp``; returns ``(header_file, cpp_sources)``."""
     src_dir = os.path.join(base_dir, "src")
+    gen_include_dir = os.path.join(base_dir, "include", "generated")
     os.makedirs(build_temp, exist_ok=True)
-    os.makedirs(src_dir, exist_ok=True)
+    os.makedirs(gen_include_dir, exist_ok=True)
 
-    header_file = os.path.join(src_dir, "knot_files_embedded.h")
+    header_file = os.path.join(gen_include_dir, "knot_files_embedded.h")
     fwd_header = os.path.join(build_temp, "knot_embed_shards_fwd.h")
     fseries_cpp = os.path.join(build_temp, "knot_embed_fseries.cpp")
     ideal_main_cpp = os.path.join(build_temp, "knot_files_embedded.cpp")
@@ -801,6 +887,8 @@ src_files = [
     "src/frenet_helicity.cpp",
     "src/potential_timefield.cpp",
     "src/magnus_integrator.cpp",
+    "src/multisector_fitter.cpp",
+    "src/trefoil_operator.cpp",
     "src/hyperbolic_volume.cpp",
     "src/knot_dynamics.cpp",
     "src/radiation_flow.cpp",
@@ -826,23 +914,18 @@ binding_files = sorted(
 # Include directories
 # For sdist builds, paths are relative to the extracted source directory
 # The generated header directory will be added by CustomBuildExt
-include_dirs = ["src", pybind11.get_include()]
+include_dirs = ["src", "include", "include/generated", pybind11.get_include()]
 
 # C++ standard - use 20 for better compatibility across platforms
 # C++23 is not fully supported on all compilers (especially older GCC versions)
 cxx_std = 20  # Use C++20 for maximum compatibility
 
-# Native extensions live under the SSTcore package (SSTcore._native / SSTcore._bindings).
-# CMake builds omit SSTCORE_PYBIND11_*_SUBMODULE and keep module names sstcore / sstbindings.
+# Native extension lives under the SSTcore package (SSTcore._native).
+# CMake builds omit SSTCORE_PYBIND11_NATIVE_SUBMODULE and use the top-level module name sstcore.
 _ext_macros = [
     ("VERSION_INFO", __version__),
     ("KNOT_FILES_EMBEDDED_H", "1"),
     ("SSTCORE_PYBIND11_NATIVE_SUBMODULE", "1"),
-]
-_ext_macros_bindings = [
-    ("VERSION_INFO", __version__),
-    ("KNOT_FILES_EMBEDDED_H", "1"),
-    ("SSTCORE_PYBIND11_BINDINGS_SUBMODULE", "1"),
 ]
 
 ext_modules = [
@@ -852,14 +935,6 @@ ext_modules = [
         include_dirs=include_dirs,
         cxx_std=cxx_std,
         define_macros=_ext_macros,
-        language="c++",
-    ),
-    Pybind11Extension(
-        "SSTcore._bindings",
-        sources=["src/module_sstbindings.cpp"] + binding_files + src_files,
-        include_dirs=include_dirs,
-        cxx_std=cxx_std,
-        define_macros=_ext_macros_bindings,
         language="c++",
     ),
 ]
@@ -915,6 +990,7 @@ setup(
     },
     ext_modules=ext_modules,
     cmdclass={
+        "egg_info": SSTEggInfo,
         "build": CustomBuild,
         "build_ext": CustomBuildExt,
         "bdist_wheel": SSTBdistWheel,

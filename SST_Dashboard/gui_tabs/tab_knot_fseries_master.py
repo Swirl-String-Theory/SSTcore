@@ -164,8 +164,8 @@ class KnotVisualizationPanel(QWidget):
 
 
 def _find_sstcore_resources():
-    """Probeer SSTcore/resources (Knots_FourierSeries, ideal.txt) te vinden.
-    Eerst via pip-install (sstcore.get_resources_dir()), anders dev-paden."""
+    """Probeer repo-root ``resources/`` (Knots_FourierSeries, ideal.txt) te vinden.
+    Eerst via pip-install (get_resources_dir()), anders dev-paden."""
     try:
         import SSTcore as _pkg
         p = _pkg.get_resources_dir()
@@ -179,15 +179,17 @@ def _find_sstcore_resources():
                 return p
         except ImportError:
             pass
-    base = Path(__file__).resolve().parent.parent
+    dash = Path(__file__).resolve().parent.parent  # SST_Dashboard
+    repo = dash.parent  # SSTcore checkout root when dashboard lives under repo
     if os.environ.get("SSTCORE_RESOURCES"):
         p = Path(os.environ["SSTCORE_RESOURCES"])
         if p.is_dir():
             return p
     for candidate in [
-        base.parent.parent.parent.parent / "SSTcore" / "resources",
-        base.parent.parent.parent / "SSTcore" / "resources",
-        Path(__file__).resolve().parent.parent.parent.parent / "SSTcore" / "resources",
+        repo / "resources",
+        repo / "SSTcore" / "resources",  # setuptools junction / legacy
+        dash.parent.parent / "resources",
+        dash.parent.parent / "SSTcore" / "resources",
     ]:
         if candidate.is_dir():
             return candidate
@@ -352,7 +354,7 @@ class GenerateAllWorker(QThread):
 
 
 class TabKnotFseriesMaster(QWidget):
-    """Eerste tab: Knot Fseries met Ideal/knots uit SSTcore (swirl_string_core/sstbindings)."""
+    """Eerste tab: Knot Fseries met Ideal/knots uit repo ``resources/`` (SSTcore/sstcore)."""
 
     def __init__(self, global_vis=None):
         super().__init__()
@@ -394,7 +396,7 @@ class TabKnotFseriesMaster(QWidget):
         row.addWidget(btn)
         path_layout.addLayout(row)
         if self._sstcore_resources:
-            path_layout.addWidget(QLabel(f"SSTcore resources: {self._sstcore_resources}"))
+            path_layout.addWidget(QLabel(f"Resources: {self._sstcore_resources}"))
         layout.addWidget(grp_paths)
 
         # --- Knotenlijst (uit library of uit map) + acties ---

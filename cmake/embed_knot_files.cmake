@@ -1,37 +1,40 @@
 # CMake script to embed knot resources into C++ source
 # Embeds:
-#   - all .fseries files recursively from SSTcore/resources/Knots_FourierSeries
-#   - all ideal*.txt files recursively from SSTcore/resources/
-#   - all .txt files recursively from SSTcore/resources/ideal_12_data (if present)
+#   - all .fseries files recursively from resources/Knots_FourierSeries
+#   - all ideal*.txt files recursively from resources/
+#   - all .txt files recursively from resources/ideal_12_data (if present)
+#   - knotplot per-knot ideals: resources/knotplot/**/knot_*_ideal.txt
 #
 # Generates:
-#   - ${CMAKE_BINARY_DIR}/generated/knot_files_embedded.h
+#   - ${CMAKE_SOURCE_DIR}/include/generated/knot_files_embedded.h  (stable path for IDEs / all build dirs)
 #   - ${CMAKE_BINARY_DIR}/generated/knot_files_embedded.cpp
 #
 # Exposed C++ functions:
 #   sst::get_embedded_knot_files()   -> map<knot_id, fseries_text>
 #   sst::get_embedded_ideal_files()  -> map<relative_name, text>
 
-set(KNOTS_FOURIER_DIR "${CMAKE_SOURCE_DIR}/SSTcore/resources/Knots_FourierSeries")
-set(RESOURCES_DIR     "${CMAKE_SOURCE_DIR}/SSTcore/resources")
+set(KNOTS_FOURIER_DIR "${CMAKE_SOURCE_DIR}/resources/Knots_FourierSeries")
+set(RESOURCES_DIR     "${CMAKE_SOURCE_DIR}/resources")
 set(IDEAL12_DIR       "${RESOURCES_DIR}/ideal_12_data")
+set(KNOTPLOT_DIR      "${RESOURCES_DIR}/knotplot")
 
 set(OUTPUT_FILE "${CMAKE_BINARY_DIR}/generated/knot_files_embedded.cpp")
-set(HEADER_FILE "${CMAKE_BINARY_DIR}/generated/knot_files_embedded.h")
+set(HEADER_FILE "${CMAKE_SOURCE_DIR}/include/generated/knot_files_embedded.h")
 
 file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/generated")
+file(MAKE_DIRECTORY "${CMAKE_SOURCE_DIR}/include/generated")
 
 # -------------------------
 # Collect resource files
 # -------------------------
 
-# Recursive .fseries files under SSTcore/resources/Knots_FourierSeries
+# Recursive .fseries files under resources/Knots_FourierSeries
 set(FSERIES_FILES "")
 if(EXISTS "${KNOTS_FOURIER_DIR}")
     file(GLOB_RECURSE FSERIES_FILES RELATIVE "${KNOTS_FOURIER_DIR}" "${KNOTS_FOURIER_DIR}/*.fseries")
 endif()
 
-# Recursive ideal*.txt under SSTcore/resources/
+# Recursive ideal*.txt under resources/
 set(IDEAL_FILES "")
 if(EXISTS "${RESOURCES_DIR}")
     file(GLOB_RECURSE IDEAL_FILES RELATIVE "${RESOURCES_DIR}" "${RESOURCES_DIR}/ideal*.txt")
@@ -43,8 +46,18 @@ if(EXISTS "${IDEAL12_DIR}")
     file(GLOB_RECURSE IDEAL12_TXT_FILES RELATIVE "${RESOURCES_DIR}" "${IDEAL12_DIR}/*.txt")
 endif()
 
+# Per-knot ideal snippets under resources/knotplot/<knot_id>/knot_<id>_ideal.txt
+set(KNOTPLOT_IDEAL_FILES "")
+if(EXISTS "${KNOTPLOT_DIR}")
+    file(GLOB_RECURSE KNOTPLOT_IDEAL_FILES
+        RELATIVE "${RESOURCES_DIR}"
+        LIST_DIRECTORIES false
+        "${KNOTPLOT_DIR}/**/knot_*_ideal.txt"
+    )
+endif()
+
 # Merge and de-duplicate ideal text lists
-set(ALL_IDEAL_TEXT_FILES ${IDEAL_FILES} ${IDEAL12_TXT_FILES})
+set(ALL_IDEAL_TEXT_FILES ${IDEAL_FILES} ${IDEAL12_TXT_FILES} ${KNOTPLOT_IDEAL_FILES})
 list(REMOVE_DUPLICATES ALL_IDEAL_TEXT_FILES)
 
 # -------------------------

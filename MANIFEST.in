@@ -1,10 +1,11 @@
-# Resource tree bundled as SSTcore/resources (package_data)
-graft SSTcore/resources
+# Resource tree at repo root (see setup.py: junction SSTcore/resources -> ../resources for wheels)
+graft resources
 
 # Native extension sources (required for sdist → wheel; must match setup.py src_files + bindings)
 recursive-include src *.cpp
 recursive-include src *.h
 recursive-include src *.hpp
+recursive-include include *.h
 
 # Include all .fseries knot data files
 recursive-include src/knot_fseries *.fseries
@@ -19,6 +20,9 @@ include LICENSE
 include setup.py
 include pyproject.toml
 include MANIFEST.in
+include sstcore.py
+include sstbindings.py
+include swirl_string_core.py
 
 # Include CMake files (for reference, though not used in pip build)
 recursive-include cmake *.cmake

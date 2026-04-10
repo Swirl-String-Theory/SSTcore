@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       git_ref:
-        description: 'Git ref to checkout and publish (branch, tag, or SHA, e.g. main, master, v0.2.0)'
+        description: 'Git ref to checkout and publish (branch, tag, or SHA, e.g. main, master, v0.8.0)'
         required: true
         default: 'main'
       dry_run:

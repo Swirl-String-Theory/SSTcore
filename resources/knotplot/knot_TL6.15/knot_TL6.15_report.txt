@@ -1,0 +1,26 @@
+source_file: knot_TL6.15.txt
+knot_id: knot_TL6.15
+num_harmonics: 100
+num_resample_points: 4000
+original_point_count: 228
+original_polygon_length: 352.042014713873
+resampled_spline_length: 356.697553237887
+original_closure_gap: 1.012797613100e+01
+
+# reconstruction error against centered resampled spline
+rms_error: 5.563223855865e-02
+mean_error: 2.170210969441e-02
+max_error: 8.890820057149e-01
+
+# geometric scales
+rms_radius: 6.800974563412e+00
+max_radius: 1.078614507963e+01
+bbox_diag: 2.824338164003e+01
+
+# relative errors
+rel_rms_vs_rms_radius: 8.180039204666e-03
+rel_rms_vs_bbox_diag: 1.969744249031e-03
+rel_max_vs_bbox_diag: 3.147930432150e-02
+
+# quick assessment
+assessment: usable_check_needed

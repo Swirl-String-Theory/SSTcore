@@ -182,7 +182,7 @@ def _ideal_txt_candidate_paths():
                     add(d / name)
         except ImportError:
             pass
-    # 2) SSTcore/resources: script in SSTcore/SST_Dashboard/gui_tabs OF dashboard naast SSTcore
+    # 2) repo resources/: script in SSTcore/SST_Dashboard/gui_tabs OF dashboard naast SSTcore
     for root in (parent2, parent2 / "SSTcore", calculations.parent):
         for name in ("ideal.txt", "Ideal.txt"):
             add(root / "resources" / name)
@@ -471,9 +471,13 @@ def compute_geom(block, s):
 
 
 def resolve_fremlin_4_1_dir():
+    here = os.path.abspath(os.path.dirname(__file__))
+    root = os.path.abspath(os.path.join(here, "..", "..", ".."))
     candidates = [
-        r"C:\\workspace\\projects\\SSTcore\\resources\\Knots_FourierSeries",
-        r"C:\\workspace\\projects\\SSTcore\\src\\Knots_FourierSeries",
+        os.path.join(root, "resources", "Knots_FourierSeries"),
+        os.path.join(root, "SSTcore", "resources", "Knots_FourierSeries"),
+        os.path.join(root, "src", "Knots_FourierSeries"),
+        os.path.join("resources", "Knots_FourierSeries"),
         os.path.join("SSTcore", "resources", "Knots_FourierSeries"),
         os.path.join("src", "Knots_FourierSeries"),
     ]

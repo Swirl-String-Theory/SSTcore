@@ -1,0 +1,19 @@
+[
+  {
+    "file": "knot_TL3.3_Gear\\knot_TL3.3_Gear.fseries",
+    "stem": "knot_TL3.3_Gear",
+    "n_components": 1,
+    "H_link": 0.0,
+    "chi_net": -9.252236535320844,
+    "pair_coherence": 0.0,
+    "self_coherence": -1.0,
+    "writhe": [
+      -9.252236535320844
+    ],
+    "linking_matrix": [
+      [
+        0.0
+      ]
+    ]
+  }
+]

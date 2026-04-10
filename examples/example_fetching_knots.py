@@ -4,7 +4,7 @@ Example: fetching knot data from resources/**/*.fseries and ideal.txt.
 All paths are resolved at runtime (script-relative, package-relative, or env).
 No absolute paths in source — works on any computer after clone/pip install.
 
-  1. Locate resources via SSTcore.get_resources_dir() or fallbacks (repo SSTcore/resources, SSTCORE_RESOURCES).
+  1. Locate resources via SSTcore.get_resources_dir() or fallbacks (repo ``resources/``, SSTCORE_RESOURCES).
   2. List and read .fseries files under Knots_FourierSeries/.
   3. Read ideal.txt (ideal knot database with <AB> blocks).
 

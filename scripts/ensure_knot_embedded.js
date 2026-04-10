@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Generate build_node/generated/knot_files_embedded.cpp/.h (required by binding.gyp).
+// Generate build_node/generated/knot_files_embedded.cpp and include/generated/knot_files_embedded.h (binding.gyp).
 'use strict';
 
 const { execFileSync } = require('child_process');

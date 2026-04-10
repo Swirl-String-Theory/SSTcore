@@ -6,7 +6,7 @@ Standalone, non-destructive taxonomy builder for a **folder-based repository lay
 Use this version when you have a local repository folder such as:
 
 - `./SSTcore/`
-- `./SSTcore/resources/`
+- `./resources/` (repo root)
 - `./SSTcore/SST_Dashboard/`
 
 and **do not** want to create or use a zip snapshot.
