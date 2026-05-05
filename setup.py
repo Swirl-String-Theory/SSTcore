@@ -235,7 +235,7 @@ def _windows_msvc_toolset_defaults() -> None:
 
 _windows_msvc_toolset_defaults()
 
-__version__ = "0.8.0"
+__version__ = "0.8.1"
 base_dir = os.path.dirname(os.path.abspath(__file__))
 # Knot / ideal databases and Fourier series live at repo root: resources/
 REPO_RESOURCES_DIR = os.path.join(base_dir, "resources")
@@ -321,6 +321,26 @@ def _sstcore_package_data_files():
             rel = os.path.relpath(full, pkg_root).replace(os.sep, "/")
             out.append(rel)
     return out
+
+
+def _validate_package_data_payload(package_data_files):
+    """Fail fast if critical runtime resources are not included in wheel package_data."""
+    repo_res = os.path.join(base_dir, "resources")
+    if not os.path.isdir(repo_res):
+        return
+    relset = set(package_data_files)
+    required = ["resources/ideal.txt"]
+    missing = [p for p in required if p not in relset]
+    has_kfs_payload = any(p.startswith("resources/Knots_FourierSeries/") for p in relset)
+    if missing or not has_kfs_payload:
+        details = []
+        if missing:
+            details.append(f"missing required files: {missing}")
+        if not has_kfs_payload:
+            details.append("missing Knots_FourierSeries payload under resources/Knots_FourierSeries/")
+        raise RuntimeError(
+            "SSTcore package_data is incomplete; refusing build (" + "; ".join(details) + ")."
+        )
 
 
 def _relative_path(path, base=base_dir):
@@ -970,6 +990,9 @@ if not os.path.isfile(_sstcore_init):
         "Use a case-sensitive checkout (directory must be SSTcore/, not sstcore/)."
     )
 
+_sstcore_package_data = _sstcore_package_data_files()
+_validate_package_data_payload(_sstcore_package_data)
+
 # All metadata, extensions, and package_data here. pyproject.toml is [build-system] only
 # (no [project], no [tool.setuptools]) so older setuptools / PlatformIO venvs do not
 # require a PEP 621 `project.name` when running `setup.py bdist_wheel`.
@@ -1005,7 +1028,7 @@ setup(
         ([("share/sstcore/knot_fseries", fseries_files)] if fseries_files else [])
         + resource_data_files
     ),
-    package_data={"SSTcore": _sstcore_package_data_files()},
+    package_data={"SSTcore": _sstcore_package_data},
     install_requires=[
         "pybind11>=2.6.0",
         "numpy>=1.19.0",

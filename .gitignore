@@ -48,3 +48,6 @@ __pycache__/
 
 # CMake/setuptools generated embed API header (stable path under include/)
 /include/generated/
+
+# Build-time junction to repo-root resources (created by setup.py for package_data)
+/SSTcore/resources/
