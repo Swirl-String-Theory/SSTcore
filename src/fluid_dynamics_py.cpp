@@ -39,8 +39,17 @@ void bind_fluid_dynamics(py::module_& m) {
                   py::arg("dv_dx"),
                   py::arg("du_dy"),
                   R"pbdoc(
-        Swirl clock rate 0.5 * (dv/dx - du/dy).
+        Legacy alias for local_rotation_rate = 0.5 * (dv/dx - du/dy). Not the Canon Swirl-Clock factor.
     )pbdoc");
+
+        m.def("local_rotation_rate", &sst::FluidDynamics::local_rotation_rate,
+                  py::arg("dv_dx"),
+                  py::arg("du_dy"),
+                  R"pbdoc(Local angular rotation rate 0.5 * (dv/dx - du/dy).)pbdoc");
+
+        m.def("swirl_clock_factor_from_speed", &sst::FluidDynamics::swirl_clock_factor_from_speed,
+                  py::arg("v_norm"), py::arg("c") = 2.99792458e8,
+                  R"pbdoc(Canon Swirl-Clock factor S_t = sqrt(1 - v^2/c^2).)pbdoc");
 
         m.def("vorticity_from_curvature", &sst::FluidDynamics::vorticity_from_curvature,
                   py::arg("V"),
@@ -67,8 +76,16 @@ void bind_fluid_dynamics(py::module_& m) {
                   py::arg("rho"),
                   py::arg("omega"),
                   R"pbdoc(
-        Rotational kinetic energy density (1/2) * ρ * ω^2.
+        Legacy helper 0.5 * rho * omega^2. Prefer swirl_energy_density_from_speed or swirl_tension_energy_density.
     )pbdoc");
+
+        m.def("swirl_energy_density_from_speed", &sst::FluidDynamics::swirl_energy_density_from_speed,
+                  py::arg("rho"), py::arg("v_norm"),
+                  R"pbdoc(Canon kinetic swirl energy density rho_E = 0.5 * rho * v^2.)pbdoc");
+
+        m.def("swirl_tension_energy_density", &sst::FluidDynamics::swirl_tension_energy_density,
+                  py::arg("rho"), py::arg("omega"), py::arg("ell"),
+                  R"pbdoc(Local vorticity/tension surrogate 0.5 * rho * ell^2 * omega^2.)pbdoc");
 
         m.def("kairos_energy_trigger", &sst::FluidDynamics::kairos_energy_trigger,
                   py::arg("rho"),

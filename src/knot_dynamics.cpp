@@ -120,12 +120,11 @@ namespace sst {
         double SSTCanonicalXiModel::compute_xi(const KnotInvariants& K) const {
                 const double L = K.ropelength.has_value() ? K.ropelength.value() : K.ropelength_like;
                 const double V = K.hyperbolic_volume_opt.has_value() ? K.hyperbolic_volume_opt.value() : K.hyperbolic_volume;
+                const double C = p_.use_crossing_number_as_C ? static_cast<double>(K.crossing_number) : 0.0;
+                const double H = p_.use_writhe_as_H ? K.writhe : 0.0;
 
-                // C(T) and H(T) are carried by KnotState; invariants-only interface uses neutral placeholders.
-                const double C = 0.0;
-                const double H = 0.0;
-
-                return std::exp(p_.alpha_C * C + p_.beta_L * L + p_.gamma_H * H + p_.delta_V * V);
+                const double additive = p_.alpha_C * C + p_.beta_L * L + p_.gamma_H * H + p_.delta_V * V;
+                return additive * std::pow(static_cast<double>(SST::Constants::PHI), -2.0 * static_cast<double>(p_.golden_layer));
         }
 
         SectorGate SSTCanonicalXiModel::assign_gate(const KnotInvariants& K) const {
@@ -136,7 +135,7 @@ namespace sst {
         }
 
         MassFunctional::MassFunctional(const CanonicalConstants& c) : c_(c) {
-                if (c_.r_c <= 0.0 || c_.lambda_c <= 0.0 || c_.m_e <= 0.0 || c_.rho_m <= 0.0) {
+                if (c_.r_c <= 0.0 || c_.lambda_c <= 0.0 || c_.m_e <= 0.0 || c_.rho_m <= 0.0 || c_.c <= 0.0) {
                         throw std::invalid_argument("Canonical constants must be positive.");
                 }
         }
@@ -145,6 +144,10 @@ namespace sst {
                 constexpr double pi = 3.14159265358979323846;
                 return 2.0 * pi * pi * pi * c_.rho_m *
                        std::pow(c_.r_c, 5) / std::pow(c_.lambda_c, 2) * L_tot;
+        }
+
+        double MassFunctional::bare_master_mass_scale() const {
+                return c_.rho_m * c_.r_c * c_.r_c * c_.r_c;
         }
 
         double MassFunctional::gate_factor(SectorGate G) const {
@@ -162,10 +165,24 @@ namespace sst {
                 out.gate = model.assign_gate(K);
                 out.xi = model.compute_xi(K);
                 out.gate_factor = gate_factor(out.gate);
+                const double S_t = SSTCanonicalConstants::swirl_clock(c_.v_swirl, c_.c);
+                const double clock_impedance = 1.0 / (S_t * S_t);
+                out.mass_kg = bare_master_mass_scale() * out.gate_factor * out.xi * clock_impedance;
+                out.mass_ratio = out.mass_kg / c_.m_e;
+                out.valid = true;
+                out.note = "Canon v0.8.1 mass computed from rho_m*r_c^3 * gate * Xi * S_t^-2.";
+                return out;
+        }
+
+        KnotDerived MassFunctional::evaluate_electron_normalized(const KnotInvariants& K, const XiModel& model) const {
+                KnotDerived out;
+                out.gate = model.assign_gate(K);
+                out.xi = model.compute_xi(K);
+                out.gate_factor = gate_factor(out.gate);
                 out.mass_ratio = out.gate_factor * out.xi;
                 out.mass_kg = out.mass_ratio * c_.m_e;
                 out.valid = true;
-                out.note = "Mass ratio computed from gate and Xi model.";
+                out.note = "Legacy electron-normalized shortcut: M/m_e = gate * Xi.";
                 return out;
         }
 

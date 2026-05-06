@@ -73,6 +73,14 @@ add_custom_target(knot_files_embedded ALL
 # Core SST library sources
 add_library(sstcore_lib STATIC
         src/ab_initio_mass.cpp
+        src/canonical_constants.cpp
+        src/sst_master_equation.cpp
+        src/chronos_kelvin_transport.cpp
+        src/sst_tension_scales.cpp
+        src/delay_mode_selector.cpp
+        src/atomic_bridge_model.cpp
+        src/spectroscopic_gap.cpp
+        src/clock_field_eft.cpp
         src/trefoil_closure_kernels.cpp
         src/biot_savart.cpp
         src/fluid_dynamics.cpp
@@ -113,6 +121,14 @@ if(SST_BUILD_PYTHON_BINDINGS)
     pybind11_add_module(sstcore src/module_sst.cpp)
     target_sources(sstcore PRIVATE
             src/ab_initio_mass_py.cpp
+            src/canonical_constants_py.cpp
+            src/sst_master_equation_py.cpp
+            src/chronos_kelvin_transport_py.cpp
+            src/sst_tension_scales_py.cpp
+            src/delay_mode_selector_py.cpp
+            src/atomic_bridge_model_py.cpp
+            src/spectroscopic_gap_py.cpp
+            src/clock_field_eft_py.cpp
             src/biot_savart_py.cpp
             src/field_kernels_py.cpp
             src/field_ops_py.cpp

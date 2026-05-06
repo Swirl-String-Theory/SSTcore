@@ -22,6 +22,7 @@ namespace SST {
         constexpr long double ALPHA     = 0.0072973525693L;         // [-]   Fine Structure Constant
         constexpr long double M_ELECTRON = 9.1093837015e-31L;       // [kg]  Electron Rest Mass
         constexpr long double E_CHARGE   = 1.602176634e-19L;        // [C]   Elementary Charge
+        constexpr long double EPSILON_0  = 8.8541878128e-12L;       // [F/m] Vacuum permittivity
 
         // --- Mathematical Constants ---
         const long double PI          = std::acos(-1.0L);
@@ -37,14 +38,57 @@ namespace SST {
 
         // Derived from SST Rest Mass Functional (NLS-Golden)
         constexpr long double RHO_CORE  = 3.8934358266918687e18L;   // [kg/m^3] Core Density
-        constexpr long double RHO_FLUID = 6.8398588e-07L;           // [kg/m^3] Effective Fluid Density
+        constexpr long double RHO_FLUID_CANON   = 7.0e-7L;          // [kg/m^3] Canon v0.8.x rounded effective fluid density
+        constexpr long double RHO_FLUID_DERIVED = 6.8398588e-07L;   // [kg/m^3] CODATA-derived electron anchor value
+        constexpr long double RHO_FLUID = RHO_FLUID_CANON;          // [kg/m^3] Default public API value
 
         // Derived from quantization: Gamma_0 = h / m_eff
-        constexpr long double GAMMA_0   = 9.68455e-09L;             // [m^2/s] Circulation Quantum
+        constexpr long double GAMMA_0   = 9.68361918e-09L;          // [m^2/s] Circulation Quantum, 2*pi*r_c*v_swirl
 
         // --- Energy and Force Limits ---
         // Maximum tangential force sustained by the swirl before reconnection
         constexpr long double F_SWIRL_MAX = 29.053507L;             // [N]
+
+
+
+        // --- Canon v0.8.x helper identities ---
+        inline long double compton_angular_frequency() {
+            return M_ELECTRON * C_VACUUM * C_VACUUM / H_BAR;
+        }
+
+        inline long double reduced_compton_wavelength() {
+            return H_BAR / (M_ELECTRON * C_VACUUM);
+        }
+
+        inline long double full_compton_wavelength() {
+            return 2.0L * PI * reduced_compton_wavelength();
+        }
+
+        inline long double core_radius_from_compton_anchor() {
+            return V_SWIRL / compton_angular_frequency();
+        }
+
+        inline long double circulation_quantum_from_compton_anchor() {
+            return 2.0L * PI * V_SWIRL * V_SWIRL / compton_angular_frequency();
+        }
+
+        inline long double swirl_energy_density(long double rho_f = RHO_FLUID, long double v = V_SWIRL) {
+            return 0.5L * rho_f * v * v;
+        }
+
+        inline long double mass_equivalent_density(long double rho_f = RHO_FLUID, long double v = V_SWIRL) {
+            return swirl_energy_density(rho_f, v) / (C_VACUUM * C_VACUUM);
+        }
+
+        inline long double geometric_gate() {
+            // Canon gate uses the full Compton wavelength h/(m_e c), not the reduced wavelength.
+            return full_compton_wavelength() / (PI * RC_CORE);
+        }
+
+        inline long double swirl_clock(long double v = V_SWIRL) {
+            const long double x = 1.0L - (v * v) / (C_VACUUM * C_VACUUM);
+            return std::sqrt(x > 0.0L ? x : 0.0L);
+        }
 
         /**
          * @brief Mass-to-Energy prefactor for the NLS-Golden Functional.

@@ -38,7 +38,10 @@ namespace sst {
 
 			static bool is_incompressible(const Vec3 &dudx, const Vec3 &dvdy, const Vec3 &dwdz);
 
+			// Legacy name retained for compatibility: this returns local rotation rate, not the Canon Swirl-Clock.
 			static double swirl_clock_rate(double dv_dx, double du_dy);
+			static double local_rotation_rate(double dv_dx, double du_dy);
+			static double swirl_clock_factor_from_speed(double v_norm, double c = 2.99792458e8);
 
 			static double vorticity_from_curvature(double V, double R);
 
@@ -52,7 +55,10 @@ namespace sst {
 
 			static double potential_vorticity(double fa, double zeta_r, double h);
 
+			// Legacy angular-rate helper; dimensionally an energy density only if omega is already a speed scale or ell=1 m is implicit.
 			static double swirl_energy(double rho, double omega);
+			static double swirl_energy_density_from_speed(double rho, double v_norm);
+			static double swirl_tension_energy_density(double rho, double omega, double ell);
 
 			static double circulation_surface_integral(
 					const std::vector<Vec3> &omega_field,

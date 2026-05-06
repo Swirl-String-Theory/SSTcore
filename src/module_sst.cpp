@@ -7,6 +7,14 @@ namespace py = pybind11;
 
 // Forward declaration only!
 void bind_ab_initio(py::module_& m);
+void bind_canonical_constants(py::module_& m);
+void bind_sst_master_equation(py::module_& m);
+void bind_chronos_kelvin_transport(py::module_& m);
+void bind_sst_tension_scales(py::module_& m);
+void bind_delay_mode_selector(py::module_& m);
+void bind_atomic_bridge_model(py::module_& m);
+void bind_spectroscopic_gap(py::module_& m);
+void bind_clock_field_eft(py::module_& m);
 void bind_biot_savart(py::module_& m);
 void bind_fluid_dynamics(py::module_ &m);
 void bind_field_kernels(py::module_ &m);
@@ -37,6 +45,14 @@ PYBIND11_MODULE(sstcore, m) {
 #endif
   m.doc() = "SSTcore Bindings";
   bind_ab_initio(m);
+  bind_canonical_constants(m);
+  bind_sst_master_equation(m);
+  bind_chronos_kelvin_transport(m);
+  bind_sst_tension_scales(m);
+  bind_delay_mode_selector(m);
+  bind_atomic_bridge_model(m);
+  bind_spectroscopic_gap(m);
+  bind_clock_field_eft(m);
   bind_biot_savart(m);
   bind_fluid_dynamics(m);
   bind_field_kernels(m);

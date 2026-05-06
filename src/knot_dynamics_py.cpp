@@ -83,6 +83,9 @@ void bind_knot(py::module_& m) {
       .def_readwrite("r_c", &CanonicalConstants::r_c)
       .def_readwrite("lambda_c", &CanonicalConstants::lambda_c)
       .def_readwrite("m_e", &CanonicalConstants::m_e)
+      .def_readwrite("rho_f", &CanonicalConstants::rho_f)
+      .def_readwrite("v_swirl", &CanonicalConstants::v_swirl)
+      .def_readwrite("c", &CanonicalConstants::c)
       .def_readwrite("rho_m", &CanonicalConstants::rho_m);
 
   py::class_<KnotDerived>(m, "KnotDerived")
@@ -114,7 +117,10 @@ void bind_knot(py::module_& m) {
       .def_readwrite("alpha_C", &SSTCanonicalXiModel::Params::alpha_C)
       .def_readwrite("beta_L", &SSTCanonicalXiModel::Params::beta_L)
       .def_readwrite("gamma_H", &SSTCanonicalXiModel::Params::gamma_H)
-      .def_readwrite("delta_V", &SSTCanonicalXiModel::Params::delta_V);
+      .def_readwrite("delta_V", &SSTCanonicalXiModel::Params::delta_V)
+      .def_readwrite("golden_layer", &SSTCanonicalXiModel::Params::golden_layer)
+      .def_readwrite("use_crossing_number_as_C", &SSTCanonicalXiModel::Params::use_crossing_number_as_C)
+      .def_readwrite("use_writhe_as_H", &SSTCanonicalXiModel::Params::use_writhe_as_H);
 
   py::class_<SSTCanonicalXiModel>(m, "SSTCanonicalXiModel")
       .def(py::init<const SSTCanonicalXiModel::Params&>(), py::arg("params"))
@@ -124,10 +130,16 @@ void bind_knot(py::module_& m) {
   py::class_<MassFunctional>(m, "MassFunctional")
       .def(py::init<const CanonicalConstants&>(), py::arg("constants") = CanonicalConstants{})
       .def("baseline_mass_from_ropelength", &MassFunctional::baseline_mass_from_ropelength, py::arg("L_tot"))
+      .def("bare_master_mass_scale", &MassFunctional::bare_master_mass_scale)
       .def("gate_factor", &MassFunctional::gate_factor, py::arg("G"))
       .def("evaluate",
            [](const MassFunctional& self, const KnotInvariants& K, const SimpleInvariantXiModel& model) {
              return self.evaluate(K, model);
+           },
+           py::arg("K"), py::arg("model"))
+      .def("evaluate_electron_normalized",
+           [](const MassFunctional& self, const KnotInvariants& K, const SimpleInvariantXiModel& model) {
+             return self.evaluate_electron_normalized(K, model);
            },
            py::arg("K"), py::arg("model"));
 

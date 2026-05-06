@@ -7,6 +7,7 @@
 
 #include "../include/SST_Constants.h"
 #include "../include/vec3_utils.h"
+#include "canonical_constants.h"
 #ifndef M_PI
 #define M_PI SST::Constants::pi
 #endif
@@ -79,10 +80,14 @@ namespace sst {
 
   struct CanonicalConstants {
     double r_c = static_cast<double>(SST::Constants::RC_CORE);
-    double lambda_c = static_cast<double>(SST::Constants::H_BAR /
+    // Full electron Compton wavelength h/(m_e c). Canon gate lambda_c/(pi r_c)=4/alpha uses full, not reduced, Compton wavelength.
+    double lambda_c = static_cast<double>(2.0L * SST::Constants::PI * SST::Constants::H_BAR /
                                 (SST::Constants::M_ELECTRON * SST::Constants::C_VACUUM));
     double m_e = static_cast<double>(SST::Constants::M_ELECTRON);
-    double rho_m = static_cast<double>(SST::Constants::RHO_FLUID);
+    double rho_f = static_cast<double>(SST::Constants::RHO_FLUID);
+    double v_swirl = static_cast<double>(SST::Constants::V_SWIRL);
+    double c = static_cast<double>(SST::Constants::C_VACUUM);
+    double rho_m = static_cast<double>(SST::Constants::mass_equivalent_density());
   };
 
   struct KnotDerived {
@@ -128,7 +133,10 @@ namespace sst {
       double alpha_C = 0.0;
       double beta_L = 0.0;
       double gamma_H = 0.0;
-      double delta_V = 0.0;
+      double delta_V = 0.0;      // optional legacy hyperbolic-volume term; set 0 for strict Canon kernel
+      int golden_layer = 0;
+      bool use_crossing_number_as_C = true;
+      bool use_writhe_as_H = true;
     };
 
     explicit SSTCanonicalXiModel(const Params& p);
@@ -145,8 +153,10 @@ namespace sst {
     explicit MassFunctional(const CanonicalConstants& c = CanonicalConstants{});
 
     [[nodiscard]] double baseline_mass_from_ropelength(double L_tot) const;
+    [[nodiscard]] double bare_master_mass_scale() const;
     [[nodiscard]] double gate_factor(SectorGate G) const;
     [[nodiscard]] KnotDerived evaluate(const KnotInvariants& K, const XiModel& model) const;
+    [[nodiscard]] KnotDerived evaluate_electron_normalized(const KnotInvariants& K, const XiModel& model) const;
 
   private:
     CanonicalConstants c_;

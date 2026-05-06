@@ -56,7 +56,16 @@ namespace sst {
         }
 
         double FluidDynamics::swirl_clock_rate(double dv_dx, double du_dy) {
+                return local_rotation_rate(dv_dx, du_dy);
+        }
+
+        double FluidDynamics::local_rotation_rate(double dv_dx, double du_dy) {
                 return 0.5 * (dv_dx - du_dy);
+        }
+
+        double FluidDynamics::swirl_clock_factor_from_speed(double v_norm, double c) {
+                const double x = 1.0 - (v_norm * v_norm) / (c * c);
+                return std::sqrt(x > 0.0 ? x : 0.0);
         }
 
         double FluidDynamics::vorticity_from_curvature(double V, double R) {
@@ -72,7 +81,17 @@ namespace sst {
         }
 
         double FluidDynamics::swirl_energy(double rho, double omega) {
+                // Legacy compatibility: kept unchanged. Prefer swirl_energy_density_from_speed(rho, v_norm)
+                // or swirl_tension_energy_density(rho, omega, ell) for dimensionally explicit Canon work.
                 return 0.5 * rho * omega * omega;
+        }
+
+        double FluidDynamics::swirl_energy_density_from_speed(double rho, double v_norm) {
+                return 0.5 * rho * v_norm * v_norm;
+        }
+
+        double FluidDynamics::swirl_tension_energy_density(double rho, double omega, double ell) {
+                return 0.5 * rho * ell * ell * omega * omega;
         }
 
         bool FluidDynamics::kairos_energy_trigger(double rho, double omega, double Ce) {
