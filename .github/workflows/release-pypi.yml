@@ -104,7 +104,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install "${GITHUB_WORKSPACE}"/dist/*.whl
           cd "$(mktemp -d)"
-          python -c "import SSTcore; print('smoke ok:', SSTcore.__name__)"
+          python -c "import SSTcore; import SSTcore._native; print('smoke ok:', SSTcore.__name__)"
         shell: bash
 
       - name: Run Python tests (pytest against installed wheel)

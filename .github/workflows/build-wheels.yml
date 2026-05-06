@@ -104,7 +104,7 @@ jobs:
           # Import from outside the repo: cwd on sys.path would load ./SSTcore (sources only,
           # no .so) and shadow the wheel installed in site-packages.
           cd "$(mktemp -d)"
-          python -c "import SSTcore; print('smoke ok:', SSTcore.__name__)"
+          python -c "import SSTcore; import SSTcore._native; print('smoke ok:', SSTcore.__name__)"
         shell: bash
 
       - name: Run Python tests (pytest against installed wheel)

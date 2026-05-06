@@ -1,9 +1,10 @@
 """Pytest hooks for SSTcore tests.
 
 - **Local / CMake**: prepend typical build output dirs so ``sstbindings*.pyd`` / ``.so`` resolve.
-- **Wheel CI** (``SST_WHEEL_TEST=1``): remove the repository root from ``sys.path`` so pytest does
-  not load the source ``SSTcore/`` package (no extensions) ahead of the installed wheel — same idea
-  as the smoke test's ``cd "$(mktemp -d)"``.
+- **Wheel CI** (``SST_WHEEL_TEST=1``): remove **every** ``sys.path`` entry that resolves inside the
+  checkout (repo root *and* subdirs like ``tests/``). Pytest injects those paths before imports;
+  stripping only the repo root is not enough — a ``tests/`` prefix can still resolve ``SSTcore/``
+  from the tree and shadow the wheel (pure ``__init__.py``, no ``_native``).
 """
 
 from __future__ import annotations
@@ -18,21 +19,27 @@ def _repo_root() -> Path:
 
 
 def _strip_repo_root_from_sys_path() -> None:
-    """When testing an installed wheel, drop checkout root so site-packages wins."""
+    """When testing an installed wheel, drop any checkout paths so site-packages wins."""
     if os.environ.get("SST_WHEEL_TEST") != "1":
         return
-    root = _repo_root()
-    root_norm = os.path.normcase(os.path.normpath(str(root.resolve())))
+    root = _repo_root().resolve()
 
-    def _is_repo_entry(p: str) -> bool:
+    def _is_under_repo(p: str) -> bool:
         if not p:
             return False
         try:
-            return os.path.normcase(os.path.normpath(os.path.abspath(p))) == root_norm
+            resolved = Path(p).resolve()
         except OSError:
             return False
+        if resolved == root:
+            return True
+        try:
+            resolved.relative_to(root)
+            return True
+        except ValueError:
+            return False
 
-    sys.path[:] = [p for p in sys.path if not _is_repo_entry(p)]
+    sys.path[:] = [p for p in sys.path if not _is_under_repo(p)]
 
 
 def _prepend_repo_build_dirs() -> None:
