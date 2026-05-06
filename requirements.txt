@@ -1,6 +1,18 @@
-numpy>=1.26.0
-scipy>=1.10.0
+# Minimal dependencies for a fully functioning SSTcore release build/install.
+# Runtime deps (from setup.py install_requires)
+pybind11>=2.6.0
+numpy>=1.19.0
+
+# Build deps (from pyproject.toml [build-system].requires)
+setuptools>=69
+wheel
+packaging
+
+numpy>=1.19.0
 pandas>=2.0.0
-matplotlib>=3.10.0
+scipy>=1.10.0
+matplotlib>=3.8.0
 scikit-learn>=1.8.0
 torch>=2.0.0
+requests>=2.31.0
+pyknotid>=0.5.3
