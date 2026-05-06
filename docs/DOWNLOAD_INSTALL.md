@@ -1,4 +1,4 @@
-# Downloading and Installing swirl-string-core
+# Downloading and Installing SSTcore
 
 ## After Publishing to PyPI
 
@@ -9,7 +9,7 @@ Once you've published the package to PyPI, it will be available for download **w
 ### Standard Installation (Recommended)
 
 ```bash
-pip install swirl-string-core
+pip install SSTcore
 ```
 
 This will:
@@ -21,27 +21,27 @@ This will:
 ### Install Specific Version
 
 ```bash
-pip install swirl-string-core==0.1.0
+pip install SSTcore==0.1.0
 ```
 
 ### Install from TestPyPI (Before Official Release)
 
 ```bash
-pip install --index-url https://test.pypi.org/simple/ swirl-string-core
+pip install --index-url https://test.pypi.org/simple/ SSTcore
 ```
 
 Note: You may need to also include the main PyPI index for dependencies:
 ```bash
-pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ swirl-string-core
+pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ SSTcore
 ```
 
 ## Package URLs After Publishing
 
 Once published, your package will be available at:
 
-- **PyPI Package Page**: https://pypi.org/project/swirl-string-core/
-- **Download Page**: https://pypi.org/project/swirl-string-core/#files
-- **Simple Index**: https://pypi.org/simple/swirl-string-core/
+- **PyPI Package Page**: https://pypi.org/project/SSTcore/
+- **Download Page**: https://pypi.org/project/SSTcore/#files
+- **Simple Index**: https://pypi.org/simple/SSTcore/
 
 ## Timeline
 
@@ -55,14 +55,14 @@ After publishing, verify it's available:
 
 ```bash
 # Check if package exists
-pip search swirl-string-core  # (if search is enabled)
-# Or visit: https://pypi.org/project/swirl-string-core/
+pip search SSTcore  # (if search is enabled)
+# Or visit: https://pypi.org/project/SSTcore/
 
 # Try installing
-pip install swirl-string-core
+pip install SSTcore
 
 # Verify import works
-python -c "import swirl_string_core; print('Success!')"
+python -c "import SSTcore; print('Success!')"
 ```
 
 ## Using the Package
@@ -70,12 +70,12 @@ python -c "import swirl_string_core; print('Success!')"
 Once installed:
 
 ```python
-import swirl_string_core
+import SSTcore
 # or
 import sstbindings  # backwards compatibility
 
 # Use embedded knots
-from swirl_string_core import VortexKnotSystem
+from SSTcore import VortexKnotSystem
 
 system = VortexKnotSystem()
 system.initialize_knot_from_name('3_1', resolution=1000)
@@ -89,7 +89,7 @@ print(f"Loaded knot with {len(positions)} points")
 
 If `pip install` fails with "Could not find a version":
 - Wait a few more minutes for PyPI to process
-- Check the package name is correct: `swirl-string-core` (with hyphens)
+- Check the package name is correct: `SSTcore` (with hyphens)
 - Verify the package was uploaded successfully
 
 ### Installation Fails

@@ -56,7 +56,7 @@ sys.path.insert(0, os.path.abspath("."))
 try:
     from SSTcore import rossby_number, ekman_number, cylinder_mass, cylinder_inertia, torque
 except ImportError:
-    from swirl_string_core import rossby_number, ekman_number, cylinder_mass, cylinder_inertia, torque
+    from SSTcore import rossby_number, ekman_number, cylinder_mass, cylinder_inertia, torque
 
 U = 10.0       # velocity in m/s
 omega = 7.29e-5  # Earth's rotation rad/s

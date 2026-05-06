@@ -2,8 +2,8 @@
 // Created by oscar on 3/2/2026.
 //
 
-#ifndef SWIRL_STRING_CORE_SST_CONSTANTS_H
-#define SWIRL_STRING_CORE_SST_CONSTANTS_H
+#ifndef SSTCORE_SST_CONSTANTS_H
+#define SSTCORE_SST_CONSTANTS_H
 
 
 #include <cmath>
@@ -57,4 +57,4 @@ namespace SST {
     } // namespace Constants
 } // namespace SST
 
-#endif // SWIRL_STRING_CORE_SST_CONSTANTS_H
+#endif // SSTCORE_SST_CONSTANTS_H

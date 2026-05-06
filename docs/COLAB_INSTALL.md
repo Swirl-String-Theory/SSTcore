@@ -1,4 +1,4 @@
-# Installing swirl-string-core on Google Colab
+# Installing SSTcore on Google Colab
 
 ## Important Note
 
@@ -12,7 +12,7 @@
 !apt-get install -y build-essential g++
 
 # Then install the package (will build from source)
-!pip install swirl-string-core
+!pip install SSTcore
 ```
 
 **Note**: Building from source takes 2-5 minutes on Colab.
@@ -27,7 +27,7 @@ If you encounter build errors, try installing build dependencies first:
 !apt-get install -y build-essential g++
 
 # Then install the package
-!pip install swirl-string-core
+!pip install SSTcore
 ```
 
 ## Alternative: Install from Source with Verbose Output
@@ -35,7 +35,7 @@ If you encounter build errors, try installing build dependencies first:
 If you need to see the actual error messages:
 
 ```python
-!pip install swirl-string-core --verbose --no-cache-dir
+!pip install SSTcore --verbose --no-cache-dir
 ```
 
 ## Common Issues
@@ -56,18 +56,18 @@ If you need to see the actual error messages:
 **Solution**: Colab may run out of memory. Try:
 ```python
 # Restart runtime and try again
-!pip install swirl-string-core --no-cache-dir
+!pip install SSTcore --no-cache-dir
 ```
 
 ## Verify Installation
 
 ```python
 try:
-    import swirl_string_core
-    print("✓ swirl_string_core imported successfully")
+    import SSTcore
+    print("✓ SSTcore imported successfully")
     
     # Test embedded knots
-    from swirl_string_core import VortexKnotSystem
+    from SSTcore import VortexKnotSystem
     system = VortexKnotSystem()
     system.initialize_knot_from_name('3_1', resolution=100)
     print(f"✓ Loaded knot with {len(system.get_positions())} points")
@@ -78,8 +78,8 @@ except Exception as e:
 ## Using the Package
 
 ```python
-import swirl_string_core
-from swirl_string_core import VortexKnotSystem
+import SSTcore
+from SSTcore import VortexKnotSystem
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D

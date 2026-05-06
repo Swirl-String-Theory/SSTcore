@@ -6,7 +6,7 @@ try:
         estimate_crossing_number,
     )
 except ImportError:
-    from swirl_string_core import (
+    from SSTcore import (
         evaluate_fourier_series,
         writhe_gauss_curve,
         estimate_crossing_number,

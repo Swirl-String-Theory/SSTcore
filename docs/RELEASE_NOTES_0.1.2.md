@@ -1,6 +1,6 @@
 # Release Notes for v0.1.2
 
-## swirl-string-core v0.1.2
+## SSTcore v0.1.2
 
 ### Features
 - Embedded 42 knot `.fseries` files directly in the C++ library
@@ -8,8 +8,8 @@
 - No external `.fseries` files required for Python users
 
 ### Improvements
-- Renamed module from `sstcore` to `swirl_string_core` for better branding
-- Backwards compatibility: `sstbindings` module still available
+- Canonical Python package/API name `SSTcore`; CMake extension module remains `sstcore`
+- Backwards compatibility: deprecated top-level shims `swirl_string_core` / `sstbindings` still ship as thin re-exports
 - Optimized C++20 build configuration for better compatibility
 - Added Linux compiler flags for cross-platform builds
 
@@ -20,13 +20,13 @@
 
 ### Installation
 ```bash
-pip install swirl-string-core
+pip install SSTcore
 ```
 
 ### Usage
 ```python
-import swirl_string_core
-from swirl_string_core import VortexKnotSystem
+import SSTcore
+from SSTcore import VortexKnotSystem
 
 # Initialize any embedded knot
 system = VortexKnotSystem()
@@ -46,5 +46,5 @@ All knots from `src/knot_fseries/` are now built-in, including:
 
 ### Documentation
 - GitHub: https://github.com/Swirl-String-Theory/SSTcore
-- PyPI: https://pypi.org/project/swirl-string-core/
+- PyPI: https://pypi.org/project/SSTcore/
 

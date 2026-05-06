@@ -16,7 +16,7 @@ The source distribution allows users to build from source if no wheel matches th
 python -m build --sdist
 ```
 
-This creates: `swirl_string_core-0.1.0.tar.gz`
+This creates: `SSTcore-0.1.0.tar.gz`
 
 ## Step 2: Verify Files
 
@@ -31,12 +31,12 @@ ls -lh dist/*.whl dist/*.tar.gz
 ```
 
 You should see:
-- `swirl_string_core-0.1.0-cp39-cp39-win_amd64.whl`
-- `swirl_string_core-0.1.0-cp310-cp310-win_amd64.whl`
-- `swirl_string_core-0.1.0-cp311-cp311-win_amd64.whl`
-- `swirl_string_core-0.1.0-cp312-cp312-win_amd64.whl`
-- `swirl_string_core-0.1.0-cp313-cp313-win_amd64.whl`
-- `swirl_string_core-0.1.0.tar.gz` (source distribution)
+- `SSTcore-0.1.0-cp39-cp39-win_amd64.whl`
+- `SSTcore-0.1.0-cp310-cp310-win_amd64.whl`
+- `SSTcore-0.1.0-cp311-cp311-win_amd64.whl`
+- `SSTcore-0.1.0-cp312-cp312-win_amd64.whl`
+- `SSTcore-0.1.0-cp313-cp313-win_amd64.whl`
+- `SSTcore-0.1.0.tar.gz` (source distribution)
 
 ## Step 3: Test on TestPyPI (Recommended)
 
@@ -54,7 +54,7 @@ twine upload --repository testpypi dist/*.whl dist/*.tar.gz
 Then test installation:
 
 ```bash
-pip install --index-url https://test.pypi.org/simple/ swirl-string-core
+pip install --index-url https://test.pypi.org/simple/ SSTcore
 ```
 
 ## Step 4: Upload to Production PyPI
@@ -90,13 +90,13 @@ After uploading, wait 1-5 minutes, then verify:
 
 ```bash
 # Check package page
-# https://pypi.org/project/swirl-string-core/
+# https://pypi.org/project/SSTcore/
 
 # Test installation
-pip install swirl-string-core
+pip install SSTcore
 
 # Test import
-python -c "import swirl_string_core; print('Success!')"
+python -c "import SSTcore; print('Success!')"
 ```
 
 ## What Happens Next
@@ -104,8 +104,8 @@ python -c "import swirl_string_core; print('Success!')"
 After uploading:
 
 1. **PyPI processes** the files (1-5 minutes)
-2. **Package becomes available** at: https://pypi.org/project/swirl-string-core/
-3. **Users can install** with: `pip install swirl-string-core`
+2. **Package becomes available** at: https://pypi.org/project/SSTcore/
+3. **Users can install** with: `pip install SSTcore`
 4. **Google Colab users** will need to build from source (no Linux wheels yet)
 
 ## Next Steps: Build Linux Wheels

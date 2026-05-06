@@ -9,13 +9,13 @@ import pytest
 
 
 def test_vortex_knot_system_import() -> None:
-    sstbindings = pytest.importorskip("sstbindings", exc_type=ImportError)
-    assert hasattr(sstbindings, "VortexKnotSystem")
+    sstcore = pytest.importorskip("sstcore", exc_type=ImportError)
+    assert hasattr(sstcore, "VortexKnotSystem")
 
 
 def test_initialize_knot_from_name_when_available() -> None:
-    sstbindings = pytest.importorskip("sstbindings", exc_type=ImportError)
-    cls = sstbindings.VortexKnotSystem
+    sstcore = pytest.importorskip("sstcore", exc_type=ImportError)
+    cls = sstcore.VortexKnotSystem
     if not hasattr(cls, "initialize_knot_from_name"):
         pytest.skip("initialize_knot_from_name not exposed by this build")
     system = cls()
@@ -25,12 +25,12 @@ def test_initialize_knot_from_name_when_available() -> None:
 
 
 def _main() -> None:
-    if "sstbindings" in sys.modules:
-        del sys.modules["sstbindings"]
-    import sstbindings
+    if "sstcore" in sys.modules:
+        del sys.modules["sstcore"]
+    import sstcore
 
     print("Available VortexKnotSystem methods:")
-    methods = [m for m in dir(sstbindings.VortexKnotSystem) if not m.startswith("_")]
+    methods = [m for m in dir(sstcore.VortexKnotSystem) if not m.startswith("_")]
     for m in sorted(methods):
         print(f"  - {m}")
 
@@ -38,7 +38,7 @@ def _main() -> None:
         print("\n✓ initialize_knot_from_name is available!")
         print("\nTesting knot loading...")
         try:
-            system = sstbindings.VortexKnotSystem()
+            system = sstcore.VortexKnotSystem()
             system.initialize_knot_from_name("3_1", resolution=100)
             positions = system.get_positions()
             print(f"✓ Successfully loaded knot 3_1 with {len(positions)} points")

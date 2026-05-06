@@ -2,8 +2,8 @@
 // Created by mr on 3/22/2025.
 //
 
-#ifndef SWIRL_STRING_CORE_KNOT_DYNAMICS_H
-#define SWIRL_STRING_CORE_KNOT_DYNAMICS_H
+#ifndef SSTCORE_KNOT_DYNAMICS_H
+#define SSTCORE_KNOT_DYNAMICS_H
 
 #include "../include/SST_Constants.h"
 #include "../include/vec3_utils.h"
@@ -533,4 +533,4 @@ namespace sst {
 } // namespace sst
 
 
-#endif //SWIRL_STRING_CORE_KNOT_DYNAMICS_H
+#endif //SSTCORE_KNOT_DYNAMICS_H

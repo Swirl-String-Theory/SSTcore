@@ -7,18 +7,7 @@ Tests all functions with LaTeX formulas, inputs, and results logged.
 import numpy as np
 import pytest
 
-try:
-    import swirl_string_core
-    HAS_SST = True
-except ImportError:
-    try:
-        import sstbindings as swirl_string_core
-        HAS_SST = True
-    except ImportError:
-        HAS_SST = False
-
-if not HAS_SST:
-    pytest.skip("Could not import swirl_string_core or sstbindings", allow_module_level=True)
+sstcore = pytest.importorskip("sstcore", exc_type=ImportError)
 
 
 def log_test(func_name, latex_formula, inputs_dict, results, description=""):
@@ -66,7 +55,7 @@ def test_dipole_field_at_point():
     
     formula = r"$\mathbf{B}(\mathbf{r}) = \frac{\mu_0}{4\pi}\frac{3(\mathbf{m}\cdot\hat{\mathbf{r}})\hat{\mathbf{r}}-\mathbf{m}}{r^3}$"
     
-    result = swirl_string_core.dipole_field_at_point(r, m)
+    result = sstcore.dipole_field_at_point(r, m)
     
     log_test(
         "dipole_field_at_point",
@@ -100,7 +89,7 @@ def test_biot_savart_wire_grid():
     
     formula = r"$\mathbf{B}(\mathbf{r}) = \frac{\mu_0 I}{4\pi}\sum_{segments}\frac{d\mathbf{l}\times(\mathbf{r}-\mathbf{r}_{mid})}{|\mathbf{r}-\mathbf{r}_{mid}|^3}$"
     
-    bx, by, bz = swirl_string_core.biot_savart_wire_grid(
+    bx, by, bz = sstcore.biot_savart_wire_grid(
         X.flatten(), Y.flatten(), Z.flatten(),
         wire_points, current
     )
@@ -143,7 +132,7 @@ def test_dipole_ring_field_grid():
     
     formula = r"$\mathbf{B}(\mathbf{r}) = \sum_{i=1}^{M}\frac{\mu_0}{4\pi}\frac{3(\mathbf{m}_i\cdot\hat{\mathbf{r}}_i)\hat{\mathbf{r}}_i-\mathbf{m}_i}{|\mathbf{r}-\mathbf{r}_i|^3}$"
     
-    bx, by, bz = swirl_string_core.dipole_ring_field_grid(
+    bx, by, bz = sstcore.dipole_ring_field_grid(
         X.flatten(), Y.flatten(), Z.flatten(),
         positions, moments
     )
@@ -186,7 +175,7 @@ def test_biot_savart_vector_potential_grid():
     
     formula = r"$\mathbf{A}(\mathbf{r}) = \frac{\mu_0 I}{4\pi}\int\frac{d\mathbf{l}}{|\mathbf{r}-\mathbf{r}'|}$"
     
-    Ax, Ay, Az = swirl_string_core.biot_savart_vector_potential_grid(polyline, grid, current)
+    Ax, Ay, Az = sstcore.biot_savart_vector_potential_grid(polyline, grid, current)
     
     log_test(
         "biot_savart_vector_potential_grid",

@@ -23,8 +23,8 @@ Use this checklist before publishing to PyPI.
 
 - [ ] **Testing**
   - [ ] Build succeeds: `python -m build`
-  - [ ] Wheel installs: `pip install dist/swirl_string_core-*.whl`
-  - [ ] Import works: `import swirl_string_core`
+  - [ ] Wheel installs: `pip install dist/SSTcore-*.whl`
+  - [ ] Import works: `import SSTcore`
   - [ ] Embedded knots work: Run `test_embedded_knots.py`
 
 ## Build Process
@@ -40,7 +40,7 @@ Use this checklist before publishing to PyPI.
 
 - [ ] Create TestPyPI account: https://test.pypi.org/account/register/
 - [ ] Upload to TestPyPI: `twine upload --repository testpypi dist/*`
-- [ ] Test installation: `pip install --index-url https://test.pypi.org/simple/ swirl-string-core`
+- [ ] Test installation: `pip install --index-url https://test.pypi.org/simple/ SSTcore`
 - [ ] Verify functionality works from TestPyPI
 
 ## PyPI Publishing
@@ -52,8 +52,8 @@ Use this checklist before publishing to PyPI.
 
 ## Post-Publishing
 
-- [ ] Verify installation: `pip install swirl-string-core`
-- [ ] Test import: `python -c "import swirl_string_core; print('Success!')"`
+- [ ] Verify installation: `pip install SSTcore`
+- [ ] Test import: `python -c "import SSTcore; print('Success!')"`
 - [ ] Update repository README with PyPI installation instructions
 - [ ] Create GitHub release with version tag
 - [ ] Add PyPI badge to README (optional)

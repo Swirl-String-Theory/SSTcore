@@ -7,18 +7,7 @@ Tests all functions with LaTeX formulas, inputs, and results logged.
 import numpy as np
 import pytest
 
-try:
-    import swirl_string_core
-    HAS_SST = True
-except ImportError:
-    try:
-        import sstbindings as swirl_string_core
-        HAS_SST = True
-    except ImportError:
-        HAS_SST = False
-
-if not HAS_SST:
-    pytest.skip("Could not import swirl_string_core or sstbindings", allow_module_level=True)
+sstcore = pytest.importorskip("sstcore", exc_type=ImportError)
 
 
 def log_test(func_name, latex_formula, inputs_dict, results, description=""):
@@ -50,7 +39,7 @@ def test_potential_temperature():
     
     formula = r"$\theta = T\left(\frac{p_0}{p}\right)^\kappa$ where $\kappa = \frac{R}{c_p}$"
     
-    result = swirl_string_core.potential_temperature(T, p0, p, R, cp)
+    result = sstcore.potential_temperature(T, p0, p, R, cp)
     
     log_test(
         "potential_temperature",
@@ -75,7 +64,7 @@ def test_entropy_from_theta():
     
     formula = r"$ds = c_p \frac{d\theta}{\theta}$"
     
-    result = swirl_string_core.entropy_from_theta(cp, theta, dtheta)
+    result = sstcore.entropy_from_theta(cp, theta, dtheta)
     
     log_test(
         "entropy_from_theta",
@@ -100,7 +89,7 @@ def test_entropy_from_pv():
     
     formula = r"$ds = \frac{NR}{\gamma-1}(\ln(p) + \ln(V))$"
     
-    result = swirl_string_core.entropy_from_pv(N, R, p, V, gamma)
+    result = sstcore.entropy_from_pv(N, R, p, V, gamma)
     
     log_test(
         "entropy_from_pv",
@@ -125,7 +114,7 @@ def test_enthalpy():
     
     formula = r"$H = E + pV$"
     
-    result = swirl_string_core.enthalpy(internal_energy, p, V)
+    result = sstcore.enthalpy(internal_energy, p, V)
     
     log_test(
         "enthalpy",

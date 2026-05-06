@@ -12,14 +12,10 @@ try:
     HAVE_SST = True
 except Exception:
     try:
-        from swirl_string_core import fourier_knot_eval
+        from sstcore import fourier_knot_eval
         HAVE_SST = True
     except Exception:
-        try:
-            from sstbindings import fourier_knot_eval
-            HAVE_SST = True
-        except Exception:
-            HAVE_SST = False
+        HAVE_SST = False
 
 
 def _parse_floats_from_line(line: str):
@@ -108,7 +104,7 @@ def eval_fourier_block(coeffs, s):
     """
     Evaluate x(s), y(s), z(s) from coeffs dict (a_x, b_x, a_y, b_y, a_z, b_z).
     Convention: j = 0 .. N-1 (row index = harmonic index).
-    Uses sstbindings.fourier_knot_eval if available, else NumPy.
+    Uses SSTcore.fourier_knot_eval if available, else NumPy.
     Returns (x, y, z) as 1D arrays.
     """
     if HAVE_SST:

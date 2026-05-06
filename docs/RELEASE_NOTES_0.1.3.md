@@ -1,6 +1,6 @@
 # Release Notes for v0.1.3
 
-## swirl-string-core v0.1.3
+## SSTcore v0.1.3
 
 ### Changes
 - Updated build configuration for better cross-platform compatibility
@@ -14,10 +14,10 @@
 
 ### Installation
 ```bash
-pip install swirl-string-core
+pip install SSTcore
 ```
 
 ### Documentation
 - GitHub: https://github.com/Swirl-String-Theory/SSTcore
-- PyPI: https://pypi.org/project/swirl-string-core/
+- PyPI: https://pypi.org/project/SSTcore/
 

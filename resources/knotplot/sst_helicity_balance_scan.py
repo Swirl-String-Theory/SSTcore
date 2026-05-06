@@ -47,12 +47,9 @@ try:
     import SSTcore as _sstcore  # preferred local name
 except ImportError:
     try:
-        import swirl_string_core as _sstcore
+        import sstcore as _sstcore
     except ImportError:
-        try:
-            import sstbindings as _sstcore
-        except ImportError:
-            _sstcore = None
+        _sstcore = None
 
 HAVE_SSTCORE = False
 fourier_knot_eval = None

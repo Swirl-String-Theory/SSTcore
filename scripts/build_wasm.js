@@ -43,7 +43,7 @@ function writeWasmStub(reason) {
         '};',
         '',
     ].join('\n');
-    const out = path.join(distDir, 'swirl_string_core_wasm.js');
+    const out = path.join(distDir, 'sstcore_wasm.js');
     fs.writeFileSync(out, body, 'utf8');
     console.warn(`[build:wasm] Wrote stub ${path.relative(rootDir, out)} (${note}).`);
 }
@@ -80,7 +80,7 @@ try {
     process.exit(0);
 }
 
-const tryTargets = ['swirl_string_core_wasm', 'sstcore_wasm'];
+const tryTargets = ['sstcore_wasm', 'swirl_string_core_wasm'];
 let built = false;
 for (const target of tryTargets) {
     try {

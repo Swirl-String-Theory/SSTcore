@@ -59,7 +59,7 @@ Examples:
 
 If you get this error when uploading:
 ```
-ERROR: File already exists ('swirl_string_core-0.1.0-...')
+ERROR: File already exists ('SSTcore-0.1.0-...')
 ```
 
 **Solution**: Increment the version number and rebuild.
@@ -68,11 +68,11 @@ ERROR: File already exists ('swirl_string_core-0.1.0-...')
 
 ## Checking Current Version on PyPI
 
-Visit: https://pypi.org/project/swirl-string-core/
+Visit: https://pypi.org/project/SSTcore/
 
 Or check via pip:
 ```bash
-pip index versions swirl-string-core
+pip index versions SSTcore
 ```
 
 ## Git Tags

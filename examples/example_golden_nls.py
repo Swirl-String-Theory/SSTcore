@@ -1,10 +1,7 @@
 try:
     import SSTcore as sst
 except ImportError:
-    try:
-        import sstcore as sst
-    except ImportError:
-        import sstbindings as sst
+    import sstcore as sst
 
 import math
 

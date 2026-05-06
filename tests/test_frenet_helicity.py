@@ -1,22 +1,27 @@
-import pytest
-pytest.skip("example script", allow_module_level=True)
-import sstbindings  # your pybind11 module
+#!/usr/bin/env python3
+"""Minimal checks for Frenet frames + helicity via ``sstcore``."""
+
 import numpy as np
+import pytest
 
-# Example closed curve (circle in XY-plane)
-theta = np.linspace(0, 2 * np.pi, 100)
-X = [(np.cos(t), np.sin(t), 0.0) for t in theta]
+pytest.importorskip("sstcore", exc_type=ImportError)
 
-# Compute Frenet frames
-T, N, B = sstbindings.compute_frenet_frames(X)
 
-# Compute curvature and torsion
-curvature, torsion = sstbindings.compute_curvature_torsion(T, N)
+def test_frenet_helicity_roundtrip():
+    import sstcore
 
-# Print some values
-print("Curvature (first 5):", curvature[:5])
-print("Torsion (first 5):", torsion[:5])
+    X = np.random.randn(10, 3)
 
-# Use T as both velocity and vorticity for test helicity
-helicity = sstbindings.compute_helicity(T, T)
-print("Helicity (T · T):", helicity)
+    T, N, B = sstcore.compute_frenet_frames(X)
+
+    assert T.shape == X.shape
+    assert N.shape == X.shape
+    assert B.shape == X.shape
+
+    curvature, torsion = sstcore.compute_curvature_torsion(T, N)
+
+    assert curvature.shape[0] == X.shape[0]
+    assert torsion.shape[0] == X.shape[0]
+
+    helicity = sstcore.compute_helicity(T, T)
+    assert np.isfinite(helicity)

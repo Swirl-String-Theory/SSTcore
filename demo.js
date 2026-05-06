@@ -1,5 +1,5 @@
 // demo.js in C:\workspace\projects\SSTcore
-const sst = require('./'); // or './build/Release/swirl_string_core.node'
+const sst = require('./'); // or './build/Release/sstcore.node'
 
 // Example: check version and call one function
 console.log('Version:', sst.version);

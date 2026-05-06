@@ -1,5 +1,5 @@
-#ifndef SWIRL_STRING_CORE_SST_INTEGRATOR_H
-#define SWIRL_STRING_CORE_SST_INTEGRATOR_H
+#ifndef SSTCORE_SST_INTEGRATOR_H
+#define SSTCORE_SST_INTEGRATOR_H
 
 #pragma once
 #include <array>
@@ -24,4 +24,4 @@ void compute_sst_mass(const std::vector<Vec3>& points, double chi_spin,
 
 } // namespace sst
 
-#endif // SWIRL_STRING_CORE_SST_INTEGRATOR_H
+#endif // SSTCORE_SST_INTEGRATOR_H

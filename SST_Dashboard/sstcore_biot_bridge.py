@@ -25,13 +25,13 @@ def _candidate_dirs(extra_search_dirs: Optional[Iterable[os.PathLike | str]] = N
 
 
 def try_import_sstcore(extra_search_dirs: Optional[Iterable[os.PathLike | str]] = None):
-    """Import swirl_string_core / sstbindings / sstcore, optionally searching local folders.
+    """Import SSTcore or CMake-built ``sstcore``, optionally searching local folders.
 
     Returns
     -------
     module or None
     """
-    module_names = ("swirl_string_core", "sstbindings", "sstcore")
+    module_names = ("SSTcore", "sstcore")
 
     for name in module_names:
         try:

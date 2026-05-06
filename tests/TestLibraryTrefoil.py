@@ -3,14 +3,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-import sstbindings
-print(sstbindings.vorticity_z_2D(3.0, 1.0))  # Example
+import sstcore
+print(sstcore.vorticity_z_2D(3.0, 1.0))  # Example
 
 
 import os
 script_name = os.path.splitext(os.path.basename(__file__))[0]
 from matplotlib.colors import TwoSlopeNorm
-from sstbindings import VortexKnotSystem, biot_savart_velocity, compute_kinetic_energy
+from sstcore import VortexKnotSystem, biot_savart_velocity, compute_kinetic_energy
 
 # Simulated data for demonstration
 plotGridsize = 50

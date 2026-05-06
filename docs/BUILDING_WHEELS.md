@@ -72,7 +72,7 @@ Or users can build from source:
 
 ```python
 !apt-get update && apt-get install -y build-essential g++
-!pip install swirl-string-core
+!pip install SSTcore
 ```
 
 ## Building Linux Wheels on Windows/macOS
@@ -104,9 +104,9 @@ Check which Python versions a wheel supports:
 
 ```bash
 # Inspect wheel tags
-python -m pip show swirl-string-core
+python -m pip show SSTcore
 # Or
-unzip -l dist/swirl_string_core-0.1.0-cp312-cp312-win_amd64.whl
+unzip -l dist/SSTcore-0.1.0-cp312-cp312-win_amd64.whl
 ```
 
 The wheel filename format is:
@@ -114,7 +114,7 @@ The wheel filename format is:
 {package}-{version}-{python_tag}-{abi_tag}-{platform_tag}.whl
 ```
 
-Example: `swirl_string_core-0.1.0-cp312-cp312-win_amd64.whl`
+Example: `SSTcore-0.1.0-cp312-cp312-win_amd64.whl`
 - `cp312`: Python 3.12
 - `win_amd64`: Windows 64-bit
 

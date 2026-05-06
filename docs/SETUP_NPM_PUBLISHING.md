@@ -18,16 +18,16 @@ The repository uses a single workflow, **`.github/workflows/npm.yml`** (workflow
 
 ### 2. npm Package Name
 
-The package name is set in `package.json` as `swirl-string-core`. Make sure this name is available on npm:
+The package name is set in `package.json` as `SSTcore`. Make sure this name is available on npm:
 
 ```bash
-npm search swirl-string-core
+npm search SSTcore
 ```
 
 If the name is taken, update `package.json`:
 ```json
 {
-  "name": "@your-org/swirl-string-core"  // Use scoped package
+  "name": "@your-org/SSTcore"  // Use scoped package
 }
 ```
 
@@ -71,7 +71,7 @@ This runs the **test matrix only**. npm publish runs only on a **published relea
 
 2. The workflow will run automatically and attempt to publish
 
-**Note**: For test releases, you might want to use a scoped package name like `@your-org/swirl-string-core-test` to avoid polluting the main package.
+**Note**: For test releases, you might want to use a scoped package name like `@your-org/SSTcore-test` to avoid polluting the main package.
 
 ## Step 4: Publish a Real Release
 
@@ -214,11 +214,11 @@ npm publish
 
 After publishing, verify on npm:
 
-1. Go to https://www.npmjs.com/package/swirl-string-core
+1. Go to https://www.npmjs.com/package/SSTcore
 2. Check the version appears in the package page
 3. Test installation:
    ```bash
-   npm install swirl-string-core
+   npm install SSTcore
    ```
 
 ## Best Practices
@@ -233,5 +233,5 @@ After publishing, verify on npm:
 
 - See `BUILD_NPM.md` for local build instructions
 - See `README_NPM.md` for package usage
-- Check npm package page: https://www.npmjs.com/package/swirl-string-core
+- Check npm package page: https://www.npmjs.com/package/SSTcore
 

@@ -29,7 +29,7 @@ This creates `dist/` with:
 twine upload --repository testpypi dist/*
 
 # Test installation
-pip install --index-url https://test.pypi.org/simple/ swirl-string-core
+pip install --index-url https://test.pypi.org/simple/ SSTcore
 ```
 
 ## 5. Publish to PyPI
@@ -45,8 +45,8 @@ You'll need:
 ## 6. Verify
 
 ```bash
-pip install swirl-string-core
-python -c "import swirl_string_core; print('Success!')"
+pip install SSTcore
+python -c "import SSTcore; print('Success!')"
 ```
 
 ## Next Steps

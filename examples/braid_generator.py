@@ -99,10 +99,7 @@ if __name__ == "__main__":
     try:
         import SSTcore as sstcore
     except ImportError:
-        try:
-            import sstcore
-        except ImportError:
-            import sstbindings as sstcore
+        import sstcore
 
     # Dictionary of fundamental particles and their Braid Words
     test_braids = {

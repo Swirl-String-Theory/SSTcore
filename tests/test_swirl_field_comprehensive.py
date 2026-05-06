@@ -7,18 +7,7 @@ Tests all functions with LaTeX formulas, inputs, and results logged.
 import numpy as np
 import pytest
 
-try:
-    import swirl_string_core
-    HAS_SST = True
-except ImportError:
-    try:
-        import sstbindings as swirl_string_core
-        HAS_SST = True
-    except ImportError:
-        HAS_SST = False
-
-if not HAS_SST:
-    pytest.skip("Could not import swirl_string_core or sstbindings", allow_module_level=True)
+sstcore = pytest.importorskip("sstcore", exc_type=ImportError)
 
 
 def log_test(func_name, latex_formula, inputs_dict, results, description=""):
@@ -62,7 +51,7 @@ def test_compute_swirl_field():
     formula = r"$\mathbf{F}_{swirl}(\mathbf{r}, t) = \text{swirl force field}$"
     
     try:
-        result = swirl_string_core.compute_swirl_field(res, time)
+        result = sstcore.compute_swirl_field(res, time)
         
         log_test(
             "compute_swirl_field",

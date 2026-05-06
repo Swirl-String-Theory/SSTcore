@@ -31,7 +31,6 @@ function loadNativeModule() {
     }
     const candidates = [
         path.join(__dirname, 'build', 'Release', 'sstcore.node'),
-        path.join(__dirname, 'build', 'Release', 'swirl_string_core.node'),
     ];
     for (const p of candidates) {
         const m = tryRequireNative(p);
@@ -41,7 +40,7 @@ function loadNativeModule() {
             return m;
         }
     }
-    console.warn('Native addon not found (tried sstcore.node and swirl_string_core.node); falling back to WASM if available');
+    console.warn('Native addon not found (tried sstcore.node); falling back to WASM if available');
     return null;
 }
 
@@ -49,11 +48,17 @@ function loadWasmModule() {
     if (isBrowser) {
         try {
             const dynamicImport = new Function('specifier', 'return import(specifier)');
-            return dynamicImport('./dist/swirl_string_core_wasm.js').then(module => {
+            return dynamicImport('./dist/sstcore_wasm.js').then(module => {
                 wasmModule = module;
                 bindingSource = module;
                 return module;
-            }).catch(err => {
+            }).catch(() =>
+                dynamicImport('./dist/swirl_string_core_wasm.js').then(module => {
+                    wasmModule = module;
+                    bindingSource = module;
+                    return module;
+                }),
+            ).catch(err => {
                 console.warn('WASM module not available:', err.message);
                 return null;
             });
@@ -63,7 +68,11 @@ function loadWasmModule() {
         }
     } else if (isNode) {
         try {
-            wasmModule = require('./dist/swirl_string_core_wasm.js');
+            try {
+                wasmModule = require('./dist/sstcore_wasm.js');
+            } catch (_) {
+                wasmModule = require('./dist/swirl_string_core_wasm.js');
+            }
             bindingSource = wasmModule;
             return wasmModule;
         } catch (err) {

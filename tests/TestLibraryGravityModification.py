@@ -8,13 +8,13 @@ matplotlib.use('TkAgg') # Use TkAgg for interactive GUI
 
 # --- Import Compiled SST Library ---
 try:
-    import sstbindings
-    from sstbindings import SSTGravity, biot_savart_velocity
+    import sstcore
+    from sstcore import SSTGravity, biot_savart_velocity
     HAS_SST = True
     print("SUCCESS: SST C++ Bindings loaded. Gravity Modification Kernels active.")
 except ImportError:
     HAS_SST = False
-    print("WARNING: 'sstbindings' not found. Falling back to slow Python math (Visualization only).")
+    print("WARNING: 'sstcore' compatibility module not found. Falling back to slow Python math (Visualization only).")
 
 # --- SST Canon Constants ---
 V_SWIRL = 1.09384563e6  # m/s (Vacuum stiffness)

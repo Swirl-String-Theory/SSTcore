@@ -35,10 +35,7 @@ particles = [
 try:
     import SSTcore as sstcore
 except ImportError:
-    try:
-        import sstcore
-    except ImportError:
-        import sstbindings as sstcore
+    import sstcore
 
 # Formules voor Alexander Root
 phi0 = (1 + math.sqrt(5)) / 2

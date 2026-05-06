@@ -1,11 +1,11 @@
-# swirl-string-core npm Package
+# SSTcore npm Package
 
 This package provides Node.js and WebAssembly bindings for the Swirl String Theory Core library, making it available for Angular and other JavaScript/TypeScript applications.
 
 ## Installation
 
 ```bash
-npm install swirl-string-core
+npm install SSTcore
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ npm install swirl-string-core
 The package automatically detects the environment and loads the appropriate module:
 
 ```javascript
-const sst = require('swirl-string-core');
+const sst = require('SSTcore');
 
 // Check if module is available
 if (!sst.isAvailable) {
@@ -36,7 +36,7 @@ console.log('Velocities:', velocities);
 In an Angular application:
 
 ```typescript
-import * as sst from 'swirl-string-core';
+import * as sst from 'SSTcore';
 
 // The module will automatically load the WASM version in the browser
 const velocities = sst.computeVelocity(curve, gridPoints);
@@ -47,7 +47,7 @@ const velocities = sst.computeVelocity(curve, gridPoints);
 Full TypeScript definitions are included:
 
 ```typescript
-import sst, { Vec3, BiotSavartInvariants } from 'swirl-string-core';
+import sst, { Vec3, BiotSavartInvariants } from 'SSTcore';
 
 const curve: Vec3[] = [[0, 0, 0], [1, 0, 0], [1, 1, 0]];
 const grid: Vec3[] = [[0.5, 0.5, 0.5]];
@@ -132,6 +132,6 @@ CC BY-NC 4.0 (Non-Commercial)
 
 ## See Also
 
-- [Python Package](https://pypi.org/project/swirl-string-core/)
+- [Python Package](https://pypi.org/project/SSTcore/)
 - [GitHub Repository](https://github.com/Swirl-String-Theory/SSTcore)
 

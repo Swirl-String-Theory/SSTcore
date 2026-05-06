@@ -19,7 +19,7 @@ git push
 3. Choose:
    - **Token name**: `GitHub Actions` (or any descriptive name)
    - **Scope**: 
-     - For testing: "Project: swirl-string-core" (project-specific)
+     - For testing: "Project: SSTcore" (project-specific)
      - For production: "Entire account" (can publish any project)
    - **Expiration**: Set as needed (or leave blank for no expiration)
 4. Click "Add token"
@@ -136,13 +136,13 @@ Once wheels are built and uploaded:
 1. Test installation on different platforms:
    ```bash
    # Linux
-   pip install swirl-string-core
+   pip install SSTcore
    
    # Windows
-   pip install swirl-string-core
+   pip install SSTcore
    
    # macOS
-   pip install swirl-string-core
+   pip install SSTcore
    ```
 
 2. Update your README with installation instructions

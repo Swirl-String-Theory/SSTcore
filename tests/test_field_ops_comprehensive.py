@@ -7,18 +7,7 @@ Tests all functions with LaTeX formulas, inputs, and results logged.
 import numpy as np
 import pytest
 
-try:
-    import swirl_string_core
-    HAS_SST = True
-except ImportError:
-    try:
-        import sstbindings as swirl_string_core
-        HAS_SST = True
-    except ImportError:
-        HAS_SST = False
-
-if not HAS_SST:
-    pytest.skip("Could not import swirl_string_core or sstbindings", allow_module_level=True)
+sstcore = pytest.importorskip("sstcore", exc_type=ImportError)
 
 
 def log_test(func_name, latex_formula, inputs_dict, results, description=""):
@@ -78,7 +67,7 @@ def test_curl3d_central():
     
     formula = r"$\boldsymbol{\omega} = \nabla \times \mathbf{v} = \left(\frac{\partial v_z}{\partial y} - \frac{\partial v_y}{\partial z}, \frac{\partial v_x}{\partial z} - \frac{\partial v_z}{\partial x}, \frac{\partial v_y}{\partial x} - \frac{\partial v_x}{\partial y}\right)$"
     
-    result = swirl_string_core.curl3d_central(vel, spacing)
+    result = sstcore.curl3d_central(vel, spacing)
     
     log_test(
         "curl3d_central",

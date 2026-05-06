@@ -2,8 +2,8 @@
 // Created by oscar on 2/26/2026.
 //
 
-#ifndef SWIRL_STRING_CORE_AB_INITIO_MASS_H
-#define SWIRL_STRING_CORE_AB_INITIO_MASS_H
+#ifndef SSTCORE_AB_INITIO_MASS_H
+#define SSTCORE_AB_INITIO_MASS_H
 
 #pragma once
 #include <cmath>
@@ -143,4 +143,4 @@ public:
 
 } // namespace sst
 
-#endif // SWIRL_STRING_CORE_AB_INITIO_MASS_H
+#endif // SSTCORE_AB_INITIO_MASS_H

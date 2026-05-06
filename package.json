@@ -4,7 +4,7 @@
   "description": "SSTcore - Swirl String Theory Canonical Core. High-performance C++ library for knot dynamics, vortex systems, and fluid mechanics (Node native addon + optional WASM). Same project as pip install SSTcore.",
   "main": "index.js",
   "module": "index.js",
-  "browser": "dist/swirl_string_core_wasm.js",
+  "browser": "dist/sstcore_wasm.js",
   "types": "index.d.ts",
   "files": [
     "index.js",

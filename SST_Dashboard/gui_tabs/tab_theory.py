@@ -6,12 +6,9 @@ try:
     import SSTcore as sstcore
 except ImportError:
     try:
-        import swirl_string_core as sstcore
+        import sstcore
     except ImportError:
-        try:
-            import sstbindings as sstcore
-        except ImportError:
-            sstcore = None
+        sstcore = None
 
 
 class TabTheory(QWidget):

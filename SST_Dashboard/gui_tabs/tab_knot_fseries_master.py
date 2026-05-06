@@ -1,6 +1,6 @@
 # gui_tabs/tab_knot_fseries_master.py
 # Eerste tab: Knot Fseries Master – Qt-versie met Ideal/knots uit SSTcore (knot_dynamics_py).
-# Gebruikt swirl_string_core/sstbindings voor embedded Ideal.txt en .fseries in resources.
+# Gebruikt SSTcore (Python-pakket of CMake-module sstcore) voor embedded Ideal.txt en .fseries.
 # Bevat 3D-visualisatie van geselecteerde knoop (.fseries of Ideal AB Id).
 import os
 import re
@@ -21,14 +21,10 @@ try:
     using_cxx_backend = True
 except ImportError:
     try:
-        import swirl_string_core as sstcore
+        import sstcore
         using_cxx_backend = True
     except ImportError:
-        try:
-            import sstbindings as sstcore
-            using_cxx_backend = True
-        except ImportError:
-            sstcore = None
+        sstcore = None
 
 # Python helicity fallback: prefer canonical module, then legacy shim
 try:

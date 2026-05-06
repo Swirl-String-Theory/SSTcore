@@ -6,10 +6,7 @@ import sys
 try:
     import SSTcore as sstcore
 except ImportError:
-    try:
-        import sstcore
-    except ImportError:
-        import sstbindings as sstcore
+    import sstcore
 
 
 # Example field data

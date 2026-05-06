@@ -1,10 +1,7 @@
 try:
-    import SSTcore as sstbindings
+    import SSTcore as sstcore
 except ImportError:
-    try:
-        import sstcore as sstbindings
-    except ImportError:
-        import sstbindings as sstbindings
+    import sstcore
 import time
 
 # De Catalogus beheert de vaste topologische invarianten
@@ -23,7 +20,7 @@ def evaluate_particle(knot_id):
     start = time.time()
 
     # MAGIE: C++ leest hier zélf Ideal.txt uit zijn eigen ingebakken geheugen!
-    particle = sstbindings.ParticleEvaluator(knot_id, resolution=4000)
+    particle = sstcore.ParticleEvaluator(knot_id, resolution=4000)
 
     # C++ Relaxatie
     particle.relax(iterations=2500, timestep=0.005)

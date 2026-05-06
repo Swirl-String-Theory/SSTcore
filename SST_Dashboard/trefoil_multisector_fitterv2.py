@@ -203,11 +203,11 @@ def _get_kernel_module():
         return sst
     except ImportError:
         try:
-            import swirl_string_core as sst  # type: ignore
+            import SSTcore as sst  # type: ignore
             return sst
         except ImportError as exc:
             raise ImportError(
-                "Could not import compiled SST pybind11 module. Tried 'sst' and 'swirl_string_core'."
+                "Could not import compiled SST pybind11 module. Tried 'sstcore' and 'SSTcore'."
             ) from exc
 
 

@@ -1,6 +1,6 @@
 """Pytest hooks for SSTcore tests.
 
-- **Local / CMake**: prepend typical build output dirs so ``sstbindings*.pyd`` / ``.so`` resolve.
+- **Local / CMake**: prepend typical build output dirs so native modules (e.g. ``SSTcore._native``) resolve.
 - **Wheel CI** (``SST_WHEEL_TEST=1``): remove **every** ``sys.path`` entry that resolves inside the
   checkout (repo root *and* subdirs like ``tests/``). Pytest injects those paths before imports;
   stripping only the repo root is not enough — a ``tests/`` prefix can still resolve ``SSTcore/``

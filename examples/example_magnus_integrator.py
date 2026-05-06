@@ -15,10 +15,7 @@ import numpy as np
 try:
     import SSTcore as sstcore
 except ImportError:
-    try:
-        import sstcore
-    except ImportError:
-        import sstbindings as sstcore
+    import sstcore
 
 def vector_magnitude(v):
     return math.sqrt(sum(x**2 for x in v))

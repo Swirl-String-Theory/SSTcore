@@ -9,7 +9,7 @@ sys.path.insert(0, os.path.abspath("."))
 try:
     from SSTcore import RadiationFlow, radiation_force, van_der_pol_dx, van_der_pol_dy
 except ImportError:
-    from swirl_string_core import RadiationFlow, radiation_force, van_der_pol_dx, van_der_pol_dy
+    from SSTcore import RadiationFlow, radiation_force, van_der_pol_dx, van_der_pol_dy
 
 # Radiation force example
 F = radiation_force(I0=1000, Qm=1.2, lambda1=600e-9, lambda2=500e-9, lambda_g=550e-9)

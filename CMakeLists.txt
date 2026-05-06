@@ -185,10 +185,11 @@ endif()
 # Check if node-addon-api is available
 find_program(NODE_EXECUTABLE NAMES node)
 
+# Written by the Node addon configure logic below (also consumed by scripts/build_node_target.js).
+set(HAVE_SSTCORE_NODE OFF CACHE BOOL "Node.js addon target is available")
+
 # Allow manual override of node-addon-api include dir for robustness (especially on Windows)
 set(NODE_ADDON_API_INCLUDE_DIR "" CACHE PATH "Path to node-addon-api include directory (optional override)")
-
-set(HAVE_SWIRL_STRING_CORE_NODE OFF CACHE BOOL "Node.js addon target is available")
 
 if(NODE_EXECUTABLE)
     # Try to find node-addon-api include directory if not provided explicitly

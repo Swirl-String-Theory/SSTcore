@@ -5,7 +5,7 @@ Canonical SST helicity module: Biot–Savart velocity, vorticity/curl, and a_mu 
 Use this module as the main import path for helicity computations. For legacy compatibility,
 HelicityCalculationVAMcore.py re-exports this API.
 
-Backend: tries swirl_string_core, then sstcore, then sstbindings for compiled
+Backend: tries ``SSTcore`` then CMake module ``sstcore`` for compiled
 biot_savart_velocity_grid and curl3d_central; falls back to pure Python otherwise.
 """
 import os
@@ -36,7 +36,7 @@ except ImportError:
 _biot_savart_fn = None
 _curl3d_fn = None
 HAVE_SST = False
-for _mod_name in ("swirl_string_core", "sstcore", "sstbindings"):
+for _mod_name in ("SSTcore", "sstcore"):
     try:
         _mod = __import__(_mod_name)
         if hasattr(_mod, "biot_savart_velocity_grid") and hasattr(_mod, "curl3d_central"):

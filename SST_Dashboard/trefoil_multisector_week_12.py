@@ -29,9 +29,9 @@ The pybind11 module must expose:
     sst.MultisectorFitter.evaluate_multisector_abs(...)
 
 The script tries to import either:
-    import sst
+    import sstcore as sst
 or:
-    import swirl_string_core as sst
+    import SSTcore as sst
 """
 
 from dataclasses import dataclass, field, asdict
@@ -57,11 +57,11 @@ def _get_kernel_module():
         return sst
     except ImportError:
         try:
-            import swirl_string_core as sst  # type: ignore
+            import SSTcore as sst  # type: ignore
             return sst
         except ImportError as exc:
             raise ImportError(
-                "Could not import compiled SST pybind11 module. Tried 'sst' and 'swirl_string_core'."
+                "Could not import compiled SST pybind11 module. Tried 'sstcore' and 'SSTcore'."
             ) from exc
 
 

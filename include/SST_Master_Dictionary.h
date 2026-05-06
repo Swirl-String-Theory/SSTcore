@@ -2,8 +2,8 @@
 // Created by oscar on 3/2/2026.
 //
 
-#ifndef SWIRL_STRING_CORE_SST_MASTER_DICTIONARY_H
-#define SWIRL_STRING_CORE_SST_MASTER_DICTIONARY_H
+#ifndef SSTCORE_SST_MASTER_DICTIONARY_H
+#define SSTCORE_SST_MASTER_DICTIONARY_H
 
 
 #include <string>
@@ -117,4 +117,4 @@ static const std::vector<SSTParticleEntry> SST_STANDARD_MODEL_PARTICLES = {
     {"baryon", "-", "n",   "neutron",     "939.565 MeV/c^2", "0", 0.5},
 };
 
-#endif // SWIRL_STRING_CORE_SST_MASTER_DICTIONARY_H
+#endif // SSTCORE_SST_MASTER_DICTIONARY_H

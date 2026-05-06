@@ -55,7 +55,7 @@ Optioneel: stel `SSTCORE_RESOURCES` in om een vaste map te forceren.
 
 ### SSTCORE Installation Guide (Windows)
 
-This precompiled `sstbindings.cp311-win_amd64.pyd`  file is a pybind11 module
+This precompiled `sstcore.cp311-win_amd64.pyd` file is a pybind11 module
 compiled for Python 3.11 on 64-bit Windows.
 
 ## ✅ Installation Steps
@@ -69,18 +69,18 @@ compiled for Python 3.11 on 64-bit Windows.
    Example:
    ```
    your_project/
-   ├── sstbindings.cp311-win_amd64.pyd
+   ├── sstcore.cp311-win_amd64.pyd
    └── your_script.py
    ```
 
 3. In your script:
    ```python
-   import sstbindings
+   import sstcore
    ```
 
 4. Use the exposed functions/classes such as:
    ```python
-   vortex = sstbindings.VortexKnotSystem()
+   vortex = sstcore.VortexKnotSystem()
    vortex.initialize_trefoil_knot()
    ```
 
@@ -159,25 +159,24 @@ npm install sstcore
 
 See [README_NPM.md](README_NPM.md) for detailed usage instructions.
 
-### 📦 Test if python receives SST Bindings `
+### 📦 Test if python receives SST Bindings
 ```bash
-python -c "import sstbindings; print(sstcore)"
-````
-This should return `<module 'sstcore' from 'C:\\workspace\\projects\\sstcore\\build\\Debug\\sstbindings.cp312-win_amd64.pyd'>`
+python -c "import sstcore; print(sstcore)"
+```
+This should return a path to `sstcore.*.pyd` or the `SSTcore` package.
 This indicates that the Python bindings for SSTcore have been successfully built and installed.
-If this command fails, ensure that `sstbindings.cp311-win_amd64.pyd` is found in the same directory where you run python.
+If this command fails, ensure that `sstcore.cp311-win_amd64.pyd` is found in the same directory where you run python.
 When it does not work, you can delete the `cmake-build` and `build` folder and try to recompile the C++ bindings from within `./build/` with `cmake ..` followed by  `cmake --build . --config Debug` again.
 
 ### 🐍 Import the SST Bindings in Python
 ```
-from sstbindings import VortexKnotSystem, biot_savart_velocity, compute_kinetic_energy
+from SSTcore import VortexKnotSystem, biot_savart_velocity, compute_kinetic_energy
 ```
-
 
 ### 🔨 Load the C++ module dynamically from the compiled path, because the SST Bindings are not installed in the Python site-packages.
 ```python
 import os
-module_path = os.path.abspath("C:\\workspace\\projects\\sstcore\\build\\Debug\\sstbindings.cp312-win_amd64.pyd")
+module_path = os.path.abspath("C:\\workspace\\projects\\sstcore\\build\\Debug\\sstcore.cp312-win_amd64.pyd")
 module_name = "sstcore"
 ```
 

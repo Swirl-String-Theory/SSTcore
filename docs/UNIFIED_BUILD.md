@@ -16,7 +16,7 @@ pip install -e .
 
 The build process will:
 
-1. **Build Python extensions** (swirl_string_core and sstbindings)
+1. **Build Python extensions** (SSTcore and sstbindings)
 2. **Build npm package** (Node.js native addon) automatically
 
 ## Build Steps
@@ -42,7 +42,7 @@ The unified build performs these steps in order:
 
 4. **Builds native addon**:
    - Runs `npm run build:node` to compile the Node.js native addon
-   - Creates `build/Release/swirl_string_core.node`
+   - Creates `build/Release/SSTcore.node`
 
 ## Behavior
 

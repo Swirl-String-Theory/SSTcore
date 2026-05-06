@@ -13,10 +13,10 @@ python test_embedded_knots.py
 Or use Python directly:
 
 ```python
-import sstbindings  # or swirl_string_core
+from SSTcore import VortexKnotSystem
 
 # Create a vortex knot system
-system = sstbindings.VortexKnotSystem()
+system = VortexKnotSystem()
 
 # Initialize a knot by name (no .fseries file needed!)
 system.initialize_knot_from_name('3_1', resolution=1000)
@@ -26,6 +26,8 @@ positions = system.get_positions()
 print(f"Loaded knot with {len(positions)} points")
 print(f"First point: {positions[0]}")
 ```
+
+(If you only have the CMake-built extension: `from sstcore import VortexKnotSystem`.)
 
 ## Available Knot IDs
 
@@ -48,14 +50,14 @@ print(f"First point: {positions[0]}")
 ### Module Not Found
 
 If you get `ModuleNotFoundError`, make sure:
-- The Python module was built: `cmake --build . --config Release --target sstbindings`
+- The Python module was built: `cmake --build . --config Release --target sstcore`
 - You're using the correct Python version (the module is built for a specific Python version)
 - The `.pyd` file is in your Python path or current directory
 
 ### Method Not Found
 
 If `initialize_knot_from_name` is not available:
-- Rebuild the Python bindings: `cmake --build . --config Release --target sstbindings`
+- Rebuild the Python bindings: `cmake --build . --config Release --target sstcore`
 - Make sure `py_knot.cpp` is included in the build
 - Check that the binding code in `src/knot_py.cpp` includes the method
 

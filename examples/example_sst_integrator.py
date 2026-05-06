@@ -20,13 +20,7 @@ if str(_parent) not in sys.path:
 try:
     import SSTcore as sstcore
 except ImportError:
-    try:
-        import sstcore
-    except ImportError:
-        try:
-            import swirl_string_core as sstcore
-        except ImportError:
-            import sstbindings as sstcore
+    import sstcore
 
 if not getattr(sstcore, "compute_sst_mass", None):
     print(

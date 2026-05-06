@@ -10,7 +10,7 @@ using namespace emscripten;
 EMSCRIPTEN_KEEPALIVE
 extern "C" {
     // Placeholder exports
-    int swirl_string_core_wasm_version() {
+    int sstcore_wasm_version() {
         return 1; // version 0.1.3
     }
 }
@@ -18,7 +18,7 @@ extern "C" {
 // Note: Full WASM bindings should mirror the Node.js bindings structure
 // but use emscripten::val and emscripten::function instead of N-API
 // Example structure:
-// EMSCRIPTEN_BINDINGS(swirl_string_core) {
+// EMSCRIPTEN_BINDINGS(sstcore) {
 //     function("computeVelocity", &BiotSavart::computeVelocity);
 //     // ... other bindings
 // }

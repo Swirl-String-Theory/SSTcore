@@ -2,7 +2,7 @@ import numpy as np
 
 """
 Note: This example shows a Python implementation. For C++ bindings, use:
-    from swirl_string_core import rotating_frame_rhs, crocco_gradient
+    from SSTcore import rotating_frame_rhs, crocco_gradient
     # rotating_frame_rhs(velocity, vorticity, grad_phi, grad_p, omega, rho)
     # crocco_gradient(velocity, vorticity, grad_phi, grad_p, rho)
 

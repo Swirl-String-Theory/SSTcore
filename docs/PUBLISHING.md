@@ -1,6 +1,6 @@
-# Publishing swirl-string-core to PyPI
+# Publishing SSTcore to PyPI
 
-This guide walks you through publishing the `swirl-string-core` package to PyPI.
+This guide walks you through publishing the `SSTcore` package to PyPI.
 
 ## Important: Python Version Compatibility
 
@@ -43,7 +43,7 @@ Before publishing, make sure to:
   ```
 - [ ] Test installation from the built wheel:
   ```bash
-  pip install dist/swirl_string_core-*.whl
+  pip install dist/SSTcore-*.whl
   ```
 
 ## Step 1: Update Package Metadata
@@ -67,8 +67,8 @@ python -m build
 ```
 
 This creates:
-- `dist/swirl-string-core-0.1.0.tar.gz` (source distribution)
-- `dist/swirl_string_core-0.1.0-cp3X-cp3X-*.whl` (wheel for your platform)
+- `dist/SSTcore-0.1.0.tar.gz` (source distribution)
+- `dist/SSTcore-0.1.0-cp3X-cp3X-*.whl` (wheel for your platform)
 
 ## Step 3: Test on TestPyPI (Recommended)
 
@@ -79,7 +79,7 @@ First, test on TestPyPI to ensure everything works:
 twine upload --repository testpypi dist/*
 
 # Test installation from TestPyPI
-pip install --index-url https://test.pypi.org/simple/ swirl-string-core
+pip install --index-url https://test.pypi.org/simple/ SSTcore
 ```
 
 ## Step 4: Publish to PyPI
@@ -103,10 +103,10 @@ After publishing, verify the package can be installed:
 
 ```bash
 # Wait a few minutes for PyPI to process
-pip install swirl-string-core
+pip install SSTcore
 
 # Test import
-python -c "import swirl_string_core; print('Success!')"
+python -c "import SSTcore; print('Success!')"
 ```
 
 ## Version Management
@@ -141,12 +141,12 @@ After successful publication:
 
 1. Update your repository README with installation instructions:
    ```bash
-   pip install swirl-string-core
+   pip install SSTcore
    ```
 2. Create a GitHub release with the version tag
 3. Update documentation with PyPI badge:
    ```markdown
-   [![PyPI version](https://badge.fury.io/py/swirl-string-core.svg)](https://badge.fury.io/py/swirl-string-core)
+   [![PyPI version](https://badge.fury.io/py/SSTcore.svg)](https://badge.fury.io/py/SSTcore)
    ```
 
 ## Continuous Integration

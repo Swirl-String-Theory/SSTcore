@@ -2,8 +2,8 @@
 // Created by mr on 7/28/2025.
 //
 
-#ifndef SWIRL_STRING_CORE_RADIATION_FLOW_H
-#define SWIRL_STRING_CORE_RADIATION_FLOW_H
+#ifndef SSTCORE_RADIATION_FLOW_H
+#define SSTCORE_RADIATION_FLOW_H
 
 #pragma once
 #include <cmath>
@@ -24,4 +24,4 @@ public:
 
 
 
-#endif // SWIRL_STRING_CORE_RADIATION_FLOW_H
+#endif // SSTCORE_RADIATION_FLOW_H

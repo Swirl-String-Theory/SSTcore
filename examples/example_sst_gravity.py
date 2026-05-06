@@ -3,14 +3,11 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import os
 
-# --- Import SSTcore (canonical); legacy swirl_string_core shim if needed ---
+# --- Import SSTcore (pip package) or CMake-built ``sstcore`` module ---
 try:
-    import SSTcore as swirl_string_core
     from SSTcore import VortexKnotSystem, biot_savart_velocity, SSTGravity
 except ImportError:
-    import swirl_string_core
-    from swirl_string_core import VortexKnotSystem, biot_savart_velocity
-    from swirl_string_core import SSTGravity
+    from sstcore import VortexKnotSystem, biot_savart_velocity, SSTGravity
 
 # --- 1. Simulation Setup (SST Canon Constants) ---
 # Canonical Swirl Velocity (c_l) ~ 10^6 m/s

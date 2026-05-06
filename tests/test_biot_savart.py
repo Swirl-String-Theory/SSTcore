@@ -1,18 +1,17 @@
+#!/usr/bin/env python3
+"""Minimal Biot–Savart sanity check via ``sstcore``."""
+
 import pytest
-pytest.skip("example script", allow_module_level=True)
-import sys
-sys.path.append("../cmake-build-debug")
-import sstbindings
 
-# Point where we evaluate the velocity
-r = [0.0, 0.0, 0.0]
+pytest.importorskip("sstcore", exc_type=ImportError)
 
-# Vortex filament points (simple straight line)
-X = [[1.0, 0.0, 0.0], [-1.0, 0.0, 0.0]]
 
-# Tangent vectors (uniform for test)
-T = [[0.0, 1.0, 0.0], [0.0, 1.0, 0.0]]
+def test_biot_savart_velocity_basic():
+    import sstcore
 
-v = sstbindings.biot_savart_velocity(r, X, T)
+    r = [0.1, 0.2, 0.3]
+    X = [[1.0, 0.0, 0.0], [-1.0, 0.0, 0.0]]
+    T = [[0.0, 1.0, 0.0], [0.0, -1.0, 0.0]]
 
-print("Biot–Savart Velocity at r =", r, ":", v)
+    v = sstcore.biot_savart_velocity(r, X, T)
+    assert len(v) == 3

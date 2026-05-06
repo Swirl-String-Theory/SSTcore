@@ -17,12 +17,9 @@ try:
     import SSTcore as sstcore
 except ImportError:
     try:
-        import swirl_string_core as sstcore
+        import sstcore
     except ImportError:
-        try:
-            import sstbindings as sstcore
-        except ImportError:
-            sstcore = None
+        sstcore = None
 
 # Import sweep logic from examples (portable whether run from repo root or examples/)
 _root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

@@ -1,5 +1,5 @@
-#ifndef SWIRL_STRING_CORE_TREFOIL_OPERATOR_H
-#define SWIRL_STRING_CORE_TREFOIL_OPERATOR_H
+#ifndef SSTCORE_TREFOIL_OPERATOR_H
+#define SSTCORE_TREFOIL_OPERATOR_H
 
 #pragma once
 #include <cstddef>
@@ -231,4 +231,4 @@ public:
 
 } // namespace sst
 
-#endif // SWIRL_STRING_CORE_TREFOIL_OPERATOR_H
+#endif // SSTCORE_TREFOIL_OPERATOR_H

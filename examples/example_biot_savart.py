@@ -4,7 +4,6 @@ script_name = os.path.splitext(os.path.basename(__file__))[0]
 import sys
 sys.path.insert(0, os.path.abspath("."))
 try:
-    import SSTcore as swirl_string_core
     from SSTcore import (
         circulation_surface_integral,
         enstrophy,
@@ -14,8 +13,7 @@ try:
         evaluate_fourier_block,
     )
 except ImportError:
-    import swirl_string_core
-    from swirl_string_core import (
+    from sstcore import (
         circulation_surface_integral,
         enstrophy,
         BiotSavart,

@@ -9,7 +9,7 @@ try:
     HAVE_SST = True
 except ImportError:
     try:
-        from sstbindings import fourier_knot_eval, biot_savart_velocity_grid
+        from SSTcore import fourier_knot_eval, biot_savart_velocity_grid
         HAVE_SST = True
     except ImportError:
         HAVE_SST = False

@@ -1022,6 +1022,7 @@ setup(
     python_requires=">=3.9",
     package_dir={"": "."},
     packages=["SSTcore"],
+    # Deprecated top-level shims (swirl_string_core.py, sstbindings.py) + flat alias sstcore.py
     py_modules=["swirl_string_core", "sstcore", "sstbindings"],
     include_package_data=True,
     data_files=(

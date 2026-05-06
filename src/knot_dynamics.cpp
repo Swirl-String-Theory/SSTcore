@@ -1144,7 +1144,7 @@ namespace sst {
                         std::string p = std::string(env) + "/" + filename;
                         if (path_exists(p)) return p;
                 }
-                // Env SST_RESOURCE_DIR (resource root: .../share/swirl_string_core or .../resources)
+                // Env SST_RESOURCE_DIR (resource root: .../share/sstcore or .../resources)
                 if (const char* env = std::getenv("SST_RESOURCE_DIR")) {
                         std::string base(env);
                         std::string p = base + "/resources/knot_fseries/" + filename;
@@ -1170,11 +1170,15 @@ namespace sst {
                         "../../src/Knots_FourierSeries",
                         "knot_fseries",
                         "../knot_fseries",
+                        "share/sstcore/knot_fseries",
+                        "../../share/sstcore/knot_fseries",
                         "share/swirl_string_core/knot_fseries",
                 };
 #if defined(_WIN32)
                 legacy.push_back("../../share/swirl_string_core/knot_fseries");
 #else
+                legacy.push_back("/usr/local/share/sstcore/knot_fseries");
+                legacy.push_back("/usr/share/sstcore/knot_fseries");
                 legacy.push_back("../../share/swirl_string_core/knot_fseries");
                 legacy.push_back("/usr/local/share/swirl_string_core/knot_fseries");
                 legacy.push_back("/usr/share/swirl_string_core/knot_fseries");
@@ -1219,6 +1223,7 @@ namespace sst {
                 std::vector<std::string> legacy = {
                         "resources",
                         "../resources",
+                        "share/sstcore/resources",
                         "share/swirl_string_core/resources",
                 };
                 for (const auto& base : legacy) {

@@ -7,18 +7,7 @@ Tests all functions with LaTeX formulas, inputs, and results logged.
 import numpy as np
 import pytest
 
-try:
-    import swirl_string_core
-    HAS_SST = True
-except ImportError:
-    try:
-        import sstbindings as swirl_string_core
-        HAS_SST = True
-    except ImportError:
-        HAS_SST = False
-
-if not HAS_SST:
-    pytest.skip("Could not import swirl_string_core or sstbindings", allow_module_level=True)
+sstcore = pytest.importorskip("sstcore", exc_type=ImportError)
 
 
 def log_test(func_name, latex_formula, inputs_dict, results, description=""):
@@ -92,7 +81,7 @@ def test_compute_beltrami_shear():
     
     formula = r"$S = |\mathbf{B} \times (\nabla \times \mathbf{B})|$"
     
-    result = swirl_string_core.SSTGravity.compute_beltrami_shear(B_field, Curl_B)
+    result = sstcore.SSTGravity.compute_beltrami_shear(B_field, Curl_B)
     
     log_test(
         "SSTGravity.compute_beltrami_shear",
@@ -121,7 +110,7 @@ def test_compute_gravity_dilation():
     
     formula = r"$G_{local} = G_0\left[1 - \left(\frac{v_{induced}}{v_{swirl}}\right)^2\right]$"
     
-    result = swirl_string_core.SSTGravity.compute_gravity_dilation(
+    result = sstcore.SSTGravity.compute_gravity_dilation(
         B_field, omega_drive, v_swirl, B_saturation
     )
     
@@ -158,7 +147,7 @@ def test_compute_helicity_density():
     
     formula = r"$h = \mathbf{A} \cdot \mathbf{B}$"
     
-    result = swirl_string_core.SSTGravity.compute_helicity_density(A_field, B_field)
+    result = sstcore.SSTGravity.compute_helicity_density(A_field, B_field)
     
     log_test(
         "SSTGravity.compute_helicity_density",

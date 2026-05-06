@@ -7,18 +7,7 @@ Tests all functions with LaTeX formulas, inputs, and results logged.
 import numpy as np
 import pytest
 
-try:
-    import swirl_string_core
-    HAS_SST = True
-except ImportError:
-    try:
-        import sstbindings as swirl_string_core
-        HAS_SST = True
-    except ImportError:
-        HAS_SST = False
-
-if not HAS_SST:
-    pytest.skip("Could not import swirl_string_core or sstbindings", allow_module_level=True)
+sstcore = pytest.importorskip("sstcore", exc_type=ImportError)
 
 
 def log_test(func_name, latex_formula, inputs_dict, results, description=""):
@@ -78,7 +67,7 @@ def test_van_der_pol_dx():
     formula = r"$\frac{dx}{dt} = y$ (Van der Pol oscillator)"
     
     try:
-        result = swirl_string_core.van_der_pol_dx(x, y, mu)
+        result = sstcore.van_der_pol_dx(x, y, mu)
         
         log_test(
             "van_der_pol_dx",
@@ -94,7 +83,7 @@ def test_van_der_pol_dx():
     except TypeError:
         # Try without mu
         try:
-            result = swirl_string_core.van_der_pol_dx(x, y)
+            result = sstcore.van_der_pol_dx(x, y)
             log_test(
                 "van_der_pol_dx",
                 formula,
@@ -127,7 +116,7 @@ def test_van_der_pol_dy():
     formula = r"$\frac{dy}{dt} = \mu(1-x^2)y - x$ (Van der Pol oscillator)"
     
     try:
-        result = swirl_string_core.van_der_pol_dy(x, y, mu)
+        result = sstcore.van_der_pol_dy(x, y, mu)
         
         log_test(
             "van_der_pol_dy",
@@ -143,7 +132,7 @@ def test_van_der_pol_dy():
     except TypeError:
         # Try without mu
         try:
-            result = swirl_string_core.van_der_pol_dy(x, y)
+            result = sstcore.van_der_pol_dy(x, y)
             log_test(
                 "van_der_pol_dy",
                 formula,

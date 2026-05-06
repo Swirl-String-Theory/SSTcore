@@ -3,7 +3,7 @@ import numpy as np
 try:
     from SSTcore import parse_fseries_multi, index_of_largest_block, evaluate_fourier_block
 except ImportError:
-    from swirl_string_core import parse_fseries_multi, index_of_largest_block, evaluate_fourier_block
+    from SSTcore import parse_fseries_multi, index_of_largest_block, evaluate_fourier_block
 
 # Load (auto-selects largest block), evaluate at 1000 points
 blocks = parse_fseries_multi("myKnot.fseries")

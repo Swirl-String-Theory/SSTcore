@@ -11,9 +11,12 @@ try:
     import SSTcore as sstcore
 except ImportError:
     try:
-        import swirl_string_core as sstcore
-    except ImportError:
-        import sstbindings as sstcore
+        import sstcore as sstcore
+    except ImportError as exc:
+        raise ImportError(
+            "Could not import SST bindings. Tried 'SSTcore' and 'sstcore'. "
+            "Install the package (pip install SSTcore) or ensure the compiled module is on PYTHONPATH."
+        ) from exc
 
 # =====================================================================
 # 1. CONSTANTS & PHYSICS FUNCTIONS

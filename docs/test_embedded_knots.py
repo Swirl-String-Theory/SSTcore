@@ -14,14 +14,14 @@ if os.path.exists(BUILD_DIR):
 
 def _load_bindings():
     try:
-        import swirl_string_core as bindings
+        import SSTcore as bindings
 
-        return bindings, bindings.VortexKnotSystem, "swirl_string_core"
+        return bindings, bindings.VortexKnotSystem, "SSTcore"
     except ImportError:
         try:
-            import sstbindings as bindings
+            import sstcore as bindings
 
-            return bindings, bindings.VortexKnotSystem, "sstbindings"
+            return bindings, bindings.VortexKnotSystem, "sstcore"
         except ImportError:
             return None
 
@@ -42,7 +42,7 @@ def test_embedded_knot_access():
 
     if VortexKnotSystem is None:
         pytest.skip(
-            "Could not import swirl_string_core or sstbindings. "
+            "Could not import SSTcore or sstcore. "
             "Build the C++ module first.",
         )
     for knot_id in TEST_KNOTS:
@@ -54,7 +54,7 @@ def test_embedded_knot_access():
 
 def main():
     if _bindings is None:
-        print("✗ ERROR: Could not import swirl_string_core or sstbindings")
+        print("✗ ERROR: Could not import SSTcore or sstcore")
         print("  Make sure you've built the C++ module first!")
         print(f"  Tried to load from: {BUILD_DIR}")
         return 1

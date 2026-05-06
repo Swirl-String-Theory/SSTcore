@@ -183,13 +183,13 @@ jobs:
           tag_name: ${{ github.ref_name }}
           release_name: Release ${{ steps.get_version.outputs.version }}
           body: |
-            ## swirl-string-core v${{ steps.get_version.outputs.version }}
+            ## SSTcore v${{ steps.get_version.outputs.version }}
 
             npm package published successfully.
 
             Install with:
             ```bash
-            npm install swirl-string-core
+            npm install SSTcore
             ```
           draft: false
           prerelease: false

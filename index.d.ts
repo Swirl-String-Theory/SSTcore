@@ -1,4 +1,4 @@
-// index.d.ts - TypeScript definitions for swirl-string-core
+// index.d.ts - TypeScript definitions for SSTcore (npm)
 
 export type Vec3 = [number, number, number] | { x: number; y: number; z: number };
 export type Vec3Array = Vec3[] | Float64Array;

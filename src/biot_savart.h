@@ -2,8 +2,8 @@
 // Created by mr on 3/21/2025.
 //
 
-#ifndef SWIRL_STRING_CORE_BIOT_SAVART_H
-#define SWIRL_STRING_CORE_BIOT_SAVART_H
+#ifndef SSTCORE_BIOT_SAVART_H
+#define SSTCORE_BIOT_SAVART_H
 
 #pragma once
 #include <array>
@@ -82,4 +82,4 @@ namespace sst {
             std::size_t m);
 }
 
-#endif //SWIRL_STRING_CORE_BIOT_SAVART_H
+#endif //SSTCORE_BIOT_SAVART_H

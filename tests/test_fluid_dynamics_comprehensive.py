@@ -7,18 +7,7 @@ Tests all functions with LaTeX formulas, inputs, and results logged.
 import numpy as np
 import pytest
 
-try:
-    import swirl_string_core
-    HAS_SST = True
-except ImportError:
-    try:
-        import sstbindings as swirl_string_core
-        HAS_SST = True
-    except ImportError:
-        HAS_SST = False
-
-if not HAS_SST:
-    pytest.skip("Could not import swirl_string_core or sstbindings", allow_module_level=True)
+sstcore = pytest.importorskip("sstcore", exc_type=ImportError)
 
 
 def log_test(func_name, latex_formula, inputs_dict, results, description=""):
@@ -68,7 +57,7 @@ def test_compute_pressure_field():
     
     formula = r"$P = P_\infty - \frac{1}{2}\rho|\mathbf{v}|^2$"
     
-    result = swirl_string_core.compute_pressure_field(velocity_magnitude, rho_ae, P_infinity)
+    result = sstcore.compute_pressure_field(velocity_magnitude, rho_ae, P_infinity)
     
     log_test(
         "compute_pressure_field",
@@ -94,7 +83,7 @@ def test_compute_velocity_magnitude():
     
     formula = r"$|\mathbf{v}| = \sqrt{v_x^2 + v_y^2 + v_z^2}$"
     
-    result = swirl_string_core.compute_velocity_magnitude(velocity)
+    result = sstcore.compute_velocity_magnitude(velocity)
     
     log_test(
         "compute_velocity_magnitude",
@@ -117,7 +106,7 @@ def test_evolve_positions_euler():
     
     # Make a copy since function may modify in place
     pos_copy = [list(p) for p in positions]
-    swirl_string_core.evolve_positions_euler(pos_copy, velocity, dt)
+    sstcore.evolve_positions_euler(pos_copy, velocity, dt)
     
     log_test(
         "evolve_positions_euler",
@@ -143,7 +132,7 @@ def test_compute_vorticity():
     
     formula = r"$\boldsymbol{\omega} = \nabla \times \mathbf{v} = \left(\frac{\partial w}{\partial y} - \frac{\partial v}{\partial z}, \frac{\partial u}{\partial z} - \frac{\partial w}{\partial x}, \frac{\partial v}{\partial x} - \frac{\partial u}{\partial y}\right)$"
     
-    result = swirl_string_core.compute_vorticity(grad)
+    result = sstcore.compute_vorticity(grad)
     
     log_test(
         "compute_vorticity",
@@ -163,7 +152,7 @@ def test_swirl_clock_rate():
     
     formula = r"$\text{Swirl rate} = \frac{1}{2}\left(\frac{\partial v}{\partial x} - \frac{\partial u}{\partial y}\right)$"
     
-    result = swirl_string_core.swirl_clock_rate(dv_dx, du_dy)
+    result = sstcore.swirl_clock_rate(dv_dx, du_dy)
     
     log_test(
         "swirl_clock_rate",
@@ -184,7 +173,7 @@ def test_vorticity_from_curvature():
     
     formula = r"$\omega = \frac{V}{R}$"
     
-    result = swirl_string_core.vorticity_from_curvature(V, R)
+    result = sstcore.vorticity_from_curvature(V, R)
     
     log_test(
         "vorticity_from_curvature",
@@ -205,7 +194,7 @@ def test_vortex_pressure_drop():
     
     formula = r"$\Delta P = \frac{1}{2}\rho c^2$"
     
-    result = swirl_string_core.vortex_pressure_drop(rho, c)
+    result = sstcore.vortex_pressure_drop(rho, c)
     
     log_test(
         "vortex_pressure_drop",
@@ -226,7 +215,7 @@ def test_vortex_transverse_pressure_diff():
     
     formula = r"$\Delta P_{transverse} = \frac{1}{4}\rho c^2$"
     
-    result = swirl_string_core.vortex_transverse_pressure_diff(rho, c)
+    result = sstcore.vortex_transverse_pressure_diff(rho, c)
     
     log_test(
         "vortex_transverse_pressure_diff",
@@ -247,7 +236,7 @@ def test_swirl_energy():
     
     formula = r"$E_{swirl} = \frac{1}{2}\rho\omega^2$"
     
-    result = swirl_string_core.swirl_energy(rho, omega)
+    result = sstcore.swirl_energy(rho, omega)
     
     log_test(
         "swirl_energy",
@@ -269,7 +258,7 @@ def test_kairos_energy_trigger():
     
     formula = r"$\text{Trigger if } \frac{1}{2}\rho\omega^2 > \frac{1}{2}\rho C_e^2$"
     
-    result = swirl_string_core.kairos_energy_trigger(rho, omega, Ce)
+    result = sstcore.kairos_energy_trigger(rho, omega, Ce)
     
     log_test(
         "kairos_energy_trigger",
@@ -300,7 +289,7 @@ def test_compute_helicity():
     
     formula = r"$H = \int \mathbf{v} \cdot \boldsymbol{\omega} \, dV = \sum_i (\mathbf{v}_i \cdot \boldsymbol{\omega}_i) \Delta V$"
     
-    result = swirl_string_core.compute_helicity(velocity, vorticity, dV)
+    result = sstcore.compute_helicity(velocity, vorticity, dV)
     
     log_test(
         "compute_helicity",
@@ -323,7 +312,7 @@ def test_potential_vorticity():
     
     formula = r"$PV = \frac{f_a + \zeta_r}{h}$"
     
-    result = swirl_string_core.potential_vorticity(fa, zeta_r, h)
+    result = sstcore.potential_vorticity(fa, zeta_r, h)
     
     log_test(
         "potential_vorticity",
@@ -346,7 +335,7 @@ def test_is_incompressible():
     
     formula = r"$\nabla \cdot \mathbf{v} = \frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} + \frac{\partial w}{\partial z} \approx 0$"
     
-    result = swirl_string_core.is_incompressible(dudx, dvdy, dwdz)
+    result = sstcore.is_incompressible(dudx, dvdy, dwdz)
     
     log_test(
         "is_incompressible",
@@ -376,7 +365,7 @@ def test_circulation_surface_integral():
     
     formula = r"$\Gamma = \oint \boldsymbol{\omega} \cdot d\mathbf{A} = \sum_i \boldsymbol{\omega}_i \cdot \Delta\mathbf{A}_i$"
     
-    result = swirl_string_core.circulation_surface_integral(omega_field, dA_field)
+    result = sstcore.circulation_surface_integral(omega_field, dA_field)
     
     log_test(
         "circulation_surface_integral",
@@ -397,7 +386,7 @@ def test_enstrophy():
     
     formula = r"$\text{Enstrophy} = \int \omega^2 \, dA = \sum_i \omega_i^2 \Delta A_i$"
     
-    result = swirl_string_core.enstrophy(omega_squared, ds_area)
+    result = sstcore.enstrophy(omega_squared, ds_area)
     
     log_test(
         "enstrophy",
@@ -419,7 +408,7 @@ def test_compute_bernoulli_pressure():
     
     formula = r"$P = P_\infty - \frac{1}{2}\rho|\mathbf{v}|^2$"
     
-    result = swirl_string_core.compute_bernoulli_pressure(velocity_magnitude, rho, p_inf)
+    result = sstcore.compute_bernoulli_pressure(velocity_magnitude, rho, p_inf)
     
     log_test(
         "compute_bernoulli_pressure",
@@ -446,7 +435,7 @@ def test_pressure_gradient():
     
     formula = r"$\nabla P = \left(\frac{\partial P}{\partial x}, \frac{\partial P}{\partial y}\right)$"
     
-    result = swirl_string_core.pressure_gradient(pressure_field, dx, dy)
+    result = sstcore.pressure_gradient(pressure_field, dx, dy)
     
     log_test(
         "pressure_gradient",
@@ -469,7 +458,7 @@ def test_laplacian_phi():
     
     formula = r"$\nabla^2\phi = \frac{\partial^2\phi}{\partial x^2} + \frac{\partial^2\phi}{\partial y^2} + \frac{\partial^2\phi}{\partial z^2}$"
     
-    result = swirl_string_core.laplacian_phi(d2phidx2, d2phidy2, d2phidz2)
+    result = sstcore.laplacian_phi(d2phidx2, d2phidy2, d2phidz2)
     
     log_test(
         "laplacian_phi",
@@ -490,7 +479,7 @@ def test_grad_phi():
     
     formula = r"$\nabla\phi = \left(\frac{\partial\phi}{\partial x}, \frac{\partial\phi}{\partial y}, \frac{\partial\phi}{\partial z}\right)$"
     
-    result = swirl_string_core.grad_phi(phi_grad)
+    result = sstcore.grad_phi(phi_grad)
     
     log_test(
         "grad_phi",
@@ -510,7 +499,7 @@ def test_bernoulli_pressure_potential():
     
     formula = r"$P = P_0 - \frac{1}{2}\rho V^2$"
     
-    result = swirl_string_core.bernoulli_pressure_potential(velocity_squared, V)
+    result = sstcore.bernoulli_pressure_potential(velocity_squared, V)
     
     log_test(
         "bernoulli_pressure_potential",
@@ -535,7 +524,7 @@ def test_compute_kinetic_energy():
     
     formula = r"$E_k = \frac{1}{2}\rho\sum_i |\mathbf{v}_i|^2$"
     
-    result = swirl_string_core.compute_kinetic_energy(velocity, rho_ae)
+    result = sstcore.compute_kinetic_energy(velocity, rho_ae)
     
     log_test(
         "compute_kinetic_energy",
@@ -557,7 +546,7 @@ def test_rossby_number():
     
     formula = r"$Ro = \frac{U}{2\Omega d}$"
     
-    result = swirl_string_core.rossby_number(U, omega, d)
+    result = sstcore.rossby_number(U, omega, d)
     
     log_test(
         "rossby_number",
@@ -580,7 +569,7 @@ def test_ekman_number():
     
     formula = r"$Ek = \frac{\nu}{\Omega H^2}$"
     
-    result = swirl_string_core.ekman_number(nu, omega, H)
+    result = sstcore.ekman_number(nu, omega, H)
     
     log_test(
         "ekman_number",
@@ -603,7 +592,7 @@ def test_cylinder_mass():
     
     formula = r"$m = \rho \pi R^2 H$"
     
-    result = swirl_string_core.cylinder_mass(rho, R, H)
+    result = sstcore.cylinder_mass(rho, R, H)
     
     log_test(
         "cylinder_mass",
@@ -625,7 +614,7 @@ def test_cylinder_inertia():
     
     formula = r"$I = \frac{1}{2}mR^2$"
     
-    result = swirl_string_core.cylinder_inertia(mass, R)
+    result = sstcore.cylinder_inertia(mass, R)
     
     log_test(
         "cylinder_inertia",
@@ -646,7 +635,7 @@ def test_torque():
     
     formula = r"$\tau = I\alpha$"
     
-    result = swirl_string_core.torque(inertia, alpha)
+    result = sstcore.torque(inertia, alpha)
     
     log_test(
         "torque",

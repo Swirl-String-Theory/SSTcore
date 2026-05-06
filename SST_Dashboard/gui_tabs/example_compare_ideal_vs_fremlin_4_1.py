@@ -42,10 +42,7 @@ except ImportError:
 try:
     import SSTcore as ssc
 except ImportError:
-    try:
-        import swirl_string_core as ssc
-    except ImportError:
-        import sstbindings as ssc
+    import sstcore as ssc
 
 
 IDEAL_EMBEDDED_NAME = "ideal.txt"

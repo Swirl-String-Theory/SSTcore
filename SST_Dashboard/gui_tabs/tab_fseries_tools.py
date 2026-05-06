@@ -18,14 +18,10 @@ try:
     using_cxx_backend = True
 except ImportError:
     try:
-        import swirl_string_core as sstcore
+        import sstcore
         using_cxx_backend = True
     except ImportError:
-        try:
-            import sstbindings as sstcore
-            using_cxx_backend = True
-        except ImportError:
-            sstcore = None
+        sstcore = None
 
 # Python fallback: prefer canonical module, then legacy shim
 try:

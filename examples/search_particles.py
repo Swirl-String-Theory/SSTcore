@@ -7,10 +7,7 @@ from datetime import datetime
 try:
     import SSTcore as sstcore
 except ImportError:
-    try:
-        import sstcore
-    except ImportError:
-        import sstbindings as sstcore
+    import sstcore
 
 # =====================================================================
 # 1. STANDARD MODEL REFERENCE DATABASE

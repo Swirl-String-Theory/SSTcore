@@ -7,18 +7,7 @@ Tests all functions with LaTeX formulas, inputs, and results logged.
 import numpy as np
 import pytest
 
-try:
-    import swirl_string_core
-    HAS_SST = True
-except ImportError:
-    try:
-        import sstbindings as swirl_string_core
-        HAS_SST = True
-    except ImportError:
-        HAS_SST = False
-
-if not HAS_SST:
-    pytest.skip("Could not import swirl_string_core or sstbindings", allow_module_level=True)
+sstcore = pytest.importorskip("sstcore", exc_type=ImportError)
 
 
 def log_test(func_name, latex_formula, inputs_dict, results, description=""):
@@ -77,7 +66,7 @@ def test_compute_frenet_frames():
     
     formula = r"$\mathbf{T} = \frac{d\mathbf{r}/ds}{|d\mathbf{r}/ds|}, \quad \mathbf{N} = \frac{d\mathbf{T}/ds}{|d\mathbf{T}/ds|}, \quad \mathbf{B} = \mathbf{T} \times \mathbf{N}$"
     
-    T, N, B = swirl_string_core.compute_frenet_frames(X)
+    T, N, B = sstcore.compute_frenet_frames(X)
     
     log_test(
         "compute_frenet_frames",
@@ -103,7 +92,7 @@ def test_compute_curvature_torsion():
     
     formula = r"$\kappa = |\mathbf{T}'|, \quad \tau = -\mathbf{N} \cdot \mathbf{B}'$"
     
-    curvature, torsion = swirl_string_core.compute_curvature_torsion(T, N)
+    curvature, torsion = sstcore.compute_curvature_torsion(T, N)
     
     log_test(
         "compute_curvature_torsion",
@@ -137,7 +126,7 @@ def test_compute_helicity():
     
     formula = r"$H = \int \mathbf{v} \cdot \boldsymbol{\omega} \, dV$"
     
-    result = swirl_string_core.compute_helicity(velocity, vorticity)
+    result = sstcore.compute_helicity(velocity, vorticity)
     
     log_test(
         "compute_helicity",

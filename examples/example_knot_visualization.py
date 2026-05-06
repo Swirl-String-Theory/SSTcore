@@ -6,14 +6,12 @@ import glob
 
 # --- Import SSTcore (canonical C++ API) ---
 try:
-    import SSTcore as swirl_string_core
     from SSTcore import VortexKnotSystem, load_all_knots
 except ImportError:
     try:
-        import swirl_string_core
-        from swirl_string_core import VortexKnotSystem, load_all_knots
+        from sstcore import VortexKnotSystem, load_all_knots
     except ImportError:
-        print("ERROR: Could not import SSTcore / swirl_string_core. Build the C++ module first.")
+        print("ERROR: Could not import SSTcore (or CMake module sstcore). Build the bindings first.")
         exit(1)
 
 # --- 0. List Available Knots ---

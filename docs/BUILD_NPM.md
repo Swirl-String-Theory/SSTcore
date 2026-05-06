@@ -1,4 +1,4 @@
-# Building swirl-string-core for npm
+# Building SSTcore for npm
 
 This guide explains how to build the npm package for local use or publication.
 
@@ -45,8 +45,8 @@ npm run build:node
 
 This command:
 1. Runs CMake to generate embedded knot files and configure the Node addon target
-2. Uses a helper script (`scripts/build_node_target.js`) to **only** build the CMake Node addon target if it was generated (i.e., `HAVE_SWIRL_STRING_CORE_NODE=ON`)
-3. Builds the addon using node-gyp (creates `build/Release/swirl_string_core.node`)
+2. Uses a helper script (`scripts/build_node_target.js`) to **only** build the CMake Node addon target if it was generated (i.e., `HAVE_SSTCORE_NODE=ON`)
+3. Builds the addon using node-gyp (creates `build/Release/SSTcore.node`)
 
 If `node-addon-api` is not available or CMake cannot detect it, the CMake Node addon target is skipped and the helper script will log a message and continue without failing the build. In that case, `node-gyp rebuild` will still attempt to build the native addon using `binding.gyp`.
 
@@ -98,12 +98,12 @@ npm run build:all
 After building, you should have:
 
 ### Native Addon (Node.js)
-- `build/Release/swirl_string_core.node` - The compiled native addon
+- `build/Release/SSTcore.node` - The compiled native addon
 - `build_node/` - CMake build directory with generated files
 
 ### WASM (Browser)
-- `dist/swirl_string_core_wasm.js` - WASM loader
-- `dist/swirl_string_core_wasm.wasm` - Compiled WebAssembly binary
+- `dist/SSTcore_wasm.js` - WASM loader
+- `dist/SSTcore_wasm.wasm` - Compiled WebAssembly binary
 
 ## Using the Package Locally
 
@@ -114,7 +114,7 @@ After building, you should have:
 npm link
 
 # In your Angular/Node.js project
-npm link swirl-string-core
+npm link SSTcore
 ```
 
 ### Option 2: Install from Local Path
@@ -131,7 +131,7 @@ npm install /path/to/SSTcore
 npm install /path/to/SSTcore
 
 # Then import in your TypeScript files
-import * as sst from 'swirl-string-core';
+import * as sst from 'SSTcore';
 ```
 
 ## Publishing to npm
@@ -223,7 +223,7 @@ npm install node-addon-api
 
 **Solution**: 
 1. Ensure the native addon was built: `npm run build:node`
-2. Check that `build/Release/swirl_string_core.node` exists
+2. Check that `build/Release/SSTcore.node` exists
 3. The package will fall back to WASM if native addon is unavailable
 
 ## Platform-Specific Notes

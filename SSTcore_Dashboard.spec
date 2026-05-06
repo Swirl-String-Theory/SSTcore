@@ -5,7 +5,7 @@ a = Analysis(
     ['sst_dashboard.py'],
     pathex=[],
     binaries=[],
-    datas=[('swirl_string_core.cp312-win_amd64.pyd', '.'), ('examples/ideal_database.txt', 'src/knot_fseries')],
+    datas=[('sstcore.cp312-win_amd64.pyd', '.'), ('examples/ideal_database.txt', 'src/knot_fseries')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
