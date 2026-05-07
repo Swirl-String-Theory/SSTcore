@@ -410,6 +410,12 @@ class CustomBuildExt(build_ext):
                 # Suppress some warnings that might cause issues
                 if '-Wno-deprecated-declarations' not in ext.extra_compile_args:
                     ext.extra_compile_args.append('-Wno-deprecated-declarations')
+                # Fail fast on Linux if any referenced symbol is unresolved.
+                if sys.platform.startswith("linux"):
+                    if not hasattr(ext, "extra_link_args") or ext.extra_link_args is None:
+                        ext.extra_link_args = []
+                    if "-Wl,--no-undefined" not in ext.extra_link_args:
+                        ext.extra_link_args.append("-Wl,--no-undefined")
         
         # Windows: huge generated TUs; /GL raises compile memory — disable; keep bigobj + heap
         if sys.platform == "win32":
@@ -900,6 +906,14 @@ header_file, _generated_embed_cpp_sources, _embed_build_temp_used = generate_emb
 # Get all source files (must match CMakeLists sstcore_lib)
 src_files = [
     "src/ab_initio_mass.cpp",
+    "src/canonical_constants.cpp",
+    "src/sst_master_equation.cpp",
+    "src/chronos_kelvin_transport.cpp",
+    "src/sst_tension_scales.cpp",
+    "src/delay_mode_selector.cpp",
+    "src/atomic_bridge_model.cpp",
+    "src/spectroscopic_gap.cpp",
+    "src/clock_field_eft.cpp",
     "src/trefoil_closure_kernels.cpp",
     "src/biot_savart.cpp",
     "src/fluid_dynamics.cpp",
