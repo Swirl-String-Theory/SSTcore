@@ -1,4 +1,5 @@
 #include "delay_mode_selector.h"
+#include <algorithm>
 #include <cmath>
 #include <stdexcept>
 
