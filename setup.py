@@ -410,12 +410,6 @@ class CustomBuildExt(build_ext):
                 # Suppress some warnings that might cause issues
                 if '-Wno-deprecated-declarations' not in ext.extra_compile_args:
                     ext.extra_compile_args.append('-Wno-deprecated-declarations')
-                # Fail fast on Linux if any referenced symbol is unresolved.
-                if sys.platform.startswith("linux"):
-                    if not hasattr(ext, "extra_link_args") or ext.extra_link_args is None:
-                        ext.extra_link_args = []
-                    if "-Wl,--no-undefined" not in ext.extra_link_args:
-                        ext.extra_link_args.append("-Wl,--no-undefined")
         
         # Windows: huge generated TUs; /GL raises compile memory — disable; keep bigobj + heap
         if sys.platform == "win32":

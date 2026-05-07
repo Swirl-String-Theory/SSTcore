@@ -1,4 +1,5 @@
 #include "chronos_kelvin_transport.h"
+#include <algorithm>
 #include <cmath>
 #include <stdexcept>
 
