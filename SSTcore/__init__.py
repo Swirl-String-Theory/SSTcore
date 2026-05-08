@@ -6,7 +6,7 @@ import sys
 import re
 from typing import Optional, List, Tuple, Dict, Any
 
-__version__ = "0.8.1"
+__version__ = "0.8.2"
 
 # Known ideal-style files in resources/ (knots: AB/HT, links: TL).
 IDEAL_SOURCE_FILES = {
