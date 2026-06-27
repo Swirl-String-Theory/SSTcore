@@ -1250,6 +1250,153 @@ namespace sst {
                 return {};
         }
 
+        namespace {
+
+        std::string embed_basename(const std::string& key) {
+                const auto slash = key.find_last_of("/\\");
+                return (slash == std::string::npos) ? key : key.substr(slash + 1);
+        }
+
+        bool is_allowed_ideal_ab_source_key(const std::string& key) {
+                std::string lower = key;
+                for (char& c : lower) {
+                        c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+                }
+                if (lower.find("knotplot") != std::string::npos) return false;
+                const std::string base = embed_basename(lower);
+                if (base.find("_ideal.txt") != std::string::npos) return false;
+                if (base == "ideal.txt") return true;
+                if (base.rfind("ideal", 0) == 0 && base.size() > 4 &&
+                    base.compare(base.size() - 4, 4, ".txt") == 0) {
+                        return true;
+                }
+                return false;
+        }
+
+        std::string extract_ab_block_xml(const std::string& content, const std::string& ab_id) {
+                const std::string needle = "Id=\"" + ab_id + "\"";
+                size_t pos = 0;
+                while (true) {
+                        const size_t a0 = content.find("<AB", pos);
+                        if (a0 == std::string::npos) break;
+                        const size_t a1 = content.find('>', a0);
+                        if (a1 == std::string::npos) break;
+                        const std::string open_tag = content.substr(a0, a1 - a0 + 1);
+                        if (open_tag.find(needle) == std::string::npos) {
+                                pos = a1 + 1;
+                                continue;
+                        }
+                        const size_t z0 = content.find("</AB>", a1);
+                        if (z0 == std::string::npos) break;
+                        return content.substr(a0, (z0 + 5) - a0);
+                }
+                return {};
+        }
+
+        std::string read_file_or_empty(const std::string& path) {
+                std::ifstream in(path);
+                if (!in) return {};
+                std::ostringstream ss;
+                ss << in.rdbuf();
+                return ss.str();
+        }
+
+        std::vector<std::string> ideal_ab_search_filenames() {
+                return {
+                        "ideal.txt",
+                        "ideal_short.txt",
+                        "ideal_11a.txt",
+                        "ideal_11n.txt",
+                        "idealLinks.txt",
+                        "idealLinks_10a.txt",
+                        "idealLinks_10n.txt",
+                };
+        }
+
+        std::string try_ideal_content_for_ab(const std::string& content, const std::string& ab_id) {
+                return extract_ab_block_xml(content, ab_id);
+        }
+
+        } // namespace
+
+        std::string find_ideal_ab_block_by_id(const std::string& ab_id) {
+                if (ab_id.empty()) return {};
+
+                const auto search_in_map = [&](const std::map<std::string, std::string>& files,
+                                               const std::string& target_basename) -> std::string {
+                        for (const auto& kv : files) {
+                                if (!is_allowed_ideal_ab_source_key(kv.first)) continue;
+                                if (embed_basename(kv.first) != target_basename) continue;
+                                const std::string block = try_ideal_content_for_ab(kv.second, ab_id);
+                                if (!block.empty()) return block;
+                        }
+                        return {};
+                };
+
+                static std::map<std::string, std::string> embedded_ideal = get_embedded_ideal_files();
+
+                // 1) Embedded ideal.txt first
+                {
+                        const std::string block = search_in_map(embedded_ideal, "ideal.txt");
+                        if (!block.empty()) return block;
+                }
+
+                // 2) Other embedded ideal*.txt in deterministic order
+                for (const std::string& fname : ideal_ab_search_filenames()) {
+                        if (fname == "ideal.txt") continue;
+                        const std::string block = search_in_map(embedded_ideal, fname);
+                        if (!block.empty()) return block;
+                }
+
+                // 3) Disk: same filename order
+                for (const std::string& fname : ideal_ab_search_filenames()) {
+                        const std::string path = find_ideal_file_path(fname);
+                        if (path.empty()) continue;
+                        const std::string content = read_file_or_empty(path);
+                        if (content.empty()) continue;
+                        const std::string block = try_ideal_content_for_ab(content, ab_id);
+                        if (!block.empty()) return block;
+                }
+
+                // 4) Legacy ideal_database.txt (embedded knot files + disk + env)
+                {
+                        static std::map<std::string, std::string> embedded_knot = get_embedded_knot_files();
+                        for (const auto& kv : embedded_knot) {
+                                if (kv.first.find("ideal_database.txt") == std::string::npos) continue;
+                                const std::string block = try_ideal_content_for_ab(kv.second, ab_id);
+                                if (!block.empty()) return block;
+                        }
+                }
+                if (const char* env_path = std::getenv("SST_IDEAL_DATABASE")) {
+                        if (env_path[0] != '\0') {
+                                const std::string block =
+                                    try_ideal_content_for_ab(read_file_or_empty(env_path), ab_id);
+                                if (!block.empty()) return block;
+                        }
+                }
+                const char* legacy_paths[] = {
+                        "ideal_database.txt",
+                        "Front-End/knot_fseries/ideal_database.txt",
+                        "../Front-End/knot_fseries/ideal_database.txt",
+                        "../../Front-End/knot_fseries/ideal_database.txt",
+                };
+                for (const char* p : legacy_paths) {
+                        const std::string block = try_ideal_content_for_ab(read_file_or_empty(p), ab_id);
+                        if (!block.empty()) return block;
+                }
+
+                // 5) Env SST_IDEAL_TXT explicit file
+                if (const char* env_txt = std::getenv("SST_IDEAL_TXT")) {
+                        if (env_txt[0] != '\0') {
+                                const std::string block =
+                                    try_ideal_content_for_ab(read_file_or_empty(env_txt), ab_id);
+                                if (!block.empty()) return block;
+                        }
+                }
+
+                return {};
+        }
+
         std::string VortexKnotSystem::find_knot_file(const std::string& knot_id) {
                 std::string path = find_knot_file_path(knot_id, "");
                 if (!path.empty()) return path;

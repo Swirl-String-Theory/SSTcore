@@ -19,51 +19,36 @@
 
 namespace sst {
 
-    static std::string load_ideal_database_from_file() {
-        const char* paths[] = {
-            "ideal_database.txt",
-            "Front-End/knot_fseries/ideal_database.txt",
-            "../Front-End/knot_fseries/ideal_database.txt",
-            "../../Front-End/knot_fseries/ideal_database.txt",
-        };
-        const char* env_path = std::getenv("SST_IDEAL_DATABASE");
-        if (env_path && env_path[0] != '\0') {
-            std::ifstream f(env_path);
-            if (f) {
-                std::ostringstream ss;
-                ss << f.rdbuf();
-                return ss.str();
-            }
-        }
-        for (const char* p : paths) {
-            std::ifstream f(p);
-            if (f) {
-                std::ostringstream ss;
-                ss << f.rdbuf();
-                return ss.str();
-            }
-        }
-        return "";
+    namespace {
+    bool is_canonical_gilbert_ab_id(const std::string& knot_ab_id) {
+        static const std::regex re(R"(^(\d+)(:\d+)+$)");
+        return std::regex_match(knot_ab_id, re);
     }
+    } // namespace
 
-    ParticleEvaluator::ParticleEvaluator(const std::string& knot_ab_id, int resolution) {
-        std::string db_content;
-        auto embedded_files = get_embedded_knot_files();
-        for (const auto& pair : embedded_files) {
-            if (pair.first.find("ideal_database.txt") != std::string::npos) {
-                db_content = pair.second;
-                break;
-            }
-        }
-        if (db_content.empty()) {
-            db_content = load_ideal_database_from_file();
-        }
-        if (db_content.empty()) {
-            throw std::runtime_error("[!] SSTcore: ideal_database.txt niet gevonden.");
+    ParticleEvaluator::ParticleEvaluator(
+        const std::string& knot_ab_id,
+        int resolution,
+        bool allow_non_canonical_geometry_for_research_only) {
+        if (!allow_non_canonical_geometry_for_research_only &&
+            !is_canonical_gilbert_ab_id(knot_ab_id)) {
+            throw std::runtime_error(
+                "[!] SSTcore: ParticleEvaluator requires ideal.txt AB id (n:m:k). "
+                "Non-canon geometry refs (KnotPlot/Fremlin) are blocked for CanonMass. "
+                "Set allow_non_canonical_geometry_for_research_only=True for research only. "
+                "Got: " + knot_ab_id);
         }
 
-        if (!extract_and_build_filament(db_content, knot_ab_id, resolution)) {
-            throw std::runtime_error("[!] SSTcore: Knoop ID " + knot_ab_id + " niet gevonden in database.");
+        const std::string ab_block = find_ideal_ab_block_by_id(knot_ab_id);
+        if (ab_block.empty()) {
+            throw std::runtime_error(
+                "[!] SSTcore: Knoop ID " + knot_ab_id +
+                " niet gevonden in ideal.txt / ideal catalog.");
+        }
+
+        if (!extract_and_build_filament(ab_block, knot_ab_id, resolution)) {
+            throw std::runtime_error(
+                "[!] SSTcore: Knoop ID " + knot_ab_id + " niet gevonden in database.");
         }
     }
 

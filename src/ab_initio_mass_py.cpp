@@ -24,9 +24,10 @@ void bind_ab_initio(py::module_& m) {
         .def_readwrite("core_time_dilation", &ParticleEvaluator::RelativisticMetrics::core_time_dilation);
 
     py::class_<ParticleEvaluator>(m, "ParticleEvaluator")
-        // 1. The old String-based constructor
-        .def(py::init<const std::string &, int>(),
-             py::arg("knot_ab_id"), py::arg("resolution") = 4000)
+        .def(py::init<const std::string &, int, bool>(),
+             py::arg("knot_ab_id"),
+             py::arg("resolution") = 4000,
+             py::arg("allow_non_canonical_geometry_for_research_only") = false)
 
         // 2. The new Array-based constructor
         .def(py::init<const std::vector<std::vector<std::array<double, 3>>> &>(),

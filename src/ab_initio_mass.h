@@ -33,7 +33,10 @@ private:
 public:
   std::vector<std::vector<Vec3>> filaments;
   static void print_canonical_derivation();
-  explicit ParticleEvaluator(const std::string& knot_ab_id, int resolution = 4000);
+  explicit ParticleEvaluator(
+      const std::string& knot_ab_id,
+      int resolution = 4000,
+      bool allow_non_canonical_geometry_for_research_only = false);
   // [NEW] The direct array constructor (Bypasses ideal.txt, takes Python arrays)
   explicit ParticleEvaluator(const std::vector<std::vector<Vec3>>& input_filaments);
 

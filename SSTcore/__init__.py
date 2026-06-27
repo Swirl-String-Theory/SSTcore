@@ -16,7 +16,19 @@ IDEAL_SOURCE_FILES = {
     "idealLinks": "idealLinks.txt", # links 2–9 crossings, <TL Id="L2a1">
     "idealLinks_10a": "idealLinks_10a.txt",
     "idealLinks_10n": "idealLinks_10n.txt",
+    "ideal_short": "ideal_short.txt",
 }
+
+# AB lookup order for Patch A (ideal.txt canon; never knotplot *_ideal.txt)
+IDEAL_AB_SEARCH_SOURCES = [
+    "ideal",
+    "ideal_short",
+    "ideal_11a",
+    "ideal_11n",
+    "idealLinks",
+    "idealLinks_10a",
+    "idealLinks_10n",
+]
 
 __all__ = [
     "get_resources_dir",
@@ -28,6 +40,7 @@ __all__ = [
     "get_knotplot_ideal_path",
     "get_knot_fseries",
     "knotplot",
+    "find_ideal_ab_block_by_id",
     "get_ideal_ab",
     "get_ideal_ht",
     "get_ideal_link",
@@ -39,6 +52,12 @@ __all__ = [
     "list_all_knot_options",
     "list_all_link_options",
     "get_knot_data_for_option",
+    "KnotSource",
+    "KnotCurveRole",
+    "CalculationRole",
+    "KnotResolution",
+    "resolve_knot_ref",
+    "assert_canon_ideal",
 ]
 
 # Re-export native API (relative _native in editable/dev checkouts, else SSTcore._native wheel layout)
@@ -224,7 +243,65 @@ def _extract_xml_block(text: str, tag: str, id_value: str) -> Optional[str]:
     return text[start : end_tag + len(tag) + 3]
 
 
-def get_ideal_ab(ab_id: str, source: str = "ideal") -> Optional[str]:
+def _find_ideal_ab_block_python(ab_id: str) -> Optional[str]:
+    """Disk/embedded Python fallback when native binding unavailable."""
+    # Embedded ideal files via native helper if present
+    get_emb = globals().get("get_embedded_ideal_files")
+    if callable(get_emb):
+        try:
+            embedded = get_emb()
+            for fname in [IDEAL_SOURCE_FILES[s] for s in IDEAL_AB_SEARCH_SOURCES]:
+                for key, content in embedded.items():
+                    if "knotplot" in key.replace("\\", "/").lower():
+                        continue
+                    base = key.replace("\\", "/").rsplit("/", 1)[-1]
+                    if base.find("_ideal.txt") != -1:
+                        continue
+                    if base != fname:
+                        continue
+                    block = _extract_xml_block(content, "AB", ab_id)
+                    if block:
+                        return block
+        except Exception:
+            pass
+
+    for source in IDEAL_AB_SEARCH_SOURCES:
+        path = get_ideal_file_path(source)
+        if path is None:
+            continue
+        try:
+            text = path.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        block = _extract_xml_block(text, "AB", ab_id)
+        if block:
+            return block
+    return None
+
+
+def find_ideal_ab_block_by_id(ab_id: str) -> Optional[str]:
+    """
+    Find <AB Id="..."> XML in ideal*.txt sources (embedded-first).
+
+    Native pybind returns empty string on miss; this public API returns None.
+    Never searches knotplot/**/knot_*_ideal.txt.
+    """
+    ab_id = (ab_id or "").strip()
+    if not ab_id:
+        return None
+    try:
+        from . import _native as _mod
+        if hasattr(_mod, "find_ideal_ab_block_by_id"):
+            raw = _mod.find_ideal_ab_block_by_id(ab_id)
+            return raw if raw else None
+    except ImportError:
+        pass
+    return _find_ideal_ab_block_python(ab_id)
+
+
+def get_ideal_ab(ab_id: str, source: Optional[str] = None) -> Optional[str]:
+    if source is None:
+        return find_ideal_ab_block_by_id(ab_id)
     path = get_ideal_file_path(source) if source != "ideal" else get_ideal_txt_path()
     if path is None:
         return None
@@ -408,3 +485,13 @@ def get_knot_data_for_option(opt: Dict[str, Any]) -> Optional[Any]:
     if kind == "link":
         return get_ideal_link(kid, source=opt.get("source"))
     return None
+
+
+from .knot_registry import (  # noqa: E402
+    KnotSource,
+    KnotCurveRole,
+    CalculationRole,
+    KnotResolution,
+    resolve_knot_ref,
+    assert_canon_ideal,
+)

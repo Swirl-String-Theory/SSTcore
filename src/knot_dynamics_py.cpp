@@ -598,6 +598,11 @@ Compute a PD code from a closed 3D polygonal curve.
         },
         py::arg("points"), py::arg("eps") = 1e-8,
         R"pbdoc(Compute discrete curvature from points.)pbdoc");
+  m.def("find_ideal_ab_block_by_id", &sst::find_ideal_ab_block_by_id,
+        py::arg("ab_id"),
+        "Find <AB Id=\"...\"> block XML in embedded/disk ideal*.txt (never knotplot). "
+        "Returns empty string if not found.");
+
   m.def("get_embedded_ideal_files", &sst::get_embedded_ideal_files,
         "Return embedded ideal*.txt resources as {relative_name: content}.");
 

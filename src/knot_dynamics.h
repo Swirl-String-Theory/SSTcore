@@ -46,6 +46,10 @@ namespace sst {
 	// Returns full path to ideal database file (e.g. "ideal.txt"), or empty if not found.
 	std::string find_ideal_file_path(const std::string& filename, const std::string& explicit_base = "");
 
+	// Search embedded + disk ideal*.txt (never knotplot) for <AB Id="ab_id"> block XML.
+	// Returns empty string if not found.
+	std::string find_ideal_ab_block_by_id(const std::string& ab_id);
+
   struct KnotInvariants {
     std::string name;
     int crossing_number = 0;      // k
