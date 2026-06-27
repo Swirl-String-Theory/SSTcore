@@ -24,6 +24,8 @@ void bind_atomic_bridge_model(py::module_& m) {
                     py::arg("sigma"), py::arg("E_R"), py::arg("eta0"), py::arg("anticommutator_value"))
         .def_static("frozen_linear_interaction", &sst::AtomicBridgeModel::frozen_linear_interaction,
                     py::arg("sigma"), py::arg("E_R"), py::arg("eta0"), py::arg("gamma"), py::arg("anticommutator_value"))
+        .def_static("pauli_barrier_scale", &sst::AtomicBridgeModel::pauli_barrier_scale,
+                    py::arg("rho_f"), py::arg("Gamma0"), py::arg("L"), py::arg("a_cut"), py::arg("shape_factor") = 1.0)
         .def_static("omega_z_from_displacement_gradient", &sst::AtomicBridgeModel::omega_z_from_displacement_gradient,
                     py::arg("Omega"), py::arg("dxi_dz"))
         .def_static("u_theta_uniform_vorticity", &sst::AtomicBridgeModel::u_theta_uniform_vorticity,

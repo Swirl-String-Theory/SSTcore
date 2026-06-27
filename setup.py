@@ -235,7 +235,7 @@ def _windows_msvc_toolset_defaults() -> None:
 
 _windows_msvc_toolset_defaults()
 
-__version__ = "0.8.2"
+__version__ = "0.8.12"
 base_dir = os.path.dirname(os.path.abspath(__file__))
 # Knot / ideal databases and Fourier series live at repo root: resources/
 REPO_RESOURCES_DIR = os.path.join(base_dir, "resources")

@@ -20,5 +20,9 @@ void bind_sst_tension_scales(py::module_& m) {
         .def_static("electron_spring_energy", &sst::SSTTensionScales::electron_spring_energy,
                     py::arg("F_swirl_max"), py::arg("r_c"), py::arg("n") = 2.0)
         .def_static("rydberg_from_sst", &sst::SSTTensionScales::rydberg_from_sst,
-                    py::arg("v_swirl"), py::arg("r_c"), py::arg("c"));
+                    py::arg("v_swirl"), py::arg("r_c"), py::arg("c"))
+        .def_static("swirl_impedance", &sst::SSTTensionScales::swirl_impedance,
+                    py::arg("P_K"), py::arg("v_K"))
+        .def_static("dimensionless_stiffness_ratio", &sst::SSTTensionScales::dimensionless_stiffness_ratio,
+                    py::arg("P_K"), py::arg("V_K"), py::arg("hbar"), py::arg("omega"));
 }

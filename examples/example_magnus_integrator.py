@@ -25,7 +25,7 @@ if __name__ == "__main__":
 
     # 1. Establish Canonical SST Constants (Zero-Parameter Boot)
     c = 299792458.0
-    alpha = 0.0072973525693
+    alpha = sstcore.SSTCanonicalConstants.alpha()  # SST::Constants::ALPHA (canon v0.8.12)
 
     rho_f = 7.0e-7                      # Effective fluid density [kg/m^3]
     v_swirl = 1.09384563e6              # Characteristic swirl speed [m/s]

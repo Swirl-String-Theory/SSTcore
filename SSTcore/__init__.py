@@ -6,7 +6,7 @@ import sys
 import re
 from typing import Optional, List, Tuple, Dict, Any
 
-__version__ = "0.8.2"
+__version__ = "0.8.12"
 
 # Known ideal-style files in resources/ (knots: AB/HT, links: TL).
 IDEAL_SOURCE_FILES = {
@@ -41,20 +41,26 @@ __all__ = [
     "get_knot_data_for_option",
 ]
 
-# Re-export native API (from SSTcore._native, or SSTcore._bindings if _native missing)
+# Re-export native API (relative _native in editable/dev checkouts, else SSTcore._native wheel layout)
 try:
-    import SSTcore._native as _sst_native
-    from SSTcore._native import *  # noqa: F401, F403
+    from . import _native as _sst_native
+    from ._native import *  # noqa: F401, F403
     _native_all = getattr(_sst_native, "__all__", [])
     __all__ = list(__all__) + [x for x in _native_all if x not in __all__]
 except ImportError:
     try:
-        import SSTcore._bindings as _sst_native
-        from SSTcore._bindings import *  # noqa: F401, F403
+        import SSTcore._native as _sst_native
+        from SSTcore._native import *  # noqa: F401, F403
         _native_all = getattr(_sst_native, "__all__", [])
         __all__ = list(__all__) + [x for x in _native_all if x not in __all__]
     except ImportError:
-        pass
+        try:
+            import SSTcore._bindings as _sst_native
+            from SSTcore._bindings import *  # noqa: F401, F403
+            _native_all = getattr(_sst_native, "__all__", [])
+            __all__ = list(__all__) + [x for x in _native_all if x not in __all__]
+        except ImportError:
+            pass
 
 
 def get_resources_dir() -> Optional[Path]:

@@ -39,7 +39,7 @@ KNOT_INVARIANTS = {
 }
 
 # Constanten voor de Master Equation
-alpha_fs = 0.0072973525693 # 1 / 137.036
+alpha_fs = sstcore.SSTCanonicalConstants.alpha()  # SST::Constants::ALPHA (canon v0.8.12)
 ELECTRON_MASS_MEV = 0.51099895
 
 def evaluate_particle(knot_id, M0_calibration):

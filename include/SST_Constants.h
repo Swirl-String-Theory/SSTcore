@@ -11,15 +11,15 @@
 /**
  * @namespace SST::Constants::pi
  * @brief High-precision physical constants for Swirl-String Theory (SST).
- * Includes CODATA 2018 quantum standards and derived SST fluid primitives.
+ * Includes CODATA quantum standards and canon-calibrated SST primitives.
  */
 namespace SST {
     namespace Constants {
 
-        // --- CODATA 2018 Fundamental Quantum Constants ---
+        // --- CODATA / SI Fundamental Quantum Constants ---
         constexpr long double C_VACUUM  = 299792458.0L;             // [m/s] Speed of Light
         constexpr long double H_BAR     = 1.054571817e-34L;         // [J s] Reduced Planck Constant
-        constexpr long double ALPHA     = 0.0072973525693L;         // [-]   Fine Structure Constant
+        constexpr long double ALPHA     = 0.0072973525643L;         // [-]   Fine Structure Constant
         constexpr long double M_ELECTRON = 9.1093837015e-31L;       // [kg]  Electron Rest Mass
         constexpr long double E_CHARGE   = 1.602176634e-19L;        // [C]   Elementary Charge
         constexpr long double EPSILON_0  = 8.8541878128e-12L;       // [F/m] Vacuum permittivity
@@ -40,7 +40,7 @@ namespace SST {
         constexpr long double RHO_CORE  = 3.8934358266918687e18L;   // [kg/m^3] Core Density
         constexpr long double RHO_FLUID_CANON   = 7.0e-7L;          // [kg/m^3] Canon v0.8.x rounded effective fluid density
         constexpr long double RHO_FLUID_DERIVED = 6.8398588e-07L;   // [kg/m^3] CODATA-derived electron anchor value
-        constexpr long double RHO_FLUID = RHO_FLUID_CANON;          // [kg/m^3] Default public API value
+        constexpr long double RHO_FLUID = RHO_FLUID_CANON;          // backward-compatible alias
 
         // Derived from quantization: Gamma_0 = h / m_eff
         constexpr long double GAMMA_0   = 9.68361918e-09L;          // [m^2/s] Circulation Quantum, 2*pi*r_c*v_swirl

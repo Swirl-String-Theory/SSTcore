@@ -1,3 +1,4 @@
+# LEGACY LOG: captured output uses pre-v0.8.12 alpha (0.0072973525693); not regenerated.
 === SST AB INITIO FOUNDATION (ZERO-PARAMETER BOOT) ===
 
 [*] Loading CODATA 2018 Quantum Constants...

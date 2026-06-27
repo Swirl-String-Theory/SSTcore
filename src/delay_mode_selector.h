@@ -17,6 +17,8 @@ public:
     [[nodiscard]] static double circulation_delay(double length, double v_swirl);
     [[nodiscard]] static double core_turnover_delay(double r_c, double v_swirl);
     [[nodiscard]] static double discrete_mode_frequency(int n, double tau);
+    // Mode equation (canon v0.8.10+): Omega = omega0 - kappa*sin(Omega*tau).
+    // Residual: Omega - omega0 + kappa*sin(Omega*tau)  (note opposite sign in the sine term).
     [[nodiscard]] static double phase_lock_residual(double Omega, double omega0, double kappa, double tau);
     [[nodiscard]] static double phase_lock_stability_slope(double Omega, double kappa, double tau);
     [[nodiscard]] static DelayModeResult solve_phase_locked_frequency(

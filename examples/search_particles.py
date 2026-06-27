@@ -30,7 +30,7 @@ PDG_DATABASE = {
 }
 
 phi0 = (1 + math.sqrt(5)) / 2
-alpha_fs = 0.0072973525693
+alpha_fs = sstcore.SSTCanonicalConstants.alpha()  # SST::Constants::ALPHA (canon v0.8.12)
 
 def twist_t_plus(n: int) -> float:
     return ((2.0 * n + 1.0) + math.sqrt(4.0 * n + 1.0)) / (2.0 * n)

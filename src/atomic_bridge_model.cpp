@@ -49,6 +49,18 @@ double AtomicBridgeModel::frozen_linear_interaction(double sigma, double E_R, do
     return scalar_clock_potential_linear(sigma, E_R, eta0, gamma) + orbit_coupling_energy(sigma, E_R, eta0, anticommutator_value);
 }
 
+
+
+double AtomicBridgeModel::pauli_barrier_scale(double rho_f, double Gamma0, double L, double a_cut, double shape_factor) {
+    if (rho_f < 0.0 || Gamma0 <= 0.0 || L <= 0.0 || a_cut <= 0.0) {
+        throw std::invalid_argument("rho_f must be non-negative; Gamma0, L, and a_cut must be positive.");
+    }
+    if (shape_factor < 0.0) {
+        throw std::invalid_argument("shape_factor must be non-negative.");
+    }
+    return (rho_f * Gamma0 * Gamma0 / (4.0 * pi_d)) * (L / a_cut) * shape_factor;
+}
+
 double AtomicBridgeModel::omega_z_from_displacement_gradient(double Omega, double dxi_dz) {
     return 2.0 * Omega * dxi_dz;
 }

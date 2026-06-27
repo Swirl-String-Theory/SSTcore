@@ -20,7 +20,7 @@ class SSTFoundation:
         self.c = 299792458.0              # Speed of light [m/s]
         self.h_bar = 1.054571817e-34      # Reduced Planck constant [J s]
         self.m_e = 9.1093837015e-31       # Electron mass [kg]
-        self.alpha = 0.0072973525693      # Fine-structure constant
+        self.alpha = sstcore.SSTCanonicalConstants.alpha()  # SST::Constants::ALPHA (canon v0.8.12)
 
         # 2. Derive SST Geometric Scales
         self.r_e = (self.alpha * self.h_bar) / (self.m_e * self.c)  # Classical electron radius
@@ -148,7 +148,7 @@ PDG_DATABASE = {
 }
 
 phi0 = (1 + math.sqrt(5)) / 2
-alpha_fs = 0.0072973525693
+alpha_fs = sstcore.SSTCanonicalConstants.alpha()  # SST::Constants::ALPHA (canon v0.8.12)
 
 def twist_t_plus(n_cross: float) -> float:
     n = max(1.0, n_cross / 2.0)

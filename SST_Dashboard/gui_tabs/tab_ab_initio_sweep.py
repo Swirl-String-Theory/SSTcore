@@ -15,7 +15,8 @@ except ImportError:
 # Constanten & Formules
 # =====================================================================
 phi0 = (1 + math.sqrt(5)) / 2
-alpha_fs = 0.0072973525693
+_CANON_ALPHA = 0.0072973525643  # SST::Constants::ALPHA fallback when bindings unavailable
+alpha_fs = sstcore.SSTCanonicalConstants.alpha() if sstcore else _CANON_ALPHA
 ELECTRON_MASS_MEV = 0.51099895000
 
 def twist_t_plus(n: int) -> float:

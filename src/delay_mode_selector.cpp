@@ -23,7 +23,12 @@ double DelayModeSelector::discrete_mode_frequency(int n, double tau) {
 }
 
 double DelayModeSelector::phase_lock_residual(double Omega, double omega0, double kappa, double tau) {
-    return Omega - omega0 - kappa * std::sin(Omega * tau);
+    // Canon v0.8.10+ uses
+    //   dot(phi)(t) = omega0 + kappa sin(phi(t - tau) - phi(t)).
+    // For phi(t)=Omega t, the sine argument is -Omega tau, hence
+    //   Omega = omega0 - kappa sin(Omega tau).
+    // The residual is therefore Omega - omega0 + kappa sin(Omega tau).
+    return Omega - omega0 + kappa * std::sin(Omega * tau);
 }
 
 double DelayModeSelector::phase_lock_stability_slope(double Omega, double kappa, double tau) {
@@ -39,7 +44,7 @@ DelayModeResult DelayModeSelector::solve_phase_locked_frequency(
     double Omega = (initial_guess != 0.0) ? initial_guess : omega0;
     for (int i = 0; i < max_iter; ++i) {
         const double f = phase_lock_residual(Omega, omega0, kappa, tau);
-        const double df = 1.0 - kappa * tau * std::cos(Omega * tau);
+        const double df = 1.0 + kappa * tau * std::cos(Omega * tau);
         if (std::abs(df) < 1e-30) break;
         const double step = f / df;
         Omega -= step;

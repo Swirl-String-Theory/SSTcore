@@ -17,6 +17,8 @@ public:
     [[nodiscard]] static double electron_spring_frequency(double F_swirl_max, double r_c, double m_e, double n = 2.0);
     [[nodiscard]] static double electron_spring_energy(double F_swirl_max, double r_c, double n = 2.0);
     [[nodiscard]] static double rydberg_from_sst(double v_swirl, double r_c, double c);
+    [[nodiscard]] static double swirl_impedance(double P_K, double v_K);
+    [[nodiscard]] static double dimensionless_stiffness_ratio(double P_K, double V_K, double hbar, double omega);
 };
 
 } // namespace sst

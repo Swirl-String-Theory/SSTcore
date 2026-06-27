@@ -49,4 +49,17 @@ double SSTTensionScales::rydberg_from_sst(double v_swirl, double r_c, double c) 
     return SSTCanonicalConstants::rydberg_sst(v_swirl, r_c, c);
 }
 
+
+double SSTTensionScales::swirl_impedance(double P_K, double v_K) {
+    if (v_K <= 0.0) throw std::invalid_argument("v_K must be positive.");
+    return P_K / v_K;
+}
+
+double SSTTensionScales::dimensionless_stiffness_ratio(double P_K, double V_K, double hbar, double omega) {
+    if (V_K < 0.0 || hbar <= 0.0 || omega <= 0.0) {
+        throw std::invalid_argument("V_K must be non-negative; hbar and omega must be positive.");
+    }
+    return (P_K * V_K) / (hbar * omega);
+}
+
 } // namespace sst

@@ -2,7 +2,7 @@
 <module classpath="CIDR" type="CPP_MODULE" version="4">
   <component name="FacetManager">
     <facet type="Python" name="Python facet">
-      <configuration sdkName="C:\Users\mr\anaconda3\envs\SSTcore12" />
+      <configuration sdkName="SSTcore12" />
     </facet>
   </component>
 </module>
