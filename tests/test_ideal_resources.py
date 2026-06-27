@@ -2,43 +2,11 @@
 
 from __future__ import annotations
 
-import sys
-from pathlib import Path
-
 import pytest
 
-_ROOT = Path(__file__).resolve().parent.parent
+from sstcore_test_import import load_sstcore_package
 
-
-def _import_sstcore_package():
-    """Import full SSTcore package (not native-only shadow from build/)."""
-    pkg_dir = _ROOT / "SSTcore"
-    if not pkg_dir.is_dir():
-        pkg_dir = _ROOT / "sstcore"
-    init_py = pkg_dir / "__init__.py"
-    if not init_py.is_file():
-        raise ImportError(f"SSTcore package not found under {_ROOT}")
-
-    import importlib.util
-
-    for name in ("sstcore", "SSTcore"):
-        if name in sys.modules:
-            del sys.modules[name]
-
-    spec = importlib.util.spec_from_file_location(
-        "SSTcore",
-        init_py,
-        submodule_search_locations=[str(pkg_dir.resolve())],
-    )
-    if spec is None or spec.loader is None:
-        raise ImportError(f"Cannot load SSTcore from {init_py}")
-    mod = importlib.util.module_from_spec(spec)
-    sys.modules["SSTcore"] = mod
-    spec.loader.exec_module(mod)
-    return mod
-
-
-sstcore = _import_sstcore_package()
+sstcore = load_sstcore_package()
 
 
 def test_import_shims():

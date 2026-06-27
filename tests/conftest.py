@@ -66,3 +66,8 @@ _strip_repo_root_from_sys_path()
 def pytest_configure(config) -> None:  # noqa: ARG001
     _strip_repo_root_from_sys_path()
     _prepend_repo_build_dirs()
+
+
+def pytest_sessionstart(session) -> None:  # noqa: ARG001
+    # Pytest may prepend --rootdir after conftest import; strip again for wheel CI.
+    _strip_repo_root_from_sys_path()

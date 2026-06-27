@@ -4,12 +4,10 @@
 import numpy as np
 import pytest
 
-pytest.importorskip("sstcore", exc_type=ImportError)
+sstcore = pytest.importorskip("sstcore", exc_type=ImportError)
 
 
 def test_frenet_helicity_roundtrip():
-    import sstcore
-
     X = np.random.randn(10, 3)
 
     T, N, B = sstcore.compute_frenet_frames(X)

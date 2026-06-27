@@ -2,35 +2,11 @@
 
 from __future__ import annotations
 
-import sys
-from pathlib import Path
-
 import pytest
 
-_ROOT = Path(__file__).resolve().parent.parent
+from sstcore_test_import import load_sstcore_package
 
-
-def _import_sstcore_package():
-    pkg_dir = _ROOT / "SSTcore"
-    init_py = pkg_dir / "__init__.py"
-    import importlib.util
-
-    for name in ("sstcore", "SSTcore"):
-        if name in sys.modules:
-            del sys.modules[name]
-
-    spec = importlib.util.spec_from_file_location(
-        "SSTcore",
-        init_py,
-        submodule_search_locations=[str(pkg_dir.resolve())],
-    )
-    mod = importlib.util.module_from_spec(spec)
-    sys.modules["SSTcore"] = mod
-    spec.loader.exec_module(mod)
-    return mod
-
-
-sstcore = _import_sstcore_package()
+sstcore = load_sstcore_package()
 
 
 def test_find_ideal_by_id_ab_trefoil():

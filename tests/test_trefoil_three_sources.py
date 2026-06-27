@@ -16,27 +16,9 @@ N_DIST = 2048
 IDEAL_L = 16.371637
 
 
-def _import_sstcore_package():
-    pkg_dir = _ROOT / "SSTcore"
-    init_py = pkg_dir / "__init__.py"
-    import importlib.util
+from sstcore_test_import import load_sstcore_package
 
-    for name in ("sstcore", "SSTcore"):
-        if name in sys.modules:
-            del sys.modules[name]
-
-    spec = importlib.util.spec_from_file_location(
-        "SSTcore",
-        init_py,
-        submodule_search_locations=[str(pkg_dir.resolve())],
-    )
-    mod = importlib.util.module_from_spec(spec)
-    sys.modules["SSTcore"] = mod
-    spec.loader.exec_module(mod)
-    return mod
-
-
-sstcore = _import_sstcore_package()
+sstcore = load_sstcore_package()
 
 
 def parse_ab_coeffs_text(text: str, target_id: str):

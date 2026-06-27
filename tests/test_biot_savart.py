@@ -3,12 +3,10 @@
 
 import pytest
 
-pytest.importorskip("sstcore", exc_type=ImportError)
+sstcore = pytest.importorskip("sstcore", exc_type=ImportError)
 
 
 def test_biot_savart_velocity_basic():
-    import sstcore
-
     r = [0.1, 0.2, 0.3]
     X = [[1.0, 0.0, 0.0], [-1.0, 0.0, 0.0]]
     T = [[0.0, 1.0, 0.0], [0.0, -1.0, 0.0]]
