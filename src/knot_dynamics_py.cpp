@@ -204,6 +204,7 @@ void bind_knot(py::module_& m) {
       .def_readwrite("L", &IdealABBlock::L)
       .def_readwrite("D", &IdealABBlock::D)
       .def_readwrite("n", &IdealABBlock::n)
+      .def_readwrite("source_tag", &IdealABBlock::source_tag)
       .def_readwrite("components", &IdealABBlock::components)
       .def_readwrite("fourier", &IdealABBlock::fourier);
 
@@ -224,6 +225,10 @@ void bind_knot(py::module_& m) {
 
   m.def("parse_ideal_txt_from_string", &FourierKnot::parse_ideal_txt_from_string,
         py::arg("content"), "Parse ideal.txt-style content string into IdealABBlock entries.");
+
+  m.def("parse_ideal_gilbert_from_string", &FourierKnot::parse_ideal_gilbert_from_string,
+        py::arg("content"),
+        "Parse Gilbert ideal*.txt content (AB, HT, TL) into IdealABBlock entries.");
 
   m.def("index_of_ideal_id", &FourierKnot::index_of_ideal_id,
         py::arg("blocks"), py::arg("id"),
@@ -602,6 +607,11 @@ Compute a PD code from a closed 3D polygonal curve.
         py::arg("ab_id"),
         "Find <AB Id=\"...\"> block XML in embedded/disk ideal*.txt (never knotplot). "
         "Returns empty string if not found.");
+
+  m.def("find_ideal_block_by_id", &sst::find_ideal_block_by_id,
+        py::arg("block_id"), py::arg("tag") = "",
+        "Find <AB>, <HT>, or <TL> block XML by Id in ideal*.txt sources. "
+        "Empty tag tries AB, HT, TL in order.");
 
   m.def("get_embedded_ideal_files", &sst::get_embedded_ideal_files,
         "Return embedded ideal*.txt resources as {relative_name: content}.");

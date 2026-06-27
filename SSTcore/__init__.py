@@ -4,7 +4,9 @@ from pathlib import Path
 import os
 import sys
 import re
-from typing import Optional, List, Tuple, Dict, Any
+from typing import Optional, List, Tuple, Dict, Any, Union
+from dataclasses import dataclass
+from enum import Enum
 
 __version__ = "0.8.12"
 
@@ -41,6 +43,10 @@ __all__ = [
     "get_knot_fseries",
     "knotplot",
     "find_ideal_ab_block_by_id",
+    "find_ideal_block_by_id",
+    "find_ideal_by_id",
+    "IdealLookupResult",
+    "IdealGeometryKind",
     "get_ideal_ab",
     "get_ideal_ht",
     "get_ideal_link",
@@ -299,6 +305,163 @@ def find_ideal_ab_block_by_id(ab_id: str) -> Optional[str]:
     return _find_ideal_ab_block_python(ab_id)
 
 
+class IdealGeometryKind(str, Enum):
+    FOURIER_XML = "fourier_xml"
+    POINT_CLOUD = "point_cloud"
+
+
+@dataclass
+class IdealLookupResult:
+    ideal_id: str
+    block: Optional[str]
+    source_key: str
+    source_file: str
+    xml_tag: str
+    author: Optional[str]
+    geometry_kind: IdealGeometryKind
+
+
+def _extract_data_author(text: str) -> Optional[str]:
+    m = re.search(r'<DATA[^>]*Author="([^"]*)"', text or "")
+    return m.group(1) if m else None
+
+
+def _infer_gilbert_tags(ideal_id: str) -> List[str]:
+    x = (ideal_id or "").strip()
+    if re.match(r"^\d+(:\d+)+$", x):
+        return ["AB"]
+    if re.match(r"^K\d", x, re.I):
+        return ["HT"]
+    if re.match(r"^L\d", x, re.I):
+        return ["TL"]
+    return ["AB", "HT", "TL"]
+
+
+def _is_point_cloud_id(ideal_id: str) -> bool:
+    return bool(re.match(r"^12[an]\d+$", (ideal_id or "").strip(), re.I))
+
+
+def _find_ideal_block_python(ideal_id: str, tags: List[str]) -> Optional[IdealLookupResult]:
+    ideal_id = (ideal_id or "").strip()
+    if not ideal_id:
+        return None
+
+    get_emb = globals().get("get_embedded_ideal_files")
+    embedded: Dict[str, str] = {}
+    if callable(get_emb):
+        try:
+            embedded = get_emb() or {}
+        except Exception:
+            embedded = {}
+
+    def _scan_text(text: str, source_key: str, filename: str) -> Optional[IdealLookupResult]:
+        for xml_tag in tags:
+            block = _extract_xml_block(text, xml_tag, ideal_id)
+            if block:
+                return IdealLookupResult(
+                    ideal_id=ideal_id,
+                    block=block,
+                    source_key=source_key,
+                    source_file=filename,
+                    xml_tag=xml_tag,
+                    author=_extract_data_author(text),
+                    geometry_kind=IdealGeometryKind.FOURIER_XML,
+                )
+        return None
+
+    for source in IDEAL_AB_SEARCH_SOURCES:
+        fname = IDEAL_SOURCE_FILES.get(source, f"{source}.txt")
+        for key, content in embedded.items():
+            if "knotplot" in key.replace("\\", "/").lower():
+                continue
+            base = key.replace("\\", "/").rsplit("/", 1)[-1]
+            if base.find("_ideal.txt") != -1:
+                continue
+            if base != fname:
+                continue
+            hit = _scan_text(content, source, fname)
+            if hit:
+                return hit
+
+    for source in IDEAL_AB_SEARCH_SOURCES:
+        path = get_ideal_file_path(source)
+        if path is None:
+            continue
+        try:
+            text = path.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            continue
+        hit = _scan_text(text, source, path.name)
+        if hit:
+            return hit
+    return None
+
+
+def find_ideal_block_by_id(block_id: str, tag: Optional[str] = None) -> Optional[str]:
+    """Find Gilbert XML block (AB/HT/TL) by Id; returns None on miss."""
+    block_id = (block_id or "").strip()
+    if not block_id:
+        return None
+    tag_norm = (tag or "").strip().upper()
+    try:
+        from . import _native as _mod
+        if hasattr(_mod, "find_ideal_block_by_id"):
+            raw = _mod.find_ideal_block_by_id(block_id, tag_norm)
+            return raw if raw else None
+    except ImportError:
+        pass
+    tags = [tag_norm] if tag_norm else _infer_gilbert_tags(block_id)
+    hit = _find_ideal_block_python(block_id, tags)
+    return hit.block if hit else None
+
+
+def find_ideal_by_id(ideal_id: str, tag: Optional[str] = None) -> Optional[IdealLookupResult]:
+    """Lookup ideal.txt / ideal_11* / idealLinks entry with provenance metadata."""
+    ideal_id = (ideal_id or "").strip()
+    if not ideal_id:
+        return None
+    if _is_point_cloud_id(ideal_id):
+        pts = get_ideal_12_points(ideal_id)
+        if not pts:
+            return None
+        base = ideal_id.replace("_", "").strip().lower()
+        return IdealLookupResult(
+            ideal_id=ideal_id,
+            block=None,
+            source_key="ideal_12_data",
+            source_file=f"ideal_12_data/{base}.txt",
+            xml_tag="",
+            author=None,
+            geometry_kind=IdealGeometryKind.POINT_CLOUD,
+        )
+
+    tag_norm = (tag or "").strip().upper()
+    tags = [tag_norm] if tag_norm else _infer_gilbert_tags(ideal_id)
+
+    block = find_ideal_block_by_id(ideal_id, tag=tag_norm or None)
+    if block:
+        hit = _find_ideal_block_python(ideal_id, tags)
+        if hit and hit.block == block:
+            return hit
+        xml_tag = tag_norm or tags[0]
+        if "<HT" in block[:8]:
+            xml_tag = "HT"
+        elif "<TL" in block[:8]:
+            xml_tag = "TL"
+        elif "<AB" in block[:8]:
+            xml_tag = "AB"
+        return IdealLookupResult(
+            ideal_id=ideal_id,
+            block=block,
+            source_key="ideal",
+            source_file="ideal.txt",
+            xml_tag=xml_tag,
+            author=None,
+            geometry_kind=IdealGeometryKind.FOURIER_XML,
+        )
+    return _find_ideal_block_python(ideal_id, tags)
+
+
 def get_ideal_ab(ab_id: str, source: Optional[str] = None) -> Optional[str]:
     if source is None:
         return find_ideal_ab_block_by_id(ab_id)
@@ -458,7 +621,14 @@ def list_all_knot_options(crossings: int) -> List[Dict[str, Any]]:
             options.append({"id": ht_id, "kind": "ht_11n", "source": "ideal_11n"})
     else:
         for knot_id in list_ideal_12_ids():
-            options.append({"id": knot_id, "kind": "ideal_12", "source": "ideal_12_data"})
+            options.append(
+                {
+                    "id": knot_id,
+                    "kind": "ideal_12",
+                    "source": "ideal_12_data",
+                    "geometry_kind": IdealGeometryKind.POINT_CLOUD.value,
+                }
+            )
     return options
 
 

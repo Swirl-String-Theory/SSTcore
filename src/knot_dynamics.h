@@ -50,6 +50,9 @@ namespace sst {
 	// Returns empty string if not found.
 	std::string find_ideal_ab_block_by_id(const std::string& ab_id);
 
+	// General Gilbert lookup: <AB>, <HT>, or <TL> by Id. tag empty => try AB, HT, TL in order.
+	std::string find_ideal_block_by_id(const std::string& block_id, const std::string& tag = "");
+
   struct KnotInvariants {
     std::string name;
     int crossing_number = 0;      // k
@@ -413,11 +416,15 @@ namespace sst {
                         double L = 0.0;            // L="..."
                         double D = 0.0;            // D="..."
                         int n = 1;                 // n="..." (number of components)
+                        std::string source_tag;    // AB | HT | TL
                         std::vector<IdealABComponent> components;
 
                         // Backward-compat convenience: first component's Fourier block
                         FourierBlock fourier;
                 };
+
+                // Parse AB, HT, and TL blocks from Gilbert ideal*.txt content
+                static std::vector<IdealABBlock> parse_ideal_gilbert_from_string(const std::string& content);
 
                 // Parse all AB blocks from ideal*.txt file path / content
                 static std::vector<IdealABBlock> parse_ideal_txt_multi(const std::string& path);

@@ -1273,24 +1273,39 @@ namespace sst {
                 return false;
         }
 
-        std::string extract_ab_block_xml(const std::string& content, const std::string& ab_id) {
-                const std::string needle = "Id=\"" + ab_id + "\"";
+        std::string extract_gilbert_block_xml(const std::string& content,
+                                              const std::string& block_id,
+                                              const std::string& tag) {
+                if (tag.empty()) return {};
+                const std::string open_needle = "<" + tag;
+                const std::string close_tag = "</" + tag + ">";
+                const std::string id_needle = "Id=\"" + block_id + "\"";
                 size_t pos = 0;
                 while (true) {
-                        const size_t a0 = content.find("<AB", pos);
+                        const size_t a0 = content.find(open_needle, pos);
                         if (a0 == std::string::npos) break;
                         const size_t a1 = content.find('>', a0);
                         if (a1 == std::string::npos) break;
                         const std::string open_tag = content.substr(a0, a1 - a0 + 1);
-                        if (open_tag.find(needle) == std::string::npos) {
+                        if (open_tag.find(id_needle) == std::string::npos) {
                                 pos = a1 + 1;
                                 continue;
                         }
-                        const size_t z0 = content.find("</AB>", a1);
+                        const size_t z0 = content.find(close_tag, a1);
                         if (z0 == std::string::npos) break;
-                        return content.substr(a0, (z0 + 5) - a0);
+                        return content.substr(a0, (z0 + close_tag.size()) - a0);
                 }
                 return {};
+        }
+
+        std::string extract_ab_block_xml(const std::string& content, const std::string& ab_id) {
+                return extract_gilbert_block_xml(content, ab_id, "AB");
+        }
+
+        std::string try_ideal_content_for_tag(const std::string& content,
+                                              const std::string& block_id,
+                                              const std::string& tag) {
+                return extract_gilbert_block_xml(content, block_id, tag);
         }
 
         std::string read_file_or_empty(const std::string& path) {
@@ -1391,6 +1406,69 @@ namespace sst {
                                 const std::string block =
                                     try_ideal_content_for_ab(read_file_or_empty(env_txt), ab_id);
                                 if (!block.empty()) return block;
+                        }
+                }
+
+                return {};
+        }
+
+        std::string find_ideal_block_by_id(const std::string& block_id, const std::string& tag) {
+                if (block_id.empty()) return {};
+
+                std::vector<std::string> tags;
+                if (tag.empty()) {
+                        tags = {"AB", "HT", "TL"};
+                } else {
+                        tags = {tag};
+                }
+
+                const auto search_in_map = [&](const std::map<std::string, std::string>& files,
+                                               const std::string& target_basename) -> std::string {
+                        for (const auto& kv : files) {
+                                if (!is_allowed_ideal_ab_source_key(kv.first)) continue;
+                                if (embed_basename(kv.first) != target_basename) continue;
+                                for (const std::string& t : tags) {
+                                        const std::string block =
+                                            try_ideal_content_for_tag(kv.second, block_id, t);
+                                        if (!block.empty()) return block;
+                                }
+                        }
+                        return {};
+                };
+
+                static std::map<std::string, std::string> embedded_ideal = get_embedded_ideal_files();
+
+                {
+                        const std::string block = search_in_map(embedded_ideal, "ideal.txt");
+                        if (!block.empty()) return block;
+                }
+
+                for (const std::string& fname : ideal_ab_search_filenames()) {
+                        if (fname == "ideal.txt") continue;
+                        const std::string block = search_in_map(embedded_ideal, fname);
+                        if (!block.empty()) return block;
+                }
+
+                for (const std::string& fname : ideal_ab_search_filenames()) {
+                        const std::string path = find_ideal_file_path(fname);
+                        if (path.empty()) continue;
+                        const std::string content = read_file_or_empty(path);
+                        if (content.empty()) continue;
+                        for (const std::string& t : tags) {
+                                const std::string block =
+                                    try_ideal_content_for_tag(content, block_id, t);
+                                if (!block.empty()) return block;
+                        }
+                }
+
+                if (const char* env_txt = std::getenv("SST_IDEAL_TXT")) {
+                        if (env_txt[0] != '\0') {
+                                const std::string content = read_file_or_empty(env_txt);
+                                for (const std::string& t : tags) {
+                                        const std::string block =
+                                            try_ideal_content_for_tag(content, block_id, t);
+                                        if (!block.empty()) return block;
+                                }
                         }
                 }
 
@@ -1573,6 +1651,35 @@ static std::vector<sst::FourierKnot::IdealABComponent> _sst_parse_ab_components_
         comps.push_back(_sst_parse_component_block(comp_attrs, comp_body));
     }
 
+    if (comps.empty()) {
+        const std::string marker = "<STRING";
+        size_t pos = 0;
+        while (pos < ab_body.size()) {
+            const size_t s0 = ab_body.find(marker, pos);
+            if (s0 == std::string::npos) break;
+            const size_t s1 = ab_body.find('>', s0);
+            if (s1 == std::string::npos) break;
+            const std::string open_tag = ab_body.substr(s0, s1 - s0 + 1);
+            const size_t content_start = s1 + 1;
+            const size_t next_string = ab_body.find(marker, content_start);
+            const size_t close_string = ab_body.find("</STRING>", content_start);
+            size_t content_end = ab_body.size();
+            if (close_string != std::string::npos &&
+                (next_string == std::string::npos || close_string < next_string)) {
+                content_end = close_string;
+            } else if (next_string != std::string::npos) {
+                content_end = next_string;
+            }
+            const std::string comp_body = ab_body.substr(content_start, content_end - content_start);
+            comps.push_back(_sst_parse_component_block(open_tag, comp_body));
+            if (close_string != std::string::npos && content_end == close_string) {
+                pos = close_string + 9;
+            } else {
+                pos = content_end;
+            }
+        }
+    }
+
     if (!comps.empty()) return comps;
 
     FourierKnot::IdealABComponent single;
@@ -1580,6 +1687,66 @@ static std::vector<sst::FourierKnot::IdealABComponent> _sst_parse_ab_components_
     single = _sst_parse_component_block("<Component I=\"1\">", ab_body);
     comps.push_back(std::move(single));
     return comps;
+}
+
+static sst::FourierKnot::IdealABBlock _sst_parse_gilbert_open_body(
+    const std::string& open_tag,
+    const std::string& body,
+    const std::string& tag_name)
+{
+    using AB = sst::FourierKnot::IdealABBlock;
+    AB blk;
+    blk.source_tag = tag_name;
+
+    static const std::regex id_re(R"re(Id="([^"]+)")re", std::regex::icase);
+    static const std::regex conway_re(R"re(Conway="([^"]*)")re", std::regex::icase);
+    static const std::regex L_re(R"re(L="([^"]+)")re", std::regex::icase);
+    static const std::regex D_re(R"re(D="([^"]+)")re", std::regex::icase);
+    static const std::regex n_re(R"re(n="([^"]+)")re", std::regex::icase);
+
+    std::smatch m;
+    if (std::regex_search(open_tag, m, id_re))     blk.id     = m[1].str();
+    if (std::regex_search(open_tag, m, conway_re)) blk.conway = m[1].str();
+    if (std::regex_search(open_tag, m, L_re)) {
+        try { blk.L = std::stod(_sst_trim_copy2(m[1].str())); } catch (...) { blk.L = 0.0; }
+    }
+    if (std::regex_search(open_tag, m, D_re)) {
+        try { blk.D = std::stod(_sst_trim_copy2(m[1].str())); } catch (...) { blk.D = 0.0; }
+    }
+    if (std::regex_search(open_tag, m, n_re)) {
+        try { blk.n = std::max(1, std::stoi(_sst_trim_copy2(m[1].str()))); } catch (...) { blk.n = 1; }
+    }
+
+    blk.components = _sst_parse_ab_components_from_body(body);
+    if (!blk.components.empty()) {
+        blk.fourier = blk.components.front().fourier;
+        if (blk.n < 1) blk.n = static_cast<int>(blk.components.size());
+    } else {
+        blk.n = 0;
+    }
+    return blk;
+}
+
+static void _sst_collect_gilbert_blocks(const std::string& content,
+                                        const std::string& tag_name,
+                                        std::vector<sst::FourierKnot::IdealABBlock>& out)
+{
+    const std::string open_needle = "<" + tag_name;
+    const std::string close_tag = "</" + tag_name + ">";
+    size_t pos = 0;
+    while (true) {
+        const size_t a0 = content.find(open_needle, pos);
+        if (a0 == std::string::npos) break;
+        const size_t a1 = content.find('>', a0);
+        if (a1 == std::string::npos) break;
+        const size_t z0 = content.find(close_tag, a1);
+        if (z0 == std::string::npos) break;
+
+        const std::string open_tag = content.substr(a0, a1 - a0 + 1);
+        const std::string body = content.substr(a1 + 1, z0 - (a1 + 1));
+        out.push_back(_sst_parse_gilbert_open_body(open_tag, body, tag_name));
+        pos = z0 + close_tag.size();
+    }
 }
 }
 
@@ -1592,50 +1759,20 @@ sst::FourierKnot::parse_ideal_txt_multi(const std::string& path) {
 }
 
 std::vector<sst::FourierKnot::IdealABBlock>
+sst::FourierKnot::parse_ideal_gilbert_from_string(const std::string& content) {
+    std::vector<IdealABBlock> out;
+    _sst_collect_gilbert_blocks(content, "AB", out);
+    _sst_collect_gilbert_blocks(content, "HT", out);
+    _sst_collect_gilbert_blocks(content, "TL", out);
+    return out;
+}
+
+std::vector<sst::FourierKnot::IdealABBlock>
 sst::FourierKnot::parse_ideal_txt_from_string(const std::string& content) {
-    using AB = sst::FourierKnot::IdealABBlock;
-    std::vector<AB> out;
-
-    static const std::regex id_re(R"(Id="([^"]+)\")", std::regex::icase);
-    static const std::regex conway_re(R"(Conway="([^"]*)\")", std::regex::icase);
-    static const std::regex L_re(R"(L="([^"]+)\")", std::regex::icase);
-    static const std::regex D_re(R"(D="([^"]+)\")", std::regex::icase);
-    static const std::regex n_re(R"(n="([^"]+)\")", std::regex::icase);
-
-    size_t pos = 0;
-    while (true) {
-        size_t a0 = content.find("<AB", pos);
-        if (a0 == std::string::npos) break;
-        size_t a1 = content.find('>', a0);
-        if (a1 == std::string::npos) break;
-        size_t z0 = content.find("</AB>", a1);
-        if (z0 == std::string::npos) break;
-
-        std::string open_tag = content.substr(a0, a1 - a0 + 1);
-        std::string body     = content.substr(a1 + 1, z0 - (a1 + 1));
-
-        AB blk;
-        std::smatch m;
-        if (std::regex_search(open_tag, m, id_re))     blk.id     = m[1].str();
-        if (std::regex_search(open_tag, m, conway_re)) blk.conway = m[1].str();
-        if (std::regex_search(open_tag, m, L_re))      blk.L      = std::stod(_sst_trim_copy2(m[1].str()));
-        if (std::regex_search(open_tag, m, D_re))      blk.D      = std::stod(_sst_trim_copy2(m[1].str()));
-        if (std::regex_search(open_tag, m, n_re)) {
-            try { blk.n = std::max(1, std::stoi(_sst_trim_copy2(m[1].str()))); } catch (...) { blk.n = 1; }
-        }
-
-        blk.components = _sst_parse_ab_components_from_body(body);
-        if (!blk.components.empty()) {
-            blk.fourier = blk.components.front().fourier;
-            if (blk.n < 1) blk.n = static_cast<int>(blk.components.size());
-        } else {
-            blk.n = 0;
-        }
-
-        out.push_back(std::move(blk));
-        pos = z0 + 5;
+    std::vector<IdealABBlock> out;
+    for (const IdealABBlock& blk : parse_ideal_gilbert_from_string(content)) {
+        if (blk.source_tag == "AB") out.push_back(blk);
     }
-
     return out;
 }
 
