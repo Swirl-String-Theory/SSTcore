@@ -70,6 +70,26 @@ This creates:
 - `dist/SSTcore-0.1.0.tar.gz` (source distribution)
 - `dist/SSTcore-0.1.0-cp3X-cp3X-*.whl` (wheel for your platform)
 
+### Source ZIP bundle (audit / evidence)
+
+CI and local release builds also produce a compact **`dist/SSTcore_source_vX.Y.Z.zip`** for Canon evidence and manual review. Large resource trees are nested as `resources/*.zip` (no `*.stl` meshes).
+
+```bash
+python -m build --sdist
+python scripts/make_source_zip.py
+# -> dist/SSTcore_source_v0.8.12.zip
+```
+
+After extracting that ZIP:
+
+```bash
+python scripts/unpack_source_resources.py
+pip install -e .
+python -m pytest tests/ -q
+```
+
+See [`resources/README.md`](../resources/README.md) for archive layout and exclusions. PyPI wheels already embed unpacked resources; this step is only for the source ZIP download path.
+
 ## Step 3: Test on TestPyPI (Recommended)
 
 First, test on TestPyPI to ensure everything works:

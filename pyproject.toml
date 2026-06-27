@@ -6,3 +6,7 @@ requires = ["setuptools>=69", "wheel", "pybind11>=2.6.0", "numpy>=1.19.0", "pack
 # wheels that contained only .dist-info (no SSTcore/, no .so) under PEP 517.
 # Do not reintroduce [project] without reconciling with setup().
 build-backend = "setuptools.build_meta:__legacy__"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

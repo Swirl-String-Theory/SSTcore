@@ -180,12 +180,23 @@ jobs:
           python -m build --sdist
         shell: bash
 
+      - name: Build source ZIP bundle
+        run: python scripts/make_source_zip.py
+        shell: bash
+
       - name: Store sdist artifact
         uses: actions/upload-artifact@v4
         with:
           name: sdist
           path: dist/*.tar.gz
           retention-days: 30
+
+      - name: Store source ZIP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-zip
+          path: dist/SSTcore_source_v*.zip
+          retention-days: 90
 
   upload-pypi:
     name: Upload to PyPI
