@@ -1,4 +1,4 @@
-"""Deprecated shim: ``import sstbindings`` mirrors the full ``SSTcore`` API."""
+"""Compatibility shim: ``import sstbindings`` mirrors the ``SSTcore`` package API."""
 
 import SSTcore as _sstcore_pkg
 

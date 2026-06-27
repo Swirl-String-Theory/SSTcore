@@ -51,3 +51,4 @@ __pycache__/
 
 # Build-time junction to repo-root resources (created by setup.py for package_data)
 /SSTcore/resources/
+/src/SSTcore/resources/

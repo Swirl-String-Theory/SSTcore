@@ -54,6 +54,10 @@ jobs:
           python -m pip install "${{ env.SETUPTOOLS_PIN }}" wheel pybind11 numpy
         shell: bash
 
+      - name: Verify src/SSTcore package layout
+        run: python scripts/check_package_casing.py
+        shell: bash
+
       - name: Build wheel
         env:
           PreferredToolArchitecture: x64

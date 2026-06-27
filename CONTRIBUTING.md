@@ -50,6 +50,24 @@ Requires a full checkout **with submodules** (`git submodule update --init --rec
 npm run wheel:preflight
 ```
 
-This mirrors CI: install build dependencies, `python setup.py bdist_wheel --dist-dir dist`, then verify the wheel archive contains native modules (`.so` / `.pyd`).
+This mirrors CI: install build dependencies, `python setup.py bdist_wheel --dist-dir dist`, then verify the wheel archive contains native modules (`.so` / `.pyd`) and the **`SSTcore/`** package prefix (not lowercase `sstcore/`).
+
+## Package layout: `src/SSTcore/`
+
+The importable Python package is **`src/SSTcore/`** (src-layout). The repository root is **not** the import package — that avoids `SSTcore/SSTcore` confusion and case issues on Linux/macOS.
+
+```python
+import SSTcore
+import SSTcore as sst
+```
+
+Optional legacy alias: **`import sstcore`** via root `sstcore.py` shim.
+
+Before pushing packaging changes:
+
+```bash
+python scripts/check_package_casing.py
+npm run wheel:preflight
+```
 
 Linux-only **`auditwheel repair`** is not run locally by this script; use WSL2 or Docker if you need that step.

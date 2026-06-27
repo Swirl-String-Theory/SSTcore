@@ -3,6 +3,12 @@ import sys
 import math
 import pandas as pd
 from datetime import datetime
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 # Tabel uit de afbeelding (Standard Model overzicht)
 particles = [
     # Quarks (generaties I, II, III)

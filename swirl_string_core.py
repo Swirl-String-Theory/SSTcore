@@ -1,4 +1,4 @@
-"""Deprecated shim: ``import swirl_string_core`` mirrors the full ``SSTcore`` API."""
+"""Deprecated shim: ``import swirl_string_core`` mirrors the ``SSTcore`` package API."""
 
 import SSTcore as _sstcore_pkg
 

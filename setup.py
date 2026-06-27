@@ -237,14 +237,17 @@ _windows_msvc_toolset_defaults()
 
 __version__ = "0.8.12"
 base_dir = os.path.dirname(os.path.abspath(__file__))
+# Python import package: src/SSTcore/ (repo root is not the import package).
+_PYTHON_PKG = "SSTcore"
+_PYTHON_PKG_DIR = os.path.join("src", _PYTHON_PKG)
 # Knot / ideal databases and Fourier series live at repo root: resources/
 REPO_RESOURCES_DIR = os.path.join(base_dir, "resources")
 
 
 def _ensure_sstcore_resources_junction():
-    """Expose repo-root ``resources/`` as ``SSTcore/resources`` for setuptools package_data."""
+    """Expose repo-root ``resources/`` as ``src/SSTcore/resources`` for setuptools package_data."""
     repo_res = os.path.normpath(REPO_RESOURCES_DIR)
-    pkg_res = os.path.normpath(os.path.join(base_dir, "SSTcore", "resources"))
+    pkg_res = os.path.normpath(os.path.join(base_dir, _PYTHON_PKG_DIR, "resources"))
     if not os.path.isdir(repo_res):
         return
     os.makedirs(os.path.dirname(pkg_res), exist_ok=True)
@@ -263,7 +266,7 @@ def _ensure_sstcore_resources_junction():
         except OSError:
             pass
         if _usable_package_resources(pkg_res):
-            # Do not replace: avoids Windows file locks and duplicate trees under SSTcore/resources.
+            # Do not replace: avoids Windows file locks and duplicate trees under sstcore/resources.
             return
 
     if os.path.lexists(pkg_res):
@@ -308,12 +311,12 @@ class SSTEggInfo(egg_info_cls):
 
 
 def _sstcore_package_data_files():
-    """Paths relative to the SSTcore/ package dir for package_data (full resource tree in wheels)."""
+    """Paths relative to the src/SSTcore/ package dir for package_data."""
     _ensure_sstcore_resources_junction()
-    root = os.path.join(base_dir, "SSTcore", "resources")
+    root = os.path.join(base_dir, _PYTHON_PKG_DIR, "resources")
     if not os.path.isdir(root):
         return []
-    pkg_root = os.path.join(base_dir, "SSTcore")
+    pkg_root = os.path.join(base_dir, _PYTHON_PKG_DIR)
     out = []
     for dp, _, fns in os.walk(root):
         for fn in fns:
@@ -948,8 +951,7 @@ include_dirs = ["src", "include", "include/generated", pybind11.get_include()]
 # C++23 is not fully supported on all compilers (especially older GCC versions)
 cxx_std = 20  # Use C++20 for maximum compatibility
 
-# Native extension lives under the SSTcore package (SSTcore._native).
-# CMake builds omit SSTCORE_PYBIND11_NATIVE_SUBMODULE and use the top-level module name sstcore.
+# Native extension: SSTcore._native (wheel); CMake may use top-level ``sstcore`` module name.
 _ext_macros = [
     ("VERSION_INFO", __version__),
     ("KNOT_FILES_EMBEDDED_H", "1"),
@@ -990,12 +992,12 @@ if os.path.exists("Readme.md"):
     with open("Readme.md", "r", encoding="utf-8") as f:
         long_description = f.read()
 
-# Fail fast on Linux/macOS if the package tree is missing (case-sensitive FS / bad clone).
-_sstcore_init = os.path.join(base_dir, "SSTcore", "__init__.py")
+# Fail fast if src-layout Python package is missing.
+_sstcore_init = os.path.join(base_dir, _PYTHON_PKG_DIR, "__init__.py")
 if not os.path.isfile(_sstcore_init):
     raise RuntimeError(
         f"Missing Python package file {_sstcore_init!r}. "
-        "Use a case-sensitive checkout (directory must be SSTcore/, not sstcore/)."
+        "Expected src/SSTcore/ (src-layout; import SSTcore)."
     )
 
 _sstcore_package_data = _sstcore_package_data_files()
@@ -1028,16 +1030,16 @@ setup(
     },
     zip_safe=False,
     python_requires=">=3.9",
-    package_dir={"": "."},
-    packages=["SSTcore"],
-    # Deprecated top-level shims (swirl_string_core.py, sstbindings.py) + flat alias sstcore.py
-    py_modules=["swirl_string_core", "sstcore", "sstbindings"],
+    package_dir={"": "src"},
+    packages=[_PYTHON_PKG],
+    # Root-level compatibility shims (``import sstcore`` / deprecated names)
+    py_modules=["sstcore", "swirl_string_core", "sstbindings"],
     include_package_data=True,
     data_files=(
         ([("share/sstcore/knot_fseries", fseries_files)] if fseries_files else [])
         + resource_data_files
     ),
-    package_data={"SSTcore": _sstcore_package_data},
+    package_data={_PYTHON_PKG: _sstcore_package_data},
     install_requires=[
         "pybind11>=2.6.0",
         "numpy>=1.19.0",

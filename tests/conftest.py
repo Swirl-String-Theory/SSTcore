@@ -1,10 +1,8 @@
 """Pytest hooks for SSTcore tests.
 
-- **Local / CMake**: prepend typical build output dirs so native modules (e.g. ``SSTcore._native``) resolve.
-- **Wheel CI** (``SST_WHEEL_TEST=1``): remove **every** ``sys.path`` entry that resolves inside the
-  checkout (repo root *and* subdirs like ``tests/``). Pytest injects those paths before imports;
-  stripping only the repo root is not enough — a ``tests/`` prefix can still resolve ``SSTcore/``
-  from the tree and shadow the wheel (pure ``__init__.py``, no ``_native``).
+- **Local / CMake**: prepend typical build output dirs so native modules (e.g. ``sstcore._native``) resolve.
+- **Wheel CI** (``SST_WHEEL_TEST=1``): remove checkout paths so site-packages wins, then re-add
+  ``tests/`` only so test helpers (``sstcore_test_import``) remain importable.
 """
 
 from __future__ import annotations
@@ -16,6 +14,10 @@ from pathlib import Path
 
 def _repo_root() -> Path:
     return Path(__file__).resolve().parent.parent
+
+
+def _tests_dir() -> Path:
+    return Path(__file__).resolve().parent
 
 
 def _strip_repo_root_from_sys_path() -> None:
@@ -42,6 +44,15 @@ def _strip_repo_root_from_sys_path() -> None:
     sys.path[:] = [p for p in sys.path if not _is_under_repo(p)]
 
 
+def _ensure_tests_helpers_on_sys_path() -> None:
+    """Keep ``tests/`` importable for shared helpers while the package comes from the wheel."""
+    if os.environ.get("SST_WHEEL_TEST") != "1":
+        return
+    tests_dir = str(_tests_dir().resolve())
+    if tests_dir not in sys.path:
+        sys.path.insert(0, tests_dir)
+
+
 def _prepend_repo_build_dirs() -> None:
     if os.environ.get("SST_WHEEL_TEST") == "1":
         return
@@ -65,9 +76,10 @@ _strip_repo_root_from_sys_path()
 
 def pytest_configure(config) -> None:  # noqa: ARG001
     _strip_repo_root_from_sys_path()
+    _ensure_tests_helpers_on_sys_path()
     _prepend_repo_build_dirs()
 
 
 def pytest_sessionstart(session) -> None:  # noqa: ARG001
-    # Pytest may prepend --rootdir after conftest import; strip again for wheel CI.
     _strip_repo_root_from_sys_path()
+    _ensure_tests_helpers_on_sys_path()

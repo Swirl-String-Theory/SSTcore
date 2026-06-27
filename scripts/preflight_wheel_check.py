@@ -6,6 +6,14 @@ import glob
 import sys
 import zipfile
 
+CANON_PKG = "SSTcore"
+
+
+def _check_package_layout(names: list[str], archive: str) -> None:
+    if not any(n.startswith(f"{CANON_PKG}/") for n in names):
+        print(f"error: {archive} missing {CANON_PKG}/ package tree", file=sys.stderr)
+        raise SystemExit(1)
+
 
 def main() -> int:
     wheels = sorted(glob.glob("dist/*.whl"))
@@ -15,14 +23,13 @@ def main() -> int:
     for whl in wheels:
         with zipfile.ZipFile(whl) as zf:
             names = zf.namelist()
+        _check_package_layout(names, whl)
         native = [n for n in names if n.endswith((".so", ".pyd"))]
         print(f"{whl} native_modules {len(native)}")
         for n in native[:10]:
             print(f"  {n}")
         if not native:
             print(f"error: wheel has no .so/.pyd: {whl}", file=sys.stderr)
-            for n in names[:80]:
-                print(f"  {n}", file=sys.stderr)
             return 1
     return 0
 

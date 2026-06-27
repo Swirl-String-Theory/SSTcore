@@ -27,5 +27,5 @@ include swirl_string_core.py
 # Include CMake files (for reference, though not used in pip build)
 recursive-include cmake *.cmake
 
-recursive-include SSTcore *.py
+recursive-include src/SSTcore *.py
 

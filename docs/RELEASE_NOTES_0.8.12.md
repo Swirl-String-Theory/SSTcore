@@ -33,7 +33,7 @@ The v0.8.0 snapshot items remain: expanded C++ core (Biot–Savart, fluid dynami
 - Added Python-bound quantities: **`pauli_barrier_scale`**, **`swirl_impedance`**, **`dimensionless_stiffness_ratio`**
 - Benchmark and dashboard scripts route fine-structure constant through **`SSTCanonicalConstants.alpha()`** instead of hardcoded values
 - New spectroscopic-gap, delay-mode selection, and tension-scale classes; additional fluid-dynamics methods
-- Package version bumped to **0.8.12** in `setup.py` and `SSTcore/__init__.py`
+- Package version bumped to **0.8.12** in `setup.py` and `src/SSTcore/__init__.py`
 
 ### Ideal geometry & mass pipeline
 
@@ -82,7 +82,7 @@ Robustness archives, v10.3 workflow, and sweep export layout from v0.8.0 are unc
 - CI wheel smoke tests import native module; **`SST_WHEEL_TEST=1`** strips checkout paths from `sys.path`
 - Editable installs resolve **`SSTcore._native`** via relative import
 - Import path refactor: **`swirl_string_core` → `SSTcore`**; root **`sstcore.py`** shim re-exports full API
-- **`import SSTcore`** canonical; on Windows case-insensitive FS use **`python -m sstcore`**
+- **`import SSTcore`** canonical; **`import sstcore`** optional via root shim; **`python -m SSTcore`**
 - New test coverage: ideal resources, knot registry, trefoil three sources, Gilbert formats, export CLI
 - **`SSTcore_full_probe.py`**: import, resources, topology lookup, ParticleEvaluator canon guard, `resolve_knot_ref`
 
@@ -95,7 +95,7 @@ npm/WASM packaging docs from v0.8.0 remain; no breaking npm API changes in this 
 1. **`ParticleEvaluator`** — expects Gilbert AB ids (`3:1:1`, `6:1:1`, …). KnotPlot/Fremlin-style refs fail unless `allow_non_canonical_geometry_for_research_only=True`.
 2. **`ideal_database.txt`** — deprecated for canon mass; use `ideal.txt` / `find_ideal_ab_block_by_id()`.
 3. **Examples** — embedded-first by default; set **`SST_USE_DISK_RESOURCES=1`** for explicit disk fallback.
-4. **Module casing** — package directory `SSTcore/`; CLI: `python -m sstcore` on Windows, `python -m SSTcore` on case-sensitive Linux/macOS when installed as `SSTcore`.
+4. **Import / layout** — canonical package **`src/SSTcore/`** with **`import SSTcore`**. Optional **`import sstcore`** via root shim. Avoid hand-made ZIPs; use git clone or PyPI sdist.
 
 ---
 
