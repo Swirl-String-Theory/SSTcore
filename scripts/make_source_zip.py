@@ -20,6 +20,7 @@ from source_zip_common import (
     collect_source_files,
     iter_files_for_nested_dir,
     read_version,
+    repo_rel_path,
 )
 
 SOURCE_ZIP_README = """SSTcore source bundle
@@ -67,7 +68,7 @@ def build_nested_archive(repo_root: Path, spec, staging_resources: Path) -> dict
     dir_name = spec.rel_dir.split("/")[-1]
     with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
         for path in files:
-            inner = path.relative_to(repo_root / spec.rel_dir)
+            inner = path.relative_to(repo_rel_path(repo_root, spec.rel_dir))
             arc = f"{dir_name}/{inner.as_posix()}"
             zf.write(path, arcname=arc)
 
@@ -198,7 +199,7 @@ def build_source_zip(
             for rel in files:
                 if rel in nested_zip_rels or rel == f"resources/{MANIFEST_NAME}":
                     continue
-                disk = repo_root / rel.replace("/", "\\")
+                disk = repo_rel_path(repo_root, rel)
                 if not disk.is_file():
                     continue
                 _add_file_to_zip(zf, disk, prefix + rel)

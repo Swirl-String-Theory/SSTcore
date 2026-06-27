@@ -18,6 +18,7 @@ from source_zip_common import (  # noqa: E402
     MANIFEST_NAME,
     collect_source_files,
     read_version,
+    repo_rel_path,
     should_exclude_file,
 )
 from make_source_zip import build_source_zip  # noqa: E402
@@ -51,6 +52,16 @@ def test_collect_source_files_includes_readme() -> None:
     assert "src/SSTcore/__init__.py" in files
     assert not any("resources/knotplot/" in f for f in files)
     assert not any(f.endswith(".stl") for f in files)
+
+
+def test_repo_rel_path_uses_forward_slashes(tmp_path: Path) -> None:
+    nested = tmp_path / "resources" / "ideal_12_data"
+    nested.mkdir(parents=True)
+    sample = nested / "12a1.txt"
+    sample.write_text("x", encoding="utf-8")
+    resolved = repo_rel_path(tmp_path, "resources/ideal_12_data/12a1.txt")
+    assert resolved == sample
+    assert resolved.is_file()
 
 
 def test_build_source_zip_smoke(tmp_path: Path) -> None:

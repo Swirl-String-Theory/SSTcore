@@ -11,7 +11,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from source_zip_common import MANIFEST_NAME, REPO_ROOT
+from source_zip_common import MANIFEST_NAME, REPO_ROOT, repo_rel_path
 
 
 def _sha256_file(path: Path) -> str:
@@ -42,8 +42,8 @@ def unpack_resources(repo_root: Path, *, force: bool = False, quiet: bool = Fals
         zip_rel = entry["path"]
         target_rel = entry["target"]
         expected_sha = entry.get("sha256")
-        zip_path = repo_root / zip_rel.replace("/", "\\")
-        target_dir = repo_root / target_rel.replace("/", "\\")
+        zip_path = repo_rel_path(repo_root, zip_rel)
+        target_dir = repo_rel_path(repo_root, target_rel)
 
         if not zip_path.is_file():
             if entry.get("optional"):

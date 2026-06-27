@@ -103,6 +103,12 @@ def _norm_rel(path: str) -> str:
     return path.replace("\\", "/")
 
 
+def repo_rel_path(root: Path, rel_posix: str) -> Path:
+    """Join repo root with a forward-slash relative path (POSIX-safe on all OSes)."""
+    rel_posix = _norm_rel(rel_posix)
+    return root.joinpath(*rel_posix.split("/")) if rel_posix else root
+
+
 def _matches_glob_exclude(rel_posix: str) -> bool:
     for pat in GLOB_EXCLUDE_PATTERNS:
         if fnmatch.fnmatch(rel_posix, pat):
@@ -191,7 +197,7 @@ def collect_source_files(repo_root: Path | None = None) -> list[str]:
         add(rel)
 
     for rel in ALWAYS_INCLUDE_IF_PRESENT:
-        if (root / rel.replace("/", "\\")).is_file():
+        if repo_rel_path(root, rel).is_file():
             add(rel)
 
     return sorted(out)
@@ -219,7 +225,7 @@ NESTED_SPECS = [NestedArchiveSpec.from_config(d, opt) for d, opt in NESTED_RESOU
 
 
 def iter_files_for_nested_dir(repo_root: Path, rel_dir: str) -> Iterator[Path]:
-    base = repo_root / rel_dir.replace("/", "\\")
+    base = repo_rel_path(repo_root, rel_dir)
     if not base.is_dir():
         return
     for path in sorted(base.rglob("*")):
