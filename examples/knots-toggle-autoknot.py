@@ -79,7 +79,14 @@ def compute_curvature(x, y, z):
 
 # --- Load and prepare knots ---
 folder = './'
-paths = sorted(glob.glob(os.path.join(folder, '*.fseries')))
+try:
+    from SSTcore import get_knots_fourier_series_dir
+except ImportError:
+    from sstcore import get_knots_fourier_series_dir
+_kfs = get_knots_fourier_series_dir()
+paths = sorted(glob.glob(str(_kfs / "**" / "knot.*.fseries"), recursive=True)) if _kfs else []
+if not paths:
+    paths = sorted(glob.glob(os.path.join(folder, '*.fseries')))
 labels = [os.path.splitext(os.path.basename(p))[0].replace('knot','').replace('Knot','') for p in paths]
 
 if USE_CPP:

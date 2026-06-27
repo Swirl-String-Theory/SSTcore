@@ -1,12 +1,28 @@
 # fourier_knot.example.py
 import numpy as np
 try:
-    from SSTcore import parse_fseries_multi, index_of_largest_block, evaluate_fourier_block
+    from SSTcore import (
+        parse_fseries_multi,
+        parse_fseries_from_string,
+        index_of_largest_block,
+        evaluate_fourier_block,
+        load_fseries_knot,
+    )
 except ImportError:
-    from SSTcore import parse_fseries_multi, index_of_largest_block, evaluate_fourier_block
+    from sstcore import (
+        parse_fseries_multi,
+        parse_fseries_from_string,
+        index_of_largest_block,
+        evaluate_fourier_block,
+        load_fseries_knot,
+    )
 
-# Load (auto-selects largest block), evaluate at 1000 points
-blocks = parse_fseries_multi("myKnot.fseries")
+# Embedded-first: use bundled Fremlin trefoil unless SST_USE_DISK_RESOURCES=1
+_text = load_fseries_knot("3_1")
+if _text:
+    blocks = parse_fseries_from_string(_text)
+else:
+    blocks = parse_fseries_multi("myKnot.fseries")
 block_idx = index_of_largest_block(blocks)
 block = blocks[block_idx]
 s_vals = np.linspace(0, 2*np.pi, 1000, endpoint=False).tolist()

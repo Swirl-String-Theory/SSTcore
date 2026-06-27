@@ -5,7 +5,7 @@ a = Analysis(
     ['sst_dashboard.py'],
     pathex=[],
     binaries=[],
-    datas=[('sstcore.cp312-win_amd64.pyd', '.'), ('examples/ideal_database.txt', 'src/knot_fseries')],
+    datas=[('sstcore.cp312-win_amd64.pyd', '.'), ('resources/ideal.txt', 'resources')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

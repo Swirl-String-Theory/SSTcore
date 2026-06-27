@@ -76,8 +76,15 @@ Xf, Yf, Zf = np.meshgrid(interior_vals, interior_vals, interior_vals, indexing='
 r_sq = (Xf**2 + Yf**2 + Zf**2).ravel()
 grid_shape = (grid_size, grid_size, grid_size)
 
-# Find all .fseries files
-paths = sorted(glob.glob("*.fseries"))
+# Find all .fseries files (embedded-first)
+try:
+    from SSTcore import get_knots_fourier_series_dir
+except ImportError:
+    from sstcore import get_knots_fourier_series_dir
+_kfs = get_knots_fourier_series_dir()
+paths = sorted(glob.glob(str(_kfs / "**" / "knot.*.fseries"), recursive=True)) if _kfs else []
+if not paths:
+    paths = sorted(glob.glob("*.fseries"))
 
 print("\\n=== VAM Muon Anomaly via Helicity ===")
 for path in paths:

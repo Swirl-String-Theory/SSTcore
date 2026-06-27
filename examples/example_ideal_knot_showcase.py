@@ -14,15 +14,21 @@ except ImportError:
 
 
 def find_ideal_txt():
-    candidates = [
-        os.environ.get("IDEAL_TXT_PATH", ""),
-        "ideal.txt",
-        os.path.join(os.path.dirname(__file__), "ideal.txt"),
-        os.path.join(os.path.dirname(__file__), "..", "SSTcore", "resources", "ideal.txt"),
-    ]
-    for p in candidates:
-        if p and os.path.exists(p):
-            return p
+    try:
+        import SSTcore as ssc
+    except ImportError:
+        import sstcore as ssc
+    p = ssc.get_ideal_txt_path()
+    if p is not None and p.is_file():
+        return str(p)
+    if os.environ.get("SST_USE_DISK_RESOURCES") == "1":
+        candidates = [
+            os.environ.get("IDEAL_TXT_PATH", ""),
+            os.path.join(os.path.dirname(__file__), "..", "resources", "ideal.txt"),
+        ]
+        for cand in candidates:
+            if cand and os.path.exists(cand):
+                return cand
     return None
 
 
@@ -57,6 +63,15 @@ def main():
         ideal_ab = blocks[idx]
         ideal_block = ideal_ab.fourier
         print(f"Selected AB {ideal_ab.id}, Conway={ideal_ab.conway}, L(listed)={ideal_ab.L:.6f}, D={ideal_ab.D:.6f}")
+    else:
+        xml = ssc.load_ideal_ab_embedded("4:1:1")
+        if xml:
+            print("Loading embedded ideal AB 4:1:1 via load_ideal_ab_embedded")
+            blocks = ssc.parse_ideal_txt_from_string(xml)
+            if blocks:
+                ideal_ab = blocks[0]
+                ideal_block = ideal_ab.fourier
+                print(f"Selected AB {ideal_ab.id}, L={ideal_ab.L:.6f}")
 
         desc = ssc.describe_fourier_block(ideal_block, nsamples=2048, exclude_window=4)
         print("\nDescriptors:")

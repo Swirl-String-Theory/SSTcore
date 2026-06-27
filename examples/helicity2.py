@@ -57,12 +57,23 @@ Xf, Yf, Zf = np.meshgrid(interior_vals, interior_vals, interior_vals, indexing='
 r_sq = (Xf**2 + Yf**2 + Zf**2).ravel()
 grid_shape = (grid_size, grid_size, grid_size)
 
-# === Automatically Find All .fseries Files ===
-knot_files = {
-    os.path.splitext(fname)[0]: fname
-    for fname in os.listdir(".")
-    if fname.endswith(".fseries")
-}
+# === Automatically Find All .fseries Files (embedded-first) ===
+try:
+    from SSTcore import get_knots_fourier_series_dir
+except ImportError:
+    from sstcore import get_knots_fourier_series_dir
+
+knot_files = {}
+_kfs = get_knots_fourier_series_dir()
+if _kfs is not None:
+    for fp in _kfs.rglob("knot.*.fseries"):
+        knot_files[fp.stem.replace("knot.", "")] = str(fp)
+if not knot_files:
+    knot_files = {
+        os.path.splitext(fname)[0]: fname
+        for fname in os.listdir(".")
+        if fname.endswith(".fseries")
+    }
 
 results = {}
 

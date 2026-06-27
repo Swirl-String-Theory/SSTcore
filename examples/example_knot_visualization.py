@@ -19,14 +19,18 @@ print("=" * 70)
 print("Available Built-in Knots in Swirl String Core:")
 print("=" * 70)
 
-# Find all .fseries files to list available knots
-knot_fseries_dir = os.path.join(os.path.dirname(__file__), '..', 'src', 'knot_fseries')
-if not os.path.exists(knot_fseries_dir):
-    knot_fseries_dir = os.path.join('src', 'knot_fseries')
-if not os.path.exists(knot_fseries_dir):
-    knot_fseries_dir = 'knot_fseries'
+# Find all .fseries files to list available knots (embedded-first)
+try:
+    from SSTcore import list_embedded_fseries_ids, get_knots_fourier_series_dir
+except ImportError:
+    from sstcore import list_embedded_fseries_ids, get_knots_fourier_series_dir
 
-fseries_files = sorted(glob.glob(os.path.join(knot_fseries_dir, '*.fseries')))
+fseries_ids = list_embedded_fseries_ids()
+knot_fseries_dir = get_knots_fourier_series_dir()
+fseries_files = []
+if knot_fseries_dir is not None:
+    import glob as _glob
+    fseries_files = sorted(_glob.glob(str(knot_fseries_dir / "**" / "knot.*.fseries"), recursive=True))
 
 # Knot descriptions
 knot_descriptions = {
@@ -46,6 +50,10 @@ for fpath in fseries_files:
         knot_id = basename[5:].split('.')[0]
         if knot_id not in knot_groups:
             knot_groups[knot_id] = []
+
+if not knot_groups and fseries_ids:
+    for knot_id in fseries_ids:
+        knot_groups.setdefault(knot_id, [])
 
 print("\n📐 All Built-in Knots:")
 print()

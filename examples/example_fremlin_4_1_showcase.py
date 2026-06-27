@@ -28,17 +28,19 @@ except ImportError:
 
 
 def _candidate_fseries_roots():
-    """Portable: script-relative and env only (no absolute paths)."""
+    """Embedded-first Knots_FourierSeries root."""
+    d = ssc.get_knots_fourier_series_dir()
+    if d is not None:
+        return str(d)
+    if os.environ.get("SST_USE_DISK_RESOURCES") != "1":
+        return None
     here = os.path.abspath(os.path.dirname(__file__))
     root = os.path.abspath(os.path.join(here, ".."))
     candidates = [
-        os.environ.get("SSTCORE_RESOURCES", "").rstrip(os.sep) + os.sep + "Knots_FourierSeries" if os.environ.get("SSTCORE_RESOURCES") else "",
+        os.environ.get("SSTCORE_RESOURCES", "").rstrip(os.sep) + os.sep + "Knots_FourierSeries"
+        if os.environ.get("SSTCORE_RESOURCES")
+        else "",
         os.path.join(root, "resources", "Knots_FourierSeries"),
-        os.path.join(root, "SSTcore", "resources", "Knots_FourierSeries"),
-        os.path.join(root, "src", "Knots_FourierSeries"),
-        os.path.join("resources", "Knots_FourierSeries"),
-        os.path.join("SSTcore", "resources", "Knots_FourierSeries"),
-        os.path.join("src", "Knots_FourierSeries"),
     ]
     for p in candidates:
         if p and os.path.isdir(p):

@@ -9,8 +9,10 @@ try:
         enstrophy,
         BiotSavart,
         parse_fseries_multi,
+        parse_fseries_from_string,
         index_of_largest_block,
         evaluate_fourier_block,
+        load_fseries_knot,
     )
 except ImportError:
     from sstcore import (
@@ -18,12 +20,18 @@ except ImportError:
         enstrophy,
         BiotSavart,
         parse_fseries_multi,
+        parse_fseries_from_string,
         index_of_largest_block,
         evaluate_fourier_block,
+        load_fseries_knot,
     )
 
-# Load knot points from .fseries file
-blocks = parse_fseries_multi("example.fseries")
+# Load knot points (embedded-first: trefoil 3_1, else local example.fseries)
+_fseries_text = load_fseries_knot("3_1")
+if _fseries_text:
+    blocks = parse_fseries_from_string(_fseries_text)
+else:
+    blocks = parse_fseries_multi("example.fseries")
 block_idx = index_of_largest_block(blocks)
 block = blocks[block_idx]
 s_vals = np.linspace(0, 2*np.pi, 200, endpoint=False).tolist()

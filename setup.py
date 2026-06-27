@@ -1042,6 +1042,11 @@ setup(
         "pybind11>=2.6.0",
         "numpy>=1.19.0",
     ],
+    entry_points={
+        "console_scripts": [
+            "sstcore-export-resources=SSTcore.cli:export_resources_entry",
+        ],
+    },
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Science/Research",

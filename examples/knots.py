@@ -117,10 +117,18 @@ def plot_knots_grid_auto(paths):
 
 
 if __name__ == "__main__":
-    # automatically grab all .fseries in the fseries/ folder
-    folder = "fseries"
-    filenames = sorted(glob.glob(os.path.join(folder, "*.fseries")))
+    try:
+        from SSTcore import get_knots_fourier_series_dir, list_embedded_fseries_ids
+    except ImportError:
+        from sstcore import get_knots_fourier_series_dir, list_embedded_fseries_ids
+    kfs = get_knots_fourier_series_dir()
+    filenames = []
+    if kfs is not None:
+        filenames = sorted(glob.glob(str(kfs / "**" / "knot.*.fseries"), recursive=True))
     if not filenames:
-            print(f"No .fseries files found in '{folder}/'")
+        folder = "fseries"
+        filenames = sorted(glob.glob(os.path.join(folder, "*.fseries")))
+    if not filenames:
+        print("No .fseries files found (install SSTcore resources or set SST_USE_DISK_RESOURCES=1)")
     else:
         plot_knots_grid_auto(filenames)

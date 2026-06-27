@@ -17,35 +17,21 @@ except ImportError:
 
 
 def candidate_ideal_paths():
-    """Search ideal.txt in dev/build/install locations (portable: no absolute paths)."""
-    here = os.path.abspath(os.path.dirname(__file__))
-    root = os.path.abspath(os.path.join(here, ".."))
-    candidates = []
-    # Env override (works on any machine)
-    if os.environ.get("IDEAL_TXT_PATH"):
-        candidates.append(os.environ.get("IDEAL_TXT_PATH"))
-    r = os.environ.get("SSTCORE_RESOURCES")
-    if r:
-        candidates.append(os.path.join(r.rstrip(os.sep), "ideal.txt"))
-    # Source tree (repo root = parent of examples/)
-    candidates.extend([
-        os.path.join(root, "resources", "ideal.txt"),
-        os.path.join(root, "resources", "Knots_FourierSeries", "ideal.txt"),
-        os.path.join(root, "SSTcore", "resources", "ideal.txt"),
-        os.path.join(root, "SSTcore", "resources", "Knots_FourierSeries", "ideal.txt"),
-        os.path.join(root, "src", "Knots_FourierSeries", "ideal.txt"),
-        os.path.join("resources", "ideal.txt"),
-        os.path.join("resources", "Knots_FourierSeries", "ideal.txt"),
-        os.path.join("SSTcore", "resources", "ideal.txt"),
-        os.path.join("SSTcore", "resources", "Knots_FourierSeries", "ideal.txt"),
-        os.path.join("src", "Knots_FourierSeries", "ideal.txt"),
-        os.path.join(root, "build", "share", "sstcore", "resources", "ideal.txt"),
-        os.path.join(root, "build", "share", "sstcore", "resources", "Knots_FourierSeries", "ideal.txt"),
-    ])
-    # Pip/install
-    for sub in ("share/sstcore/resources/ideal.txt", "share/sstcore/resources/Knots_FourierSeries/ideal.txt"):
-        candidates.append(os.path.join(sys.prefix, sub.replace("/", os.sep)))
-    return candidates
+    """Embedded-first ideal.txt resolution."""
+    paths = []
+    p = ssc.get_ideal_txt_path()
+    if p is not None:
+        paths.append(str(p))
+    if os.environ.get("SST_USE_DISK_RESOURCES") == "1":
+        here = os.path.abspath(os.path.dirname(__file__))
+        root = os.path.abspath(os.path.join(here, ".."))
+        if os.environ.get("IDEAL_TXT_PATH"):
+            paths.append(os.environ.get("IDEAL_TXT_PATH"))
+        r = os.environ.get("SSTCORE_RESOURCES")
+        if r:
+            paths.append(os.path.join(r.rstrip(os.sep), "ideal.txt"))
+        paths.append(os.path.join(root, "resources", "ideal.txt"))
+    return paths
 
 
 def resolve_ideal_path():

@@ -64,6 +64,12 @@ __all__ = [
     "KnotResolution",
     "resolve_knot_ref",
     "assert_canon_ideal",
+    "list_ideal_source_files",
+    "load_fseries_knot",
+    "list_embedded_fseries_ids",
+    "load_ideal_ab_embedded",
+    "parse_fseries_knot",
+    "use_disk_resources",
 ]
 
 # Re-export native API (relative _native in editable/dev checkouts, else SSTcore._native wheel layout)
@@ -230,6 +236,76 @@ def get_knot_fseries(knot_id: str) -> Optional[str]:
         return first_match_path.read_text(encoding="utf-8", errors="replace")
     except OSError:
         return None
+
+
+def use_disk_resources() -> bool:
+    """True when SST_USE_DISK_RESOURCES=1 (opt-in disk fallback for examples)."""
+    return os.environ.get("SST_USE_DISK_RESOURCES", "").strip() == "1"
+
+
+def list_ideal_source_files() -> Dict[str, str]:
+    """Return known Gilbert ideal bundle keys → filenames."""
+    return dict(IDEAL_SOURCE_FILES)
+
+
+def load_ideal_ab_embedded(ab_id: str) -> Optional[str]:
+    """Load canon AB XML block from embedded/disk ideal catalog (Patch A lookup)."""
+    return find_ideal_ab_block_by_id(ab_id)
+
+
+def load_fseries_knot(label: str) -> Optional[str]:
+    """Load Fremlin fseries text for a knot label like ``3_1`` (embedded-first)."""
+    label = (label or "").strip().replace(".", "_")
+    if not label:
+        return None
+    if not use_disk_resources():
+        text = get_knot_fseries(label)
+        if text:
+            return text
+    kfs = get_knots_fourier_series_dir()
+    if kfs is None:
+        return get_knot_fseries(label)
+    exact = f"knot.{label}.fseries"
+    for root, _dirs, files in os.walk(kfs):
+        for fn in files:
+            if fn.lower() == exact.lower():
+                try:
+                    return (Path(root) / fn).read_text(encoding="utf-8", errors="replace")
+                except OSError:
+                    continue
+    return get_knot_fseries(label)
+
+
+def list_embedded_fseries_ids() -> List[str]:
+    """List knot labels (e.g. ``3_1``) available under Knots_FourierSeries/."""
+    kfs = get_knots_fourier_series_dir()
+    if kfs is None:
+        return []
+    out: List[str] = []
+    for root, _dirs, files in os.walk(kfs):
+        for fn in files:
+            fn_lower = fn.lower()
+            if fn_lower.startswith("knot.") and fn_lower.endswith(".fseries"):
+                out.append(fn[5 : -len(".fseries")])
+    return sorted(set(out))
+
+
+def parse_fseries_knot(label: str):
+    """Parse embedded/disk fseries for ``label`` into Fourier blocks (native API)."""
+    text = load_fseries_knot(label)
+    if not text:
+        return None
+    parse_fn = globals().get("parse_fseries_from_string")
+    if not callable(parse_fn):
+        try:
+            from . import _native as _mod
+
+            parse_fn = getattr(_mod, "parse_fseries_from_string", None)
+        except ImportError:
+            parse_fn = None
+    if not callable(parse_fn):
+        return None
+    return parse_fn(text)
 
 
 def _extract_xml_block(text: str, tag: str, id_value: str) -> Optional[str]:
