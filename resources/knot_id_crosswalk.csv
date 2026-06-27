@@ -1,0 +1,5 @@
+ref,canonical_ab_id,knotplot_name,fremlin_label,notes
+3:1:1,3:1:1,knot_3.1,3_1,trefoil Gilbert AB canon
+3_1,3:1:1,knot_3.1,3_1,Fremlin label for trefoil
+knot_3.1,3:1:1,knot_3.1,3_1,KnotPlot legacy import (not canon AB lookup)
+triple-gear,,knot_TL3.3_Gear,,Triple-Gear visualization alias

@@ -569,6 +569,54 @@ def write_csv(path: Path, rows: List[Dict[str, Any]]) -> None:
             writer.writerow({k: jsonable(row.get(k)) for k in keys})
 
 
+def probe_particle_evaluator(sst: Any) -> Dict[str, Any]:
+    result: Dict[str, Any] = {
+        "particle_evaluator_exists": hasattr(sst, "ParticleEvaluator"),
+        "trefoil_canon_ok": None,
+        "trefoil_canon_error": None,
+        "knotplot_reject_ok": None,
+        "knotplot_reject_error": None,
+        "resolve_knot_ref_ok": None,
+        "resolve_knot_ref_ropelength": None,
+        "resolve_knot_ref_error": None,
+        "errors": [],
+    }
+
+    if not result["particle_evaluator_exists"]:
+        result["errors"].append("ParticleEvaluator not exported")
+        return result
+
+    try:
+        sst.ParticleEvaluator("3:1:1", 200)
+        result["trefoil_canon_ok"] = True
+    except Exception as exc:
+        result["trefoil_canon_ok"] = False
+        result["trefoil_canon_error"] = f"{type(exc).__name__}: {exc}"
+
+    try:
+        sst.ParticleEvaluator("knot_3.1", 200)
+        result["knotplot_reject_ok"] = False
+        result["knotplot_reject_error"] = "expected RuntimeError for non-canon id"
+    except Exception as exc:
+        result["knotplot_reject_ok"] = True
+        result["knotplot_reject_error"] = f"{type(exc).__name__}: {exc}"
+
+    if hasattr(sst, "resolve_knot_ref") and callable(sst.resolve_knot_ref):
+        try:
+            res = sst.resolve_knot_ref("3:1:1")
+            if res is None:
+                result["resolve_knot_ref_ok"] = False
+                result["resolve_knot_ref_error"] = "resolve_knot_ref returned None"
+            else:
+                result["resolve_knot_ref_ok"] = True
+                result["resolve_knot_ref_ropelength"] = getattr(res, "ropelength", None)
+        except Exception as exc:
+            result["resolve_knot_ref_ok"] = False
+            result["resolve_knot_ref_error"] = f"{type(exc).__name__}: {exc}"
+
+    return result
+
+
 def make_report(sst: Any, import_info: Dict[str, Any]) -> Dict[str, Any]:
     report: Dict[str, Any] = {}
     report["environment"] = probe_environment()
@@ -578,6 +626,7 @@ def make_report(sst: Any, import_info: Dict[str, Any]) -> Dict[str, Any]:
     report["resources"] = probe_resources(sst)
     report["native_bindings"] = probe_native_bindings(sst)
     report["topology_candidates"] = probe_topologies(sst)
+    report["particle_evaluator"] = probe_particle_evaluator(sst)
     report["constant_checks"] = compute_constant_checks()
     report["meson_link_scaffolds"] = compute_meson_link_scaffolds(
         report["constant_checks"]["E_meson0_MeV"]
@@ -643,6 +692,15 @@ def print_report_summary(report: Dict[str, Any]) -> None:
             f"error={row['error']}"
         )
 
+    print_header("ParticleEvaluator (Patch B canon guard)")
+    pe = report.get("particle_evaluator") or {}
+    print_kv("particle_evaluator_exists", pe.get("particle_evaluator_exists"))
+    print_kv("trefoil_canon_ok", pe.get("trefoil_canon_ok"))
+    print_kv("trefoil_canon_error", pe.get("trefoil_canon_error"))
+    print_kv("knotplot_reject_ok", pe.get("knotplot_reject_ok"))
+    print_kv("resolve_knot_ref_ok", pe.get("resolve_knot_ref_ok"))
+    print_kv("resolve_knot_ref_ropelength", pe.get("resolve_knot_ref_ropelength"))
+
     print_header("Canon-v0.8.x numerical sanity checks")
     cc = report["constant_checks"]
     for key in [
@@ -679,6 +737,11 @@ def print_report_summary(report: Dict[str, Any]) -> None:
         problems.append("ideal.txt not found.")
     if not any(row["found_nonempty"] for row in report["topology_candidates"]):
         problems.append("no topology candidates were found via helper lookups.")
+    pe = report.get("particle_evaluator") or {}
+    if pe.get("particle_evaluator_exists") and not pe.get("trefoil_canon_ok"):
+        problems.append("ParticleEvaluator trefoil canon smoke failed.")
+    if pe.get("particle_evaluator_exists") and pe.get("knotplot_reject_ok") is False:
+        problems.append("ParticleEvaluator did not reject knot_3.1 non-canon id.")
 
     if problems:
         print("Probe completed with warnings:")
