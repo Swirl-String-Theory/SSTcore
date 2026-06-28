@@ -1,0 +1,5 @@
+knot,E_slice_J,velmag_heatmap,SwirlClock_heatmap,rhoE_log10_heatmap
+"T(3,2)",1.0890582145542263e-35,figures/T3_2_velmag_heatmap.png,figures/T3_2_SwirlClock_heatmap.png,figures/T3_2_rhoE_log10_heatmap.png
+"T(2,3)",2.706486633490919e-35,figures/T2_3_velmag_heatmap.png,figures/T2_3_SwirlClock_heatmap.png,figures/T2_3_rhoE_log10_heatmap.png
+"T(6,9)",2.0394423949400613e-34,figures/T6_9_velmag_heatmap.png,figures/T6_9_SwirlClock_heatmap.png,figures/T6_9_rhoE_log10_heatmap.png
+"T(9,6)",1.136878048269936e-34,figures/T9_6_velmag_heatmap.png,figures/T9_6_SwirlClock_heatmap.png,figures/T9_6_rhoE_log10_heatmap.png

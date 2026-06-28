@@ -1,0 +1,28 @@
+{
+  "coil": {
+    "S": 40,
+    "step_fwd": 11,
+    "step_bwd": -9,
+    "phases": 3,
+    "turns_pairs": 40,
+    "samples_per_segment": 4,
+    "radius_m": 0.05,
+    "height_m": 0.0,
+    "layer_count": 1,
+    "layer_spacing_m": 0.0015,
+    "path_mode": "chord"
+  },
+  "circuit": {
+    "v_bus": 24.0,
+    "duty": 0.382,
+    "current_limit_A": 8.0,
+    "wire_diameter_m": 0.001,
+    "mosfet_rds_on_ohm": 0.055,
+    "driver_deadtime_s": 2.5e-07,
+    "phase_resistance_extra_ohm": 0.05,
+    "inductance_scale": 1.0,
+    "mutual_k": 0.06,
+    "include_skin": true,
+    "waveform": "bipolar_pwm"
+  }
+}

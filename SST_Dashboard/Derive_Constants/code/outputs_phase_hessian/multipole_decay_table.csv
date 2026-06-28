@@ -1,0 +1,6 @@
+ell,degeneracy_2ell_plus_1,exterior_decay,contributes_to_1_over_r,far_field_status
+0,1,r^-1,True,leading Coulombic monopole
+1,3,r^-2,False,subleading multipole
+2,5,r^-3,False,subleading multipole
+3,7,r^-4,False,subleading multipole
+4,9,r^-5,False,subleading multipole

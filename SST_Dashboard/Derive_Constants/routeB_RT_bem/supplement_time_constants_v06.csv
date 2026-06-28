@@ -1,0 +1,11 @@
+compound,constant,value,uncertainty,unit,source,found_token_in_pdf_text
+"(R,S)-1-h9",tau_CS1,12.4,0.4,ps,narrative_TA_global_fit,True
+"(R,S)-1-h9",tau_CS2,203.0,8.0,ps,narrative_TA_global_fit,True
+"(R,S)-1-h9",tau_rlx,32.0,5.0,ns,narrative_TA_global_fit,True
+"(R,S)-1-h9",tau_CR,65.9,0.7,us,narrative_TA_global_fit,True
+"(R,S)-1-d9",tau_CR,51.1,0.3,us,narrative_TA_global_fit,True
+2-h9,tau_CS1,4.8,0.3,ps,narrative_TA_global_fit,True
+2-h9,tau_CS2,213.0,6.0,ps,narrative_TA_global_fit,True
+2-h9,tau_rlx,4.8,0.5,ns,narrative_TA_global_fit,True
+2-h9,tau_CR,46.4,0.6,us,narrative_TA_global_fit,True
+2-d9,tau_CR,57.0,0.1,us,narrative_TA_global_fit,True

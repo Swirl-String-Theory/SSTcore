@@ -1,0 +1,2 @@
+mode,n_points,w_perp_mean,w_perp_spread,w_perp_min,w_perp_max,w_perp_ratio_max_min,w_perp_richardson_extrap,grid_monotone_growth,H_perp_grows_with_refinement,diverges_under_refinement,converged_under_refinement,near_one_within_tol,sigma_extrap,c2_extrap,target_11_over_48,status
+convergence_study,6,908.6922215195478,328.52348485460027,401.46506751138907,1428.2160082170458,3.5575100395914996,2266.726669975602,True,True,True,False,False,1514.151113317068,94.63444458231675,0.22916666666666666,FALSIFIER_BARE_GP_WPERP_DIVERGES_NO_FINITE_VALUE

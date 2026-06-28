@@ -1,0 +1,19 @@
+{
+  "slots": 40,
+  "step_forward": 11,
+  "step_backward": -9,
+  "n_pairs": 20,
+  "radius_bottom": 0.05,
+  "radius_top": 0.05,
+  "height": 0.0,
+  "profile": "linear",
+  "profile_power": 2.2,
+  "samples_per_segment": 16,
+  "start_slot": 0,
+  "phase_offsets": [
+    0.0,
+    2.0943951023931953,
+    4.1887902047863905
+  ],
+  "z_center": 0.0
+}

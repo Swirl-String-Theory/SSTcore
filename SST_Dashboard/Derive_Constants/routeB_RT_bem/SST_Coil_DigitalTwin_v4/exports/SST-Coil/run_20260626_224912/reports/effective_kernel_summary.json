@@ -1,0 +1,16 @@
+{
+  "observable": "weighted_gradB2",
+  "radii_m": [
+    0.03,
+    0.05,
+    0.1
+  ],
+  "f_min_hz": 100000.0,
+  "f_max_hz": 8000000.0,
+  "samples": 70,
+  "harmonics": 9,
+  "grid": 13,
+  "duty": 0.382,
+  "collapse_rms_in_fR": 0.11283673087727887,
+  "interpretation": "Small collapse_rms means curves align when plotted against f0*R. This is necessary but not sufficient evidence for a geometric kernel; compare against absolute-frequency resonance and measured data."
+}

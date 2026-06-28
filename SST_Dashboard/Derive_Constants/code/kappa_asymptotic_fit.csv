@@ -1,0 +1,2 @@
+status,model,n_points,poly_order,intercept_kappa_infinity,rms,coefficients_high_to_low
+fit_complete,DeltaE = c0 + c1/kappa + ... + c2/kappa^2,20,2,-0.00011962868537788621,4.975548843873005e-05,"[-0.00973867339549527, 1.0119723189314516, -0.00011962868537788621]"

@@ -1,0 +1,38 @@
+{
+  "source_npz": "exports/SST-Coil/run_20260626_194605/npz/SST-Coil_BiotSavart_midplane.npz",
+  "note": "midplane tensor diagnostic only; not a full closed-surface force integral",
+  "mean_tensor_Pa": [
+    [
+      -0.007205904954467736,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      -0.007205904954467736,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.007205904954467736
+    ]
+  ],
+  "max_abs_tensor_Pa": [
+    [
+      3.0145549448157745,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      3.0145549448157745,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      3.0145549448157745
+    ]
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "name": "taxonomy_identity",
+  "primary_key": [
+    "id"
+  ],
+  "fields": {
+    "id": "string",
+    "standard_name": "string",
+    "components": "integer",
+    "is_prime": "boolean|null",
+    "object_class": "string",
+    "geometry_class": "string",
+    "crossing_number": "integer|null",
+    "braid_index": "integer|null",
+    "genus": "integer|null",
+    "determinant": "integer|null",
+    "signature": "integer|null",
+    "arf": "integer|null",
+    "chirality_label": "string",
+    "reversible": "boolean|null",
+    "amphichiral": "boolean|null",
+    "amphichiral_type": "string",
+    "symmetry_group": "string|null",
+    "pd_code": "string|null",
+    "dt_code": "string|null",
+    "source": "string|null",
+    "notes": "string|null"
+  }
+}

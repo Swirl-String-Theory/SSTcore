@@ -1,0 +1,2 @@
+status,message
+not_computed_because_E0_was_not_derived,The script refuses to compute alpha_cell from a calibrated or boundary E0.

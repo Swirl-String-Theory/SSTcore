@@ -1,0 +1,125 @@
+% BEMv16 appendix snippet
+% Heat-kernel / DtN proof obligations for the Route-B normalizer.
+% Alpha-blind: no observed fine-structure value is used.
+
+\subsection{Heat-kernel normalizer for the certified Route-B correction}
+
+\paragraph{Status.}
+This subsection gives a conditional heat-kernel/DtN normalization theorem.
+It does not derive the fine-structure constant.  It derives the normalizer
+required for the finite R--T correction, assuming the R--T boundary problem is
+represented by first-order Dirichlet-to-Neumann/Steklov maps and that the
+pair-subtracted residual has second-order length covariance.
+
+Let \(\Sigma_K\) be the two-dimensional boundary associated with the certified
+source-cell geometry of knot \(K\).  Let \(\Lambda_R\) and \(\Lambda_T\) denote
+the R- and T-sector boundary maps, and let
+\[
+\Lambda_R u_j=\lambda_j \Lambda_T u_j
+\]
+define the generalized R--T boundary spectrum after removal of the prescribed
+soft sector.  The truncated pair action is
+\[
+\Delta F_{\rm pair}(K/0_1;M)
+=
+-\sum_{j=1}^M \log\lambda_j(K)
++
+\sum_{j=1}^M \log\lambda_j(0_1).
+\]
+
+\begin{assumption}[DtN/Steklov order]
+The maps \(\Lambda_R\) and \(\Lambda_T\) are first-order elliptic boundary
+operators on the two-dimensional surface \(\Sigma_K\), up to compact and
+lower-order regularizing terms.
+\end{assumption}
+
+\begin{assumption}[Mode extensivity]
+After pair subtraction and after fixing the soft-sector convention, the
+unresolved finite action is extensive in retained mode count:
+\[
+\Delta F_{\rm pair}(K/0_1;M)=M\,\bar f(K/0_1)+o(M).
+\]
+\end{assumption}
+
+\begin{assumption}[Second-order length covariance]
+The residual finite density entering the certified longitudinal budget scales
+as a second-order boundary density:
+\[
+L_{\rm cert}\mapsto \lambda L_{\rm cert}
+\quad\Longrightarrow\quad
+\bar f\mapsto \lambda^{-2}\bar f .
+\]
+\end{assumption}
+
+\begin{theorem}[Conditional Route-B normalizer]
+Among separable monomial normalizers
+\[
+\mathcal N_{a,b}=M_{\max}^{a}L_{\rm cert}^{b},
+\]
+the unique minimal normalizer compatible with mode extensivity and
+second-order length covariance is
+\[
+\boxed{\mathcal N_{\rm RT}=M_{\max}L_{\rm cert}^{2}}.
+\]
+\end{theorem}
+
+\begin{proof}
+Mode extensivity implies that the raw pair correction carries one power of
+\(M_{\max}\).  Removing the cutoff-count dependence fixes \(a=1\).  The
+second-order length covariance assumption states that the intensive residual
+has scale weight \(L_{\rm cert}^{-2}\).  Removing this scale weight fixes
+\(b=2\).  Hence the minimal separable monomial normalizer is
+\[
+\mathcal N_{\rm RT}=M_{\max}L_{\rm cert}^{2}.
+\]
+\end{proof}
+
+The certified Route-B correction is therefore
+\[
+\Delta F_{\rm phys}(K/0_1)
+=
+\frac{\Delta F_{\rm pair}(K/0_1)}
+{M_{\max}L_{\rm cert}(K)^2}.
+\]
+For the trefoil source-cell this gives the alpha-blind budget
+\[
+\alpha^{-1}_{\rm pred,blind}
+=
+\frac12
+\left[
+N_{\rm soft}V_{\rm soft}L_{\rm cert}(3_1)
++
+\frac{\Delta F_{\rm pair}(3_1/0_1)}
+{M_{\max}L_{\rm cert}(3_1)^2}
+\right].
+\]
+
+\paragraph{Numerical link to BEMv14/BEMv15.}
+The supplied BEMv14 multigrid data select \(M_{\max}L_{\rm cert}^{2}\) across
+all detected grid families.  The Stage D alpha-blind subset gives
+\[
+\langle\alpha^{-1}_{\rm pred,blind}\rangle_D=137.15486676613227,
+\qquad
+{\rm CV}_D=5.894392513597222e-06.
+\]
+The Stage C+D subset gives
+\[
+\langle\alpha^{-1}_{\rm pred,blind}\rangle_{C+D}=137.15528451885825,
+\qquad
+{\rm CV}_{C+D}=1.1352779235901546e-05.
+\]
+The largest correction ratio across the supplied set is
+\[
+\max
+\frac{|\Delta F_{\rm pair}/(M_{\max}L_{\rm cert}^{2})|}
+{N_{\rm soft}V_{\rm soft}L_{\rm cert}}
+=
+0.00930461683469654.
+\]
+
+\paragraph{Open mathematical obligation.}
+The remaining theorem-level gate is to derive the second-order length
+covariance from the principal symbol and heat-kernel coefficients of the
+R--T boundary operator.  Until that derivation is supplied, BEMv16 should be
+cited as a conditional heat-kernel normalizer certificate, not as a complete
+derivation of \(\alpha\).

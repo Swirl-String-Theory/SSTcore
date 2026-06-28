@@ -1,0 +1,2 @@
+radial_r_min,radial_r_max,radial_n,A_ext_numeric,A_ext_exact_finite,A_ext_infinite_limit,relative_error_numeric_vs_exact_finite
+1.0,1000000.0,20000,6.851792437580052e-05,6.851790802679149e-05,6.851797654476803e-05,2.3860928484742114e-07

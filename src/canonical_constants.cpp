@@ -72,6 +72,11 @@ double SSTCanonicalConstants::core_density_closure(double m_e, double c, double 
     return (m_e * c * c) / (2.0 * pi_d * v_swirl * v_swirl * r_c * r_c * r_c);
 }
 
+double SSTCanonicalConstants::horn_envelope_density(double m_e, double c, double v_swirl, double r_c) {
+    // Canon v0.8.12 rho_horn; identical closure to the legacy rho_core.
+    return core_density_closure(m_e, c, v_swirl, r_c);
+}
+
 double SSTCanonicalConstants::geometric_gate(double lambda_c, double r_c) {
     if (lambda_c <= 0.0 || r_c <= 0.0) throw std::invalid_argument("lambda_c and r_c must be positive.");
     return lambda_c / (pi_d * r_c);
@@ -104,6 +109,7 @@ SSTCanonicalValues SSTCanonicalConstants::values(double rho_f, double v_swirl) {
     out.rho_E = swirl_energy_density(rho_f, v_swirl);
     out.rho_m = mass_equivalent_density(out.rho_E, out.c);
     out.rho_core = core_density_closure(out.m_e, out.c, v_swirl, out.r_c);
+    out.rho_horn = out.rho_core;   // canon v0.8.12 alias
     out.eta_0 = eta0(v_swirl, out.c);
     out.geometric_gate = geometric_gate(out.lambda_c, out.r_c);
     out.swirl_clock = swirl_clock(v_swirl, out.c);

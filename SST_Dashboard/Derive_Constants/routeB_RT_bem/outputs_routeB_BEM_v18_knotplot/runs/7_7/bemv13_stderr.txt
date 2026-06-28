@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem\routeB_RT_bem_v13_certified_length_budget.py", line 552, in <module>
+    main()
+    ~~~~^^
+  File "C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem\routeB_RT_bem_v13_certified_length_budget.py", line 527, in main
+    run_bemv8(v8_script, args, bemv8_dir)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem\routeB_RT_bem_v13_certified_length_budget.py", line 218, in run_bemv8
+    raise RuntimeError(f"BEMv8 subrun failed, see {outdir}/bemv8_stderr.txt")
+RuntimeError: BEMv8 subrun failed, see outputs_routeB_BEM_v18_knotplot\runs\7_7\bemv8_base/bemv8_stderr.txt

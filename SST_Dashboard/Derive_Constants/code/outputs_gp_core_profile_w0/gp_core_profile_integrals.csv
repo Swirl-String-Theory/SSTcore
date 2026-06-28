@@ -1,0 +1,10 @@
+name,value
+I_radial_no_2pi,0.24999407921681724
+I_phase_no_2pi,3.0557242645292217
+I_potential_no_2pi,0.4988819677997329
+I_depletion_no_2pi,0.9977639355994657
+I_core_weight_norm,1.0000000000000002
+mean_rho_core_weight,2.0929853164522676
+rho_max,30.0
+profile_energy_ratio_radial_over_radial_plus_potential,0.333825711494939
+profile_energy_ratio_transverse_over_total,0.8688740138390405

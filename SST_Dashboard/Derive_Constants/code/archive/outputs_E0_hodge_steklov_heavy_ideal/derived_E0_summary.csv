@@ -1,0 +1,2 @@
+status,preferred_observable,E_star_derived,diagnostic_E_candidate,diagnostic_classification,diagnostic_reason,message
+E0_not_derived,sector_action,,1199.9999999999995,no_interior_stationary_point,closest_abs_derivative_at_boundary,No interior stationary eigenvalue was found. E0 remains an external/conjectured input for this model.

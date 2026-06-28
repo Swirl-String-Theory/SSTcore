@@ -1,0 +1,14 @@
+==============================================================================
+Route B BEMv5 zeta/cutoff audit complete
+==============================================================================
+source: XML/Fourier ideal.txt=ideal.txt
+outdir: outputs_routeB_BEM_v14_stageC\grids\C3_cartesian_fine_small\runs\g012_nc24_nt7_ns96_tf0p24_of3p4\bemv8_base\bemv5_base
+knots: 0_1, 3_1, 4_1
+0_1            raw_modes= 263 S_all= 2.33847690284 file=raw_spectrum_0_1.npy
+3_1            raw_modes= 263 S_all= 2.30007428815 file=raw_spectrum_3_1.npy
+4_1            raw_modes= 263 S_all= 2.35458990161 file=raw_spectrum_4_1.npy
+cutoff rows: 526
+fit rows: 6
+legacy inverse-tail selected fit: {'model': 'sqrt+inv+threehalf', 'status': 'PASS_FIT', 'n_points': 198, 'M_min': 66, 'M_max': 263, 'rms': 0.004657021647244506, 'S_inf': -1.1551568212542374, 'S_inf_se': 0.054938895937176616, 'alpha_inv_pred_blind': -0.5775784106271187, 'c_sqrt': 37.18885145592825, 'c_sqrt_se': 1.9090273553573538, 'c_inv': -389.1990830528674, 'c_inv_se': 21.65434348725888, 'c_threehalf': 1341.0478519019275, 'c_threehalf_se': 80.21298691588883, 'knot': '3_1', 'reference': '0_1', 'target_selected': True, 'fit_tail_frac': 0.75, 'max_common_modes': 263}
+BEMv5 heat-kernel selected fit: {'counterterm_model': 'hk+inv_sqrt+inv', 'status': 'PASS_FIT', 'n_points': 198, 'M_min': 66, 'M_max': 263, 'rms': 0.0013213159732044036, 'S_ren': 526.5264162130935, 'S_ren_se': 37.791782592747616, 'alpha_inv_half_RT_only': 263.26320810654676, 'a_M': -0.1556026384425948, 'a_M_se': 0.009311610184314222, 'a_sqrtM': 13.599580397330197, 'a_sqrtM_se': 0.8802359118133494, 'a_logM': -110.61814541696238, 'a_logM_se': 7.70753976576812, 'b_inv_sqrt': -1587.0873621522758, 'b_inv_sqrt_se': 118.52381305634312, 'b_inv': 2117.7623206904746, 'b_inv_se': 168.7859710841158, 'soft_action': 16.755160819145562, 'S_total_soft_plus_RT': 543.281577032239, 'alpha_inv_pred_blind_with_soft': 271.6407885161195, 'knot': '3_1', 'reference': '0_1', 'target_selected': True, 'counterterm_tail_frac': 0.75, 'max_common_modes': 263, 'soft_index_count': 4, 'soft_volume_mode': 'unit_ball', 'soft_volume_value': 4.1887902047863905}
+wrote: raw_spectrum_*.npy, cutoff_series.csv, renormalized_action_fit.csv, heat_kernel_counterterms.csv, soft_sector_index.csv, blind_alpha_prediction.md

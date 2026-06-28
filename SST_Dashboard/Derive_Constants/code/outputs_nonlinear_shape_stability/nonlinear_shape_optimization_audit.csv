@@ -1,0 +1,2 @@
+start,initial_amplitude,success,initial_area_excess,final_area_excess,final_coeff_norm,message
+zero,0.0,True,0.0,0.0,0.0,sphere on grid

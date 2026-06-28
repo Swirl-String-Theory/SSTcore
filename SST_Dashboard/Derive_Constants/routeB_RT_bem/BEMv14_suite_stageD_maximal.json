@@ -1,0 +1,47 @@
+[
+  {
+    "label": "D1_ultra_paired_48_64_80",
+    "args": {
+      "grid_mode": "paired",
+      "n_center_list": "48,64,80",
+      "n_theta_list": "8,10,12",
+      "n_sphere_list": "256,384,512",
+      "tube_fraction_list": "0.24,0.20,0.16",
+      "outer_factor_list": "3.2,3.8,4.4",
+      "pair_fit_min_M": 14,
+      "pair_fit_tail_frac": 0.6,
+      "length_samples": 48000,
+      "grid_run_timeout": 7200
+    }
+  },
+  {
+    "label": "D2_ultra_outer_anchored",
+    "args": {
+      "grid_mode": "paired",
+      "n_center_list": "64,64,64,64",
+      "n_theta_list": "10,10,10,10",
+      "n_sphere_list": "384,384,384,384",
+      "tube_fraction_list": "0.20,0.20,0.20,0.20",
+      "outer_factor_list": "3.0,3.8,4.6,5.4",
+      "pair_fit_min_M": 14,
+      "pair_fit_tail_frac": 0.6,
+      "length_samples": 48000,
+      "grid_run_timeout": 7200
+    }
+  },
+  {
+    "label": "D3_ultra_tube_anchored",
+    "args": {
+      "grid_mode": "paired",
+      "n_center_list": "64,64,64,64",
+      "n_theta_list": "10,10,10,10",
+      "n_sphere_list": "384,384,384,384",
+      "tube_fraction_list": "0.28,0.22,0.18,0.14",
+      "outer_factor_list": "4.0,4.0,4.0,4.0",
+      "pair_fit_min_M": 14,
+      "pair_fit_tail_frac": 0.6,
+      "length_samples": 48000,
+      "grid_run_timeout": 7200
+    }
+  }
+]

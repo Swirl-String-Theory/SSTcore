@@ -1,0 +1,9 @@
+==============================================================================
+Route B BEMv9 correction-normalizer audit complete
+==============================================================================
+outdir: outputs_routeB_BEM_v10\runs\g004_nc48_nt8_ns256_tf0p2_of3p6
+source: BEMv8 subrun=outputs_routeB_BEM_v10\runs\g004_nc48_nt8_ns256_tf0p2_of3p6\bemv8_base
+selected normalizer: M_L2
+gate: PASS_SUBLEADING_CORRECTION
+alpha_inv_pred_blind_v9: 137.16137160819176
+wrote: finite_correction_normalizers.csv, alpha_budget_v9_candidates.csv, correction_gate_report.md, blind_alpha_prediction_v9.md

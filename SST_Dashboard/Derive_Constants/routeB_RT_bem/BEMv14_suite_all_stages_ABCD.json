@@ -1,0 +1,211 @@
+[
+  {
+    "label": "A1_paired_micro_low",
+    "args": {
+      "grid_mode": "paired",
+      "n_center_list": "8,10,12",
+      "n_theta_list": "3,3,4",
+      "n_sphere_list": "14,18,24",
+      "tube_fraction_list": "0.40,0.34,0.30",
+      "outer_factor_list": "2.0,2.4,2.8",
+      "pair_fit_min_M": 4
+    }
+  },
+  {
+    "label": "A2_paired_micro_high",
+    "args": {
+      "grid_mode": "paired",
+      "n_center_list": "10,12,14",
+      "n_theta_list": "3,4,4",
+      "n_sphere_list": "18,24,32",
+      "tube_fraction_list": "0.36,0.30,0.26",
+      "outer_factor_list": "2.2,2.6,3.0",
+      "pair_fit_min_M": 4
+    }
+  },
+  {
+    "label": "A3_cartesian_tiny",
+    "args": {
+      "grid_mode": "cartesian",
+      "n_center_list": "8,10",
+      "n_theta_list": "3,4",
+      "n_sphere_list": "14,18",
+      "tube_fraction_list": "0.36,0.30",
+      "outer_factor_list": "2.2,2.8",
+      "pair_fit_min_M": 4
+    }
+  },
+  {
+    "label": "B1_paired_coarse",
+    "args": {
+      "grid_mode": "paired",
+      "n_center_list": "12,16,20,24",
+      "n_theta_list": "4,4,5,6",
+      "n_sphere_list": "24,36,48,72",
+      "tube_fraction_list": "0.36,0.32,0.28,0.24",
+      "outer_factor_list": "2.2,2.6,3.0,3.4",
+      "pair_fit_min_M": 6
+    }
+  },
+  {
+    "label": "B2_paired_medium",
+    "args": {
+      "grid_mode": "paired",
+      "n_center_list": "16,20,24,32",
+      "n_theta_list": "4,5,6,7",
+      "n_sphere_list": "36,48,72,96",
+      "tube_fraction_list": "0.34,0.30,0.26,0.22",
+      "outer_factor_list": "2.4,2.8,3.2,3.6",
+      "pair_fit_min_M": 8
+    }
+  },
+  {
+    "label": "B3_cartesian_mesh_cross",
+    "args": {
+      "grid_mode": "cartesian",
+      "n_center_list": "12,16",
+      "n_theta_list": "4,5",
+      "n_sphere_list": "24,36",
+      "tube_fraction_list": "0.32,0.28",
+      "outer_factor_list": "2.6,3.2",
+      "pair_fit_min_M": 6
+    }
+  },
+  {
+    "label": "B4_outer_radius_sweep",
+    "args": {
+      "grid_mode": "paired",
+      "n_center_list": "20,20,20,20,20",
+      "n_theta_list": "5,5,5,5,5",
+      "n_sphere_list": "64,64,64,64,64",
+      "tube_fraction_list": "0.28,0.28,0.28,0.28,0.28",
+      "outer_factor_list": "2.0,2.5,3.0,3.5,4.0",
+      "pair_fit_min_M": 6
+    }
+  },
+  {
+    "label": "B5_tube_radius_sweep",
+    "args": {
+      "grid_mode": "paired",
+      "n_center_list": "20,20,20,20,20",
+      "n_theta_list": "5,5,5,5,5",
+      "n_sphere_list": "64,64,64,64,64",
+      "tube_fraction_list": "0.40,0.34,0.28,0.22,0.18",
+      "outer_factor_list": "3.0,3.0,3.0,3.0,3.0",
+      "pair_fit_min_M": 6
+    }
+  },
+  {
+    "label": "C1_paired_fine",
+    "args": {
+      "grid_mode": "paired",
+      "n_center_list": "24,32,40,48",
+      "n_theta_list": "5,6,7,8",
+      "n_sphere_list": "96,144,196,256",
+      "tube_fraction_list": "0.35,0.30,0.25,0.20",
+      "outer_factor_list": "2.4,2.8,3.2,3.6",
+      "pair_fit_min_M": 10,
+      "length_samples": 24000
+    }
+  },
+  {
+    "label": "C2_paired_fine_alt_tail",
+    "args": {
+      "grid_mode": "paired",
+      "n_center_list": "24,32,40,48",
+      "n_theta_list": "5,6,7,8",
+      "n_sphere_list": "96,144,196,256",
+      "tube_fraction_list": "0.34,0.29,0.24,0.19",
+      "outer_factor_list": "2.6,3.0,3.4,3.8",
+      "pair_fit_min_M": 12,
+      "pair_fit_tail_frac": 0.65,
+      "length_samples": 24000
+    }
+  },
+  {
+    "label": "C3_cartesian_fine_small",
+    "args": {
+      "grid_mode": "cartesian",
+      "n_center_list": "24,32",
+      "n_theta_list": "5,7",
+      "n_sphere_list": "96,144",
+      "tube_fraction_list": "0.30,0.24",
+      "outer_factor_list": "2.8,3.4",
+      "pair_fit_min_M": 10,
+      "length_samples": 24000
+    }
+  },
+  {
+    "label": "C4_tube_boundary_only",
+    "args": {
+      "grid_mode": "paired",
+      "boundary_subspace": "tube",
+      "n_center_list": "24,32,40",
+      "n_theta_list": "5,6,7",
+      "n_sphere_list": "96,144,196",
+      "tube_fraction_list": "0.32,0.26,0.20",
+      "outer_factor_list": "3.0,3.2,3.4",
+      "pair_fit_min_M": 10,
+      "length_samples": 24000
+    }
+  },
+  {
+    "label": "C5_sphere_boundary_only",
+    "args": {
+      "grid_mode": "paired",
+      "boundary_subspace": "sphere",
+      "n_center_list": "24,32,40",
+      "n_theta_list": "5,6,7",
+      "n_sphere_list": "96,144,196",
+      "tube_fraction_list": "0.32,0.26,0.20",
+      "outer_factor_list": "3.0,3.2,3.4",
+      "pair_fit_min_M": 10,
+      "length_samples": 24000
+    }
+  },
+  {
+    "label": "D1_ultra_paired_48_64_80",
+    "args": {
+      "grid_mode": "paired",
+      "n_center_list": "48,64,80",
+      "n_theta_list": "8,10,12",
+      "n_sphere_list": "256,384,512",
+      "tube_fraction_list": "0.24,0.20,0.16",
+      "outer_factor_list": "3.2,3.8,4.4",
+      "pair_fit_min_M": 14,
+      "pair_fit_tail_frac": 0.6,
+      "length_samples": 48000,
+      "grid_run_timeout": 7200
+    }
+  },
+  {
+    "label": "D2_ultra_outer_anchored",
+    "args": {
+      "grid_mode": "paired",
+      "n_center_list": "64,64,64,64",
+      "n_theta_list": "10,10,10,10",
+      "n_sphere_list": "384,384,384,384",
+      "tube_fraction_list": "0.20,0.20,0.20,0.20",
+      "outer_factor_list": "3.0,3.8,4.6,5.4",
+      "pair_fit_min_M": 14,
+      "pair_fit_tail_frac": 0.6,
+      "length_samples": 48000,
+      "grid_run_timeout": 7200
+    }
+  },
+  {
+    "label": "D3_ultra_tube_anchored",
+    "args": {
+      "grid_mode": "paired",
+      "n_center_list": "64,64,64,64",
+      "n_theta_list": "10,10,10,10",
+      "n_sphere_list": "384,384,384,384",
+      "tube_fraction_list": "0.28,0.22,0.18,0.14",
+      "outer_factor_list": "4.0,4.0,4.0,4.0",
+      "pair_fit_min_M": 14,
+      "pair_fit_tail_frac": 0.6,
+      "length_samples": 48000,
+      "grid_run_timeout": 7200
+    }
+  }
+]

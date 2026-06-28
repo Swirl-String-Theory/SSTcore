@@ -1,0 +1,2 @@
+status,statement,alpha_cell,alpha_cell_inverse,E_star,E_eff,K_cell,C_far_intercept,relative_error_intercept_vs_alpha,abs_error_intercept_vs_alpha,tail_max_abs_relative_error,tolerance,proof_status
+pass,lim_{R->infty} C_far(R) = alpha_cell within the stated numerical fit tolerance,0.007297355018552128,137.03595308953606,274.0749037578999,274.07190617907213,10.904974657754376,0.00729735501855218,7.13158454631824e-15,5.204170427930421e-17,7.97943640625818e-09,1e-07,numerical_certificate_for_conditional_farfield_theorem; requires independent justification of K_cell=E_eff/(8*pi)

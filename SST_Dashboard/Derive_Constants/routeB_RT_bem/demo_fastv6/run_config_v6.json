@@ -1,0 +1,59 @@
+{
+  "args": {
+    "boundary_subspace": "all",
+    "continuum_models": "h+a+Rinv,h+a+Rinv+Ninv,h+h2+a+Rinv",
+    "counterterm_fit_min_M": 4,
+    "counterterm_models": "hk,hk+inv_sqrt,hk+inv_sqrt+inv",
+    "counterterm_tail_frac": 0.75,
+    "fit_min_M": 4,
+    "fit_models": "sqrt,sqrt+inv,sqrt+inv+threehalf",
+    "fit_tail_frac": 0.75,
+    "grid_json": "",
+    "grid_mode": "paired",
+    "ideal": "/mnt/data/ideal.txt",
+    "ideal_xml_knot_ids": "0:1:1,3:1:1,4:1:1",
+    "keep_constant": false,
+    "max_raw_modes": 0,
+    "mu_mode": "inverse_outer_radius",
+    "mu_value": 1.0,
+    "n_center_list": "8,10,12",
+    "n_sphere_list": "14,18,24",
+    "n_theta_list": "3,3,4",
+    "no_auto_add_unknot": false,
+    "outdir": "/mnt/data/outputs_routeB_BEM_v6_fast",
+    "outer_factor_list": "2.2,2.6,3.0",
+    "prefer_counterterm_model": "",
+    "reference": "0_1",
+    "soft_index_count": 4,
+    "soft_volume_mode": "unit_ball",
+    "soft_volume_value": 0.0,
+    "subrun_timeout": 120,
+    "target": "3_1",
+    "tube_fraction_list": "0.38,0.32,0.28",
+    "v5_script": "/mnt/data/routeB_RT_bem_v5_soft_hk_falsifier.py"
+  },
+  "grid": [
+    {
+      "n_center": 8,
+      "n_sphere": 14,
+      "n_theta": 3,
+      "outer_factor": 2.2,
+      "tube_fraction": 0.38
+    },
+    {
+      "n_center": 10,
+      "n_sphere": 18,
+      "n_theta": 3,
+      "outer_factor": 2.6,
+      "tube_fraction": 0.32
+    },
+    {
+      "n_center": 12,
+      "n_sphere": 24,
+      "n_theta": 4,
+      "outer_factor": 3.0,
+      "tube_fraction": 0.28
+    }
+  ],
+  "v5_script": "/mnt/data/routeB_RT_bem_v5_soft_hk_falsifier.py"
+}

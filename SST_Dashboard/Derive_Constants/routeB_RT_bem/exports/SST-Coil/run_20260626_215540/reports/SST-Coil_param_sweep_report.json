@@ -1,0 +1,24 @@
+{
+  "radii_m": [
+    0.03,
+    0.05,
+    0.1
+  ],
+  "duties": [
+    0.382,
+    0.5
+  ],
+  "freqs_Hz": [
+    100000.0,
+    300000.0,
+    1000000.0,
+    3000000.0
+  ],
+  "harmonics": [
+    1,
+    3,
+    5,
+    7
+  ],
+  "warning": "Uses placeholder kernel; intended for ranking candidate tests, not proof."
+}

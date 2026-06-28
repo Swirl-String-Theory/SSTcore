@@ -1,0 +1,26 @@
+{
+  "name": "taxonomy_embeddings",
+  "primary_key": [
+    "embedding_id"
+  ],
+  "fields": {
+    "embedding_id": "string",
+    "id": "string",
+    "variant": "string|null",
+    "source_file": "string",
+    "representation": "string",
+    "ideal_or_relaxed": "string|null",
+    "sample_count": "integer|null",
+    "curve_length": "number|null",
+    "bbox_xmin": "number|null",
+    "bbox_xmax": "number|null",
+    "bbox_ymin": "number|null",
+    "bbox_ymax": "number|null",
+    "bbox_zmin": "number|null",
+    "bbox_zmax": "number|null",
+    "normalization": "string|null",
+    "fourier_block_count": "integer|null",
+    "provenance": "string|null",
+    "notes": "string|null"
+  }
+}

@@ -1,0 +1,12 @@
+==============================================================================
+Route B BEMv13 certified-length budget complete
+==============================================================================
+outdir: outputs_routeB_BEM_v14_stageB\grids\B3_cartesian_mesh_cross\runs\g031_nc16_nt5_ns36_tf0p28_of2p6
+source: BEMv8 subrun=outputs_routeB_BEM_v14_stageB\grids\B3_cartesian_mesh_cross\runs\g031_nc16_nt5_ns36_tf0p28_of2p6\bemv8_base
+selected normalizer: M_Lcert2
+gate: PASS_SUBLEADING_CORRECTION
+L_cert_target: 16.371637
+leading_half_alpha_inv_cert: 137.15470540383689
+finite_correction_half_cert: -0.0024124539619101012
+alpha_inv_pred_blind_v13: 137.15229294987498
+wrote: certified_length_audit.csv, certified_normalizer_candidates.csv, alpha_component_budget_v13.csv, certified_length_report.md

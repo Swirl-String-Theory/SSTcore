@@ -1,0 +1,9 @@
+quantity,value,label
+L_K (ropelength),16.36723445,INFO
+A_K → 1/(4π) [DERIVED],0.07957747,DERIVED
+A_K · L_K,1.30246313,INFO
+(8π/3) · L_K  [N_p=4 cond],137.11782271,INFO
+(16π/3) · L_K [N_p=4 cond],274.23564541,INFO
+Λ_Hodge(a) free,1.70695469,INFO
+CODATA α⁻¹ [comparison],137.03599918,CALIBRATED
+(8π/3)·L_K / α⁻¹ − 1 [%],0.05970951,INFO

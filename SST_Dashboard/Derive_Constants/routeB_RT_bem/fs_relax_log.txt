@@ -1,0 +1,1055 @@
+
+C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem>python fs_production_run_seeddiag_toposafe_patched.py
+[device] xpu
+[production] N=128, box=10.0, device=xpu, steps=400, delta=0.015, toposafe=True, adaptive_seed=True
+[meter efficiency @ N=128] eps=0.948   (Q_true = Q_meter / eps)
+
+[scope] pq+1 applies here only to T(2,q) torus knots; twist/non-torus knots need a separate minimizer scan, not this hypothesis.
+
+=== 3_1 trefoil = T(2,3)   (torus pq+1 = 7) ===
+    seed/framing scan (Q_H calibrated; geometry-aware):
+      sf=0.30 tube= 0.156 M=1024 fr=  0 -> Q_seed=  -0.82 err_pq+1= 6.18 err_int= 0.18 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  1 -> Q_seed=  -1.06 err_pq+1= 5.94 err_int= 0.06 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  2 -> Q_seed=  -1.29 err_pq+1= 5.71 err_int= 0.29 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  3 -> Q_seed=  -1.53 err_pq+1= 5.47 err_int= 0.47 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  4 -> Q_seed=  -1.77 err_pq+1= 5.23 err_int= 0.23 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  5 -> Q_seed=  -2.00 err_pq+1= 5.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  6 -> Q_seed=  -2.24 err_pq+1= 4.76 err_int= 0.24 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  7 -> Q_seed=  -2.47 err_pq+1= 4.53 err_int= 0.47 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  8 -> Q_seed=  -2.70 err_pq+1= 4.30 err_int= 0.30 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  9 -> Q_seed=  -2.93 err_pq+1= 4.07 err_int= 0.07 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 10 -> Q_seed=  -3.16 err_pq+1= 3.84 err_int= 0.16 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 11 -> Q_seed=  -3.39 err_pq+1= 3.61 err_int= 0.39 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 12 -> Q_seed=  -3.62 err_pq+1= 3.38 err_int= 0.38 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 13 -> Q_seed=  -3.84 err_pq+1= 3.16 err_int= 0.16 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 14 -> Q_seed=  -4.07 err_pq+1= 2.93 err_int= 0.07 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 15 -> Q_seed=  -4.29 err_pq+1= 2.71 err_int= 0.29 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 16 -> Q_seed=  -4.51 err_pq+1= 2.49 err_int= 0.49 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 17 -> Q_seed=  -4.73 err_pq+1= 2.27 err_int= 0.27 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 18 -> Q_seed=  -4.94 err_pq+1= 2.06 err_int= 0.06 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 19 -> Q_seed=  -5.16 err_pq+1= 1.84 err_int= 0.16 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 20 -> Q_seed=  -5.37 err_pq+1= 1.63 err_int= 0.37 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 21 -> Q_seed=  -5.57 err_pq+1= 1.43 err_int= 0.43 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 22 -> Q_seed=  -5.78 err_pq+1= 1.22 err_int= 0.22 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 23 -> Q_seed=  -5.98 err_pq+1= 1.02 err_int= 0.02 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 24 -> Q_seed=  -6.18 err_pq+1= 0.82 err_int= 0.18 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 25 -> Q_seed=  -6.38 err_pq+1= 0.62 err_int= 0.38 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  0 -> Q_seed=  -0.82 err_pq+1= 6.18 err_int= 0.18 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  1 -> Q_seed=  -1.06 err_pq+1= 5.94 err_int= 0.06 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  2 -> Q_seed=  -1.29 err_pq+1= 5.71 err_int= 0.29 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  3 -> Q_seed=  -1.53 err_pq+1= 5.47 err_int= 0.47 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  4 -> Q_seed=  -1.77 err_pq+1= 5.23 err_int= 0.23 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  5 -> Q_seed=  -2.00 err_pq+1= 5.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  6 -> Q_seed=  -2.24 err_pq+1= 4.76 err_int= 0.24 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  7 -> Q_seed=  -2.47 err_pq+1= 4.53 err_int= 0.47 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  8 -> Q_seed=  -2.70 err_pq+1= 4.30 err_int= 0.30 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  9 -> Q_seed=  -2.93 err_pq+1= 4.07 err_int= 0.07 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 10 -> Q_seed=  -3.16 err_pq+1= 3.84 err_int= 0.16 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 11 -> Q_seed=  -3.39 err_pq+1= 3.61 err_int= 0.39 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 12 -> Q_seed=  -3.62 err_pq+1= 3.38 err_int= 0.38 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 13 -> Q_seed=  -3.84 err_pq+1= 3.16 err_int= 0.16 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 14 -> Q_seed=  -4.07 err_pq+1= 2.93 err_int= 0.07 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 15 -> Q_seed=  -4.29 err_pq+1= 2.71 err_int= 0.29 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 16 -> Q_seed=  -4.51 err_pq+1= 2.49 err_int= 0.49 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 17 -> Q_seed=  -4.73 err_pq+1= 2.27 err_int= 0.27 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 18 -> Q_seed=  -4.94 err_pq+1= 2.06 err_int= 0.06 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 19 -> Q_seed=  -5.16 err_pq+1= 1.84 err_int= 0.16 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 20 -> Q_seed=  -5.37 err_pq+1= 1.63 err_int= 0.37 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 21 -> Q_seed=  -5.57 err_pq+1= 1.43 err_int= 0.43 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 22 -> Q_seed=  -5.78 err_pq+1= 1.22 err_int= 0.22 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 23 -> Q_seed=  -5.98 err_pq+1= 1.02 err_int= 0.02 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 24 -> Q_seed=  -6.18 err_pq+1= 0.82 err_int= 0.18 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 25 -> Q_seed=  -6.38 err_pq+1= 0.62 err_int= 0.38 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  0 -> Q_seed=  -0.82 err_pq+1= 6.18 err_int= 0.18 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  1 -> Q_seed=  -1.06 err_pq+1= 5.94 err_int= 0.06 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  2 -> Q_seed=  -1.29 err_pq+1= 5.71 err_int= 0.29 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  3 -> Q_seed=  -1.53 err_pq+1= 5.47 err_int= 0.47 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  4 -> Q_seed=  -1.77 err_pq+1= 5.23 err_int= 0.23 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  5 -> Q_seed=  -2.00 err_pq+1= 5.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  6 -> Q_seed=  -2.24 err_pq+1= 4.76 err_int= 0.24 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  7 -> Q_seed=  -2.47 err_pq+1= 4.53 err_int= 0.47 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  8 -> Q_seed=  -2.70 err_pq+1= 4.30 err_int= 0.30 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr=  9 -> Q_seed=  -2.93 err_pq+1= 4.07 err_int= 0.07 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 10 -> Q_seed=  -3.16 err_pq+1= 3.84 err_int= 0.16 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 11 -> Q_seed=  -3.39 err_pq+1= 3.61 err_int= 0.39 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 12 -> Q_seed=  -3.62 err_pq+1= 3.38 err_int= 0.38 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 13 -> Q_seed=  -3.84 err_pq+1= 3.16 err_int= 0.16 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 14 -> Q_seed=  -4.07 err_pq+1= 2.93 err_int= 0.07 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 15 -> Q_seed=  -4.29 err_pq+1= 2.71 err_int= 0.29 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 16 -> Q_seed=  -4.51 err_pq+1= 2.49 err_int= 0.49 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 17 -> Q_seed=  -4.73 err_pq+1= 2.27 err_int= 0.27 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 18 -> Q_seed=  -4.94 err_pq+1= 2.06 err_int= 0.06 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 19 -> Q_seed=  -5.16 err_pq+1= 1.84 err_int= 0.16 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 20 -> Q_seed=  -5.37 err_pq+1= 1.63 err_int= 0.37 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 21 -> Q_seed=  -5.57 err_pq+1= 1.43 err_int= 0.43 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 22 -> Q_seed=  -5.78 err_pq+1= 1.22 err_int= 0.22 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 23 -> Q_seed=  -5.98 err_pq+1= 1.02 err_int= 0.02 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 24 -> Q_seed=  -6.18 err_pq+1= 0.82 err_int= 0.18 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1024 fr= 25 -> Q_seed=  -6.38 err_pq+1= 0.62 err_int= 0.38 dmin= 0.199 R/dmin= 0.78 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  0 -> Q_seed=  -0.82 err_pq+1= 6.18 err_int= 0.18 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  1 -> Q_seed=  -1.06 err_pq+1= 5.94 err_int= 0.06 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  2 -> Q_seed=  -1.30 err_pq+1= 5.70 err_int= 0.30 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  3 -> Q_seed=  -1.53 err_pq+1= 5.47 err_int= 0.47 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  4 -> Q_seed=  -1.77 err_pq+1= 5.23 err_int= 0.23 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  5 -> Q_seed=  -2.00 err_pq+1= 5.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  6 -> Q_seed=  -2.24 err_pq+1= 4.76 err_int= 0.24 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  7 -> Q_seed=  -2.47 err_pq+1= 4.53 err_int= 0.47 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  8 -> Q_seed=  -2.70 err_pq+1= 4.30 err_int= 0.30 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  9 -> Q_seed=  -2.93 err_pq+1= 4.07 err_int= 0.07 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 10 -> Q_seed=  -3.16 err_pq+1= 3.84 err_int= 0.16 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 11 -> Q_seed=  -3.39 err_pq+1= 3.61 err_int= 0.39 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 12 -> Q_seed=  -3.62 err_pq+1= 3.38 err_int= 0.38 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 13 -> Q_seed=  -3.85 err_pq+1= 3.15 err_int= 0.15 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 14 -> Q_seed=  -4.08 err_pq+1= 2.92 err_int= 0.08 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 15 -> Q_seed=  -4.30 err_pq+1= 2.70 err_int= 0.30 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 16 -> Q_seed=  -4.53 err_pq+1= 2.47 err_int= 0.47 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 17 -> Q_seed=  -4.75 err_pq+1= 2.25 err_int= 0.25 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 18 -> Q_seed=  -4.97 err_pq+1= 2.03 err_int= 0.03 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 19 -> Q_seed=  -5.19 err_pq+1= 1.81 err_int= 0.19 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 20 -> Q_seed=  -5.40 err_pq+1= 1.60 err_int= 0.40 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 21 -> Q_seed=  -5.62 err_pq+1= 1.38 err_int= 0.38 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 22 -> Q_seed=  -5.83 err_pq+1= 1.17 err_int= 0.17 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 23 -> Q_seed=  -6.04 err_pq+1= 0.96 err_int= 0.04 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 24 -> Q_seed=  -6.25 err_pq+1= 0.75 err_int= 0.25 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 25 -> Q_seed=  -6.46 err_pq+1= 0.54 err_int= 0.46 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  0 -> Q_seed=  -0.82 err_pq+1= 6.18 err_int= 0.18 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  1 -> Q_seed=  -1.06 err_pq+1= 5.94 err_int= 0.06 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  2 -> Q_seed=  -1.30 err_pq+1= 5.70 err_int= 0.30 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  3 -> Q_seed=  -1.53 err_pq+1= 5.47 err_int= 0.47 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  4 -> Q_seed=  -1.77 err_pq+1= 5.23 err_int= 0.23 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  5 -> Q_seed=  -2.00 err_pq+1= 5.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  6 -> Q_seed=  -2.24 err_pq+1= 4.76 err_int= 0.24 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  7 -> Q_seed=  -2.47 err_pq+1= 4.53 err_int= 0.47 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  8 -> Q_seed=  -2.70 err_pq+1= 4.30 err_int= 0.30 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  9 -> Q_seed=  -2.93 err_pq+1= 4.07 err_int= 0.07 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 10 -> Q_seed=  -3.16 err_pq+1= 3.84 err_int= 0.16 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 11 -> Q_seed=  -3.39 err_pq+1= 3.61 err_int= 0.39 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 12 -> Q_seed=  -3.62 err_pq+1= 3.38 err_int= 0.38 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 13 -> Q_seed=  -3.85 err_pq+1= 3.15 err_int= 0.15 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 14 -> Q_seed=  -4.08 err_pq+1= 2.92 err_int= 0.08 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 15 -> Q_seed=  -4.30 err_pq+1= 2.70 err_int= 0.30 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 16 -> Q_seed=  -4.53 err_pq+1= 2.47 err_int= 0.47 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 17 -> Q_seed=  -4.75 err_pq+1= 2.25 err_int= 0.25 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 18 -> Q_seed=  -4.97 err_pq+1= 2.03 err_int= 0.03 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 19 -> Q_seed=  -5.19 err_pq+1= 1.81 err_int= 0.19 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 20 -> Q_seed=  -5.40 err_pq+1= 1.60 err_int= 0.40 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 21 -> Q_seed=  -5.62 err_pq+1= 1.38 err_int= 0.38 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 22 -> Q_seed=  -5.83 err_pq+1= 1.17 err_int= 0.17 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 23 -> Q_seed=  -6.04 err_pq+1= 0.96 err_int= 0.04 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 24 -> Q_seed=  -6.25 err_pq+1= 0.75 err_int= 0.25 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 25 -> Q_seed=  -6.46 err_pq+1= 0.54 err_int= 0.46 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  0 -> Q_seed=  -0.82 err_pq+1= 6.18 err_int= 0.18 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  1 -> Q_seed=  -1.06 err_pq+1= 5.94 err_int= 0.06 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  2 -> Q_seed=  -1.30 err_pq+1= 5.70 err_int= 0.30 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  3 -> Q_seed=  -1.53 err_pq+1= 5.47 err_int= 0.47 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  4 -> Q_seed=  -1.77 err_pq+1= 5.23 err_int= 0.23 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  5 -> Q_seed=  -2.00 err_pq+1= 5.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  6 -> Q_seed=  -2.24 err_pq+1= 4.76 err_int= 0.24 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  7 -> Q_seed=  -2.47 err_pq+1= 4.53 err_int= 0.47 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  8 -> Q_seed=  -2.70 err_pq+1= 4.30 err_int= 0.30 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr=  9 -> Q_seed=  -2.93 err_pq+1= 4.07 err_int= 0.07 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 10 -> Q_seed=  -3.16 err_pq+1= 3.84 err_int= 0.16 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 11 -> Q_seed=  -3.39 err_pq+1= 3.61 err_int= 0.39 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 12 -> Q_seed=  -3.62 err_pq+1= 3.38 err_int= 0.38 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 13 -> Q_seed=  -3.85 err_pq+1= 3.15 err_int= 0.15 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 14 -> Q_seed=  -4.08 err_pq+1= 2.92 err_int= 0.08 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 15 -> Q_seed=  -4.30 err_pq+1= 2.70 err_int= 0.30 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 16 -> Q_seed=  -4.53 err_pq+1= 2.47 err_int= 0.47 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 17 -> Q_seed=  -4.75 err_pq+1= 2.25 err_int= 0.25 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 18 -> Q_seed=  -4.97 err_pq+1= 2.03 err_int= 0.03 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 19 -> Q_seed=  -5.19 err_pq+1= 1.81 err_int= 0.19 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 20 -> Q_seed=  -5.40 err_pq+1= 1.60 err_int= 0.40 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 21 -> Q_seed=  -5.62 err_pq+1= 1.38 err_int= 0.38 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 22 -> Q_seed=  -5.83 err_pq+1= 1.17 err_int= 0.17 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 23 -> Q_seed=  -6.04 err_pq+1= 0.96 err_int= 0.04 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 24 -> Q_seed=  -6.25 err_pq+1= 0.75 err_int= 0.25 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1024 fr= 25 -> Q_seed=  -6.46 err_pq+1= 0.54 err_int= 0.46 dmin= 0.239 R/dmin= 0.65 vox= 2.0 geom_warn
+    -> top 3 candidates by geometry + distance to pq+1=7:
+       #1: sf=0.36, tube=0.156, M=1024, framing= 25, Q_seed=-6.46, err_to_pq+1=0.54, err_to_int=0.46, R/dmin=0.65, vox=2.0, geom_warn
+       #2: sf=0.36, tube=0.156, M=1024, framing= 25, Q_seed=-6.46, err_to_pq+1=0.54, err_to_int=0.46, R/dmin=0.65, vox=2.0, geom_warn
+       #3: sf=0.36, tube=0.156, M=1024, framing= 25, Q_seed=-6.46, err_to_pq+1=0.54, err_to_int=0.46, R/dmin=0.65, vox=2.0, geom_warn
+    -> WARN candidate #1: geometry diagnostics are not clean; run is diagnostic, not final.
+    -> relaxing candidate #1: sf=0.36, tube=0.156, M=1024, framing=25 (seed Q_H=-6.46); toposafe, 400 steps:
+   reject at step   60: Q_H=-4.943 hold=0.807 err=1.179; rollback, delta -> 0.0075
+   reject at step   60: Q_H=-5.268 hold=0.860 err=0.854; rollback, delta -> 0.00375
+   reject at step   60: Q_H=-5.400 hold=0.882 err=0.723; rollback, delta -> 0.00187
+   reject at step   60: Q_H=-5.459 hold=0.892 err=0.663; rollback, delta -> 0.000937
+   reject at step   60: Q_H=-5.488 hold=0.896 err=0.634; rollback, delta -> 0.000469
+   reject at step   60: Q_H=-5.502 hold=0.899 err=0.620; rollback, delta -> 0.000234
+   reject at step   60: Q_H=-5.509 hold=0.900 err=0.613; rollback, delta -> 0.000117
+   reject at step   80: Q_H=-5.509 hold=0.900 err=0.613; rollback, delta -> 5.86e-05
+   abort: TOPOLOGY_LEAK; accepted=60, rejects=8, delta=5.86e-05
+    RESULT 3_1 trefoil #1: Q_H -6.46 -> -5.82   hold=0.900   |round|=6   E2=675 E4=51702   pq+1=7   status=TOPOLOGY_LEAK accepted=60 rejects=8 <-- not stable/match
+
+    -> WARN candidate #2: geometry diagnostics are not clean; run is diagnostic, not final.
+    -> relaxing candidate #2: sf=0.36, tube=0.156, M=1024, framing=25 (seed Q_H=-6.46); toposafe, 400 steps:
+   reject at step   60: Q_H=-4.943 hold=0.807 err=1.179; rollback, delta -> 0.0075
+   reject at step   60: Q_H=-5.268 hold=0.860 err=0.854; rollback, delta -> 0.00375
+   reject at step   60: Q_H=-5.400 hold=0.882 err=0.723; rollback, delta -> 0.00187
+   reject at step   60: Q_H=-5.459 hold=0.892 err=0.663; rollback, delta -> 0.000937
+   reject at step   60: Q_H=-5.488 hold=0.896 err=0.634; rollback, delta -> 0.000469
+   reject at step   60: Q_H=-5.502 hold=0.899 err=0.620; rollback, delta -> 0.000234
+   reject at step   60: Q_H=-5.509 hold=0.900 err=0.613; rollback, delta -> 0.000117
+   reject at step   80: Q_H=-5.509 hold=0.900 err=0.613; rollback, delta -> 5.86e-05
+   abort: TOPOLOGY_LEAK; accepted=60, rejects=8, delta=5.86e-05
+    RESULT 3_1 trefoil #2: Q_H -6.46 -> -5.82   hold=0.900   |round|=6   E2=675 E4=51702   pq+1=7   status=TOPOLOGY_LEAK accepted=60 rejects=8 <-- not stable/match
+
+    -> WARN candidate #3: geometry diagnostics are not clean; run is diagnostic, not final.
+    -> relaxing candidate #3: sf=0.36, tube=0.156, M=1024, framing=25 (seed Q_H=-6.46); toposafe, 400 steps:
+   reject at step   60: Q_H=-4.943 hold=0.807 err=1.179; rollback, delta -> 0.0075
+   reject at step   60: Q_H=-5.268 hold=0.860 err=0.854; rollback, delta -> 0.00375
+   reject at step   60: Q_H=-5.400 hold=0.882 err=0.723; rollback, delta -> 0.00187
+   reject at step   60: Q_H=-5.459 hold=0.892 err=0.663; rollback, delta -> 0.000937
+   reject at step   60: Q_H=-5.488 hold=0.896 err=0.634; rollback, delta -> 0.000469
+   reject at step   60: Q_H=-5.502 hold=0.899 err=0.620; rollback, delta -> 0.000234
+   reject at step   60: Q_H=-5.509 hold=0.900 err=0.613; rollback, delta -> 0.000117
+   reject at step   80: Q_H=-5.509 hold=0.900 err=0.613; rollback, delta -> 5.86e-05
+   abort: TOPOLOGY_LEAK; accepted=60, rejects=8, delta=5.86e-05
+    RESULT 3_1 trefoil #3: Q_H -6.46 -> -5.82   hold=0.900   |round|=6   E2=675 E4=51702   pq+1=7   status=TOPOLOGY_LEAK accepted=60 rejects=8 <-- not stable/match
+
+=== 5_1 cinquefoil = T(2,5)   (torus pq+1 = 11) ===
+    seed/framing scan (Q_H calibrated; geometry-aware):
+      sf=0.30 tube= 0.156 M=1280 fr=  0 -> Q_seed=  -1.71 err_pq+1= 9.29 err_int= 0.29 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  1 -> Q_seed=  -1.95 err_pq+1= 9.05 err_int= 0.05 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  2 -> Q_seed=  -2.19 err_pq+1= 8.81 err_int= 0.19 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  3 -> Q_seed=  -2.42 err_pq+1= 8.58 err_int= 0.42 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  4 -> Q_seed=  -2.66 err_pq+1= 8.34 err_int= 0.34 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  5 -> Q_seed=  -2.90 err_pq+1= 8.10 err_int= 0.10 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  6 -> Q_seed=  -3.13 err_pq+1= 7.87 err_int= 0.13 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  7 -> Q_seed=  -3.37 err_pq+1= 7.63 err_int= 0.37 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  8 -> Q_seed=  -3.60 err_pq+1= 7.40 err_int= 0.40 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  9 -> Q_seed=  -3.84 err_pq+1= 7.16 err_int= 0.16 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 10 -> Q_seed=  -4.07 err_pq+1= 6.93 err_int= 0.07 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 11 -> Q_seed=  -4.30 err_pq+1= 6.70 err_int= 0.30 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 12 -> Q_seed=  -4.54 err_pq+1= 6.46 err_int= 0.46 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 13 -> Q_seed=  -4.77 err_pq+1= 6.23 err_int= 0.23 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 14 -> Q_seed=  -5.00 err_pq+1= 6.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 15 -> Q_seed=  -5.22 err_pq+1= 5.78 err_int= 0.22 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 16 -> Q_seed=  -5.45 err_pq+1= 5.55 err_int= 0.45 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 17 -> Q_seed=  -5.68 err_pq+1= 5.32 err_int= 0.32 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 18 -> Q_seed=  -5.90 err_pq+1= 5.10 err_int= 0.10 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 19 -> Q_seed=  -6.12 err_pq+1= 4.88 err_int= 0.12 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 20 -> Q_seed=  -6.34 err_pq+1= 4.66 err_int= 0.34 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 21 -> Q_seed=  -6.56 err_pq+1= 4.44 err_int= 0.44 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 22 -> Q_seed=  -6.78 err_pq+1= 4.22 err_int= 0.22 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 23 -> Q_seed=  -7.00 err_pq+1= 4.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 24 -> Q_seed=  -7.21 err_pq+1= 3.79 err_int= 0.21 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 25 -> Q_seed=  -7.43 err_pq+1= 3.57 err_int= 0.43 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 26 -> Q_seed=  -7.64 err_pq+1= 3.36 err_int= 0.36 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  0 -> Q_seed=  -1.71 err_pq+1= 9.29 err_int= 0.29 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  1 -> Q_seed=  -1.95 err_pq+1= 9.05 err_int= 0.05 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  2 -> Q_seed=  -2.19 err_pq+1= 8.81 err_int= 0.19 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  3 -> Q_seed=  -2.42 err_pq+1= 8.58 err_int= 0.42 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  4 -> Q_seed=  -2.66 err_pq+1= 8.34 err_int= 0.34 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  5 -> Q_seed=  -2.90 err_pq+1= 8.10 err_int= 0.10 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  6 -> Q_seed=  -3.13 err_pq+1= 7.87 err_int= 0.13 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  7 -> Q_seed=  -3.37 err_pq+1= 7.63 err_int= 0.37 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  8 -> Q_seed=  -3.60 err_pq+1= 7.40 err_int= 0.40 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  9 -> Q_seed=  -3.84 err_pq+1= 7.16 err_int= 0.16 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 10 -> Q_seed=  -4.07 err_pq+1= 6.93 err_int= 0.07 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 11 -> Q_seed=  -4.30 err_pq+1= 6.70 err_int= 0.30 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 12 -> Q_seed=  -4.54 err_pq+1= 6.46 err_int= 0.46 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 13 -> Q_seed=  -4.77 err_pq+1= 6.23 err_int= 0.23 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 14 -> Q_seed=  -5.00 err_pq+1= 6.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 15 -> Q_seed=  -5.22 err_pq+1= 5.78 err_int= 0.22 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 16 -> Q_seed=  -5.45 err_pq+1= 5.55 err_int= 0.45 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 17 -> Q_seed=  -5.68 err_pq+1= 5.32 err_int= 0.32 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 18 -> Q_seed=  -5.90 err_pq+1= 5.10 err_int= 0.10 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 19 -> Q_seed=  -6.12 err_pq+1= 4.88 err_int= 0.12 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 20 -> Q_seed=  -6.34 err_pq+1= 4.66 err_int= 0.34 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 21 -> Q_seed=  -6.56 err_pq+1= 4.44 err_int= 0.44 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 22 -> Q_seed=  -6.78 err_pq+1= 4.22 err_int= 0.22 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 23 -> Q_seed=  -7.00 err_pq+1= 4.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 24 -> Q_seed=  -7.21 err_pq+1= 3.79 err_int= 0.21 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 25 -> Q_seed=  -7.43 err_pq+1= 3.57 err_int= 0.43 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 26 -> Q_seed=  -7.64 err_pq+1= 3.36 err_int= 0.36 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  0 -> Q_seed=  -1.71 err_pq+1= 9.29 err_int= 0.29 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  1 -> Q_seed=  -1.95 err_pq+1= 9.05 err_int= 0.05 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  2 -> Q_seed=  -2.19 err_pq+1= 8.81 err_int= 0.19 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  3 -> Q_seed=  -2.42 err_pq+1= 8.58 err_int= 0.42 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  4 -> Q_seed=  -2.66 err_pq+1= 8.34 err_int= 0.34 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  5 -> Q_seed=  -2.90 err_pq+1= 8.10 err_int= 0.10 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  6 -> Q_seed=  -3.13 err_pq+1= 7.87 err_int= 0.13 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  7 -> Q_seed=  -3.37 err_pq+1= 7.63 err_int= 0.37 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  8 -> Q_seed=  -3.60 err_pq+1= 7.40 err_int= 0.40 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr=  9 -> Q_seed=  -3.84 err_pq+1= 7.16 err_int= 0.16 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 10 -> Q_seed=  -4.07 err_pq+1= 6.93 err_int= 0.07 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 11 -> Q_seed=  -4.30 err_pq+1= 6.70 err_int= 0.30 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 12 -> Q_seed=  -4.54 err_pq+1= 6.46 err_int= 0.46 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 13 -> Q_seed=  -4.77 err_pq+1= 6.23 err_int= 0.23 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 14 -> Q_seed=  -5.00 err_pq+1= 6.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 15 -> Q_seed=  -5.22 err_pq+1= 5.78 err_int= 0.22 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 16 -> Q_seed=  -5.45 err_pq+1= 5.55 err_int= 0.45 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 17 -> Q_seed=  -5.68 err_pq+1= 5.32 err_int= 0.32 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 18 -> Q_seed=  -5.90 err_pq+1= 5.10 err_int= 0.10 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 19 -> Q_seed=  -6.12 err_pq+1= 4.88 err_int= 0.12 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 20 -> Q_seed=  -6.34 err_pq+1= 4.66 err_int= 0.34 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 21 -> Q_seed=  -6.56 err_pq+1= 4.44 err_int= 0.44 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 22 -> Q_seed=  -6.78 err_pq+1= 4.22 err_int= 0.22 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 23 -> Q_seed=  -7.00 err_pq+1= 4.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 24 -> Q_seed=  -7.21 err_pq+1= 3.79 err_int= 0.21 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 25 -> Q_seed=  -7.43 err_pq+1= 3.57 err_int= 0.43 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1280 fr= 26 -> Q_seed=  -7.64 err_pq+1= 3.36 err_int= 0.36 dmin= 0.238 R/dmin= 0.66 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  0 -> Q_seed=  -1.71 err_pq+1= 9.29 err_int= 0.29 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  1 -> Q_seed=  -1.94 err_pq+1= 9.06 err_int= 0.06 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  2 -> Q_seed=  -2.18 err_pq+1= 8.82 err_int= 0.18 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  3 -> Q_seed=  -2.42 err_pq+1= 8.58 err_int= 0.42 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  4 -> Q_seed=  -2.65 err_pq+1= 8.35 err_int= 0.35 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  5 -> Q_seed=  -2.89 err_pq+1= 8.11 err_int= 0.11 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  6 -> Q_seed=  -3.13 err_pq+1= 7.87 err_int= 0.13 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  7 -> Q_seed=  -3.36 err_pq+1= 7.64 err_int= 0.36 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  8 -> Q_seed=  -3.60 err_pq+1= 7.40 err_int= 0.40 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  9 -> Q_seed=  -3.83 err_pq+1= 7.17 err_int= 0.17 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 10 -> Q_seed=  -4.06 err_pq+1= 6.94 err_int= 0.06 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 11 -> Q_seed=  -4.30 err_pq+1= 6.70 err_int= 0.30 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 12 -> Q_seed=  -4.53 err_pq+1= 6.47 err_int= 0.47 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 13 -> Q_seed=  -4.76 err_pq+1= 6.24 err_int= 0.24 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 14 -> Q_seed=  -4.99 err_pq+1= 6.01 err_int= 0.01 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 15 -> Q_seed=  -5.22 err_pq+1= 5.78 err_int= 0.22 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 16 -> Q_seed=  -5.45 err_pq+1= 5.55 err_int= 0.45 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 17 -> Q_seed=  -5.68 err_pq+1= 5.32 err_int= 0.32 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 18 -> Q_seed=  -5.91 err_pq+1= 5.09 err_int= 0.09 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 19 -> Q_seed=  -6.13 err_pq+1= 4.87 err_int= 0.13 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 20 -> Q_seed=  -6.36 err_pq+1= 4.64 err_int= 0.36 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 21 -> Q_seed=  -6.58 err_pq+1= 4.42 err_int= 0.42 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 22 -> Q_seed=  -6.80 err_pq+1= 4.20 err_int= 0.20 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 23 -> Q_seed=  -7.02 err_pq+1= 3.98 err_int= 0.02 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 24 -> Q_seed=  -7.25 err_pq+1= 3.75 err_int= 0.25 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 25 -> Q_seed=  -7.46 err_pq+1= 3.54 err_int= 0.46 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 26 -> Q_seed=  -7.68 err_pq+1= 3.32 err_int= 0.32 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  0 -> Q_seed=  -1.71 err_pq+1= 9.29 err_int= 0.29 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  1 -> Q_seed=  -1.94 err_pq+1= 9.06 err_int= 0.06 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  2 -> Q_seed=  -2.18 err_pq+1= 8.82 err_int= 0.18 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  3 -> Q_seed=  -2.42 err_pq+1= 8.58 err_int= 0.42 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  4 -> Q_seed=  -2.65 err_pq+1= 8.35 err_int= 0.35 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  5 -> Q_seed=  -2.89 err_pq+1= 8.11 err_int= 0.11 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  6 -> Q_seed=  -3.13 err_pq+1= 7.87 err_int= 0.13 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  7 -> Q_seed=  -3.36 err_pq+1= 7.64 err_int= 0.36 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  8 -> Q_seed=  -3.60 err_pq+1= 7.40 err_int= 0.40 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  9 -> Q_seed=  -3.83 err_pq+1= 7.17 err_int= 0.17 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 10 -> Q_seed=  -4.06 err_pq+1= 6.94 err_int= 0.06 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 11 -> Q_seed=  -4.30 err_pq+1= 6.70 err_int= 0.30 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 12 -> Q_seed=  -4.53 err_pq+1= 6.47 err_int= 0.47 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 13 -> Q_seed=  -4.76 err_pq+1= 6.24 err_int= 0.24 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 14 -> Q_seed=  -4.99 err_pq+1= 6.01 err_int= 0.01 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 15 -> Q_seed=  -5.22 err_pq+1= 5.78 err_int= 0.22 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 16 -> Q_seed=  -5.45 err_pq+1= 5.55 err_int= 0.45 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 17 -> Q_seed=  -5.68 err_pq+1= 5.32 err_int= 0.32 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 18 -> Q_seed=  -5.91 err_pq+1= 5.09 err_int= 0.09 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 19 -> Q_seed=  -6.13 err_pq+1= 4.87 err_int= 0.13 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 20 -> Q_seed=  -6.36 err_pq+1= 4.64 err_int= 0.36 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 21 -> Q_seed=  -6.58 err_pq+1= 4.42 err_int= 0.42 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 22 -> Q_seed=  -6.80 err_pq+1= 4.20 err_int= 0.20 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 23 -> Q_seed=  -7.02 err_pq+1= 3.98 err_int= 0.02 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 24 -> Q_seed=  -7.25 err_pq+1= 3.75 err_int= 0.25 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 25 -> Q_seed=  -7.46 err_pq+1= 3.54 err_int= 0.46 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 26 -> Q_seed=  -7.68 err_pq+1= 3.32 err_int= 0.32 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  0 -> Q_seed=  -1.71 err_pq+1= 9.29 err_int= 0.29 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  1 -> Q_seed=  -1.94 err_pq+1= 9.06 err_int= 0.06 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  2 -> Q_seed=  -2.18 err_pq+1= 8.82 err_int= 0.18 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  3 -> Q_seed=  -2.42 err_pq+1= 8.58 err_int= 0.42 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  4 -> Q_seed=  -2.65 err_pq+1= 8.35 err_int= 0.35 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  5 -> Q_seed=  -2.89 err_pq+1= 8.11 err_int= 0.11 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  6 -> Q_seed=  -3.13 err_pq+1= 7.87 err_int= 0.13 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  7 -> Q_seed=  -3.36 err_pq+1= 7.64 err_int= 0.36 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  8 -> Q_seed=  -3.60 err_pq+1= 7.40 err_int= 0.40 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr=  9 -> Q_seed=  -3.83 err_pq+1= 7.17 err_int= 0.17 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 10 -> Q_seed=  -4.06 err_pq+1= 6.94 err_int= 0.06 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 11 -> Q_seed=  -4.30 err_pq+1= 6.70 err_int= 0.30 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 12 -> Q_seed=  -4.53 err_pq+1= 6.47 err_int= 0.47 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 13 -> Q_seed=  -4.76 err_pq+1= 6.24 err_int= 0.24 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 14 -> Q_seed=  -4.99 err_pq+1= 6.01 err_int= 0.01 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 15 -> Q_seed=  -5.22 err_pq+1= 5.78 err_int= 0.22 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 16 -> Q_seed=  -5.45 err_pq+1= 5.55 err_int= 0.45 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 17 -> Q_seed=  -5.68 err_pq+1= 5.32 err_int= 0.32 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 18 -> Q_seed=  -5.91 err_pq+1= 5.09 err_int= 0.09 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 19 -> Q_seed=  -6.13 err_pq+1= 4.87 err_int= 0.13 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 20 -> Q_seed=  -6.36 err_pq+1= 4.64 err_int= 0.36 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 21 -> Q_seed=  -6.58 err_pq+1= 4.42 err_int= 0.42 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 22 -> Q_seed=  -6.80 err_pq+1= 4.20 err_int= 0.20 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 23 -> Q_seed=  -7.02 err_pq+1= 3.98 err_int= 0.02 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 24 -> Q_seed=  -7.25 err_pq+1= 3.75 err_int= 0.25 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 25 -> Q_seed=  -7.46 err_pq+1= 3.54 err_int= 0.46 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1280 fr= 26 -> Q_seed=  -7.68 err_pq+1= 3.32 err_int= 0.32 dmin= 0.285 R/dmin= 0.55 vox= 2.0 geom_warn
+    -> top 3 candidates by geometry + distance to pq+1=11:
+       #1: sf=0.36, tube=0.156, M=1280, framing= 26, Q_seed=-7.68, err_to_pq+1=3.32, err_to_int=0.32, R/dmin=0.55, vox=2.0, geom_warn
+       #2: sf=0.36, tube=0.156, M=1280, framing= 26, Q_seed=-7.68, err_to_pq+1=3.32, err_to_int=0.32, R/dmin=0.55, vox=2.0, geom_warn
+       #3: sf=0.36, tube=0.156, M=1280, framing= 26, Q_seed=-7.68, err_to_pq+1=3.32, err_to_int=0.32, R/dmin=0.55, vox=2.0, geom_warn
+    -> SKIP candidate #1: seed Q_H=-7.68 is not close enough to pq+1=11 (err=3.32 > 0.75); not a valid pq+1 relaxation test.
+
+    -> SKIP candidate #2: seed Q_H=-7.68 is not close enough to pq+1=11 (err=3.32 > 0.75); not a valid pq+1 relaxation test.
+
+    -> SKIP candidate #3: seed Q_H=-7.68 is not close enough to pq+1=11 (err=3.32 > 0.75); not a valid pq+1 relaxation test.
+
+=== 7_1 septafoil = T(2,7)   (torus pq+1 = 15) ===
+    seed/framing scan (Q_H calibrated; geometry-aware):
+      sf=0.30 tube= 0.156 M=1792 fr=  0 -> Q_seed=  -2.69 err_pq+1=12.31 err_int= 0.31 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  1 -> Q_seed=  -2.93 err_pq+1=12.07 err_int= 0.07 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  2 -> Q_seed=  -3.17 err_pq+1=11.83 err_int= 0.17 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  3 -> Q_seed=  -3.41 err_pq+1=11.59 err_int= 0.41 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  4 -> Q_seed=  -3.65 err_pq+1=11.35 err_int= 0.35 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  5 -> Q_seed=  -3.88 err_pq+1=11.12 err_int= 0.12 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  6 -> Q_seed=  -4.12 err_pq+1=10.88 err_int= 0.12 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  7 -> Q_seed=  -4.36 err_pq+1=10.64 err_int= 0.36 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  8 -> Q_seed=  -4.59 err_pq+1=10.41 err_int= 0.41 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  9 -> Q_seed=  -4.83 err_pq+1=10.17 err_int= 0.17 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 10 -> Q_seed=  -5.06 err_pq+1= 9.94 err_int= 0.06 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 11 -> Q_seed=  -5.30 err_pq+1= 9.70 err_int= 0.30 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 12 -> Q_seed=  -5.53 err_pq+1= 9.47 err_int= 0.47 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 13 -> Q_seed=  -5.76 err_pq+1= 9.24 err_int= 0.24 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 14 -> Q_seed=  -6.00 err_pq+1= 9.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 15 -> Q_seed=  -6.23 err_pq+1= 8.77 err_int= 0.23 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 16 -> Q_seed=  -6.46 err_pq+1= 8.54 err_int= 0.46 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 17 -> Q_seed=  -6.69 err_pq+1= 8.31 err_int= 0.31 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 18 -> Q_seed=  -6.92 err_pq+1= 8.08 err_int= 0.08 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 19 -> Q_seed=  -7.14 err_pq+1= 7.86 err_int= 0.14 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 20 -> Q_seed=  -7.37 err_pq+1= 7.63 err_int= 0.37 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 21 -> Q_seed=  -7.60 err_pq+1= 7.40 err_int= 0.40 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 22 -> Q_seed=  -7.82 err_pq+1= 7.18 err_int= 0.18 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 23 -> Q_seed=  -8.05 err_pq+1= 6.95 err_int= 0.05 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 24 -> Q_seed=  -8.27 err_pq+1= 6.73 err_int= 0.27 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 25 -> Q_seed=  -8.49 err_pq+1= 6.51 err_int= 0.49 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 26 -> Q_seed=  -8.71 err_pq+1= 6.29 err_int= 0.29 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 27 -> Q_seed=  -8.93 err_pq+1= 6.07 err_int= 0.07 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 28 -> Q_seed=  -9.15 err_pq+1= 5.85 err_int= 0.15 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 29 -> Q_seed=  -9.36 err_pq+1= 5.64 err_int= 0.36 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 30 -> Q_seed=  -9.58 err_pq+1= 5.42 err_int= 0.42 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  0 -> Q_seed=  -2.69 err_pq+1=12.31 err_int= 0.31 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  1 -> Q_seed=  -2.93 err_pq+1=12.07 err_int= 0.07 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  2 -> Q_seed=  -3.17 err_pq+1=11.83 err_int= 0.17 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  3 -> Q_seed=  -3.41 err_pq+1=11.59 err_int= 0.41 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  4 -> Q_seed=  -3.65 err_pq+1=11.35 err_int= 0.35 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  5 -> Q_seed=  -3.88 err_pq+1=11.12 err_int= 0.12 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  6 -> Q_seed=  -4.12 err_pq+1=10.88 err_int= 0.12 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  7 -> Q_seed=  -4.36 err_pq+1=10.64 err_int= 0.36 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  8 -> Q_seed=  -4.59 err_pq+1=10.41 err_int= 0.41 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  9 -> Q_seed=  -4.83 err_pq+1=10.17 err_int= 0.17 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 10 -> Q_seed=  -5.06 err_pq+1= 9.94 err_int= 0.06 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 11 -> Q_seed=  -5.30 err_pq+1= 9.70 err_int= 0.30 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 12 -> Q_seed=  -5.53 err_pq+1= 9.47 err_int= 0.47 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 13 -> Q_seed=  -5.76 err_pq+1= 9.24 err_int= 0.24 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 14 -> Q_seed=  -6.00 err_pq+1= 9.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 15 -> Q_seed=  -6.23 err_pq+1= 8.77 err_int= 0.23 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 16 -> Q_seed=  -6.46 err_pq+1= 8.54 err_int= 0.46 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 17 -> Q_seed=  -6.69 err_pq+1= 8.31 err_int= 0.31 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 18 -> Q_seed=  -6.92 err_pq+1= 8.08 err_int= 0.08 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 19 -> Q_seed=  -7.14 err_pq+1= 7.86 err_int= 0.14 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 20 -> Q_seed=  -7.37 err_pq+1= 7.63 err_int= 0.37 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 21 -> Q_seed=  -7.60 err_pq+1= 7.40 err_int= 0.40 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 22 -> Q_seed=  -7.82 err_pq+1= 7.18 err_int= 0.18 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 23 -> Q_seed=  -8.05 err_pq+1= 6.95 err_int= 0.05 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 24 -> Q_seed=  -8.27 err_pq+1= 6.73 err_int= 0.27 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 25 -> Q_seed=  -8.49 err_pq+1= 6.51 err_int= 0.49 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 26 -> Q_seed=  -8.71 err_pq+1= 6.29 err_int= 0.29 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 27 -> Q_seed=  -8.93 err_pq+1= 6.07 err_int= 0.07 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 28 -> Q_seed=  -9.15 err_pq+1= 5.85 err_int= 0.15 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 29 -> Q_seed=  -9.36 err_pq+1= 5.64 err_int= 0.36 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 30 -> Q_seed=  -9.58 err_pq+1= 5.42 err_int= 0.42 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  0 -> Q_seed=  -2.69 err_pq+1=12.31 err_int= 0.31 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  1 -> Q_seed=  -2.93 err_pq+1=12.07 err_int= 0.07 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  2 -> Q_seed=  -3.17 err_pq+1=11.83 err_int= 0.17 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  3 -> Q_seed=  -3.41 err_pq+1=11.59 err_int= 0.41 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  4 -> Q_seed=  -3.65 err_pq+1=11.35 err_int= 0.35 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  5 -> Q_seed=  -3.88 err_pq+1=11.12 err_int= 0.12 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  6 -> Q_seed=  -4.12 err_pq+1=10.88 err_int= 0.12 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  7 -> Q_seed=  -4.36 err_pq+1=10.64 err_int= 0.36 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  8 -> Q_seed=  -4.59 err_pq+1=10.41 err_int= 0.41 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr=  9 -> Q_seed=  -4.83 err_pq+1=10.17 err_int= 0.17 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 10 -> Q_seed=  -5.06 err_pq+1= 9.94 err_int= 0.06 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 11 -> Q_seed=  -5.30 err_pq+1= 9.70 err_int= 0.30 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 12 -> Q_seed=  -5.53 err_pq+1= 9.47 err_int= 0.47 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 13 -> Q_seed=  -5.76 err_pq+1= 9.24 err_int= 0.24 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 14 -> Q_seed=  -6.00 err_pq+1= 9.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 15 -> Q_seed=  -6.23 err_pq+1= 8.77 err_int= 0.23 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 16 -> Q_seed=  -6.46 err_pq+1= 8.54 err_int= 0.46 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 17 -> Q_seed=  -6.69 err_pq+1= 8.31 err_int= 0.31 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 18 -> Q_seed=  -6.92 err_pq+1= 8.08 err_int= 0.08 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 19 -> Q_seed=  -7.14 err_pq+1= 7.86 err_int= 0.14 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 20 -> Q_seed=  -7.37 err_pq+1= 7.63 err_int= 0.37 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 21 -> Q_seed=  -7.60 err_pq+1= 7.40 err_int= 0.40 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 22 -> Q_seed=  -7.82 err_pq+1= 7.18 err_int= 0.18 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 23 -> Q_seed=  -8.05 err_pq+1= 6.95 err_int= 0.05 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 24 -> Q_seed=  -8.27 err_pq+1= 6.73 err_int= 0.27 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 25 -> Q_seed=  -8.49 err_pq+1= 6.51 err_int= 0.49 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 26 -> Q_seed=  -8.71 err_pq+1= 6.29 err_int= 0.29 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 27 -> Q_seed=  -8.93 err_pq+1= 6.07 err_int= 0.07 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 28 -> Q_seed=  -9.15 err_pq+1= 5.85 err_int= 0.15 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 29 -> Q_seed=  -9.36 err_pq+1= 5.64 err_int= 0.36 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=1792 fr= 30 -> Q_seed=  -9.58 err_pq+1= 5.42 err_int= 0.42 dmin= 0.229 R/dmin= 0.68 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  0 -> Q_seed=  -2.70 err_pq+1=12.30 err_int= 0.30 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  1 -> Q_seed=  -2.93 err_pq+1=12.07 err_int= 0.07 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  2 -> Q_seed=  -3.17 err_pq+1=11.83 err_int= 0.17 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  3 -> Q_seed=  -3.41 err_pq+1=11.59 err_int= 0.41 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  4 -> Q_seed=  -3.65 err_pq+1=11.35 err_int= 0.35 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  5 -> Q_seed=  -3.89 err_pq+1=11.11 err_int= 0.11 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  6 -> Q_seed=  -4.12 err_pq+1=10.88 err_int= 0.12 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  7 -> Q_seed=  -4.36 err_pq+1=10.64 err_int= 0.36 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  8 -> Q_seed=  -4.60 err_pq+1=10.40 err_int= 0.40 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  9 -> Q_seed=  -4.83 err_pq+1=10.17 err_int= 0.17 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 10 -> Q_seed=  -5.07 err_pq+1= 9.93 err_int= 0.07 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 11 -> Q_seed=  -5.30 err_pq+1= 9.70 err_int= 0.30 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 12 -> Q_seed=  -5.54 err_pq+1= 9.46 err_int= 0.46 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 13 -> Q_seed=  -5.77 err_pq+1= 9.23 err_int= 0.23 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 14 -> Q_seed=  -6.00 err_pq+1= 9.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 15 -> Q_seed=  -6.24 err_pq+1= 8.76 err_int= 0.24 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 16 -> Q_seed=  -6.47 err_pq+1= 8.53 err_int= 0.47 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 17 -> Q_seed=  -6.70 err_pq+1= 8.30 err_int= 0.30 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 18 -> Q_seed=  -6.93 err_pq+1= 8.07 err_int= 0.07 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 19 -> Q_seed=  -7.16 err_pq+1= 7.84 err_int= 0.16 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 20 -> Q_seed=  -7.39 err_pq+1= 7.61 err_int= 0.39 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 21 -> Q_seed=  -7.62 err_pq+1= 7.38 err_int= 0.38 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 22 -> Q_seed=  -7.85 err_pq+1= 7.15 err_int= 0.15 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 23 -> Q_seed=  -8.08 err_pq+1= 6.92 err_int= 0.08 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 24 -> Q_seed=  -8.30 err_pq+1= 6.70 err_int= 0.30 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 25 -> Q_seed=  -8.53 err_pq+1= 6.47 err_int= 0.47 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 26 -> Q_seed=  -8.75 err_pq+1= 6.25 err_int= 0.25 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 27 -> Q_seed=  -8.98 err_pq+1= 6.02 err_int= 0.02 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 28 -> Q_seed=  -9.20 err_pq+1= 5.80 err_int= 0.20 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 29 -> Q_seed=  -9.42 err_pq+1= 5.58 err_int= 0.42 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 30 -> Q_seed=  -9.65 err_pq+1= 5.35 err_int= 0.35 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  0 -> Q_seed=  -2.70 err_pq+1=12.30 err_int= 0.30 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  1 -> Q_seed=  -2.93 err_pq+1=12.07 err_int= 0.07 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  2 -> Q_seed=  -3.17 err_pq+1=11.83 err_int= 0.17 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  3 -> Q_seed=  -3.41 err_pq+1=11.59 err_int= 0.41 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  4 -> Q_seed=  -3.65 err_pq+1=11.35 err_int= 0.35 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  5 -> Q_seed=  -3.89 err_pq+1=11.11 err_int= 0.11 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  6 -> Q_seed=  -4.12 err_pq+1=10.88 err_int= 0.12 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  7 -> Q_seed=  -4.36 err_pq+1=10.64 err_int= 0.36 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  8 -> Q_seed=  -4.60 err_pq+1=10.40 err_int= 0.40 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  9 -> Q_seed=  -4.83 err_pq+1=10.17 err_int= 0.17 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 10 -> Q_seed=  -5.07 err_pq+1= 9.93 err_int= 0.07 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 11 -> Q_seed=  -5.30 err_pq+1= 9.70 err_int= 0.30 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 12 -> Q_seed=  -5.54 err_pq+1= 9.46 err_int= 0.46 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 13 -> Q_seed=  -5.77 err_pq+1= 9.23 err_int= 0.23 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 14 -> Q_seed=  -6.00 err_pq+1= 9.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 15 -> Q_seed=  -6.24 err_pq+1= 8.76 err_int= 0.24 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 16 -> Q_seed=  -6.47 err_pq+1= 8.53 err_int= 0.47 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 17 -> Q_seed=  -6.70 err_pq+1= 8.30 err_int= 0.30 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 18 -> Q_seed=  -6.93 err_pq+1= 8.07 err_int= 0.07 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 19 -> Q_seed=  -7.16 err_pq+1= 7.84 err_int= 0.16 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 20 -> Q_seed=  -7.39 err_pq+1= 7.61 err_int= 0.39 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 21 -> Q_seed=  -7.62 err_pq+1= 7.38 err_int= 0.38 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 22 -> Q_seed=  -7.85 err_pq+1= 7.15 err_int= 0.15 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 23 -> Q_seed=  -8.08 err_pq+1= 6.92 err_int= 0.08 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 24 -> Q_seed=  -8.30 err_pq+1= 6.70 err_int= 0.30 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 25 -> Q_seed=  -8.53 err_pq+1= 6.47 err_int= 0.47 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 26 -> Q_seed=  -8.75 err_pq+1= 6.25 err_int= 0.25 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 27 -> Q_seed=  -8.98 err_pq+1= 6.02 err_int= 0.02 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 28 -> Q_seed=  -9.20 err_pq+1= 5.80 err_int= 0.20 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 29 -> Q_seed=  -9.42 err_pq+1= 5.58 err_int= 0.42 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 30 -> Q_seed=  -9.65 err_pq+1= 5.35 err_int= 0.35 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  0 -> Q_seed=  -2.70 err_pq+1=12.30 err_int= 0.30 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  1 -> Q_seed=  -2.93 err_pq+1=12.07 err_int= 0.07 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  2 -> Q_seed=  -3.17 err_pq+1=11.83 err_int= 0.17 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  3 -> Q_seed=  -3.41 err_pq+1=11.59 err_int= 0.41 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  4 -> Q_seed=  -3.65 err_pq+1=11.35 err_int= 0.35 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  5 -> Q_seed=  -3.89 err_pq+1=11.11 err_int= 0.11 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  6 -> Q_seed=  -4.12 err_pq+1=10.88 err_int= 0.12 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  7 -> Q_seed=  -4.36 err_pq+1=10.64 err_int= 0.36 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  8 -> Q_seed=  -4.60 err_pq+1=10.40 err_int= 0.40 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr=  9 -> Q_seed=  -4.83 err_pq+1=10.17 err_int= 0.17 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 10 -> Q_seed=  -5.07 err_pq+1= 9.93 err_int= 0.07 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 11 -> Q_seed=  -5.30 err_pq+1= 9.70 err_int= 0.30 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 12 -> Q_seed=  -5.54 err_pq+1= 9.46 err_int= 0.46 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 13 -> Q_seed=  -5.77 err_pq+1= 9.23 err_int= 0.23 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 14 -> Q_seed=  -6.00 err_pq+1= 9.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 15 -> Q_seed=  -6.24 err_pq+1= 8.76 err_int= 0.24 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 16 -> Q_seed=  -6.47 err_pq+1= 8.53 err_int= 0.47 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 17 -> Q_seed=  -6.70 err_pq+1= 8.30 err_int= 0.30 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 18 -> Q_seed=  -6.93 err_pq+1= 8.07 err_int= 0.07 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 19 -> Q_seed=  -7.16 err_pq+1= 7.84 err_int= 0.16 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 20 -> Q_seed=  -7.39 err_pq+1= 7.61 err_int= 0.39 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 21 -> Q_seed=  -7.62 err_pq+1= 7.38 err_int= 0.38 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 22 -> Q_seed=  -7.85 err_pq+1= 7.15 err_int= 0.15 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 23 -> Q_seed=  -8.08 err_pq+1= 6.92 err_int= 0.08 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 24 -> Q_seed=  -8.30 err_pq+1= 6.70 err_int= 0.30 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 25 -> Q_seed=  -8.53 err_pq+1= 6.47 err_int= 0.47 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 26 -> Q_seed=  -8.75 err_pq+1= 6.25 err_int= 0.25 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 27 -> Q_seed=  -8.98 err_pq+1= 6.02 err_int= 0.02 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 28 -> Q_seed=  -9.20 err_pq+1= 5.80 err_int= 0.20 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 29 -> Q_seed=  -9.42 err_pq+1= 5.58 err_int= 0.42 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=1792 fr= 30 -> Q_seed=  -9.65 err_pq+1= 5.35 err_int= 0.35 dmin= 0.275 R/dmin= 0.57 vox= 2.0 geom_warn
+    -> top 3 candidates by geometry + distance to pq+1=15:
+       #1: sf=0.36, tube=0.156, M=1792, framing= 30, Q_seed=-9.65, err_to_pq+1=5.35, err_to_int=0.35, R/dmin=0.57, vox=2.0, geom_warn
+       #2: sf=0.36, tube=0.156, M=1792, framing= 30, Q_seed=-9.65, err_to_pq+1=5.35, err_to_int=0.35, R/dmin=0.57, vox=2.0, geom_warn
+       #3: sf=0.36, tube=0.156, M=1792, framing= 30, Q_seed=-9.65, err_to_pq+1=5.35, err_to_int=0.35, R/dmin=0.57, vox=2.0, geom_warn
+    -> SKIP candidate #1: seed Q_H=-9.65 is not close enough to pq+1=15 (err=5.35 > 0.75); not a valid pq+1 relaxation test.
+
+    -> SKIP candidate #2: seed Q_H=-9.65 is not close enough to pq+1=15 (err=5.35 > 0.75); not a valid pq+1 relaxation test.
+
+    -> SKIP candidate #3: seed Q_H=-9.65 is not close enough to pq+1=15 (err=5.35 > 0.75); not a valid pq+1 relaxation test.
+
+=== 9_1 nonafoil = T(2,9)   (torus pq+1 = 19) ===
+    seed/framing scan (Q_H calibrated; geometry-aware):
+      sf=0.30 tube= 0.156 M=2304 fr=  0 -> Q_seed=  -3.70 err_pq+1=15.30 err_int= 0.30 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  1 -> Q_seed=  -3.94 err_pq+1=15.06 err_int= 0.06 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  2 -> Q_seed=  -4.18 err_pq+1=14.82 err_int= 0.18 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  3 -> Q_seed=  -4.42 err_pq+1=14.58 err_int= 0.42 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  4 -> Q_seed=  -4.65 err_pq+1=14.35 err_int= 0.35 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  5 -> Q_seed=  -4.89 err_pq+1=14.11 err_int= 0.11 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  6 -> Q_seed=  -5.13 err_pq+1=13.87 err_int= 0.13 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  7 -> Q_seed=  -5.37 err_pq+1=13.63 err_int= 0.37 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  8 -> Q_seed=  -5.60 err_pq+1=13.40 err_int= 0.40 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  9 -> Q_seed=  -5.84 err_pq+1=13.16 err_int= 0.16 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 10 -> Q_seed=  -6.07 err_pq+1=12.93 err_int= 0.07 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 11 -> Q_seed=  -6.31 err_pq+1=12.69 err_int= 0.31 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 12 -> Q_seed=  -6.54 err_pq+1=12.46 err_int= 0.46 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 13 -> Q_seed=  -6.78 err_pq+1=12.22 err_int= 0.22 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 14 -> Q_seed=  -7.01 err_pq+1=11.99 err_int= 0.01 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 15 -> Q_seed=  -7.25 err_pq+1=11.75 err_int= 0.25 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 16 -> Q_seed=  -7.48 err_pq+1=11.52 err_int= 0.48 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 17 -> Q_seed=  -7.71 err_pq+1=11.29 err_int= 0.29 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 18 -> Q_seed=  -7.94 err_pq+1=11.06 err_int= 0.06 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 19 -> Q_seed=  -8.17 err_pq+1=10.83 err_int= 0.17 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 20 -> Q_seed=  -8.40 err_pq+1=10.60 err_int= 0.40 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 21 -> Q_seed=  -8.63 err_pq+1=10.37 err_int= 0.37 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 22 -> Q_seed=  -8.86 err_pq+1=10.14 err_int= 0.14 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 23 -> Q_seed=  -9.09 err_pq+1= 9.91 err_int= 0.09 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 24 -> Q_seed=  -9.32 err_pq+1= 9.68 err_int= 0.32 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 25 -> Q_seed=  -9.54 err_pq+1= 9.46 err_int= 0.46 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 26 -> Q_seed=  -9.77 err_pq+1= 9.23 err_int= 0.23 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 27 -> Q_seed=  -9.99 err_pq+1= 9.01 err_int= 0.01 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 28 -> Q_seed= -10.22 err_pq+1= 8.78 err_int= 0.22 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 29 -> Q_seed= -10.44 err_pq+1= 8.56 err_int= 0.44 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 30 -> Q_seed= -10.66 err_pq+1= 8.34 err_int= 0.34 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 31 -> Q_seed= -10.88 err_pq+1= 8.12 err_int= 0.12 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 32 -> Q_seed= -11.10 err_pq+1= 7.90 err_int= 0.10 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 33 -> Q_seed= -11.32 err_pq+1= 7.68 err_int= 0.32 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 34 -> Q_seed= -11.54 err_pq+1= 7.46 err_int= 0.46 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  0 -> Q_seed=  -3.70 err_pq+1=15.30 err_int= 0.30 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  1 -> Q_seed=  -3.94 err_pq+1=15.06 err_int= 0.06 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  2 -> Q_seed=  -4.18 err_pq+1=14.82 err_int= 0.18 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  3 -> Q_seed=  -4.42 err_pq+1=14.58 err_int= 0.42 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  4 -> Q_seed=  -4.65 err_pq+1=14.35 err_int= 0.35 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  5 -> Q_seed=  -4.89 err_pq+1=14.11 err_int= 0.11 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  6 -> Q_seed=  -5.13 err_pq+1=13.87 err_int= 0.13 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  7 -> Q_seed=  -5.37 err_pq+1=13.63 err_int= 0.37 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  8 -> Q_seed=  -5.60 err_pq+1=13.40 err_int= 0.40 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  9 -> Q_seed=  -5.84 err_pq+1=13.16 err_int= 0.16 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 10 -> Q_seed=  -6.07 err_pq+1=12.93 err_int= 0.07 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 11 -> Q_seed=  -6.31 err_pq+1=12.69 err_int= 0.31 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 12 -> Q_seed=  -6.54 err_pq+1=12.46 err_int= 0.46 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 13 -> Q_seed=  -6.78 err_pq+1=12.22 err_int= 0.22 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 14 -> Q_seed=  -7.01 err_pq+1=11.99 err_int= 0.01 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 15 -> Q_seed=  -7.25 err_pq+1=11.75 err_int= 0.25 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 16 -> Q_seed=  -7.48 err_pq+1=11.52 err_int= 0.48 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 17 -> Q_seed=  -7.71 err_pq+1=11.29 err_int= 0.29 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 18 -> Q_seed=  -7.94 err_pq+1=11.06 err_int= 0.06 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 19 -> Q_seed=  -8.17 err_pq+1=10.83 err_int= 0.17 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 20 -> Q_seed=  -8.40 err_pq+1=10.60 err_int= 0.40 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 21 -> Q_seed=  -8.63 err_pq+1=10.37 err_int= 0.37 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 22 -> Q_seed=  -8.86 err_pq+1=10.14 err_int= 0.14 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 23 -> Q_seed=  -9.09 err_pq+1= 9.91 err_int= 0.09 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 24 -> Q_seed=  -9.32 err_pq+1= 9.68 err_int= 0.32 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 25 -> Q_seed=  -9.54 err_pq+1= 9.46 err_int= 0.46 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 26 -> Q_seed=  -9.77 err_pq+1= 9.23 err_int= 0.23 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 27 -> Q_seed=  -9.99 err_pq+1= 9.01 err_int= 0.01 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 28 -> Q_seed= -10.22 err_pq+1= 8.78 err_int= 0.22 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 29 -> Q_seed= -10.44 err_pq+1= 8.56 err_int= 0.44 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 30 -> Q_seed= -10.66 err_pq+1= 8.34 err_int= 0.34 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 31 -> Q_seed= -10.88 err_pq+1= 8.12 err_int= 0.12 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 32 -> Q_seed= -11.10 err_pq+1= 7.90 err_int= 0.10 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 33 -> Q_seed= -11.32 err_pq+1= 7.68 err_int= 0.32 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 34 -> Q_seed= -11.54 err_pq+1= 7.46 err_int= 0.46 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  0 -> Q_seed=  -3.70 err_pq+1=15.30 err_int= 0.30 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  1 -> Q_seed=  -3.94 err_pq+1=15.06 err_int= 0.06 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  2 -> Q_seed=  -4.18 err_pq+1=14.82 err_int= 0.18 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  3 -> Q_seed=  -4.42 err_pq+1=14.58 err_int= 0.42 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  4 -> Q_seed=  -4.65 err_pq+1=14.35 err_int= 0.35 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  5 -> Q_seed=  -4.89 err_pq+1=14.11 err_int= 0.11 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  6 -> Q_seed=  -5.13 err_pq+1=13.87 err_int= 0.13 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  7 -> Q_seed=  -5.37 err_pq+1=13.63 err_int= 0.37 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  8 -> Q_seed=  -5.60 err_pq+1=13.40 err_int= 0.40 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr=  9 -> Q_seed=  -5.84 err_pq+1=13.16 err_int= 0.16 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 10 -> Q_seed=  -6.07 err_pq+1=12.93 err_int= 0.07 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 11 -> Q_seed=  -6.31 err_pq+1=12.69 err_int= 0.31 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 12 -> Q_seed=  -6.54 err_pq+1=12.46 err_int= 0.46 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 13 -> Q_seed=  -6.78 err_pq+1=12.22 err_int= 0.22 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 14 -> Q_seed=  -7.01 err_pq+1=11.99 err_int= 0.01 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 15 -> Q_seed=  -7.25 err_pq+1=11.75 err_int= 0.25 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 16 -> Q_seed=  -7.48 err_pq+1=11.52 err_int= 0.48 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 17 -> Q_seed=  -7.71 err_pq+1=11.29 err_int= 0.29 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 18 -> Q_seed=  -7.94 err_pq+1=11.06 err_int= 0.06 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 19 -> Q_seed=  -8.17 err_pq+1=10.83 err_int= 0.17 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 20 -> Q_seed=  -8.40 err_pq+1=10.60 err_int= 0.40 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 21 -> Q_seed=  -8.63 err_pq+1=10.37 err_int= 0.37 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 22 -> Q_seed=  -8.86 err_pq+1=10.14 err_int= 0.14 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 23 -> Q_seed=  -9.09 err_pq+1= 9.91 err_int= 0.09 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 24 -> Q_seed=  -9.32 err_pq+1= 9.68 err_int= 0.32 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 25 -> Q_seed=  -9.54 err_pq+1= 9.46 err_int= 0.46 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 26 -> Q_seed=  -9.77 err_pq+1= 9.23 err_int= 0.23 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 27 -> Q_seed=  -9.99 err_pq+1= 9.01 err_int= 0.01 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 28 -> Q_seed= -10.22 err_pq+1= 8.78 err_int= 0.22 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 29 -> Q_seed= -10.44 err_pq+1= 8.56 err_int= 0.44 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 30 -> Q_seed= -10.66 err_pq+1= 8.34 err_int= 0.34 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 31 -> Q_seed= -10.88 err_pq+1= 8.12 err_int= 0.12 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 32 -> Q_seed= -11.10 err_pq+1= 7.90 err_int= 0.10 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 33 -> Q_seed= -11.32 err_pq+1= 7.68 err_int= 0.32 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2304 fr= 34 -> Q_seed= -11.54 err_pq+1= 7.46 err_int= 0.46 dmin= 0.226 R/dmin= 0.69 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  0 -> Q_seed=  -3.71 err_pq+1=15.29 err_int= 0.29 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  1 -> Q_seed=  -3.95 err_pq+1=15.05 err_int= 0.05 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  2 -> Q_seed=  -4.19 err_pq+1=14.81 err_int= 0.19 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  3 -> Q_seed=  -4.43 err_pq+1=14.57 err_int= 0.43 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  4 -> Q_seed=  -4.67 err_pq+1=14.33 err_int= 0.33 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  5 -> Q_seed=  -4.90 err_pq+1=14.10 err_int= 0.10 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  6 -> Q_seed=  -5.14 err_pq+1=13.86 err_int= 0.14 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  7 -> Q_seed=  -5.38 err_pq+1=13.62 err_int= 0.38 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  8 -> Q_seed=  -5.62 err_pq+1=13.38 err_int= 0.38 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  9 -> Q_seed=  -5.85 err_pq+1=13.15 err_int= 0.15 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 10 -> Q_seed=  -6.09 err_pq+1=12.91 err_int= 0.09 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 11 -> Q_seed=  -6.33 err_pq+1=12.67 err_int= 0.33 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 12 -> Q_seed=  -6.56 err_pq+1=12.44 err_int= 0.44 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 13 -> Q_seed=  -6.80 err_pq+1=12.20 err_int= 0.20 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 14 -> Q_seed=  -7.03 err_pq+1=11.97 err_int= 0.03 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 15 -> Q_seed=  -7.27 err_pq+1=11.73 err_int= 0.27 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 16 -> Q_seed=  -7.50 err_pq+1=11.50 err_int= 0.50 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 17 -> Q_seed=  -7.74 err_pq+1=11.26 err_int= 0.26 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 18 -> Q_seed=  -7.97 err_pq+1=11.03 err_int= 0.03 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 19 -> Q_seed=  -8.20 err_pq+1=10.80 err_int= 0.20 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 20 -> Q_seed=  -8.43 err_pq+1=10.57 err_int= 0.43 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 21 -> Q_seed=  -8.67 err_pq+1=10.33 err_int= 0.33 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 22 -> Q_seed=  -8.90 err_pq+1=10.10 err_int= 0.10 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 23 -> Q_seed=  -9.13 err_pq+1= 9.87 err_int= 0.13 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 24 -> Q_seed=  -9.36 err_pq+1= 9.64 err_int= 0.36 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 25 -> Q_seed=  -9.59 err_pq+1= 9.41 err_int= 0.41 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 26 -> Q_seed=  -9.82 err_pq+1= 9.18 err_int= 0.18 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 27 -> Q_seed= -10.05 err_pq+1= 8.95 err_int= 0.05 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 28 -> Q_seed= -10.27 err_pq+1= 8.73 err_int= 0.27 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 29 -> Q_seed= -10.50 err_pq+1= 8.50 err_int= 0.50 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 30 -> Q_seed= -10.73 err_pq+1= 8.27 err_int= 0.27 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 31 -> Q_seed= -10.95 err_pq+1= 8.05 err_int= 0.05 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 32 -> Q_seed= -11.18 err_pq+1= 7.82 err_int= 0.18 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 33 -> Q_seed= -11.40 err_pq+1= 7.60 err_int= 0.40 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 34 -> Q_seed= -11.63 err_pq+1= 7.37 err_int= 0.37 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  0 -> Q_seed=  -3.71 err_pq+1=15.29 err_int= 0.29 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  1 -> Q_seed=  -3.95 err_pq+1=15.05 err_int= 0.05 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  2 -> Q_seed=  -4.19 err_pq+1=14.81 err_int= 0.19 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  3 -> Q_seed=  -4.43 err_pq+1=14.57 err_int= 0.43 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  4 -> Q_seed=  -4.67 err_pq+1=14.33 err_int= 0.33 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  5 -> Q_seed=  -4.90 err_pq+1=14.10 err_int= 0.10 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  6 -> Q_seed=  -5.14 err_pq+1=13.86 err_int= 0.14 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  7 -> Q_seed=  -5.38 err_pq+1=13.62 err_int= 0.38 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  8 -> Q_seed=  -5.62 err_pq+1=13.38 err_int= 0.38 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  9 -> Q_seed=  -5.85 err_pq+1=13.15 err_int= 0.15 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 10 -> Q_seed=  -6.09 err_pq+1=12.91 err_int= 0.09 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 11 -> Q_seed=  -6.33 err_pq+1=12.67 err_int= 0.33 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 12 -> Q_seed=  -6.56 err_pq+1=12.44 err_int= 0.44 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 13 -> Q_seed=  -6.80 err_pq+1=12.20 err_int= 0.20 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 14 -> Q_seed=  -7.03 err_pq+1=11.97 err_int= 0.03 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 15 -> Q_seed=  -7.27 err_pq+1=11.73 err_int= 0.27 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 16 -> Q_seed=  -7.50 err_pq+1=11.50 err_int= 0.50 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 17 -> Q_seed=  -7.74 err_pq+1=11.26 err_int= 0.26 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 18 -> Q_seed=  -7.97 err_pq+1=11.03 err_int= 0.03 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 19 -> Q_seed=  -8.20 err_pq+1=10.80 err_int= 0.20 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 20 -> Q_seed=  -8.43 err_pq+1=10.57 err_int= 0.43 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 21 -> Q_seed=  -8.67 err_pq+1=10.33 err_int= 0.33 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 22 -> Q_seed=  -8.90 err_pq+1=10.10 err_int= 0.10 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 23 -> Q_seed=  -9.13 err_pq+1= 9.87 err_int= 0.13 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 24 -> Q_seed=  -9.36 err_pq+1= 9.64 err_int= 0.36 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 25 -> Q_seed=  -9.59 err_pq+1= 9.41 err_int= 0.41 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 26 -> Q_seed=  -9.82 err_pq+1= 9.18 err_int= 0.18 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 27 -> Q_seed= -10.05 err_pq+1= 8.95 err_int= 0.05 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 28 -> Q_seed= -10.27 err_pq+1= 8.73 err_int= 0.27 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 29 -> Q_seed= -10.50 err_pq+1= 8.50 err_int= 0.50 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 30 -> Q_seed= -10.73 err_pq+1= 8.27 err_int= 0.27 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 31 -> Q_seed= -10.95 err_pq+1= 8.05 err_int= 0.05 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 32 -> Q_seed= -11.18 err_pq+1= 7.82 err_int= 0.18 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 33 -> Q_seed= -11.40 err_pq+1= 7.60 err_int= 0.40 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 34 -> Q_seed= -11.63 err_pq+1= 7.37 err_int= 0.37 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  0 -> Q_seed=  -3.71 err_pq+1=15.29 err_int= 0.29 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  1 -> Q_seed=  -3.95 err_pq+1=15.05 err_int= 0.05 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  2 -> Q_seed=  -4.19 err_pq+1=14.81 err_int= 0.19 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  3 -> Q_seed=  -4.43 err_pq+1=14.57 err_int= 0.43 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  4 -> Q_seed=  -4.67 err_pq+1=14.33 err_int= 0.33 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  5 -> Q_seed=  -4.90 err_pq+1=14.10 err_int= 0.10 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  6 -> Q_seed=  -5.14 err_pq+1=13.86 err_int= 0.14 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  7 -> Q_seed=  -5.38 err_pq+1=13.62 err_int= 0.38 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  8 -> Q_seed=  -5.62 err_pq+1=13.38 err_int= 0.38 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr=  9 -> Q_seed=  -5.85 err_pq+1=13.15 err_int= 0.15 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 10 -> Q_seed=  -6.09 err_pq+1=12.91 err_int= 0.09 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 11 -> Q_seed=  -6.33 err_pq+1=12.67 err_int= 0.33 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 12 -> Q_seed=  -6.56 err_pq+1=12.44 err_int= 0.44 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 13 -> Q_seed=  -6.80 err_pq+1=12.20 err_int= 0.20 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 14 -> Q_seed=  -7.03 err_pq+1=11.97 err_int= 0.03 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 15 -> Q_seed=  -7.27 err_pq+1=11.73 err_int= 0.27 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 16 -> Q_seed=  -7.50 err_pq+1=11.50 err_int= 0.50 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 17 -> Q_seed=  -7.74 err_pq+1=11.26 err_int= 0.26 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 18 -> Q_seed=  -7.97 err_pq+1=11.03 err_int= 0.03 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 19 -> Q_seed=  -8.20 err_pq+1=10.80 err_int= 0.20 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 20 -> Q_seed=  -8.43 err_pq+1=10.57 err_int= 0.43 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 21 -> Q_seed=  -8.67 err_pq+1=10.33 err_int= 0.33 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 22 -> Q_seed=  -8.90 err_pq+1=10.10 err_int= 0.10 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 23 -> Q_seed=  -9.13 err_pq+1= 9.87 err_int= 0.13 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 24 -> Q_seed=  -9.36 err_pq+1= 9.64 err_int= 0.36 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 25 -> Q_seed=  -9.59 err_pq+1= 9.41 err_int= 0.41 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 26 -> Q_seed=  -9.82 err_pq+1= 9.18 err_int= 0.18 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 27 -> Q_seed= -10.05 err_pq+1= 8.95 err_int= 0.05 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 28 -> Q_seed= -10.27 err_pq+1= 8.73 err_int= 0.27 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 29 -> Q_seed= -10.50 err_pq+1= 8.50 err_int= 0.50 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 30 -> Q_seed= -10.73 err_pq+1= 8.27 err_int= 0.27 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 31 -> Q_seed= -10.95 err_pq+1= 8.05 err_int= 0.05 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 32 -> Q_seed= -11.18 err_pq+1= 7.82 err_int= 0.18 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 33 -> Q_seed= -11.40 err_pq+1= 7.60 err_int= 0.40 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2304 fr= 34 -> Q_seed= -11.63 err_pq+1= 7.37 err_int= 0.37 dmin= 0.271 R/dmin= 0.58 vox= 2.0 geom_warn
+    -> top 3 candidates by geometry + distance to pq+1=19:
+       #1: sf=0.36, tube=0.156, M=2304, framing= 34, Q_seed=-11.63, err_to_pq+1=7.37, err_to_int=0.37, R/dmin=0.58, vox=2.0, geom_warn
+       #2: sf=0.36, tube=0.156, M=2304, framing= 34, Q_seed=-11.63, err_to_pq+1=7.37, err_to_int=0.37, R/dmin=0.58, vox=2.0, geom_warn
+       #3: sf=0.36, tube=0.156, M=2304, framing= 34, Q_seed=-11.63, err_to_pq+1=7.37, err_to_int=0.37, R/dmin=0.58, vox=2.0, geom_warn
+    -> SKIP candidate #1: seed Q_H=-11.63 is not close enough to pq+1=19 (err=7.37 > 0.75); not a valid pq+1 relaxation test.
+
+    -> SKIP candidate #2: seed Q_H=-11.63 is not close enough to pq+1=19 (err=7.37 > 0.75); not a valid pq+1 relaxation test.
+
+    -> SKIP candidate #3: seed Q_H=-11.63 is not close enough to pq+1=19 (err=7.37 > 0.75); not a valid pq+1 relaxation test.
+
+=== 11_1 undecafoil = T(2,11)   (torus pq+1 = 23) ===
+    seed/framing scan (Q_H calibrated; geometry-aware):
+      sf=0.30 tube= 0.156 M=2816 fr=  0 -> Q_seed=  -4.75 err_pq+1=18.25 err_int= 0.25 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  1 -> Q_seed=  -4.99 err_pq+1=18.01 err_int= 0.01 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  2 -> Q_seed=  -5.23 err_pq+1=17.77 err_int= 0.23 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  3 -> Q_seed=  -5.47 err_pq+1=17.53 err_int= 0.47 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  4 -> Q_seed=  -5.71 err_pq+1=17.29 err_int= 0.29 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  5 -> Q_seed=  -5.95 err_pq+1=17.05 err_int= 0.05 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  6 -> Q_seed=  -6.18 err_pq+1=16.82 err_int= 0.18 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  7 -> Q_seed=  -6.42 err_pq+1=16.58 err_int= 0.42 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  8 -> Q_seed=  -6.66 err_pq+1=16.34 err_int= 0.34 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  9 -> Q_seed=  -6.90 err_pq+1=16.10 err_int= 0.10 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 10 -> Q_seed=  -7.13 err_pq+1=15.87 err_int= 0.13 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 11 -> Q_seed=  -7.37 err_pq+1=15.63 err_int= 0.37 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 12 -> Q_seed=  -7.61 err_pq+1=15.39 err_int= 0.39 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 13 -> Q_seed=  -7.84 err_pq+1=15.16 err_int= 0.16 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 14 -> Q_seed=  -8.08 err_pq+1=14.92 err_int= 0.08 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 15 -> Q_seed=  -8.31 err_pq+1=14.69 err_int= 0.31 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 16 -> Q_seed=  -8.55 err_pq+1=14.45 err_int= 0.45 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 17 -> Q_seed=  -8.78 err_pq+1=14.22 err_int= 0.22 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 18 -> Q_seed=  -9.02 err_pq+1=13.98 err_int= 0.02 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 19 -> Q_seed=  -9.25 err_pq+1=13.75 err_int= 0.25 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 20 -> Q_seed=  -9.48 err_pq+1=13.52 err_int= 0.48 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 21 -> Q_seed=  -9.71 err_pq+1=13.29 err_int= 0.29 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 22 -> Q_seed=  -9.95 err_pq+1=13.05 err_int= 0.05 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 23 -> Q_seed= -10.18 err_pq+1=12.82 err_int= 0.18 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 24 -> Q_seed= -10.41 err_pq+1=12.59 err_int= 0.41 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 25 -> Q_seed= -10.64 err_pq+1=12.36 err_int= 0.36 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 26 -> Q_seed= -10.87 err_pq+1=12.13 err_int= 0.13 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 27 -> Q_seed= -11.09 err_pq+1=11.91 err_int= 0.09 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 28 -> Q_seed= -11.32 err_pq+1=11.68 err_int= 0.32 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 29 -> Q_seed= -11.55 err_pq+1=11.45 err_int= 0.45 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 30 -> Q_seed= -11.77 err_pq+1=11.23 err_int= 0.23 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 31 -> Q_seed= -12.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 32 -> Q_seed= -12.23 err_pq+1=10.77 err_int= 0.23 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 33 -> Q_seed= -12.45 err_pq+1=10.55 err_int= 0.45 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 34 -> Q_seed= -12.67 err_pq+1=10.33 err_int= 0.33 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 35 -> Q_seed= -12.89 err_pq+1=10.11 err_int= 0.11 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 36 -> Q_seed= -13.12 err_pq+1= 9.88 err_int= 0.12 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 37 -> Q_seed= -13.34 err_pq+1= 9.66 err_int= 0.34 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 38 -> Q_seed= -13.56 err_pq+1= 9.44 err_int= 0.44 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  0 -> Q_seed=  -4.75 err_pq+1=18.25 err_int= 0.25 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  1 -> Q_seed=  -4.99 err_pq+1=18.01 err_int= 0.01 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  2 -> Q_seed=  -5.23 err_pq+1=17.77 err_int= 0.23 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  3 -> Q_seed=  -5.47 err_pq+1=17.53 err_int= 0.47 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  4 -> Q_seed=  -5.71 err_pq+1=17.29 err_int= 0.29 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  5 -> Q_seed=  -5.95 err_pq+1=17.05 err_int= 0.05 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  6 -> Q_seed=  -6.18 err_pq+1=16.82 err_int= 0.18 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  7 -> Q_seed=  -6.42 err_pq+1=16.58 err_int= 0.42 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  8 -> Q_seed=  -6.66 err_pq+1=16.34 err_int= 0.34 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  9 -> Q_seed=  -6.90 err_pq+1=16.10 err_int= 0.10 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 10 -> Q_seed=  -7.13 err_pq+1=15.87 err_int= 0.13 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 11 -> Q_seed=  -7.37 err_pq+1=15.63 err_int= 0.37 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 12 -> Q_seed=  -7.61 err_pq+1=15.39 err_int= 0.39 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 13 -> Q_seed=  -7.84 err_pq+1=15.16 err_int= 0.16 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 14 -> Q_seed=  -8.08 err_pq+1=14.92 err_int= 0.08 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 15 -> Q_seed=  -8.31 err_pq+1=14.69 err_int= 0.31 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 16 -> Q_seed=  -8.55 err_pq+1=14.45 err_int= 0.45 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 17 -> Q_seed=  -8.78 err_pq+1=14.22 err_int= 0.22 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 18 -> Q_seed=  -9.02 err_pq+1=13.98 err_int= 0.02 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 19 -> Q_seed=  -9.25 err_pq+1=13.75 err_int= 0.25 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 20 -> Q_seed=  -9.48 err_pq+1=13.52 err_int= 0.48 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 21 -> Q_seed=  -9.71 err_pq+1=13.29 err_int= 0.29 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 22 -> Q_seed=  -9.95 err_pq+1=13.05 err_int= 0.05 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 23 -> Q_seed= -10.18 err_pq+1=12.82 err_int= 0.18 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 24 -> Q_seed= -10.41 err_pq+1=12.59 err_int= 0.41 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 25 -> Q_seed= -10.64 err_pq+1=12.36 err_int= 0.36 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 26 -> Q_seed= -10.87 err_pq+1=12.13 err_int= 0.13 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 27 -> Q_seed= -11.09 err_pq+1=11.91 err_int= 0.09 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 28 -> Q_seed= -11.32 err_pq+1=11.68 err_int= 0.32 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 29 -> Q_seed= -11.55 err_pq+1=11.45 err_int= 0.45 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 30 -> Q_seed= -11.77 err_pq+1=11.23 err_int= 0.23 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 31 -> Q_seed= -12.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 32 -> Q_seed= -12.23 err_pq+1=10.77 err_int= 0.23 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 33 -> Q_seed= -12.45 err_pq+1=10.55 err_int= 0.45 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 34 -> Q_seed= -12.67 err_pq+1=10.33 err_int= 0.33 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 35 -> Q_seed= -12.89 err_pq+1=10.11 err_int= 0.11 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 36 -> Q_seed= -13.12 err_pq+1= 9.88 err_int= 0.12 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 37 -> Q_seed= -13.34 err_pq+1= 9.66 err_int= 0.34 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 38 -> Q_seed= -13.56 err_pq+1= 9.44 err_int= 0.44 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  0 -> Q_seed=  -4.75 err_pq+1=18.25 err_int= 0.25 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  1 -> Q_seed=  -4.99 err_pq+1=18.01 err_int= 0.01 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  2 -> Q_seed=  -5.23 err_pq+1=17.77 err_int= 0.23 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  3 -> Q_seed=  -5.47 err_pq+1=17.53 err_int= 0.47 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  4 -> Q_seed=  -5.71 err_pq+1=17.29 err_int= 0.29 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  5 -> Q_seed=  -5.95 err_pq+1=17.05 err_int= 0.05 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  6 -> Q_seed=  -6.18 err_pq+1=16.82 err_int= 0.18 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  7 -> Q_seed=  -6.42 err_pq+1=16.58 err_int= 0.42 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  8 -> Q_seed=  -6.66 err_pq+1=16.34 err_int= 0.34 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr=  9 -> Q_seed=  -6.90 err_pq+1=16.10 err_int= 0.10 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 10 -> Q_seed=  -7.13 err_pq+1=15.87 err_int= 0.13 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 11 -> Q_seed=  -7.37 err_pq+1=15.63 err_int= 0.37 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 12 -> Q_seed=  -7.61 err_pq+1=15.39 err_int= 0.39 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 13 -> Q_seed=  -7.84 err_pq+1=15.16 err_int= 0.16 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 14 -> Q_seed=  -8.08 err_pq+1=14.92 err_int= 0.08 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 15 -> Q_seed=  -8.31 err_pq+1=14.69 err_int= 0.31 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 16 -> Q_seed=  -8.55 err_pq+1=14.45 err_int= 0.45 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 17 -> Q_seed=  -8.78 err_pq+1=14.22 err_int= 0.22 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 18 -> Q_seed=  -9.02 err_pq+1=13.98 err_int= 0.02 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 19 -> Q_seed=  -9.25 err_pq+1=13.75 err_int= 0.25 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 20 -> Q_seed=  -9.48 err_pq+1=13.52 err_int= 0.48 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 21 -> Q_seed=  -9.71 err_pq+1=13.29 err_int= 0.29 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 22 -> Q_seed=  -9.95 err_pq+1=13.05 err_int= 0.05 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 23 -> Q_seed= -10.18 err_pq+1=12.82 err_int= 0.18 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 24 -> Q_seed= -10.41 err_pq+1=12.59 err_int= 0.41 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 25 -> Q_seed= -10.64 err_pq+1=12.36 err_int= 0.36 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 26 -> Q_seed= -10.87 err_pq+1=12.13 err_int= 0.13 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 27 -> Q_seed= -11.09 err_pq+1=11.91 err_int= 0.09 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 28 -> Q_seed= -11.32 err_pq+1=11.68 err_int= 0.32 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 29 -> Q_seed= -11.55 err_pq+1=11.45 err_int= 0.45 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 30 -> Q_seed= -11.77 err_pq+1=11.23 err_int= 0.23 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 31 -> Q_seed= -12.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 32 -> Q_seed= -12.23 err_pq+1=10.77 err_int= 0.23 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 33 -> Q_seed= -12.45 err_pq+1=10.55 err_int= 0.45 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 34 -> Q_seed= -12.67 err_pq+1=10.33 err_int= 0.33 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 35 -> Q_seed= -12.89 err_pq+1=10.11 err_int= 0.11 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 36 -> Q_seed= -13.12 err_pq+1= 9.88 err_int= 0.12 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 37 -> Q_seed= -13.34 err_pq+1= 9.66 err_int= 0.34 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.30 tube= 0.156 M=2816 fr= 38 -> Q_seed= -13.56 err_pq+1= 9.44 err_int= 0.44 dmin= 0.224 R/dmin= 0.70 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  0 -> Q_seed=  -4.75 err_pq+1=18.25 err_int= 0.25 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  1 -> Q_seed=  -4.99 err_pq+1=18.01 err_int= 0.01 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  2 -> Q_seed=  -5.23 err_pq+1=17.77 err_int= 0.23 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  3 -> Q_seed=  -5.47 err_pq+1=17.53 err_int= 0.47 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  4 -> Q_seed=  -5.71 err_pq+1=17.29 err_int= 0.29 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  5 -> Q_seed=  -5.95 err_pq+1=17.05 err_int= 0.05 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  6 -> Q_seed=  -6.18 err_pq+1=16.82 err_int= 0.18 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  7 -> Q_seed=  -6.42 err_pq+1=16.58 err_int= 0.42 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  8 -> Q_seed=  -6.66 err_pq+1=16.34 err_int= 0.34 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  9 -> Q_seed=  -6.90 err_pq+1=16.10 err_int= 0.10 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 10 -> Q_seed=  -7.13 err_pq+1=15.87 err_int= 0.13 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 11 -> Q_seed=  -7.37 err_pq+1=15.63 err_int= 0.37 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 12 -> Q_seed=  -7.61 err_pq+1=15.39 err_int= 0.39 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 13 -> Q_seed=  -7.84 err_pq+1=15.16 err_int= 0.16 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 14 -> Q_seed=  -8.08 err_pq+1=14.92 err_int= 0.08 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 15 -> Q_seed=  -8.31 err_pq+1=14.69 err_int= 0.31 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 16 -> Q_seed=  -8.55 err_pq+1=14.45 err_int= 0.45 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 17 -> Q_seed=  -8.79 err_pq+1=14.21 err_int= 0.21 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 18 -> Q_seed=  -9.02 err_pq+1=13.98 err_int= 0.02 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 19 -> Q_seed=  -9.25 err_pq+1=13.75 err_int= 0.25 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 20 -> Q_seed=  -9.49 err_pq+1=13.51 err_int= 0.49 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 21 -> Q_seed=  -9.72 err_pq+1=13.28 err_int= 0.28 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 22 -> Q_seed=  -9.96 err_pq+1=13.04 err_int= 0.04 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 23 -> Q_seed= -10.19 err_pq+1=12.81 err_int= 0.19 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 24 -> Q_seed= -10.42 err_pq+1=12.58 err_int= 0.42 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 25 -> Q_seed= -10.65 err_pq+1=12.35 err_int= 0.35 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 26 -> Q_seed= -10.88 err_pq+1=12.12 err_int= 0.12 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 27 -> Q_seed= -11.11 err_pq+1=11.89 err_int= 0.11 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 28 -> Q_seed= -11.35 err_pq+1=11.65 err_int= 0.35 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 29 -> Q_seed= -11.58 err_pq+1=11.42 err_int= 0.42 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 30 -> Q_seed= -11.80 err_pq+1=11.20 err_int= 0.20 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 31 -> Q_seed= -12.03 err_pq+1=10.97 err_int= 0.03 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 32 -> Q_seed= -12.26 err_pq+1=10.74 err_int= 0.26 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 33 -> Q_seed= -12.49 err_pq+1=10.51 err_int= 0.49 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 34 -> Q_seed= -12.72 err_pq+1=10.28 err_int= 0.28 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 35 -> Q_seed= -12.94 err_pq+1=10.06 err_int= 0.06 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 36 -> Q_seed= -13.17 err_pq+1= 9.83 err_int= 0.17 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 37 -> Q_seed= -13.40 err_pq+1= 9.60 err_int= 0.40 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 38 -> Q_seed= -13.62 err_pq+1= 9.38 err_int= 0.38 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  0 -> Q_seed=  -4.75 err_pq+1=18.25 err_int= 0.25 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  1 -> Q_seed=  -4.99 err_pq+1=18.01 err_int= 0.01 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  2 -> Q_seed=  -5.23 err_pq+1=17.77 err_int= 0.23 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  3 -> Q_seed=  -5.47 err_pq+1=17.53 err_int= 0.47 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  4 -> Q_seed=  -5.71 err_pq+1=17.29 err_int= 0.29 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  5 -> Q_seed=  -5.95 err_pq+1=17.05 err_int= 0.05 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  6 -> Q_seed=  -6.18 err_pq+1=16.82 err_int= 0.18 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  7 -> Q_seed=  -6.42 err_pq+1=16.58 err_int= 0.42 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  8 -> Q_seed=  -6.66 err_pq+1=16.34 err_int= 0.34 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  9 -> Q_seed=  -6.90 err_pq+1=16.10 err_int= 0.10 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 10 -> Q_seed=  -7.13 err_pq+1=15.87 err_int= 0.13 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 11 -> Q_seed=  -7.37 err_pq+1=15.63 err_int= 0.37 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 12 -> Q_seed=  -7.61 err_pq+1=15.39 err_int= 0.39 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 13 -> Q_seed=  -7.84 err_pq+1=15.16 err_int= 0.16 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 14 -> Q_seed=  -8.08 err_pq+1=14.92 err_int= 0.08 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 15 -> Q_seed=  -8.31 err_pq+1=14.69 err_int= 0.31 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 16 -> Q_seed=  -8.55 err_pq+1=14.45 err_int= 0.45 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 17 -> Q_seed=  -8.79 err_pq+1=14.21 err_int= 0.21 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 18 -> Q_seed=  -9.02 err_pq+1=13.98 err_int= 0.02 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 19 -> Q_seed=  -9.25 err_pq+1=13.75 err_int= 0.25 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 20 -> Q_seed=  -9.49 err_pq+1=13.51 err_int= 0.49 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 21 -> Q_seed=  -9.72 err_pq+1=13.28 err_int= 0.28 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 22 -> Q_seed=  -9.96 err_pq+1=13.04 err_int= 0.04 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 23 -> Q_seed= -10.19 err_pq+1=12.81 err_int= 0.19 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 24 -> Q_seed= -10.42 err_pq+1=12.58 err_int= 0.42 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 25 -> Q_seed= -10.65 err_pq+1=12.35 err_int= 0.35 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 26 -> Q_seed= -10.88 err_pq+1=12.12 err_int= 0.12 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 27 -> Q_seed= -11.11 err_pq+1=11.89 err_int= 0.11 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 28 -> Q_seed= -11.35 err_pq+1=11.65 err_int= 0.35 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 29 -> Q_seed= -11.58 err_pq+1=11.42 err_int= 0.42 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 30 -> Q_seed= -11.80 err_pq+1=11.20 err_int= 0.20 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 31 -> Q_seed= -12.03 err_pq+1=10.97 err_int= 0.03 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 32 -> Q_seed= -12.26 err_pq+1=10.74 err_int= 0.26 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 33 -> Q_seed= -12.49 err_pq+1=10.51 err_int= 0.49 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 34 -> Q_seed= -12.72 err_pq+1=10.28 err_int= 0.28 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 35 -> Q_seed= -12.94 err_pq+1=10.06 err_int= 0.06 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 36 -> Q_seed= -13.17 err_pq+1= 9.83 err_int= 0.17 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 37 -> Q_seed= -13.40 err_pq+1= 9.60 err_int= 0.40 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 38 -> Q_seed= -13.62 err_pq+1= 9.38 err_int= 0.38 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  0 -> Q_seed=  -4.75 err_pq+1=18.25 err_int= 0.25 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  1 -> Q_seed=  -4.99 err_pq+1=18.01 err_int= 0.01 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  2 -> Q_seed=  -5.23 err_pq+1=17.77 err_int= 0.23 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  3 -> Q_seed=  -5.47 err_pq+1=17.53 err_int= 0.47 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  4 -> Q_seed=  -5.71 err_pq+1=17.29 err_int= 0.29 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  5 -> Q_seed=  -5.95 err_pq+1=17.05 err_int= 0.05 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  6 -> Q_seed=  -6.18 err_pq+1=16.82 err_int= 0.18 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  7 -> Q_seed=  -6.42 err_pq+1=16.58 err_int= 0.42 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  8 -> Q_seed=  -6.66 err_pq+1=16.34 err_int= 0.34 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr=  9 -> Q_seed=  -6.90 err_pq+1=16.10 err_int= 0.10 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 10 -> Q_seed=  -7.13 err_pq+1=15.87 err_int= 0.13 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 11 -> Q_seed=  -7.37 err_pq+1=15.63 err_int= 0.37 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 12 -> Q_seed=  -7.61 err_pq+1=15.39 err_int= 0.39 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 13 -> Q_seed=  -7.84 err_pq+1=15.16 err_int= 0.16 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 14 -> Q_seed=  -8.08 err_pq+1=14.92 err_int= 0.08 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 15 -> Q_seed=  -8.31 err_pq+1=14.69 err_int= 0.31 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 16 -> Q_seed=  -8.55 err_pq+1=14.45 err_int= 0.45 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 17 -> Q_seed=  -8.79 err_pq+1=14.21 err_int= 0.21 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 18 -> Q_seed=  -9.02 err_pq+1=13.98 err_int= 0.02 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 19 -> Q_seed=  -9.25 err_pq+1=13.75 err_int= 0.25 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 20 -> Q_seed=  -9.49 err_pq+1=13.51 err_int= 0.49 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 21 -> Q_seed=  -9.72 err_pq+1=13.28 err_int= 0.28 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 22 -> Q_seed=  -9.96 err_pq+1=13.04 err_int= 0.04 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 23 -> Q_seed= -10.19 err_pq+1=12.81 err_int= 0.19 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 24 -> Q_seed= -10.42 err_pq+1=12.58 err_int= 0.42 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 25 -> Q_seed= -10.65 err_pq+1=12.35 err_int= 0.35 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 26 -> Q_seed= -10.88 err_pq+1=12.12 err_int= 0.12 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 27 -> Q_seed= -11.11 err_pq+1=11.89 err_int= 0.11 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 28 -> Q_seed= -11.35 err_pq+1=11.65 err_int= 0.35 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 29 -> Q_seed= -11.58 err_pq+1=11.42 err_int= 0.42 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 30 -> Q_seed= -11.80 err_pq+1=11.20 err_int= 0.20 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 31 -> Q_seed= -12.03 err_pq+1=10.97 err_int= 0.03 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 32 -> Q_seed= -12.26 err_pq+1=10.74 err_int= 0.26 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 33 -> Q_seed= -12.49 err_pq+1=10.51 err_int= 0.49 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 34 -> Q_seed= -12.72 err_pq+1=10.28 err_int= 0.28 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 35 -> Q_seed= -12.94 err_pq+1=10.06 err_int= 0.06 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 36 -> Q_seed= -13.17 err_pq+1= 9.83 err_int= 0.17 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 37 -> Q_seed= -13.40 err_pq+1= 9.60 err_int= 0.40 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+      sf=0.36 tube= 0.156 M=2816 fr= 38 -> Q_seed= -13.62 err_pq+1= 9.38 err_int= 0.38 dmin= 0.269 R/dmin= 0.58 vox= 2.0 geom_warn
+    -> top 3 candidates by geometry + distance to pq+1=23:
+       #1: sf=0.36, tube=0.156, M=2816, framing= 38, Q_seed=-13.62, err_to_pq+1=9.38, err_to_int=0.38, R/dmin=0.58, vox=2.0, geom_warn
+       #2: sf=0.36, tube=0.156, M=2816, framing= 38, Q_seed=-13.62, err_to_pq+1=9.38, err_to_int=0.38, R/dmin=0.58, vox=2.0, geom_warn
+       #3: sf=0.36, tube=0.156, M=2816, framing= 38, Q_seed=-13.62, err_to_pq+1=9.38, err_to_int=0.38, R/dmin=0.58, vox=2.0, geom_warn
+    -> SKIP candidate #1: seed Q_H=-13.62 is not close enough to pq+1=23 (err=9.38 > 0.75); not a valid pq+1 relaxation test.
+
+    -> SKIP candidate #2: seed Q_H=-13.62 is not close enough to pq+1=23 (err=9.38 > 0.75); not a valid pq+1 relaxation test.
+
+    -> SKIP candidate #3: seed Q_H=-13.62 is not close enough to pq+1=23 (err=9.38 > 0.75); not a valid pq+1 relaxation test.
+
+Interpretation: for T(2,q) torus knots, the pq+1 hypothesis is tested
+only when the relaxed candidate starts near |Q_H|=2q+1 and HOLDS
+that charge. A seed close to some other integer sector is not a pq+1
+test. Twist/non-torus knots are explicitly out of scope for pq+1.
+For the energy-minimal-sector claim, relax several framings and compare
+E only among runs that remain in their starting topological sector.

@@ -1,0 +1,2257 @@
+
+<PDF_PAGE 1>
+ 
+ 
+Supplementary Materials for 
+ 
+Direct observation of chirality-induced spin selectivity in electron donor–acceptor 
+molecules 
+ 
+Hannah J. Eckvahl et al. 
+ 
+Corresponding authors: Stefano Carretta, stefano.carretta@unipr.it; Matthew D. Krzyaniak, mdkrzyaniak@northwestern.edu;  
+Michael R. Wasielewski, m-wasielewski@northwestern.edu 
+ 
+Science 382, 197 (2023) 
+DOI: 10.1126/science.adj5328 
+ 
+The PDF file includes: 
+ 
+Materials and Methods 
+Supplementary Text 
+Figs. S1 to S12 
+Tables S1 to S7 
+References 
+
+
+<PDF_PAGE 2>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+2 
+ 
+Materials and Methods 
+Synthesis 
+The synthetic schemes and structures of the intermediates and final structures are illustrated in 
+Figs. S1-S2. All commercially available materials were used without further purification unless 
+otherwise noted. Characterization of synthesized compounds was performed at Integrated 
+5 
+Molecular Structure Education and Research Center (IMSERC) at Northwestern University. 
+Proton and carbon NMR spectra were recorded on a Bruker Avance III 500 MHz system equipped 
+with DCH CryoProbe. Shifts are reported in parts-per-million (ppm) relative to TMS. High 
+Resolution Mass Spectra (HRMS) were obtained with an Agilent LCTOF 6200 series mass 
+spectrometer using electrospray ionization (ESI), APCI, and APPI. CD spectra were obtained with 
+10 
+Jasco J-815 CD Instrument Keck Biophysics Facility at Northwestern University. 
+NIA-xyl. In a 250 mL two-neck round bottom flask equipped with a condenser and a dropping 
+funnel, 1,4,5,8-naphthalenetetracarboxylic dianhydride (3.0 g, 11.2 mmol, regenerated prior to use 
+by refluxing overnight in acetic anhydride followed by the removal of the acetic anhydride under 
+reduced pressure) was suspended in 40 mL of dry N,N-dimethylformamide. The mixture was 
+15 
+heated to reflux under an inert atmosphere and stirred for two hours to ensure the dissolution of 
+the 1,4,5,8-naphthalenetetracarboxylic dianhydride. To this vigorously stirred solution, 2,6-
+xylidine (677 mg, 5.6 mmol) in 50 ml of dry N,N-dimethylformamide was added via a dropping 
+funnel over several hours. The reaction mixture was refluxed overnight under an inert atmosphere, 
+cooled down to room temperature, and the solvent removed under reduced pressure. The crude 
+20 
+material was purified by silica gel chromatography (100 % dichloromethane), affording NIA-xyl 
+as a brown powder (800 mg, 2.15 mmol, 38 %). 1H NMR (500 MHz, CD2Cl2, δ): 8.76-8.80 (m, 
+4H), 7.27 (m, 1H), 7.19 (m, 2H), 2.05 (m, 6H). 13C NMR (126 MHz, CDCl3, δ): 161.43, 160.90, 
+158.25, 135.00, 134.92, 132.76, 132.47, 132.38, 130.81, 130.60, 128.42, 128.30, 128.26, 127.85, 
+
+
+<PDF_PAGE 3>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+3 
+ 
+127.80, 127.04, 126.85, 126.76, 126.14, 122.36, 16.80. ESI-HRMS (m/z): calculated for C23H9N5O 
+[M]+: 371.0813, found: 371.0803. 
+NH2-NDI-xyl. In a 25 mL round bottom flask equipped with a condenser, NIA-xyl (300 mg, 
+0.81 mmol) was suspended in 10 mL of dry N,N-dimethylformamide. The mixture was heated to 
+reflux and stirred for one hour. Hydrazine monohydride (0.5 mL) was added, and the reaction 
+5 
+mixture was refluxed for 3 hours. The reaction mixture was cooled to room temperature and the 
+solvent was removed under reduced pressure. The crude material was dissolved in 
+dichloromethane and washed twice with brine. The organic layer was dried over sodium sulfate, 
+filtered, and concentrated under reduced pressure. The crude material was purified by silica gel 
+chromatography (20 % ethyl acetate in dichloromethane), affording NH2-NDI-xyl as a yellow 
+10 
+solid (270 mg, 0.70 mmol, 87 %). 1H NMR (500 MHz, CD2Cl2, δ): 8.71-8.76 (m, 4H), 7.26 (m, 
+1H), 7.18 (d, J = 7.7 Hz, 2H), 5.52 (s, 2H), 2.04 (s, 6H). 13C NMR (126 MHz, CD2Cl2, δ): 161.32, 
+158.81, 135.00, 132.71, 130.58, 130.34, 128.28, 127.78, 126.64, 126.13, 125.49, 124.83, 16.82. 
+ESI-HRMS (m/z): calculated for C22H15N3O4 [M+H]+: 386.1135, found: 386.1152. 
+NMA-NMI-NDI-xyl. In a 25 mL two-neck round bottom flask equipped with a condenser and 
+15 
+a dropping funnel, 5,5′-dimethoxy-1H,1′H,3H,3′H-[6,6′-bibenzo[de]isochromene]-1,1′,3,3′-
+tetraone(50) (327 mg, 0.72 mmol) was suspended in 10 mL of dry N,N-dimethylformamide and 
+the mixture was refluxed for one hour under inert atmosphere. To this, NH2-NDI-xyl (250 mg, 
+0.65 mmol) dissolved in 50 mL of dry N,N-dimethylformamide was added via a dropping funnel 
+over several hours, and the reaction mixture was further refluxed overnight under an inert 
+20 
+atmosphere. The reaction mixture was cooled to room temperature and the solvent was removed 
+under reduced pressure. Due to purification difficulties and the tendency of the product to undergo 
+hydrolysis of the anhydride moiety, the crude material was passed through a silica gel pad (10 % 
+ethyl acetate in dichloromethane) and used without further purification right away. A small 
+
+
+<PDF_PAGE 4>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+4 
+ 
+fraction of the crude was purified using preparatory TLC for characterization. 1H NMR (500 MHz, 
+CD2Cl2, δ): 8.84 (m, 4H), 8.55 (s, 1H), 8.47-8.51 (m, 2H), 8.43 (d, J = 6.8 Hz, 1H), 7.51-7.57 (m, 
+2H), 7.28 (m, 1H), 7.21 (d, J = 7.6 Hz, 2H), 3.87 (s, 3H), 3.84 (s, 3H), 2.08 (s, 6H). 13C NMR (126 
+MHz, CD2Cl2, δ): 162.00, 160.53, 160.44, 159.92, 159.86, 156.06, 155.87, 133.44, 132.61, 132.48, 
+132.22, 132.08, 132.05, 131.46, 131.43, 131.32, 130.47, 129.11, 128.58, 128.29, 128.00, 127.81, 
+5 
+127.56, 127.48, 126.41, 126.10, 125.93, 125.46, 124.25, 123.76, 122.09, 120.58, 119.01, 118.72, 
+117.95, 29.68, 17.59. APCI-HRMS (m/z): calculated for C48H27N3O11 [M]+: 821.1651, found: 
+821.1627. 
+Br-Ph-(NMI)2-NDI-xyl. In a 50 mL round bottom flask equipped with a condenser, NMA-
+NMI-NDI-xyl (210 mg, crude), 4-bromoaniline (132 mg, 0.77 mmol), and zinc (II) acetate 
+10 
+dihydrate (15 mg) were dissolved in 20 mL of dry N,N-dimethylformamide and the mixture was 
+refluxed overnight under an inert atmosphere. The reaction mixture was cooled to room 
+temperature and the solvent was removed under reduced pressure. The crude material was purified 
+by silica gel chromatography (gradient from 100 % dichloromethane to 5 % ethyl acetate in 
+dichloromethane), affording Br-Ph-(NMI)2-NDI-xyl as a brown solid (40 mg, 0.30 mmol). 1H 
+15 
+NMR (500 MHz, CD2Cl2, δ): 8.80-8.90 (m, 4H), 8.56 (s, 1H), 8.50 (m, 2H), 8.43 (dd, J1 = 7.0 Hz, 
+J2 = 1.1 Hz, 1H), 7.66 (d, J = 8.6 Hz, 2H), 7.49-7.58 (m, 3H), 7.45 (dd, J1 = 8.6 Hz, J2 = 1.1 Hz, 
+1H), 7.29 (m, 1H), 7.18-7.23 (m, 4H), 3.86 (m, 6H), 2.08 (s, 6H). 13C NMR (126 MHz, CD2Cl2, 
+δ): 163.20, 163.01, 161.25, 159.99, 159.96, 159.18, 159.11, 155.13, 155.07, 135.02, 135.01, 
+134.05, 132.66, 131.99, 131.72, 131.64, 131.57, 131.33, 131.30, 130.72, 130.70, 130.49, 129.87, 
+20 
+129.70, 128.69, 128.36, 127.83, 127.19, 127.13, 127.03, 126.75, 126.70, 125.64, 125.44, 123.90, 
+123.80, 123.48, 123.34, 122.74, 122.08, 121.75, 121.24, 117.19, 116.37, 28.93, 16.85. ESI-HRMS 
+(m/z): calculated for C54H31BrN4O10Na [M+Na]+: 999.1109, found: 999.1125. 
+
+
+<PDF_PAGE 5>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+5 
+ 
+(R,S)-1-d9. In a 25 mL round bottom two-neck flask equipped with a condenser and a septum 
+were combined Br-Ph-(NMI)2-NDI-xyl (20 mg, 0.02 mmol), PXX-d9-Bpin (Fig. S2) (17 mg, 0.04 
+mmol), [1,1′-bis(diphenylphosphino)ferrocene]dichloropalladium(II) (3 mg, 0.004 mmol), and 
+potassium carbonate (20 mg). The flask was evacuated and filled with nitrogen three times. To this 
+mixture, 10 mL of a degassed mixture of toluene, ethanol, and water (2/1/1 vol. ratio) was added 
+5 
+through the septum. The reaction mixture was heated at 110 0C overnight under an inert 
+atmosphere. The reaction mixture was cooled to room temperature, dissolved in dichloromethane, 
+and washed twice with brine. The organic layer was dried over sodium sulfate, filtered, and 
+concentrated under reduced pressure. The crude material was purified by silica gel 
+chromatography (gradient from 100 % dichloromethane to 5 % ethyl acetate in dichloromethane), 
+10 
+affording (R,S)-1-d9 as a yellow solid (17 mg, 0.014 mmol, 72 %). 1H NMR (500 MHz, CD2Cl2, 
+δ): 8.81-8.88 (m, 4H), 8.58 (s, 1H), 8.55 (s, 1H), 8.51 (dd, J1 = 6.5 Hz, J2 = 1.5 Hz, 1H), 8.47 (dd, 
+J1 = 7.0 Hz, J2 = 1.0 Hz, 1H), 7.62 (d, J = 8.4 Hz, 2H), 7.52-7.60 (m, 3H), 7.47 (dd, J1 = 8.5 Hz, J2 
+= 1.0 Hz, 1H), 7.41 (d, J = 8.2 Hz, 2H), 7.29 (m, 1H), 7.21 (d, J = 7.7 Hz, 2H), 3.89 (s, 3H), 3.87 
+(s, 3H), 2.09 (s, 6H). 13C NMR (126 MHz, CD2Cl2, δ): 163.48, 163.29, 161.26, 160.02, 159.98, 
+15 
+159.19, 159.12, 155.16, 155.09, 151.74, 151.60, 143.78, 143.36, 139.24, 135.03, 134.10, 132.66, 
+132.03, 131.65, 131.34, 131.31, 130.72, 130.47, 130.38, 129.72, 129.41, 128.65, 128.35, 128.25, 
+127.83, 127.20, 127.14, 127.03, 126.76, 125.65, 125.55, 124.03, 123.77, 123.50, 123.40, 122.73, 
+122.30, 121.25, 121.09, 120.70, 117.22, 116.36, 110.96, 110.56, 28.93, 16.86. APPI-HRMS (m/z): 
+calculated for C74H31D9N4O12 [M]+: 1185.3208, found: 1185.3225. 
+20 
+(R,S)-1-h9. Using a procedure described for the synthesis of (R,S)-1-d9, (R,S)-1-h9 was 
+obtained from 20 mg (0.02 mmol) of D and 18 mg of PXX-Bpin(31) as a yellow solid (16 mg, 66 
+%). 1H NMR (500 MHz, CD2Cl2, δ): 8.81-8.88 (m, 4H), 8.58 (s, 1H), 8.55 (s, 1H), 8.51 (dd, J1 = 
+6.6 Hz, J2 = 1.4 Hz, 1H), 8.47 (dd, J1 = 7.0 Hz, J2 = 0.7 Hz, 1H), 7.63 (d, J = 8.2 Hz, 2H), 7.50-
+
+
+<PDF_PAGE 6>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+6 
+ 
+7.59 (m, 4H), 7.46 (dd, J1 = 8.2 Hz, J2 = 0.8 Hz, 1H), 7.41 (d, J = 8.2 Hz, 2H), 7.26-7.33 (m, 2H), 
+7.21 (d, J = 7.6 Hz, 2H), 7.16 (d, J = 7.8 Hz, 1H), 7.05-7.10 (m, 2H),  6.92 (dd, J1 = 9.1 Hz, J2 = 
+3.7 Hz, 2H), 6.74 (d, J = 7.8 Hz, 1H), 6.62 (dd, J1 = 5.6 Hz , J2 = 1.8 Hz, 1H), 3.89 (s, 3H), 3.87 
+(s, 3H), 2.09 (s, 6H). 13C NMR (126 MHz, CD2Cl2, δ): 163.47, 163.28, 161.26, 160.02, 159.99, 
+159.19, 159.13, 155.22, 155.15, 151.83, 151.68, 143.87, 143.46, 139.29, 135.05, 135.03, 134.15, 
+5 
+132.70, 132.08, 131.70, 131.62, 131.51, 131.33, 131.30, 130.71, 130.37, 129.71, 129.42, 128.65, 
+128.50, 128.36, 128.27, 127.83, 127.58, 127.20, 127.13, 127.06, 126.81, 126.80, 126.74, 126.48, 
+125.84, 125.69, 125.62, 124.38, 124.09, 123.84, 123.55, 123.45, 122.78, 122.37, 121.31, 121.12, 
+120.75, 119.47, 117.28, 116.81, 116.55, 116.43, 111.00, 110.61, 108.07, 107.94, 28.93, 16.84. 
+ESI-HRMS (m/z): calculated for C74H41N4O12 [M+H]+: 1177.2715, found: 1177.2707. 
+10 
+PXX-d9-Br. Under a nitrogen atmosphere, PXX-d10 (42) (1 eq, 0.34 mmol, 100 mg) and N-
+bromosuccinimide (1 eq, 0.34 mmol, 60.9 mg) were suspended in dry dimethylformamide (6.5 
+mL). The mixture was sparged with nitrogen for 15 minutes, then stirred at room temperature for 
+16 hr. The mixture was poured into water (60 mL) and vacuum filtered. The yellow solid was 
+washed three times with water (20 mL), then dried in a vacuum oven overnight to yield PXX-d9-
+15 
+Br as a dull yellow solid (104 mg). The product was used without further purification. 
+PXX-d9-Bpin. Under a nitrogen atmosphere, PXX-d9-Br (1 eq, 0.28 mmol 103 mg), 
+bis(pinacolato)diboron (3 eq, 0.83 mmol, 212 mg), potassium acetate (6 eq, 1.67 mmol, 164 mg), 
+and [1,1′-bis(diphenylphosphino)ferrocene]dichloropalladium(II) (0.05 eq, 0.014 mmol, 10.2 mg) 
+were dissolved in dioxanes (15 mL, stored in an inert atmosphere over molecular sieves).  The 
+20 
+mixture was sparged with nitrogen for 15 minutes, then stirred at reflux 12 hr. After cooling to 
+room temperature, the solvent was removed under reduced pressure. The product was purified with 
+flash chromatography (50/50 hexanes/dichloromethane mobile phase), yielding PXX-d9-Bpin as 
+a fluorescent yellow solid (50 mg, 43%). 1H NMR (500 MHz, CDCl3, δ): 1.37. 13C NMR (126 
+
+
+<PDF_PAGE 7>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+7 
+ 
+MHz, CDCl3, δ): 155.43, 152.63, 144.22, 143.75, 135.20, 131.25, 121.47, 121.35, 111.91, 111.28, 
+83.51, 24.98. ESI-HRMS (m/z): calculated for C26H12D9BO4 [M]+: 417.2098, found: 417.2120. 
+PXX-d9-xy-Br. Under a nitrogen atmosphere, PXX-d9-Bpin (1 eq, 0.083 mmol 34.2 mg), 2,5-
+dibromo-p-xylene (20 eq, 1.64 mmol, 433 mg), potassium carbonate (4 eq, 0.32 mmol, 45.3 mg), 
+and tetrakis(triphenylphosphine)palladium(0) (0.05 eq, 0.004 mmol, 4.8 mg) were dissolved in 
+5 
+dioxanes (10 mL, distilled, then stored in an inert atmosphere over molecular sieves) and water (1 
+mL).  The mixture was sparged with nitrogen for 15 minutes, then stirred at reflux 12 hr. After 
+cooling to room temperature, the solvent was removed under reduced pressure. The product was 
+purified with flash chromatography (90/10 hexanes/dichloromethane mobile phase), yielding 
+PXX-d9-xy-Br as a fluorescent yellow solid (31 mg, 80%). 1H NMR (500 MHz, CDCl3, δ): 7.47 
+10 
+(s, 1H), 7.05 (s, 1H), 2.38 (s, 3H), 2.01 (s, 3H). 13C NMR (126 MHz, CDCl3, δ): 152.58, 152.10, 
+144.44, 144.18, 138.27, 136.23, 135.15, 133.55, 132.52, 131.38, 131.18, 129.48, 123.83, 121.56, 
+121.52, 111.76, 111.39, 22.31, 19.14. ESI-HRMS (m/z): calculated for C28H8D9BrO2 [M]+: 
+473.0977, found: 473.0990. 
+PXX-d9-xy-Bpin. Under a nitrogen atmosphere, PXX-d9-xy-Br (1 eq, 0.046 mmol 21.5 mg), 
+15 
+bis(pinacolato)diboron (2 eq, 0.092 mmol, 23.4 mg), potassium acetate (4 eq, 0.18 mmol, 18 mg), 
+and [1,1′-bis(diphenylphosphino)ferrocene]dichloropalladium(II) (0.05 eq, 0.0023 mmol, 1.7 mg) 
+were dissolved in dioxanes (5 mL, distilled, then stored in an inert atmosphere over molecular 
+sieves).  The mixture was sparged with nitrogen for 15 minutes, then stirred at reflux 12 hr. After 
+cooling to room temperature, the solvent was removed under reduced pressure. The product was 
+20 
+purified with flash chromatography (70/30 hexanes/dichloromethane mobile phase), yielding 
+PXX-d9-xy-Bpin as a fluorescent yellow solid (18 mg, 75%). 1H NMR (500 MHz, CDCl3, δ): 7.69 
+(s, 1H), 7.00 (s, 1H), 2.52 (s, 3H), 2.03 (s, 3H), 1.36 (s, 12H). 13C NMR (126 MHz, CDCl3, δ): 
+152.64, 151.90, 144.37, 144.21, 142.28, 141.58, 137.55, 132.94, 132.60, 131.78, 131.17, 129.48, 
+
+
+<PDF_PAGE 8>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+8 
+ 
+121.60, 121.46, 111.63, 111.50, 88.26, 83.47, 29.71, 24.93, 24.92, 21.66, 19.11. ESI-HRMS (m/z): 
+calculated for C34H20D9BO4 [M]+: 521.2724, found: 521.2755. 
+Br-NMI-NDI-dtbp. NIA-dtbp and Br-NMI-NH2 were synthesized as previously 
+reported.(38, 51) Under a nitrogen atmosphere, Br-NMI-NH2 (1 eq, 0.25 mmol, 100 mg) and NIA-
+dtbp (1.5 eq, 0.38 mmol, 173 mg) were dissolved in ethanol (5 mL, 100%). The mixture was 
+5 
+sparged with nitrogen for 15 minutes, then stirred at reflux 12 h (overnight). The precipitate was 
+isolated by vacuum filtration while the mixture was still hot, yielding Br-NMI-NDI-dtbp as a 
+white powder (142 mg, 67 %). 1H NMR (500 MHz, CDCl3, δ): 8.89-8.84 (m, 4H), 8.37 (dd, J1 = 
+7.3 Hz, J2 = 1.2 Hz, 1H), 8.66 (dd, J1 = 8.6 Hz, J2 = 1.2 Hz, 1H), 8.49 (d, J = 7.8 Hz, 1H), 8.11 (d, 
+J = 7.9 Hz, 1H), 7.91 (dd, J1 = 8.6 Hz, J2 = 7.2 Hz, 1H), 7.60 (d, J = 8.7 Hz, 1H), 7.48 (dd, J1 = 8.6 
+10 
+Hz, J2 = 2.3 Hz, 1H), 7.28-7.21 (m, 2H), 7.00 (dd, J1 = 7.3 Hz, J2 = 2.2 Hz, 1H), 2.21-2.26 (m, 
+6H), 1.33-1.30 (m, 9H), 1.27 (s, 9H).  13C NMR (126 MHz, CDCl3, δ): 163.84, 163.24, 163.21, 
+162.42, 150.39, 143.68, 143.66, 135.16, 134.84, 134.79, 134.27, 133.81, 132.59, 131.99, 131.97, 
+131.75, 131.54, 131.29, 131.23, 130.97, 130.90, 130.88, 129.52, 129.03, 129.01, 128.27, 127.49, 
+127.46, 127.43, 127.32, 127.29, 127.16, 126.93, 126.73, 123.12, 122.23, 35.57, 34.28, 31.74, 
+15 
+31.19, 17.40.  APPI-HRMS (m/z): calculated for C48H38BrN3O6Na [M+Na]+: 854.1842, found: 
+854.1827. 
+2-d9. Under a nitrogen atmosphere, PXX-d9-xy-Bpin (1.22 eq, 0.029 mmol 15 mg), Br-NMI-
+NDI-dtbp (1 eq, 0.024 mmol, 19.7 mg), potassium carbonate (2.5 eq, 0.059 mmol, 8.2 mg), and 
+[1,1′-bis(diphenylphosphino)ferrocene]dichloropalladium(II) (0.1 eq, 0.0023 mmol, 1.7 mg) were 
+20 
+dissolved in dioxanes (5 mL, distilled, then stored in an inert atmosphere over molecular sieves) 
+and water (0.5 mL, distilled).  The mixture was sparged with nitrogen for 15 minutes, then stirred 
+at reflux 12 h (overnight). After cooling to room temperature, the solvent was removed under 
+reduced pressure. The product was purified with flash chromatography (dichloromethane eluent), 
+
+
+<PDF_PAGE 9>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+9 
+ 
+yielding 2-d9 as a yellow solid (14 mg, 42%). 1H NMR (500 MHz, CDCl3, δ): 8.90-8.81 (m, 4H), 
+8.78-8.69 (m, 2H), 8.08 (t, J = 8.0 Hz, 1H), 7.80 (t, J = 7.8 Hz, 1H), 7.62 (t, J = 8.4 Hz, 1H), 7.60 
+(d, J = 8.7 Hz, 1H), 7.48 (dd, J1 = 8.6 Hz, J2 = 2.3 Hz, 1H), 7.31 (d, J = 3.0 Hz, 1H), 7.24-7.19 (m, 
+2H), 7.02 (dd, J1 = 13.6 Hz, J2 = 2.2 Hz, 1H), 2.27-2.18 (m, 6H), 2.13 (s, 3H), 2.07 (s, 3H), 1.34-
+1.31 (m, 9H), 1.28 (s, 9H).  13C NMR (126 MHz, CDCl3, δ): 163.92, 163.86, 163.73, 162.39, 
+5 
+152.60, 152.14, 150.40, 147.28, 147.27, 147.23, 147.21, 144.48, 144.25, 144.23, 143.75, 143.73, 
+139.53, 139.49, 137.54, 137.48, 135.58, 135.24, 135.22, 134.73, 134.67, 134.45, 134.44, 134.40, 
+134.39, 134.20, 133.64, 133.62, 133.58, 133.57, 133.25, 133.18, 132.24, 132.08, 132.06, 132.01, 
+131.96, 131.71, 131.69, 131.61, 131.59, 131.50, 131.48, 131.35, 131.34, 131.32, 131.22, 130.93, 
+130.87, 130.82, 129.67, 129.59, 129.03, 129.00, 128.97, 128.12, 128.07, 127.57, 127.54, 127.50, 
+10 
+127.45, 127.35, 127.31, 127.17, 127.10, 127.07, 127.05, 126.70, 123.07, 123.04, 121.96, 121.94, 
+121.91, 121.63, 121.59, 111.90, 111.83, 111.44, 111.40, 35.60, 34.32, 34.30, 31.77, 31.23, 31.21, 
+29.71, 22.70, 19.69, 19.66, 19.48, 19.47, 17.54, 17.48, 17.47, 17.45, 14.20, 14.12. APPI-HRMS 
+(m/z): calculated for C76H46D9N3O8Na [M+Na]+: 1169.4452, found: 1169.4423. 
+2-h9. Under a nitrogen atmosphere, PXX-xy-Bpin (1.5 eq, 0. 222 mmol, 112.6 mg), Br-NMI-
+15 
+NDI-dtbp (1 eq, 0.150 mmol, 124.8 mg), and potassium carbonate (2 eq, 0.300 mmol, 41.5 mg) 
+were dissolved in tetrahydrofuran (15 mL) and water (1.5 mL). The mixture was sparged with 
+nitrogen for 15 minutes. The flask was opened briefly to add tetrakis(triphenylphosphine) 
+palladium(0) (0.05 eq, 0.0075 mmol, 8.7 mg), then sparged with nitrogen for another 15 minutes. 
+The mixture was then heated to reflux and stirred 12 h (overnight). After cooling to room 
+20 
+temperature, the solvent was removed under reduced pressure. The product was purified with flash 
+chromatography (using 3% ethyl acetate in dichloromethane as the mobile phase), yielding 2-h9 
+as a yellow-green solid (100 mg, 59 %). 1H NMR (500 MHz, CDCl3, δ): 8.90-8.82 (m, 4H), 8.76 
+(dt,J1 = 7.4 Hz, J2 = 3.0 Hz, 1H), 8.72 (t,J = 7.7 Hz, 1H), 8.07 (t, J = 7.9 Hz, 1H), 7.82-7.74 (m, 
+
+
+<PDF_PAGE 10>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+10 
+ 
+2H), 7.60 (d, J = 8.7 Hz, 1H), 7.48 (dd,J1 = 8.7 Hz, J2 = 2.3 Hz, 1H), 7.35 (dd,J1 = 9.1 Hz, J2 = 1.9 
+Hz, 1H), 7.26-7.19 (m, 3H), 7.14-6.96 (m, 6H), 6.93 (dd, J1 = 16.6 Hz, J2 = 9.2 Hz, 1H), 6.78 (dd, 
+J1 = 7.8 Hz, J2 = 2.4 Hz, 1H), 6.67 (m, 1H), 2.27-2.20 (m, 6H), 2.13 (s, 3H), 2.07 (s, 3H), 1.34-
+1.32 (m, 9H), 1.28 (s, 9H).  13C NMR (126 MHz, CDCl3, δ): 163.93, 163.92, 163.86, 163.74, 
+163.73, 162.40, 152.65, 152.64, 152.18, 150.40, 147.28, 147.24, 144.54, 144.54, 144.31, 144.29, 
+5 
+143.75, 143.74, 139.55, 139.51, 137.54, 137.49, 135.58, 135.58, 135.26, 135.23, 134.74, 134.69, 
+134.47, 134.45, 134.41, 134.40, 134.20, 133.64, 133.64, 133.59, 133.58, 133.28, 133.27, 133.19, 
+133.18, 132.27, 132.25, 132.15, 132.10, 132.06, 131.73, 131.72, 131.61, 131.58, 131.57, 131.51, 
+131.49, 131.46, 131.38, 131.36, 131.35, 131.33, 130.94, 130.88, 130.82, 129.75, 129.68, 129.04, 
+129.01, 128.98, 128.12, 128.08, 127.84, 127.72, 127.57, 127.54, 127.50, 127.45, 127.35, 127.31, 
+10 
+127.24, 127.18, 127.10, 127.06, 126.70, 126.61, 126.58, 125.31, 125.21, 123.07, 123.03, 121.96, 
+121.93, 121.91, 121.63, 121.59, 120.26, 120.24, 117.52, 117.39, 117.38, 111.92, 111.84, 111.45, 
+111.42, 108.78, 108.64, 108.56, 35.60, 34.32, 34.30, 31.77, 31.23, 31.22, 29.71, 19.70, 19.66, 
+19.48, 19.47, 17.54, 17.48, 17.47, 17.45. APPI-HRMS (m/z): calculated for C76H55N3O8 ESI-
+HRMS (m/z): calculated for C76H55N3O8 [M]+: 1137.3984, found: 1137.3998. 
+15 
+Optical Spectroscopic Characterization 
+The two enantiomers of (R,S)-1-h9 and (R,S)-1-d9 were separated using a chiral HPLC column 
+(Fig. S3). Their steady-state UV-Vis spectra were obtained with a Shimadzu-1800 
+spectrophotometer in toluene. The spectrum of racemic (R,S)-1-h9 along with the spectra of PXX-
+h9, racemic (R,S)-NMI2, and NDI are shown in Fig. S4a. The spectrum of (R,S)-1-h9 is 
+20 
+approximately an additive combination of those of PXX, (R,S)-NMI2, and NDI, thus indicating 
+that the electronic coupling between these redox components is relatively weak. The corresponding 
+spectra of (R,S)-1-d9 are nearly identical (Fig. S4c). Circular dichroism (CD) spectra of each 
+enantiomer show the expected mirror image symmetry over the absorption range of the chiral 
+
+
+<PDF_PAGE 11>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+11 
+ 
+NMI2 bridge molecule (Figs. S4b and S4d), which is in full agreement with the CD spectra reported 
+for NMI2 previously.(32) 
+Details of the transient absorption instrumentation have been described previously.(52) 
+Briefly, ~50% of  the output of a 1 kHz amplified Ti:sapphire system at 827 nm (1 W, 100 fs, 
+Spitfire, Spectra Physics) is used to pump a non-collinear optical parametric amplifier (TOPAS-
+5 
+Prime, Light-Conversion, LLC.) tuned to generate the ~120 fs, 520 nm pump pulses. The pump is 
+depolarized to minimize polarization-specific dynamics. In the nsTA experiment, the probe is 
+generated in a separately delayed broadband laser system (EOS, Ultrafast Systems, LLC). The 
+transmitted probe is detected on a commercial spectrometer (customized Helios-EOS, Ultrafast 
+Systems, LLC).  
+10 
+Transient absorption (TA) measurements were used to obtain the photoinduced electron 
+transfer dynamics for r=the racemic mixtures (R and S)-1-h9, (R and S )-1-d9 as well as the achiral 
+reference molecules 2-h9 and 2-d9 in a butyronitrile (PrCN) glass at 105 K using a 120-fs, 450 nm 
+pump pulse and monitoring the transient spectra at 100 fs-250 µs (Fig. S5). These data were 
+globally fit over the entire time range to yield evolution-associated spectra (Fig. S6). 
+15 
+Photoexcitation of (R and S)-1-h9 results in the ground state bleach (GSB) of its 450 nm absorption 
+accompanied by the appearance of the excited state absorption (ESA) bands of the lowest excited 
+singlet state of PXX-h9 (1*PXX) at 630, 779, and 1177 nm, as well as stimulated emission features 
+at 483 and 523 nm  (Figs. 5a and S6a). These transient features decay in τCS1 = 12.4 ± 0.4 ps 
+accompanied by the rise of a complex transient signal showing a prominent 979 nm band 
+20 
+characteristic of PXX-h9•+.(31) The 410 nm absorption characteristic of NMI•- is largely cancelled 
+out by the PXX-h9 GSB.(53) A second electron transfer producing NDI•-occurs in τCS2 = 203 ± 8 
+ps as indicated by the formation of the sharp features at 474 and 601 nm.(53) Further low amplitude 
+absorption changes of PXX-h9•+ and NDI•- occur in τrlx = 32 ± 5 ns, which are attributed to a 
+
+
+<PDF_PAGE 12>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+12 
+ 
+relaxation process in the low temperature glassy solvent followed by decay of the PXX-h9•+-NDI•- 
+SCRP to its ground state in τCR = 65.9 ± 0.7 μs. The corresponding TA data for (R and S)-1-d9 
+(Figs. S5c and S6c) exhibit spectra and kinetics very similar to those of (R and S)-1-h9, where the 
+charge recombination time of the PXX-d9•+-NDI•- SCRP to its ground state τCR = 51.1 ± 0.3 μs. 
+TA measurements under the same conditions were conducted on the achiral reference molecule 
+5 
+2-h9. The transient spectra at selected times are shown in Fig. S5b. The spectral features are very 
+similar to those of (R and S)-1-h9, and the time constants for charge separation and recombination 
+obtained from the global fits to the data are  τCS1 = 4.8 ± 0.3 ps, τCS2 = 213 ± 6 ps, τrlx = 4.8 ± 0.5 
+ns, and τCR = 46.4 ± 0.6 µs. The TA data for achiral 2-d9 (Figs. S5d and S6d) exhibit spectra and 
+kinetics very similar to those of 1-h9, where the charge recombination time of the PXX-d9•+-NDI•- 
+10 
+SCRP to its ground state in τCR = 57.0 ± 0.1 µs. The TA data show that (R and S)-1 and 2 have 
+ultrafast charge separation rates, which ensures an initial singlet state precursor, as well as long 
+SCRP recombination lifetimes, making them excellent candidates for studying the CISS effect on 
+their spin dynamics. 
+Transient Electron Paramagnetic Resonance (TREPR) Spectroscopy 
+15 
+All EPR measurements were performed at X-band (∼9.6 GHz) on a Bruker Elexsys E680 X/W 
+EPR spectrometer equipped with a split ring resonator (ER4118X-MS3). The temperature was 
+maintained at 85 K using an Oxford Instruments CF935 continuous-flow cryostat using liquid 
+nitrogen. The sample was photoexcited at 450 nm with 7 ns, 1 mJ laser pulses generated via an 
+optical parametric oscillator (Spectra-Physics BasiScan) pumped with the 355 nm output of a 
+20 
+frequency-tripled Nd:YAG laser (Spectra-Physics Quanta-Ray Lab-170+-10H) operating at a 
+repetition rate of 10 Hz. The laser light was coupled into the resonator via a fiber optic (Thorlabs 
+FT1000UMT) and collimator placed outside the cryostat window. 
+
+
+<PDF_PAGE 13>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+13 
+ 
+All EPR measurements were performed in the liquid crystal, 5CB (Sigma-Aldrich). Solutions 
+with an O.D. of 0.5 over a 2 mm pathlength were loaded into quartz tubes (2.40 mm o.d., 2.00 mm 
+i.d.), subjected to three freeze-pump-thaw cycles on a vacuum line (10-3 Torr), and sealed with a 
+hydrogen torch. The samples slightly warmed, then aligned in a 1 T magnetic field for 5 minutes 
+and quickly loaded into the already cold resonator at 85 K. Two sample orientations were collected, 
+5 
+one, as loaded, with the 5CB director parallel to the magnetic field, and other by rotating the sample 
+90 degrees to generate a liquid crystal director perpendicular to the magnetic field. 
+Transient continuous-wave EPR (TREPR) spectra were collected following photoexcitation, 
+the kinetic traces of the transient magnetization at a fixed magnetic field were acquired in 
+quadrature under CW irradiation (0.62 mW). Sweeping the magnetic field gave 2D spectra of 
+10 
+magnetic field versus time. For each kinetic trace, the average of the signal acquired prior to the 
+laser pulse was subtracted from the data. The kinetic traces recorded at magnetic field values off-
+resonance were considered background signals, whose average was also subtracted from all kinetic 
+traces. The spectra were then smoothed in time domain using a Savitzky-Golay filter and 
+appropriately phased into absorption/emission and dispersion. All processing and fitting of the 
+15 
+spectra were performed in Matlab using home written scripts and the simulation package EasySpin 
+v6.0-dev.(54, 55)  
+Out-of-phase electron spin echo envelope modulation (OOP-ESEEM) spectroscopy was 
+collected 50 ns following photoexcitation using a two-pulse, 𝜋𝜋2
+⁄ − 𝜏𝜏−𝜋𝜋, pulse sequence. 
+Microwave pulses were generated using a 1 kW TWT amplifier (Applied Systems Engineering 
+20 
+117X) in a partially over-coupled resonator to minimize ringing. Using pulse lengths of π/2 = 16 
+ns and π = 32 ns, the pulse sequence was started at τ = 100 ns and incremented Δ𝜏𝜏= 16 ns, a 
+standard 4-step phase cycle was utilized and the integrated spin echo intensity was recorded.  
+The time domain OOP-ESEEM traces were fit with the equation:(38) 
+
+
+<PDF_PAGE 14>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+14 
+ 
+𝑆𝑆(𝜏𝜏) = 𝑒𝑒
+−𝜏𝜏𝑇𝑇𝑑𝑑
+ൗ
+∫sin൫𝐽𝐽+ 𝐷𝐷(𝜃𝜃)൯𝜏𝜏 𝑊𝑊(𝜃𝜃) sin 𝜃𝜃𝑑𝑑𝑑𝑑
+𝜋𝜋
+0
+ 
+(S1) 
+where 𝑇𝑇𝑑𝑑 is a relaxation time, 𝐽𝐽 is the exchange coupling and 𝐷𝐷(𝜃𝜃) is the dipolar coupling and 
+𝑊𝑊(𝜃𝜃) is the weighting function ordering imposed by the liquid crystal. The dipolar coupling takes 
+the form: 
+ 𝐷𝐷(𝜃𝜃) =
+𝜇𝜇0
+4𝜋𝜋ℎ
+𝑔𝑔𝐷𝐷𝑔𝑔𝐴𝐴𝛽𝛽𝑒𝑒2
+𝑟𝑟𝐷𝐷𝐷𝐷
+3
+(1 −3𝑐𝑐𝑐𝑐𝑐𝑐2𝜃𝜃) 
+(S2) 
+5 
+When calculating the distance, 𝑔𝑔𝐷𝐷 and 𝑔𝑔𝐴𝐴 were both taken as the free electron g-value, 𝑔𝑔𝑒𝑒=
+2.0023. In the main text we have also introduced the constant 𝑑𝑑≡
+𝜇𝜇0
+4𝜋𝜋ℎ
+𝑔𝑔𝐷𝐷𝑔𝑔𝐴𝐴𝛽𝛽𝑒𝑒2
+𝑟𝑟𝐷𝐷𝐷𝐷
+3
+= 52.04 MHz nm3/
+𝑟𝑟𝐷𝐷𝐷𝐷
+3 . The parallel and perpendicular spectra were fit simultaneously with weighting function 
+𝑊𝑊(𝜃𝜃) = 𝑒𝑒𝜆𝜆൫3 cos2 𝜃𝜃−1൯/2, where 𝜆𝜆= 5 for the parallel spectra and 𝜆𝜆= −5 for the perpendicular 
+spectra, resulting in an orientation distribution with a FWHM of ~20°. We have checked that this 
+10 
+orientation distribution does not produce a visible effect on the resulting TREPR spectra. 
+The OOP-ESEEM data and fits are shown in Figs. S7 and S8 and the fitting parameters are 
+summarized in Table S1. 
+Density Functional Theory Calculations 
+Geometry optimizations of (R)-1-h9, (S)-1-h9, and 2-h9 were performed using density functional 
+15 
+theory (DFT) at B3LYP/6-31G* level of theory in QChem (version 5.1).(56)  The optimized 
+structures are shown in Fig. S9 and the optimized cartesian coordinates are given in Tables S2-S4.  
+Supplementary Text 
+Spin-Correlated Radical  Pair (SCRP) Theory 
+SCRP with no CISS Effect 
+20 
+The radical pair spin Hamiltonian is: 
+ℋ෡= 𝛽𝛽𝑒𝑒𝑩𝑩0𝒈𝒈𝐷𝐷𝑺𝑺෡𝐷𝐷+ 𝛽𝛽𝑒𝑒𝑩𝑩0𝒈𝒈𝐴𝐴𝑺𝑺෡𝐴𝐴+ 𝐽𝐽𝑺𝑺෡𝐷𝐷𝑺𝑺෡𝐴𝐴+ 𝑺𝑺෡𝐷𝐷𝑫𝑫𝐷𝐷𝐷𝐷𝑺𝑺෡𝐴𝐴+ ℋ෡𝐻𝐻𝐻𝐻 
+(S3) 
+
+
+<PDF_PAGE 15>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+15 
+ 
+The first two terms are the electron Zeeman interaction with the static magnetic field, 𝑩𝑩0; 𝐽𝐽 is the 
+exchange coupling; 𝑫𝑫𝐷𝐷𝐷𝐷 is the electron-electron dipole interaction matrix with principal elements 
+of  [𝐷𝐷
+𝐷𝐷
+−2𝐷𝐷] and D follows the definition given in eqn S2; and within the final term, ℋ෡𝐻𝐻𝐻𝐻, 
+are the electron-nuclear hyperfine interactions.  
+In the coupled spin basis, |𝑇𝑇+⟩, |𝑇𝑇0⟩, |𝑇𝑇−⟩, |𝑆𝑆⟩, this leads to the Hamiltonian matrix:(39, 40, 57) 
+5 
+ℋ෡=
+⎣
+⎢
+⎢
+⎢
+⎢
+⎡𝜐𝜐+ +
+𝐽𝐽
+4 +
+𝐷𝐷
+4
+0
+0
+0
+0
+𝐽𝐽
+4 −
+𝐷𝐷
+2
+0
+𝜐𝜐−
+0
+0
+−𝜐𝜐+ +
+𝐽𝐽
+4 +
+𝐷𝐷
+4
+0
+0
+𝜐𝜐−
+0
+−
+3𝐽𝐽
+4 ⎦
+⎥
+⎥
+⎥
+⎥
+⎤
+ 
+(S4) 
+where: 
+𝜐𝜐+ =
+1
+2 𝛽𝛽𝑒𝑒(𝑔𝑔𝐷𝐷+ 𝑔𝑔𝐴𝐴)𝐵𝐵0 + ∑൫𝑎𝑎𝐷𝐷𝐷𝐷+ 𝑎𝑎𝐴𝐴𝐴𝐴൯𝑚𝑚𝑗𝑗
+𝑗𝑗
+ 
+(S5a) 
+𝜐𝜐−=
+1
+2 𝛽𝛽𝑒𝑒(𝑔𝑔𝐷𝐷−𝑔𝑔𝐴𝐴)𝐵𝐵0 + ∑൫𝑎𝑎𝐷𝐷𝐷𝐷−𝑎𝑎𝐴𝐴𝐴𝐴൯𝑚𝑚𝑗𝑗
+𝑗𝑗
+ 
+(S5b) 
+The angle 𝜃𝜃 follows the standard definition, the angle between the vector connecting the two 
+10 
+spins and the laboratory magnetic field. More generally, the Hamiltonian matrix, eq. S4, is written 
+in the laboratory frame as defined by the high-field approximation. It is readily apparent that the 
+off-diagonal term, 𝜈𝜈−, (i.e. the difference between the effective Zeeman energies of the two ions, 
+also including the contribution from hyperfine couplings) will mix the |𝑇𝑇0⟩ and |𝑆𝑆⟩ states and upon 
+diagonalization yields the eigenstates: 
+15 
+|1⟩= |𝑇𝑇+1⟩
+|2⟩≡|Φ𝐴𝐴⟩= cos 𝜙𝜙|𝑆𝑆⟩+ sin 𝜙𝜙|𝑇𝑇0⟩
+|3⟩≡|Φ𝐵𝐵⟩= −sin 𝜙𝜙|𝑆𝑆⟩+ cos 𝜙𝜙|𝑇𝑇0⟩
+|4⟩= |𝑇𝑇−1⟩
+ 
+(S6) 
+when 
+𝜙𝜙=
+1
+2 tan−1
+2𝜐𝜐−
+(𝐷𝐷2)
+⁄
+−𝐽𝐽 
+(S7) 
+And the eigenvalues: 
+
+
+<PDF_PAGE 16>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+16 
+ 
+𝐸𝐸1 = 𝜈𝜈+ +
+(𝐽𝐽+𝐷𝐷)
+4
+𝐸𝐸2 = −
+(𝐽𝐽+𝐷𝐷)
+4
++ ටቀ
+𝐷𝐷
+4 −
+𝐽𝐽
+2ቁ
+2
++ 𝜈𝜈−2
+𝐸𝐸3 = −
+(𝐽𝐽+𝐷𝐷)
+4
+−ටቀ
+𝐷𝐷
+4 −
+𝐽𝐽
+2ቁ
+2
++ 𝜈𝜈−2
+𝐸𝐸4 = −𝜈𝜈+ +
+(𝐽𝐽+𝐷𝐷)
+4
+   
+(S8) 
+The spin Hamiltonian and its resulting eigenvalues and eigenvectors are independent of any 
+molecular chirality and only depend on the magnetic properties of the involved spins.  
+The steady-state EPR spectrum (after coherences are lost) in field or frequency space is composed 
+of peaks at positions determined by differences in the eigenvalues of the spin Hamiltonian, eqns. 
+5 
+S8, with intensities determined by the transition rate between the eigenstates |𝑖𝑖⟩ and |𝑗𝑗⟩ and their 
+population differences: 
+𝐼𝐼𝑖𝑖𝑖𝑖∝หൻ𝑖𝑖ห𝑆𝑆̂𝑦𝑦ห𝑗𝑗ൿห
+𝟐𝟐൫𝑝𝑝𝑖𝑖−𝑝𝑝𝑗𝑗൯       
+(S9) 
+where 𝑝𝑝𝑖𝑖 and 𝑝𝑝𝑗𝑗 are the populations of the two eigenstates which correspond to the diagonal 
+elements of the density matrix in the eigenbasis and depend upon on the initial state, i.e. 𝑝𝑝𝑖𝑖=
+10 
+|⟨𝑖𝑖|𝜓𝜓0〉|2. ൻ𝑖𝑖ห𝑆𝑆̂𝑦𝑦ห𝑗𝑗ൿ is the magnetic dipole matrix element of the examined transition along the 
+direction of the microwave field, which is orthogonal to the static field.  
+Conversely, transition frequencies (and hence peak positions) only depend on the Hamiltonian 
+eigenvalues and not on the specific initial state.  
+The four transitions of the SCRP (starting from a singlet precursor) appear at their usual positions. 
+15 
+All four transitions are of the same intensity (see definition in Eq. S9) such that: 
+𝐼𝐼12 = −𝐼𝐼24 = 𝐼𝐼13 = −𝐼𝐼34 =
+cos2 𝜙𝜙sin2 𝜙𝜙
+2
+=
+𝜐𝜐−2
+2(𝐷𝐷2
+⁄ −𝐽𝐽)2+8𝜐𝜐−2 
+(S10) 
+SCRP with the CISS Effect 
+The state for a radical pair following electron transfer through a chiral bridge can be written as 
+|𝜓𝜓0⟩= cos 𝜒𝜒|𝑆𝑆⟩+ sin 𝜒𝜒|𝑇𝑇0(𝒏𝒏)⟩      
+ (S11) 
+20 
+
+
+<PDF_PAGE 17>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+17 
+ 
+This state was first proposed by Luo and Hore,(46) where the angle 𝜒𝜒 is related to the chirality and 
+quantifies the effect of CISS in the reaction. The states |𝑆𝑆⟩ and |𝑇𝑇0(𝒏𝒏)⟩ are the radical pair singlet 
+and the radical pair triplet states, respectively; in particular, the triplet state is defined with respect 
+to the axis 𝒏𝒏 of charge separation, which is also the axis of chirality, the CISS quantization axis, 
+and the long molecular axis. In the limiting cases: 𝜒𝜒= 0 (no CISS), |𝜓𝜓0⟩ is a pure singlet state; at 
+5 
+the other extreme 𝜒𝜒= ±
+𝜋𝜋
+4, so that |𝜓𝜓0⟩= |↑↓(𝒏𝒏)⟩ or |↓↑(𝒏𝒏)⟩, i.e. it shows maximum local spin 
+polarization (100% CISS); and when 𝜒𝜒= ±
+𝜋𝜋
+2, |𝜓𝜓0⟩= |𝑇𝑇0(𝒏𝒏)⟩ a pure triplet state. The ± refers to 
+the two different enantiomers. 
+In the basis of the spin Hamiltonian, eqn. S4, the triplet state is defined in the high-field limit 
+and polarized along the laboratory magnetic field. When working in orientations or distributions 
+10 
+of orientations where the CISS axis is not aligned with the laboratory magnetic field, it becomes 
+necessary to rotate the state as defined in the molecular frame to the laboratory frame: 
+ 𝑒𝑒−𝑖𝑖𝑺𝑺෡𝑦𝑦𝜃𝜃|𝜓𝜓0⟩= |𝜓𝜓0(𝜃𝜃)⟩= cos 𝜒𝜒|𝑆𝑆⟩+ sin 𝜒𝜒ቂcos 𝜃𝜃|𝑇𝑇0⟩+
+sin 𝜃𝜃
+√2 (|𝑇𝑇−1⟩−|𝑇𝑇+1⟩)ቃ                    (S12) 
+where the singlet component is rotationally invariant, while |𝑇𝑇0(𝒏𝒏)⟩≡|𝑇𝑇0(𝜃𝜃)⟩= cos 𝜃𝜃|𝑇𝑇0⟩+
+sin 𝜃𝜃
+√2 (|𝑇𝑇−1⟩−|𝑇𝑇+1⟩). Similar to eqn. S2, 𝜃𝜃 is defined as the angle between the CISS axis and the 
+15 
+magnetic field. In the D•+-Bχ-A•- molecules studied here, the CISS axis and the dipolar axis are 
+nearly collinear so 𝜃𝜃 in eqns. S2 and S12 refers to the same measure. When 𝜃𝜃≠0, sizable 
+components on |𝑇𝑇−1⟩ and |𝑇𝑇+1⟩ are introduced (see Fig. 3 of the main text). 
+Let us now focus on the two limiting cases examined in this work, i.e. 𝜃𝜃= 0° and 𝜃𝜃= 90°. 
+The resulting intensity for 𝐼𝐼13 and 𝐼𝐼34 at  𝜃𝜃= 90∘ is given by: 
+20 
+𝐼𝐼13 = −𝐼𝐼34 =
+1
+4 cos2 𝜙𝜙(cos 2𝜒𝜒−cos2 𝜒𝜒cos 2𝜙𝜙)                                            
+(S13) 
+
+
+<PDF_PAGE 18>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+18 
+ 
+Showing a dependence on the composition of the eigenstates (𝜙𝜙) and on the amount of CISS (𝜒𝜒). 
+This can be separated into a singlet (𝐼𝐼𝑆𝑆) and a 100% CISS (𝐼𝐼𝐶𝐶𝐶𝐶𝐶𝐶𝐶𝐶) contributions, i.e. 
+𝐼𝐼13 = −𝐼𝐼34 =
+1
+2 (1 −2 sin2 𝜒𝜒) cos2 𝜙𝜙sin2 𝜙𝜙−
+1
+4 sin2 𝜒𝜒cos2 𝜙𝜙cos 2𝜙𝜙
+= (1 −𝑝𝑝) 𝐼𝐼𝑆𝑆+ 𝑝𝑝 𝐼𝐼𝐶𝐶𝐶𝐶𝐶𝐶𝐶𝐶                                           
+          
+(S14) 
+where 𝑝𝑝= 2 sin2 𝜒𝜒 represents the CISS efficiency and 
+  𝐼𝐼𝑆𝑆=
+1
+2 cos2 𝜙𝜙sin2 𝜙𝜙                                                                       
+(S15) 
+5 
+  𝐼𝐼𝐶𝐶𝐶𝐶𝐶𝐶𝐶𝐶= −
+1
+8 cos 2𝜙𝜙cos2 𝜙𝜙                                                             
+ (S16) 
+Note that for this orientation 𝐼𝐼𝑆𝑆 and 𝐼𝐼𝐶𝐶𝐶𝐶𝐶𝐶𝐶𝐶 have opposite signs and that 𝐼𝐼𝐶𝐶𝐶𝐶𝐶𝐶𝐶𝐶 is the same that would 
+be obtained starting from a fully polarized initial state (𝜒𝜒= ±𝜋𝜋/4 ). 
+The calculation is perfectly analogous for 𝐼𝐼12 = −𝐼𝐼24, so that  
+ 𝐼𝐼12 = −𝐼𝐼24 =
+1
+4 sin2 𝜙𝜙 (2 cos2 𝜙𝜙cos2 𝜒𝜒−sin2 𝜒𝜒)                                      
+(S17) 
+10 
+This can also be decomposed into singlet and 100% CISS contributions, with the same sign. 
+Remarkably, in the present case 𝐼𝐼12 and 𝐼𝐼24 are much weaker and occur in the central part of the 
+spectrum. Hence, we focus on the main peaks 𝐼𝐼34 and 𝐼𝐼13 in the following. Similar expressions can 
+also be derived for 𝜃𝜃= 0. A summary of the different singlet and CISS contributions for each 
+orientation is reported in Table S5. 
+15 
+In Table S5, blue (orange) indicate emissive (absorptive) signals, fixed by the sign of D. Note 
+that opposite enantiomers are indistinguishable when θ = 90°, while they give different intensities 
+when θ = 0°, which are therefore averaged in the Table S5.  
+For these specific directions the same results could be obtained using the initial mixed state for 
+electron transfer through a chiral bridge proposed by Chiesa et al.(47) or the coherent superposition  
+20 
+  |𝜓𝜓0
+′ ⟩= cos 𝜒𝜒|𝑆𝑆⟩+ 𝑖𝑖sin 𝜒𝜒|𝑇𝑇0(𝒏𝒏)⟩                                             
+ (S18) 
+
+
+<PDF_PAGE 19>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+19 
+ 
+derived by Fay.(45) Eq. S18 does not yield any single-spin polarization, but was expanded later 
+by Fay(44) to account for spin-spin exchange interactions during multi-step electron transfer 
+processes, leading to polarization effects similar to those postulated by Luo and Hore(46) (a 
+mixture of states S18 and S11 with the same angle 𝜒𝜒). Since the three models are equivalent for 
+describing the TREPR spectra, we mainly focus on Eq. S11.(46) 
+5 
+TREPR Spectral Linewidths 
+To understand how the entanglement of the eigenstates affects the linewidths for different 
+initial states, let us focus again on 𝜃𝜃= 90∘ and transition 𝐼𝐼13 between |Φ𝐵𝐵⟩ and |T+1⟩, which occurs 
+on the low field side of the spectrum. Analogous reasoning holds for transition 𝐼𝐼34 on the high 
+field side of the spectrum. The intensities of the transitions for singlet and 100% CISS initial states 
+10 
+are given by Eqs. S15 and S16 above. Their dependence on the mixing angle 𝜙𝜙 is very different, 
+as shown in Fig. S10. In order to better compare the linewidths of the two curves, here we report 
+the absolute value of  𝐼𝐼S and  𝐼𝐼CISS (Fig. S10A), along with its derivative (Fig. S10B). 
+As discussed in the main text, 𝜙𝜙 can be varied by considering different configurations of the 
+nuclear spins coupled to the SCRP or by distributions of the Hamiltonian parameters. In the present 
+15 
+calculations, we included a 14% strain in the donor-acceptor distance, leading to a distribution of 
+dipole-dipole interactions. This, in turn, corresponds to resonances occurring at different values of 
+B0. As a result, we can have regions in the tails of a specific peak, which correspond to more 
+entangled states, i.e. such that 𝜙𝜙 is closer to 0 compared to the center of the peak. In this case, 
+moving from the center of the peak to the tail corresponds to moving toward 𝜙𝜙= 0 in Fig. S10B, 
+20 
+where 𝑑𝑑|𝐼𝐼CISS|/𝑑𝑑𝑑𝑑 is positive and 𝑑𝑑|𝐼𝐼S|/𝑑𝑑𝑑𝑑 is negative. Such a situation, in which 𝐼𝐼CISS increases 
+while 𝐼𝐼S decreases from the center to the tail of the peak leads to a larger broadening of 𝐼𝐼CISS 
+compared to 𝐼𝐼S, thus exactly producing CISS features in the tail when 𝐼𝐼CISS and 𝐼𝐼S are combined. 
+ 
+
+
+<PDF_PAGE 20>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+20 
+ 
+TREPR Spectral Simulations 
+The time dependence of the TREPR spectra is simulated by numerically integrating the 
+stochastic Liouville equation for the system density matrix 
+𝑑𝑑𝜌𝜌𝑟𝑟(Ω,𝑡𝑡)
+𝑑𝑑𝑑𝑑
+= −𝑖𝑖 ቂ
+1
+ℏ 𝐻𝐻෩(Ω) + 𝑖𝑖𝑅𝑅෨+ 𝑖𝑖𝐾𝐾෩ቃ𝜌𝜌𝑟𝑟(Ω, 𝑡𝑡)      
+(S19) 
+where 𝜌𝜌𝑟𝑟(Ω, 𝑡𝑡) is the density matrix of the system in the rotating frame, 𝐻𝐻෩(Ω), 𝑅𝑅෨ and 𝐾𝐾෩ are super-
+5 
+operators associated to the coherent Hamiltonian evolution, to dephasing/relaxation and 
+recombination effects, respectively. Both relaxation and recombination are negligible in the time 
+range of interest and we therefore omit them in the following. Conversely, off-diagonal elements 
+of 𝜌𝜌𝑟𝑟 are affected by pure dephasing, parametrized by transition-dependent 𝑇𝑇2. 
+Note that in the high-field limit, the non-secular terms in the Hamiltonian are also negligible 
+10 
+and the rotating-frame Hamiltonian (including the microwave field) becomes time independent. 
+Hence, Eq. S19 can be directly integrated, leading to 
+𝜌𝜌𝑟𝑟(Ω, 𝑡𝑡) = exp  ቂ−
+𝑖𝑖
+ℏ 𝐻𝐻෩(Ω) + 𝑅𝑅෨+ 𝐾𝐾෩ቃ𝑡𝑡𝜌𝜌𝑟𝑟(Ω, 0)                 
+(S20) 
+from which the spectrum ൻ𝑆𝑆𝑦𝑦(𝐵𝐵0, 𝑡𝑡)ൿ= 𝑇𝑇𝑇𝑇[𝜌𝜌𝑟𝑟(Ω, 𝑡𝑡)𝑆𝑆𝑦𝑦] is calculated.(47) 
+Apart from the rise of the signal at short times, the resulting spectra are equivalent to those 
+15 
+obtained from linear-response theory in the stationary limit, Eq. S9, using, for instance, the 
+Easyspin package for spin-polarized initial states.(54, 55)  
+The time and field dependencies of the TREPR spectra simulated for the protonated compound 
+using the minimal model described in the main text and simulated for the deuterated case  including 
+a distribution of hyperfine fields generated by the four 1H and two 14N nuclear spins of NDI•- are 
+20 
+reported in Figs. S11 and S12. The experimental spectra are very well reproduced, both for the 
+main peaks and for the characteristic CISS features at the two wings. The latter show practically 
+the same time dependence as the main peaks, indicating that they are not transient but resonant 
+
+
+<PDF_PAGE 21>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+21 
+ 
+peaks (also present in the steady-state spectra). The full distributions of hyperfine fields, g-tensors 
+and dipolar strain included in this model are slightly different from those reported in the main text, 
+but these small differences do not affect the origin of CISS features. 
+Electron Transfer Rates and Energetics 
+The free energies of reaction for (R or S) 1-h9 (-d9) and 2-h9 (-d9) were determined from the 
+5 
+modified Weller equation(58) (Eq. S21) using the one-electron oxidation potential 𝐸𝐸1/2
++  of PXX 
+(0.81 V vs. SCE(31), and the one-electron reduction potentials 𝐸𝐸1/2
+− of NMI, NMI2, and NDI (-1.4 
+V, (53) -1.5 V(59) and -0.48 V (53) vs SCE, respectively), the estimated dielectric constant of 
+PrCN at 105 K (ε = 2.3),(60) and the center-to-center radical ion pair distances given in Table S1 
+determined as noted. The ionic radii are estimated as half of the donor-acceptor distance and 𝑒𝑒0 is 
+10 
+the charge of the electron. 
+𝛥𝛥𝐺𝐺𝐷𝐷𝐷𝐷= 𝐸𝐸1/2
++
+−𝐸𝐸1/2
+−
++
+𝑒𝑒02
+𝜀𝜀ቀ
+1
+2𝑟𝑟𝐷𝐷+
+1
+2𝑟𝑟𝐴𝐴−
+1
+𝑟𝑟𝐷𝐷𝐷𝐷ቁ  
+ 
+(S21) 
+The values of the electronic coupling matrix elements for the electron transfer reaction were 
+determined using the semi-classical expression for the electron transfer rate 𝑘𝑘𝐸𝐸𝐸𝐸 given in Eq. S22, 
+(60) where 𝛥𝛥𝐺𝐺𝐷𝐷𝐷𝐷 and 𝑘𝑘𝐸𝐸𝐸𝐸 are the free energies of reaction and measured rate constants given in 
+15 
+Table S1. The values of 𝑘𝑘𝐸𝐸𝐸𝐸 are obtained from the data presented in Figs. S5 and S6. In addition, 
+the total internal reorganization for the one-electron oxidation of PXX and reduction of NMI, NMI2 
+or NDI (𝜆𝜆𝑖𝑖) is estimated as 0.5 eV, while the solvent reorganization energy of PrCN at 105 K (𝜆𝜆𝑆𝑆) 
+is estimated from Eq. S23(60) and we make the usual assumption of one dominant vibration (𝜔𝜔 = 
+1500 cm-1) coupled to the reaction coordinate of the electron transfer reaction. 
+20 
+𝑘𝑘𝐸𝐸𝐸𝐸=
+2𝜋𝜋
+ℏ𝑉𝑉𝐷𝐷𝐷𝐷
+2
+1
+(4𝜋𝜋𝜆𝜆𝑠𝑠𝑘𝑘𝐵𝐵𝑇𝑇)1/2 ∑
+𝑠𝑠𝑚𝑚𝑒𝑒−𝑠𝑠
+𝑚𝑚!
+∞
+𝑚𝑚=1
+⋅exp ቂ−
+(𝜆𝜆𝑠𝑠+𝛥𝛥𝐺𝐺𝐷𝐷𝐷𝐷+𝑚𝑚𝑚𝑚)2
+4𝜆𝜆𝑠𝑠𝑘𝑘𝐵𝐵𝑇𝑇
+ቃ   
+(S22) 
+where s = λi/ω 
+𝜆𝜆𝑠𝑠= 𝑒𝑒0
+2 ቀ
+1
+2𝑟𝑟𝐷𝐷+
+1
+2𝑟𝑟𝐴𝐴−
+1
+𝑟𝑟𝐷𝐷𝐷𝐷ቁቀ
+1
+𝑛𝑛2 −
+1
+𝜀𝜀ቁ   
+ 
+ 
+ 
+(S23) 
+where n is the refractive index of the solvent and the remaining values are defined above. 
+
+
+<PDF_PAGE 22>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+22 
+ 
+ 
+O
+O
+N
+O
+O
+O O
+O
+O
+N N
+N
+O
+O
+O
+O
+O
+O
+O
+O O
+O
+O
+N N
+N
+O
+O
+O
+O
+Br
+N
+O
+O
+O O
+O
+O
+N N
+N
+O
+O
+O
+O
+DMF, reflux, 16h
+Zn(OAc)2*2H2O, 
+DMF, reflux, 16h
+4-bromoaniline
+O O
+O
+O
+O
+O
+O
+O
+(R,S)-1-d9
+K2CO3, Pd(dppf)Cl2,
+Tol/EtOH/H2O, reflux, 16h
+               72 %
+N
+N
+O
+O
+O
+O
+H2N
+d9
+N
+N
+O
+O
+O
+O
+H2N
+O
+N
+O
+O
+O
+O
+O
+O
+O
+O
+O
+O
+2,6-xylidine
+DMF, reflux, 16h
+          38 %
+DMF, reflux, 3h
+         87 %
+N2H4*H2O
+PXX-d9-Bpin
+PXX-Bpin
+K2CO3, Pd(dppf)Cl2,
+Tol/EtOH/H2O, reflux, 16h
+                66 %
+O
+O
+N
+O
+O
+O O
+O
+O
+N N
+N
+O
+O
+O
+O
+(R,S)-1-h9
+NIA-xyl
+NH2-NDI-xyl
+NMA-NMI-NDI-xyl
+Br-Ph-(NMI)2-NDI-xyl
+ 
+Fig. S1. Synthetic scheme for (R and S)-1-h9 and (R and S)-1-d9 
+ 
+ 
+5 
+ 
+ 
+ 
+ 
+
+
+<PDF_PAGE 23>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+23 
+ 
+O
+O
+N
+O
+O
+N
+O
+O
+N
+Br
+O
+O
+N
+O
+O
+O
+O
+O
+N
+Br
+NH2
+EtOH, reflux, 12 h, 67 %
+O
+O
+N
+O
+O
+N
+O
+O
+N
+O
+O
+O
+O
+N
+O
+O
+N
+O
+O
+N
+O
+O
+PXX-xy-Bpin
+K2CO3, Pd(dppf)Cl2,
+dioxanes, reflux, 12 h, 59 %
+PXX-d9-xy-Bpin
+K2CO3, Pd(dppf)Cl2,
+dioxanes, reflux, 12 h, 42 %
+O
+O
+O
+O
+Br
+O
+O
+B O
+O
+O
+O
+Br
+O
+O
+B O
+O
+NBS
+DMF, rt, 12h
+B2Pin2
+KOAc, Pd(dppf)Cl2,
+dioxanes, reflux, 12 h, 43 %
+Br
+Br
+K2CO3, Pd(dppf)Cl2,
+dioxanes, reflux, 12 h, 80 %
+B2Pin2
+KOAc, Pd(dppf)Cl2,
+dioxanes, reflux, 12 h, 75 %
+d9
+d9
+d9
+d9
+d9
+PXX-d9-Br
+PXX-d9-Bpin
+PXX-d9-xy-Br
+PXX-d9-xy-Bpin
+NIA-dtbp
+Br-NMI-NH2
+Br-NMI-NDI-dtbp
+2-h9
+2-d9
+ 
+Fig. S2. Synthetic scheme for 2-h9 and 2-d9 
+ 
+ 
+
+
+<PDF_PAGE 24>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+24 
+ 
+ 
+Fig. S3. HPLC chromatogram showing the chiral resolution of (A) (R and S)-1-h9 and (B) (R and 
+S)-1-d9 enantiomers on a ChiralPak IA-3 column (250 x 4.6 mm, 3 µm) monitored at 380 nm using 
+a dichloromethane/hexanes/isopropanol mixture as an eluent (50/45/5 volume %) at 1 mL/min 
+5 
+flow rate. Peaks with the shorter retention times are the (S) enantiomers. 
+ 
+ 
+A 
+B 
+
+
+<PDF_PAGE 25>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+25 
+ 
+ 
+Fig. S4. Optical spectra. (A) UV-vis absorption of the racemic mixture of (R and S)-1-h9, PXX, (R and S)-
+NMI2 and NDI in toluene at 295 K. (B) CD spectra of  (R)-1-h9 and (S)-1-h9. (C) UV-vis absorption of the 
+racemic mixture of (R and S)-1-d9, PXX, (R and S)-NMI2 and NDI in toluene at 295 K. (D) CD spectra of (R)-
+1-d9 and (S)-1-d9. 
+a) 
+b) 
+A 
+B 
+C 
+D 
+
+
+<PDF_PAGE 26>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+26 
+ 
+ 
+A 
+B 
+Fig. S5. Transient absorption data following 450 nm excitation of compounds in PrCN at 105 K at the indicated 
+pump-probe delay times. (A) (R and S)-1-h9, (B) 2-h9, (C) (R and S)-1-d9, (D) 2-d9. 
+C 
+D 
+
+
+<PDF_PAGE 27>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+27 
+ 
+ 
+A 
+B 
+Fig. S6. Evolution-associated spectra obtained by globally fitting the femto- and nanosecond transient absorption 
+data for (A) (R and S)-1-h9, (B) 2-h9, (C) (R and S)-1-d9, and (D) 2-d9, following 450 nm excitation in PrCN at 
+105 K. 
+C 
+D 
+
+
+<PDF_PAGE 28>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+28 
+ 
+ 
+Fig. S7. OOP-ESEEM data and fits at θ = 0° and θ = 90° for the indicated molecules oriented in 5CB. Lower 
+right: Hahn echo pulse sequence for OOP-ESEEM experiments, where TDAF is the delay after the laser flash. 
+(S)-1-h9 
+(R)-1-h9 
+2-h9 
+
+
+<PDF_PAGE 29>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+29 
+ 
+ 
+Fig. S8. OOP-ESEEM data and fits at θ = 0° and θ = 90° for the indicated molecules oriented in 5CB. Lower 
+right: Hahn echo pulse sequence for OOP-ESEEM experiments, where TDAF is the delay after the laser flash. 
+2-d9 
+ 
+(R)-1-d9 
+  
+  
+(S)-1-d9 
+
+
+<PDF_PAGE 30>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+30 
+ 
+ 
+A 
+B 
+C 
+Fig. S9. Geometry optimized structures. (A) (R)-1-h9, (B) (S)-1-h9, and (C) 2-h9 obtained using density 
+functional theory (DFT) at the B3LYP/6-31G* level of theory in QChem (version 5.1).  
+
+
+<PDF_PAGE 31>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+31 
+ 
+ 
+Fig. S10. Transition intensity as a function of the CISS contribution. (A) Dependence of the absolute 
+value of the intensity of the |Φ𝐵𝐵⟩↔|T+1⟩ (1-3) transition on the composition of the eigenstates, expressed 
+by the angle 𝜙𝜙, for an initial singlet (blue line) or fully polarized (100% CISS, red curve) state. (B) Same 
+for its derivative.  
+ 
+A 
+B 
+
+
+<PDF_PAGE 32>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+32 
+ 
+ 
+Fig. S11. Time and field dependence of TREPR spectra. Experimental (A) and simulated (B) time and field 
+dependence of TREPR spectra of (R and S)-1-h9 with the long axis of each molecule perpendicular to the applied 
+magnetic field direction. The time dependence of the lateral CISS features is enhanced using a non-linear color-
+scale. 
+A 
+b) 
+B 
+d) 
+
+
+<PDF_PAGE 33>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+33 
+ 
+  
+ 
+ 
+ 
+Figure S12. Time and field dependence of TREPR spectra. Experimental (A) and simulated (B) time and field 
+dependence of TREPR spectra of (R and S)-1-d9 with the long axis of each molecule perpendicular to the applied 
+magnetic field direction. The time dependence of the lateral CISS features is enhanced using a non-linear color-
+scale. The effect of hyperfine interactions is included as a secular term in the Hamiltonian, with four 1H (𝐼𝐼= 1/2) 
+and two 14N (𝐼𝐼= 1) nuclear spins coupled to NDI- with isotropic 𝑎𝑎𝐻𝐻= 4 MHz and 𝑎𝑎𝑁𝑁= 2 MHz. For each 
+configuration of the nuclear spins, we consider a distribution of hyperfine fields with a gaussian broadening of 1 
+MHz to account for possible strain and anisotropy of the hyperfine couplings. A distribution of donor-acceptor 
+distances with standard deviation 0.5 nm was also included. Slightly different values of the g-tensors compared to 
+the minimal model were used 𝑔𝑔𝑁𝑁𝑁𝑁𝑁𝑁 = (2.0034, 2.0041,   2.0043), 𝑔𝑔𝑃𝑃𝑃𝑃𝑃𝑃= (2.0032, 2.0046, 2.0046) and a 
+CISS contribution of 47 %. 
+A 
+B 
+
+
+<PDF_PAGE 34>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+34 
+ 
+Compound 
+Electron Transfer 
+Reaction 
+rDA (nm) 
+𝛥𝛥𝐺𝐺𝐷𝐷𝐷𝐷 (eV) 
+𝑘𝑘𝐸𝐸𝐸𝐸 (s-1) 
+𝑉𝑉𝐷𝐷𝐷𝐷 (cm-1) 
+(R or S) 1-h9 
+(R or S) 1-d9 
+1*PXX-NMI2-NDI→ 
+   PXX•+-NMI2•--NDI 
+ 
+1.46 a 
+ 
+-0.26 
+8.1 x 1010 
+8.3 x 1010 
+18 
+18 
+(R or S) 1-h9 
+(R or S) 1-d9 
+PXX•+-NMI2•--NDI→   
+PXX•+-NMI2-NDI•- 
+ 
+2.48 ± 0.01b 
+ 
+-1.09 
+4.9 x 109 
+1.5 x 1010 
+40 
+70 
+2-h9 
+2-d9 
+1*PXX-NMI-NDI→ 
+   PXX•+-NMI•--NDI 
+ 
+1.21a 
+ 
+-0.21 
+2.1 x 1011 
+2.6 x 1011 
+74 
+83 
+2-h9 
+2-d9 
+   PXX•+-NMI•--NDI→    
+PXX•+-NMI-NDI•- 
+ 
+2.28 ± 0.01b 
+ 
+-1.12 
+4.7 x 109 
+5.8 x 109 
+18 
+20 
+ 
+Table S1.  Electron Transfer Data. aDistances obtained from the DFT calculations given in Tables S3-S5. bDistances 
+obtained from the OOP-ESEEM data given in the main text. 
+ 
+ 
+ 
+5 
+
+
+<PDF_PAGE 35>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+35 
+ 
+ 
+ 
+ 
+Compound 
+J (MHz) 
+𝑟𝑟𝐷𝐷𝐷𝐷 (nm) 
+(S)-1-h9 
+-0.21 ± 0.09 
+2.48 ± 0.01 
+(R)-1-h9 
+-0.28 ± 0.11 
+2.48 ± 0.01 
+2-h9 
+-0.14 ± 0.10 
+2.28 ± 0.01 
+(S)-1-d9 
+-0.31 ± 0.10 
+2.53 ± 0.01 
+(R)-1-d9 
+-0.18 ± 0.10 
+2.51 ± 0.01 
+2-d9 
+-0.25 ± 0.10 
+2.29 ± 0.01 
+ 
+Table S2. OOP-ESEEM fit parameters 
+
+
+<PDF_PAGE 36>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+36 
+ 
+(R)-1h9 
+Coordinates (Angstroms) 
+     ATOM                X               Y               Z 
+      1  H        16.3358942944   -4.3281626064   -2.2877779347 
+      2  H        18.8019623042   -4.1693433187   -1.9479313717 
+5 
+      3  C        16.7611601820   -3.5145988373   -1.7095809383 
+      4  C        18.1587795359   -3.4119561690   -1.5083550495 
+      5  O        14.5660393913   -2.6739519154   -1.3610844712 
+      6  H        11.9554419289   -2.7139744068   -1.5808736086 
+      7  C        15.9315444646   -2.5615966536   -1.1581652039 
+10 
+      8  H         6.7328227085    1.1956699080    2.5948679097 
+      9  C        12.3283682942   -1.8685093007   -1.0113134439 
+     10  C        18.7163833194   -2.3845926757   -0.7749051188 
+     11  H         9.1962546309    1.1050068920    2.8402936355 
+     12  C        13.7165528883   -1.7324192465   -0.8150725568 
+15 
+     13  H        19.7921984943   -2.3275352957   -0.6334012584 
+     14  C        16.4771104203   -1.4935031639   -0.3987795457 
+     15  C        11.4606382462   -0.9370578779   -0.4711447059 
+     16  H       -16.6065064634   -2.6405937900    2.4174190066 
+     17  C         7.3691531102    1.2034762054    1.7159872678 
+20 
+     18  C        -1.8269945346   -0.5152290510    0.2083806265 
+     19  C        17.8825534162   -1.3907657745   -0.1961869238 
+     20  C        -3.2551505378   -0.4921919533    0.1830938352 
+     21  H        10.3942787638   -1.0680207988   -0.6182288983 
+     22  C         8.7541789852    1.1581587223    1.8496320274 
+25 
+     23  C        14.1997169495   -0.6752613331   -0.0733415615 
+     24  O        -6.0321160099    1.1785465171   -1.5033436950 
+     25  H         1.6450232955   -3.3923115486   -1.3680027496 
+     26  C       -15.8988961538   -2.0526615079    1.8260684184 
+     27  C        15.6076544587   -0.5298791633    0.1585942148 
+30 
+     28  H       -15.2557354228   -1.5043821588    2.5250233216 
+     29  H       -15.2645627919   -2.7546285296    1.2714685306 
+     30  C        11.9189161302    0.1811046448    0.2893023948 
+     31  C        18.3494238737   -0.2892156097    0.5804127404 
+     32  C        13.3273161708    0.2848801528    0.4886757962 
+35 
+     33  C         2.5580440635   -0.7477155995   -0.9855300313 
+     34  C         3.2308530614    0.3068324835   -0.3978768148 
+     35  C         4.7117015711    0.2278505312   -0.2925212371 
+     36  C         3.2246847375    2.5106941690    0.6817524741 
+     37  C         2.5239245555    1.4266326195    0.0935108442 
+40 
+     38  C         4.7040872449    2.4832567201    0.7968925806 
+     39  C         1.1519314424   -0.7219852159   -1.0951769561 
+     40  C         2.5343610706    3.6077804483    1.1614267250 
+     41  C         1.1250477687   -2.8658485725   -2.1775722624 
+     42  O         5.3427683922   -0.7345995100   -0.7007680978 
+45 
+     43  C         1.0964757572    1.4573806069   -0.0020593889 
+     44  C         1.1273931851    3.6459799453    1.0751780471 
+     45  C         0.4241377198    2.6007817471    0.5143995436 
+
+
+<PDF_PAGE 37>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+37 
+ 
+     46  C         0.4108253560    0.3559605914   -0.5997675805 
+     47  N         5.3586783224    1.3246848202    0.3099582008 
+     48  O         5.3426153314    3.3978093410    1.2893845788 
+     49  O         0.4381285903   -1.7149465830   -1.6950858853 
+     50  C         6.7970869904    1.2652523619    0.4464860312 
+5 
+     51  C        -1.0813041063    0.3342850776   -0.6792930564 
+     52  H         3.1449148758   -1.5798425606   -1.3545876724 
+     53  C        -3.9199877312    0.3852762671   -0.7127643152 
+     54  C        -5.3988525559    0.4490882673   -0.7649716890 
+     55  H         3.0942621527    4.4251178485    1.6031474860 
+10 
+     56  H        19.4179921686   -0.1870363654    0.7497114800 
+     57  C        16.0969213299    0.5186390063    0.9073452845 
+     58  C         9.5925612131    1.1646275382    0.7234413754 
+     59  H         0.3521351747   -3.5129393114   -2.5943785084 
+     60  H         0.5916391273    4.5093864749    1.4583611731 
+15 
+     61  H       -18.5847437669   -1.7471402971    1.5416830154 
+     62  H        -0.6578046941    2.6441050410    0.4623305454 
+     63  C        11.0714018476    1.1706564492    0.8914466326 
+     64  C        17.4853523455    0.6445700690    1.1210554482 
+     65  C        13.8817253115    1.3359251312    1.2666464753 
+20 
+     66  C       -16.6350630992   -1.1167235119    0.8979254592 
+     67  C       -18.0334175847   -1.0858628676    0.8780366665 
+     68  O        15.2466658104    1.4558545745    1.4589305555 
+     69  H         1.8445339355   -2.6047087247   -2.9631668082 
+     70  C        11.6596541329    2.1660526720    1.6594099405 
+25 
+     71  C         7.6098222708    1.2742443630   -0.6864641475 
+     72  C        -1.7786537054    1.1604887390   -1.5592304434 
+     73  H        17.8546567885    1.4771307987    1.7115359085 
+     74  C         8.9942693199    1.2183667183   -0.5466360004 
+     75  C        -3.1921607771    1.1886987654   -1.5616667162 
+30 
+     76  C        13.0536496921    2.2657897712    1.8551489924 
+     77  N        -6.0600321054   -0.4226177944    0.1289480289 
+     78  C        -8.0720450190   -1.2775784878   -0.7953395931 
+     79  C        -8.0587675521    0.5224447933    0.9917241579 
+     80  O        -7.4190137550   -2.0155396053   -1.5056271643 
+35 
+     81  N        -7.4419081151   -0.3896705828    0.1055825028 
+     82  O        -7.3947108199    1.2341969395    1.7182648899 
+     83  C        -9.5554276085   -1.2266232375   -0.7924381444 
+     84  C        -9.5425210188    0.5283720875    0.9540374904 
+     85  C       -10.2666136387   -2.0587509152   -1.6416549417 
+40 
+     86  C       -10.2396610820   -0.3368914872    0.0735730623 
+     87  C       -10.2413279431    1.3857385175    1.7882821826 
+     88  C       -11.6733486674   -2.0321755363   -1.6542399872 
+     89  C       -11.6615519420   -0.3124059291    0.0594812100 
+     90  C       -11.6481530585    1.4075665373    1.7729162819 
+45 
+     91  C       -12.3661936008   -1.1733966689   -0.8166332991 
+     92  C       -12.3534243734    0.5717515708    0.9225113922 
+     93  C       -13.8547414752   -1.1637687658   -0.8420941530 
+
+
+<PDF_PAGE 38>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+38 
+ 
+     94  C       -13.8417432800    0.6077046860    0.9240729942 
+     95  H        -9.7168837727   -2.7294739324   -2.2935061538 
+     96  O       -14.4982786817   -1.8899765993   -1.5810889678 
+     97  H        -9.6819744803    2.0367884286    2.4518067997 
+     98  N       -14.4962387750   -0.2696743019    0.0372911183 
+5 
+     99  O       -14.4746688691    1.3535231217    1.6525687876 
+    100  C       -15.9494855099   -0.2535365507    0.0320715017 
+    101  H       -12.2370578485   -2.6812570916   -2.3158569210 
+    102  H        11.0205994208    2.9199799813    2.1104896529 
+    103  H       -12.2021268922    2.0753583226    2.4240462811 
+10 
+    104  C       -18.7183666280   -0.2241967210    0.0245121917 
+    105  H        13.4782569082    3.0670740983    2.4505982904 
+    106  H         7.1606246412    1.3273192063   -1.6726538926 
+    107  H       -19.8049880737   -0.2126463569    0.0215495427 
+    108  H         9.6213876730    1.2450920080   -1.4330661484 
+15 
+    109  C        -5.4722302084   -1.3233034767    1.0492664600 
+    110  C       -16.6116549564    0.6239506080   -0.8372798088 
+    111  C       -18.0105375461    0.6227323822   -0.8250945128 
+    112  O        -6.1716778923   -2.0185844561    1.7609092303 
+    113  C       -15.8511161853    1.5451770774   -1.7603172858 
+20 
+    114  H       -18.5437857318    1.2958553438   -1.4916735287 
+    115  H       -15.2088283665    2.2361038363   -1.2009031220 
+    116  H       -15.2123475188    0.9847053983   -2.4535991740 
+    117  H       -16.5432251711    2.1452427082   -2.3577702042 
+    118  C        -3.9925083722   -1.3309211117    1.0605510605 
+25 
+    119  C        -3.3400425239   -2.1681109004    1.9475446532 
+    120  H        -3.9317792663   -2.7964165193    2.6048264370 
+    121  C        -1.9338814917   -2.1837520132    1.9893229627 
+    122  H        -1.4254090223   -2.8346269061    2.6945049820 
+    123  C        -1.1967994922   -1.3781139013    1.1451306973 
+30 
+    124  H        -0.1140547656   -1.3958543095    1.1976229668 
+    125  O        -1.1924185285    2.0348260952   -2.4318562869 
+    126  C        -0.1820177022    1.5633367239   -3.3307740400 
+    127  H        -0.2906188841    2.1543016481   -4.2438657364 
+    128  H        -0.3248378460    0.5022055350   -3.5609310127 
+35 
+    129  H         0.8199678125    1.7168091366   -2.9192293300 
+    130  H        -3.7019977033    1.8525417974   -2.2509995110 
+ 
+Table S3. Optimized cartesian coordinates for (R)-1-h9. 
+ 
+ 
+40 
+
+
+<PDF_PAGE 39>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+39 
+ 
+(S)-1-h9 
+  Coordinates (Angstroms) 
+     ATOM                X               Y               Z 
+      1  C        17.4475492751   -1.7348908307    0.4157596817 
+      2  C        18.3988117941   -0.7584104561    0.6446031257 
+5 
+      3  C        18.0515751565    0.6175297370    0.7872092214 
+      4  C        16.6717480335    0.9529257366    0.6810054414 
+      5  C        15.7123688121   -0.0564053915    0.4446238925 
+      6  C        16.0871814926   -1.3764790487    0.3159447150 
+      7  C        18.9788188713    1.6668239536    1.0264080357 
+10 
+      8  C        18.5336977517    2.9670751178    1.1500370600 
+      9  C        17.1617779316    3.3006831816    1.0455022680 
+     10  C        16.2430600744    2.2993790511    0.8133484350 
+     11  C        14.3346873559    0.3301272277    0.3455613577 
+     12  C        13.3723245058   -0.6791075337    0.1128919782 
+15 
+     13  C        13.8101192750   -2.0253690700    0.0031291594 
+     14  O        15.1490722085   -2.3638475260    0.0915262602 
+     15  O        14.9034385863    2.6385697819    0.7165072235 
+     16  C        13.9660633291    1.6513072205    0.4870169573 
+     17  C        11.9893752169   -0.3446129856    0.0093429096 
+20 
+     18  C        11.0472652202   -1.4037220693   -0.2181172140 
+     19  C        11.5240049830   -2.7048787962   -0.3006010101 
+     20  C        12.8922482857   -3.0329406261   -0.1942869281 
+     21  C        12.6049329114    2.0052299597    0.4114034295 
+     22  C        11.6504307121    1.0312654018    0.1823731182 
+25 
+     23  C         9.5863189140   -1.1584891203   -0.3634120439 
+     24  C         9.0756958417   -0.2777075887   -1.3322511746 
+     25  C         7.7023752498   -0.1067355114   -1.4936929360 
+     26  C         6.8174365157   -0.8170310671   -0.6854696566 
+     27  C         7.3014025771   -1.6920909986    0.2844916947 
+30 
+     28  C         8.6743732683   -1.8584342995    0.4430025136 
+     29  N         5.3887179256   -0.6660113871   -0.8535014086 
+     30  C         4.7621586781   -1.4877111055   -1.8189458784 
+     31  C         3.2854262795   -1.3812765205   -1.9191900076 
+     32  C         2.5678028776   -0.4900275506   -1.0801917529 
+35 
+     33  C         3.2515254092    0.3278566438   -0.1530256495 
+     34  C         4.7296037003    0.2562216743   -0.0178694306 
+     35  O         5.4216974499   -2.2452732765   -2.5109689966 
+     36  O         5.3530645094    0.9412485843    0.7778335736 
+     37  C         1.1420384611   -0.4185973272   -1.1613057911 
+40 
+     38  C         0.4346007230    0.4675083554   -0.2985590738 
+     39  C         1.1468820722    1.2712749241    0.5947980634 
+     40  C         2.5549961935    1.1978191745    0.6648481162 
+     41  C         2.6132762276   -2.1766744476   -2.8279087264 
+     42  C         1.2074975816   -2.1073226260   -2.9201577615 
+45 
+     43  C         0.4879956644   -1.2558979757   -2.1084739331 
+     44  C        -1.0577420273    0.5323103181   -0.3188832827 
+     45  C        -1.7021744722    1.4455479032   -1.1558118252 
+
+
+<PDF_PAGE 40>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+40 
+ 
+     46  C        -3.1110920305    1.5141474661   -1.1944879114 
+     47  C        -3.8747327062    0.6798541851   -0.3992732154 
+     48  C        -3.2619190434   -0.2547623298    0.4678266233 
+     49  C        -1.8343579021   -0.3293464538    0.5103923371 
+     50  C        -4.0392107839   -1.1158772009    1.2890261010 
+5 
+     51  C        -3.4265053189   -2.0243837762    2.1315388757 
+     52  C        -2.0197108700   -2.1010120213    2.1798699893 
+     53  C        -1.2434490984   -1.2781852863    1.3916400881 
+     54  C        -5.3488575157    0.7838084590   -0.4860238454 
+     55  N        -6.0554585536   -0.1030774820    0.3554174820 
+10 
+     56  C        -5.5166387885   -1.0590521727    1.2520664176 
+     57  O        -6.2546813072   -1.7596046036    1.9178411796 
+     58  O        -5.9433709589    1.5576339823   -1.2131537428 
+     59  O        -0.8976794367    2.2348889404   -1.9166128412 
+     60  C        -1.4936369051    3.2053563147   -2.7701812683 
+15 
+     61  O         0.4042046792    2.0951401476    1.3827776473 
+     62  C         1.0685484472    2.9254224701    2.3287594685 
+     63  N        -7.4350343215   -0.0418599949    0.2880648814 
+     64  C        -8.0503772911   -0.8970684392   -0.6539480970 
+     65  C        -9.5323645822   -0.8271426577   -0.6917617471 
+20 
+     66  C       -10.2295820994    0.0530770764    0.1735829007 
+     67  C        -9.5469350892    0.8893599445    1.0925203258 
+     68  C        -8.0652148510    0.8584508126    1.1767103480 
+     69  C       -10.2294286060   -1.6319106921   -1.5782343926 
+     70  C       -11.6348491093   -1.5873563794   -1.6290957796 
+25 
+     71  C       -12.3403044195   -0.7372890410   -0.7931168807 
+     72  C       -11.6500757973    0.0967495386    0.1196816061 
+     73  C       -12.3550609353    0.9719459099    0.9812601774 
+     74  C       -11.6637604089    1.7810248578    1.8681869488 
+     75  C       -10.2583679551    1.7392339855    1.9237758091 
+30 
+     76  C       -13.8274720935   -0.7105048362   -0.8575569077 
+     77  N       -14.4826830471    0.1715738678    0.0239695510 
+     78  C       -13.8425366912    1.0245799125    0.9442652295 
+     79  O        -7.4137781582    1.5423911054    1.9403863999 
+     80  O        -7.3863304395   -1.6243780043   -1.3651353746 
+35 
+     81  O       -14.4863080466    1.7636507284    1.6701717773 
+     82  O       -14.4587532940   -1.4137301641   -1.6285887437 
+     83  H        13.2287803268   -4.0608672686   -0.2782598903 
+     84  H        10.8147273477   -3.5074012834   -0.4817839433 
+     85  H        10.6061877074    1.3215717718    0.1476655403 
+40 
+     86  H        12.3200154972    3.0441649731    0.5444095140 
+     87  H        17.7277436849   -2.7783561345    0.3112943256 
+     88  H        19.4450214390   -1.0427783655    0.7201657738 
+     89  H        20.0369729431    1.4350585457    1.1112450688 
+     90  H        19.2481993232    3.7646734310    1.3338029655 
+45 
+     91  H        16.8241839516    4.3267990303    1.1462052377 
+     92  H         9.7608276840    0.2566750838   -1.9837265800 
+     93  H         7.3153459614    0.5635634847   -2.2549578969 
+
+
+<PDF_PAGE 41>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+41 
+ 
+     94  H         6.6032415652   -2.2364365495    0.9131753330 
+     95  H         9.0510635008   -2.5316171771    1.2075068357 
+     96  H         3.1244851560    1.8043788300    1.3583326663 
+     97  H         3.1862713883   -2.8497640098   -3.4568973491 
+     98  H         0.6877197155   -2.7358659067   -3.6374597085 
+5 
+     99  H        -0.5935485540   -1.2175981218   -2.1857811257 
+    100  H        -1.5453319798   -2.8169111242    2.8444997194 
+    101  H        -4.0472344406   -2.6691643958    2.7446700507 
+    102  H        -3.6299111919    2.2107281860   -1.8415862918 
+    103  H        -9.6698752605   -2.2959764226   -2.2285579442 
+10 
+    104  H       -12.1876952227   -2.2159803368   -2.3190106865 
+    105  H       -12.2276333757    2.4423065219    2.5174649976 
+    106  H        -9.7100120229    2.3676272989    2.6176122581 
+    107  H        -0.6615671309    3.7180389509   -3.2550116658 
+    108  H        -2.0871745086    3.9308496949   -2.2005969918 
+15 
+    109  H        -2.1258632051    2.7360948454   -3.5341004328 
+    110  H         0.2776681038    3.4769638426    2.8391938646 
+    111  H         1.7472158141    3.6325006437    1.8361662373 
+    112  H         1.6297952489    2.3324710646    3.0614662987 
+    113  C       -15.9354808633    0.1958305600   -0.0122703144 
+20 
+    114  C       -16.5758042831    1.1033784824   -0.8669327383 
+    115  C       -15.7928075366    2.0518727685   -1.7422349671 
+    116  C       -17.9746602124    1.1066726916   -0.8850872666 
+    117  H       -18.4915017884    1.8025894620   -1.5411198600 
+    118  C       -18.7030410777    0.2356850308   -0.0782102109 
+25 
+    119  H       -19.7893125171    0.2512253056   -0.1042471108 
+    120  C       -18.0395108006   -0.6552508471    0.7620667992 
+    121  H       -18.6075101702   -1.3352368184    1.3917472836 
+    122  C       -16.6420756964   -0.6920872765    0.8108531924 
+    123  C       -15.9280367622   -1.6609388888    1.7224049060 
+30 
+    124  H       -15.1387130339    1.5127210430   -2.4381779245 
+    125  H       -15.1632655156    2.7231164956   -1.1456869805 
+    126  H       -16.4699504255    2.6725081560   -2.3358858926 
+    127  H       -15.2868386786   -1.1393352003    2.4429976006 
+    128  H       -15.2954478879   -2.3551657409    1.1561325625 
+35 
+    129  H       -16.6490947469   -2.2564324861    2.2895347957 
+    130  H        -0.1618514242   -1.3475515026    1.4361573513 
+ 
+Table S4. Optimized cartesian coordinates for (S)-1-h9. 
+ 
+40 
+ 
+ 
+ 
+ 
+ 
+45 
+ 
+ 
+ 
+
+
+<PDF_PAGE 42>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+42 
+ 
+2-h9  Coordinates (Angstroms) 
+     ATOM                X               Y               Z 
+      1  C        16.2389988065   -1.2085745481   -0.2077704691 
+      2  C        17.1878902191   -0.2059808573   -0.2793452660 
+      3  C        16.8299273794    1.1742023226   -0.3170548233 
+5 
+      4  C        15.4410854736    1.4855056127   -0.2778226179 
+      5  C        14.4840152293    0.4491779158   -0.2063419279 
+      6  C        14.8694027171   -0.8737099890   -0.1706059345 
+      7  C        17.7547747970    2.2498694870   -0.3903938501 
+      8  C        17.2985198747    3.5518039724   -0.4212719286 
+10 
+      9  C        15.9175781122    3.8614500529   -0.3816585818 
+     10  C        15.0010803418    2.8342174542   -0.3105513955 
+     11  C        13.0970326691    0.8124965246   -0.1726387368 
+     12  C        12.1384555570   -0.2234624144   -0.1015353339 
+     13  C        12.5875519895   -1.5696994087   -0.0576249332 
+15 
+     14  O        13.9335760099   -1.8865876429   -0.0994500212 
+     15  O        13.6524933722    3.1509131251   -0.2718134021 
+     16  C        12.7171148087    2.1380387642   -0.2036224147 
+     17  C        10.7480550103    0.0871085227   -0.0637994574 
+     18  C         9.8083244508   -0.9918796366    0.0109132387 
+20 
+     19  C        10.2952627338   -2.2888995449    0.0684673186 
+     20  C        11.6738815602   -2.5962097871    0.0326865914 
+     21  C        11.3488373573    2.4716038626   -0.1555441801 
+     22  C        10.3974970273    1.4700278653   -0.0848704088 
+     23  C         8.3317252197   -0.7595181719    0.0504412720 
+25 
+     24  C         7.6012106376   -0.3776154336   -1.0944429734 
+     25  C         6.2142493683   -0.2425632951   -0.9742137100 
+     26  C         5.5296733140   -0.4788391285    0.2250569668 
+     27  C         6.2584542969   -0.8476047203    1.3740350935 
+     28  C         7.6454380811   -0.9796441927    1.2522427729 
+30 
+     29  C         4.0436434343   -0.3120409793    0.2473807510 
+     30  N        -6.6617074487   -0.0871117428    0.0317899129 
+     31  C        -7.1989954716    1.1549239433    0.4329140564 
+     32  C        -8.6824337269    1.2765791978    0.4028423851 
+     33  C        -9.4792319116    0.1863298400   -0.0227609054 
+35 
+     34  C        -8.8909751873   -1.0360746132   -0.4270176042 
+     35  C        -7.4118089135   -1.1949965597   -0.4147551044 
+     36  C        -9.2815200505    2.4639669370    0.7924199155 
+     37  C       -10.6826414153    2.5973324631    0.7704126737 
+     38  C       -11.4830388262    1.5438361414    0.3577295753 
+40 
+     39  C       -10.8943243035    0.3209156682   -0.0450258287 
+     40  C       -11.6904827031   -0.7703307791   -0.4691171980 
+     41  C       -11.0915596918   -1.9579032258   -0.8584565509 
+     42  C        -9.6905937706   -2.0903281668   -0.8389550103 
+     43  C       -12.9625439039    1.7029380639    0.3417135964 
+45 
+     44  N       -13.7111299304    0.5942052784   -0.1030819200 
+     45  C       -13.1733751428   -0.6498257526   -0.4960251677 
+     46  O        -6.8637861581   -2.2227158779   -0.7751323587 
+
+
+<PDF_PAGE 43>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+43 
+ 
+     47  O        -6.4756912410    2.0703474716    0.7842692923 
+     48  O       -13.8970289769   -1.5688623336   -0.8389560481 
+     49  C       -15.1546589828    0.7392745158   -0.1546807916 
+     50  O       -13.5120837213    2.7327688242    0.6951322293 
+     51  C         3.4947464923    0.9611792279    0.2088086728 
+5 
+     52  C         2.1019230158    1.1671133462    0.2190926194 
+     53  C         1.2359920549    0.0904167814    0.2636186679 
+     54  C         1.7530819681   -1.2292276265    0.2908756845 
+     55  C         3.1668059714   -1.4460190393    0.2771093727 
+     56  C         0.8712316853   -2.3401449643    0.3248409869 
+10 
+     57  C         1.3699699198   -3.6304160318    0.3363252085 
+     58  C         2.7607386249   -3.8514261209    0.3063589431 
+     59  C         3.6384023920   -2.7862875641    0.2747457507 
+     60  C        -0.2275802471    0.3369229905    0.2716789316 
+     61  N        -1.0566731497   -0.8064092500    0.2993107798 
+15 
+     62  C        -0.5994632762   -2.1396610863    0.3439366068 
+     63  O        -1.3907526830   -3.0683567764    0.3976357743 
+     64  O        -0.7106143978    1.4572431884    0.2538963635 
+     65  C        -2.4898471990   -0.5990471072    0.2617886624 
+     66  C        -3.2513804196   -0.7151961922    1.4315379359 
+20 
+     67  C        -4.6305922052   -0.5316386760    1.3077274606 
+     68  C        -5.2197029881   -0.2407047259    0.0810921212 
+     69  C        -4.4574502508   -0.1041530699   -1.0853433086 
+     70  C        -3.0795013495   -0.2952408689   -0.9620516290 
+     71  C       -15.9194129176    0.5629222038    1.0044927766 
+25 
+     72  C       -17.3051238910    0.7184582179    0.8756971520 
+     73  C       -17.8968008267    1.0286485001   -0.3460874637 
+     74  C       -17.1231004237    1.1976762310   -1.5010089538 
+     75  C       -15.7394902015    1.0490573728   -1.3807963998 
+     76  C         5.5898402420   -1.0765189868    2.7111253811 
+30 
+     77  C         8.2689661013   -0.1523716750   -2.4318897687 
+     78  C       -15.2913606761    0.2318866574    2.3353903073 
+     79  C       -17.7635765474    1.5187317461   -2.8311611111 
+     80  C        -5.0808412467    0.2132739417   -2.4212502578 
+     81  C        -2.6294808604   -1.0459030744    2.7643896152 
+35 
+     82  H        16.5283274190   -2.2543837020   -0.1794858149 
+     83  H        18.2411927950   -0.4720913366   -0.3079015850 
+     84  H        18.8198435370    2.0373044837   -0.4218104211 
+     85  H        18.0112582311    4.3699210677   -0.4771319913 
+     86  H        15.5718029689    4.8895139374   -0.4063840345 
+40 
+     87  H        12.0188211331   -3.6240983751    0.0710325439 
+     88  H         9.5852615723   -3.1089357649    0.1317488983 
+     89  H         9.3475263123    1.7404292283   -0.0328548659 
+     90  H        11.0587329631    3.5175765206   -0.1685301742 
+     91  H         8.2228109938   -1.2577071673    2.1308429273 
+45 
+     92  H         5.6374337608    0.0341247450   -1.8537879620 
+     93  H         4.1597060550    1.8194832807    0.1795617311 
+     94  H         1.6856988906    2.1689789140    0.1948086659 
+
+
+<PDF_PAGE 44>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+44 
+ 
+     95  H         3.1420873980   -4.8683904838    0.3037284137 
+     96  H         0.6681482981   -4.4574409110    0.3619468023 
+     97  H        -2.4475344558   -0.2074632570   -1.8408175044 
+     98  H        -5.2627547834   -0.6206601743    2.1864888851 
+     99  H        -9.2133519982   -3.0156829381   -1.1435479711 
+5 
+    100  H       -11.7247431077   -2.7788973905   -1.1776567537 
+    101  H        -8.6483949250    3.2843249520    1.1134612214 
+    102  H       -11.1590379521    3.5233938711    1.0741983013 
+    103  H       -15.1008663835    1.1732882006   -2.2512005937 
+    104  H       -18.9775269834    1.1395286334   -0.4033115290 
+10 
+    105  H       -17.9302390061    0.5919175915    1.7563413867 
+    106  H         4.7088835600   -2.9620638588    0.2414674872 
+    107  H         4.9571173014   -0.2278118206    2.9955067481 
+    108  H         6.3367414518   -1.2182586100    3.4979741818 
+    109  H         4.9445162717   -1.9634368845    2.7024520535 
+15 
+    110  H         8.8909949801   -1.0087279264   -2.7162848522 
+    111  H         8.9269716201    0.7248979684   -2.4193180398 
+    112  H         7.5234146608    0.0018706665   -3.2179373251 
+    113  H        -5.7028355985    1.1146625473   -2.3728422750 
+    114  H        -5.7136727762   -0.6124845956   -2.7675856034 
+20 
+    115  H        -4.3083483820    0.3824725330   -3.1768905609 
+    116  H        -2.2492885833   -2.0740594439    2.7707459835 
+    117  H        -3.3636218934   -0.9506510898    3.5697020181 
+    118  H        -1.7903299813   -0.3791517595    2.9937817489 
+    119  H       -14.6693244671   -0.6692519090    2.2773927887 
+25 
+    120  H       -16.0620546533    0.0555260727    3.0915518177 
+    121  H       -14.6568904844    1.0529112394    2.6901940205 
+    122  H       -17.0101458972    1.7247154823   -3.5977846523 
+    123  H       -18.4179315116    2.3957306539   -2.7593981379 
+    124  H       -18.3799122012    0.6840476547   -3.1886897819 
+30 
+ 
+Table S5. Optimized cartesian coordinates for 2-h9. 
+ 
+ 
+ 
+
+
+<PDF_PAGE 45>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+45 
+ 
+𝜽𝜽 
+𝑰𝑰𝑪𝑪𝑪𝑪𝑪𝑪𝑪𝑪 
+𝑰𝑰𝑺𝑺 
+𝑰𝑰𝟏𝟏𝟏𝟏 
+0 
+1
+4 cos2 𝜙𝜙 
+1
+2 sin2 𝜙𝜙cos2 𝜙𝜙 
+1
+4 cos2 𝜙𝜙(1 −cos 2𝜙𝜙cos2𝜒𝜒) 
+90 
+−1
+8 cos 2𝜙𝜙cos2 𝜙𝜙 
+1
+2 sin2 𝜙𝜙cos2 𝜙𝜙 
+1
+4 cos2 𝜙𝜙(cos 2𝜒𝜒−cos 2𝜙𝜙cos2 𝜒𝜒) 
+ 
+Table S6. Summary of the different intensities for transition 1↔3 assuming 100% CISS, 
+pure singlet and partial CISS efficiency (see Eqs. S16, S15, S13).  
+ 
+ 
+
+
+<PDF_PAGE 46>
+Submitted Manuscript: Confidential 
+Template revised November 2022 
+46 
+ 
+𝑔𝑔𝑁𝑁𝑁𝑁𝑁𝑁 
+(2.0034,  2.0041,  2.0044) 
+𝑔𝑔𝑃𝑃𝑃𝑃𝑃𝑃 
+(2.0031,  2.0044,  2.0046) 
+𝑟𝑟𝐷𝐷𝐷𝐷 
+2.5 nm 
+𝜎𝜎𝐷𝐷 
+0.35 nm 
+𝑎𝑎𝑁𝑁𝑁𝑁𝑁𝑁 
+6.3 MHz 
+𝑎𝑎𝑃𝑃𝑃𝑃𝑃𝑃 
+10 MHz 
+Δ𝐵𝐵0 
+0.4 mT 
+ 
+Table S7. Summary of the parameters used for the simulations of Fig. 4, where 𝜎𝜎𝐷𝐷 is the width 
+of the gaussian distribution of DA distances (used to compute 𝐷𝐷(𝜃𝜃), Eq. S2) and Δ𝐵𝐵0 is the 
+additional gaussian broadening used to convolute the spectra and accounting for inhomogeneous 
+broadening of the remaining parameters. Parameters are given in the laboratory frame, with the 
+5 
+magnetic field along z.     
+ 
+ 
+ 
+ 
+
+
+<PDF_PAGE 47>
+References and Notes 
+1. M. Atzori, R. Sessoli, The second quantum revolution: Role and challenges of molecular 
+chemistry. J. Am. Chem. Soc. 141, 11339–11352 (2019). doi:10.1021/jacs.9b00984 
+Medline 
+2. M. R. Wasielewski, M. D. E. Forbes, N. L. Frank, K. Kowalski, G. D. Scholes, J. Yuen-Zhou, 
+M. A. Baldo, D. E. Freedman, R. H. Goldsmith, T. Goodson 3rd, M. L. Kirk, J. K. 
+McCusker, J. P. Ogilvie, D. A. Shultz, S. Stoll, K. B. Whaley, Exploiting chemistry and 
+molecular systems for quantum information science. Nat. Rev. Chem. 4, 490–504 (2020). 
+doi:10.1038/s41570-020-0200-5 Medline 
+3. K. Ray, S. P. Ananthavel, D. H. Waldeck, R. Naaman, Asymmetric scattering of polarized 
+electrons by organized organic films of chiral molecules. Science 283, 814–816 (1999). 
+doi:10.1126/science.283.5403.814 Medline 
+4. R. Naaman, Y. Paltiel, D. H. Waldeck, Chiral molecules and the electron spin. Nat. Rev. 
+Chem. 3, 250–260 (2019). doi:10.1038/s41570-019-0087-1 
+5. C. D. Aiello, J. M. Abendroth, M. Abbas, A. Afanasev, S. Agarwal, A. S. Banerjee, D. N. 
+Beratan, J. N. Belling, B. Berche, A. Botana, J. R. Caram, G. L. Celardo, G. Cuniberti, A. 
+Garcia-Etxarri, A. Dianat, I. Diez-Perez, Y. Guo, R. Gutierrez, C. Herrmann, J. Hihath, S. 
+Kale, P. Kurian, Y.-C. Lai, T. Liu, A. Lopez, E. Medina, V. Mujica, R. Naaman, M. 
+Noormandipour, J. L. Palma, Y. Paltiel, W. Petuskey, J. C. Ribeiro-Silva, J. J. Saenz, E. 
+J. G. Santos, M. Solyanik-Gorgone, V. J. Sorger, D. M. Stemer, J. M. Ugalde, A. Valdes-
+Curiel, S. Varela, D. H. Waldeck, M. R. Wasielewski, P. S. Weiss, H. Zacharias, Q. H. 
+Wang, A chirality-based quantum leap. ACS Nano 16, 4989–5035 (2022). 
+doi:10.1021/acsnano.1c01347 Medline 
+6. A. Chiesa, A. Privitera, E. Macaluso, M. Mannini, R. Bittl, R. Naaman, M. R. Wasielewski, R. 
+Sessoli, S. Carretta, Chirality-induced spin selectivity: An enabling technology for 
+quantum applications. Adv. Mater. 35, e2300472 (2023). doi:10.1002/adma.202300472 
+Medline 
+7. S. H. Yang, R. Naaman, Y. Paltiel, S. S. P. Parkin, Chiral spintronics. Nat. Rev. Phys. 3, 328–
+343 (2021). doi:10.1038/s42254-021-00302-9 
+8. R. Naaman, Y. Paltiel, D. H. Waldeck, Chiral induced spin selectivity gives a new twist on 
+spin-control in chemistry. Acc. Chem. Res. 53, 2659–2667 (2020). 
+doi:10.1021/acs.accounts.0c00485 Medline 
+9. I. Carmeli, K. Senthil Kumar, O. Heifler, C. Carmeli, R. Naaman, Spin selectivity in electron 
+transfer in photosystem I. Angew. Chem. Int. Ed. 53, 8953–8958 (2014). 
+doi:10.1002/anie.201404382 Medline 
+10. J. Fransson, Charge and spin dynamics and enantioselectivity in chiral molecules. J. Phys. 
+Chem. Lett. 13, 808–814 (2022). doi:10.1021/acs.jpclett.1c03925 Medline 
+11. J. Fransson, Charge redistribution and spin polarization driven by correlation induced 
+electron exchange in chiral molecules. Nano Lett. 21, 3026–3032 (2021). 
+doi:10.1021/acs.nanolett.1c00183 Medline 
+12. J. Fransson, Vibrational origin of exchange splitting and “chiral-induced spin selectivity”. 
+Phys. Rev. B 102, 235416 (2020). doi:10.1103/PhysRevB.102.235416 
+
+
+<PDF_PAGE 48>
+13. J. Fransson, Chirality-induced spin selectivity: The role of electron correlations. J. Phys. 
+Chem. Lett. 10, 7126–7132 (2019). doi:10.1021/acs.jpclett.9b02929 Medline 
+14. S. Naskar, V. Mujica, C. Herrmann, Chiral-induced spin selectivity and non-equilibrium spin 
+accumulation in molecules and interfaces: A first-principles study. J. Phys. Chem. Lett. 
+14, 694–701 (2023). doi:10.1021/acs.jpclett.2c03747 Medline 
+15. A. Dianat, R. Gutierrez, H. Alpern, V. Mujica, A. Ziv, S. Yochelis, O. Millo, Y. Paltiel, G. 
+Cuniberti, Role of exchange interactions in the magnetic response and intermolecular 
+recognition of chiral molecules. Nano Lett. 20, 7077–7086 (2020). 
+doi:10.1021/acs.nanolett.0c02216 Medline 
+16. C.-Z. Wang, V. Mujica, Y.-C. Lai, Spin Fano resonances in chiral molecules: An alternative 
+mechanism for the ciss effect and experimental implications. Nano Lett. 21, 10423–
+10430 (2021). doi:10.1021/acs.nanolett.1c03770 Medline 
+17. M. S. Zöllner, S. Varela, E. Medina, V. Mujica, C. Herrmann, Insight into the origin of 
+chiral-induced spin selectivity from a symmetry analysis of electronic transmission. J. 
+Chem. Theory Comput. 16, 2914–2929 (2020). doi:10.1021/acs.jctc.9b01078 Medline 
+18. R. Bittl, G. Kothe, Transient EPR of radical pairs in photosynthetic reaction centers: 
+Prediction of quantum beats. Chem. Phys. Lett. 177, 547–553 (1991). doi:10.1016/0009-
+2614(91)90082-K 
+19. G. Kothe, S. Weber, R. Bittl, E. Ohmes, M. C. Thurnauer, J. R. Norris, Transient EPR of 
+light-induced radical pairs in plant photosystem I: Observation of quantum beats. Chem. 
+Phys. Lett. 186, 474–480 (1991). doi:10.1016/0009-2614(91)90454-H 
+20. R. Bittl, A. van der Est, A. Kamlowski, W. Lubitz, D. Stehlik, Time-resolved EPR of the 
+radical pair P865+·Qa-· in bacterial reaction centers. Observation of transient nutations, 
+quantum beats and envelope modulation effects. Chem. Phys. Lett. 226, 349–358 (1994). 
+doi:10.1016/0009-2614(94)00690-3 
+21. S. A. Dzuba, P. Gast, A. J. Hoff, ESEEM study of spin-spin interactions in spin-polarized 
+P+Qa- pairs in the photosynthetic purple bacterium Rhodobacter sphaeroides R26. Chem. 
+Phys. Lett. 236, 595–602 (1995). doi:10.1016/0009-2614(95)00259-7 
+22. M. R. Wasielewski, G. L. Gaines III, G. P. Wiederrecht, W. A. Svec, M. P. Niemczyk, 
+Biomimetic modeling of photosynthetic reaction center function: Long-lived, spin-
+polarized radical ion pair formation in chlorophyll-porphyrin-quinone triads. J. Am. 
+Chem. Soc. 115, 10442–10443 (1993). doi:10.1021/ja00075a103 
+23. K. Hasharoni, H. Levanon, S. R. Greenfield, D. J. Gosztola, W. A. Svec, M. R. Wasielewski, 
+Mimicry of the radical pair and triplet states in photosynthetic reaction centers with a 
+synthetic model. J. Am. Chem. Soc. 117, 8055–8056 (1995). doi:10.1021/ja00135a040 
+24. D. Carbonera, M. Di Valentin, C. Corvaja, G. Agostini, G. Giacometti, P. A. Liddell, D. 
+Kuciauskas, A. L. Moore, T. A. Moore, D. Gust, EPR investigation of photoinduced 
+radical pair formation and decay to a triplet state in a carotene−porphyrin−fullerene triad. 
+J. Am. Chem. Soc. 120, 4398–4405 (1998). doi:10.1021/ja9712074 
+25. S. M. Harvey, M. R. Wasielewski, Photogenerated spin-correlated radical pairs: From 
+photosynthetic energy transduction to quantum information science. J. Am. Chem. Soc. 
+143, 15508–15529 (2021). doi:10.1021/jacs.1c07706 Medline 
+
+
+<PDF_PAGE 49>
+26. R. Carmieli, T. A. Zeidan, R. F. Kelley, Q. Mi, F. D. Lewis, M. R. Wasielewski, Excited 
+state, charge transfer, and spin dynamics in DNA hairpin conjugates with 
+perylenediimide hairpin linkers. J. Phys. Chem. A 113, 4691–4700 (2009). 
+doi:10.1021/jp900230q Medline 
+27. R. Carmieli, A. L. Smeigh, S. M. Mickley Conron, A. K. Thazhathveetil, M. Fuki, Y. Kobori, 
+F. D. Lewis, M. R. Wasielewski, Structure and dynamics of photogenerated triplet radical 
+ion pairs in DNA hairpin conjugates with anthraquinone end caps. J. Am. Chem. Soc. 
+134, 11251–11260 (2012). doi:10.1021/ja303721j Medline 
+28. J. H. Olshansky, M. D. Krzyaniak, R. M. Young, M. R. Wasielewski, Photogenerated spin-
+entangled qubit (radical) pairs in DNA hairpins: Observation of spin delocalization and 
+coherence. J. Am. Chem. Soc. 141, 2152–2160 (2019). doi:10.1021/jacs.8b13155 Medline 
+29. J. H. Olshansky, J. Zhang, M. D. Krzyaniak, E. R. Lorenzo, M. R. Wasielewski, Selectively 
+addressable photogenerated spin qubit pairs in DNA hairpins. J. Am. Chem. Soc. 142, 
+3346–3350 (2020). doi:10.1021/jacs.9b13398 Medline 
+30. E. R. Lorenzo, J. H. Olshansky, D. S. D. Abia, M. D. Krzyaniak, R. M. Young, M. R. 
+Wasielewski, Interaction of photogenerated spin qubit pairs with a third electron spin in 
+DNA hairpins. J. Am. Chem. Soc. 143, 4625–4632 (2021). doi:10.1021/jacs.0c12645 
+Medline 
+31. J. A. Christensen, J. Zhang, J. Zhou, J. N. Nelson, M. R. Wasielewski, Near-infrared 
+excitation of the peri-xanthenoxanthene radical cation drives energy-demanding hole 
+transfer reactions. J. Phys. Chem. C 122, 23364–23370 (2018). 
+doi:10.1021/acs.jpcc.8b07819 
+32. M.-T. Chen, Y. Zhang, M. O. Vysotsky, J. O. Lindner, M.-H. Li, M.-J. Lin, F. Würthner, 
+1,1′-bi(2-naphthol-4,5-dicarboximide)s: Blue emissive axially chiral scaffolds with 
+aggregation-enhanced emission properties. Org. Chem. Front. 6, 3731–3740 (2019). 
+doi:10.1039/C9QO01090D 
+33. M. C. Thurnauer, J. R. Norris, An electron spin echo phase shift observed in photosynthetic 
+algae: Possible evidence for dynamic radical pair interactions. Chem. Phys. Lett. 76, 557–
+561 (1980). doi:10.1016/0009-2614(80)80667-1 
+34. K. M. Salikhov, Y. E. Kandrashkin, A. K. Salikhov, Peculiarities of free induction and 
+primary spin echo signals for spin-correlated radical pairs. Appl. Magn. Reson. 3, 199–
+216 (1992). doi:10.1007/BF03166790 
+35. J. Tan, M. C. Thurnauer, J. R. Norris, Electron spin echo envelope modulation due to 
+exchange and dipolar interactions in a spin-correlated radical pair. Chem. Phys. Lett. 219, 
+283–290 (1994). doi:10.1016/0009-2614(94)87059-4 
+36. R. Bittl, S. G. Zech, Pulsed EPR study of spin-coupled radical pairs in photosynthetic 
+reaction centers: Measurement of the distance between P700·+ and A1·- in photosystem I 
+and between P865·+ and Qa·- in bacterial reaction centers. J. Phys. Chem. B 101, 1429–
+1436 (1997). doi:10.1021/jp962256q 
+37. S. Santabarbara, I. Kuprov, P. J. Hore, A. Casal, P. Heathcote, M. C. W. Evans, Analysis of 
+the spin-polarized electron spin echo of the [P700+ A1-] radical pair of photosystem I 
+indicates that both reaction center subunits are competent in electron transfer in 
+
+
+<PDF_PAGE 50>
+cyanobacteria, green algae, and higher plants. Biochemistry 45, 7389–7403 (2006). 
+doi:10.1021/bi060330h Medline 
+38. R. Carmieli, Q. Mi, A. B. Ricks, E. M. Giacobbe, S. M. Mickley, M. R. Wasielewski, Direct 
+measurement of photoinduced charge separation distances in donor-acceptor systems for 
+artificial photosynthesis using OOP-ESEEM. J. Am. Chem. Soc. 131, 8372–8373 (2009). 
+doi:10.1021/ja902864h Medline 
+39. C. D. Buckley, D. A. Hunter, P. J. Hore, K. A. McLauchlan, Electron spin resonance of spin-
+correlated radical pairs. Chem. Phys. Lett. 135, 307–312 (1987). doi:10.1016/0009-
+2614(87)85162-X 
+40. G. L. Closs, M. D. E. Forbes, J. R. Norris, Spin-polarized electron-paramagnetic resonance-
+spectra of radical pairs in micelles - observation of electron spin-spin interactions. J. 
+Phys. Chem. 91, 3592–3599 (1987). doi:10.1021/j100297a026 
+41. A. J. Hoff, P. Gast, S. A. Dzuba, C. R. Timmel, C. E. Fursman, P. J. Hore, The nuts and bolts 
+of distance determination and zero- and double-quantum coherence in photoinduced 
+radical pairs. Spectrochim. Acta A Mol. Biomol. Spectrosc. 54, 2283–2293 (1998). 
+doi:10.1016/S1386-1425(98)00211-X 
+42. H. Mao, G. J. Pažėra, R. M. Young, M. D. Krzyaniak, M. R. Wasielewski, Quantum gate 
+operations on a spectrally addressable photogenerated molecular electron spin-qubit pair. 
+J. Am. Chem. Soc. 145, 6585–6593 (2023). doi:10.1021/jacs.3c01243 Medline 
+43. Y. Wu, M. D. Krzyaniak, J. F. Stoddart, M. R. Wasielewski, Spin frustration in the triradical 
+trianion of a naphthalenediimide molecular triangle. J. Am. Chem. Soc. 139, 2948–2951 
+(2017). doi:10.1021/jacs.7b00515 Medline 
+44. T. P. Fay, D. T. Limmer, Origin of chirality induced spin selectivity in photoinduced electron 
+transfer. Nano Lett. 21, 6696–6702 (2021). doi:10.1021/acs.nanolett.1c02370 Medline 
+45. T. P. Fay, Chirality-induced spin coherence in electron transfer reactions. J. Phys. Chem. 
+Lett. 12, 1407–1412 (2021). doi:10.1021/acs.jpclett.1c00009 Medline 
+46. J. Luo, P. J. Hore, Chiral-induced spin selectivity in the formation and recombination of 
+radical pairs: Cryptochrome magnetoreception and EPR detection. New J. Phys. 23, 
+043032 (2021). doi:10.1088/1367-2630/abed0b 
+47. A. Chiesa, M. Chizzini, E. Garlatti, E. Salvadori, F. Tacchino, P. Santini, I. Tavernelli, R. 
+Bittl, M. Chiesa, R. Sessoli, S. Carretta, Assessing the nature of chiral-induced spin 
+selectivity by magnetic resonance. J. Phys. Chem. Lett. 12, 6341–6347 (2021). 
+doi:10.1021/acs.jpclett.1c01447 Medline 
+48. D. Amsallem, A. Kumar, R. Naaman, O. Gidron, Spin polarization through axially chiral 
+linkers: Length dependence and correlation with the dissymmetry factor. Chirality 35, 
+562–568 (2023). doi:10.1002/chir.23556 Medline 
+49. H. J. Eckvahl et al., Direct observation of chirality-induced spin selectivity in electron donor-
+acceptor molecules, Dryad (2023); https://doi.org/10.5061/dryad.fbg79cp1r. 
+50. A. Sciutto, A. Fermi, A. Folli, T. Battisti, J. M. Beames, D. M. Murphy, D. Bonifazi, 
+Customizing photoredox properties of PXX-based dyes through energy level rigid shifts 
+of frontier molecular orbitals. Chemistry 24, 4382–4389 (2018). 
+doi:10.1002/chem.201705620 Medline 
+
+
+<PDF_PAGE 51>
+51. J. L. Sessler, C. T. Brown, D. O’Connor, S. L. Springs, R. Wang, M. Sathiosatham, T. 
+Hirose, A rigid chlorin−naphthalene diimide conjugate. A possible new noncovalent 
+electron transfer model system. J. Org. Chem. 63, 7370–7374 (1998). 
+doi:10.1021/jo9810112 Medline 
+52. R. M. Young, S. M. Dyar, J. C. Barnes, M. Juríček, J. F. Stoddart, D. T. Co, M. R. 
+Wasielewski, Ultrafast conformational dynamics of electron transfer in 
+ExBox4+⊂perylene. J. Phys. Chem. A 117, 12438–12448 (2013). doi:10.1021/jp409883a 
+Medline 
+53. D. Gosztola, M. P. Niemczyk, W. Svec, A. S. Lukas, M. R. Wasielewski, Excited doublet 
+states of electrochemically generated aromatic imide and diimide radical anions. J. Phys. 
+Chem. A 104, 6545–6551 (2000). doi:10.1021/jp000706f 
+54. S. Stoll, A. Schweiger, EasySpin, a comprehensive software package for spectral simulation 
+and analysis in EPR. J. Magn. Reson. 178, 42–55 (2006). doi:10.1016/j.jmr.2005.08.013 
+Medline 
+55. C. E. Tait, M. D. Krzyaniak, S. Stoll, Computational tools for the simulation and analysis of 
+spin-polarized EPR spectra. J. Magn. Reson. 349, 107410 (2023). 
+doi:10.1016/j.jmr.2023.107410 Medline 
+56. Y. Shao, Z. Gan, E. Epifanovsky, A. T. B. Gilbert, M. Wormit, J. Kussmann, A. W. Lange, 
+A. Behn, J. Deng, X. Feng, D. Ghosh, M. Goldey, P. R. Horn, L. D. Jacobson, I. 
+Kaliman, R. Z. Khaliullin, T. Kuś, A. Landau, J. Liu, E. I. Proynov, Y. M. Rhee, R. M. 
+Richard, M. A. Rohrdanz, R. P. Steele, E. J. Sundstrom, H. L. Woodcock III, P. M. 
+Zimmerman, D. Zuev, B. Albrecht, E. Alguire, B. Austin, G. J. O. Beran, Y. A. Bernard, 
+E. Berquist, K. Brandhorst, K. B. Bravaya, S. T. Brown, D. Casanova, C.-M. Chang, Y. 
+Chen, S. H. Chien, K. D. Closser, D. L. Crittenden, M. Diedenhofen, R. A. DiStasio Jr., 
+H. Do, A. D. Dutoi, R. G. Edgar, S. Fatehi, L. Fusti-Molnar, A. Ghysels, A. Golubeva-
+Zadorozhnaya, J. Gomes, M. W. D. Hanson-Heine, P. H. P. Harbach, A. W. Hauser, E. 
+G. Hohenstein, Z. C. Holden, T.-C. Jagau, H. Ji, B. Kaduk, K. Khistyaev, J. Kim, J. Kim, 
+R. A. King, P. Klunzinger, D. Kosenkov, T. Kowalczyk, C. M. Krauter, K. U. Lao, A. D. 
+Laurent, K. V. Lawler, S. V. Levchenko, C. Y. Lin, F. Liu, E. Livshits, R. C. Lochan, A. 
+Luenser, P. Manohar, S. F. Manzer, S.-P. Mao, N. Mardirossian, A. V. Marenich, S. A. 
+Maurer, N. J. Mayhall, E. Neuscamman, C. M. Oana, R. Olivares-Amaya, D. P. O’Neill, 
+J. A. Parkhill, T. M. Perrine, R. Peverati, A. Prociuk, D. R. Rehn, E. Rosta, N. J. Russ, S. 
+M. Sharada, S. Sharma, D. W. Small, A. Sodt, T. Stein, D. Stück, Y.-C. Su, A. J. W. 
+Thom, T. Tsuchimochi, V. Vanovschi, L. Vogt, O. Vydrov, T. Wang, M. A. Watson, J. 
+Wenzel, A. White, C. F. Williams, J. Yang, S. Yeganeh, S. R. Yost, Z.-Q. You, I. Y. 
+Zhang, X. Zhang, Y. Zhao, B. R. Brooks, G. K. L. Chan, D. M. Chipman, C. J. Cramer, 
+W. A. Goddard III, M. S. Gordon, W. J. Hehre, A. Klamt, H. F. Schaefer III, M. W. 
+Schmidt, C. D. Sherrill, D. G. Truhlar, A. Warshel, X. Xu, A. Aspuru-Guzik, R. Baer, A. 
+T. Bell, N. A. Besley, J.-D. Chai, A. Dreuw, B. D. Dunietz, T. R. Furlani, S. R. 
+Gwaltney, C.-P. Hsu, Y. Jung, J. Kong, D. S. Lambrecht, W. Z. Liang, C. Ochsenfeld, V. 
+A. Rassolov, L. V. Slipchenko, J. E. Subotnik, T. Van Voorhis, J. M. Herbert, A. I. 
+Krylov, P. M. W. Gill, M. Head-Gordon, Advances in molecular quantum chemistry 
+contained in the Q-Chem 4 program package. Mol. Phys. 113, 184–215 (2015). 
+doi:10.1080/00268976.2014.952696 
+
+
+<PDF_PAGE 52>
+57. P. J. Hore, in Advanced EPR in biology and biochemistry, A. J. Hoff, Ed. (Elsevier, 1989), 
+pp. 405–440. 
+58. A. Weller, Photoinduced electron transfer in solution: Exciplex and radical ion pair formation 
+free enthalpies and their solvent dependence. Z. Phys. Chem. (Leipz.) 133, 93–98 (1982). 
+doi:10.1524/zpch.1982.133.1.093 
+59. H. Mao, R. M. Young, M. D. Krzyaniak, M. R. Wasielewski, Controlling the dynamics of 
+three electron spin qubits in a donor-acceptor-radical molecule using dielectric 
+environment changes. J. Phys. Chem. Lett. 12, 2213–2218 (2021). 
+doi:10.1021/acs.jpclett.1c00077 Medline 
+60. G. L. Closs, J. R. Miller, Intramolecular long-distance electron transfer in organic molecules. 
+Science 240, 440–447 (1988). doi:10.1126/science.240.4851.440 Medline 

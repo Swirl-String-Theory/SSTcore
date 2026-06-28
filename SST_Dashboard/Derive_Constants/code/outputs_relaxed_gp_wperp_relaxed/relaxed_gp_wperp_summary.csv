@@ -1,0 +1,2 @@
+profile_mode_used,profile_success,scipy_available,grid_n,R_box,R_mask,eps,relax_enabled,H_scalar,H_perp,w_perp_relaxed_proxy,sigma,c2_at_chiR2,target_11_over_48,matches_w_perp_1_within_tol,status
+pade,True,True,90,8.0,7.0,0.0152703116982,True,2.7574458096882575e-07,13.94286356688732,50564415.51053955,33709613.340359695,2106850.833772481,0.22916666666666666,False,OPEN_GATE_PROXY_NOT_EQUAL_1

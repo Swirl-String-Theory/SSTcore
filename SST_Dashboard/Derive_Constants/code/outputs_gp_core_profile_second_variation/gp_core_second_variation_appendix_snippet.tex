@@ -1,0 +1,63 @@
+\section{GP core-profile second-variation gate}
+\label{app:gp-core-profile-second-variation}
+
+The radial GP/NLS vortex profile \(f(\rho)\) satisfies
+\[
+  f''+\frac{1}{\rho}f'
+  -
+  \frac{n^2}{\rho^2}f
+  +
+  f(1-f^2)=0,
+  \qquad
+  f(0)=0,\quad f(\infty)=1.
+\]
+The spherical shell Jacobian gives
+\[
+  (1-\eta)^3=1-3\eta+3\eta^2+O(\eta^3),
+\]
+so
+\[
+  \sigma_{\rm vol}=3.
+\]
+The isotropic transverse GP/NLS gradient projection gives
+\[
+  \left\langle \sin^2\theta\right\rangle_{S^2}
+  =
+  \frac{\int_0^\pi \sin^2\theta\,\sin\theta\,d\theta}
+       {\int_0^\pi \sin\theta\,d\theta}
+  =
+  \frac{2}{3}.
+\]
+For any radial core weight \(W(\rho)\) independent of the shell angle, the
+radial factor cancels in the normalized angular average:
+\[
+  \frac{\int W(\rho)\rho\,d\rho\int_{S^2}\sin^2\theta\,d\Omega}
+       {\int W(\rho)\rho\,d\rho\int_{S^2}d\Omega}
+  =
+  \frac23.
+\]
+Thus
+\[
+  \sigma=3+\frac23 w_\perp.
+\]
+The unweighted isotropic GP/NLS shell reduction sets \(w_\perp=1\), giving
+\[
+  \sigma=\frac{11}{3}.
+\]
+With
+\[
+  \eta_K=\frac{1}{2\chi_R\mathcal L_K},
+  \qquad
+  \chi_R=2,
+\]
+one obtains
+\[
+  \sigma\eta_K^2
+  =
+  \frac{11}{3}\frac{1}{16\mathcal L_K^2}
+  =
+  \frac{11}{48\mathcal L_K^2}.
+\]
+The remaining primitive-equation gate is to derive \(w_\perp=1\) from the full
+GP/SST core-profile reduction rather than imposing it as the unweighted shell
+normalization.

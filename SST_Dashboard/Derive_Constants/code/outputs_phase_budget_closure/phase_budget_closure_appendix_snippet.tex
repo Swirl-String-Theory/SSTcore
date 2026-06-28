@@ -1,0 +1,49 @@
+\section{Reduction of the interior phase-Hessian gate to an accessible-area budget}
+For radial stiffness \(n(r)\) on \(a\le r\le R\), the minimized phase Hessian is
+\[
+  \Lambda_\phi
+  =
+  \frac{4\pi}
+       {\displaystyle\int_a^R\frac{dr}{n(r)r^2}}.
+\]
+Fix the total radial phase-stiffness budget
+\[
+  M=\int_a^R4\pi r^2 n(r)\,dr.
+\]
+Variation with a Lagrange multiplier gives
+\[
+  n_*(r)
+  =
+  \frac{M}{4\pi(R-a)}\,\frac{1}{r^2}.
+\]
+Equivalently, the same result follows from the Cauchy--Schwarz inequality.
+For this optimal profile,
+\[
+  \Lambda_{\max}
+  =
+  \frac{M}{(R-a)^2}.
+\]
+Therefore the desired interior relation
+\[
+  \Lambda_\phi=\frac{E_{\rm eff}}{2}
+\]
+is equivalent, in the optimized radial phase channel, to
+\[
+  M
+  =
+  \frac{E_{\rm eff}}{2}(R-a)^2.
+\]
+For the trefoil pressure cell,
+\[
+  a=\eta_K=\frac{1}{4\mathcal L_K}=1.52703116982\times10^{-2},
+\]
+so the required budget is
+\[
+  M_{\rm req}
+  =
+  \frac{E_{\rm eff}}{2}(1-\eta_K)^2.
+\]
+This does not yet close the gate: the profile \(n(r)\propto r^{-2}\) is derived,
+but the accessible-area budget \(M_{\rm req}\) must still be obtained from the
+interior finite-cell dynamics rather than imposed by matching
+\(\Lambda_\phi=E_{\rm eff}/2\).

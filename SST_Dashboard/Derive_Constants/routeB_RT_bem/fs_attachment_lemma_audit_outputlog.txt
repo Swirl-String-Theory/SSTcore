@@ -1,0 +1,13 @@
+[log] writing console output to fs_attachment_lemma_audit_outputlog.txt
+[config] input_results=core_holonomy_v2_results.csv
+[config] out_prefix=attachment_lemma_audit
+[config] n_range=-5:5, passive_turns=2.501
+[scope] Attachment Lemma audit: U(1) connection holonomy -> n_core selection
+[input] read geometry rows from core_holonomy_v2_results.csv: 27
+[filter] canonical-only retained 16 / 27
+[write] attachment_lemma_audit_models.csv
+[write] attachment_lemma_audit_results.csv
+[write] attachment_lemma_audit_lock_scan.csv
+[write] attachment_lemma_audit_geometry_rows.csv
+[write] attachment_lemma_audit_summary.md
+[done]

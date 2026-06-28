@@ -1,0 +1,7 @@
+{
+  "args": {
+    "v16_outdir": "/mnt/data/outputs_routeB_BEM_v16_heat_kernel",
+    "outdir": "/mnt/data/outputs_routeB_BEM_v17_principal_symbol",
+    "boundary_dim": 2
+  }
+}

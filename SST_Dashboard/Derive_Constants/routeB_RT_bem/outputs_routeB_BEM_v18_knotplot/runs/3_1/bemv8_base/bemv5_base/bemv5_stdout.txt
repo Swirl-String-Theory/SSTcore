@@ -1,0 +1,13 @@
+==============================================================================
+Route B BEMv5 zeta/cutoff audit complete
+==============================================================================
+source: XML/Fourier ideal.txt=ideal.txt
+outdir: outputs_routeB_BEM_v18_knotplot\runs\3_1\bemv8_base\bemv5_base
+knots: 0_1, 3_1
+0_1            raw_modes= 215 S_all= 2.35892296092 file=raw_spectrum_0_1.npy
+3_1            raw_modes= 215 S_all= 2.35784028362 file=raw_spectrum_3_1.npy
+cutoff rows: 215
+fit rows: 3
+legacy inverse-tail selected fit: {'model': 'sqrt+inv+threehalf', 'status': 'PASS_FIT', 'n_points': 162, 'M_min': 54, 'M_max': 215, 'rms': 0.0009956717939551662, 'S_inf': -0.35116781302822686, 'S_inf_se': 0.012983919306801086, 'alpha_inv_pred_blind': -0.17558390651411343, 'c_sqrt': 10.490269166426941, 'c_sqrt_se': 0.4078956757853804, 'c_inv': -99.56975167850568, 'c_inv_se': 4.182893790121353, 'c_threehalf': 311.16496238940186, 'c_threehalf_se': 14.00733606143836, 'knot': '3_1', 'reference': '0_1', 'target_selected': True, 'fit_tail_frac': 0.75, 'max_common_modes': 215}
+BEMv5 heat-kernel selected fit: {'counterterm_model': 'hk+inv_sqrt+inv', 'status': 'PASS_FIT', 'n_points': 162, 'M_min': 54, 'M_max': 215, 'rms': 0.0007727860295395441, 'S_ren': 43.6640994865639, 'S_ren_se': 23.42603681101287, 'alpha_inv_half_RT_only': 21.83204974328195, 'a_M': -0.01657210768430084, 'a_M_se': 0.007363840894554226, 'a_sqrtM': 1.2805871233110784, 'a_sqrtM_se': 0.6293767538094652, 'a_logM': -9.485910926516706, 'a_logM_se': 4.982539860033553, 'b_inv_sqrt': -127.47610809138358, 'b_inv_sqrt_se': 69.27157708201634, 'b_inv': 163.18691948349814, 'b_inv_se': 89.18486050903597, 'soft_action': 16.755160819145562, 'S_total_soft_plus_RT': 60.41926030570946, 'alpha_inv_pred_blind_with_soft': 30.20963015285473, 'knot': '3_1', 'reference': '0_1', 'target_selected': True, 'counterterm_tail_frac': 0.75, 'max_common_modes': 215, 'soft_index_count': 4, 'soft_volume_mode': 'unit_ball', 'soft_volume_value': 4.1887902047863905}
+wrote: raw_spectrum_*.npy, cutoff_series.csv, renormalized_action_fit.csv, heat_kernel_counterterms.csv, soft_sector_index.csv, blind_alpha_prediction.md

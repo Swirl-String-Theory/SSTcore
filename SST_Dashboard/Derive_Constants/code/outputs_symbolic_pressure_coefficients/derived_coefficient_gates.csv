@@ -1,0 +1,5 @@
+gate,target,general_formula,sufficient_assumption,required_value,assumed_value,result,status,remaining_task
+pressure volume prefactor,16*pi/3,4*pi*N_p/3,N_p=4 pressure sectors,4,4,16*pi/3,passed_if_Np_derived,derive N_p=4 from a pressure-cell mode count or variational principle
+finite-shell correction,11/48,c2=sigma/(4 chi_R^2),chi_R=2 and sigma=3+2/3=11/3,sigma=11/3 at chi_R=2,"sigma=11/3, chi_R=2",11/48,passed_if_sigma_decomposition_derived,derive sigma=3+2/3 from controlled NLS/GP shell second variation
+cell-radius closure,chi_R=2,A_chi=chi_R+lambda_chi/chi_R -> chi_R=sqrt(lambda_chi),lambda_chi=4,4,4,2,passed_if_lambda_chi_derived,derive lambda_chi=4 from inner/outer pressure-cell stationarity
+phase stiffness normalization,K_cell=E_eff/(8*pi),A_phi=q_phi E_eff phi^2/4 -> Lambda=q_phi E_eff/2,q_phi=1 canonical unit phase normalization,1,1,K_cell=E_eff/(8*pi),passed_if_phase_hessian_derived,"derive q_phi=1 from one-cell phase-Hessian operator, not by normalization"

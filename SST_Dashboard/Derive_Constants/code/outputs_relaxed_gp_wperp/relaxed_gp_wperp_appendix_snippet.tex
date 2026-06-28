@@ -1,0 +1,26 @@
+\section{Relaxed GP core-Hessian target for \(w_\perp\)}
+The remaining shell-normalization gate is
+\[
+  \sigma=3+\frac23w_\perp.
+\]
+The relaxed GP-core audit computes two normalized strain-channel Hessians,
+\[
+  H_{00}^{\rm rel}
+  =
+  \frac{d^2}{d\epsilon^2}
+  \min_b E_{\rm GP}[\psi_{\rm scalar}(\epsilon,b)],
+\]
+and
+\[
+  H_{\perp\perp}^{\rm rel}
+  =
+  \frac{d^2}{d\epsilon^2}
+  \min_b E_{\rm GP}[\psi_{\rm shear}(\epsilon,b)].
+\]
+The measured proxy is
+\[
+  w_\perp=\frac{H_{\perp\perp}^{\rm rel}}{H_{00}^{\rm rel}}.
+\]
+This is a collective-coordinate approximation to the full Schur-complement
+Hessian.  The gate closes only if \(w_\perp\to1\) under refinement or if the
+full linearized GP operator yields the same result.

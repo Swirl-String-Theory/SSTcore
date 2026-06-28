@@ -1,0 +1,23 @@
+{
+  "relative_path_from_manuscripts": "../code",
+  "scripts": [
+    "derive_gp_core_profile_second_variation.py",
+    "derive_pressure_self_duality_from_laplace_matching.py",
+    "solve_one_cell_hodge_phase_hessian.py",
+    "derive_pressure_mode_cutoff_surface_spectrum.py",
+    "test_finite_core_nonspherical_shape_corrections.py",
+    "solve_nonlinear_shape_stability.py",
+    "derive_phase_pressure_exchange_self_duality.py"
+  ],
+  "output_directories": [
+    "outputs_gp_core_profile_second_variation",
+    "outputs_laplace_self_duality",
+    "outputs_hodge_phase_hessian",
+    "outputs_surface_mode_cutoff",
+    "outputs_finite_core_shape",
+    "outputs_nonlinear_shape_stability_lmax6_opt",
+    "outputs_phase_pressure_self_duality"
+  ],
+  "status": "final derived-gate evidence after nonlinear and global topology updates",
+  "latest_update": "added canonical normal-mode phase-pressure self-duality gate for Lambda_phi=E_eff/2"
+}

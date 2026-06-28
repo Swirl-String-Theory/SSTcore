@@ -1,0 +1,41 @@
+--- a/src/chronos_kelvin_transport.h	2026-06-27 23:49:09.347646455 +0000
++++ b/src/chronos_kelvin_transport.h	2026-06-27 23:49:50.175338118 +0000
+@@ -10,7 +10,12 @@
+ public:
+     [[nodiscard]] static double kelvin_invariant(double R, double omega);
+     [[nodiscard]] static double omega_from_invariant(double invariant, double R);
++    // Returns the ANGULAR-FREQUENCY convention Omega (= vorticity / 2):
++    //   Omega = (c / r_c) * sqrt(1 - S_t^2).
+     [[nodiscard]] static double omega_from_swirl_clock(double S_t, double r_c, double c = static_cast<double>(SST::Constants::C_VACUUM));
++    // Returns the canon chronos-Kelvin VORTICITY omega = 2 * Omega (Canon Sec. 2.9):
++    //   omega = (2c / r_c) * sqrt(1 - S_t^2).
++    [[nodiscard]] static double vorticity_from_swirl_clock(double S_t, double r_c, double c = static_cast<double>(SST::Constants::C_VACUUM));
+     [[nodiscard]] static double swirl_clock_from_omega(double omega, double r_c, double c = static_cast<double>(SST::Constants::C_VACUUM));
+     [[nodiscard]] static double chronos_kelvin_invariant(double R, double S_t, double r_c, double c = static_cast<double>(SST::Constants::C_VACUUM));
+     [[nodiscard]] static double clock_radius_derivative(double S_t, double R, double dR_dt);
+--- a/src/chronos_kelvin_transport.cpp	2026-06-27 23:49:09.347563068 +0000
++++ b/src/chronos_kelvin_transport.cpp	2026-06-27 23:49:50.177622290 +0000
+@@ -22,6 +22,12 @@
+     return (c / r_c) * std::sqrt(std::max(0.0, 1.0 - S_t * S_t));
+ }
+ 
++double ChronosKelvinTransport::vorticity_from_swirl_clock(double S_t, double r_c, double c) {
++    // Canon Sec. 2.9 chronos-Kelvin vorticity. Rigid local rotation has
++    // vorticity = 2 * angular frequency, hence omega = 2 * omega_from_swirl_clock.
++    return 2.0 * omega_from_swirl_clock(S_t, r_c, c);
++}
++
+ double ChronosKelvinTransport::swirl_clock_from_omega(double omega, double r_c, double c) {
+     if (r_c <= 0.0 || c <= 0.0) throw std::invalid_argument("r_c and c must be positive.");
+     const double x = 1.0 - (omega * r_c) * (omega * r_c) / (c * c);
+--- a/src/chronos_kelvin_transport_py.cpp	2026-06-27 23:49:09.347658446 +0000
++++ b/src/chronos_kelvin_transport_py.cpp	2026-06-27 23:49:50.177814894 +0000
+@@ -9,6 +9,8 @@
+         .def_static("omega_from_invariant", &sst::ChronosKelvinTransport::omega_from_invariant, py::arg("invariant"), py::arg("R"))
+         .def_static("omega_from_swirl_clock", &sst::ChronosKelvinTransport::omega_from_swirl_clock,
+                     py::arg("S_t"), py::arg("r_c"), py::arg("c") = static_cast<double>(SST::Constants::C_VACUUM))
++        .def_static("vorticity_from_swirl_clock", &sst::ChronosKelvinTransport::vorticity_from_swirl_clock,
++                    py::arg("S_t"), py::arg("r_c"), py::arg("c") = static_cast<double>(SST::Constants::C_VACUUM))
+         .def_static("swirl_clock_from_omega", &sst::ChronosKelvinTransport::swirl_clock_from_omega,
+                     py::arg("omega"), py::arg("r_c"), py::arg("c") = static_cast<double>(SST::Constants::C_VACUUM))
+         .def_static("chronos_kelvin_invariant", &sst::ChronosKelvinTransport::chronos_kelvin_invariant,

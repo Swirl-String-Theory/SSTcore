@@ -1,0 +1,8 @@
+id,name,crossing,index,kind,conway,L_cert,D_database,n_components,run_supported_by_current_bem,catalog_status
+L2a1,L2a1,2,,knotplot_link,2,,1.0,1,False,CATALOG_ONLY_LINK
+L4a1,L4a1,4,,knotplot_link,4,,1.0,1,False,CATALOG_ONLY_LINK
+L5a1,L5a1,5,,knotplot_link,2 1 2,,1.0,1,False,CATALOG_ONLY_LINK
+L6a1,L6a1,6,,knotplot_link,2 2 2,,1.0,1,False,CATALOG_ONLY_LINK
+L8a1,L8a1,8,,knotplot_link,.2 1,,1.0,1,False,CATALOG_ONLY_LINK
+L6a4,L6a4,6,,knotplot_link,.1,,1.0,1,False,CATALOG_ONLY_LINK
+L6n1,L6n1,6,,knotplot_link,"2,2,2-",,1.0,1,False,CATALOG_ONLY_LINK

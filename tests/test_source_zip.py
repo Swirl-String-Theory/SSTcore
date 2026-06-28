@@ -50,6 +50,7 @@ def test_collect_source_files_includes_readme() -> None:
     files = collect_source_files(REPO_ROOT)
     assert "resources/README.md" in files
     assert "src/SSTcore/__init__.py" in files
+    assert "docs/patches/v0.8.12/sstcore_v0_8_12_alignment_ALL.patch" in files
     assert not any("resources/knotplot/" in f for f in files)
     assert not any(f.endswith(".stl") for f in files)
 

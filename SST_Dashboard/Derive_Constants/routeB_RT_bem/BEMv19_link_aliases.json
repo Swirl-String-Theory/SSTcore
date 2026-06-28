@@ -1,0 +1,20 @@
+{
+  "link_ids": [
+    "L2a1",
+    "L4a1",
+    "L5a1",
+    "L6a1",
+    "L8a1",
+    "L6a4",
+    "L6n1"
+  ],
+  "notes": {
+    "L2a1": "Hopf-like 2-component link candidate if present in ideal.txt.",
+    "L4a1": "Catalog-only unless multi-component Route-B operator is enabled.",
+    "L5a1": "Catalog-only unless multi-component Route-B operator is enabled.",
+    "L6a1": "Catalog-only unless multi-component Route-B operator is enabled.",
+    "L8a1": "Catalog-only unless multi-component Route-B operator is enabled.",
+    "L6a4": "Catalog-only unless multi-component Route-B operator is enabled.",
+    "L6n1": "Non-alternating link notation candidate; catalog-only by default."
+  }
+}

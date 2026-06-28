@@ -1,0 +1,17 @@
+name,symbolic,latex
+jacobian,-eta**3 + 3*eta**2 - 3*eta + 1,- \eta^{3} + 3 \eta^{2} - 3 \eta + 1
+sigma_volume,3,3
+sin2_average,2/3,\frac{2}{3}
+projector_trace_average,2/3,\frac{2}{3}
+w_perp,11/10,\frac{11}{10}
+sigma_perp,11/15,\frac{11}{15}
+sigma_total,56/15,\frac{56}{15}
+chi_R,2,2
+eta_K,1/(4*L_K),\frac{1}{4 L_{K}}
+c2,7/30,\frac{7}{30}
+shell_factor,1 - 7/(30*L_K**2),1 - \frac{7}{30 L_{K}^{2}}
+target_sigma,11/3,\frac{11}{3}
+target_c2,11/48,\frac{11}{48}
+sigma_matches_11_over_3,False,False
+c2_matches_11_over_48,False,False
+shell_factor_numeric_at_LK,0.9991294523010538,0.9991294523010538

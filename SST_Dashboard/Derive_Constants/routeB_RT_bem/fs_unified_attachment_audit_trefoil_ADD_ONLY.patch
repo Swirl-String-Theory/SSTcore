@@ -1,0 +1,341 @@
+--- fs_unified_attachment_audit.py
++++ fs_unified_attachment_audit.py
+@@ -1284,6 +1284,209 @@
+     return mesh_summary_rows, comp_rows, dist_rows, lock_rows, helicity_rows
+ 
+ 
++
++# -----------------------------------------------------------------------------
++# Segmented trefoil / trefoil-gear STL module
++# -----------------------------------------------------------------------------
++
++_ASSIGN_RE = re.compile(r'^\s*([A-Z][A-Z0-9_]*)\s*=\s*(.+?)(?:\s*#.*)?$')
++
++
++def _parse_literal_value(expr: str):
++    expr = expr.strip()
++    if expr in ('True', 'False'):
++        return expr == 'True'
++    if expr in ('None', 'none', 'NULL', 'null'):
++        return None
++    if len(expr) > 2 and expr[0] in ('r', 'R') and expr[1] in ('"', "'") and expr[-1] == expr[1]:
++        return expr[2:-1]
++    if (expr.startswith('"') and expr.endswith('"')) or (expr.startswith("'") and expr.endswith("'")):
++        return expr[1:-1]
++    try:
++        if any(ch in expr.lower() for ch in ['.', 'e']):
++            return float(expr)
++        return int(expr)
++    except Exception:
++        return expr
++
++
++def parse_blender_params(path: Path) -> Dict[str, object]:
++    """Parse simple uppercase assignments from the Blender generator script.
++
++    Complex expressions are retained as strings. The audit uses explicit derived
++    fields for segment count, total blade turns, per-segment turns, 3-blade
++    profile markers, and connector/lock markers.
++    """
++    text = path.read_text(encoding='utf-8', errors='replace')
++    params: Dict[str, object] = {}
++    for line in text.splitlines():
++        m = _ASSIGN_RE.match(line)
++        if not m:
++            continue
++        key, expr = m.group(1), m.group(2).strip()
++        params[key] = _parse_literal_value(expr)
++
++    try:
++        seg = int(params.get('SEGMENT_COUNT', 3) or 3)
++        total = float(params.get('TREFOIL_TWIST_TURNS', 0.0) or 0.0)
++        use_curve = bool(params.get('USE_TREFOIL_CURVATURE', False))
++        params['DERIVED_SEGMENT_COUNT'] = seg
++        params['DERIVED_TOTAL_BLADE_TURNS'] = total
++        params['DERIVED_TWIST_TURNS_PER_PRINTED_SEGMENT'] = total if use_curve else (total / seg if seg else float('nan'))
++        params['DERIVED_USE_TREFOIL_CURVATURE'] = use_curve
++    except Exception:
++        pass
++
++    params['DERIVED_PROFILE_PRIMARY_SYMMETRY'] = 3
++    params['DERIVED_PROFILE_SECONDARY_SYMMETRY'] = 6
++    params['DERIVED_HAS_3_BLADE_PROFILE'] = ('math.cos(3.0 * theta)' in text or 'cos(3.0 * theta)' in text)
++    params['DERIVED_HAS_D_KEY_CONNECTOR'] = ('D_FLAT_FRACTION' in text and 'd_key_xy' in text)
++    params['DERIVED_HAS_BOOLEAN_SOCKET'] = ('FemaleSocketBoolean' in text or 'boolean_subtract_socket' in text)
++    params['DERIVED_HAS_SNAP_BUMP'] = ('ENABLE_SNAP' in text and 'SNAP_BUMP' in text)
++    return params
++
++
++def blender_param_rows(params: Dict[str, object], source_path: Path) -> List[Dict[str, object]]:
++    keys = [
++        'OBJECT_NAME', 'USE_TREFOIL_CURVATURE', 'SEGMENT_COUNT', 'TREFOIL_TWIST_TURNS',
++        'TWIST_TURNS', 'CORE_RADIUS', 'BLADE_RADIUS', 'LOBE_STRENGTH', 'BLADE_SHARPNESS',
++        'PROFILE_ECCENTRICITY', 'ENABLE_CONNECTORS', 'MALE_CONNECTOR_LENGTH',
++        'FEMALE_SOCKET_LENGTH', 'CONNECTOR_RADIUS_SCALE', 'D_FLAT_FRACTION',
++        'CONNECTOR_CLEARANCE', 'ENABLE_SNAP', 'SNAP_BUMP_HEIGHT', 'SNAP_BUMP_WIDTH',
++        'APPLY_FINAL_TRANSFORM', 'FINAL_MIRROR_Y', 'FINAL_UNIFORM_SCALE',
++        'DERIVED_SEGMENT_COUNT', 'DERIVED_TOTAL_BLADE_TURNS',
++        'DERIVED_TWIST_TURNS_PER_PRINTED_SEGMENT', 'DERIVED_USE_TREFOIL_CURVATURE',
++        'DERIVED_PROFILE_PRIMARY_SYMMETRY', 'DERIVED_PROFILE_SECONDARY_SYMMETRY',
++        'DERIVED_HAS_3_BLADE_PROFILE', 'DERIVED_HAS_D_KEY_CONNECTOR',
++        'DERIVED_HAS_BOOLEAN_SOCKET', 'DERIVED_HAS_SNAP_BUMP',
++    ]
++    return [{'source_path': str(source_path), 'parameter': k, 'value': params.get(k, '')} for k in keys if k in params]
++
++
++def estimate_radial_harmonics(mesh, min_k: int = 2, max_k: int = 80, bins: int = 720) -> Dict[str, object]:
++    """Estimate dominant radial harmonic around the largest PCA plane.
++
++    This is a diagnostic only. STL booleans/export transforms can make the
++    dominant outer-boundary harmonic differ from the real tooth count.
++    """
++    pts = np.asarray(mesh.vertices, dtype=float)
++    if len(pts) < 10:
++        return {'dominant_harmonic': '', 'dominant_amplitude': '', 'top_harmonics': '', 'notes': 'too_few_vertices'}
++    center = pts.mean(axis=0)
++    vals, vecs = pca_axes(pts)
++    u = vecs[:, 0]
++    v = vecs[:, 1]
++    Y = pts - center
++    x = Y @ u
++    y = Y @ v
++    theta = np.mod(np.arctan2(y, x), TAU)
++    r = np.sqrt(x * x + y * y)
++    idx = np.floor(theta / TAU * bins).astype(int)
++    idx = np.clip(idx, 0, bins - 1)
++    maxr = np.full(bins, np.nan, dtype=float)
++    for i, ri in zip(idx, r):
++        if np.isnan(maxr[i]) or ri > maxr[i]:
++            maxr[i] = ri
++    mean_val = float(np.nanmean(maxr)) if not np.all(np.isnan(maxr)) else 0.0
++    prof = np.where(np.isnan(maxr), mean_val, maxr) - mean_val
++    amps = np.abs(np.fft.rfft(prof))
++    if len(amps) <= min_k:
++        return {'dominant_harmonic': '', 'dominant_amplitude': '', 'top_harmonics': '', 'notes': 'fft_too_short'}
++    hi = min(max_k, len(amps) - 1)
++    candidates = [(float(amps[k]), int(k)) for k in range(min_k, hi + 1)]
++    candidates.sort(reverse=True)
++    top = candidates[:8]
++    dom_amp, dom_k = top[0]
++    return {
++        'dominant_harmonic': dom_k,
++        'dominant_amplitude': dom_amp,
++        'top_harmonics': ';'.join(f'{k}:{a:.6g}' for a, k in top),
++        'notes': 'radial_fft_diagnostic_not_topological',
++    }
++
++
++def run_trefoil_gear_module(args) -> Tuple[List[Dict[str, object]], List[Dict[str, object]], List[Dict[str, object]], List[Dict[str, object]]]:
++    """Analyze segmented trefoil STL analogs and Blender generator metadata."""
++    mesh_rows: List[Dict[str, object]] = []
++    harmonic_rows: List[Dict[str, object]] = []
++    param_rows: List[Dict[str, object]] = []
++    analog_rows: List[Dict[str, object]] = []
++
++    params: Dict[str, object] = {}
++    if args.trefoil_blender_script:
++        script_path = Path(args.trefoil_blender_script)
++        if script_path.exists():
++            params = parse_blender_params(script_path)
++            param_rows.extend(blender_param_rows(params, script_path))
++        else:
++            param_rows.append({'source_path': str(script_path), 'parameter': 'ERROR', 'value': 'file_not_found'})
++
++    single_gear_paths = {str(Path(x)) for x in (args.single_gear_stl or [])}
++    trefoil_paths = [Path(x) for x in (args.trefoil_stl or [])]
++    trefoil_paths.extend(Path(x) for x in (args.trefoil_segment_stl or []))
++    trefoil_paths.extend(Path(x) for x in (args.trefoil_closed_stl or []))
++    trefoil_paths.extend(Path(x) for x in (args.single_gear_stl or []))
++
++    for path in trefoil_paths:
++        if not path.exists():
++            mesh_rows.append({'mesh_label': path.stem, 'path': str(path), 'error': 'file_not_found'})
++            continue
++        mesh = load_mesh(path)
++        label = 'single_gear_reference' if str(path) in single_gear_paths else path.stem
++        ms = asdict(mesh_summary(mesh, path, label))
++        ms['abs_volume'] = abs(float(ms.get('volume', 0.0) or 0.0))
++        mesh_rows.append(ms)
++        harm = estimate_radial_harmonics(mesh)
++        harm.update({'mesh_label': label, 'path': str(path)})
++        harmonic_rows.append(harm)
++
++    seg_count = int(params.get('DERIVED_SEGMENT_COUNT', args.trefoil_segment_count) or args.trefoil_segment_count)
++    total_turns = float(params.get('DERIVED_TOTAL_BLADE_TURNS', args.trefoil_total_turns) or args.trefoil_total_turns)
++    turns_per_segment = float(params.get('DERIVED_TWIST_TURNS_PER_PRINTED_SEGMENT', total_turns / seg_count if seg_count else float('nan')))
++    profile_sym = int(params.get('DERIVED_PROFILE_PRIMARY_SYMMETRY', args.trefoil_profile_symmetry) or args.trefoil_profile_symmetry)
++    has_connectors = bool(params.get('ENABLE_CONNECTORS', args.trefoil_has_connectors))
++    has_d_key = bool(params.get('DERIVED_HAS_D_KEY_CONNECTOR', args.trefoil_has_connectors))
++    has_socket = bool(params.get('DERIVED_HAS_BOOLEAN_SOCKET', args.trefoil_has_connectors))
++    has_snap = bool(params.get('DERIVED_HAS_SNAP_BUMP', False))
++    has_axle = bool(args.axle_stl)
++
++    gear_harmonics = [r for r in harmonic_rows if r.get('mesh_label') == 'single_gear_reference']
++    est_teeth = gear_harmonics[0].get('dominant_harmonic') if gear_harmonics else ''
++    teeth_match = ''
++    if est_teeth != '':
++        try:
++            teeth_match = 'YES' if int(est_teeth) == int(round(total_turns)) else 'NO_DIAGNOSTIC_ONLY'
++        except Exception:
++            teeth_match = ''
++
++    if has_connectors and has_d_key and seg_count >= 3:
++        status = 'SEGMENTED_TREFOIL_FRAMED_TUBE_ATTACHMENT_ANALOG'
++    else:
++        status = 'TREFOIL_GEOMETRY_DIAGNOSTIC_ONLY'
++    if has_axle:
++        status += '_WITH_CORE_SPINE'
++
++    analog_rows.append({
++        'object_id': 'segmented_trefoil_gear_variant',
++        'segment_count': seg_count,
++        'total_blade_turns': total_turns,
++        'twist_turns_per_segment': turns_per_segment,
++        'profile_primary_symmetry': profile_sym,
++        'has_connectors': 'YES' if has_connectors else 'NO',
++        'has_d_key_phase_lock': 'YES' if has_d_key else 'NO',
++        'has_boolean_socket': 'YES' if has_socket else 'NO',
++        'has_snap_bump': 'YES' if has_snap else 'NO',
++        'has_core_spine_or_axle': 'YES' if has_axle else 'NO',
++        'single_gear_estimated_tooth_harmonic': est_teeth,
++        'single_gear_teeth_matches_total_blade_turns': teeth_match,
++        'core_attachment_target_chi': 1,
++        'blade_turns_identified_with_n_core': 'NO',
++        'attachment_interpretation': '3-blade keyed segmented tube supports physical framing; central spine/axle can model global core-phase reference. Blade turns are shell/gearing turns, not direct n_core.',
++        'audit_status': status,
++    })
++    return mesh_rows, harmonic_rows, param_rows, analog_rows
++
++
+ # -----------------------------------------------------------------------------
+ # Summary
+ # -----------------------------------------------------------------------------
+@@ -1297,8 +1500,9 @@
+     return d
+ 
+ 
+-def write_summary(path: Path, args, single_objs: List[SingleObject], single_rows: List[Dict[str, object]], link_objects: List[LinkObject], link_result_rows: List[Dict[str, object]], gear_rows: Dict[str, List[Dict[str, object]]]) -> None:
++def write_summary(path: Path, args, single_objs: List[SingleObject], single_rows: List[Dict[str, object]], link_objects: List[LinkObject], link_result_rows: List[Dict[str, object]], gear_rows: Dict[str, List[Dict[str, object]]], trefoil_rows: Optional[Dict[str, List[Dict[str, object]]]] = None) -> None:
+     lines: List[str] = []
++    trefoil_rows = trefoil_rows or {}
+     Omega = args.v_swirl / args.r_c
+     T_core = TAU * args.r_c / args.v_swirl
+     lines.append('# Unified Compensated Attachment Audit Summary\n\n')
+@@ -1325,6 +1529,8 @@
+     lines.append(f'- link attachment result rows: **{len(link_result_rows)}**\n')
+     lines.append(f'- gear mesh rows: **{len(gear_rows.get("mesh", []))}**\n')
+     lines.append(f'- gear lock scenarios: **{len(gear_rows.get("lock", []))}**\n')
++    lines.append(f'- trefoil-gear mesh rows: **{len(trefoil_rows.get("mesh", []))}**\n')
++    lines.append(f'- trefoil-gear analog rows: **{len(trefoil_rows.get("analog", []))}**\n')
+     lines.append('\n')
+     if single_objs:
+         lines.append('## Single-object classes\n\n')
+@@ -1359,6 +1565,13 @@
+     if gear_rows.get('lock'):
+         lines.append('## Gear lock scenario counts\n\n')
+         lines.append(f'`{count_by(gear_rows["lock"], "audit_status")}`\n\n')
++    if trefoil_rows.get('analog'):
++        lines.append('## Segmented trefoil gear/STL module\n\n')
++        lines.append('| object | segments | blade turns | per segment | profile symmetry | status |\n|---|---:|---:|---:|---:|---|\n')
++        for r in trefoil_rows['analog']:
++            lines.append(f"| `{r.get('object_id')}` | {r.get('segment_count')} | {r.get('total_blade_turns')} | {r.get('twist_turns_per_segment')} | {r.get('profile_primary_symmetry')} | `{r.get('audit_status')}` |\n")
++        lines.append('\n')
++        lines.append('Interpretation: blade/shell turns are treated as a mechanical gearing budget, not as direct `n_core`. The core Attachment target remains `chi=1` in the matter sector.\n\n')
+     lines.append('## Canon-candidate statement\n\n')
+     lines.append('```text\n')
+     lines.append('[CONDITIONAL CANON-CANDIDATE]\n')
+@@ -1370,6 +1583,7 @@
+     lines.append('For twist/general knots: SL_phys(K) = SL_geom_proxy(K) + chi, with proxy status explicit.\n')
+     lines.append('For multicomponent links: H/Gamma^2 = sum_i(SL_i + chi_i) + 2 sum_ij Lk_ij + higher.\n')
+     lines.append('For gear STL analogs: fully locked sign sectors support a mechanical global-attachment analog.\n')
++    lines.append('For segmented trefoil STL analogs: keyed 3-blade framed-tube segments support a single-component core-spine attachment analog.\n')
+     lines.append('```\n\n')
+     lines.append('## Audit warning\n\n')
+     lines.append('This script is an audit harness and model classifier, not a proof machine. Exact neutral compensation remains the physical load-bearing gate.\n')
+@@ -1420,6 +1634,17 @@
+     ap.add_argument('--axle-stl', default=None, help='Optional axle STL file.')
+     ap.add_argument('--gear-linking-matrix-csv', default=None, help='Optional linking matrix CSV to combine with gear module.')
+     ap.add_argument('--helix-ratio', type=float, default=1.0, help='psi/Theta ratio for central helix/axle lock model.')
++
++    # segmented trefoil gear/STL module
++    ap.add_argument('--trefoil-stl', action='append', default=[], help='Optional trefoil STL(s), open/closed/segment. Can be repeated.')
++    ap.add_argument('--trefoil-segment-stl', action='append', default=[], help='Optional straight printed trefoil segment STL(s). Can be repeated.')
++    ap.add_argument('--trefoil-closed-stl', action='append', default=[], help='Optional fully/mostly closed trefoil STL(s). Can be repeated.')
++    ap.add_argument('--single-gear-stl', action='append', default=[], help='Optional single gear STL reference, e.g. triple_gear_part_1.stl. Can be repeated.')
++    ap.add_argument('--trefoil-blender-script', default=None, help='Optional Blender generator script to parse segment count, blade turns, connector lock parameters.')
++    ap.add_argument('--trefoil-segment-count', type=int, default=3, help='Fallback segment count if no Blender script is parsed.')
++    ap.add_argument('--trefoil-total-turns', type=float, default=10.0, help='Fallback total shell/blade turns over full trefoil assembly.')
++    ap.add_argument('--trefoil-profile-symmetry', type=int, default=3, help='Fallback blade/profile symmetry count.')
++    ap.add_argument('--trefoil-has-connectors', action='store_true', help='Assume segmented trefoil has keyed/locking connectors if no Blender script is parsed.')
+ 
+     # attachment kernel
+     ap.add_argument('--eps-list', default='0,0.01,0.1,1.0', help='epsilon_SE values.')
+@@ -1458,6 +1683,7 @@
+         print(f'[config] link_files={args.link_file}')
+         print(f'[config] link_roots={args.link_root}')
+         print(f'[config] gear_stl={args.gear_stl}')
++        print(f'[config] trefoil_stl={args.trefoil_stl} trefoil_segment_stl={args.trefoil_segment_stl} trefoil_closed_stl={args.trefoil_closed_stl} single_gear_stl={args.single_gear_stl}')
+         print(f'[scope] unified compensated swirl-clock / entanglement attachment audit')
+ 
+         models = attachment_models(include_diagnostics=(args.core_models == 'full'))
+@@ -1505,7 +1731,7 @@
+                 except Exception as e:
+                     print(f'[ideal-link][ERROR] {lo.object_id}: {e}')
+ 
+-        if not single_objs and not link_objects and not args.link_file and not args.gear_stl:
++        if not single_objs and not link_objects and not args.link_file and not args.gear_stl and not (args.trefoil_stl or args.trefoil_segment_stl or args.trefoil_closed_stl or args.single_gear_stl or args.trefoil_blender_script):
+             single_objs = fallback_torus_objects(parse_q_list(args.q_list), args.p, parse_extra_torus(args.extra_torus))
+             print(f'[fallback] generated {len(single_objs)} analytic torus rows')
+ 
+@@ -1541,6 +1767,18 @@
+             except Exception as e:
+                 print(f'[gear][ERROR] {e}')
+ 
++        # segmented trefoil gear/STL analog
++        trefoil_mesh_rows: List[Dict[str, object]] = []
++        trefoil_harmonic_rows: List[Dict[str, object]] = []
++        trefoil_param_rows: List[Dict[str, object]] = []
++        trefoil_analog_rows: List[Dict[str, object]] = []
++        if args.trefoil_stl or args.trefoil_segment_stl or args.trefoil_closed_stl or args.single_gear_stl or args.trefoil_blender_script:
++            try:
++                trefoil_mesh_rows, trefoil_harmonic_rows, trefoil_param_rows, trefoil_analog_rows = run_trefoil_gear_module(args)
++                print(f'[trefoil-gear] mesh_rows={len(trefoil_mesh_rows)} harmonic_rows={len(trefoil_harmonic_rows)} param_rows={len(trefoil_param_rows)} analog_rows={len(trefoil_analog_rows)}')
++            except Exception as e:
++                print(f'[trefoil-gear][ERROR] {e}')
++
+         # writes
+         paths = {
+             'objects': out_dir / f'{base}_objects.csv',
+@@ -1554,6 +1792,10 @@
+             'gear_dist': out_dir / f'{base}_gear_distance_matrix.csv',
+             'gear_lock': out_dir / f'{base}_gear_lock_scenarios.csv',
+             'gear_helicity': out_dir / f'{base}_gear_helicity_bookkeeping.csv',
++            'trefoil_mesh': out_dir / f'{base}_trefoil_gear_mesh_summary.csv',
++            'trefoil_harmonics': out_dir / f'{base}_trefoil_gear_radial_harmonics.csv',
++            'trefoil_params': out_dir / f'{base}_trefoil_blender_params.csv',
++            'trefoil_analog': out_dir / f'{base}_trefoil_attachment_analog.csv',
+             'summary': out_dir / f'{base}_summary.md',
+         }
+         write_csv(paths['objects'], object_rows)
+@@ -1567,12 +1809,21 @@
+         write_csv(paths['gear_dist'], gear_dist_rows)
+         write_csv(paths['gear_lock'], gear_lock_rows)
+         write_csv(paths['gear_helicity'], gear_helicity_rows)
++        write_csv(paths['trefoil_mesh'], trefoil_mesh_rows)
++        write_csv(paths['trefoil_harmonics'], trefoil_harmonic_rows)
++        write_csv(paths['trefoil_params'], trefoil_param_rows)
++        write_csv(paths['trefoil_analog'], trefoil_analog_rows)
+         write_summary(paths['summary'], args, single_objs, single_rows, link_objects, link_result_rows, {
+             'mesh': gear_mesh_rows,
+             'components': gear_comp_rows,
+             'distance': gear_dist_rows,
+             'lock': gear_lock_rows,
+             'helicity': gear_helicity_rows,
++        }, {
++            'mesh': trefoil_mesh_rows,
++            'harmonics': trefoil_harmonic_rows,
++            'params': trefoil_param_rows,
++            'analog': trefoil_analog_rows,
+         })
+         for name, p in paths.items():
+             print(f'[write] {p}')

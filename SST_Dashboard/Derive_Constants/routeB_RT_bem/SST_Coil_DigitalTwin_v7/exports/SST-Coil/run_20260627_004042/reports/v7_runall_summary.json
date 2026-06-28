@@ -1,0 +1,10 @@
+{
+  "status": "ok",
+  "geometry_sectors": [
+    "SawBowl curved original interpolation",
+    "SawBowl straight/chord",
+    "Rodin torus T(5,12) CW/CCW"
+  ],
+  "current_model": "first-order PWM Fourier + R/L; not full SPICE/FEM",
+  "note": "Use straight/chord for star visibility; use curved for exact GUI-SawBowl interpolation logic."
+}

@@ -1,0 +1,5 @@
+knot,E_slice_J,hexapole_frac_at_1p2R,velmag_heatmap,SwirlClock_heatmap
+"T(3,2)",1.1151930849139049e-35,0.7057930663629249,T3_2_velmag_heatmap.png,T3_2_SwirlClock_heatmap.png
+"T(2,3)",1.6056371451776763e-35,0.011570062979924639,T2_3_velmag_heatmap.png,T2_3_SwirlClock_heatmap.png
+"T(6,9)",1.4473829054922739e-34,0.01162841400551192,T6_9_velmag_heatmap.png,T6_9_SwirlClock_heatmap.png
+"T(9,6)",9.87848819974821e-35,0.7069872204622665,T9_6_velmag_heatmap.png,T9_6_SwirlClock_heatmap.png

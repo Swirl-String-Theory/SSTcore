@@ -1,0 +1,8 @@
+ell,degeneracy,L_laplacian,nu_l,kappa_l,tau,max_real_root,best_branch,constrained_by_pressure_moments,classification
+0,1,0,0.05,0.08,1.0,0.02780615056095065,0,True,retained_constraint_mode
+1,3,2,0.73,0.04,1.0,-0.6531375825942035,0,True,ambiguous_or_unstable
+2,5,6,2.57,0.008,1.0,-2.474951000557311,0,False,suppressed_shape_mode
+3,7,12,6.529999999999999,0.002162162162162162,1.0,-5.809222193582142,0,False,suppressed_shape_mode
+4,9,20,14.05,0.0007920792079207921,1.0,-8.799224870558023,0,False,suppressed_shape_mode
+5,11,30,27.05,0.00035398230088495576,1.0,-10.738155164514971,0,False,suppressed_shape_mode
+6,13,42,47.93,0.00018099547511312217,1.0,-12.193218965864489,0,False,suppressed_shape_mode

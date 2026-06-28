@@ -24,6 +24,7 @@ struct SSTCanonicalValues {
     double rho_E = 0.0;
     double rho_m = 0.0;
     double rho_core = 0.0;
+    double rho_horn = 0.0;       // canon v0.8.12 horn-envelope density (alias of rho_core)
     double eta_0 = 0.0;
     double geometric_gate = 0.0;
     double swirl_clock = 0.0;
@@ -64,6 +65,8 @@ public:
     [[nodiscard]] static double swirl_energy_density(double rho_f, double v_norm);
     [[nodiscard]] static double mass_equivalent_density(double rho_E, double c = static_cast<double>(SST::Constants::C_VACUUM));
     [[nodiscard]] static double core_density_closure(double m_e, double c, double v_swirl, double r_c);
+    // Canon v0.8.12 name for the horn-envelope density closure; alias of core_density_closure.
+    [[nodiscard]] static double horn_envelope_density(double m_e, double c, double v_swirl, double r_c);
     [[nodiscard]] static double geometric_gate(double lambda_c, double r_c);
     [[nodiscard]] static double f_swirl_max(double hbar, double omega_c, double r_c);
     [[nodiscard]] static double rydberg_sst(double v_swirl, double r_c, double c = static_cast<double>(SST::Constants::C_VACUUM));

@@ -22,6 +22,12 @@ double ChronosKelvinTransport::omega_from_swirl_clock(double S_t, double r_c, do
     return (c / r_c) * std::sqrt(std::max(0.0, 1.0 - S_t * S_t));
 }
 
+double ChronosKelvinTransport::vorticity_from_swirl_clock(double S_t, double r_c, double c) {
+    // Canon Sec. 2.9 chronos-Kelvin vorticity. Rigid local rotation has
+    // vorticity = 2 * angular frequency, hence omega = 2 * omega_from_swirl_clock.
+    return 2.0 * omega_from_swirl_clock(S_t, r_c, c);
+}
+
 double ChronosKelvinTransport::swirl_clock_from_omega(double omega, double r_c, double c) {
     if (r_c <= 0.0 || c <= 0.0) throw std::invalid_argument("r_c and c must be positive.");
     const double x = 1.0 - (omega * r_c) * (omega * r_c) / (c * c);

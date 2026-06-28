@@ -1,0 +1,2 @@
+L_K,E_eff,target_Eeff_over_2,inner_radius_a,outer_radius_R,accessible_length_R_minus_a,accessible_squared_factor,M_required,M_required_over_Eeff_over_2,best_candidate,best_ratio_to_target,best_relative_error,gate_status
+16.371637,274.0748756568,137.0374378284,0.015270311698213197,1.0,0.9847296883017868,0.969692559022934,132.88418376976742,0.969692559022934,M_Eeff_over_2_times_accessible_area,1.0,0.0,REDUCED_TO_ACCESSIBLE_AREA_BUDGET_GATE

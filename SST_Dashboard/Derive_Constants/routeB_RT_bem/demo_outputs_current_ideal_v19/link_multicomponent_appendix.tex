@@ -1,0 +1,46 @@
+% BEMv19 appendix snippet
+% Multi-component link geometry parser for Route-B.
+
+\subsection{Multi-component link geometry parser}
+
+\paragraph{Status.}
+This appendix introduces the geometry parser required before links can be
+included in the Route-B R--T spectral programme.  It does not yet define the
+full multi-component R--T boundary operator.
+
+For a link \(L=C_1\cup\cdots\cup C_m\), each component is represented by its
+own Fourier curve
+\[
+\mathbf x_a(t)=
+\sum_{n\ge1}
+\left[
+\mathbf A_{a,n}\cos(nt)+\mathbf B_{a,n}\sin(nt)
+\right],
+\qquad a=1,\ldots,m .
+\]
+The parser evaluates each component, computes its arclength, and estimates
+pairwise Gauss linking numbers
+\[
+\operatorname{Lk}(C_a,C_b)
+=
+\frac{1}{4\pi}
+\oint_{C_a}\oint_{C_b}
+\frac{(\mathbf x-\mathbf y)\cdot(d\mathbf x\times d\mathbf y)}
+{\|\mathbf x-\mathbf y\|^3}.
+\]
+
+\paragraph{Route-B operator upgrade.}
+The single-component boundary map must be replaced by a block operator
+\[
+\Lambda^{\rm link}_{R/T}
+=
+\left(\Lambda^{R/T}_{ab}\right)_{a,b=1}^{m},
+\]
+where diagonal blocks describe self-response and off-diagonal blocks describe
+inter-component R--T coupling.  Only after this block operator is defined can
+links enter the same spectral determinant used for knots.
+
+\paragraph{Status tag.}
+\[
+\boxed{\text{BEMv19: link geometry parser ready; block R--T operator open.}}
+\]

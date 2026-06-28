@@ -1,0 +1,3 @@
+label,path,file_size_bytes,vertices,faces,watertight,euler_number,body_count,volume,surface_area,xmin,ymin,zmin,xmax,ymax,zmax,extent_x,extent_y,extent_z
+gear,C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem\triple_gear_solid_with_mark.stl,12785784,127857,255714,YES,0,3,47171.8959873,26152.9282279,-31.3458347321,-37.0826759338,-22.6640605927,38.5661621094,37.0361862183,22.7383518219,69.9119968414,74.1188621521,45.4024124146
+axle,C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem\30cm_axle.stl,8229184,82291,164582,YES,0,1,16694.6295636,22684.1524896,-6.61908340454,-6.61928844452,-146.666732788,6.61978006363,6.62017583847,154.000015259,13.2388634682,13.239464283,300.666748047

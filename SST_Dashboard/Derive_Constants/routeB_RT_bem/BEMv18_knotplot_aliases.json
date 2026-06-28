@@ -1,0 +1,42 @@
+{
+  "knot_aliases": {
+    "K11a367": {
+      "display_alias": "11_x",
+      "note": "User says this is one of 11_1/11_2 in KnotPlot notation; exact standard ordering can be adjusted here."
+    },
+    "K11a247": {
+      "display_alias": "11_y",
+      "note": "User says this is one of 11_1/11_2 in KnotPlot notation; exact standard ordering can be adjusted here."
+    }
+  },
+  "link_ids": {
+    "L2a1": {
+      "kind": "link",
+      "run_supported_by_current_bem": false
+    },
+    "L4a1": {
+      "kind": "link",
+      "run_supported_by_current_bem": false
+    },
+    "L5a1": {
+      "kind": "link",
+      "run_supported_by_current_bem": false
+    },
+    "L6a1": {
+      "kind": "link",
+      "run_supported_by_current_bem": false
+    },
+    "L8a1": {
+      "kind": "link",
+      "run_supported_by_current_bem": false
+    },
+    "L6a4": {
+      "kind": "link",
+      "run_supported_by_current_bem": false
+    },
+    "L6n1": {
+      "kind": "link",
+      "run_supported_by_current_bem": false
+    }
+  }
+}

@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem\routeB_RT_bem_v5_soft_hk_falsifier.py", line 1158, in <module>
+    main()
+    ~~~~^^
+  File "C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem\routeB_RT_bem_v5_soft_hk_falsifier.py", line 1134, in main
+    cutoff_rows, fit_rows, best = make_cutoff_and_fits(outdir, spectra, meta, args)
+                                  ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem\routeB_RT_bem_v5_soft_hk_falsifier.py", line 667, in make_cutoff_and_fits
+    target = resolve_name(args.target, names, meta)
+  File "C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem\routeB_RT_bem_v5_soft_hk_falsifier.py", line 647, in resolve_name
+    raise ValueError(f"Could not resolve knot {name_or_id!r}; available={names}")
+ValueError: Could not resolve knot '7_2'; available=['0_1', '7_1_2']

@@ -1,0 +1,7 @@
+step,formula,status
+two_sector_decomposition,E_eff = M_phi + M_pressure,definition in two-sector reduced model
+self_duality,phase-pressure exchange symmetry implies M_phi = M_pressure,derived if exchange symmetry is a primitive symmetry
+half_budget,M_phi = E_eff/2,derived within self-dual two-sector model
+accessible_area_projection,M_acc = M_phi (R-a)^2/R^2,derived geometrically
+interior_phase_Hessian,Lambda_phi = M_acc/(R-a)^2 = E_eff/(2R^2),conditional on self_duality; for R=1 gives E_eff/2
+primitive_remaining_gate,derive phase-pressure exchange symmetry from interior GP/SST equations,open beyond the reduced model

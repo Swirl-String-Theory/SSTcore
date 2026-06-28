@@ -1,0 +1,130 @@
+--- a/src/chronos_kelvin_transport.h	2026-06-27 23:49:09.347646455 +0000
++++ b/src/chronos_kelvin_transport.h	2026-06-27 23:49:50.175338118 +0000
+@@ -10,7 +10,12 @@
+ public:
+     [[nodiscard]] static double kelvin_invariant(double R, double omega);
+     [[nodiscard]] static double omega_from_invariant(double invariant, double R);
++    // Returns the ANGULAR-FREQUENCY convention Omega (= vorticity / 2):
++    //   Omega = (c / r_c) * sqrt(1 - S_t^2).
+     [[nodiscard]] static double omega_from_swirl_clock(double S_t, double r_c, double c = static_cast<double>(SST::Constants::C_VACUUM));
++    // Returns the canon chronos-Kelvin VORTICITY omega = 2 * Omega (Canon Sec. 2.9):
++    //   omega = (2c / r_c) * sqrt(1 - S_t^2).
++    [[nodiscard]] static double vorticity_from_swirl_clock(double S_t, double r_c, double c = static_cast<double>(SST::Constants::C_VACUUM));
+     [[nodiscard]] static double swirl_clock_from_omega(double omega, double r_c, double c = static_cast<double>(SST::Constants::C_VACUUM));
+     [[nodiscard]] static double chronos_kelvin_invariant(double R, double S_t, double r_c, double c = static_cast<double>(SST::Constants::C_VACUUM));
+     [[nodiscard]] static double clock_radius_derivative(double S_t, double R, double dR_dt);
+--- a/src/chronos_kelvin_transport.cpp	2026-06-27 23:49:09.347563068 +0000
++++ b/src/chronos_kelvin_transport.cpp	2026-06-27 23:49:50.177622290 +0000
+@@ -22,6 +22,12 @@
+     return (c / r_c) * std::sqrt(std::max(0.0, 1.0 - S_t * S_t));
+ }
+ 
++double ChronosKelvinTransport::vorticity_from_swirl_clock(double S_t, double r_c, double c) {
++    // Canon Sec. 2.9 chronos-Kelvin vorticity. Rigid local rotation has
++    // vorticity = 2 * angular frequency, hence omega = 2 * omega_from_swirl_clock.
++    return 2.0 * omega_from_swirl_clock(S_t, r_c, c);
++}
++
+ double ChronosKelvinTransport::swirl_clock_from_omega(double omega, double r_c, double c) {
+     if (r_c <= 0.0 || c <= 0.0) throw std::invalid_argument("r_c and c must be positive.");
+     const double x = 1.0 - (omega * r_c) * (omega * r_c) / (c * c);
+--- a/src/chronos_kelvin_transport_py.cpp	2026-06-27 23:49:09.347658446 +0000
++++ b/src/chronos_kelvin_transport_py.cpp	2026-06-27 23:49:50.177814894 +0000
+@@ -9,6 +9,8 @@
+         .def_static("omega_from_invariant", &sst::ChronosKelvinTransport::omega_from_invariant, py::arg("invariant"), py::arg("R"))
+         .def_static("omega_from_swirl_clock", &sst::ChronosKelvinTransport::omega_from_swirl_clock,
+                     py::arg("S_t"), py::arg("r_c"), py::arg("c") = static_cast<double>(SST::Constants::C_VACUUM))
++        .def_static("vorticity_from_swirl_clock", &sst::ChronosKelvinTransport::vorticity_from_swirl_clock,
++                    py::arg("S_t"), py::arg("r_c"), py::arg("c") = static_cast<double>(SST::Constants::C_VACUUM))
+         .def_static("swirl_clock_from_omega", &sst::ChronosKelvinTransport::swirl_clock_from_omega,
+                     py::arg("omega"), py::arg("r_c"), py::arg("c") = static_cast<double>(SST::Constants::C_VACUUM))
+         .def_static("chronos_kelvin_invariant", &sst::ChronosKelvinTransport::chronos_kelvin_invariant,
+--- a/src/canonical_constants.h	2026-06-27 23:49:09.347422709 +0000
++++ b/src/canonical_constants.h	2026-06-27 23:49:50.178003584 +0000
+@@ -24,6 +24,7 @@
+     double rho_E = 0.0;
+     double rho_m = 0.0;
+     double rho_core = 0.0;
++    double rho_horn = 0.0;       // canon v0.8.12 horn-envelope density (alias of rho_core)
+     double eta_0 = 0.0;
+     double geometric_gate = 0.0;
+     double swirl_clock = 0.0;
+@@ -64,6 +65,8 @@
+     [[nodiscard]] static double swirl_energy_density(double rho_f, double v_norm);
+     [[nodiscard]] static double mass_equivalent_density(double rho_E, double c = static_cast<double>(SST::Constants::C_VACUUM));
+     [[nodiscard]] static double core_density_closure(double m_e, double c, double v_swirl, double r_c);
++    // Canon v0.8.12 name for the horn-envelope density closure; alias of core_density_closure.
++    [[nodiscard]] static double horn_envelope_density(double m_e, double c, double v_swirl, double r_c);
+     [[nodiscard]] static double geometric_gate(double lambda_c, double r_c);
+     [[nodiscard]] static double f_swirl_max(double hbar, double omega_c, double r_c);
+     [[nodiscard]] static double rydberg_sst(double v_swirl, double r_c, double c = static_cast<double>(SST::Constants::C_VACUUM));
+--- a/src/canonical_constants.cpp	2026-06-27 23:49:09.347358714 +0000
++++ b/src/canonical_constants.cpp	2026-06-27 23:49:50.178205589 +0000
+@@ -72,6 +72,11 @@
+     return (m_e * c * c) / (2.0 * pi_d * v_swirl * v_swirl * r_c * r_c * r_c);
+ }
+ 
++double SSTCanonicalConstants::horn_envelope_density(double m_e, double c, double v_swirl, double r_c) {
++    // Canon v0.8.12 rho_horn; identical closure to the legacy rho_core.
++    return core_density_closure(m_e, c, v_swirl, r_c);
++}
++
+ double SSTCanonicalConstants::geometric_gate(double lambda_c, double r_c) {
+     if (lambda_c <= 0.0 || r_c <= 0.0) throw std::invalid_argument("lambda_c and r_c must be positive.");
+     return lambda_c / (pi_d * r_c);
+@@ -104,6 +109,7 @@
+     out.rho_E = swirl_energy_density(rho_f, v_swirl);
+     out.rho_m = mass_equivalent_density(out.rho_E, out.c);
+     out.rho_core = core_density_closure(out.m_e, out.c, v_swirl, out.r_c);
++    out.rho_horn = out.rho_core;   // canon v0.8.12 alias
+     out.eta_0 = eta0(v_swirl, out.c);
+     out.geometric_gate = geometric_gate(out.lambda_c, out.r_c);
+     out.swirl_clock = swirl_clock(v_swirl, out.c);
+--- a/src/canonical_constants_py.cpp	2026-06-27 23:49:09.347529504 +0000
++++ b/src/canonical_constants_py.cpp	2026-06-27 23:49:50.178343368 +0000
+@@ -21,6 +21,7 @@
+         .def_readwrite("rho_E", &sst::SSTCanonicalValues::rho_E)
+         .def_readwrite("rho_m", &sst::SSTCanonicalValues::rho_m)
+         .def_readwrite("rho_core", &sst::SSTCanonicalValues::rho_core)
++        .def_readwrite("rho_horn", &sst::SSTCanonicalValues::rho_horn)
+         .def_readwrite("eta_0", &sst::SSTCanonicalValues::eta_0)
+         .def_readwrite("geometric_gate", &sst::SSTCanonicalValues::geometric_gate)
+         .def_readwrite("swirl_clock", &sst::SSTCanonicalValues::swirl_clock)
+@@ -61,6 +62,8 @@
+                     py::arg("rho_f"), py::arg("v_norm"))
+         .def_static("mass_equivalent_density", &sst::SSTCanonicalConstants::mass_equivalent_density,
+                     py::arg("rho_E"), py::arg("c") = static_cast<double>(SST::Constants::C_VACUUM))
++        .def_static("horn_envelope_density", &sst::SSTCanonicalConstants::horn_envelope_density,
++                    py::arg("m_e"), py::arg("c"), py::arg("v_swirl"), py::arg("r_c"))
+         .def_static("core_density_closure", &sst::SSTCanonicalConstants::core_density_closure,
+                     py::arg("m_e"), py::arg("c"), py::arg("v_swirl"), py::arg("r_c"))
+         .def_static("geometric_gate", &sst::SSTCanonicalConstants::geometric_gate,
+--- a/include/SST_Constants.h	2026-06-27 23:49:09.090450729 +0000
++++ b/include/SST_Constants.h	2026-06-27 23:49:50.178533861 +0000
+@@ -16,10 +16,10 @@
+ namespace SST {
+     namespace Constants {
+ 
+-        // --- CODATA / SI Fundamental Quantum Constants ---
+-        constexpr long double C_VACUUM  = 299792458.0L;             // [m/s] Speed of Light
+-        constexpr long double H_BAR     = 1.054571817e-34L;         // [J s] Reduced Planck Constant
+-        constexpr long double ALPHA     = 0.0072973525643L;         // [-]   Fine Structure Constant
++        // --- CODATA-2018 / SI Fundamental Quantum Constants (single release) ---
++        constexpr long double C_VACUUM  = 299792458.0L;             // [m/s] Speed of Light (exact)
++        constexpr long double H_BAR     = 1.054571817e-34L;         // [J s] Reduced Planck Constant (exact)
++        constexpr long double ALPHA     = 7.2973525693e-3L;         // [-]   Fine Structure Constant [CODATA-2018]
+         constexpr long double M_ELECTRON = 9.1093837015e-31L;       // [kg]  Electron Rest Mass
+         constexpr long double E_CHARGE   = 1.602176634e-19L;        // [C]   Elementary Charge
+         constexpr long double EPSILON_0  = 8.8541878128e-12L;       // [F/m] Vacuum permittivity
+@@ -36,8 +36,9 @@
+         // Derived from: v_swirl = (alpha * c) / 2
+         constexpr long double V_SWIRL   = 1093845.63L;              // [m/s] Characteristic Swirl Speed
+ 
+-        // Derived from SST Rest Mass Functional (NLS-Golden)
+-        constexpr long double RHO_CORE  = 3.8934358266918687e18L;   // [kg/m^3] Core Density
++        // Horn-envelope density closure m_e c^2 / (2 pi v_swirl^2 r_c^3)
++        // (canon v0.8.12 rho_horn; legacy symbol RHO_CORE retained for compatibility).
++        constexpr long double RHO_CORE  = 3.8934358266918687e18L;   // [kg/m^3] Horn-envelope density
+         constexpr long double RHO_FLUID_CANON   = 7.0e-7L;          // [kg/m^3] Canon v0.8.x rounded effective fluid density
+         constexpr long double RHO_FLUID_DERIVED = 6.8398588e-07L;   // [kg/m^3] CODATA-derived electron anchor value
+         constexpr long double RHO_FLUID = RHO_FLUID_CANON;          // backward-compatible alias

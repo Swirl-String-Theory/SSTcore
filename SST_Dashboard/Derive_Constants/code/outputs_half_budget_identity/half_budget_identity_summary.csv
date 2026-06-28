@@ -1,0 +1,2 @@
+E_eff,gamma_Mphi_over_Mpressure,M_phi_total,M_pressure_total,M_phi_over_Eeff,target_Eeff_over_2,M_phi_over_target,a,R,R_accessible,accessible_area_fraction,M_accessible,Lambda_phi,Lambda_over_target,relative_error_Lambda,status
+274.0748756568,1.0,137.0374378284,137.0374378284,0.5,137.0374378284,1.0,0.015270311698213197,1.0,0.9847296883017868,0.969692559022934,132.88418376976742,137.0374378284,1.0,0.0,HALF_BUDGET_DERIVED_WITHIN_SELF_DUAL_TWO_SECTOR_MODEL

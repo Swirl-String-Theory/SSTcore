@@ -1,0 +1,6 @@
+residual_symbol_order,boundary_dimension_d,local_density_scale,required_length_normalizer_power_b,candidate_normalizer,interpretation,status
+-0,2,L^(-0),0,M_max L_cert^0,order-0 residual; no length normalization,ALTERNATIVE_TO_FALSIFY
+-1,2,L^(-1),1,M_max L_cert^1,order-1 residual; one power of certified length,ALTERNATIVE_TO_FALSIFY
+-2,2,L^(-2),2,M_max L_cert^2,order-2 residual; BEMv16/BEMv17 target,TARGET
+-3,2,L^(-3),3,M_max L_cert^3,higher-order residual; length power 3,ALTERNATIVE_TO_FALSIFY
+-4,2,L^(-4),4,M_max L_cert^4,higher-order residual; length power 4,ALTERNATIVE_TO_FALSIFY

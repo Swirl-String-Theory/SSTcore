@@ -1,0 +1,14 @@
+{
+  "quick": true,
+  "grid": 5,
+  "bounds_m": 0.08,
+  "harmonics": 3,
+  "f0_values_hz": [
+    100000.0,
+    234034.73193207162,
+    547722.5575051662,
+    1281861.0191887026,
+    3000000.0
+  ],
+  "hard_rule": "all observables are computed from Biot-Savart B fields; no imposed sinc/exp kernel is used for geometry comparison."
+}

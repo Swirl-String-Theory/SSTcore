@@ -1,0 +1,6 @@
+{
+  "args": {
+    "outdir": "/mnt/data/outputs_routeB_BEM_v16_heat_kernel",
+    "v15_outdir": "/mnt/data/outputs_routeB_BEM_v15_normalizer_law"
+  }
+}

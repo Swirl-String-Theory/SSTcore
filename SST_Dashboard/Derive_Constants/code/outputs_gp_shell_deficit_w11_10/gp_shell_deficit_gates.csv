@@ -1,0 +1,5 @@
+gate,claim,result,status,reason,numeric
+spherical_volume_second_variation,sigma_vol=3,3,derived,(1-eta)^3 has eta^2 coefficient 3.,
+transverse_NLS_projection,<sin^2 theta>_S2=2/3,2/3,derived,Isotropic angular average / transverse projector trace.,
+unweighted_GP_shell_deficit,sigma=3+(2/3)w_perp,56/15,sensitivity_variant_not_11_over_3,11/3 requires w_perp=1.,
+finite_shell_coefficient,c2=sigma/(4 chi_R^2),7/30,does_not_match_11_over_48,"With chi_R=2 and sigma=11/3, c2=11/48.",0.23333333333333334

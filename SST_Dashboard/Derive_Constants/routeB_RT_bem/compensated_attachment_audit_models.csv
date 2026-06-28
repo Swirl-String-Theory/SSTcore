@@ -1,0 +1,10 @@
+model_id,parity,chi_kind,local_kind,attachment_kind,status_label,description
+C0_CANON_ATTACHED_BASELINE,odd,matter,canon,exact_compensated,BASELINE_EXACT_ATTACHMENT,"Baseline: exact attached canon core cycle, no redistribution; total holonomy is chi."
+C1_COMPENSATED_NEUTRAL_MATTER,odd,matter,renormalized,exact_compensated,CANON_CANDIDATE_COMPENSATED,"Compensated swirl-clock mode: local turn is renormalized, attachment supplies the missing neutral holonomy; no charge leak."
+C2_COMPENSATED_NEUTRAL_ANTIMATTER,odd,antimatter,renormalized,exact_compensated,CANON_CANDIDATE_MIRROR_COMPENSATED,Same as C1 but chi=-1 mirror sector.
+C3_UNCOMPENSATED_LOCAL_ONLY,odd,matter,renormalized,none,FAILS_EXACT_HOLONOMY_UNLESS_EPS_ZERO,Local swirl-clock renormalization without global compensation; tests whether local-only survives exact holonomy.
+C4_PARTIAL_COMPENSATION,odd,matter,renormalized,partial,PARTIAL_COMPENSATION_DIAGNOSTIC,Only part of the missing holonomy is attached; useful falsifier for exactness.
+C5_CHARGE_LEAK,odd,matter,renormalized,charge_leak,CHARGE_LEAK_CONSTRAINED,A fraction of missing holonomy leaks out of the neutral spinon/framing sector; Canon-unsafe unless suppressed.
+C6_DECOHERED_RESIDUAL,odd,matter,renormalized,residual,DECOHERENCE_RESIDUAL_DIAGNOSTIC,Compensated mode with a residual decoherence error added to total holonomy; stability but not exact Canon.
+C7_Q_DEP_COMPENSATED,odd,matter,q_renormalized,exact_compensated,Q_DEP_LOCAL_BUT_TOTAL_EXACT,"q-dependent local split, but exact compensation keeps total holonomy chi. Tests if compensation can be q-independent in total."
+C8_PASSIVE_TRANSIT_COMPENSATED_TEST,odd,matter,passive,none,PASSIVE_TRANSIT_REJECTED,Passive transit center with no exact attachment; should fail as Canon mechanism.

@@ -1,0 +1,17 @@
+molecule_id,chirality,bridge_length_m,temperature_K,time_s,signal,signal_uncertainty,method,source_feature,note
+Fig2a,1,,,,0.06440770628795435,,field_swept_EPR_spectral_proxy_NOT_time_trace,enantiomer_pair,Use only for spectral ranking; not valid for v0.3 decoherence fit without time_s metadata.
+Fig2a,0,,,,0.11093202498853413,,field_swept_EPR_spectral_proxy_NOT_time_trace,channel_vs_control_2,Use only for spectral ranking; not valid for v0.3 decoherence fit without time_s metadata.
+Fig2a,0,,,,0.06710312897461612,,field_swept_EPR_spectral_proxy_NOT_time_trace,channel_vs_control_2,Use only for spectral ranking; not valid for v0.3 decoherence fit without time_s metadata.
+Fig2b,1,,,,0.05276377063103934,,field_swept_EPR_spectral_proxy_NOT_time_trace,enantiomer_pair,Use only for spectral ranking; not valid for v0.3 decoherence fit without time_s metadata.
+Fig2b,0,,,,0.182207758585019,,field_swept_EPR_spectral_proxy_NOT_time_trace,channel_vs_control_2,Use only for spectral ranking; not valid for v0.3 decoherence fit without time_s metadata.
+Fig2b,0,,,,0.18585990505805702,,field_swept_EPR_spectral_proxy_NOT_time_trace,channel_vs_control_2,Use only for spectral ranking; not valid for v0.3 decoherence fit without time_s metadata.
+Fig2c,1,,,,0.028791563944380122,,field_swept_EPR_spectral_proxy_NOT_time_trace,enantiomer_pair,Use only for spectral ranking; not valid for v0.3 decoherence fit without time_s metadata.
+Fig2c,0,,,,0.057774538228285724,,field_swept_EPR_spectral_proxy_NOT_time_trace,channel_vs_control_2,Use only for spectral ranking; not valid for v0.3 decoherence fit without time_s metadata.
+Fig2c,0,,,,0.06216279051616747,,field_swept_EPR_spectral_proxy_NOT_time_trace,channel_vs_control_2,Use only for spectral ranking; not valid for v0.3 decoherence fit without time_s metadata.
+Fig2d,1,,,,0.04176874409696223,,field_swept_EPR_spectral_proxy_NOT_time_trace,enantiomer_pair,Use only for spectral ranking; not valid for v0.3 decoherence fit without time_s metadata.
+Fig2d,0,,,,0.11589719655603756,,field_swept_EPR_spectral_proxy_NOT_time_trace,channel_vs_control_2,Use only for spectral ranking; not valid for v0.3 decoherence fit without time_s metadata.
+Fig2d,0,,,,0.1370318102640901,,field_swept_EPR_spectral_proxy_NOT_time_trace,channel_vs_control_2,Use only for spectral ranking; not valid for v0.3 decoherence fit without time_s metadata.
+Fig4a,1,,,,0.06225808249367405,,field_swept_EPR_spectral_proxy_NOT_time_trace,achiral_vs_chiral,Use only for spectral ranking; not valid for v0.3 decoherence fit without time_s metadata.
+Fig4b,1,,,,0.16775104136455116,,field_swept_EPR_spectral_proxy_NOT_time_trace,achiral_vs_chiral,Use only for spectral ranking; not valid for v0.3 decoherence fit without time_s metadata.
+Fig4c,1,,,,0.06256514820441317,,field_swept_EPR_spectral_proxy_NOT_time_trace,achiral_vs_chiral,Use only for spectral ranking; not valid for v0.3 decoherence fit without time_s metadata.
+Fig4d,1,,,,0.09218454348417202,,field_swept_EPR_spectral_proxy_NOT_time_trace,achiral_vs_chiral,Use only for spectral ranking; not valid for v0.3 decoherence fit without time_s metadata.

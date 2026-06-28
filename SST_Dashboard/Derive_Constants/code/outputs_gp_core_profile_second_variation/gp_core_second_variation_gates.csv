@@ -1,0 +1,7 @@
+gate,claim,value,status,notes
+GP_core_profile,solve radial n=1 GP/NLS vortex profile,solve_bvp,computed,Profile affects radial weights; angular 2/3 ratio cancels for isotropic radial weights.
+volume_second_variation,(1-eta)^3 has eta^2 coefficient 3,3.0,DERIVED,Pure spherical shell Jacobian.
+transverse_projector_average,<sin^2 theta>_S2 = 2/3,0.6666666666803746,DERIVED,absolute numerical error 1.371e-11; independent of radial profile under isotropic weighting.
+relative_transverse_weight,w_perp,1.0,CANONICAL_ASSUMPTION,canonical unweighted isotropic GP/NLS gradient response
+shell_deficit_coefficient,c2 = [3 + (2/3) w_perp]/(4 chi_R^2),0.22916666666666666,DERIVED_WITHIN_CANONICAL_UNWEIGHTED_GP_SHELL,"sigma=3.6666666666666665, target c2=0.22916666666666666"
+microscopic_w_perp_gate,full primitive GP/SST reduction forces w_perp=1,True,OPEN_MICROSCOPIC_NORMALIZATION,This script does not prove the full microscopic normalization; it exposes it.

@@ -1,0 +1,7 @@
+name,symbolic,latex
+u,R*phi/r,\frac{R \phi}{r}
+du_dr,-R*phi/r**2,- \frac{R \phi}{r^{2}}
+energy_integral,4*pi*R*phi**2,4 \pi R \phi^{2}
+capacity,4*pi*R,4 \pi R
+Lambda_from_K,4*pi*K_cell*R,4 \pi K_{cell} R
+K_from_Lambda,Lambda_phi/(4*pi*R),\frac{\Lambda_{\phi}}{4 \pi R}

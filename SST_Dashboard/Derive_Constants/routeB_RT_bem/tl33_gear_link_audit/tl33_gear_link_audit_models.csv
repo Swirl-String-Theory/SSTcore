@@ -1,0 +1,10 @@
+model_id,description,parity,chi_kind,local_kind,attachment_kind,status_label
+C0_CANON_ATTACHED_BASELINE,"Baseline exact attachment: local=chi, attachment=0.",odd,matter,canon,exact_compensated,BASELINE_EXACT_ATTACHMENT
+C1_COMPENSATED_NEUTRAL_MATTER,Matter-sector exact neutral compensation.,odd,matter,renormalized,exact_compensated,CANON_CANDIDATE_COMPENSATED
+C2_COMPENSATED_NEUTRAL_ANTIMATTER,Antimatter/mirror exact neutral compensation.,odd,antimatter,renormalized,exact_compensated,CANON_CANDIDATE_MIRROR_COMPENSATED
+C3_UNCOMPENSATED_LOCAL_ONLY,Local swirl-clock renormalization without attachment compensation.,odd,matter,renormalized,none,FAILS_EXACT_HOLONOMY_UNLESS_EPS_ZERO
+C4_PARTIAL_COMPENSATION,Diagnostic partial compensation; tests exactness failure.,odd,matter,renormalized,partial,PARTIAL_COMPENSATION_DIAGNOSTIC
+C5_CHARGE_LEAK,Compensation partly leaks into charge/spectral sector.,odd,matter,renormalized,charge_leak,CHARGE_LEAK_CONSTRAINED
+C6_DECOHERED_RESIDUAL,Residual/decohered attachment; selection may survive but exactness fails.,odd,matter,decohered,residual,DECOHERENCE_RESIDUAL_DIAGNOSTIC
+C7_Q_DEP_COMPENSATED,q-dependent local contribution but total exact; diagnostic for universality.,odd,matter,q_renormalized,exact_compensated,Q_DEP_LOCAL_BUT_TOTAL_EXACT
+C8_PASSIVE_TRANSIT_COMPENSATED_TEST,Rejected passive transit center; not an Attachment mechanism.,none,matter,passive,none,PASSIVE_TRANSIT_REJECTED

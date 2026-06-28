@@ -1,0 +1,12 @@
+==============================================================================
+Route B BEMv8 pair-length budget complete
+==============================================================================
+outdir: outputs_routeB_BEM_v10\runs\g004_nc48_nt8_ns256_tf0p2_of3p6\bemv8_base
+source: BEMv5 subrun=outputs_routeB_BEM_v10\runs\g004_nc48_nt8_ns256_tf0p2_of3p6\bemv8_base\bemv5_base
+target/reference: 3_1/0_1
+L_long_target = 16.372460056045686
+leading length term = 137.16160062204122
+DeltaF_pair = -78.45497344180247
+finite correction half = -39.22748672090123
+alpha_inv_pred_blind_v8 = 97.93411390114
+wrote: geometric_length_audit.csv, hk_length_coefficients_phys.csv, spectral_length_estimate_phys.csv, pair_subtracted_correction.csv, alpha_component_budget_v8.csv, blind_alpha_prediction_v8.md

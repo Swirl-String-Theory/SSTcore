@@ -1,0 +1,40 @@
+{
+  "radius_m": 0.05,
+  "current_peak_A": 5.0,
+  "duty": 0.382,
+  "f0_Hz": 1000000.0,
+  "harmonic": 1,
+  "kernel_x": 0.28720621698601045,
+  "grid_res": 51,
+  "bounds_m": 0.1,
+  "Bmag_max_T": 0.03525816284387618,
+  "Bmag_mean_T": 0.00025762866956228906,
+  "pressure_min_proxy_Pa": -494.62891286398883,
+  "wire_length_total_m": 8.459124083581289,
+  "ac_copper_estimate": {
+    "skin_depth_m": 6.60828496282111e-05,
+    "R_dc_ohm": 0.18568326996092288,
+    "R_ac_ohm": 0.7024639184205738,
+    "R_ac_over_R_dc": 3.783129834844074
+  },
+  "params": {
+    "slots": 40,
+    "step_forward": 11,
+    "step_backward": -9,
+    "n_pairs": 20,
+    "radius_bottom": 0.05,
+    "radius_top": 0.05,
+    "height": 0.0,
+    "profile": "linear",
+    "profile_power": 2.2,
+    "samples_per_segment": 10,
+    "start_slot": 0,
+    "phase_offsets": [
+      0.0,
+      2.0943951023931953,
+      4.1887902047863905
+    ],
+    "z_center": 0.0,
+    "path_mode": "chord"
+  }
+}

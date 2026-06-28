@@ -176,6 +176,16 @@ def iter_results_files(repo_root: Path) -> Iterator[str]:
         yield rel
 
 
+def iter_docs_patches_files(repo_root: Path) -> Iterator[str]:
+    """Include docs/patches/ even before first commit (evidence bundle provenance)."""
+    root = repo_root / "docs" / "patches"
+    if not root.is_dir():
+        return
+    for path in sorted(root.rglob("*")):
+        if path.is_file():
+            yield _norm_rel(str(path.relative_to(repo_root)))
+
+
 def collect_source_files(repo_root: Path | None = None) -> list[str]:
     root = repo_root or REPO_ROOT
     seen: set[str] = set()
@@ -194,6 +204,9 @@ def collect_source_files(repo_root: Path | None = None) -> list[str]:
         add(rel)
 
     for rel in iter_results_files(root):
+        add(rel)
+
+    for rel in iter_docs_patches_files(root):
         add(rel)
 
     for rel in ALWAYS_INCLUDE_IF_PRESENT:

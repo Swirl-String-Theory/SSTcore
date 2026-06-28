@@ -1,0 +1,5 @@
+step,statement,equation,fixes,status
+1,"Assume a separable monomial normalizer N_{a,b}=M_max^a L_cert^b.","N_{a,b}=M_max^a L_cert^b",,DEFINITION
+2,Mode extensivity requires removing one power of retained mode count.,DeltaF_pair ~ M_max,a=1,FROM_A2
+3,Second-order length-scale covariance requires removing two powers of certified length.,density ~ L_cert^{-2},b=2,FROM_A3
+4,Therefore the minimal separable normalizer is M_max L_cert^2.,N_RT=M_max L_cert^2,M_Lcert2,CONDITIONAL_QED

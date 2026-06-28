@@ -21,6 +21,7 @@ void bind_canonical_constants(py::module_& m) {
         .def_readwrite("rho_E", &sst::SSTCanonicalValues::rho_E)
         .def_readwrite("rho_m", &sst::SSTCanonicalValues::rho_m)
         .def_readwrite("rho_core", &sst::SSTCanonicalValues::rho_core)
+        .def_readwrite("rho_horn", &sst::SSTCanonicalValues::rho_horn)
         .def_readwrite("eta_0", &sst::SSTCanonicalValues::eta_0)
         .def_readwrite("geometric_gate", &sst::SSTCanonicalValues::geometric_gate)
         .def_readwrite("swirl_clock", &sst::SSTCanonicalValues::swirl_clock)
@@ -61,6 +62,8 @@ void bind_canonical_constants(py::module_& m) {
                     py::arg("rho_f"), py::arg("v_norm"))
         .def_static("mass_equivalent_density", &sst::SSTCanonicalConstants::mass_equivalent_density,
                     py::arg("rho_E"), py::arg("c") = static_cast<double>(SST::Constants::C_VACUUM))
+        .def_static("horn_envelope_density", &sst::SSTCanonicalConstants::horn_envelope_density,
+                    py::arg("m_e"), py::arg("c"), py::arg("v_swirl"), py::arg("r_c"))
         .def_static("core_density_closure", &sst::SSTCanonicalConstants::core_density_closure,
                     py::arg("m_e"), py::arg("c"), py::arg("v_swirl"), py::arg("r_c"))
         .def_static("geometric_gate", &sst::SSTCanonicalConstants::geometric_gate,

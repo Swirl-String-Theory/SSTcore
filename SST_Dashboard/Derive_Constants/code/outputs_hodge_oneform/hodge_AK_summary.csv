@@ -1,0 +1,5 @@
+quantity,value,label,note
+AK_fit,0.07738638,RESEARCH-TRACK,from finite N scan
+aK_fit,-0.18018871,RESEARCH-TRACK,constant term
+AK_theorem,0.07957747,DERIVED,1/(4pi) slender-body limit
+AK_fit_ratio,0.97246596,INFO,→ 1 as N→∞

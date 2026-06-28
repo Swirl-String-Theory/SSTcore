@@ -1,0 +1,13 @@
+geometry,lane,phase,mirror,n_points,length_m
+sawbowl_curved,SawBowl phase 1,0,False,961,1.668328984289998
+sawbowl_curved,SawBowl phase 2,1,False,961,1.6683289842899982
+sawbowl_curved,SawBowl phase 3,2,False,961,1.668328984289998
+sawbowl_chord,SawBowl phase 1,0,False,41,1.497742735732544
+sawbowl_chord,SawBowl phase 2,1,False,41,1.4977427357325441
+sawbowl_chord,SawBowl phase 3,2,False,41,1.497742735732544
+rodin6lane,CW phase 1 (cp=0.00),0,False,6000,1.2544239444034464
+rodin6lane,CW phase 2 (cp=0.33),1,False,6000,1.2544239444034462
+rodin6lane,CW phase 3 (cp=0.67),2,False,6000,1.2544239444034462
+rodin6lane,CCW/mirror phase 1 (cp=0.00),0,True,6000,1.2544239444034464
+rodin6lane,CCW/mirror phase 2 (cp=0.33),1,True,6000,1.2544239444034462
+rodin6lane,CCW/mirror phase 3 (cp=0.67),2,True,6000,1.2544239444034462

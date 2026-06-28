@@ -1,0 +1,12 @@
+==============================================================================
+Route B BEMv13 certified-length budget complete
+==============================================================================
+outdir: outputs_routeB_BEM_v18_knotplot\runs\7_1
+source: BEMv8 subrun=outputs_routeB_BEM_v18_knotplot\runs\7_1\bemv8_base
+selected normalizer: M_Lcert2
+gate: PASS_SUBLEADING_CORRECTION
+L_cert_target: 30.700289
+leading_half_alpha_inv_cert: 257.1941396946228
+finite_correction_half_cert: 0.000871463183329195
+alpha_inv_pred_blind_v13: 257.1950111578061
+wrote: certified_length_audit.csv, certified_normalizer_candidates.csv, alpha_component_budget_v13.csv, certified_length_report.md

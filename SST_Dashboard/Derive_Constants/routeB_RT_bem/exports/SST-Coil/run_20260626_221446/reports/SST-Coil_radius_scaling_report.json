@@ -1,0 +1,16 @@
+{
+  "radii_m": [
+    0.03,
+    0.05,
+    0.1
+  ],
+  "duty": 0.382,
+  "f_min_Hz": 100000.0,
+  "f_max_Hz": 25000000.0,
+  "samples": 2500,
+  "n_harmonics": 15,
+  "kernel_kind": "sinc",
+  "include_skin_rolloff": false,
+  "interpretation": "If experimental features collapse in f0*R and shift as 1/R, this supports a geometry-kernel diagnostic. Fixed absolute frequencies indicate ordinary electronics/parasitics unless otherwise explained.",
+  "warning": "This is a candidate-kernel mathematical test, not evidence for anomalous force or gravity control. Replace G_candidate with measured response kernel when available."
+}

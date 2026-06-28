@@ -1,0 +1,84 @@
+{
+  "args": {
+    "alpha_cv_threshold": 0.01,
+    "boundary_subspace": "all",
+    "counterterm_fit_min_M": 4,
+    "counterterm_models": "hk,hk+inv_sqrt,hk+inv_sqrt+inv",
+    "counterterm_tail_frac": 0.75,
+    "fit_min_M": 4,
+    "fit_models": "sqrt,sqrt+inv,sqrt+inv+threehalf",
+    "fit_tail_frac": 0.75,
+    "from_bemv13_outdirs": "",
+    "grid_run_timeout": 260,
+    "grid_suite_json": "BEMv14_suite_stageA_probe.json",
+    "ideal": "ideal.txt",
+    "ideal_xml_knot_ids": "0:1:1,3:1:1,4:1:1",
+    "keep_constant": false,
+    "length_coeff": "A_M",
+    "length_fit_min_M": 4,
+    "length_fit_model": "hk+inv_sqrt+inv",
+    "length_fit_tail_frac": 0.75,
+    "length_samples": 4000,
+    "max_raw_modes": 0,
+    "min_grid_runs": 3,
+    "mu_mode": "inverse_outer_radius",
+    "mu_value": 1.0,
+    "multirun_timeout": 7200,
+    "no_auto_add_unknot": false,
+    "normalizers": "raw,Mmax,sqrtM,Lcert,Lcert2,Lcert3,NsoftV,NsoftV_Lcert,leading_full_cert,leading_half_cert,M_Lcert,sqrtM_Lcert,M_Lcert2",
+    "outdir": "outputs_routeB_BEM_v14_stageA",
+    "pair_fit_min_M": 4,
+    "pair_fit_model": "hk+inv_sqrt+inv",
+    "pair_fit_tail_frac": 0.75,
+    "preferred_normalizer": "M_Lcert2",
+    "reference": "0_1",
+    "soft_index_count": 4,
+    "soft_volume_mode": "unit_ball",
+    "soft_volume_value": 0.0,
+    "subleading_threshold": 0.05,
+    "subrun_timeout": 180,
+    "suite_profile": "quick",
+    "target": "3_1",
+    "v13_script": "",
+    "v14_script": "",
+    "v8_script": ""
+  },
+  "suite": [
+    {
+      "args": {
+        "grid_mode": "paired",
+        "n_center_list": "8,10,12",
+        "n_sphere_list": "14,18,24",
+        "n_theta_list": "3,3,4",
+        "outer_factor_list": "2.0,2.4,2.8",
+        "pair_fit_min_M": 4,
+        "tube_fraction_list": "0.40,0.34,0.30"
+      },
+      "label": "A1_paired_micro_low"
+    },
+    {
+      "args": {
+        "grid_mode": "paired",
+        "n_center_list": "10,12,14",
+        "n_sphere_list": "18,24,32",
+        "n_theta_list": "3,4,4",
+        "outer_factor_list": "2.2,2.6,3.0",
+        "pair_fit_min_M": 4,
+        "tube_fraction_list": "0.36,0.30,0.26"
+      },
+      "label": "A2_paired_micro_high"
+    },
+    {
+      "args": {
+        "grid_mode": "cartesian",
+        "n_center_list": "8,10",
+        "n_sphere_list": "14,18",
+        "n_theta_list": "3,4",
+        "outer_factor_list": "2.2,2.8",
+        "pair_fit_min_M": 4,
+        "tube_fraction_list": "0.36,0.30"
+      },
+      "label": "A3_cartesian_tiny"
+    }
+  ]
+}

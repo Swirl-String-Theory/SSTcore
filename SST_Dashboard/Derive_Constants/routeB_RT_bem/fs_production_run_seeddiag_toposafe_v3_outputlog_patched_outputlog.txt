@@ -1,0 +1,1236 @@
+[log] writing console output to fs_production_run_seeddiag_toposafe_v3_outputlog_patched_outputlog.txt
+[device] xpu
+[production] N=128, box=10.0, device=xpu, steps=400, delta=0.015, toposafe=True, adaptive_seed=True
+[meter efficiency @ N=128] eps=0.948   (Q_true = Q_meter / eps)
+
+[scope] pq+1 applies here only to T(2,q) torus knots; twist/non-torus knots need a separate minimizer scan, not this hypothesis.
+
+=== 3_1 trefoil = T(2,3)   (torus pq+1 = 7) ===
+    seed/framing scan (Q_H calibrated; geometry-aware):
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr=  0 -> Q_seed=  -2.26 err_pq+1= 4.74 err_int= 0.26 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr=  1 -> Q_seed=  -3.03 err_pq+1= 3.97 err_int= 0.03 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr=  2 -> Q_seed=  -3.68 err_pq+1= 3.32 err_int= 0.32 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr=  3 -> Q_seed=  -4.27 err_pq+1= 2.73 err_int= 0.27 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr=  4 -> Q_seed=  -5.00 err_pq+1= 2.00 err_int= 0.00 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr=  5 -> Q_seed=  -5.66 err_pq+1= 1.34 err_int= 0.34 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr=  6 -> Q_seed=  -6.21 err_pq+1= 0.79 err_int= 0.21 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr=  7 -> Q_seed=  -6.98 err_pq+1= 0.02 err_int= 0.02 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr=  8 -> Q_seed=  -7.57 err_pq+1= 0.57 err_int= 0.43 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr=  9 -> Q_seed=  -8.15 err_pq+1= 1.15 err_int= 0.15 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr= 10 -> Q_seed=  -8.89 err_pq+1= 1.89 err_int= 0.11 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr= 11 -> Q_seed=  -9.41 err_pq+1= 2.41 err_int= 0.41 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr= 12 -> Q_seed= -10.07 err_pq+1= 3.07 err_int= 0.07 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr= 13 -> Q_seed= -10.68 err_pq+1= 3.68 err_int= 0.32 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr= 14 -> Q_seed= -11.28 err_pq+1= 4.28 err_int= 0.28 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr= 15 -> Q_seed= -11.82 err_pq+1= 4.82 err_int= 0.18 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr= 16 -> Q_seed= -12.49 err_pq+1= 5.49 err_int= 0.49 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr= 17 -> Q_seed= -12.97 err_pq+1= 5.97 err_int= 0.03 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr= 18 -> Q_seed= -13.58 err_pq+1= 6.58 err_int= 0.42 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr= 19 -> Q_seed= -14.12 err_pq+1= 7.12 err_int= 0.12 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr= 20 -> Q_seed= -14.66 err_pq+1= 7.66 err_int= 0.34 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr= 21 -> Q_seed= -15.18 err_pq+1= 8.18 err_int= 0.18 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr= 22 -> Q_seed= -15.73 err_pq+1= 8.73 err_int= 0.27 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr= 23 -> Q_seed= -16.21 err_pq+1= 9.21 err_int= 0.21 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr= 24 -> Q_seed= -16.71 err_pq+1= 9.71 err_int= 0.29 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1024 fr= 25 -> Q_seed= -17.21 err_pq+1=10.21 err_int= 0.21 dmin= 0.199 R/dmin= 8.37 vox=21.3 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr=  0 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr=  1 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr=  2 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr=  3 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr=  4 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr=  5 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr=  6 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr=  7 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr=  8 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr=  9 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr= 10 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr= 11 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr= 12 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr= 13 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr= 14 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr= 15 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr= 16 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr= 17 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr= 18 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr= 19 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr= 20 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr= 21 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr= 22 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr= 23 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr= 24 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.032 M=1024 fr= 25 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.16 vox= 0.4 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr=  0 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr=  1 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr=  2 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr=  3 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr=  4 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr=  5 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr=  6 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr=  7 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr=  8 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr=  9 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr= 10 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr= 11 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr= 12 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr= 13 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr= 14 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr= 15 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr= 16 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr= 17 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr= 18 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr= 19 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr= 20 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr= 21 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr= 22 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr= 23 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr= 24 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.044 M=1024 fr= 25 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr=  0 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr=  1 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr=  2 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr=  3 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr=  4 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr=  5 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr=  6 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr=  7 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr=  8 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr=  9 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr= 10 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr= 11 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr= 12 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr= 13 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr= 14 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr= 15 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr= 16 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr= 17 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr= 18 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr= 19 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr= 20 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr= 21 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr= 22 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr= 23 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr= 24 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.056 M=1024 fr= 25 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.199 R/dmin= 0.28 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr=  0 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr=  1 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr=  2 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr=  3 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr=  4 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr=  5 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr=  6 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr=  7 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr=  8 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr=  9 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr= 10 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr= 11 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr= 12 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr= 13 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr= 14 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr= 15 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr= 16 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr= 17 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr= 18 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr= 19 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr= 20 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr= 21 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr= 22 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr= 23 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr= 24 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.038 M=1024 fr= 25 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr=  0 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr=  1 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr=  2 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr=  3 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr=  4 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr=  5 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr=  6 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr=  7 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr=  8 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr=  9 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr= 10 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr= 11 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr= 12 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr= 13 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr= 14 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr= 15 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr= 16 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr= 17 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr= 18 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr= 19 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr= 20 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr= 21 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr= 22 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr= 23 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr= 24 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.053 M=1024 fr= 25 -> Q_seed=  +0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr=  0 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr=  1 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr=  2 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr=  3 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr=  4 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr=  5 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr=  6 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr=  7 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr=  8 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr=  9 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr= 10 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr= 11 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr= 12 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr= 13 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr= 14 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr= 15 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr= 16 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr= 17 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr= 18 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr= 19 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr= 20 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr= 21 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr= 22 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr= 23 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr= 24 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.067 M=1024 fr= 25 -> Q_seed=  -0.00 err_pq+1= 7.00 err_int= 0.00 dmin= 0.239 R/dmin= 0.28 vox= 0.9 geom_warn
+    -> top 3 candidates by distance to pq+1=7 + geometry diagnostics:
+       #1: mode=legacy, sf=0.30, tube=1.667, M=1024, framing=  7, Q_seed=-6.98, err_to_pq+1=0.02, err_to_int=0.02, R/dmin=8.37, vox=21.3, geom_warn
+       #2: mode=legacy, sf=0.30, tube=1.667, M=1024, framing=  8, Q_seed=-7.57, err_to_pq+1=0.57, err_to_int=0.43, R/dmin=8.37, vox=21.3, geom_warn
+       #3: mode=legacy, sf=0.30, tube=1.667, M=1024, framing=  6, Q_seed=-6.21, err_to_pq+1=0.79, err_to_int=0.21, R/dmin=8.37, vox=21.3, geom_warn
+    -> WARN candidate #1: geometry diagnostics are not clean; run is diagnostic, not final.
+    -> relaxing candidate #1: mode=legacy, sf=0.30, tube=1.667, M=1024, framing=7 (seed Q_H=-6.98); toposafe, 400 steps:
+   reject at step   40: Q_H=-5.658 hold=0.855 err=0.957; rollback, delta -> 0.0075
+   reject at step   40: Q_H=-5.895 hold=0.891 err=0.720; rollback, delta -> 0.00375
+   reject at step   60: Q_H=-5.896 hold=0.891 err=0.719; rollback, delta -> 0.00187
+   reject at step   80: Q_H=-5.896 hold=0.891 err=0.719; rollback, delta -> 0.000937
+   reject at step   80: Q_H=-5.931 hold=0.897 err=0.684; rollback, delta -> 0.000469
+   reject at step   80: Q_H=-5.949 hold=0.899 err=0.666; rollback, delta -> 0.000234
+   reject at step  100: Q_H=-5.949 hold=0.899 err=0.666; rollback, delta -> 0.000117
+   reject at step  100: Q_H=-5.953 hold=0.900 err=0.662; rollback, delta -> 5.86e-05
+   abort: TOPOLOGY_LEAK; accepted=80, rejects=8, delta=5.86e-05
+    RESULT 3_1 trefoil #1: Q_H -6.98 -> -6.29   hold=0.901   |round|=6   E2=2096 E4=3314   pq+1=7   status=TOPOLOGY_LEAK accepted=80 rejects=8 <-- not stable/match
+
+    -> WARN candidate #2: geometry diagnostics are not clean; run is diagnostic, not final.
+    -> relaxing candidate #2: mode=legacy, sf=0.30, tube=1.667, M=1024, framing=8 (seed Q_H=-7.57); toposafe, 400 steps:
+   reject at step   40: Q_H=-6.233 hold=0.869 err=0.939; rollback, delta -> 0.0075
+   reject at step   60: Q_H=-6.234 hold=0.869 err=0.938; rollback, delta -> 0.00375
+   reject at step   60: Q_H=-6.346 hold=0.885 err=0.827; rollback, delta -> 0.00187
+   reject at step   60: Q_H=-6.411 hold=0.894 err=0.762; rollback, delta -> 0.000937
+   reject at step   60: Q_H=-6.446 hold=0.899 err=0.727; rollback, delta -> 0.000469
+   reject at step   80: Q_H=-6.446 hold=0.899 err=0.727; rollback, delta -> 0.000234
+   reject at step   80: Q_H=-6.455 hold=0.900 err=0.718; rollback, delta -> 0.000117
+   reject at step  100: Q_H=-6.455 hold=0.900 err=0.718; rollback, delta -> 5.86e-05
+   abort: TOPOLOGY_LEAK; accepted=80, rejects=8, delta=5.86e-05
+    RESULT 3_1 trefoil #2: Q_H -7.57 -> -6.81   hold=0.901   |round|=7   E2=2077 E4=3768   pq+1=7   status=TOPOLOGY_LEAK accepted=80 rejects=8 <-- MATCH
+
+    -> SKIP candidate #3: seed Q_H=-6.21 is not close enough to pq+1=7 (err=0.79 > 0.75); not a valid pq+1 relaxation test.
+
+=== 5_1 cinquefoil = T(2,5)   (torus pq+1 = 11) ===
+    seed/framing scan (Q_H calibrated; geometry-aware):
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr=  0 -> Q_seed=  -3.33 err_pq+1= 7.67 err_int= 0.33 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr=  1 -> Q_seed=  -2.46 err_pq+1= 8.54 err_int= 0.46 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr=  2 -> Q_seed=  -4.46 err_pq+1= 6.54 err_int= 0.46 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr=  3 -> Q_seed=  -3.54 err_pq+1= 7.46 err_int= 0.46 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr=  4 -> Q_seed=  -4.68 err_pq+1= 6.32 err_int= 0.32 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr=  5 -> Q_seed=  -5.17 err_pq+1= 5.83 err_int= 0.17 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr=  6 -> Q_seed=  -4.82 err_pq+1= 6.18 err_int= 0.18 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr=  7 -> Q_seed=  -6.39 err_pq+1= 4.61 err_int= 0.39 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr=  8 -> Q_seed=  -5.67 err_pq+1= 5.33 err_int= 0.33 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr=  9 -> Q_seed=  -6.79 err_pq+1= 4.21 err_int= 0.21 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr= 10 -> Q_seed=  -7.10 err_pq+1= 3.90 err_int= 0.10 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr= 11 -> Q_seed=  -6.96 err_pq+1= 4.04 err_int= 0.04 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr= 12 -> Q_seed=  -8.33 err_pq+1= 2.67 err_int= 0.33 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr= 13 -> Q_seed=  -7.62 err_pq+1= 3.38 err_int= 0.38 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr= 14 -> Q_seed=  -8.87 err_pq+1= 2.13 err_int= 0.13 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr= 15 -> Q_seed=  -8.80 err_pq+1= 2.20 err_int= 0.20 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr= 16 -> Q_seed=  -9.09 err_pq+1= 1.91 err_int= 0.09 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr= 17 -> Q_seed=  -9.94 err_pq+1= 1.06 err_int= 0.06 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr= 18 -> Q_seed=  -9.62 err_pq+1= 1.38 err_int= 0.38 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr= 19 -> Q_seed= -10.58 err_pq+1= 0.42 err_int= 0.42 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr= 20 -> Q_seed= -10.57 err_pq+1= 0.43 err_int= 0.43 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr= 21 -> Q_seed= -10.88 err_pq+1= 0.12 err_int= 0.12 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr= 22 -> Q_seed= -11.55 err_pq+1= 0.55 err_int= 0.45 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr= 23 -> Q_seed= -11.35 err_pq+1= 0.35 err_int= 0.35 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr= 24 -> Q_seed= -12.17 err_pq+1= 1.17 err_int= 0.17 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr= 25 -> Q_seed= -12.14 err_pq+1= 1.14 err_int= 0.14 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1280 fr= 26 -> Q_seed= -12.49 err_pq+1= 1.49 err_int= 0.49 dmin= 0.238 R/dmin= 7.01 vox=21.3 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr=  0 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr=  1 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr=  2 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr=  3 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr=  4 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr=  5 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr=  6 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr=  7 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr=  8 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr=  9 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr= 10 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr= 11 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr= 12 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr= 13 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr= 14 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr= 15 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr= 16 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr= 17 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr= 18 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr= 19 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr= 20 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr= 21 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr= 22 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr= 23 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr= 24 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr= 25 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.038 M=1280 fr= 26 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr=  0 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr=  1 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr=  2 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr=  3 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr=  4 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr=  5 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr=  6 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr=  7 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr=  8 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr=  9 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr= 10 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr= 11 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr= 12 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr= 13 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr= 14 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr= 15 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr= 16 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr= 17 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr= 18 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr= 19 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr= 20 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr= 21 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr= 22 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr= 23 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr= 24 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr= 25 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.052 M=1280 fr= 26 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.22 vox= 0.7 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr=  0 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr=  1 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr=  2 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr=  3 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr=  4 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr=  5 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr=  6 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr=  7 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr=  8 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr=  9 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr= 10 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr= 11 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr= 12 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr= 13 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr= 14 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr= 15 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr= 16 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr= 17 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr= 18 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr= 19 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr= 20 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr= 21 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr= 22 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr= 23 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr= 24 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr= 25 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.30 tube= 0.067 M=1280 fr= 26 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.238 R/dmin= 0.28 vox= 0.9 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr=  0 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr=  1 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr=  2 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr=  3 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr=  4 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr=  5 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr=  6 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr=  7 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr=  8 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr=  9 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr= 10 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr= 11 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr= 12 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr= 13 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr= 14 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr= 15 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr= 16 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr= 17 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr= 18 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr= 19 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr= 20 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr= 21 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr= 22 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr= 23 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr= 24 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr= 25 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.046 M=1280 fr= 26 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr=  0 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr=  1 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr=  2 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr=  3 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr=  4 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr=  5 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr=  6 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr=  7 -> Q_seed=  -0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr=  8 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr=  9 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr= 10 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr= 11 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr= 12 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr= 13 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr= 14 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr= 15 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr= 16 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr= 17 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr= 18 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr= 19 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr= 20 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr= 21 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr= 22 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr= 23 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr= 24 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr= 25 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.063 M=1280 fr= 26 -> Q_seed=  +0.00 err_pq+1=11.00 err_int= 0.00 dmin= 0.285 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr=  0 -> Q_seed=  -0.02 err_pq+1=10.98 err_int= 0.02 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr=  1 -> Q_seed=  -0.02 err_pq+1=10.98 err_int= 0.02 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr=  2 -> Q_seed=  -0.02 err_pq+1=10.98 err_int= 0.02 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr=  3 -> Q_seed=  -0.02 err_pq+1=10.98 err_int= 0.02 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr=  4 -> Q_seed=  -0.02 err_pq+1=10.98 err_int= 0.02 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr=  5 -> Q_seed=  -0.02 err_pq+1=10.98 err_int= 0.02 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr=  6 -> Q_seed=  -0.03 err_pq+1=10.97 err_int= 0.03 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr=  7 -> Q_seed=  -0.03 err_pq+1=10.97 err_int= 0.03 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr=  8 -> Q_seed=  -0.03 err_pq+1=10.97 err_int= 0.03 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr=  9 -> Q_seed=  -0.03 err_pq+1=10.97 err_int= 0.03 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr= 10 -> Q_seed=  -0.03 err_pq+1=10.97 err_int= 0.03 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr= 11 -> Q_seed=  -0.03 err_pq+1=10.97 err_int= 0.03 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr= 12 -> Q_seed=  -0.03 err_pq+1=10.97 err_int= 0.03 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr= 13 -> Q_seed=  -0.04 err_pq+1=10.96 err_int= 0.04 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr= 14 -> Q_seed=  -0.04 err_pq+1=10.96 err_int= 0.04 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr= 15 -> Q_seed=  -0.04 err_pq+1=10.96 err_int= 0.04 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr= 16 -> Q_seed=  -0.04 err_pq+1=10.96 err_int= 0.04 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr= 17 -> Q_seed=  -0.04 err_pq+1=10.96 err_int= 0.04 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr= 18 -> Q_seed=  -0.04 err_pq+1=10.96 err_int= 0.04 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr= 19 -> Q_seed=  -0.04 err_pq+1=10.96 err_int= 0.04 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr= 20 -> Q_seed=  -0.05 err_pq+1=10.95 err_int= 0.05 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr= 21 -> Q_seed=  -0.05 err_pq+1=10.95 err_int= 0.05 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr= 22 -> Q_seed=  -0.05 err_pq+1=10.95 err_int= 0.05 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr= 23 -> Q_seed=  -0.05 err_pq+1=10.95 err_int= 0.05 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr= 24 -> Q_seed=  -0.05 err_pq+1=10.95 err_int= 0.05 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr= 25 -> Q_seed=  -0.05 err_pq+1=10.95 err_int= 0.05 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.080 M=1280 fr= 26 -> Q_seed=  -0.05 err_pq+1=10.95 err_int= 0.05 dmin= 0.285 R/dmin= 0.28 vox= 1.0 geom_warn
+    -> top 3 candidates by distance to pq+1=11 + geometry diagnostics:
+       #1: mode=legacy, sf=0.30, tube=1.667, M=1280, framing= 21, Q_seed=-10.88, err_to_pq+1=0.12, err_to_int=0.12, R/dmin=7.01, vox=21.3, geom_warn
+       #2: mode=legacy, sf=0.30, tube=1.667, M=1280, framing= 23, Q_seed=-11.35, err_to_pq+1=0.35, err_to_int=0.35, R/dmin=7.01, vox=21.3, geom_warn
+       #3: mode=legacy, sf=0.30, tube=1.667, M=1280, framing= 19, Q_seed=-10.58, err_to_pq+1=0.42, err_to_int=0.42, R/dmin=7.01, vox=21.3, geom_warn
+    -> WARN candidate #1: geometry diagnostics are not clean; run is diagnostic, not final.
+    -> relaxing candidate #1: mode=legacy, sf=0.30, tube=1.667, M=1280, framing=21 (seed Q_H=-10.88); toposafe, 400 steps:
+   reject at step   40: Q_H=-8.632 hold=0.837 err=1.681; rollback, delta -> 0.0075
+   reject at step   40: Q_H=-9.037 hold=0.876 err=1.277; rollback, delta -> 0.00375
+   reject at step   40: Q_H=-9.266 hold=0.898 err=1.047; rollback, delta -> 0.00187
+   reject at step   60: Q_H=-9.266 hold=0.898 err=1.048; rollback, delta -> 0.000937
+   reject at step   80: Q_H=-9.266 hold=0.898 err=1.048; rollback, delta -> 0.000469
+   reject at step  100: Q_H=-9.266 hold=0.898 err=1.048; rollback, delta -> 0.000234
+   reject at step  100: Q_H=-9.280 hold=0.900 err=1.033; rollback, delta -> 0.000117
+   step  100  E2= 3539.02 (tgt 3539.01)  E4=10358.50  Q_H=-9.288  hold=0.901  delta=0.000117
+   reject at step  120: Q_H=-9.280 hold=0.900 err=1.033; rollback, delta -> 5.86e-05
+   abort: TOPOLOGY_LEAK; accepted=100, rejects=8, delta=5.86e-05
+    RESULT 5_1 cinquefoil #1: Q_H -10.88 -> -9.80   hold=0.901   |round|=10   E2=3539 E4=10359   pq+1=11   status=TOPOLOGY_LEAK accepted=100 rejects=8 <-- not stable/match
+
+    -> WARN candidate #2: geometry diagnostics are not clean; run is diagnostic, not final.
+    -> relaxing candidate #2: mode=legacy, sf=0.30, tube=1.667, M=1280, framing=23 (seed Q_H=-11.35); toposafe, 400 steps:
+   reject at step   20: Q_H=-9.675 hold=0.899 err=1.083; rollback, delta -> 0.0075
+   reject at step   40: Q_H=-9.668 hold=0.899 err=1.090; rollback, delta -> 0.00375
+   reject at step   60: Q_H=-9.666 hold=0.899 err=1.092; rollback, delta -> 0.00187
+   reject at step   80: Q_H=-9.667 hold=0.899 err=1.091; rollback, delta -> 0.000937
+   reject at step  100: Q_H=-9.667 hold=0.899 err=1.091; rollback, delta -> 0.000469
+   step  100  E2= 3687.54 (tgt 3687.53)  E4=11939.39  Q_H=-9.708  hold=0.902  delta=0.000469
+   reject at step  120: Q_H=-9.667 hold=0.899 err=1.091; rollback, delta -> 0.000234
+   reject at step  140: Q_H=-9.667 hold=0.899 err=1.091; rollback, delta -> 0.000117
+   reject at step  140: Q_H=-9.677 hold=0.900 err=1.081; rollback, delta -> 5.86e-05
+   abort: TOPOLOGY_LEAK; accepted=120, rejects=8, delta=5.86e-05
+    RESULT 5_1 cinquefoil #2: Q_H -11.35 -> -10.22   hold=0.900   |round|=10   E2=3688 E4=11906   pq+1=11   status=TOPOLOGY_LEAK accepted=120 rejects=8 <-- not stable/match
+
+    -> WARN candidate #3: geometry diagnostics are not clean; run is diagnostic, not final.
+    -> relaxing candidate #3: mode=legacy, sf=0.30, tube=1.667, M=1280, framing=19 (seed Q_H=-10.58); toposafe, 400 steps:
+   reject at step   40: Q_H=-8.456 hold=0.843 err=1.571; rollback, delta -> 0.0075
+   reject at step   40: Q_H=-8.871 hold=0.885 err=1.156; rollback, delta -> 0.00375
+   reject at step   60: Q_H=-8.871 hold=0.885 err=1.156; rollback, delta -> 0.00187
+   reject at step   60: Q_H=-8.985 hold=0.896 err=1.042; rollback, delta -> 0.000937
+   reject at step   80: Q_H=-8.985 hold=0.896 err=1.042; rollback, delta -> 0.000469
+   reject at step   80: Q_H=-9.014 hold=0.899 err=1.013; rollback, delta -> 0.000234
+   reject at step  100: Q_H=-9.014 hold=0.899 err=1.013; rollback, delta -> 0.000117
+   reject at step  100: Q_H=-9.021 hold=0.900 err=1.006; rollback, delta -> 5.86e-05
+   abort: TOPOLOGY_LEAK; accepted=80, rejects=8, delta=5.86e-05
+    RESULT 5_1 cinquefoil #3: Q_H -10.58 -> -9.53   hold=0.900   |round|=10   E2=3305 E4=8907   pq+1=11   status=TOPOLOGY_LEAK accepted=80 rejects=8 <-- not stable/match
+
+=== 7_1 septafoil = T(2,7)   (torus pq+1 = 15) ===
+    seed/framing scan (Q_H calibrated; geometry-aware):
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr=  0 -> Q_seed=  -2.81 err_pq+1=12.19 err_int= 0.19 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr=  1 -> Q_seed=  -2.51 err_pq+1=12.49 err_int= 0.49 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr=  2 -> Q_seed=  -3.33 err_pq+1=11.67 err_int= 0.33 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr=  3 -> Q_seed=  -3.32 err_pq+1=11.68 err_int= 0.32 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr=  4 -> Q_seed=  -3.76 err_pq+1=11.24 err_int= 0.24 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr=  5 -> Q_seed=  -4.18 err_pq+1=10.82 err_int= 0.18 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr=  6 -> Q_seed=  -4.21 err_pq+1=10.79 err_int= 0.21 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr=  7 -> Q_seed=  -4.90 err_pq+1=10.10 err_int= 0.10 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr=  8 -> Q_seed=  -4.75 err_pq+1=10.25 err_int= 0.25 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr=  9 -> Q_seed=  -5.45 err_pq+1= 9.55 err_int= 0.45 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 10 -> Q_seed=  -5.42 err_pq+1= 9.58 err_int= 0.42 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 11 -> Q_seed=  -5.88 err_pq+1= 9.12 err_int= 0.12 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 12 -> Q_seed=  -6.15 err_pq+1= 8.85 err_int= 0.15 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 13 -> Q_seed=  -6.28 err_pq+1= 8.72 err_int= 0.28 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 14 -> Q_seed=  -6.82 err_pq+1= 8.18 err_int= 0.18 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 15 -> Q_seed=  -6.75 err_pq+1= 8.25 err_int= 0.25 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 16 -> Q_seed=  -7.36 err_pq+1= 7.64 err_int= 0.36 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 17 -> Q_seed=  -7.32 err_pq+1= 7.68 err_int= 0.32 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 18 -> Q_seed=  -7.78 err_pq+1= 7.22 err_int= 0.22 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 19 -> Q_seed=  -7.93 err_pq+1= 7.07 err_int= 0.07 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 20 -> Q_seed=  -8.15 err_pq+1= 6.85 err_int= 0.15 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 21 -> Q_seed=  -8.51 err_pq+1= 6.49 err_int= 0.49 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 22 -> Q_seed=  -8.54 err_pq+1= 6.46 err_int= 0.46 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 23 -> Q_seed=  -9.01 err_pq+1= 5.99 err_int= 0.01 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 24 -> Q_seed=  -8.99 err_pq+1= 6.01 err_int= 0.01 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 25 -> Q_seed=  -9.40 err_pq+1= 5.60 err_int= 0.40 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 26 -> Q_seed=  -9.48 err_pq+1= 5.52 err_int= 0.48 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 27 -> Q_seed=  -9.72 err_pq+1= 5.28 err_int= 0.28 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 28 -> Q_seed=  -9.97 err_pq+1= 5.03 err_int= 0.03 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 29 -> Q_seed= -10.06 err_pq+1= 4.94 err_int= 0.06 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=1792 fr= 30 -> Q_seed= -10.40 err_pq+1= 4.60 err_int= 0.40 dmin= 0.229 R/dmin= 7.27 vox=21.3 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr=  0 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr=  1 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr=  2 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr=  3 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr=  4 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr=  5 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr=  6 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr=  7 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr=  8 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr=  9 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 10 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 11 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 12 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 13 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 14 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 15 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 16 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 17 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 18 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 19 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 20 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 21 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 22 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 23 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 24 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 25 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 26 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 27 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 28 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 29 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.037 M=1792 fr= 30 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr=  0 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr=  1 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr=  2 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr=  3 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr=  4 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr=  5 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr=  6 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr=  7 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr=  8 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr=  9 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 10 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 11 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 12 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 13 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 14 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 15 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 16 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 17 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 18 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 19 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 20 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 21 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 22 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 23 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 24 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 25 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 26 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 27 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 28 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 29 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=1792 fr= 30 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr=  0 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr=  1 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr=  2 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr=  3 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr=  4 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr=  5 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr=  6 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr=  7 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr=  8 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr=  9 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 10 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 11 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 12 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 13 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 14 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 15 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 16 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 17 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 18 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 19 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 20 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 21 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 22 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 23 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 24 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 25 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 26 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 27 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 28 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 29 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.064 M=1792 fr= 30 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.229 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr=  0 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr=  1 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr=  2 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr=  3 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr=  4 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr=  5 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr=  6 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr=  7 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr=  8 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr=  9 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 10 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 11 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 12 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 13 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 14 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 15 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 16 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 17 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 18 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 19 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 20 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 21 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 22 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 23 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 24 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 25 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 26 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 27 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 28 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 29 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.044 M=1792 fr= 30 -> Q_seed=  -0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr=  0 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr=  1 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr=  2 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr=  3 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr=  4 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr=  5 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr=  6 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr=  7 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr=  8 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr=  9 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 10 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 11 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 12 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 13 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 14 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 15 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 16 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 17 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 18 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 19 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 20 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 21 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 22 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 23 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 24 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 25 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 26 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 27 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 28 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 29 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.061 M=1792 fr= 30 -> Q_seed=  +0.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.275 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr=  0 -> Q_seed=  -0.01 err_pq+1=14.99 err_int= 0.01 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr=  1 -> Q_seed=  -0.01 err_pq+1=14.99 err_int= 0.01 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr=  2 -> Q_seed=  -0.01 err_pq+1=14.99 err_int= 0.01 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr=  3 -> Q_seed=  -0.01 err_pq+1=14.99 err_int= 0.01 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr=  4 -> Q_seed=  -0.01 err_pq+1=14.99 err_int= 0.01 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr=  5 -> Q_seed=  -0.01 err_pq+1=14.99 err_int= 0.01 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr=  6 -> Q_seed=  -0.02 err_pq+1=14.98 err_int= 0.02 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr=  7 -> Q_seed=  -0.02 err_pq+1=14.98 err_int= 0.02 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr=  8 -> Q_seed=  -0.02 err_pq+1=14.98 err_int= 0.02 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr=  9 -> Q_seed=  -0.02 err_pq+1=14.98 err_int= 0.02 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 10 -> Q_seed=  -0.02 err_pq+1=14.98 err_int= 0.02 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 11 -> Q_seed=  -0.02 err_pq+1=14.98 err_int= 0.02 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 12 -> Q_seed=  -0.02 err_pq+1=14.98 err_int= 0.02 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 13 -> Q_seed=  -0.02 err_pq+1=14.98 err_int= 0.02 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 14 -> Q_seed=  -0.02 err_pq+1=14.98 err_int= 0.02 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 15 -> Q_seed=  -0.02 err_pq+1=14.98 err_int= 0.02 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 16 -> Q_seed=  -0.02 err_pq+1=14.98 err_int= 0.02 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 17 -> Q_seed=  -0.02 err_pq+1=14.98 err_int= 0.02 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 18 -> Q_seed=  -0.02 err_pq+1=14.98 err_int= 0.02 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 19 -> Q_seed=  -0.03 err_pq+1=14.97 err_int= 0.03 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 20 -> Q_seed=  -0.03 err_pq+1=14.97 err_int= 0.03 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 21 -> Q_seed=  -0.03 err_pq+1=14.97 err_int= 0.03 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 22 -> Q_seed=  -0.03 err_pq+1=14.97 err_int= 0.03 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 23 -> Q_seed=  -0.03 err_pq+1=14.97 err_int= 0.03 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 24 -> Q_seed=  -0.03 err_pq+1=14.97 err_int= 0.03 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 25 -> Q_seed=  -0.03 err_pq+1=14.97 err_int= 0.03 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 26 -> Q_seed=  -0.03 err_pq+1=14.97 err_int= 0.03 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 27 -> Q_seed=  -0.03 err_pq+1=14.97 err_int= 0.03 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 28 -> Q_seed=  -0.03 err_pq+1=14.97 err_int= 0.03 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 29 -> Q_seed=  -0.03 err_pq+1=14.97 err_int= 0.03 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.077 M=1792 fr= 30 -> Q_seed=  -0.03 err_pq+1=14.97 err_int= 0.03 dmin= 0.275 R/dmin= 0.28 vox= 1.0 geom_warn
+    -> top 3 candidates by distance to pq+1=15 + geometry diagnostics:
+       #1: mode=legacy, sf=0.30, tube=1.667, M=1792, framing= 30, Q_seed=-10.40, err_to_pq+1=4.60, err_to_int=0.40, R/dmin=7.27, vox=21.3, geom_warn
+       #2: mode=legacy, sf=0.30, tube=1.667, M=1792, framing= 29, Q_seed=-10.06, err_to_pq+1=4.94, err_to_int=0.06, R/dmin=7.27, vox=21.3, geom_warn
+       #3: mode=legacy, sf=0.30, tube=1.667, M=1792, framing= 28, Q_seed=-9.97, err_to_pq+1=5.03, err_to_int=0.03, R/dmin=7.27, vox=21.3, geom_warn
+    -> SKIP candidate #1: seed Q_H=-10.40 is not close enough to pq+1=15 (err=4.60 > 0.75); not a valid pq+1 relaxation test.
+
+    -> SKIP candidate #2: seed Q_H=-10.06 is not close enough to pq+1=15 (err=4.94 > 0.75); not a valid pq+1 relaxation test.
+
+    -> SKIP candidate #3: seed Q_H=-9.97 is not close enough to pq+1=15 (err=5.03 > 0.75); not a valid pq+1 relaxation test.
+
+=== 9_1 nonafoil = T(2,9)   (torus pq+1 = 19) ===
+    seed/framing scan (Q_H calibrated; geometry-aware):
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr=  0 -> Q_seed=  -1.47 err_pq+1=17.53 err_int= 0.47 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr=  1 -> Q_seed=  -3.04 err_pq+1=15.96 err_int= 0.04 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr=  2 -> Q_seed=  -1.73 err_pq+1=17.27 err_int= 0.27 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr=  3 -> Q_seed=  -3.72 err_pq+1=15.28 err_int= 0.28 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr=  4 -> Q_seed=  -2.27 err_pq+1=16.73 err_int= 0.27 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr=  5 -> Q_seed=  -4.06 err_pq+1=14.94 err_int= 0.06 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr=  6 -> Q_seed=  -3.03 err_pq+1=15.97 err_int= 0.03 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr=  7 -> Q_seed=  -4.15 err_pq+1=14.85 err_int= 0.15 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr=  8 -> Q_seed=  -3.88 err_pq+1=15.12 err_int= 0.12 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr=  9 -> Q_seed=  -4.19 err_pq+1=14.81 err_int= 0.19 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 10 -> Q_seed=  -4.70 err_pq+1=14.30 err_int= 0.30 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 11 -> Q_seed=  -4.32 err_pq+1=14.68 err_int= 0.32 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 12 -> Q_seed=  -5.38 err_pq+1=13.62 err_int= 0.38 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 13 -> Q_seed=  -4.66 err_pq+1=14.34 err_int= 0.34 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 14 -> Q_seed=  -5.84 err_pq+1=13.16 err_int= 0.16 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 15 -> Q_seed=  -5.18 err_pq+1=13.82 err_int= 0.18 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 16 -> Q_seed=  -6.09 err_pq+1=12.91 err_int= 0.09 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 17 -> Q_seed=  -5.81 err_pq+1=13.19 err_int= 0.19 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 18 -> Q_seed=  -6.24 err_pq+1=12.76 err_int= 0.24 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 19 -> Q_seed=  -6.46 err_pq+1=12.54 err_int= 0.46 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 20 -> Q_seed=  -6.40 err_pq+1=12.60 err_int= 0.40 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 21 -> Q_seed=  -7.01 err_pq+1=11.99 err_int= 0.01 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 22 -> Q_seed=  -6.65 err_pq+1=12.35 err_int= 0.35 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 23 -> Q_seed=  -7.41 err_pq+1=11.59 err_int= 0.41 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 24 -> Q_seed=  -7.02 err_pq+1=11.98 err_int= 0.02 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 25 -> Q_seed=  -7.66 err_pq+1=11.34 err_int= 0.34 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 26 -> Q_seed=  -7.49 err_pq+1=11.51 err_int= 0.49 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 27 -> Q_seed=  -7.84 err_pq+1=11.16 err_int= 0.16 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 28 -> Q_seed=  -7.98 err_pq+1=11.02 err_int= 0.02 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 29 -> Q_seed=  -7.99 err_pq+1=11.01 err_int= 0.01 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 30 -> Q_seed=  -8.42 err_pq+1=10.58 err_int= 0.42 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 31 -> Q_seed=  -8.18 err_pq+1=10.82 err_int= 0.18 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 32 -> Q_seed=  -8.74 err_pq+1=10.26 err_int= 0.26 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 33 -> Q_seed=  -8.44 err_pq+1=10.56 err_int= 0.44 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2304 fr= 34 -> Q_seed=  -8.96 err_pq+1=10.04 err_int= 0.04 dmin= 0.226 R/dmin= 7.38 vox=21.3 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr=  0 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr=  1 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr=  2 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr=  3 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr=  4 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr=  5 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr=  6 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr=  7 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr=  8 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr=  9 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 10 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 11 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 12 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 13 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 14 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 15 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 16 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 17 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 18 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 19 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 20 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 21 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 22 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 23 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 24 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 25 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 26 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 27 -> Q_seed=  -0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 28 -> Q_seed=  -0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 29 -> Q_seed=  -0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 30 -> Q_seed=  -0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 31 -> Q_seed=  -0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 32 -> Q_seed=  -0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 33 -> Q_seed=  -0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2304 fr= 34 -> Q_seed=  -0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr=  0 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr=  1 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr=  2 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr=  3 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr=  4 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr=  5 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr=  6 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr=  7 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr=  8 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr=  9 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 10 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 11 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 12 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 13 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 14 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 15 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 16 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 17 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 18 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 19 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 20 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 21 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 22 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 23 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 24 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 25 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 26 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 27 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 28 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 29 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 30 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 31 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 32 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 33 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.050 M=2304 fr= 34 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr=  0 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr=  1 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr=  2 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr=  3 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr=  4 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr=  5 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr=  6 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr=  7 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr=  8 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr=  9 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 10 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 11 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 12 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 13 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 14 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 15 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 16 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 17 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 18 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 19 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 20 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 21 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 22 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 23 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 24 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 25 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 26 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 27 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 28 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 29 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 30 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 31 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 32 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 33 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2304 fr= 34 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.226 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr=  0 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr=  1 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr=  2 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr=  3 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr=  4 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr=  5 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr=  6 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr=  7 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr=  8 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr=  9 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 10 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 11 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 12 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 13 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 14 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 15 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 16 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 17 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 18 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 19 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 20 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 21 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 22 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 23 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 24 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 25 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 26 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 27 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 28 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 29 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 30 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 31 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 32 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 33 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2304 fr= 34 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr=  0 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr=  1 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr=  2 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr=  3 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr=  4 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr=  5 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr=  6 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr=  7 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr=  8 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr=  9 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 10 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 11 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 12 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 13 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 14 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 15 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 16 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 17 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 18 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 19 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 20 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 21 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 22 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 23 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 24 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 25 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 26 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 27 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 28 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 29 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 30 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 31 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 32 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 33 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.060 M=2304 fr= 34 -> Q_seed=  +0.00 err_pq+1=19.00 err_int= 0.00 dmin= 0.271 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr=  0 -> Q_seed=  -0.02 err_pq+1=18.98 err_int= 0.02 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr=  1 -> Q_seed=  -0.03 err_pq+1=18.97 err_int= 0.03 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr=  2 -> Q_seed=  -0.03 err_pq+1=18.97 err_int= 0.03 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr=  3 -> Q_seed=  -0.03 err_pq+1=18.97 err_int= 0.03 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr=  4 -> Q_seed=  -0.03 err_pq+1=18.97 err_int= 0.03 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr=  5 -> Q_seed=  -0.03 err_pq+1=18.97 err_int= 0.03 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr=  6 -> Q_seed=  -0.03 err_pq+1=18.97 err_int= 0.03 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr=  7 -> Q_seed=  -0.03 err_pq+1=18.97 err_int= 0.03 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr=  8 -> Q_seed=  -0.03 err_pq+1=18.97 err_int= 0.03 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr=  9 -> Q_seed=  -0.03 err_pq+1=18.97 err_int= 0.03 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 10 -> Q_seed=  -0.03 err_pq+1=18.97 err_int= 0.03 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 11 -> Q_seed=  -0.03 err_pq+1=18.97 err_int= 0.03 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 12 -> Q_seed=  -0.03 err_pq+1=18.97 err_int= 0.03 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 13 -> Q_seed=  -0.04 err_pq+1=18.96 err_int= 0.04 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 14 -> Q_seed=  -0.04 err_pq+1=18.96 err_int= 0.04 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 15 -> Q_seed=  -0.04 err_pq+1=18.96 err_int= 0.04 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 16 -> Q_seed=  -0.04 err_pq+1=18.96 err_int= 0.04 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 17 -> Q_seed=  -0.04 err_pq+1=18.96 err_int= 0.04 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 18 -> Q_seed=  -0.04 err_pq+1=18.96 err_int= 0.04 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 19 -> Q_seed=  -0.04 err_pq+1=18.96 err_int= 0.04 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 20 -> Q_seed=  -0.04 err_pq+1=18.96 err_int= 0.04 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 21 -> Q_seed=  -0.04 err_pq+1=18.96 err_int= 0.04 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 22 -> Q_seed=  -0.04 err_pq+1=18.96 err_int= 0.04 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 23 -> Q_seed=  -0.04 err_pq+1=18.96 err_int= 0.04 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 24 -> Q_seed=  -0.04 err_pq+1=18.96 err_int= 0.04 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 25 -> Q_seed=  -0.04 err_pq+1=18.96 err_int= 0.04 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 26 -> Q_seed=  -0.04 err_pq+1=18.96 err_int= 0.04 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 27 -> Q_seed=  -0.05 err_pq+1=18.95 err_int= 0.05 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 28 -> Q_seed=  -0.05 err_pq+1=18.95 err_int= 0.05 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 29 -> Q_seed=  -0.05 err_pq+1=18.95 err_int= 0.05 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 30 -> Q_seed=  -0.05 err_pq+1=18.95 err_int= 0.05 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 31 -> Q_seed=  -0.05 err_pq+1=18.95 err_int= 0.05 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 32 -> Q_seed=  -0.05 err_pq+1=18.95 err_int= 0.05 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 33 -> Q_seed=  -0.05 err_pq+1=18.95 err_int= 0.05 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.076 M=2304 fr= 34 -> Q_seed=  -0.05 err_pq+1=18.95 err_int= 0.05 dmin= 0.271 R/dmin= 0.28 vox= 1.0 geom_warn
+    -> top 3 candidates by distance to pq+1=19 + geometry diagnostics:
+       #1: mode=legacy, sf=0.30, tube=1.667, M=2304, framing= 34, Q_seed=-8.96, err_to_pq+1=10.04, err_to_int=0.04, R/dmin=7.38, vox=21.3, geom_warn
+       #2: mode=legacy, sf=0.30, tube=1.667, M=2304, framing= 32, Q_seed=-8.74, err_to_pq+1=10.26, err_to_int=0.26, R/dmin=7.38, vox=21.3, geom_warn
+       #3: mode=legacy, sf=0.30, tube=1.667, M=2304, framing= 33, Q_seed=-8.44, err_to_pq+1=10.56, err_to_int=0.44, R/dmin=7.38, vox=21.3, geom_warn
+    -> SKIP candidate #1: seed Q_H=-8.96 is not close enough to pq+1=19 (err=10.04 > 0.75); not a valid pq+1 relaxation test.
+
+    -> SKIP candidate #2: seed Q_H=-8.74 is not close enough to pq+1=19 (err=10.26 > 0.75); not a valid pq+1 relaxation test.
+
+    -> SKIP candidate #3: seed Q_H=-8.44 is not close enough to pq+1=19 (err=10.56 > 0.75); not a valid pq+1 relaxation test.
+
+=== 11_1 undecafoil = T(2,11)   (torus pq+1 = 23) ===
+    seed/framing scan (Q_H calibrated; geometry-aware):
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr=  0 -> Q_seed=  -0.51 err_pq+1=22.49 err_int= 0.49 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr=  1 -> Q_seed=  -3.47 err_pq+1=19.53 err_int= 0.47 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr=  2 -> Q_seed=  -0.76 err_pq+1=22.24 err_int= 0.24 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr=  3 -> Q_seed=  -4.05 err_pq+1=18.95 err_int= 0.05 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr=  4 -> Q_seed=  -1.26 err_pq+1=21.74 err_int= 0.26 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr=  5 -> Q_seed=  -4.19 err_pq+1=18.81 err_int= 0.19 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr=  6 -> Q_seed=  -1.96 err_pq+1=21.04 err_int= 0.04 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr=  7 -> Q_seed=  -3.99 err_pq+1=19.01 err_int= 0.01 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr=  8 -> Q_seed=  -2.83 err_pq+1=20.17 err_int= 0.17 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr=  9 -> Q_seed=  -3.68 err_pq+1=19.32 err_int= 0.32 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 10 -> Q_seed=  -3.79 err_pq+1=19.21 err_int= 0.21 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 11 -> Q_seed=  -3.46 err_pq+1=19.54 err_int= 0.46 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 12 -> Q_seed=  -4.71 err_pq+1=18.29 err_int= 0.29 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 13 -> Q_seed=  -3.45 err_pq+1=19.55 err_int= 0.45 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 14 -> Q_seed=  -5.44 err_pq+1=17.56 err_int= 0.44 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 15 -> Q_seed=  -3.65 err_pq+1=19.35 err_int= 0.35 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 16 -> Q_seed=  -5.86 err_pq+1=17.14 err_int= 0.14 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 17 -> Q_seed=  -4.05 err_pq+1=18.95 err_int= 0.05 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 18 -> Q_seed=  -5.97 err_pq+1=17.03 err_int= 0.03 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 19 -> Q_seed=  -4.62 err_pq+1=18.38 err_int= 0.38 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 20 -> Q_seed=  -5.90 err_pq+1=17.10 err_int= 0.10 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 21 -> Q_seed=  -5.31 err_pq+1=17.69 err_int= 0.31 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 22 -> Q_seed=  -5.77 err_pq+1=17.23 err_int= 0.23 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 23 -> Q_seed=  -6.03 err_pq+1=16.97 err_int= 0.03 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 24 -> Q_seed=  -5.70 err_pq+1=17.30 err_int= 0.30 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 25 -> Q_seed=  -6.67 err_pq+1=16.33 err_int= 0.33 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 26 -> Q_seed=  -5.74 err_pq+1=17.26 err_int= 0.26 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 27 -> Q_seed=  -7.13 err_pq+1=15.87 err_int= 0.13 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 28 -> Q_seed=  -5.90 err_pq+1=17.10 err_int= 0.10 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 29 -> Q_seed=  -7.38 err_pq+1=15.62 err_int= 0.38 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 30 -> Q_seed=  -6.20 err_pq+1=16.80 err_int= 0.20 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 31 -> Q_seed=  -7.46 err_pq+1=15.54 err_int= 0.46 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 32 -> Q_seed=  -6.63 err_pq+1=16.37 err_int= 0.37 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 33 -> Q_seed=  -7.46 err_pq+1=15.54 err_int= 0.46 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 34 -> Q_seed=  -7.12 err_pq+1=15.88 err_int= 0.12 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 35 -> Q_seed=  -7.42 err_pq+1=15.58 err_int= 0.42 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 36 -> Q_seed=  -7.60 err_pq+1=15.40 err_int= 0.40 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 37 -> Q_seed=  -7.37 err_pq+1=15.63 err_int= 0.37 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=legacy   sf=0.30 tube= 1.667 M=2816 fr= 38 -> Q_seed=  -8.00 err_pq+1=15.00 err_int= 0.00 dmin= 0.224 R/dmin= 7.44 vox=21.3 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr=  0 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr=  1 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr=  2 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr=  3 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr=  4 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr=  5 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr=  6 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr=  7 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr=  8 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr=  9 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 10 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 11 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 12 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 13 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 14 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 15 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 16 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 17 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 18 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 19 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 20 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 21 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 22 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 23 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 24 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 25 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 26 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 27 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 28 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 29 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 30 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 31 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 32 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 33 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 34 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 35 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 36 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 37 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.036 M=2816 fr= 38 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.16 vox= 0.5 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr=  0 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr=  1 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr=  2 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr=  3 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr=  4 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr=  5 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr=  6 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr=  7 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr=  8 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr=  9 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 10 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 11 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 12 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 13 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 14 -> Q_seed=  -0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 15 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 16 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 17 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 18 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 19 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 20 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 21 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 22 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 23 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 24 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 25 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 26 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 27 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 28 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 29 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 30 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 31 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 32 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 33 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 34 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 35 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 36 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 37 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.049 M=2816 fr= 38 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.22 vox= 0.6 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr=  0 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr=  1 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr=  2 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr=  3 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr=  4 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr=  5 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr=  6 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr=  7 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr=  8 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr=  9 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 10 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 11 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 12 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 13 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 14 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 15 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 16 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 17 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 18 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 19 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 20 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 21 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 22 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 23 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 24 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 25 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 26 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 27 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 28 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 29 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 30 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 31 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 32 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 33 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 34 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 35 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 36 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 37 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.30 tube= 0.063 M=2816 fr= 38 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.224 R/dmin= 0.28 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr=  0 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr=  1 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr=  2 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr=  3 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr=  4 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr=  5 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr=  6 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr=  7 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr=  8 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr=  9 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 10 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 11 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 12 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 13 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 14 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 15 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 16 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 17 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 18 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 19 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 20 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 21 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 22 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 23 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 24 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 25 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 26 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 27 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 28 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 29 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 30 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 31 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 32 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 33 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 34 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 35 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 36 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 37 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.043 M=2816 fr= 38 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.16 vox= 0.6 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr=  0 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr=  1 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr=  2 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr=  3 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr=  4 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr=  5 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr=  6 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr=  7 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr=  8 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr=  9 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 10 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 11 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 12 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 13 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 14 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 15 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 16 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 17 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 18 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 19 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 20 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 21 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 22 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 23 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 24 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 25 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 26 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 27 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 28 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 29 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 30 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 31 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 32 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 33 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 34 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 35 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 36 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 37 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.059 M=2816 fr= 38 -> Q_seed=  +0.00 err_pq+1=23.00 err_int= 0.00 dmin= 0.269 R/dmin= 0.22 vox= 0.8 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr=  0 -> Q_seed=  -0.02 err_pq+1=22.98 err_int= 0.02 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr=  1 -> Q_seed=  -0.02 err_pq+1=22.98 err_int= 0.02 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr=  2 -> Q_seed=  -0.03 err_pq+1=22.97 err_int= 0.03 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr=  3 -> Q_seed=  -0.03 err_pq+1=22.97 err_int= 0.03 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr=  4 -> Q_seed=  -0.03 err_pq+1=22.97 err_int= 0.03 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr=  5 -> Q_seed=  -0.03 err_pq+1=22.97 err_int= 0.03 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr=  6 -> Q_seed=  -0.03 err_pq+1=22.97 err_int= 0.03 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr=  7 -> Q_seed=  -0.03 err_pq+1=22.97 err_int= 0.03 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr=  8 -> Q_seed=  -0.03 err_pq+1=22.97 err_int= 0.03 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr=  9 -> Q_seed=  -0.03 err_pq+1=22.97 err_int= 0.03 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 10 -> Q_seed=  -0.03 err_pq+1=22.97 err_int= 0.03 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 11 -> Q_seed=  -0.03 err_pq+1=22.97 err_int= 0.03 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 12 -> Q_seed=  -0.03 err_pq+1=22.97 err_int= 0.03 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 13 -> Q_seed=  -0.03 err_pq+1=22.97 err_int= 0.03 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 14 -> Q_seed=  -0.03 err_pq+1=22.97 err_int= 0.03 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 15 -> Q_seed=  -0.03 err_pq+1=22.97 err_int= 0.03 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 16 -> Q_seed=  -0.03 err_pq+1=22.97 err_int= 0.03 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 17 -> Q_seed=  -0.04 err_pq+1=22.96 err_int= 0.04 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 18 -> Q_seed=  -0.04 err_pq+1=22.96 err_int= 0.04 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 19 -> Q_seed=  -0.04 err_pq+1=22.96 err_int= 0.04 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 20 -> Q_seed=  -0.04 err_pq+1=22.96 err_int= 0.04 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 21 -> Q_seed=  -0.04 err_pq+1=22.96 err_int= 0.04 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 22 -> Q_seed=  -0.04 err_pq+1=22.96 err_int= 0.04 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 23 -> Q_seed=  -0.04 err_pq+1=22.96 err_int= 0.04 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 24 -> Q_seed=  -0.04 err_pq+1=22.96 err_int= 0.04 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 25 -> Q_seed=  -0.04 err_pq+1=22.96 err_int= 0.04 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 26 -> Q_seed=  -0.04 err_pq+1=22.96 err_int= 0.04 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 27 -> Q_seed=  -0.04 err_pq+1=22.96 err_int= 0.04 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 28 -> Q_seed=  -0.04 err_pq+1=22.96 err_int= 0.04 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 29 -> Q_seed=  -0.04 err_pq+1=22.96 err_int= 0.04 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 30 -> Q_seed=  -0.04 err_pq+1=22.96 err_int= 0.04 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 31 -> Q_seed=  -0.04 err_pq+1=22.96 err_int= 0.04 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 32 -> Q_seed=  -0.05 err_pq+1=22.95 err_int= 0.05 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 33 -> Q_seed=  -0.05 err_pq+1=22.95 err_int= 0.05 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 34 -> Q_seed=  -0.05 err_pq+1=22.95 err_int= 0.05 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 35 -> Q_seed=  -0.05 err_pq+1=22.95 err_int= 0.05 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 36 -> Q_seed=  -0.05 err_pq+1=22.95 err_int= 0.05 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 37 -> Q_seed=  -0.05 err_pq+1=22.95 err_int= 0.05 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+      mode=adaptive sf=0.36 tube= 0.075 M=2816 fr= 38 -> Q_seed=  -0.05 err_pq+1=22.95 err_int= 0.05 dmin= 0.269 R/dmin= 0.28 vox= 1.0 geom_warn
+    -> top 3 candidates by distance to pq+1=23 + geometry diagnostics:
+       #1: mode=legacy, sf=0.30, tube=1.667, M=2816, framing= 38, Q_seed=-8.00, err_to_pq+1=15.00, err_to_int=0.00, R/dmin=7.44, vox=21.3, geom_warn
+       #2: mode=legacy, sf=0.30, tube=1.667, M=2816, framing= 36, Q_seed=-7.60, err_to_pq+1=15.40, err_to_int=0.40, R/dmin=7.44, vox=21.3, geom_warn
+       #3: mode=legacy, sf=0.30, tube=1.667, M=2816, framing= 31, Q_seed=-7.46, err_to_pq+1=15.54, err_to_int=0.46, R/dmin=7.44, vox=21.3, geom_warn
+    -> SKIP candidate #1: seed Q_H=-8.00 is not close enough to pq+1=23 (err=15.00 > 0.75); not a valid pq+1 relaxation test.
+
+    -> SKIP candidate #2: seed Q_H=-7.60 is not close enough to pq+1=23 (err=15.40 > 0.75); not a valid pq+1 relaxation test.
+
+    -> SKIP candidate #3: seed Q_H=-7.46 is not close enough to pq+1=23 (err=15.54 > 0.75); not a valid pq+1 relaxation test.
+
+Interpretation: for T(2,q) torus knots, the pq+1 hypothesis is tested
+only when the relaxed candidate starts near |Q_H|=2q+1 and HOLDS
+that charge. A seed close to some other integer sector is not a pq+1
+test. Twist/non-torus knots are explicitly out of scope for pq+1.
+For the energy-minimal-sector claim, relax several framings and compare
+E only among runs that remain in their starting topological sector.

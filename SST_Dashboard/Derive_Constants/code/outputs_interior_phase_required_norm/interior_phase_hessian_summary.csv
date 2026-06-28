@@ -1,0 +1,2 @@
+inner_radius,outer_radius,density_mode,n0,xi,power,integral_I,Lambda_phi,E_eff,target_Eeff_over_2,Lambda_over_target,n0_required_to_match_target,K_cell_from_Lambda,K_target_Eeff_over_8piR,status
+0.0152703116982,1.0,constant,1.0,0.01,0.0,64.53198875897466,0.19473087465650946,274.0748756568,137.0374378284,0.0014210049293270786,703.7273265994603,0.015496190637095883,10.905092809519074,DIAGNOSTIC_REQUIRED_NORMALIZATION_NOT_DERIVATION

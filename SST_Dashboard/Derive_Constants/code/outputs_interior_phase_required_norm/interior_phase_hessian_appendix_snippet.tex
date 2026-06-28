@@ -1,0 +1,31 @@
+\section{Interior one-cell phase-Hessian target}
+The exterior Hodge calculation gives
+\[
+  \Lambda_\phi=4\pi R K_{\rm cell}.
+\]
+The missing interior gate is
+\[
+  \Lambda_\phi=\frac{E_{\rm eff}}{2}.
+\]
+For a radial interior phase stiffness \(n_{\rm eff}(r)\), the phase field solves
+\[
+  \nabla\cdot(n_{\rm eff}(r)\nabla\theta)=0,
+  \qquad
+  \theta(a)=0,\quad \theta(R)=\phi.
+\]
+The minimized action is
+\[
+  \mathcal A_\phi^{\rm int}
+  =
+  \frac12\Lambda_\phi\phi^2,
+\]
+with
+\[
+  \Lambda_\phi
+  =
+  \frac{4\pi}
+       {\displaystyle\int_a^R\frac{dr}{n_{\rm eff}(r)r^2}}.
+\]
+This closes the gate only if \(n_{\rm eff}(r)\) and its normalization are
+derived independently.  Solving for the normalization required to match
+\(E_{\rm eff}/2\) is a diagnostic, not a derivation.

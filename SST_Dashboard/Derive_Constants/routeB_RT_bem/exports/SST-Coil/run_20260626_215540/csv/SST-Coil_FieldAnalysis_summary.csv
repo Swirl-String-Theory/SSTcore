@@ -1,0 +1,6 @@
+metric,value
+B2_max_T2,9.585695370422663e-06
+B2_mean_T2,3.322390611119302e-08
+grad_B2_max_T2_per_m,0.001198211799881178
+magnetic_energy_density_max_J_m3,3.8140270029396586
+pressure_proxy_min_Pa,-3.8140270029396586

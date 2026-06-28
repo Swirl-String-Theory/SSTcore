@@ -1,0 +1,11 @@
+name,symbolic,latex
+A_general,a*chi_R + 4*b/chi_R,a \chi_{R} + \frac{4 b}{\chi_{R}}
+A_dual,4*a/chi_R + b*chi_R,\frac{4 a}{\chi_{R}} + b \chi_{R}
+A_dual_minus_A,(4*a - 4*b + chi_R**2*(-a + b))/chi_R,\frac{4 a - 4 b + \chi_{R}^{2} \left(- a + b\right)}{\chi_{R}}
+A_min_selected,chi_R + 4/chi_R,\chi_{R} + \frac{4}{\chi_{R}}
+dA_min,1 - 4/chi_R**2,1 - \frac{4}{\chi_{R}^{2}}
+chi_star,2,2
+lambda_chi,4,4
+self_dual_exact_for_minimal_class,True,True
+matches_lambda_4,True,True
+matches_chi_2,True,True

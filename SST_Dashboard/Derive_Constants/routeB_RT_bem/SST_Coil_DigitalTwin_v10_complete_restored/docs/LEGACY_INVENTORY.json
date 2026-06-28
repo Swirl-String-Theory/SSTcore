@@ -1,0 +1,303 @@
+[
+  {
+    "zip_index": 0,
+    "zip_name": "SST_Coil_00_common.py",
+    "restored_name": "SST_Coil_00_common.py",
+    "bytes": 3598,
+    "crc": 556689596
+  },
+  {
+    "zip_index": 1,
+    "zip_name": "SST_Coil_00_common.py",
+    "restored_name": "SST_Coil_00_common__zipentry01.py",
+    "bytes": 945,
+    "crc": 2968861840
+  },
+  {
+    "zip_index": 2,
+    "zip_name": "SST_Coil_10_Geometry_FromUserScripts.py",
+    "restored_name": "SST_Coil_10_Geometry_FromUserScripts.py",
+    "bytes": 5775,
+    "crc": 3845443630
+  },
+  {
+    "zip_index": 3,
+    "zip_name": "SST_Coil_10_geometry_sawbowl.py",
+    "restored_name": "SST_Coil_10_geometry_sawbowl.py",
+    "bytes": 5078,
+    "crc": 2013690010
+  },
+  {
+    "zip_index": 4,
+    "zip_name": "SST_Coil_10_PWM_Spectrum.py",
+    "restored_name": "SST_Coil_10_PWM_Spectrum.py",
+    "bytes": 1854,
+    "crc": 1656160976
+  },
+  {
+    "zip_index": 5,
+    "zip_name": "SST_Coil_11_geometry_rodin_6lane_exact.py",
+    "restored_name": "SST_Coil_11_geometry_rodin_6lane_exact.py",
+    "bytes": 3135,
+    "crc": 2628250197
+  },
+  {
+    "zip_index": 6,
+    "zip_name": "SST_Coil_11_geometry_rodin_torus.py",
+    "restored_name": "SST_Coil_11_geometry_rodin_torus.py",
+    "bytes": 5008,
+    "crc": 1433385098
+  },
+  {
+    "zip_index": 7,
+    "zip_name": "SST_Coil_12_geometry_sawbowl_exact.py",
+    "restored_name": "SST_Coil_12_geometry_sawbowl_exact.py",
+    "bytes": 2935,
+    "crc": 931649828
+  },
+  {
+    "zip_index": 8,
+    "zip_name": "SST_Coil_20_Circuit_DistributedLite.py",
+    "restored_name": "SST_Coil_20_Circuit_DistributedLite.py",
+    "bytes": 2294,
+    "crc": 2195653087
+  },
+  {
+    "zip_index": 9,
+    "zip_name": "SST_Coil_20_Geometry_SawShape.py",
+    "restored_name": "SST_Coil_20_Geometry_SawShape.py",
+    "bytes": 2461,
+    "crc": 3340073907
+  },
+  {
+    "zip_index": 10,
+    "zip_name": "SST_Coil_20_Geometry_SawShape.py",
+    "restored_name": "SST_Coil_20_Geometry_SawShape__zipentry10.py",
+    "bytes": 4665,
+    "crc": 350701954
+  },
+  {
+    "zip_index": 11,
+    "zip_name": "SST_Coil_20_winding_factors.py",
+    "restored_name": "SST_Coil_20_winding_factors.py",
+    "bytes": 1974,
+    "crc": 3742550818
+  },
+  {
+    "zip_index": 12,
+    "zip_name": "SST_Coil_30_biot_savart.py",
+    "restored_name": "SST_Coil_30_biot_savart.py",
+    "bytes": 1842,
+    "crc": 2974191895
+  },
+  {
+    "zip_index": 13,
+    "zip_name": "SST_Coil_30_biot_savart.py",
+    "restored_name": "SST_Coil_30_biot_savart__zipentry13.py",
+    "bytes": 1146,
+    "crc": 1624719051
+  },
+  {
+    "zip_index": 14,
+    "zip_name": "SST_Coil_30_BiotSavart.py",
+    "restored_name": "SST_Coil_30_BiotSavart.py",
+    "bytes": 4353,
+    "crc": 2107022176
+  },
+  {
+    "zip_index": 15,
+    "zip_name": "SST_Coil_30_BiotSavart_Observables.py",
+    "restored_name": "SST_Coil_30_BiotSavart_Observables.py",
+    "bytes": 2520,
+    "crc": 3251589241
+  },
+  {
+    "zip_index": 16,
+    "zip_name": "SST_Coil_30_CircuitModel.py",
+    "restored_name": "SST_Coil_30_CircuitModel.py",
+    "bytes": 4201,
+    "crc": 3340540612
+  },
+  {
+    "zip_index": 17,
+    "zip_name": "SST_Coil_40_BiotSavartDigitalTwin.py",
+    "restored_name": "SST_Coil_40_BiotSavartDigitalTwin.py",
+    "bytes": 4493,
+    "crc": 2737896432
+  },
+  {
+    "zip_index": 18,
+    "zip_name": "SST_Coil_40_current_model.py",
+    "restored_name": "SST_Coil_40_current_model.py",
+    "bytes": 1655,
+    "crc": 1596313911
+  },
+  {
+    "zip_index": 19,
+    "zip_name": "SST_Coil_40_FieldAnalysis.py",
+    "restored_name": "SST_Coil_40_FieldAnalysis.py",
+    "bytes": 2255,
+    "crc": 673551848
+  },
+  {
+    "zip_index": 20,
+    "zip_name": "SST_Coil_50_MaxwellStress.py",
+    "restored_name": "SST_Coil_50_MaxwellStress.py",
+    "bytes": 1975,
+    "crc": 3759123320
+  },
+  {
+    "zip_index": 21,
+    "zip_name": "SST_Coil_50_observables.py",
+    "restored_name": "SST_Coil_50_observables.py",
+    "bytes": 647,
+    "crc": 1356736817
+  },
+  {
+    "zip_index": 22,
+    "zip_name": "SST_Coil_60_FRScaling.py",
+    "restored_name": "SST_Coil_60_FRScaling.py",
+    "bytes": 1993,
+    "crc": 1470439686
+  },
+  {
+    "zip_index": 23,
+    "zip_name": "SST_Coil_70_HarmonicScanner.py",
+    "restored_name": "SST_Coil_70_HarmonicScanner.py",
+    "bytes": 2618,
+    "crc": 987819508
+  },
+  {
+    "zip_index": 24,
+    "zip_name": "SST_Coil_75_RadiusScalingSweep.py",
+    "restored_name": "SST_Coil_75_RadiusScalingSweep.py",
+    "bytes": 11247,
+    "crc": 2328167489
+  },
+  {
+    "zip_index": 25,
+    "zip_name": "SST_Coil_80_compare_geometries.py",
+    "restored_name": "SST_Coil_80_compare_geometries.py",
+    "bytes": 4134,
+    "crc": 847350697
+  },
+  {
+    "zip_index": 26,
+    "zip_name": "SST_Coil_80_compare_geometries_v8.py",
+    "restored_name": "SST_Coil_80_compare_geometries_v8.py",
+    "bytes": 4077,
+    "crc": 91171088
+  },
+  {
+    "zip_index": 27,
+    "zip_name": "SST_Coil_80_ExtractEffectiveKernel.py",
+    "restored_name": "SST_Coil_80_ExtractEffectiveKernel.py",
+    "bytes": 5018,
+    "crc": 3771316363
+  },
+  {
+    "zip_index": 28,
+    "zip_name": "SST_Coil_80_ExtractEffectiveKernel_v5.py",
+    "restored_name": "SST_Coil_80_ExtractEffectiveKernel_v5.py",
+    "bytes": 4447,
+    "crc": 1352174489
+  },
+  {
+    "zip_index": 29,
+    "zip_name": "SST_Coil_80_ParamSweep.py",
+    "restored_name": "SST_Coil_80_ParamSweep.py",
+    "bytes": 1479,
+    "crc": 3956825229
+  },
+  {
+    "zip_index": 30,
+    "zip_name": "SST_Coil_90_RunAll.py",
+    "restored_name": "SST_Coil_90_RunAll.py",
+    "bytes": 1810,
+    "crc": 3115437712
+  },
+  {
+    "zip_index": 31,
+    "zip_name": "SST_Coil_90_RunAll.py",
+    "restored_name": "SST_Coil_90_RunAll__zipentry31.py",
+    "bytes": 1737,
+    "crc": 2867025330
+  },
+  {
+    "zip_index": 32,
+    "zip_name": "SST_Coil_90_RunAll.py",
+    "restored_name": "SST_Coil_90_RunAll__zipentry32.py",
+    "bytes": 217,
+    "crc": 11487489
+  },
+  {
+    "zip_index": 33,
+    "zip_name": "SST_Coil_90_RunAll.py",
+    "restored_name": "SST_Coil_90_RunAll__zipentry33.py",
+    "bytes": 3394,
+    "crc": 2312422743
+  },
+  {
+    "zip_index": 34,
+    "zip_name": "SST_Coil_90_RunAll.py",
+    "restored_name": "SST_Coil_90_RunAll__zipentry34.py",
+    "bytes": 112,
+    "crc": 1163499353
+  },
+  {
+    "zip_index": 35,
+    "zip_name": "README_SST_Coil.md",
+    "restored_name": "README_SST_Coil.md",
+    "bytes": 2189,
+    "crc": 49971438
+  },
+  {
+    "zip_index": 36,
+    "zip_name": "README_SST_Coil_DigitalTwin_v4.md",
+    "restored_name": "README_SST_Coil_DigitalTwin_v4.md",
+    "bytes": 1413,
+    "crc": 803756980
+  },
+  {
+    "zip_index": 37,
+    "zip_name": "README_SST_Coil_DigitalTwin_v5.md",
+    "restored_name": "README_SST_Coil_DigitalTwin_v5.md",
+    "bytes": 1399,
+    "crc": 3902969377
+  },
+  {
+    "zip_index": 38,
+    "zip_name": "README_SST_Coil_DigitalTwin_v7.md",
+    "restored_name": "README_SST_Coil_DigitalTwin_v7.md",
+    "bytes": 1507,
+    "crc": 1929011785
+  },
+  {
+    "zip_index": 39,
+    "zip_name": "README_SST_Coil_DigitalTwin_v8.md",
+    "restored_name": "README_SST_Coil_DigitalTwin_v8.md",
+    "bytes": 469,
+    "crc": 4278273713
+  },
+  {
+    "zip_index": 40,
+    "zip_name": "SST_Coil_00_common.py",
+    "restored_name": "SST_Coil_00_common__zipentry40.py",
+    "bytes": 9562,
+    "crc": 2992121400
+  },
+  {
+    "zip_index": 41,
+    "zip_name": "SST_Coil_00_common.py",
+    "restored_name": "SST_Coil_00_common__zipentry41.py",
+    "bytes": 5135,
+    "crc": 3875285867
+  },
+  {
+    "zip_index": 42,
+    "zip_name": "SST_Coil_00_common.py",
+    "restored_name": "SST_Coil_00_common__zipentry42.py",
+    "bytes": 2798,
+    "crc": 1533375839
+  }
+]

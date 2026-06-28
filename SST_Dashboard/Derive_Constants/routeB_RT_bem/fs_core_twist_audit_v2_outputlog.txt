@@ -1,0 +1,84 @@
+[log] writing console output to fs_core_twist_audit_v2_outputlog.txt
+[config] q_list=[3, 5, 7, 9, 11], p=2, extra_torus=[(3, 2), (3, 4)], samples=2048
+[config] core_n_range=-3:3, core_n0=1.0, core_sign_mode=follow
+[scope] Non-circular audit: target-free torus pq + Core-Holonomy v2 gate matrix.
+[fseries] roots:
+  - C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem\Knots_FourierSeries
+  - C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem\knotplot
+[ideal] candidate ideal.txt paths:
+  - C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem\ideal.txt
+[inventory] entries to analyze: 34
+  - analytic torus         p=2  q= 3           analytic:T(2,3)
+  - analytic torus         p=2  q= 5           analytic:T(2,5)
+  - analytic torus         p=2  q= 7           analytic:T(2,7)
+  - analytic torus         p=2  q= 9           analytic:T(2,9)
+  - analytic torus         p=2  q=11           analytic:T(2,11)
+  - analytic torus         p=3  q= 2           analytic:T(3,2)
+  - analytic torus         p=3  q= 4           analytic:T(3,4)
+  - ideal    torus         p=2  q= 3           ideal:3:1:1
+  - ideal    torus         p=2  q= 5           ideal:5:1:1
+  - ideal    control_twist p=2  q= -  ctrl_q=5 ideal:5:1:2 (5_2_twist_control)
+  - ideal    torus         p=2  q= 7           ideal:7:1:1
+  - ideal    torus         p=2  q= 9           ideal:9:1:1
+  - ideal    torus         p=2  q=11           ideal:K11a367
+  - ideal    control_twist p=2  q= - ctrl_q=11 ideal:K11a247 (11_2_twist_control)
+  - fseries  torus         p=2  q= 3           Knots_FourierSeries/3_1/knot.3_1.fseries
+  - fseries  torus         p=2  q= 3           Knots_FourierSeries/3_1/knot.3_1p.fseries
+  - fseries  torus         p=2  q= 3           Knots_FourierSeries/3_1/knot.3_1u.fseries
+  - fseries  torus         p=2  q= 5           Knots_FourierSeries/5_1/knot.5_1.fseries
+  - fseries  torus         p=2  q= 5           Knots_FourierSeries/5_1/knot.5_1p.fseries
+  - fseries  torus         p=2  q= 5           Knots_FourierSeries/5_1/knot.5_1u.fseries
+  - fseries  control_twist p=2  q= -  ctrl_q=5 Knots_FourierSeries/5_2/knot.5_2.fseries
+  - fseries  control_twist p=2  q= -  ctrl_q=5 Knots_FourierSeries/5_2/knot.5_2d.fseries
+  - fseries  control_twist p=2  q= -  ctrl_q=5 Knots_FourierSeries/5_2/knot.5_2r.fseries
+  - fseries  torus         p=2  q= 7           Knots_FourierSeries/7_1/knot.7_1.fseries
+  - fseries  torus         p=2  q= 7           Knots_FourierSeries/7_1/knot.7_1p.fseries
+  - fseries  torus         p=2  q= 3           knotplot/knot_3.1/knot_3.1.fseries
+  - fseries  torus         p=2  q= 5           knotplot/knot_5.1/knot_5.1.fseries
+  - fseries  control_twist p=2  q= -  ctrl_q=5 knotplot/knot_5.2/knot_5.2.fseries
+  - fseries  control_twist p=2  q= -  ctrl_q=5 knotplot/knot_5.2.1/knot_5.2.1.fseries
+  - fseries  torus         p=2  q= 7           knotplot/knot_7.1/knot_7.1.fseries
+  - fseries  torus         p=2  q= 9           knotplot/knot_9.1/knot_9.1.fseries
+  - fseries  torus         p=2  q= 3           knotplot/knot_T2.3/knot_T2.3.fseries
+  - fseries  torus         p=2  q= 5           knotplot/knot_T2.5/knot_T2.5.fseries
+  - fseries  torus         p=2  q= 7           knotplot/knot_T2.7/knot_T2.7.fseries
+[RESULT 001/034] analytic:T(2,3) p=2 q=3 pq=6 Wr=-3.220128 PT_Lk0=-3.0000 SL_torus=-6.00007 abs_err=7.32939e-05 n_req=1 SL+1_abs=7 model_select=1 PASS_DERIVED_PQ trap=PASS_ANY_TARGET
+[RESULT 002/034] analytic:T(2,5) p=2 q=5 pq=10 Wr=-6.071397 PT_Lk0=-6.0000 SL_torus=-10.0002 abs_err=0.000167504 n_req=1 SL+1_abs=11 model_select=1 PASS_DERIVED_PQ trap=PASS_ANY_TARGET
+[RESULT 003/034] analytic:T(2,7) p=2 q=7 pq=14 Wr=-9.363121 PT_Lk0=-9.0000 SL_torus=-14.0003 abs_err=0.000337442 n_req=1 SL+1_abs=15 model_select=1 PASS_DERIVED_PQ trap=PASS_ANY_TARGET
+[RESULT 004/034] analytic:T(2,9) p=2 q=9 pq=18 Wr=-12.922274 PT_Lk0=-13.0001 SL_torus=-18.0007 abs_err=0.000662618 n_req=1 SL+1_abs=19 model_select=1 PASS_DERIVED_PQ trap=PASS_ANY_TARGET
+[RESULT 005/034] analytic:T(2,11) p=2 q=11 pq=22 Wr=-16.638710 PT_Lk0=-17.0003 SL_torus=-22.0012 abs_err=0.00124573 n_req=1 SL+1_abs=23 model_select=1 PASS_DERIVED_PQ trap=PASS_ANY_TARGET
+[RESULT 006/034] analytic:T(3,2) p=3 q=2 pq=6 Wr=-3.947223 PT_Lk0=-4.0001 SL_torus=-6.00012 abs_err=0.000115503 n_req=1 SL+1_abs=7 model_select=1 PASS_DERIVED_PQ trap=PASS_ANY_TARGET
+[RESULT 007/034] analytic:T(3,4) p=3 q=4 pq=12 Wr=-8.202123 PT_Lk0=-8.0002 SL_torus=-12.0003 abs_err=0.000317041 n_req=1 SL+1_abs=13 model_select=1 PASS_DERIVED_PQ trap=PASS_ANY_TARGET
+[RESULT 008/034] ideal:3:1:1 p=2 q=3 pq=6 Wr=-3.418253 PT_Lk0=-3.0000 SL_torus=-6.00004 abs_err=4.13205e-05 n_req=1 SL+1_abs=7 model_select=1 PASS_DERIVED_PQ trap=PASS_ANY_TARGET
+[RESULT 009/034] ideal:5:1:1 p=2 q=5 pq=10 Wr=-6.294355 PT_Lk0=-5.9999 SL_torus=-9.00004 abs_err=0.999963 n_req=2 SL+1_abs=10 model_select=1 SOURCE_FIT_NOT_CANONICAL trap=PASS_ANY_TARGET
+[RESULT 010/034] ideal:5:1:2 (5_2_twist_control) p=2 q=None pq=None Wr=+4.545936 PT_Lk0=+5.0002 SL_torus= abs_err= n_req=None SL+1_abs=None model_select=1 NO_TORUS_TARGET trap=SKIPPED
+[RESULT 011/034] ideal:7:1:1 p=2 q=7 pq=14 Wr=+9.182597 PT_Lk0=+8.9999 SL_torus=13.0011 abs_err=0.99888 n_req=2 SL+1_abs=14 model_select=1 SOURCE_FIT_NOT_CANONICAL trap=PASS_ANY_TARGET
+[RESULT 012/034] ideal:9:1:1 p=2 q=9 pq=18 Wr=+12.073470 PT_Lk0=+11.9999 SL_torus=15.0002 abs_err=2.99979 n_req=4 SL+1_abs=16 model_select=1 SOURCE_FIT_NOT_CANONICAL trap=PASS_ANY_TARGET
+[RESULT 013/034] ideal:K11a367 p=2 q=11 pq=22 Wr=-14.951224 PT_Lk0=-14.9999 SL_torus=-19.0006 abs_err=2.99945 n_req=4 SL+1_abs=20 model_select=1 SOURCE_FIT_NOT_CANONICAL trap=PASS_ANY_TARGET
+[RESULT 014/034] ideal:K11a247 (11_2_twist_control) p=2 q=None pq=None Wr=+7.933754 PT_Lk0=+8.0014 SL_torus= abs_err= n_req=None SL+1_abs=None model_select=1 NO_TORUS_TARGET trap=SKIPPED
+[RESULT 015/034] Knots_FourierSeries/3_1/knot.3_1.fseries p=2 q=3 pq=6 Wr=+3.418367 PT_Lk0=+3.0000 SL_torus=6.00006 abs_err=5.79198e-05 n_req=1 SL+1_abs=7 model_select=1 PASS_DERIVED_PQ trap=PASS_ANY_TARGET
+[RESULT 016/034] Knots_FourierSeries/3_1/knot.3_1p.fseries p=2 q=3 pq=6 Wr=+3.595322 PT_Lk0=+4.0000 SL_torus=0.82659 abs_err=5.17341 n_req=6 SL+1_abs=2 model_select=1 SOURCE_FIT_NOT_CANONICAL trap=PASS_ANY_TARGET
+[RESULT 017/034] Knots_FourierSeries/3_1/knot.3_1u.fseries p=2 q=3 pq=6 Wr=+3.892553 PT_Lk0=+4.0001 SL_torus=6.0001 abs_err=9.88071e-05 n_req=1 SL+1_abs=7 model_select=1 PASS_DERIVED_PQ trap=PASS_ANY_TARGET
+[RESULT 018/034] Knots_FourierSeries/5_1/knot.5_1.fseries p=2 q=5 pq=10 Wr=+6.690527 PT_Lk0=+7.0000 SL_torus=10.0001 abs_err=0.000128646 n_req=1 SL+1_abs=11 model_select=1 PASS_DERIVED_PQ trap=PASS_ANY_TARGET
+[RESULT 019/034] Knots_FourierSeries/5_1/knot.5_1p.fseries p=2 q=5 pq=10 Wr=+6.418495 PT_Lk0=+6.0001 SL_torus=3.13367 abs_err=6.86633 n_req=8 SL+1_abs=4 model_select=1 SOURCE_FIT_NOT_CANONICAL trap=PASS_ANY_TARGET
+[RESULT 020/034] Knots_FourierSeries/5_1/knot.5_1u.fseries p=2 q=5 pq=10 Wr=+7.752241 PT_Lk0=+8.0004 SL_torus=10.0007 abs_err=0.000684699 n_req=1 SL+1_abs=11 model_select=1 PASS_DERIVED_PQ trap=PASS_ANY_TARGET
+[RESULT 021/034] Knots_FourierSeries/5_2/knot.5_2.fseries p=2 q=None pq=None Wr=+4.813377 PT_Lk0=+5.0002 SL_torus= abs_err= n_req=None SL+1_abs=None model_select=1 NO_TORUS_TARGET trap=SKIPPED
+[RESULT 022/034] Knots_FourierSeries/5_2/knot.5_2d.fseries p=2 q=None pq=None Wr=+0.000000 PT_Lk0=+0.0000 SL_torus= abs_err= n_req=None SL+1_abs=None model_select=1 NO_TORUS_TARGET trap=SKIPPED
+[RESULT 023/034] Knots_FourierSeries/5_2/knot.5_2r.fseries p=2 q=None pq=None Wr=+3.310899 PT_Lk0=+0.3168 SL_torus= abs_err= n_req=None SL+1_abs=None model_select=1 NO_TORUS_TARGET trap=SKIPPED
+[RESULT 024/034] Knots_FourierSeries/7_1/knot.7_1.fseries p=2 q=7 pq=14 Wr=+9.044970 PT_Lk0=+9.0000 SL_torus=14.0004 abs_err=0.000370745 n_req=1 SL+1_abs=15 model_select=1 PASS_DERIVED_PQ trap=PASS_ANY_TARGET
+[RESULT 025/034] Knots_FourierSeries/7_1/knot.7_1p.fseries p=2 q=7 pq=14 Wr=+9.395160 PT_Lk0=+9.0004 SL_torus=11.5077 abs_err=2.49228 n_req=3 SL+1_abs=13 model_select=1 SOURCE_FIT_NOT_CANONICAL trap=PASS_ANY_TARGET
+[RESULT 026/034] knotplot/knot_3.1/knot_3.1.fseries p=2 q=3 pq=6 Wr=+3.379236 PT_Lk0=+3.0000 SL_torus=6.00007 abs_err=6.57929e-05 n_req=1 SL+1_abs=7 model_select=1 PASS_DERIVED_PQ trap=PASS_ANY_TARGET
+[RESULT 027/034] knotplot/knot_5.1/knot_5.1.fseries p=2 q=5 pq=10 Wr=+6.137671 PT_Lk0=+6.0000 SL_torus=9.00004 abs_err=0.999961 n_req=2 SL+1_abs=10 model_select=1 SOURCE_FIT_NOT_CANONICAL trap=PASS_ANY_TARGET
+[RESULT 028/034] knotplot/knot_5.2/knot_5.2.fseries p=2 q=None pq=None Wr=+4.610141 PT_Lk0=+5.0001 SL_torus= abs_err= n_req=None SL+1_abs=None model_select=1 NO_TORUS_TARGET trap=SKIPPED
+[RESULT 029/034] knotplot/knot_5.2.1/knot_5.2.1.fseries p=2 q=None pq=None Wr=+0.536995 PT_Lk0=+1.0003 SL_torus= abs_err= n_req=None SL+1_abs=None model_select=1 NO_TORUS_TARGET trap=SKIPPED
+[RESULT 030/034] knotplot/knot_7.1/knot_7.1.fseries p=2 q=7 pq=14 Wr=+8.894914 PT_Lk0=+9.0001 SL_torus=11.0002 abs_err=2.9998 n_req=4 SL+1_abs=12 model_select=1 SOURCE_FIT_NOT_CANONICAL trap=PASS_ANY_TARGET
+[RESULT 031/034] knotplot/knot_9.1/knot_9.1.fseries p=2 q=9 pq=18 Wr=+11.668189 PT_Lk0=+12.0002 SL_torus=15.0004 abs_err=2.99963 n_req=4 SL+1_abs=16 model_select=1 SOURCE_FIT_NOT_CANONICAL trap=PASS_ANY_TARGET
+[RESULT 032/034] knotplot/knot_T2.3/knot_T2.3.fseries p=2 q=3 pq=6 Wr=-3.395009 PT_Lk0=-3.0000 SL_torus=-6.00007 abs_err=6.53442e-05 n_req=1 SL+1_abs=7 model_select=1 PASS_DERIVED_PQ trap=PASS_ANY_TARGET
+[RESULT 033/034] knotplot/knot_T2.5/knot_T2.5.fseries p=2 q=5 pq=10 Wr=-6.174262 PT_Lk0=-6.0000 SL_torus=-10.0002 abs_err=0.000233728 n_req=1 SL+1_abs=11 model_select=1 PASS_DERIVED_PQ trap=PASS_ANY_TARGET
+[RESULT 034/034] knotplot/knot_T2.7/knot_T2.7.fseries p=2 q=7 pq=14 Wr=-8.940052 PT_Lk0=-9.0001 SL_torus=-11 abs_err=2.99999 n_req=4 SL+1_abs=12 model_select=1 SOURCE_FIT_NOT_CANONICAL trap=PASS_ANY_TARGET
+[write] C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem\core_holonomy_v2_results.csv
+[write] C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem\core_holonomy_v2_energy_landscape.csv
+[write] C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem\core_holonomy_v2_summary.md
+[write] C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem\core_holonomy_v2_v2_gate_scenarios.csv
+[write] C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem\core_holonomy_v2_v2_gate_summary.md
+[done]

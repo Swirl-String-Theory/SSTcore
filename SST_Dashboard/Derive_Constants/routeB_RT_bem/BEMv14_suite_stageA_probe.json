@@ -1,0 +1,38 @@
+[
+  {
+    "label": "A1_paired_micro_low",
+    "args": {
+      "grid_mode": "paired",
+      "n_center_list": "8,10,12",
+      "n_theta_list": "3,3,4",
+      "n_sphere_list": "14,18,24",
+      "tube_fraction_list": "0.40,0.34,0.30",
+      "outer_factor_list": "2.0,2.4,2.8",
+      "pair_fit_min_M": 4
+    }
+  },
+  {
+    "label": "A2_paired_micro_high",
+    "args": {
+      "grid_mode": "paired",
+      "n_center_list": "10,12,14",
+      "n_theta_list": "3,4,4",
+      "n_sphere_list": "18,24,32",
+      "tube_fraction_list": "0.36,0.30,0.26",
+      "outer_factor_list": "2.2,2.6,3.0",
+      "pair_fit_min_M": 4
+    }
+  },
+  {
+    "label": "A3_cartesian_tiny",
+    "args": {
+      "grid_mode": "cartesian",
+      "n_center_list": "8,10",
+      "n_theta_list": "3,4",
+      "n_sphere_list": "14,18",
+      "tube_fraction_list": "0.36,0.30",
+      "outer_factor_list": "2.2,2.8",
+      "pair_fit_min_M": 4
+    }
+  }
+]

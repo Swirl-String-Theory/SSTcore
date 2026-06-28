@@ -1,0 +1,60 @@
+--- a/src/canonical_constants.h	2026-06-27 23:49:09.347422709 +0000
++++ b/src/canonical_constants.h	2026-06-27 23:49:50.178003584 +0000
+@@ -24,6 +24,7 @@
+     double rho_E = 0.0;
+     double rho_m = 0.0;
+     double rho_core = 0.0;
++    double rho_horn = 0.0;       // canon v0.8.12 horn-envelope density (alias of rho_core)
+     double eta_0 = 0.0;
+     double geometric_gate = 0.0;
+     double swirl_clock = 0.0;
+@@ -64,6 +65,8 @@
+     [[nodiscard]] static double swirl_energy_density(double rho_f, double v_norm);
+     [[nodiscard]] static double mass_equivalent_density(double rho_E, double c = static_cast<double>(SST::Constants::C_VACUUM));
+     [[nodiscard]] static double core_density_closure(double m_e, double c, double v_swirl, double r_c);
++    // Canon v0.8.12 name for the horn-envelope density closure; alias of core_density_closure.
++    [[nodiscard]] static double horn_envelope_density(double m_e, double c, double v_swirl, double r_c);
+     [[nodiscard]] static double geometric_gate(double lambda_c, double r_c);
+     [[nodiscard]] static double f_swirl_max(double hbar, double omega_c, double r_c);
+     [[nodiscard]] static double rydberg_sst(double v_swirl, double r_c, double c = static_cast<double>(SST::Constants::C_VACUUM));
+--- a/src/canonical_constants.cpp	2026-06-27 23:49:09.347358714 +0000
++++ b/src/canonical_constants.cpp	2026-06-27 23:49:50.178205589 +0000
+@@ -72,6 +72,11 @@
+     return (m_e * c * c) / (2.0 * pi_d * v_swirl * v_swirl * r_c * r_c * r_c);
+ }
+ 
++double SSTCanonicalConstants::horn_envelope_density(double m_e, double c, double v_swirl, double r_c) {
++    // Canon v0.8.12 rho_horn; identical closure to the legacy rho_core.
++    return core_density_closure(m_e, c, v_swirl, r_c);
++}
++
+ double SSTCanonicalConstants::geometric_gate(double lambda_c, double r_c) {
+     if (lambda_c <= 0.0 || r_c <= 0.0) throw std::invalid_argument("lambda_c and r_c must be positive.");
+     return lambda_c / (pi_d * r_c);
+@@ -104,6 +109,7 @@
+     out.rho_E = swirl_energy_density(rho_f, v_swirl);
+     out.rho_m = mass_equivalent_density(out.rho_E, out.c);
+     out.rho_core = core_density_closure(out.m_e, out.c, v_swirl, out.r_c);
++    out.rho_horn = out.rho_core;   // canon v0.8.12 alias
+     out.eta_0 = eta0(v_swirl, out.c);
+     out.geometric_gate = geometric_gate(out.lambda_c, out.r_c);
+     out.swirl_clock = swirl_clock(v_swirl, out.c);
+--- a/src/canonical_constants_py.cpp	2026-06-27 23:49:09.347529504 +0000
++++ b/src/canonical_constants_py.cpp	2026-06-27 23:49:50.178343368 +0000
+@@ -21,6 +21,7 @@
+         .def_readwrite("rho_E", &sst::SSTCanonicalValues::rho_E)
+         .def_readwrite("rho_m", &sst::SSTCanonicalValues::rho_m)
+         .def_readwrite("rho_core", &sst::SSTCanonicalValues::rho_core)
++        .def_readwrite("rho_horn", &sst::SSTCanonicalValues::rho_horn)
+         .def_readwrite("eta_0", &sst::SSTCanonicalValues::eta_0)
+         .def_readwrite("geometric_gate", &sst::SSTCanonicalValues::geometric_gate)
+         .def_readwrite("swirl_clock", &sst::SSTCanonicalValues::swirl_clock)
+@@ -61,6 +62,8 @@
+                     py::arg("rho_f"), py::arg("v_norm"))
+         .def_static("mass_equivalent_density", &sst::SSTCanonicalConstants::mass_equivalent_density,
+                     py::arg("rho_E"), py::arg("c") = static_cast<double>(SST::Constants::C_VACUUM))
++        .def_static("horn_envelope_density", &sst::SSTCanonicalConstants::horn_envelope_density,
++                    py::arg("m_e"), py::arg("c"), py::arg("v_swirl"), py::arg("r_c"))
+         .def_static("core_density_closure", &sst::SSTCanonicalConstants::core_density_closure,
+                     py::arg("m_e"), py::arg("c"), py::arg("v_swirl"), py::arg("r_c"))
+         .def_static("geometric_gate", &sst::SSTCanonicalConstants::geometric_gate,

@@ -1,0 +1,210 @@
+[log] writing console output to fs_core_holonomy_audit_v2_canon_core_cycle_outputlog.txt
+[config] q_list=[3, 5, 7, 9, 11], samples=1024, models=['zero', 'unit', 'canon_core_cycle', 'twoomega_cycle', 'twoomega_transit', 'background']
+[config] n_range=[-3, -2, -1, 0, 1, 2, 3], k_holonomy=1.0, k_abs=0.0, odd_bonus=0.0
+[scope] Core-holonomy audit: test n_core=(1/2π)∮dθ_core selection without injecting pq+1.
+[fseries] roots:
+  - C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem\Knots_FourierSeries
+  - C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem\knotplot
+[ideal] candidate ideal.txt paths:
+  - C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem\ideal.txt
+[inventory] entries to analyze: 34
+  - analytic torus         p=2  q= 3           analytic:T(2,3)
+  - analytic torus         p=2  q= 5           analytic:T(2,5)
+  - analytic torus         p=2  q= 7           analytic:T(2,7)
+  - analytic torus         p=2  q= 9           analytic:T(2,9)
+  - analytic torus         p=2  q=11           analytic:T(2,11)
+  - analytic torus         p=3  q= 2           analytic:T(3,2)
+  - analytic torus         p=3  q= 4           analytic:T(3,4)
+  - ideal    torus         p=2  q= 3           ideal:3:1:1
+  - ideal    torus         p=2  q= 5           ideal:5:1:1
+  - ideal    control_twist p=2  q= -  ctrl_q=5 ideal:5:1:2 (5_2_twist_control)
+  - ideal    torus         p=2  q= 7           ideal:7:1:1
+  - ideal    torus         p=2  q= 9           ideal:9:1:1
+  - ideal    torus         p=2  q=11           ideal:K11a367
+  - ideal    control_twist p=2  q= - ctrl_q=11 ideal:K11a247 (11_2_twist_control)
+  - fseries  torus         p=2  q= 3           Knots_FourierSeries/3_1/knot.3_1.fseries
+  - fseries  torus         p=2  q= 3           Knots_FourierSeries/3_1/knot.3_1p.fseries
+  - fseries  torus         p=2  q= 3           Knots_FourierSeries/3_1/knot.3_1u.fseries
+  - fseries  torus         p=2  q= 5           Knots_FourierSeries/5_1/knot.5_1.fseries
+  - fseries  torus         p=2  q= 5           Knots_FourierSeries/5_1/knot.5_1p.fseries
+  - fseries  torus         p=2  q= 5           Knots_FourierSeries/5_1/knot.5_1u.fseries
+  - fseries  control_twist p=2  q= -  ctrl_q=5 Knots_FourierSeries/5_2/knot.5_2.fseries
+  - fseries  control_twist p=2  q= -  ctrl_q=5 Knots_FourierSeries/5_2/knot.5_2d.fseries
+  - fseries  control_twist p=2  q= -  ctrl_q=5 Knots_FourierSeries/5_2/knot.5_2r.fseries
+  - fseries  torus         p=2  q= 7           Knots_FourierSeries/7_1/knot.7_1.fseries
+  - fseries  torus         p=2  q= 7           Knots_FourierSeries/7_1/knot.7_1p.fseries
+  - fseries  torus         p=2  q= 3           knotplot/knot_3.1/knot_3.1.fseries
+  - fseries  torus         p=2  q= 5           knotplot/knot_5.1/knot_5.1.fseries
+  - fseries  control_twist p=2  q= -  ctrl_q=5 knotplot/knot_5.2/knot_5.2.fseries
+  - fseries  control_twist p=2  q= -  ctrl_q=5 knotplot/knot_5.2.1/knot_5.2.1.fseries
+  - fseries  torus         p=2  q= 7           knotplot/knot_7.1/knot_7.1.fseries
+  - fseries  torus         p=2  q= 9           knotplot/knot_9.1/knot_9.1.fseries
+  - fseries  torus         p=2  q= 3           knotplot/knot_T2.3/knot_T2.3.fseries
+  - fseries  torus         p=2  q= 5           knotplot/knot_T2.5/knot_T2.5.fseries
+  - fseries  torus         p=2  q= 7           knotplot/knot_T2.7/knot_T2.7.fseries
+[RESULT 001/034] analytic:T(2,3) model=zero pq=6 SL_torus=-6.00048 n_req=1 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 001/034] analytic:T(2,3) model=unit pq=6 SL_torus=-6.00048 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 001/034] analytic:T(2,3) model=canon_core_cycle pq=6 SL_torus=-6.00048 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CANON_CORE_CYCLE
+[RESULT 001/034] analytic:T(2,3) model=twoomega_cycle pq=6 SL_torus=-6.00048 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CLOSURE_ASSUMPTION
+[RESULT 001/034] analytic:T(2,3) model=twoomega_transit pq=6 SL_torus=-6.00048 n_req=1 phi/2pi=2.12514 n_sel=2 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 001/034] analytic:T(2,3) model=background pq=6 SL_torus=-6.00048 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 002/034] analytic:T(2,5) model=zero pq=10 SL_torus=-10.0014 n_req=1 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 002/034] analytic:T(2,5) model=unit pq=10 SL_torus=-10.0014 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 002/034] analytic:T(2,5) model=canon_core_cycle pq=10 SL_torus=-10.0014 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CANON_CORE_CYCLE
+[RESULT 002/034] analytic:T(2,5) model=twoomega_cycle pq=10 SL_torus=-10.0014 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CLOSURE_ASSUMPTION
+[RESULT 002/034] analytic:T(2,5) model=twoomega_transit pq=10 SL_torus=-10.0014 n_req=1 phi/2pi=2.46657 n_sel=2 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 002/034] analytic:T(2,5) model=background pq=10 SL_torus=-10.0014 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 003/034] analytic:T(2,7) model=zero pq=14 SL_torus=-14.0041 n_req=1 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 003/034] analytic:T(2,7) model=unit pq=14 SL_torus=-14.0041 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 003/034] analytic:T(2,7) model=canon_core_cycle pq=14 SL_torus=-14.0041 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CANON_CORE_CYCLE
+[RESULT 003/034] analytic:T(2,7) model=twoomega_cycle pq=14 SL_torus=-14.0041 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CLOSURE_ASSUMPTION
+[RESULT 003/034] analytic:T(2,7) model=twoomega_transit pq=14 SL_torus=-14.0041 n_req=1 phi/2pi=2.89954 n_sel=3 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 003/034] analytic:T(2,7) model=background pq=14 SL_torus=-14.0041 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 004/034] analytic:T(2,9) model=zero pq=18 SL_torus=-18.0124 n_req=1 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 004/034] analytic:T(2,9) model=unit pq=18 SL_torus=-18.0124 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 004/034] analytic:T(2,9) model=canon_core_cycle pq=18 SL_torus=-18.0124 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CANON_CORE_CYCLE
+[RESULT 004/034] analytic:T(2,9) model=twoomega_cycle pq=18 SL_torus=-18.0124 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CLOSURE_ASSUMPTION
+[RESULT 004/034] analytic:T(2,9) model=twoomega_transit pq=18 SL_torus=-18.0124 n_req=1 phi/2pi=3.38894 n_sel=3 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 004/034] analytic:T(2,9) model=background pq=18 SL_torus=-18.0124 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 005/034] analytic:T(2,11) model=zero pq=22 SL_torus=-22.0324 n_req=1 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 005/034] analytic:T(2,11) model=unit pq=22 SL_torus=-22.0324 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 005/034] analytic:T(2,11) model=canon_core_cycle pq=22 SL_torus=-22.0324 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CANON_CORE_CYCLE
+[RESULT 005/034] analytic:T(2,11) model=twoomega_cycle pq=22 SL_torus=-22.0324 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CLOSURE_ASSUMPTION
+[RESULT 005/034] analytic:T(2,11) model=twoomega_transit pq=22 SL_torus=-22.0324 n_req=1 phi/2pi=3.91391 n_sel=3 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 005/034] analytic:T(2,11) model=background pq=22 SL_torus=-22.0324 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 006/034] analytic:T(3,2) model=zero pq=6 SL_torus=-6.00287 n_req=1 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 006/034] analytic:T(3,2) model=unit pq=6 SL_torus=-6.00287 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 006/034] analytic:T(3,2) model=canon_core_cycle pq=6 SL_torus=-6.00287 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CANON_CORE_CYCLE
+[RESULT 006/034] analytic:T(3,2) model=twoomega_cycle pq=6 SL_torus=-6.00287 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CLOSURE_ASSUMPTION
+[RESULT 006/034] analytic:T(3,2) model=twoomega_transit pq=6 SL_torus=-6.00287 n_req=1 phi/2pi=2.92282 n_sel=3 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 006/034] analytic:T(3,2) model=background pq=6 SL_torus=-6.00287 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 007/034] analytic:T(3,4) model=zero pq=12 SL_torus=-12.0057 n_req=1 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 007/034] analytic:T(3,4) model=unit pq=12 SL_torus=-12.0057 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 007/034] analytic:T(3,4) model=canon_core_cycle pq=12 SL_torus=-12.0057 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CANON_CORE_CYCLE
+[RESULT 007/034] analytic:T(3,4) model=twoomega_cycle pq=12 SL_torus=-12.0057 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CLOSURE_ASSUMPTION
+[RESULT 007/034] analytic:T(3,4) model=twoomega_transit pq=12 SL_torus=-12.0057 n_req=1 phi/2pi=3.12094 n_sel=3 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 007/034] analytic:T(3,4) model=background pq=12 SL_torus=-12.0057 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 008/034] ideal:3:1:1 model=zero pq=6 SL_torus=-6.00021 n_req=1 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 008/034] ideal:3:1:1 model=unit pq=6 SL_torus=-6.00021 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 008/034] ideal:3:1:1 model=canon_core_cycle pq=6 SL_torus=-6.00021 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CANON_CORE_CYCLE
+[RESULT 008/034] ideal:3:1:1 model=twoomega_cycle pq=6 SL_torus=-6.00021 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CLOSURE_ASSUMPTION
+[RESULT 008/034] ideal:3:1:1 model=twoomega_transit pq=6 SL_torus=-6.00021 n_req=1 phi/2pi=2.10402 n_sel=2 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 008/034] ideal:3:1:1 model=background pq=6 SL_torus=-6.00021 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 009/034] ideal:5:1:1 model=zero pq=10 SL_torus=-9.00049 n_req=2 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 009/034] ideal:5:1:1 model=unit pq=10 SL_torus=-9.00049 n_req=2 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 009/034] ideal:5:1:1 model=canon_core_cycle pq=10 SL_torus=-9.00049 n_req=2 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 009/034] ideal:5:1:1 model=twoomega_cycle pq=10 SL_torus=-9.00049 n_req=2 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 009/034] ideal:5:1:1 model=twoomega_transit pq=10 SL_torus=-9.00049 n_req=2 phi/2pi=2.54003 n_sel=3 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 009/034] ideal:5:1:1 model=background pq=10 SL_torus=-9.00049 n_req=2 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 011/034] ideal:7:1:1 model=zero pq=14 SL_torus=13.0048 n_req=2 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 011/034] ideal:7:1:1 model=unit pq=14 SL_torus=13.0048 n_req=2 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 011/034] ideal:7:1:1 model=canon_core_cycle pq=14 SL_torus=13.0048 n_req=2 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 011/034] ideal:7:1:1 model=twoomega_cycle pq=14 SL_torus=13.0048 n_req=2 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 011/034] ideal:7:1:1 model=twoomega_transit pq=14 SL_torus=13.0048 n_req=2 phi/2pi=2.96043 n_sel=3 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 011/034] ideal:7:1:1 model=background pq=14 SL_torus=13.0048 n_req=2 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 012/034] ideal:9:1:1 model=zero pq=18 SL_torus=15.0014 n_req=4 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 012/034] ideal:9:1:1 model=unit pq=18 SL_torus=15.0014 n_req=4 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 012/034] ideal:9:1:1 model=canon_core_cycle pq=18 SL_torus=15.0014 n_req=4 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 012/034] ideal:9:1:1 model=twoomega_cycle pq=18 SL_torus=15.0014 n_req=4 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 012/034] ideal:9:1:1 model=twoomega_transit pq=18 SL_torus=15.0014 n_req=4 phi/2pi=3.34493 n_sel=3 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 012/034] ideal:9:1:1 model=background pq=18 SL_torus=15.0014 n_req=4 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 013/034] ideal:K11a367 model=zero pq=22 SL_torus=-19.0084 n_req=4 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 013/034] ideal:K11a367 model=unit pq=22 SL_torus=-19.0084 n_req=4 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 013/034] ideal:K11a367 model=canon_core_cycle pq=22 SL_torus=-19.0084 n_req=4 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 013/034] ideal:K11a367 model=twoomega_cycle pq=22 SL_torus=-19.0084 n_req=4 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 013/034] ideal:K11a367 model=twoomega_transit pq=22 SL_torus=-19.0084 n_req=4 phi/2pi=3.75557 n_sel=3 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 013/034] ideal:K11a367 model=background pq=22 SL_torus=-19.0084 n_req=4 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 015/034] Knots_FourierSeries/3_1/knot.3_1.fseries model=zero pq=6 SL_torus=6.00045 n_req=1 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 015/034] Knots_FourierSeries/3_1/knot.3_1.fseries model=unit pq=6 SL_torus=6.00045 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 015/034] Knots_FourierSeries/3_1/knot.3_1.fseries model=canon_core_cycle pq=6 SL_torus=6.00045 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CANON_CORE_CYCLE
+[RESULT 015/034] Knots_FourierSeries/3_1/knot.3_1.fseries model=twoomega_cycle pq=6 SL_torus=6.00045 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CLOSURE_ASSUMPTION
+[RESULT 015/034] Knots_FourierSeries/3_1/knot.3_1.fseries model=twoomega_transit pq=6 SL_torus=6.00045 n_req=1 phi/2pi=2.22161 n_sel=2 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 015/034] Knots_FourierSeries/3_1/knot.3_1.fseries model=background pq=6 SL_torus=6.00045 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 016/034] Knots_FourierSeries/3_1/knot.3_1p.fseries model=zero pq=6 SL_torus=0.584235 n_req=6 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 016/034] Knots_FourierSeries/3_1/knot.3_1p.fseries model=unit pq=6 SL_torus=0.584235 n_req=6 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 016/034] Knots_FourierSeries/3_1/knot.3_1p.fseries model=canon_core_cycle pq=6 SL_torus=0.584235 n_req=6 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 016/034] Knots_FourierSeries/3_1/knot.3_1p.fseries model=twoomega_cycle pq=6 SL_torus=0.584235 n_req=6 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 016/034] Knots_FourierSeries/3_1/knot.3_1p.fseries model=twoomega_transit pq=6 SL_torus=0.584235 n_req=6 phi/2pi=2.30943 n_sel=2 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 016/034] Knots_FourierSeries/3_1/knot.3_1p.fseries model=background pq=6 SL_torus=0.584235 n_req=6 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 017/034] Knots_FourierSeries/3_1/knot.3_1u.fseries model=zero pq=6 SL_torus=6.002 n_req=1 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 017/034] Knots_FourierSeries/3_1/knot.3_1u.fseries model=unit pq=6 SL_torus=6.002 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 017/034] Knots_FourierSeries/3_1/knot.3_1u.fseries model=canon_core_cycle pq=6 SL_torus=6.002 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CANON_CORE_CYCLE
+[RESULT 017/034] Knots_FourierSeries/3_1/knot.3_1u.fseries model=twoomega_cycle pq=6 SL_torus=6.002 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CLOSURE_ASSUMPTION
+[RESULT 017/034] Knots_FourierSeries/3_1/knot.3_1u.fseries model=twoomega_transit pq=6 SL_torus=6.002 n_req=1 phi/2pi=2.82358 n_sel=3 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 017/034] Knots_FourierSeries/3_1/knot.3_1u.fseries model=background pq=6 SL_torus=6.002 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 018/034] Knots_FourierSeries/5_1/knot.5_1.fseries model=zero pq=10 SL_torus=10.0037 n_req=1 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 018/034] Knots_FourierSeries/5_1/knot.5_1.fseries model=unit pq=10 SL_torus=10.0037 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 018/034] Knots_FourierSeries/5_1/knot.5_1.fseries model=canon_core_cycle pq=10 SL_torus=10.0037 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CANON_CORE_CYCLE
+[RESULT 018/034] Knots_FourierSeries/5_1/knot.5_1.fseries model=twoomega_cycle pq=10 SL_torus=10.0037 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CLOSURE_ASSUMPTION
+[RESULT 018/034] Knots_FourierSeries/5_1/knot.5_1.fseries model=twoomega_transit pq=10 SL_torus=10.0037 n_req=1 phi/2pi=2.78575 n_sel=3 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 018/034] Knots_FourierSeries/5_1/knot.5_1.fseries model=background pq=10 SL_torus=10.0037 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 019/034] Knots_FourierSeries/5_1/knot.5_1p.fseries model=zero pq=10 SL_torus=3.56347 n_req=7 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 019/034] Knots_FourierSeries/5_1/knot.5_1p.fseries model=unit pq=10 SL_torus=3.56347 n_req=7 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 019/034] Knots_FourierSeries/5_1/knot.5_1p.fseries model=canon_core_cycle pq=10 SL_torus=3.56347 n_req=7 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 019/034] Knots_FourierSeries/5_1/knot.5_1p.fseries model=twoomega_cycle pq=10 SL_torus=3.56347 n_req=7 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 019/034] Knots_FourierSeries/5_1/knot.5_1p.fseries model=twoomega_transit pq=10 SL_torus=3.56347 n_req=7 phi/2pi=2.72565 n_sel=3 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 019/034] Knots_FourierSeries/5_1/knot.5_1p.fseries model=background pq=10 SL_torus=3.56347 n_req=7 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 020/034] Knots_FourierSeries/5_1/knot.5_1u.fseries model=zero pq=10 SL_torus=10.0291 n_req=1 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 020/034] Knots_FourierSeries/5_1/knot.5_1u.fseries model=unit pq=10 SL_torus=10.0291 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 020/034] Knots_FourierSeries/5_1/knot.5_1u.fseries model=canon_core_cycle pq=10 SL_torus=10.0291 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CANON_CORE_CYCLE
+[RESULT 020/034] Knots_FourierSeries/5_1/knot.5_1u.fseries model=twoomega_cycle pq=10 SL_torus=10.0291 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CLOSURE_ASSUMPTION
+[RESULT 020/034] Knots_FourierSeries/5_1/knot.5_1u.fseries model=twoomega_transit pq=10 SL_torus=10.0291 n_req=1 phi/2pi=4.53825 n_sel=3 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 020/034] Knots_FourierSeries/5_1/knot.5_1u.fseries model=background pq=10 SL_torus=10.0291 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 024/034] Knots_FourierSeries/7_1/knot.7_1.fseries model=zero pq=14 SL_torus=14.0042 n_req=1 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 024/034] Knots_FourierSeries/7_1/knot.7_1.fseries model=unit pq=14 SL_torus=14.0042 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 024/034] Knots_FourierSeries/7_1/knot.7_1.fseries model=canon_core_cycle pq=14 SL_torus=14.0042 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CANON_CORE_CYCLE
+[RESULT 024/034] Knots_FourierSeries/7_1/knot.7_1.fseries model=twoomega_cycle pq=14 SL_torus=14.0042 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CLOSURE_ASSUMPTION
+[RESULT 024/034] Knots_FourierSeries/7_1/knot.7_1.fseries model=twoomega_transit pq=14 SL_torus=14.0042 n_req=1 phi/2pi=2.74632 n_sel=3 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 024/034] Knots_FourierSeries/7_1/knot.7_1.fseries model=background pq=14 SL_torus=14.0042 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 025/034] Knots_FourierSeries/7_1/knot.7_1p.fseries model=zero pq=14 SL_torus=12.6868 n_req=2 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 025/034] Knots_FourierSeries/7_1/knot.7_1p.fseries model=unit pq=14 SL_torus=12.6868 n_req=2 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 025/034] Knots_FourierSeries/7_1/knot.7_1p.fseries model=canon_core_cycle pq=14 SL_torus=12.6868 n_req=2 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 025/034] Knots_FourierSeries/7_1/knot.7_1p.fseries model=twoomega_cycle pq=14 SL_torus=12.6868 n_req=2 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 025/034] Knots_FourierSeries/7_1/knot.7_1p.fseries model=twoomega_transit pq=14 SL_torus=12.6868 n_req=2 phi/2pi=2.82054 n_sel=3 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 025/034] Knots_FourierSeries/7_1/knot.7_1p.fseries model=background pq=14 SL_torus=12.6868 n_req=2 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 026/034] knotplot/knot_3.1/knot_3.1.fseries model=zero pq=6 SL_torus=6.00028 n_req=1 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 026/034] knotplot/knot_3.1/knot_3.1.fseries model=unit pq=6 SL_torus=6.00028 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 026/034] knotplot/knot_3.1/knot_3.1.fseries model=canon_core_cycle pq=6 SL_torus=6.00028 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CANON_CORE_CYCLE
+[RESULT 026/034] knotplot/knot_3.1/knot_3.1.fseries model=twoomega_cycle pq=6 SL_torus=6.00028 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CLOSURE_ASSUMPTION
+[RESULT 026/034] knotplot/knot_3.1/knot_3.1.fseries model=twoomega_transit pq=6 SL_torus=6.00028 n_req=1 phi/2pi=2.09472 n_sel=2 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 026/034] knotplot/knot_3.1/knot_3.1.fseries model=background pq=6 SL_torus=6.00028 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 027/034] knotplot/knot_5.1/knot_5.1.fseries model=zero pq=10 SL_torus=9.0002 n_req=2 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 027/034] knotplot/knot_5.1/knot_5.1.fseries model=unit pq=10 SL_torus=9.0002 n_req=2 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 027/034] knotplot/knot_5.1/knot_5.1.fseries model=canon_core_cycle pq=10 SL_torus=9.0002 n_req=2 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 027/034] knotplot/knot_5.1/knot_5.1.fseries model=twoomega_cycle pq=10 SL_torus=9.0002 n_req=2 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 027/034] knotplot/knot_5.1/knot_5.1.fseries model=twoomega_transit pq=10 SL_torus=9.0002 n_req=2 phi/2pi=2.48835 n_sel=2 SELECTS_REQUIRED_IN_TRANSIT_MODEL
+[RESULT 027/034] knotplot/knot_5.1/knot_5.1.fseries model=background pq=10 SL_torus=9.0002 n_req=2 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 030/034] knotplot/knot_7.1/knot_7.1.fseries model=zero pq=14 SL_torus=11.0007 n_req=4 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 030/034] knotplot/knot_7.1/knot_7.1.fseries model=unit pq=14 SL_torus=11.0007 n_req=4 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 030/034] knotplot/knot_7.1/knot_7.1.fseries model=canon_core_cycle pq=14 SL_torus=11.0007 n_req=4 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 030/034] knotplot/knot_7.1/knot_7.1.fseries model=twoomega_cycle pq=14 SL_torus=11.0007 n_req=4 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 030/034] knotplot/knot_7.1/knot_7.1.fseries model=twoomega_transit pq=14 SL_torus=11.0007 n_req=4 phi/2pi=2.75004 n_sel=3 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 030/034] knotplot/knot_7.1/knot_7.1.fseries model=background pq=14 SL_torus=11.0007 n_req=4 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 031/034] knotplot/knot_9.1/knot_9.1.fseries model=zero pq=18 SL_torus=15.0018 n_req=4 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 031/034] knotplot/knot_9.1/knot_9.1.fseries model=unit pq=18 SL_torus=15.0018 n_req=4 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 031/034] knotplot/knot_9.1/knot_9.1.fseries model=canon_core_cycle pq=18 SL_torus=15.0018 n_req=4 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 031/034] knotplot/knot_9.1/knot_9.1.fseries model=twoomega_cycle pq=18 SL_torus=15.0018 n_req=4 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 031/034] knotplot/knot_9.1/knot_9.1.fseries model=twoomega_transit pq=18 SL_torus=15.0018 n_req=4 phi/2pi=3.15123 n_sel=3 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 031/034] knotplot/knot_9.1/knot_9.1.fseries model=background pq=18 SL_torus=15.0018 n_req=4 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 032/034] knotplot/knot_T2.3/knot_T2.3.fseries model=zero pq=6 SL_torus=-6.00027 n_req=1 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 032/034] knotplot/knot_T2.3/knot_T2.3.fseries model=unit pq=6 SL_torus=-6.00027 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 032/034] knotplot/knot_T2.3/knot_T2.3.fseries model=canon_core_cycle pq=6 SL_torus=-6.00027 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CANON_CORE_CYCLE
+[RESULT 032/034] knotplot/knot_T2.3/knot_T2.3.fseries model=twoomega_cycle pq=6 SL_torus=-6.00027 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CLOSURE_ASSUMPTION
+[RESULT 032/034] knotplot/knot_T2.3/knot_T2.3.fseries model=twoomega_transit pq=6 SL_torus=-6.00027 n_req=1 phi/2pi=2.10786 n_sel=2 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 032/034] knotplot/knot_T2.3/knot_T2.3.fseries model=background pq=6 SL_torus=-6.00027 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 033/034] knotplot/knot_T2.5/knot_T2.5.fseries model=zero pq=10 SL_torus=-10.001 n_req=1 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 033/034] knotplot/knot_T2.5/knot_T2.5.fseries model=unit pq=10 SL_torus=-10.001 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 033/034] knotplot/knot_T2.5/knot_T2.5.fseries model=canon_core_cycle pq=10 SL_torus=-10.001 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CANON_CORE_CYCLE
+[RESULT 033/034] knotplot/knot_T2.5/knot_T2.5.fseries model=twoomega_cycle pq=10 SL_torus=-10.001 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_CLOSURE_ASSUMPTION
+[RESULT 033/034] knotplot/knot_T2.5/knot_T2.5.fseries model=twoomega_transit pq=10 SL_torus=-10.001 n_req=1 phi/2pi=2.50179 n_sel=3 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 033/034] knotplot/knot_T2.5/knot_T2.5.fseries model=background pq=10 SL_torus=-10.001 n_req=1 phi/2pi=1 n_sel=1 SELECTS_REQUIRED_BY_INPUT_ASSUMPTION
+[RESULT 034/034] knotplot/knot_T2.7/knot_T2.7.fseries model=zero pq=14 SL_torus=-10.9998 n_req=4 phi/2pi=0 n_sel=0 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 034/034] knotplot/knot_T2.7/knot_T2.7.fseries model=unit pq=14 SL_torus=-10.9998 n_req=4 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 034/034] knotplot/knot_T2.7/knot_T2.7.fseries model=canon_core_cycle pq=14 SL_torus=-10.9998 n_req=4 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 034/034] knotplot/knot_T2.7/knot_T2.7.fseries model=twoomega_cycle pq=14 SL_torus=-10.9998 n_req=4 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 034/034] knotplot/knot_T2.7/knot_T2.7.fseries model=twoomega_transit pq=14 SL_torus=-10.9998 n_req=4 phi/2pi=2.78008 n_sel=3 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[RESULT 034/034] knotplot/knot_T2.7/knot_T2.7.fseries model=background pq=14 SL_torus=-10.9998 n_req=4 phi/2pi=1 n_sel=1 DOES_NOT_SELECT_REQUIRED_CORE_TWIST
+[write] core_holonomy_audit_results.csv
+[write] core_holonomy_audit_energy_landscape.csv
+[write] core_holonomy_audit_summary.md
+[done]

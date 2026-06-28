@@ -1,0 +1,16 @@
+--- v9/SST_Coil_90_RunAll.py
++++ v10/SST_Coil_90_RunAll.py
+@@
+- Ran only compare_geometries, winding_factors, pwm_current, and two light radius sweeps.
++ Restores broad single-run artifact generation:
++ - SawBowl curved/chord geometry plots
++ - exact Rodin 6-lane z-mirror geometry plot
++ - lane summaries
++ - winding factors and phase table
++ - current spectra by geometry
++ - static Biot-Savart midplane maps: |B|, Bz, magnetic-pressure proxy, |grad B^2|
++ - radius-scaling sweeps for SawBowl curved, SawBowl chord, and Rodin 6-lane
++ - absolute-frequency plots and fR-collapse plots
++ - combined geometry comparison response plot
++ - node-prediction table
++ - all historical user-supplied source versions preserved in legacy_all_versions_from_user_zip/

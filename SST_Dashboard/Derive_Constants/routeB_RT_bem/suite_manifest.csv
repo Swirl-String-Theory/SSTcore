@@ -1,0 +1,6 @@
+suite,grid_families,total_BEMv14_grid_points
+BEMv14_suite_stageA_probe.json,3,38
+BEMv14_suite_stageB_production.json,5,50
+BEMv14_suite_stageC_stress.json,5,46
+BEMv14_suite_stageD_maximal.json,3,11
+BEMv14_suite_all_stages_ABCD.json,16,145

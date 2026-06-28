@@ -1,0 +1,18 @@
+{
+  "radii": [
+    0.03,
+    0.05,
+    0.1
+  ],
+  "f_min": 100000.0,
+  "f_max": 8000000.0,
+  "samples": 20,
+  "harmonics": 4,
+  "grid": 7,
+  "observable": "weighted_gradB2",
+  "height": 0.006,
+  "layers": 1,
+  "path_mode": "chord",
+  "collapse_rms_fR": 0.11007227961012533,
+  "note": "v5 uses user SawBowl +11,-9 3-phase geometry and an RL/skin/deadtime current model. It is still distributed-lite, not a SPICE/field-solver replacement."
+}

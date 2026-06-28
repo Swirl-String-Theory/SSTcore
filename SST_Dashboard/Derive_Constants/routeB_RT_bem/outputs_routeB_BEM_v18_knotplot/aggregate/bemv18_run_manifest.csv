@@ -1,0 +1,11 @@
+target,run_dir,returncode,mode
+3_1,outputs_routeB_BEM_v18_knotplot\runs\3_1,0,reuse_bemv13
+4_1,outputs_routeB_BEM_v18_knotplot\runs\4_1,0,reuse_bemv13
+5_1,outputs_routeB_BEM_v18_knotplot\runs\5_1,0,reuse_bemv13
+6_1,outputs_routeB_BEM_v18_knotplot\runs\6_1,0,reuse_bemv13
+7_1,outputs_routeB_BEM_v18_knotplot\runs\7_1,0,reuse_bemv13
+8_1,outputs_routeB_BEM_v18_knotplot\runs\8_1,0,reuse_bemv13
+9_1,outputs_routeB_BEM_v18_knotplot\runs\9_1,0,reuse_bemv13
+10_1,outputs_routeB_BEM_v18_knotplot\runs\10_1,0,reuse_bemv13
+K11a367,outputs_routeB_BEM_v18_knotplot\runs\K11a367,0,reuse_bemv13
+K11a247,outputs_routeB_BEM_v18_knotplot\runs\K11a247,0,reuse_bemv13

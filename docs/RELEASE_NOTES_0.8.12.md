@@ -28,6 +28,10 @@ The v0.8.0 snapshot items remain: expanded C++ core (Biot–Savart, fluid dynami
 
 ### Canon alignment & core API
 
+- **CODATA-2018 α pin** — `SST::Constants::ALPHA` = `7.2973525693e-3` with provenance comments in `include/SST_Constants.h`
+- **Chronos–Kelvin Ω vs ω** — `omega_from_swirl_clock` documents angular frequency Ω; new **`vorticity_from_swirl_clock`** = 2Ω (Canon Sec. 2.9)
+- **ρ notation** — **`rho_horn`** / **`horn_envelope_density()`** as canon v0.8.12 aliases of `rho_core` / `core_density_closure` (horn-envelope density ≠ background `rho_m`)
+- **Patch provenance** — incremental and combined patches under [`docs/patches/v0.8.12/`](patches/v0.8.12/); included in `SSTcore_source_v*.zip`
 - Updated **`SST_Constants.h`**: canon `ALPHA` and related comments aligned with SST canon v0.8.12
 - Fixed **delay phase-lock** residual/sign for v0.8.10+ delayed-phase formulations
 - Added Python-bound quantities: **`pauli_barrier_scale`**, **`swirl_impedance`**, **`dimensionless_stiffness_ratio`**

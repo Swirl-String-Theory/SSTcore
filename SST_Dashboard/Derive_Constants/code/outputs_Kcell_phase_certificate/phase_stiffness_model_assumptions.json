@@ -1,0 +1,16 @@
+{
+  "E_star_source": "batch aggregate batch_aggregate_stats.csv",
+  "mode": "nls_shell_theorem",
+  "ropelength": 16.371637,
+  "phi_max": 0.001,
+  "n_phi": 21,
+  "quartic": 0.0,
+  "ropelength_L_over_D": 16.371637,
+  "Xi_sph": 1.0460441175140003,
+  "E_star": 274.0749037578999,
+  "E_eff": 274.07190617907213,
+  "alpha_cell": 0.007297355018552128,
+  "alpha_cell_inverse": 137.03595308953606,
+  "K_target_Eeff_over_8pi": 10.904974657754376,
+  "Lambda_target_Eeff_over_2": 137.03595308953606
+}

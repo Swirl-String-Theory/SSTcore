@@ -1,0 +1,2 @@
+grid_n,L_box,R_mask,eps,relax_field,scipy_available,H_scalar,H_perp,slope_scalar,slope_perp,w_perp,sigma,c2_at_chiR,target_11_over_48,pass_wperp_near_1,status
+71,8.0,7.0,0.01,True,True,0.4577640688597562,250.4510315026703,3.0772613752983218,0.0,547.1181522099766,367.7454348066511,22.984089675415692,0.22916666666666666,False,WPERP_NOT_1_SEE_CONVERGENCE_STUDY

@@ -1,0 +1,35 @@
+object_id,object_type,source_type,family,p,q,base_rule,base_sl_abs,base_sl_signed,expected_pq,torus_status,canon_status,notes
+"analytic:T(2,3)",single_torus,analytic,torus,2,3,torus_surface_pq,6,-6,6,PASS_DERIVED_PQ,CANONICAL_TORUS_BASE,
+"analytic:T(2,5)",single_torus,analytic,torus,2,5,torus_surface_pq,10,-10,10,PASS_DERIVED_PQ,CANONICAL_TORUS_BASE,
+"analytic:T(2,7)",single_torus,analytic,torus,2,7,torus_surface_pq,14,-14,14,PASS_DERIVED_PQ,CANONICAL_TORUS_BASE,
+"analytic:T(2,9)",single_torus,analytic,torus,2,9,torus_surface_pq,18,-18,18,PASS_DERIVED_PQ,CANONICAL_TORUS_BASE,
+"analytic:T(2,11)",single_torus,analytic,torus,2,11,torus_surface_pq,22,-22,22,PASS_DERIVED_PQ,CANONICAL_TORUS_BASE,
+"analytic:T(3,2)",single_torus,analytic,torus,3,2,torus_surface_pq,6,-6,6,PASS_DERIVED_PQ,CANONICAL_TORUS_BASE,
+"analytic:T(3,4)",single_torus,analytic,torus,3,4,torus_surface_pq,12,-12,12,PASS_DERIVED_PQ,CANONICAL_TORUS_BASE,
+ideal:3:1:1,single_torus,ideal,torus,2,3,torus_surface_pq,6,-6,6,PASS_DERIVED_PQ,CANONICAL_TORUS_BASE,
+ideal:5:1:1,single_torus,ideal,torus,2,5,fitted_torus_proxy_noncanonical,9,-9,10,SOURCE_FIT_NOT_CANONICAL,DIAGNOSTIC_NONCANONICAL_TORUS_FIT,Source/framing does not pass canonical pq check; retained only as diagnostic.
+ideal:5:1:2 (5_2_twist_control),single_twist,ideal,control_twist,2,,PT_Lk0_round_proxy_no_pq_rule,5,5,,NO_TORUS_TARGET,DIAGNOSTIC_TWIST_OR_GENERAL_PROXY,"No torus pq rule applied. PT_Lk0 is a framing proxy, not a canonical SL theorem."
+ideal:7:1:1,single_torus,ideal,torus,2,7,fitted_torus_proxy_noncanonical,13,13,14,SOURCE_FIT_NOT_CANONICAL,DIAGNOSTIC_NONCANONICAL_TORUS_FIT,Source/framing does not pass canonical pq check; retained only as diagnostic.
+ideal:9:1:1,single_torus,ideal,torus,2,9,fitted_torus_proxy_noncanonical,15,15,18,SOURCE_FIT_NOT_CANONICAL,DIAGNOSTIC_NONCANONICAL_TORUS_FIT,Source/framing does not pass canonical pq check; retained only as diagnostic.
+ideal:K11a367,single_torus,ideal,torus,2,11,fitted_torus_proxy_noncanonical,19,-19,22,SOURCE_FIT_NOT_CANONICAL,DIAGNOSTIC_NONCANONICAL_TORUS_FIT,Source/framing does not pass canonical pq check; retained only as diagnostic.
+ideal:K11a247 (11_2_twist_control),single_twist,ideal,control_twist,2,,PT_Lk0_round_proxy_no_pq_rule,8,8,,NO_TORUS_TARGET,DIAGNOSTIC_TWIST_OR_GENERAL_PROXY,"No torus pq rule applied. PT_Lk0 is a framing proxy, not a canonical SL theorem."
+Knots_FourierSeries/3_1/knot.3_1.fseries,single_torus,fseries,torus,2,3,torus_surface_pq,6,6,6,PASS_DERIVED_PQ,CANONICAL_TORUS_BASE,
+Knots_FourierSeries/3_1/knot.3_1p.fseries,single_torus,fseries,torus,2,3,fitted_torus_proxy_noncanonical,1,1,6,SOURCE_FIT_NOT_CANONICAL,DIAGNOSTIC_NONCANONICAL_TORUS_FIT,Source/framing does not pass canonical pq check; retained only as diagnostic.
+Knots_FourierSeries/3_1/knot.3_1u.fseries,single_torus,fseries,torus,2,3,torus_surface_pq,6,6,6,PASS_DERIVED_PQ,CANONICAL_TORUS_BASE,
+Knots_FourierSeries/5_1/knot.5_1.fseries,single_torus,fseries,torus,2,5,torus_surface_pq,10,10,10,PASS_DERIVED_PQ,CANONICAL_TORUS_BASE,
+Knots_FourierSeries/5_1/knot.5_1p.fseries,single_torus,fseries,torus,2,5,fitted_torus_proxy_noncanonical,3,3,10,SOURCE_FIT_NOT_CANONICAL,DIAGNOSTIC_NONCANONICAL_TORUS_FIT,Source/framing does not pass canonical pq check; retained only as diagnostic.
+Knots_FourierSeries/5_1/knot.5_1u.fseries,single_torus,fseries,torus,2,5,torus_surface_pq,10,10,10,PASS_DERIVED_PQ,CANONICAL_TORUS_BASE,
+Knots_FourierSeries/5_2/knot.5_2.fseries,single_twist,fseries,control_twist,2,,PT_Lk0_round_proxy_no_pq_rule,5,5,,NO_TORUS_TARGET,DIAGNOSTIC_TWIST_OR_GENERAL_PROXY,"No torus pq rule applied. PT_Lk0 is a framing proxy, not a canonical SL theorem."
+Knots_FourierSeries/5_2/knot.5_2d.fseries,single_twist,fseries,control_twist,2,,PT_Lk0_round_proxy_no_pq_rule,0,0,,NO_TORUS_TARGET,DIAGNOSTIC_TWIST_OR_GENERAL_PROXY,"No torus pq rule applied. PT_Lk0 is a framing proxy, not a canonical SL theorem."
+Knots_FourierSeries/5_2/knot.5_2r.fseries,single_twist,fseries,control_twist,2,,PT_Lk0_round_proxy_no_pq_rule,0,0,,NO_TORUS_TARGET,DIAGNOSTIC_TWIST_OR_GENERAL_PROXY,"No torus pq rule applied. PT_Lk0 is a framing proxy, not a canonical SL theorem."
+Knots_FourierSeries/7_1/knot.7_1.fseries,single_torus,fseries,torus,2,7,torus_surface_pq,14,14,14,PASS_DERIVED_PQ,CANONICAL_TORUS_BASE,
+Knots_FourierSeries/7_1/knot.7_1p.fseries,single_torus,fseries,torus,2,7,fitted_torus_proxy_noncanonical,12,12,14,SOURCE_FIT_NOT_CANONICAL,DIAGNOSTIC_NONCANONICAL_TORUS_FIT,Source/framing does not pass canonical pq check; retained only as diagnostic.
+knotplot/knot_3.1/knot_3.1.fseries,single_torus,fseries,torus,2,3,torus_surface_pq,6,6,6,PASS_DERIVED_PQ,CANONICAL_TORUS_BASE,
+knotplot/knot_5.1/knot_5.1.fseries,single_torus,fseries,torus,2,5,fitted_torus_proxy_noncanonical,9,9,10,SOURCE_FIT_NOT_CANONICAL,DIAGNOSTIC_NONCANONICAL_TORUS_FIT,Source/framing does not pass canonical pq check; retained only as diagnostic.
+knotplot/knot_5.2/knot_5.2.fseries,single_twist,fseries,control_twist,2,,PT_Lk0_round_proxy_no_pq_rule,5,5,,NO_TORUS_TARGET,DIAGNOSTIC_TWIST_OR_GENERAL_PROXY,"No torus pq rule applied. PT_Lk0 is a framing proxy, not a canonical SL theorem."
+knotplot/knot_5.2.1/knot_5.2.1.fseries,single_twist,fseries,control_twist,2,,PT_Lk0_round_proxy_no_pq_rule,1,1,,NO_TORUS_TARGET,DIAGNOSTIC_TWIST_OR_GENERAL_PROXY,"No torus pq rule applied. PT_Lk0 is a framing proxy, not a canonical SL theorem."
+knotplot/knot_7.1/knot_7.1.fseries,single_torus,fseries,torus,2,7,fitted_torus_proxy_noncanonical,11,11,14,SOURCE_FIT_NOT_CANONICAL,DIAGNOSTIC_NONCANONICAL_TORUS_FIT,Source/framing does not pass canonical pq check; retained only as diagnostic.
+knotplot/knot_9.1/knot_9.1.fseries,single_torus,fseries,torus,2,9,fitted_torus_proxy_noncanonical,15,15,18,SOURCE_FIT_NOT_CANONICAL,DIAGNOSTIC_NONCANONICAL_TORUS_FIT,Source/framing does not pass canonical pq check; retained only as diagnostic.
+knotplot/knot_T2.3/knot_T2.3.fseries,single_torus,fseries,torus,2,3,torus_surface_pq,6,-6,6,PASS_DERIVED_PQ,CANONICAL_TORUS_BASE,
+knotplot/knot_T2.5/knot_T2.5.fseries,single_torus,fseries,torus,2,5,torus_surface_pq,10,-10,10,PASS_DERIVED_PQ,CANONICAL_TORUS_BASE,
+knotplot/knot_T2.7/knot_T2.7.fseries,single_torus,fseries,torus,2,7,fitted_torus_proxy_noncanonical,11,-11,14,SOURCE_FIT_NOT_CANONICAL,DIAGNOSTIC_NONCANONICAL_TORUS_FIT,Source/framing does not pass canonical pq check; retained only as diagnostic.

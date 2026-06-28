@@ -1,0 +1,5 @@
+gate,claim,result,status,reason,result_symbolic,result_at_R,result_numeric
+H0_mode_count,q_phi=dim H^0(S^2)=1,1.0,derived,S^2 is connected; only ell=0 gives 1/r decay.,,,
+exterior_capacity,int |grad(phi R/r)|^2 = 4*pi*R*phi^2,,derived,Direct exterior Laplace energy integral.,4*pi*R*phi**2,12.566370614359172,
+phase_Hessian_relation,Lambda_phi=4*pi*R*K_cell,,derived,Second derivative of A_far.,4*pi*K_cell*R,,
+K_cell_value,K_cell=E_eff/(8*pi*R) if Lambda_phi=E_eff/2,,exterior_capacity_only_no_internal_hessian,Requires independent interior one-cell Hessian.,Lambda_phi/(4*pi*R),,
