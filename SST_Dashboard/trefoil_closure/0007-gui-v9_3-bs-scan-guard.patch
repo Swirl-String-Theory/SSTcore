@@ -1,0 +1,13 @@
+--- a/GUI_orthodox_ideal_knot_gui_integrated_proof_merged_v9_3.py	2026-06-29 18:25:33.120285626 +0000
++++ b/GUI_orthodox_ideal_knot_gui_integrated_proof_merged_v9_3.py	2026-06-29 18:26:01.673962603 +0000
+@@ -728,6 +728,10 @@
+     ds_med = float(np.median(geom.ds_int))
+     a_lo = max(3.0 * ds_med, geom.d_min_int * 5e-4)
+     a_hi = geom.d_min_int * 0.35
++    if not (a_hi > a_lo):
++        a_lo = a_hi / 8.0
++        print(f"[WARN] BS scan range degenerate (a_lo>=a_hi); clamped a_lo={a_lo:.3e} "
++              f"a_hi={a_hi:.3e}; increase points-per-component for a reliable A_K fit.")
+     a_scan = np.logspace(np.log10(a_lo), np.log10(a_hi), A_SCAN_COUNT)
+     backend_used = detect_bs_backend(backend_mode, enable_torch)
+     if backend_used == "local_cpp_scan":

@@ -332,7 +332,7 @@ def _validate_package_data_payload(package_data_files):
     if not os.path.isdir(repo_res):
         return
     relset = set(package_data_files)
-    required = ["resources/ideal.txt"]
+    required = ["resources/ideal.txt", "resources/binding_manifest.json"]
     missing = [p for p in required if p not in relset]
     has_kfs_payload = any(p.startswith("resources/Knots_FourierSeries/") for p in relset)
     if missing or not has_kfs_payload:

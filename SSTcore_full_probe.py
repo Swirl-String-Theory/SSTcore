@@ -46,6 +46,22 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
+_PROBE_ROOT = Path(__file__).resolve().parent
+_SCRIPTS_DIR = _PROBE_ROOT / "scripts"
+if _SCRIPTS_DIR.is_dir() and str(_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS_DIR))
+
+try:
+    from binding_inventory import (  # type: ignore[import-not-found]
+        check_manifest_runtime,
+        default_manifest_path,
+        load_binding_manifest,
+        resolve_native_module,
+    )
+    _BINDING_INVENTORY_AVAILABLE = True
+except ImportError:
+    _BINDING_INVENTORY_AVAILABLE = False
+
 
 # ---------------------------------------------------------------------
 # Canon-v0.8.x constants used only for numerical sanity checks.
@@ -75,9 +91,27 @@ EXPECTED_HELPERS = [
     "get_resources_dir",
     "get_ideal_txt_path",
     "get_knots_fourier_series_dir",
+    "get_knotplot_dir",
     "get_ideal_ab",
     "get_ideal_link",
+    "list_ideal_source_files",
+    "list_embedded_fseries_ids",
+    "load_fseries_knot",
+    "knotplot",
 ]
+
+# Sample Gilbert IDs used to smoke-test each ideal*.txt bundle.
+IDEAL_SOURCE_PROBE_SAMPLES: Dict[str, Tuple[str, str]] = {
+    "ideal": ("3:1:1", "AB"),
+    "ideal_short": ("3:1:1", "AB"),
+    "ideal_11a": ("K11a1", "HT"),
+    "ideal_11n": ("K11n1", "HT"),
+    "idealLinks": ("L2a1", "TL"),
+    "idealLinks_10a": ("L10a1", "TL"),
+    "idealLinks_10n": ("L10n1", "TL"),
+}
+
+FSERIES_PROBE_LABELS = ["3_1", "4_1", "5_2", "6_1"]
 
 POSSIBLE_NATIVE_NAMES = [
     "_sst_native",
@@ -343,6 +377,459 @@ def probe_resources(sst: Any) -> Dict[str, Any]:
         except Exception as exc:
             result["errors"].append(f"get_knots_fourier_series_dir: {type(exc).__name__}: {exc}")
 
+    return result
+
+
+def _read_text_head(path: Path, lines: int = 5) -> List[str]:
+    head: List[str] = []
+    with path.open("r", encoding="utf-8", errors="replace") as f:
+        for _ in range(lines):
+            line = f.readline()
+            if not line:
+                break
+            head.append(line.rstrip("\n"))
+    return head
+
+
+def probe_ideal_catalog(sst: Any) -> Dict[str, Any]:
+    """Validate all known ideal*.txt bundles under resources/."""
+    result: Dict[str, Any] = {
+        "catalog_ok": False,
+        "sources": [],
+        "present_count": 0,
+        "lookup_ok_count": 0,
+        "errors": [],
+    }
+
+    list_sources = getattr(sst, "list_ideal_source_files", None)
+    if not callable(list_sources):
+        result["errors"].append("list_ideal_source_files is not available")
+        return result
+
+    get_path = getattr(sst, "get_ideal_file_path", None)
+    find_block = getattr(sst, "find_ideal_block_by_id", None)
+    find_by_id = getattr(sst, "find_ideal_by_id", None)
+
+    for source_key, filename in sorted(list_sources().items()):
+        row: Dict[str, Any] = {
+            "source_key": source_key,
+            "filename": filename,
+            "path": None,
+            "exists": False,
+            "size_bytes": None,
+            "has_data_tag": False,
+            "sample_id": None,
+            "sample_tag": None,
+            "lookup_ok": None,
+            "lookup_error": None,
+            "head": [],
+        }
+
+        sample = IDEAL_SOURCE_PROBE_SAMPLES.get(source_key)
+        if sample:
+            row["sample_id"], row["sample_tag"] = sample
+
+        if not callable(get_path):
+            row["lookup_error"] = "get_ideal_file_path unavailable"
+            result["sources"].append(row)
+            continue
+
+        try:
+            path = get_path(source_key)
+            row["path"] = str(path) if path is not None else None
+            if path is None or not path.is_file():
+                row["lookup_error"] = "file not found"
+                result["sources"].append(row)
+                continue
+
+            row["exists"] = True
+            row["size_bytes"] = path.stat().st_size
+            row["head"] = _read_text_head(path)
+            text_head = "\n".join(row["head"])
+            row["has_data_tag"] = "<DATA" in text_head or "<AB" in text_head or "<HT" in text_head or "<TL" in text_head
+            result["present_count"] += 1
+
+            if sample and callable(find_block):
+                sample_id, sample_tag = sample
+                try:
+                    block = find_block(sample_id, sample_tag)
+                    if block:
+                        row["lookup_ok"] = True
+                        result["lookup_ok_count"] += 1
+                    elif callable(find_by_id):
+                        hit = find_by_id(sample_id, tag=sample_tag)
+                        row["lookup_ok"] = hit is not None and getattr(hit, "block", None)
+                        if row["lookup_ok"]:
+                            result["lookup_ok_count"] += 1
+                        else:
+                            row["lookup_error"] = f"lookup miss for {sample_id} ({sample_tag})"
+                    else:
+                        row["lookup_ok"] = False
+                        row["lookup_error"] = f"lookup miss for {sample_id} ({sample_tag})"
+                except Exception as exc:
+                    row["lookup_ok"] = False
+                    row["lookup_error"] = f"{type(exc).__name__}: {exc}"
+        except Exception as exc:
+            row["lookup_error"] = f"{type(exc).__name__}: {exc}"
+
+        result["sources"].append(row)
+
+    expected = len(IDEAL_SOURCE_PROBE_SAMPLES)
+    result["catalog_ok"] = (
+        result["present_count"] >= expected
+        and result["lookup_ok_count"] >= expected
+    )
+    if result["present_count"] < expected:
+        result["errors"].append(
+            f"only {result['present_count']}/{expected} ideal*.txt bundles present"
+        )
+    if result["lookup_ok_count"] < expected:
+        result["errors"].append(
+            f"only {result['lookup_ok_count']}/{expected} ideal lookup smoke tests passed"
+        )
+    return result
+
+
+def probe_knots_fourier_series_catalog(sst: Any) -> Dict[str, Any]:
+    """Validate Knots_FourierSeries directory and fseries loading."""
+    result: Dict[str, Any] = {
+        "catalog_ok": False,
+        "dir": None,
+        "dir_exists": False,
+        "fseries_count": 0,
+        "fseries_sample": [],
+        "probe_labels": [],
+        "errors": [],
+    }
+
+    get_dir = getattr(sst, "get_knots_fourier_series_dir", None)
+    if not callable(get_dir):
+        result["errors"].append("get_knots_fourier_series_dir is not available")
+        return result
+
+    try:
+        kfs_dir = get_dir()
+        result["dir"] = str(kfs_dir) if kfs_dir is not None else None
+        if kfs_dir is None or not kfs_dir.is_dir():
+            result["errors"].append("Knots_FourierSeries directory not found")
+            return result
+        result["dir_exists"] = True
+    except Exception as exc:
+        result["errors"].append(f"get_knots_fourier_series_dir: {type(exc).__name__}: {exc}")
+        return result
+
+    list_ids = getattr(sst, "list_embedded_fseries_ids", None)
+    if callable(list_ids):
+        try:
+            ids = list_ids()
+            result["fseries_count"] = len(ids)
+            result["fseries_sample"] = ids[:20]
+            if not ids:
+                result["errors"].append("list_embedded_fseries_ids returned empty")
+        except Exception as exc:
+            result["errors"].append(f"list_embedded_fseries_ids: {type(exc).__name__}: {exc}")
+    else:
+        # Fallback: count *.fseries on disk.
+        try:
+            files = sorted(kfs_dir.rglob("*.fseries"))
+            result["fseries_count"] = len(files)
+            result["fseries_sample"] = [p.name for p in files[:20]]
+            if not files:
+                result["errors"].append("no *.fseries files under Knots_FourierSeries")
+        except Exception as exc:
+            result["errors"].append(f"fseries scan: {type(exc).__name__}: {exc}")
+
+    load_fseries = getattr(sst, "load_fseries_knot", None)
+    get_fseries = getattr(sst, "get_knot_fseries", None)
+    parse_fseries = getattr(sst, "parse_fseries_knot", None)
+
+    for label in FSERIES_PROBE_LABELS:
+        row: Dict[str, Any] = {
+            "label": label,
+            "load_ok": None,
+            "load_bytes": None,
+            "get_knot_fseries_ok": None,
+            "parse_ok": None,
+            "error": None,
+        }
+        try:
+            text = None
+            if callable(load_fseries):
+                text = load_fseries(label)
+                row["load_ok"] = bool(text and text.strip())
+                row["load_bytes"] = len(text) if text else 0
+            if callable(get_fseries):
+                alt = get_fseries(label)
+                row["get_knot_fseries_ok"] = bool(alt and alt.strip())
+                if text is None and alt:
+                    text = alt
+            if callable(parse_fseries):
+                parsed = parse_fseries(label)
+                row["parse_ok"] = parsed is not None
+            if not row["load_ok"] and not row["get_knot_fseries_ok"]:
+                row["error"] = "no fseries text loaded"
+        except Exception as exc:
+            row["error"] = f"{type(exc).__name__}: {exc}"
+        result["probe_labels"].append(row)
+
+    loads_ok = sum(1 for r in result["probe_labels"] if r.get("load_ok") or r.get("get_knot_fseries_ok"))
+    result["catalog_ok"] = (
+        result["dir_exists"]
+        and result["fseries_count"] > 0
+        and loads_ok >= 1
+    )
+    if loads_ok < 1:
+        result["errors"].append("no Knots_FourierSeries probe labels could be loaded")
+    return result
+
+
+def probe_knotplot_catalog(sst: Any) -> Dict[str, Any]:
+    """Validate resources/knotplot knot_* directories and *_ideal.txt loading."""
+    result: Dict[str, Any] = {
+        "catalog_ok": False,
+        "dir": None,
+        "dir_exists": False,
+        "knot_dirs_total": 0,
+        "ideal_files_validated": 0,
+        "ideal_files_skipped": 0,
+        "failures": [],
+        "sample": [],
+        "errors": [],
+    }
+
+    get_dir = getattr(sst, "get_knotplot_dir", None)
+    get_path = getattr(sst, "get_knotplot_ideal_path", None)
+    read_knotplot = getattr(sst, "knotplot", None)
+    if not callable(get_dir):
+        result["errors"].append("get_knotplot_dir is not available")
+        return result
+
+    try:
+        knotplot_dir = get_dir()
+        result["dir"] = str(knotplot_dir) if knotplot_dir is not None else None
+        if knotplot_dir is None or not knotplot_dir.is_dir():
+            result["errors"].append("knotplot directory not found")
+            return result
+        result["dir_exists"] = True
+    except Exception as exc:
+        result["errors"].append(f"get_knotplot_dir: {type(exc).__name__}: {exc}")
+        return result
+
+    knot_dirs = sorted(p for p in knotplot_dir.glob("knot_*") if p.is_dir())
+    result["knot_dirs_total"] = len(knot_dirs)
+    if not knot_dirs:
+        result["errors"].append("no knot_* directories under resources/knotplot")
+        return result
+
+    for knot_dir in knot_dirs:
+        expected = knot_dir / f"{knot_dir.name}_ideal.txt"
+        if not expected.is_file():
+            result["ideal_files_skipped"] += 1
+            continue
+
+        knot_id = knot_dir.name[5:] if knot_dir.name.startswith("knot_") else knot_dir.name
+        row: Dict[str, Any] = {
+            "knot_id": knot_id,
+            "dir": knot_dir.name,
+            "ideal_file": expected.name,
+            "resolve_ok": False,
+            "read_ok": False,
+            "size_bytes": expected.stat().st_size,
+            "error": None,
+        }
+
+        try:
+            if callable(get_path):
+                resolved = get_path(knot_id)
+                row["resolve_ok"] = resolved is not None and resolved.is_file()
+                if not row["resolve_ok"]:
+                    row["error"] = "get_knotplot_ideal_path did not resolve file"
+            if callable(read_knotplot):
+                text = read_knotplot(knot_id)
+                row["read_ok"] = bool(text and text.strip())
+                if not row["read_ok"]:
+                    row["error"] = row["error"] or "knotplot() returned empty content"
+            if row["resolve_ok"] and row["read_ok"]:
+                result["ideal_files_validated"] += 1
+            else:
+                result["failures"].append(row)
+        except Exception as exc:
+            row["error"] = f"{type(exc).__name__}: {exc}"
+            result["failures"].append(row)
+
+        if len(result["sample"]) < 12:
+            result["sample"].append(row)
+
+    result["catalog_ok"] = (
+        result["dir_exists"]
+        and result["ideal_files_validated"] > 0
+        and not result["failures"]
+    )
+    if result["ideal_files_validated"] == 0:
+        result["errors"].append("no knotplot *_ideal.txt files validated")
+    if result["failures"]:
+        result["errors"].append(
+            f"{len(result['failures'])} knotplot ideal file(s) failed validation"
+        )
+    return result
+
+
+def maybe_regen_binding_manifest() -> Dict[str, Any]:
+    result: Dict[str, Any] = {"attempted": False, "ok": None, "error": None, "output_path": None}
+    if not _BINDING_INVENTORY_AVAILABLE:
+        result["error"] = "binding_inventory module not available"
+        return result
+    gen_script = _SCRIPTS_DIR / "gen_binding_manifest.py"
+    if not gen_script.is_file():
+        result["error"] = f"generator not found: {gen_script}"
+        return result
+    result["attempted"] = True
+    completed = subprocess.run(
+        [sys.executable, str(gen_script)],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        cwd=str(_PROBE_ROOT),
+    )
+    result["returncode"] = completed.returncode
+    result["stdout_tail"] = completed.stdout[-2000:]
+    result["stderr_tail"] = completed.stderr[-2000:]
+    result["output_path"] = str(default_manifest_path(_PROBE_ROOT))
+    result["ok"] = completed.returncode == 0
+    if completed.returncode != 0:
+        result["error"] = "gen_binding_manifest.py failed"
+    return result
+
+
+def probe_binding_catalog(sst: Any) -> Dict[str, Any]:
+    result: Dict[str, Any] = {
+        "catalog_ok": False,
+        "manifest_path": None,
+        "manifest_error": None,
+        "manifest_version": None,
+        "generated_at": None,
+        "cpp_public_total": 0,
+        "py_bound_total": 0,
+        "cpp_unbound_total": 0,
+        "runtime_present": 0,
+        "runtime_missing": 0,
+        "per_module": {},
+        "entries": [],
+        "missing_entries": [],
+        "gaps": {},
+        "errors": [],
+    }
+    if not _BINDING_INVENTORY_AVAILABLE:
+        result["errors"].append("binding_inventory module not available")
+        return result
+
+    manifest, manifest_err = load_binding_manifest(
+        sst,
+        root=_PROBE_ROOT,
+        probe_script=Path(__file__),
+    )
+    if manifest is None:
+        result["manifest_error"] = manifest_err
+        result["errors"].append(manifest_err or "binding manifest not found")
+        return result
+
+    result["manifest_path"] = manifest_err
+    native, native_name = resolve_native_module(sst)
+    runtime = check_manifest_runtime(manifest, sst, native)
+    result.update(
+        {
+            "catalog_ok": runtime.get("catalog_ok", False),
+            "manifest_version": runtime.get("manifest_version"),
+            "generated_at": runtime.get("generated_at"),
+            "cpp_public_total": runtime.get("cpp_public_total", 0),
+            "py_bound_total": runtime.get("py_bound_total", 0),
+            "cpp_unbound_total": runtime.get("cpp_unbound_total", 0),
+            "runtime_present": runtime.get("runtime_present", 0),
+            "runtime_missing": runtime.get("runtime_missing", 0),
+            "per_module": runtime.get("per_module", {}),
+            "entries": runtime.get("entries", []),
+            "missing_entries": runtime.get("missing_entries", []),
+            "gaps": runtime.get("gaps", {}),
+            "native_attribute": native_name,
+        }
+    )
+    if runtime.get("errors"):
+        result["errors"].extend(runtime["errors"])
+    if result["runtime_missing"]:
+        result["errors"].append(
+            f"{result['runtime_missing']} bound export(s) missing at runtime"
+        )
+    return result
+
+
+def probe_binding_tests() -> Dict[str, Any]:
+    result: Dict[str, Any] = {
+        "attempted": False,
+        "skipped": True,
+        "skip_reason": None,
+        "exit_code": None,
+        "passed": None,
+        "failed": None,
+        "errors": None,
+        "stdout_tail": "",
+        "stderr_tail": "",
+    }
+    tests_dir = _PROBE_ROOT / "tests"
+    if not tests_dir.is_dir():
+        result["skip_reason"] = f"tests directory not found: {tests_dir}"
+        return result
+
+    patterns = sorted(tests_dir.glob("test_*_comprehensive.py"))
+    targets = [tests_dir / "test_bindings_basic.py", *patterns]
+    missing = [str(p) for p in targets if not p.is_file()]
+    if missing:
+        result["skip_reason"] = f"missing test files: {missing[:3]}"
+        return result
+
+    result["attempted"] = True
+    result["skipped"] = False
+    cmd = [
+        sys.executable,
+        "-m",
+        "pytest",
+        *[str(p.relative_to(_PROBE_ROOT)) for p in targets],
+        "-q",
+        "--tb=no",
+    ]
+    completed = subprocess.run(
+        cmd,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        cwd=str(_PROBE_ROOT),
+    )
+    result["cmd"] = cmd
+    result["exit_code"] = completed.returncode
+    result["stdout_tail"] = completed.stdout[-4000:]
+    result["stderr_tail"] = completed.stderr[-4000:]
+
+    passed = failed = errors = 0
+    summary_line = ""
+    for line in completed.stdout.splitlines():
+        if " passed" in line or " failed" in line or " error" in line:
+            summary_line = line.strip()
+    if summary_line:
+        import re
+
+        m = re.search(r"(\d+)\s+passed", summary_line)
+        if m:
+            passed = int(m.group(1))
+        m = re.search(r"(\d+)\s+failed", summary_line)
+        if m:
+            failed = int(m.group(1))
+        m = re.search(r"(\d+)\s+error", summary_line)
+        if m:
+            errors = int(m.group(1))
+    result["passed"] = passed
+    result["failed"] = failed
+    result["errors"] = errors
+    result["summary_line"] = summary_line
+    result["ok"] = completed.returncode == 0
     return result
 
 
@@ -617,13 +1104,22 @@ def probe_particle_evaluator(sst: Any) -> Dict[str, Any]:
     return result
 
 
-def make_report(sst: Any, import_info: Dict[str, Any]) -> Dict[str, Any]:
+def make_report(
+    sst: Any,
+    import_info: Dict[str, Any],
+    *,
+    run_binding_tests: bool = False,
+) -> Dict[str, Any]:
     report: Dict[str, Any] = {}
     report["environment"] = probe_environment()
     report["module"] = probe_module(sst, import_info)
     report["public_api"] = probe_public_api(sst)
     report["expected_helpers"] = probe_expected_helpers(sst)
     report["resources"] = probe_resources(sst)
+    report["ideal_catalog"] = probe_ideal_catalog(sst)
+    report["knots_fourier_series_catalog"] = probe_knots_fourier_series_catalog(sst)
+    report["knotplot_catalog"] = probe_knotplot_catalog(sst)
+    report["binding_catalog"] = probe_binding_catalog(sst)
     report["native_bindings"] = probe_native_bindings(sst)
     report["topology_candidates"] = probe_topologies(sst)
     report["particle_evaluator"] = probe_particle_evaluator(sst)
@@ -631,6 +1127,8 @@ def make_report(sst: Any, import_info: Dict[str, Any]) -> Dict[str, Any]:
     report["meson_link_scaffolds"] = compute_meson_link_scaffolds(
         report["constant_checks"]["E_meson0_MeV"]
     )
+    if run_binding_tests:
+        report["binding_tests"] = probe_binding_tests()
     return report
 
 
@@ -672,6 +1170,100 @@ def print_report_summary(report: Dict[str, Any]) -> None:
         print("Resource errors:")
         for err in res["errors"]:
             print("  -", err)
+
+    print_header("Ideal catalog (ideal*.txt bundles)")
+    ideal = report.get("ideal_catalog") or {}
+    print_kv("catalog_ok", ideal.get("catalog_ok"))
+    print_kv("present_count", ideal.get("present_count"))
+    print_kv("lookup_ok_count", ideal.get("lookup_ok_count"))
+    for row in ideal.get("sources") or []:
+        print(
+            f"{row['source_key']:18s} {row['filename']:22s} "
+            f"exists={str(row['exists']):5s} "
+            f"lookup_ok={str(row['lookup_ok']):5s} "
+            f"size={row['size_bytes']} "
+            f"error={row['lookup_error']}"
+        )
+    if ideal.get("errors"):
+        print("Ideal catalog errors:")
+        for err in ideal["errors"]:
+            print("  -", err)
+
+    print_header("Knots_FourierSeries catalog")
+    kfs = report.get("knots_fourier_series_catalog") or {}
+    print_kv("catalog_ok", kfs.get("catalog_ok"))
+    print_kv("dir", kfs.get("dir"))
+    print_kv("fseries_count", kfs.get("fseries_count"))
+    for row in kfs.get("probe_labels") or []:
+        print(
+            f"{row['label']:8s} load_ok={str(row['load_ok']):5s} "
+            f"get_ok={str(row['get_knot_fseries_ok']):5s} "
+            f"parse_ok={str(row['parse_ok']):5s} "
+            f"bytes={row['load_bytes']} error={row['error']}"
+        )
+    if kfs.get("errors"):
+        print("Knots_FourierSeries errors:")
+        for err in kfs["errors"]:
+            print("  -", err)
+
+    print_header("knotplot catalog")
+    kp = report.get("knotplot_catalog") or {}
+    print_kv("catalog_ok", kp.get("catalog_ok"))
+    print_kv("dir", kp.get("dir"))
+    print_kv("knot_dirs_total", kp.get("knot_dirs_total"))
+    print_kv("ideal_files_validated", kp.get("ideal_files_validated"))
+    print_kv("ideal_files_skipped", kp.get("ideal_files_skipped"))
+    for row in kp.get("sample") or []:
+        print(
+            f"{row['knot_id']:12s} resolve_ok={str(row['resolve_ok']):5s} "
+            f"read_ok={str(row['read_ok']):5s} size={row['size_bytes']} error={row['error']}"
+        )
+    if kp.get("errors"):
+        print("knotplot errors:")
+        for err in kp["errors"]:
+            print("  -", err)
+    if kp.get("failures"):
+        print(f"knotplot failures (showing up to 5 of {len(kp['failures'])}):")
+        for row in kp["failures"][:5]:
+            print(f"  - {row['knot_id']}: {row['error']}")
+
+    print_header("Binding catalog (C++ / pybind / runtime)")
+    bc = report.get("binding_catalog") or {}
+    print_kv("catalog_ok", bc.get("catalog_ok"))
+    print_kv("manifest_path", bc.get("manifest_path"))
+    print_kv("manifest_version", bc.get("manifest_version"))
+    print_kv("cpp_public_total", bc.get("cpp_public_total"))
+    print_kv("py_bound_total", bc.get("py_bound_total"))
+    print_kv("cpp_unbound_total", bc.get("cpp_unbound_total"))
+    print_kv("runtime_present", bc.get("runtime_present"))
+    print_kv("runtime_missing", bc.get("runtime_missing"))
+    per_module = bc.get("per_module") or {}
+    for mod in sorted(per_module.keys())[:30]:
+        stats = per_module[mod]
+        print(
+            f"{mod:28s} bound={stats.get('bound', 0):4d} "
+            f"present={stats.get('present', 0):4d} missing={stats.get('missing', 0):4d}"
+        )
+    if len(per_module) > 30:
+        print(f"... {len(per_module) - 30} more modules in JSON/CSV export")
+    if bc.get("missing_entries"):
+        print("Missing runtime exports (up to 10):")
+        for row in bc["missing_entries"][:10]:
+            print(f"  - {row.get('py_export')}: {row.get('runtime_error')}")
+    if bc.get("errors"):
+        print("Binding catalog errors:")
+        for err in bc["errors"]:
+            print("  -", err)
+
+    bt = report.get("binding_tests")
+    if bt is not None:
+        print_header("Binding pytest suite")
+        print_kv("attempted", bt.get("attempted"))
+        print_kv("skipped", bt.get("skipped"))
+        print_kv("skip_reason", bt.get("skip_reason"))
+        print_kv("ok", bt.get("ok"))
+        print_kv("exit_code", bt.get("exit_code"))
+        print_kv("summary_line", bt.get("summary_line"))
 
     print_header("Native bindings")
     native = report["native_bindings"]
@@ -735,6 +1327,23 @@ def print_report_summary(report: Dict[str, Any]) -> None:
         problems.append("resources directory not found.")
     if not res["ideal_txt_exists"]:
         problems.append("ideal.txt not found.")
+    ideal = report.get("ideal_catalog") or {}
+    if not ideal.get("catalog_ok"):
+        problems.append("ideal*.txt catalog smoke tests failed.")
+    kfs = report.get("knots_fourier_series_catalog") or {}
+    if not kfs.get("catalog_ok"):
+        problems.append("Knots_FourierSeries catalog smoke tests failed.")
+    kp = report.get("knotplot_catalog") or {}
+    if not kp.get("catalog_ok"):
+        problems.append("knotplot catalog smoke tests failed.")
+    bc = report.get("binding_catalog") or {}
+    if not bc.get("catalog_ok"):
+        problems.append(
+            f"binding catalog: {bc.get('runtime_missing', '?')} export(s) missing at runtime."
+        )
+    bt = report.get("binding_tests")
+    if bt is not None and bt.get("attempted") and not bt.get("ok"):
+        problems.append("binding pytest suite failed.")
     if not any(row["found_nonempty"] for row in report["topology_candidates"]):
         problems.append("no topology candidates were found via helper lookups.")
     pe = report.get("particle_evaluator") or {}
@@ -780,8 +1389,32 @@ def main(argv: Optional[List[str]] = None) -> int:
         action="store_true",
         help="Suppress summary printing.",
     )
+    parser.add_argument(
+        "--run-binding-tests",
+        action="store_true",
+        help="Run pytest binding smoke/comprehensive tests from tests/.",
+    )
+    parser.add_argument(
+        "--strict-bindings",
+        action="store_true",
+        help="Exit with code 2 when binding catalog runtime checks fail.",
+    )
+    parser.add_argument(
+        "--regen-manifest",
+        action="store_true",
+        help="Regenerate binding_manifest.json from src/ before probing (dev checkout).",
+    )
 
     args = parser.parse_args(argv)
+
+    manifest_regen = None
+    if args.regen_manifest:
+        print_header("Regenerating binding manifest")
+        manifest_regen = maybe_regen_binding_manifest()
+        print_kv("ok", manifest_regen.get("ok"))
+        print_kv("output_path", manifest_regen.get("output_path"))
+        if manifest_regen.get("error"):
+            print("Regen error:", manifest_regen["error"])
 
     pip_info = None
     if args.install:
@@ -813,9 +1446,11 @@ def main(argv: Optional[List[str]] = None) -> int:
         print(json.dumps(import_info, indent=2))
         return 2
 
-    report = make_report(sst, import_info)
+    report = make_report(sst, import_info, run_binding_tests=args.run_binding_tests)
     if pip_info is not None:
         report["pip_install"] = pip_info
+    if manifest_regen is not None:
+        report["binding_manifest_regen"] = manifest_regen
 
     if not args.quiet:
         print_report_summary(report)
@@ -835,14 +1470,27 @@ def main(argv: Optional[List[str]] = None) -> int:
             write_csv(prefix.with_name(prefix.name + "_public_api.csv"), report["public_api"])
             write_csv(prefix.with_name(prefix.name + "_expected_helpers.csv"), report["expected_helpers"])
             write_csv(prefix.with_name(prefix.name + "_topology_candidates.csv"), report["topology_candidates"])
+            write_csv(prefix.with_name(prefix.name + "_ideal_catalog.csv"), report.get("ideal_catalog", {}).get("sources", []))
+            write_csv(prefix.with_name(prefix.name + "_knots_fourier_series.csv"), report.get("knots_fourier_series_catalog", {}).get("probe_labels", []))
+            write_csv(prefix.with_name(prefix.name + "_knotplot_catalog.csv"), report.get("knotplot_catalog", {}).get("sample", []))
+            write_csv(prefix.with_name(prefix.name + "_binding_catalog.csv"), report.get("binding_catalog", {}).get("entries", []))
             write_csv(prefix.with_name(prefix.name + "_meson_link_scaffolds.csv"), report["meson_link_scaffolds"])
         else:
             base.mkdir(parents=True, exist_ok=True)
             write_csv(base / "public_api.csv", report["public_api"])
             write_csv(base / "expected_helpers.csv", report["expected_helpers"])
             write_csv(base / "topology_candidates.csv", report["topology_candidates"])
+            write_csv(base / "ideal_catalog.csv", report.get("ideal_catalog", {}).get("sources", []))
+            write_csv(base / "knots_fourier_series.csv", report.get("knots_fourier_series_catalog", {}).get("probe_labels", []))
+            write_csv(base / "knotplot_catalog.csv", report.get("knotplot_catalog", {}).get("sample", []))
+            write_csv(base / "binding_catalog.csv", report.get("binding_catalog", {}).get("entries", []))
             write_csv(base / "meson_link_scaffolds.csv", report["meson_link_scaffolds"])
         print(f"CSV tables written under/prefix: {base}")
+
+    if args.strict_bindings:
+        bc = report.get("binding_catalog") or {}
+        if not bc.get("catalog_ok"):
+            return 2
 
     # Soft failure only if import failed. Other issues are warnings, because API versions may differ.
     return 0
