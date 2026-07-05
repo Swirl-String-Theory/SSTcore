@@ -7,21 +7,20 @@ This is the **easiest way** to build wheels for multiple Python versions on Wind
 ### Windows (PowerShell - Recommended)
 
 ```powershell
-# Run the PowerShell script
-.\build_wheels_conda.ps1
+# From repo root
+.\scripts\build_wheels_conda.ps1
 ```
 
 ### Windows (Batch)
 
 ```batch
-# Run the batch script
-build_wheels_conda.bat
+scripts\build_wheels_conda.bat
 ```
 
 ### Linux/macOS/Windows (Python script)
 
 ```bash
-python build_wheels_conda.py
+python scripts/build_wheels_conda.py
 ```
 
 ## How It Works

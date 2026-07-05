@@ -1,8 +1,0 @@
-quantity,value,label,note
-n_panels,6000,input,
-L_K_sampled,16.36723445,DERIVED,centerline length D=1 units
-L_K_literature,16.37163700,DERIVED,Knot Atlas 183-mode run
-m_x,-0.007014,DERIVED,loop area vector x-component
-m_y,0.010949,DERIVED,loop area vector y-component
-m_z,-7.581962,DERIVED,loop area vector z-component
-m_sq,57.486319,DERIVED,|m|^2

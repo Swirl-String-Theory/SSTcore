@@ -68,6 +68,19 @@ namespace sst {
     double writhe = 0.0;
     double min_self_distance = 0.0;
     double bending_energy = 0.0;
+
+    // Resolved-tube / ropelength geometry (radius convention unless stated otherwise).
+    // Canon guard: thickness_rad is reach/normal-injectivity radius, not necessarily r_c.
+    double thickness_rad = 0.0;
+    double ropelength_rad = 0.0;
+    double ropelength_diam = 0.0;
+    double minrad_min = 0.0;
+    double dcsd_min = 0.0;
+    int strut_count = 0;
+    int kink_count = 0;
+    double contact_residual = 0.0;
+    double contact_entropy = 0.0;
+    bool ropelength_lower_bound_ok = true;
   };
 
   enum class SectorGate : int {
@@ -95,6 +108,9 @@ namespace sst {
     double v_swirl = static_cast<double>(SST::Constants::V_SWIRL);
     double c = static_cast<double>(SST::Constants::C_VACUUM);
     double rho_m = static_cast<double>(SST::Constants::mass_equivalent_density());
+    // Horn-envelope density closure for resolved-tube baseline masses.
+    // Distinct from rho_m = rho_E/c^2, the medium-scale density in the master equation.
+    double rho_horn = SSTCanonicalConstants::horn_envelope_density(m_e, c, v_swirl, r_c);
   };
 
   struct KnotDerived {
@@ -159,7 +175,8 @@ namespace sst {
   public:
     explicit MassFunctional(const CanonicalConstants& c = CanonicalConstants{});
 
-    [[nodiscard]] double baseline_mass_from_ropelength(double L_tot) const;
+    [[nodiscard]] double baseline_mass_from_ropelength(double L_tot) const; // medium-scale rho_m form; retained for compatibility
+    [[nodiscard]] double baseline_mass_from_horn_ropelength(double L_tot) const;
     [[nodiscard]] double bare_master_mass_scale() const;
     [[nodiscard]] double gate_factor(SectorGate G) const;
     [[nodiscard]] KnotDerived evaluate(const KnotInvariants& K, const XiModel& model) const;

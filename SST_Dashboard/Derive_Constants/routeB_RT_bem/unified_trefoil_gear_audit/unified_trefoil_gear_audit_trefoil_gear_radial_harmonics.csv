@@ -1,7 +1,0 @@
-dominant_harmonic,dominant_amplitude,top_harmonics,notes,mesh_label,path
-2,6531.4672549,2:6531.47;4:3631.98;6:1976.94;8:895.257;7:436.838;10:397.591;5:336.566;15:321.326,radial_fft_diagnostic_not_topological,trefoil_core_plus_blade_connector_v4,trefoil_core_plus_blade_connector_v4.stl
-3,2671.79964031,3:2671.8;6:499.205;18:459.707;9:257.548;15:250.502;12:228.14;21:200.726;42:121.001,radial_fft_diagnostic_not_topological,trefoil_core_plus_blade_connector_v4.1,trefoil_core_plus_blade_connector_v4.1.stl
-3,2624.96930762,3:2624.97;6:388.94;18:225.069;9:207.718;15:198.941;12:192.301;24:158.636;21:102.637,radial_fft_diagnostic_not_topological,trefoil_core_plus_blade_connector_v4.2,trefoil_core_plus_blade_connector_v4.2.stl
-16,405.448072687,16:405.448;15:59.6171;17:49.5298;32:37.8106;64:20.1651;63:13.9018;31:13.8206;48:13.7209,radial_fft_diagnostic_not_topological,single_gear_reference,triple_gear_part_1.stl
-16,405.44806393,16:405.448;15:59.6171;17:49.5297;32:37.8106;64:20.1651;63:13.9018;31:13.8206;48:13.7209,radial_fft_diagnostic_not_topological,single_gear_reference,triple_gear_part_2.stl
-16,405.448064906,16:405.448;15:59.6171;17:49.5298;32:37.8106;64:20.1651;63:13.9018;31:13.8206;48:13.7208,radial_fft_diagnostic_not_topological,single_gear_reference,triple_gear_part_3.stl

@@ -1,8 +1,0 @@
-a_M_exponent,b_L_exponent,candidate,mode_extensive_condition_a_eq_1,order_minus_two_condition_b_eq_2,passes_bemv17_symbol_law,status
-0,0,M_max^0 L_cert^0,False,False,False,REJECTED_BY_SYMBOL_LAW
-1,0,M_max^1 L_cert^0,True,False,False,REJECTED_BY_SYMBOL_LAW
-1,1,M_max^1 L_cert^1,True,False,False,REJECTED_BY_SYMBOL_LAW
-1,2,M_max^1 L_cert^2,True,True,True,UNIQUE_TARGET
-1,3,M_max^1 L_cert^3,True,False,False,REJECTED_BY_SYMBOL_LAW
-0.5,2,M_max^0.5 L_cert^2,False,True,False,REJECTED_BY_SYMBOL_LAW
-2,2,M_max^2 L_cert^2,False,True,False,REJECTED_BY_SYMBOL_LAW

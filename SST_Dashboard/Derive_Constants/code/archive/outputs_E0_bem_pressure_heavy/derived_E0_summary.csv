@@ -1,2 +1,0 @@
-status,preferred_observable,E_star_derived,classification,bracket_E_lo,bracket_E_hi,value_interp,d2_interp,message
-E0_derived,action_total,274.59768966435337,interior_minimum,269.3057048198528,282.1790673757932,3515.3544108559704,3.0533569771541194,Interior stationary eigenvalue found. This E_star is used as E0 downstream.

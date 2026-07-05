@@ -1,2 +1,0 @@
-normalizer,n_grid_families_selected,grid_labels,aggregate_mean,aggregate_std,aggregate_span,aggregate_cv_abs,aggregate_abs_correction_ratio_max,cross_grid_gate
-M_Lcert2,5,"B1_paired_coarse,B2_paired_medium,B3_cartesian_mesh_cross,B4_outer_radius_sweep,B5_tube_radius_sweep",137.174099896424,0.050734446530874396,0.23923208908760785,0.0003698544154412709,0.0016812531754981427,PASS_CROSS_GRID_CONSENSUS

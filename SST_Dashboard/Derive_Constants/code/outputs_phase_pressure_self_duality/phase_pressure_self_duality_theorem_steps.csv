@@ -1,8 +1,0 @@
-step,formula,status
-Madelung_canonical_pair,delta n and theta are canonically conjugate in the linearized GP/Madelung action,standard Hamiltonian hydrodynamic structure
-normal_mode_reduction,H_k = 1/2 p_k^2 + 1/2 omega_k^2 q_k^2,derived after diagonalizing the quadratic Hamiltonian
-cycle_virial,<1/2 p_k^2> = <1/2 omega_k^2 q_k^2>,derived for each periodic harmonic normal mode
-half_budget,M_phi = M_p = E_eff/2,derived within canonical normal-mode reduction
-accessible_area_and_radial_optimum,M_acc=M_phi(R-a)^2/R^2 and Lambda=M_acc/(R-a)^2,from previous gate scripts
-phase_Hessian_gate,"Lambda_phi=E_eff/(2R^2), hence E_eff/2 for R=1",closed within canonical normal-mode + accessible-area + radial-optimum reduction
-remaining_primitive_requirement,finite-cell E_eff must be the cycle-averaged quadratic energy of this canonical interior mode family,physical identification still to be justified in SST primitive equations

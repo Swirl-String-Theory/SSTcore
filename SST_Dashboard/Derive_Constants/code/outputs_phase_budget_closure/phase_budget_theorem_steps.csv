@@ -1,5 +1,0 @@
-claim,formula,status
-radial phase Hessian,Lambda_phi = 4*pi / int_a^R dr/[n(r) r^2],derived by radial Euler-Lagrange equation
-optimal density for fixed budget M,n_*(r) = M/[4*pi*(R-a)] * 1/r^2,derived by variational optimization / Cauchy-Schwarz
-maximal Hessian at fixed budget,Lambda_max = M/(R-a)^2,derived
-required budget for Lambda=E_eff/2,M_required = (E_eff/2)(R-a)^2,diagnostic unless independently derived

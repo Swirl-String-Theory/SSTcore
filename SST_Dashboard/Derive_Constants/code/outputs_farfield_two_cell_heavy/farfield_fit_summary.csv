@@ -1,2 +1,0 @@
-fit_model,fit_fraction_largest_R,n_fit_points,poly_order,C_far_intercept,fit_rms,fit_R_min,fit_R_max,poly_coefficients_high_to_low
-C_far = c0 + c1/R + ... + c2/R^2,0.5,70,2,0.00729735501855218,1.2314442267786684e-17,2033.406653462981,20000.000000000004,"[0.0038924189460993594, -8.32893220661941e-13, 0.00729735501855218]"

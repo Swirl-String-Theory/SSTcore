@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "../include/vec3_utils.h"
+#include "resolved_tube_geometry.h"
 
 namespace sst {
 
@@ -93,6 +94,7 @@ std::vector<sst::Vec3> sample_curve_centered(const std::string& path, int nsampl
 double curve_length(const std::vector<sst::Vec3>& pts);
 double min_non_neighbor_distance(const std::vector<sst::Vec3>& pts, int skip);
 double reach_proxy(const std::vector<sst::Vec3>& pts, int skip);
+ResolvedTubeMetrics resolved_tube_metrics_from_fseries(const std::string& path, int nsamples, int skip);
 void curve_metrics_from_points(
     const std::vector<sst::Vec3>& pts,
     double& L,

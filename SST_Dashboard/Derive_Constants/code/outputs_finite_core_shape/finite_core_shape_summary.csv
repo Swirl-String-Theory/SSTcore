@@ -1,2 +1,0 @@
-L_K,eta_K,eta_K_squared,selected_amplitude,gap_l2,half_gap,operator_norm_delta,min_projected_l_ge_2_eigenvalue,mean_lge2_leakage_in_low3_modes,pass_no_lge2_promotion,status
-16.371637,0.015270311698213197,0.00023318241936058683,0.015270311698213197,4.0,2.0,0.015270311698213187,3.997521518965469,2.3539465011852394e-07,True,PASS_NO_LEADING_PROMOTION

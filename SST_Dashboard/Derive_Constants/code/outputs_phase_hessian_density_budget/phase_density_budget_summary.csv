@@ -1,2 +1,0 @@
-inner_radius,outer_radius,E_eff,target_Eeff_over_2,best_budget_name,best_mode,best_Lambda_phi,best_ratio_to_target,best_status,optimal_profile_formula,M_required_optimal_inverse_r2,status
-0.0152703116982,1.0,274.0748756568,137.0374378284,M_Eeff_over_2,optimal_inverse_r2,141.32050055790438,1.0312546906697693,NO_MATCH,n_eff proportional to 1/r^2 gives Lambda=M/(R-a)^2,132.88418376977097,OPEN_DENSITY_BUDGET_GATE

@@ -1,2 +1,0 @@
-status,score_0_100,S_gamma,S_helicity,S_energy,S_velocity,S_cutoff,S_decoherence,S_chirality,S_observable,pass_neutrality,pass_core_cutoff,pass_velocity_scale,pass_decoherence_collapse,pass_chirality_sign_reversal,pass_observable_proxy,N_plus,N_minus,length_m,a_m,r0_m,b_m
-CANON-CANDIDATE,99.9999758472417,1.0,1.0,1.0,0.9999979872701419,1.0,1.0,1.0,1.0,True,True,True,True,True,True,1,1,1e-09,2e-10,7e-10,1.2e-09

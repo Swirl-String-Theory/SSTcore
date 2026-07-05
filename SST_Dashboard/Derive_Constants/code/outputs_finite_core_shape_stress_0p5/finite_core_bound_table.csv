@@ -1,9 +1,0 @@
-case,amplitude_bound,gap_l2,half_gap,amplitude_over_gap,min_lge2_lower_bound_gap_minus_amp,safe_by_half_gap_bound,status
-eta_K,0.015270311698213197,4.0,2.0,0.0038175779245532993,3.984729688301787,True,PASS_BOUND
-eta_K_squared,0.00023318241936058683,4.0,2.0,5.829560484014671e-05,3.9997668175806393,True,PASS_BOUND
-10_eta_K,0.15270311698213196,4.0,2.0,0.03817577924553299,3.847296883017868,True,PASS_BOUND
-stress_0p5,0.5,4.0,2.0,0.125,3.5,True,PASS_BOUND
-stress_1p0,1.0,4.0,2.0,0.25,3.0,True,PASS_BOUND
-stress_1p5,1.5,4.0,2.0,0.375,2.5,True,PASS_BOUND
-stress_2p0_threshold,2.0,4.0,2.0,0.5,2.0,False,FAIL_OR_THRESHOLD_STRESS
-stress_2p5_fail,2.5,4.0,2.0,0.625,1.5,False,FAIL_OR_THRESHOLD_STRESS

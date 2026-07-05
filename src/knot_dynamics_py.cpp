@@ -76,7 +76,17 @@ void bind_knot(py::module_& m) {
       .def_readwrite("ropelength", &KnotInvariants::ropelength)
       .def_readwrite("writhe", &KnotInvariants::writhe)
       .def_readwrite("min_self_distance", &KnotInvariants::min_self_distance)
-      .def_readwrite("bending_energy", &KnotInvariants::bending_energy);
+      .def_readwrite("bending_energy", &KnotInvariants::bending_energy)
+      .def_readwrite("thickness_rad", &KnotInvariants::thickness_rad)
+      .def_readwrite("ropelength_rad", &KnotInvariants::ropelength_rad)
+      .def_readwrite("ropelength_diam", &KnotInvariants::ropelength_diam)
+      .def_readwrite("minrad_min", &KnotInvariants::minrad_min)
+      .def_readwrite("dcsd_min", &KnotInvariants::dcsd_min)
+      .def_readwrite("strut_count", &KnotInvariants::strut_count)
+      .def_readwrite("kink_count", &KnotInvariants::kink_count)
+      .def_readwrite("contact_residual", &KnotInvariants::contact_residual)
+      .def_readwrite("contact_entropy", &KnotInvariants::contact_entropy)
+      .def_readwrite("ropelength_lower_bound_ok", &KnotInvariants::ropelength_lower_bound_ok);
 
   py::class_<CanonicalConstants>(m, "CanonicalConstants")
       .def(py::init<>())
@@ -86,7 +96,8 @@ void bind_knot(py::module_& m) {
       .def_readwrite("rho_f", &CanonicalConstants::rho_f)
       .def_readwrite("v_swirl", &CanonicalConstants::v_swirl)
       .def_readwrite("c", &CanonicalConstants::c)
-      .def_readwrite("rho_m", &CanonicalConstants::rho_m);
+      .def_readwrite("rho_m", &CanonicalConstants::rho_m)
+      .def_readwrite("rho_horn", &CanonicalConstants::rho_horn);
 
   py::class_<KnotDerived>(m, "KnotDerived")
       .def(py::init<>())
@@ -130,6 +141,7 @@ void bind_knot(py::module_& m) {
   py::class_<MassFunctional>(m, "MassFunctional")
       .def(py::init<const CanonicalConstants&>(), py::arg("constants") = CanonicalConstants{})
       .def("baseline_mass_from_ropelength", &MassFunctional::baseline_mass_from_ropelength, py::arg("L_tot"))
+      .def("baseline_mass_from_horn_ropelength", &MassFunctional::baseline_mass_from_horn_ropelength, py::arg("L_tot"))
       .def("bare_master_mass_scale", &MassFunctional::bare_master_mass_scale)
       .def("gate_factor", &MassFunctional::gate_factor, py::arg("G"))
       .def("evaluate",

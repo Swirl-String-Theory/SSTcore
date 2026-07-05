@@ -30,10 +30,22 @@ double SSTMasterEquation::weak_swirl_clock_impedance(double v_norm, double c) {
 }
 
 double SSTMasterEquation::geometric_baseline_mass(double rho_m, double r_c, double lambda_c, double L_tot) {
+    // Backward-compatible alias for the medium-scale rho_m version.
+    return geometric_baseline_mass_from_rho_m(rho_m, r_c, lambda_c, L_tot);
+}
+
+double SSTMasterEquation::geometric_baseline_mass_from_rho_m(double rho_m, double r_c, double lambda_c, double L_tot) {
     if (rho_m < 0.0 || r_c <= 0.0 || lambda_c <= 0.0) {
         throw std::invalid_argument("rho_m must be non-negative; r_c and lambda_c must be positive.");
     }
     return 2.0 * pi_d * pi_d * pi_d * rho_m * std::pow(r_c, 5) / (lambda_c * lambda_c) * L_tot;
+}
+
+double SSTMasterEquation::geometric_horn_baseline_mass(double rho_horn, double r_c, double lambda_c, double L_tot) {
+    if (rho_horn < 0.0 || r_c <= 0.0 || lambda_c <= 0.0) {
+        throw std::invalid_argument("rho_horn must be non-negative; r_c and lambda_c must be positive.");
+    }
+    return 2.0 * pi_d * pi_d * pi_d * rho_horn * std::pow(r_c, 5) / (lambda_c * lambda_c) * L_tot;
 }
 
 SSTMasterEquationOutput SSTMasterEquation::evaluate(const SSTMasterEquationInput& in) {

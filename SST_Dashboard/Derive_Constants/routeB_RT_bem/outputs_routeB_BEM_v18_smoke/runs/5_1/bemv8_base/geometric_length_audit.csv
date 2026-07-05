@@ -1,3 +1,0 @@
-knot,id,source,length_samples,L_raw_arclength,L_database,relative_error_vs_database,status
-0_1,0:1:1,generated_unit_circle_control,1000,6.283185307179586,6.283185307179586,0.0,ALPHA_BLIND_RAW_FOURIER_ARCLENGTH
-5_1,5:1:1,xml_fourier,1000,23.600439874509323,23.598564,7.949104485017368e-05,ALPHA_BLIND_RAW_FOURIER_ARCLENGTH

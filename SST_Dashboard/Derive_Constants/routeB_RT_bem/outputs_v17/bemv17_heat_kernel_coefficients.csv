@@ -1,5 +1,0 @@
-slot,operator_order,boundary_dimension_d,asymptotic_form,role,normalizer_consequence,status
-principal Weyl count,1,2,N(Lambda) ~ C_d Vol(Sigma) Lambda^d,Defines mode count M_max and supports mode-extensivity.,one factor M_max,STANDARD_PSEUDODIFFERENTIAL_STRUCTURE
-log determinant pair subtraction,log ratio of first-order maps,2,Tr log(Lambda_R Lambda_T^{-1}) with common leading symbols removed,Cancels shared leading area/cutoff terms.,finite residual begins at lower symbol order,PROOF_OBLIGATION
-first nonzero residual coefficient,-2 residual symbol,2,"q_{-2}(x,xi) contributes length^{-2} density",Fixes L_cert^2 in denominator.,length factor L_cert^2,TARGET_THEOREM_NOT_YET_DERIVED
-dimensionless intensive correction,mode average of order -2 residual,2,DeltaF_pair/(M_max L_cert^2),Produces alpha-blind finite correction for certified Route-B budget.,N_RT = M_max L_cert^2,CONDITIONAL_RESULT

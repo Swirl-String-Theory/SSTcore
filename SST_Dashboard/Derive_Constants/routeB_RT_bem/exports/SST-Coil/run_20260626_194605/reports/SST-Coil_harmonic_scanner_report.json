@@ -1,9 +1,0 @@
-{
-  "radius_m": 0.05,
-  "duty": 0.382,
-  "f_min_Hz": 10000.0,
-  "f_max_Hz": 5000000.0,
-  "samples": 500,
-  "n_harmonics": 15,
-  "warning": "G is placeholder sinc. Use measured/simulated kernel when available."
-}

@@ -1,6 +1,0 @@
-quantity,mode_power,length_power,scaling_under_M_to_muM,scaling_under_L_to_lambdaL,role
-M_max,1,0,mu,1,retained boundary mode count
-L_cert,0,1,1,lambda,certified longitudinal scale
-DeltaF_pair,1,-2,mu,lambda^{-2},raw unresolved finite R--T pair action under assumptions A2/A3
-M_max L_cert^2,1,2,mu,lambda^{2},minimal separable normalizer
-DeltaF_pair/(M_max L_cert^2),0,0,1,1,dimensionless intensive correction

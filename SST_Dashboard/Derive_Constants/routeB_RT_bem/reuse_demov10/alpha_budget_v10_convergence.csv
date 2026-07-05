@@ -1,2 +1,0 @@
-selected_normalizer,run_id,n_center,n_theta,n_sphere,tube_fraction,outer_factor,L_long_target,leading_half_alpha_inv,DeltaF_pair_raw,normalizer_denominator,DeltaF_phys_normalized,finite_correction_half,alpha_inv_pred_blind_v9,correction_to_leading_ratio,gate
-M_L2,reuse001_outputs_routeB_BEM_v9_fast,32,6,144,0.3,2.6,16.372446942894506,137.16149076556277,-183.93247044920022,12598.679888201095,-0.014599344699713857,-0.007299672349856928,137.15419109321292,5.32195466024321e-05,PASS_SUBLEADING_CORRECTION

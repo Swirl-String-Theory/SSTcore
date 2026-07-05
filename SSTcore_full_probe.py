@@ -1104,6 +1104,248 @@ def probe_particle_evaluator(sst: Any) -> Dict[str, Any]:
     return result
 
 
+# Side-by-side trefoil (3_1) across the three geometry resource channels.
+TREFOIL_TRIAD_CHANNELS: List[Dict[str, Any]] = [
+    {
+        "channel": "ideal_txt",
+        "ref": "3:1:1",
+        "source": "ideal",
+        "expect_canon_mass": True,
+        "expect_particle_evaluator": "ok",
+    },
+    {
+        "channel": "fremlin_fseries",
+        "ref": "3_1",
+        "source": "fremlin",
+        "expect_canon_mass": False,
+        "expect_particle_evaluator": "skip",
+    },
+    {
+        "channel": "knotplot_ideal",
+        "ref": "knot_3.1",
+        "source": "knotplot",
+        "expect_canon_mass": False,
+        "expect_particle_evaluator": "reject",
+    },
+]
+CANON_TREFOIL_ROPELENGTH = 16.371637
+
+
+def _knot_resolution_dict(res: Any) -> Dict[str, Any]:
+    return {
+        "ref": getattr(res, "ref", None),
+        "source": getattr(getattr(res, "source", None), "value", getattr(res, "source", None)),
+        "role": getattr(getattr(res, "role", None), "value", getattr(res, "role", None)),
+        "canonical_ab_id": getattr(res, "canonical_ab_id", None),
+        "native_length": getattr(res, "native_length", None),
+        "ropelength": getattr(res, "ropelength", None),
+        "closure_gap": getattr(res, "closure_gap", None),
+        "fremlin_label": getattr(res, "fremlin_label", None),
+        "knotplot_name": getattr(res, "knotplot_name", None),
+        "bundle_path": getattr(res, "bundle_path", None),
+    }
+
+
+TREFOIL_EXPORT_SAMPLES = 128
+
+
+def _trefoil_fourier_block(sst: Any, spec: Dict[str, Any], res: Any) -> Any:
+    """Obtain a native FourierBlock for trefoil evaluation from a KnotResolution."""
+    source = spec["source"]
+    if source == "fremlin":
+        parse = getattr(sst, "parse_fseries_from_string", None)
+        load = getattr(sst, "load_fseries_knot", None)
+        if not callable(parse) or not callable(load):
+            return None
+        text = load(spec["ref"])
+        if not text:
+            return None
+        blocks = parse(text)
+        if not blocks:
+            return None
+        idx_fn = getattr(sst, "index_of_largest_block", None)
+        idx = int(idx_fn(blocks)) if callable(idx_fn) else 0
+        return blocks[idx]
+
+    parse_str = getattr(sst, "parse_ideal_txt_from_string", None)
+    if not callable(parse_str):
+        return None
+    xml = getattr(res, "ideal_xml", None)
+    if not xml and source == "knotplot":
+        get_path = getattr(sst, "get_knotplot_ideal_path", None)
+        if callable(get_path):
+            kp = get_path(spec["ref"])
+            if kp is not None and kp.exists():
+                xml = kp.read_text(encoding="utf-8", errors="replace")
+    if not xml:
+        return None
+    blocks = parse_str(xml)
+    if not blocks:
+        return None
+    return blocks[0].fourier
+
+
+def _point_xyz(p: Any) -> Tuple[float, float, float]:
+    if hasattr(p, "x") and hasattr(p, "y") and hasattr(p, "z"):
+        return float(p.x), float(p.y), float(p.z)
+    return float(p[0]), float(p[1]), float(p[2])
+
+
+def _try_export_trefoil_curve(sst: Any, spec: Dict[str, Any], res: Any) -> Dict[str, Any]:
+    """Sample trefoil centerline via evaluate_fourier_block (geometry export smoke)."""
+    out: Dict[str, Any] = {
+        "curve_export_ok": False,
+        "curve_export_error": None,
+        "sample_count": 0,
+        "computed_length": None,
+        "closure_gap": None,
+    }
+    eval_fn = getattr(sst, "evaluate_fourier_block", None)
+    if not callable(eval_fn):
+        out["curve_export_error"] = "evaluate_fourier_block not exported"
+        return out
+
+    s_vals = [2 * math.pi * i / TREFOIL_EXPORT_SAMPLES for i in range(TREFOIL_EXPORT_SAMPLES)]
+    try:
+        block = _trefoil_fourier_block(sst, spec, res)
+        if block is None:
+            out["curve_export_error"] = "could not obtain Fourier block"
+            return out
+        pts = eval_fn(block, s_vals)
+        if not pts or len(pts) < 3:
+            out["curve_export_error"] = f"evaluate returned {len(pts) if pts else 0} points"
+            return out
+        out["sample_count"] = len(pts)
+        x0, y0, z0 = _point_xyz(pts[0])
+        x1, y1, z1 = _point_xyz(pts[-1])
+        out["closure_gap"] = math.sqrt((x0 - x1) ** 2 + (y0 - y1) ** 2 + (z0 - z1) ** 2)
+        out["curve_export_ok"] = True
+        length_fn = getattr(sst, "length_exact", None)
+        if callable(length_fn):
+            try:
+                out["computed_length"] = float(length_fn(block, TREFOIL_EXPORT_SAMPLES))
+            except Exception:
+                pass
+    except Exception as exc:
+        out["curve_export_error"] = f"{type(exc).__name__}: {exc}"
+    return out
+
+
+def probe_trefoil_triad(sst: Any) -> Dict[str, Any]:
+    """Compare trefoil geometry across ideal.txt, Fremlin fseries, and knotplot."""
+    result: Dict[str, Any] = {
+        "channels": [],
+        "catalog_ok": True,
+        "canon_ropelength": CANON_TREFOIL_ROPELENGTH,
+        "resolve_knot_ref_available": hasattr(sst, "resolve_knot_ref")
+        and callable(sst.resolve_knot_ref),
+    }
+    if not result["resolve_knot_ref_available"]:
+        result["catalog_ok"] = False
+        result["errors"] = ["resolve_knot_ref not exported"]
+        return result
+
+    calc_role = getattr(sst, "CalculationRole", None)
+    canon_mass_role = getattr(calc_role, "CANON_MASS", "canon_mass") if calc_role else "canon_mass"
+    assert_canon = getattr(sst, "assert_canon_ideal", None)
+    pe_exists = hasattr(sst, "ParticleEvaluator")
+
+    ideal_ropelength: Optional[float] = None
+
+    for spec in TREFOIL_TRIAD_CHANNELS:
+        row: Dict[str, Any] = {
+            "channel": spec["channel"],
+            "ref": spec["ref"],
+            "source": spec["source"],
+            "resolve_ok": False,
+            "resolution": None,
+            "resource_bytes": None,
+            "canon_mass_ok": None,
+            "canon_mass_error": None,
+            "particle_evaluator": "skipped",
+            "particle_evaluator_error": None,
+            "ropelength_delta_vs_canon": None,
+            "curve_export_ok": None,
+            "curve_export_error": None,
+            "sample_count": None,
+            "computed_length": None,
+            "closure_gap": None,
+            "error": None,
+        }
+
+        try:
+            res = sst.resolve_knot_ref(spec["ref"], source=spec["source"])
+        except Exception as exc:
+            row["error"] = f"{type(exc).__name__}: {exc}"
+            result["channels"].append(row)
+            result["catalog_ok"] = False
+            continue
+
+        if res is None:
+            row["error"] = "resolve_knot_ref returned None"
+            if spec["channel"] != "knotplot_ideal" or sst.get_knotplot_ideal_path("knot_3.1") is not None:
+                result["catalog_ok"] = False
+            result["channels"].append(row)
+            continue
+
+        row["resolve_ok"] = True
+        row["resolution"] = _knot_resolution_dict(res)
+
+        if spec["source"] == "fremlin" and hasattr(sst, "load_fseries_knot"):
+            try:
+                row["resource_bytes"] = len(sst.load_fseries_knot(spec["ref"]) or "")
+            except Exception:
+                pass
+        elif spec["source"] == "ideal" and getattr(res, "ideal_xml", None):
+            row["resource_bytes"] = len(res.ideal_xml)
+        elif spec["source"] == "knotplot":
+            kp = sst.get_knotplot_ideal_path(spec["ref"])
+            if kp is not None and kp.exists():
+                row["resource_bytes"] = kp.stat().st_size
+
+        if assert_canon is not None and callable(assert_canon):
+            try:
+                assert_canon(res, canon_mass_role)
+                row["canon_mass_ok"] = True
+            except Exception as exc:
+                row["canon_mass_ok"] = False
+                row["canon_mass_error"] = str(exc)
+            if row["canon_mass_ok"] != spec["expect_canon_mass"]:
+                result["catalog_ok"] = False
+
+        rope = getattr(res, "ropelength", None)
+        if spec["channel"] == "ideal_txt" and rope is not None:
+            ideal_ropelength = float(rope)
+            row["ropelength_delta_vs_canon"] = rope - CANON_TREFOIL_ROPELENGTH
+            if abs(row["ropelength_delta_vs_canon"]) > CANON_TREFOIL_ROPELENGTH * 1e-5:
+                result["catalog_ok"] = False
+        elif rope is not None and ideal_ropelength is not None:
+            row["ropelength_delta_vs_canon"] = rope - ideal_ropelength
+
+        if pe_exists and spec["expect_particle_evaluator"] != "skip":
+            try:
+                sst.ParticleEvaluator(spec["ref"], 200)
+                row["particle_evaluator"] = "ok"
+            except Exception as exc:
+                row["particle_evaluator"] = "rejected"
+                row["particle_evaluator_error"] = f"{type(exc).__name__}: {exc}"
+            expected = spec["expect_particle_evaluator"]
+            if expected == "ok" and row["particle_evaluator"] != "ok":
+                result["catalog_ok"] = False
+            elif expected == "reject" and row["particle_evaluator"] == "ok":
+                result["catalog_ok"] = False
+
+        export = _try_export_trefoil_curve(sst, spec, res)
+        row.update(export)
+        if not row["curve_export_ok"]:
+            if spec["channel"] != "knotplot_ideal" or sst.get_knotplot_ideal_path("knot_3.1") is not None:
+                result["catalog_ok"] = False
+
+        result["channels"].append(row)
+
+    return result
+
+
 def make_report(
     sst: Any,
     import_info: Dict[str, Any],
@@ -1123,6 +1365,7 @@ def make_report(
     report["native_bindings"] = probe_native_bindings(sst)
     report["topology_candidates"] = probe_topologies(sst)
     report["particle_evaluator"] = probe_particle_evaluator(sst)
+    report["trefoil_triad"] = probe_trefoil_triad(sst)
     report["constant_checks"] = compute_constant_checks()
     report["meson_link_scaffolds"] = compute_meson_link_scaffolds(
         report["constant_checks"]["E_meson0_MeV"]
@@ -1293,6 +1536,32 @@ def print_report_summary(report: Dict[str, Any]) -> None:
     print_kv("resolve_knot_ref_ok", pe.get("resolve_knot_ref_ok"))
     print_kv("resolve_knot_ref_ropelength", pe.get("resolve_knot_ref_ropelength"))
 
+    print_header("Trefoil triad (ideal / Fremlin / knotplot)")
+    triad = report.get("trefoil_triad") or {}
+    print_kv("catalog_ok", triad.get("catalog_ok"))
+    print_kv("canon_ropelength", triad.get("canon_ropelength"))
+    for row in triad.get("channels", []):
+        resolution = row.get("resolution") or {}
+        print(
+            f"{row['channel']:18s} ref={row['ref']:<10s} "
+            f"ok={str(row['resolve_ok']):<5} "
+            f"role={resolution.get('role', '-'):<14} "
+            f"L={resolution.get('native_length')} "
+            f"R={resolution.get('ropelength')} "
+            f"dR={row.get('ropelength_delta_vs_canon')} "
+            f"canon_mass={row.get('canon_mass_ok')} "
+            f"PE={row.get('particle_evaluator')} "
+            f"export={row.get('curve_export_ok')} "
+            f"n={row.get('sample_count')} "
+            f"L_eval={row.get('computed_length')}"
+        )
+        if row.get("curve_export_error"):
+            print(f"  export: {row['curve_export_error']}")
+        if row.get("error"):
+            print(f"  error: {row['error']}")
+        if row.get("canon_mass_error"):
+            print(f"  canon_mass: {row['canon_mass_error']}")
+
     print_header("Canon-v0.8.x numerical sanity checks")
     cc = report["constant_checks"]
     for key in [
@@ -1351,6 +1620,16 @@ def print_report_summary(report: Dict[str, Any]) -> None:
         problems.append("ParticleEvaluator trefoil canon smoke failed.")
     if pe.get("particle_evaluator_exists") and pe.get("knotplot_reject_ok") is False:
         problems.append("ParticleEvaluator did not reject knot_3.1 non-canon id.")
+    triad = report.get("trefoil_triad") or {}
+    if triad.get("resolve_knot_ref_available") and not triad.get("catalog_ok"):
+        problems.append("trefoil triad cross-check failed (ideal / Fremlin / knotplot).")
+    if triad.get("resolve_knot_ref_available"):
+        for row in triad.get("channels", []):
+            if row.get("resolve_ok") and not row.get("curve_export_ok"):
+                problems.append(
+                    f"trefoil curve export failed for {row.get('channel')} ({row.get('ref')})."
+                )
+                break
 
     if problems:
         print("Probe completed with warnings:")
@@ -1474,6 +1753,7 @@ def main(argv: Optional[List[str]] = None) -> int:
             write_csv(prefix.with_name(prefix.name + "_knots_fourier_series.csv"), report.get("knots_fourier_series_catalog", {}).get("probe_labels", []))
             write_csv(prefix.with_name(prefix.name + "_knotplot_catalog.csv"), report.get("knotplot_catalog", {}).get("sample", []))
             write_csv(prefix.with_name(prefix.name + "_binding_catalog.csv"), report.get("binding_catalog", {}).get("entries", []))
+            write_csv(prefix.with_name(prefix.name + "_trefoil_triad.csv"), report.get("trefoil_triad", {}).get("channels", []))
             write_csv(prefix.with_name(prefix.name + "_meson_link_scaffolds.csv"), report["meson_link_scaffolds"])
         else:
             base.mkdir(parents=True, exist_ok=True)
@@ -1484,6 +1764,7 @@ def main(argv: Optional[List[str]] = None) -> int:
             write_csv(base / "knots_fourier_series.csv", report.get("knots_fourier_series_catalog", {}).get("probe_labels", []))
             write_csv(base / "knotplot_catalog.csv", report.get("knotplot_catalog", {}).get("sample", []))
             write_csv(base / "binding_catalog.csv", report.get("binding_catalog", {}).get("entries", []))
+            write_csv(base / "trefoil_triad.csv", report.get("trefoil_triad", {}).get("channels", []))
             write_csv(base / "meson_link_scaffolds.csv", report["meson_link_scaffolds"])
         print(f"CSV tables written under/prefix: {base}")
 

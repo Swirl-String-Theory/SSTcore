@@ -1,4 +1,5 @@
 #include "knot_dynamics.h"
+#include "resolved_tube_geometry.h"
 #include "../include/SST_Constants.h"
 #include "biot_savart.h"
 #include <algorithm>
@@ -73,13 +74,18 @@ namespace sst {
                 KnotPrediction out;
                 out.gate = assign_gate(K);
 
-                const long double lambda_c = SST::Constants::H_BAR /
-                                             (SST::Constants::M_ELECTRON * SST::Constants::C_VACUUM);
-                const long double gate_base = lambda_c / (SST::Constants::PI * SST::Constants::RC_CORE);
+                // Canon guard: the exposure gate uses the full Compton wavelength h/(m_e c),
+                // not the reduced Compton wavelength hbar/(m_e c).
+                const double lambda_c = SSTCanonicalConstants::full_compton_wavelength(
+                        static_cast<double>(SST::Constants::H_BAR),
+                        static_cast<double>(SST::Constants::M_ELECTRON),
+                        static_cast<double>(SST::Constants::C_VACUUM));
+                const double gate_base = lambda_c /
+                        (static_cast<double>(SST::Constants::PI) * static_cast<double>(SST::Constants::RC_CORE));
 
                 int gate_exponent = 0;
                 if (out.gate == SectorGate::Exposed) gate_exponent = 1;
-                out.gate_factor = std::pow(static_cast<double>(gate_base), static_cast<double>(gate_exponent));
+                out.gate_factor = std::pow(gate_base, static_cast<double>(gate_exponent));
                 out.xi = compute_xi(K);
                 out.mass_ratio = out.gate_factor * out.xi;
                 out.mass_kg = out.mass_ratio * static_cast<double>(SST::Constants::M_ELECTRON);
@@ -141,8 +147,17 @@ namespace sst {
         }
 
         double MassFunctional::baseline_mass_from_ropelength(double L_tot) const {
+                // Medium-scale rho_m form retained for master-equation diagnostics.
+                // Do not use this as the resolved horn-envelope mass baseline.
                 constexpr double pi = 3.14159265358979323846;
                 return 2.0 * pi * pi * pi * c_.rho_m *
+                       std::pow(c_.r_c, 5) / std::pow(c_.lambda_c, 2) * L_tot;
+        }
+
+        double MassFunctional::baseline_mass_from_horn_ropelength(double L_tot) const {
+                // Resolved-tube horn-envelope baseline from Canon guardrails v3.
+                constexpr double pi = 3.14159265358979323846;
+                return 2.0 * pi * pi * pi * c_.rho_horn *
                        std::pow(c_.r_c, 5) / std::pow(c_.lambda_c, 2) * L_tot;
         }
 
@@ -258,9 +273,37 @@ namespace sst {
                 K.writhe = g.writhe;
                 K.min_self_distance = g.min_self_distance;
                 K.bending_energy = g.bending_energy;
-                K.ropelength_like = (g.min_self_distance > 1e-12)
-                        ? (g.L / g.min_self_distance)
-                        : g.L;
+
+                // Resolved-tube metrics: Rawdon/Cantarella thickness = min(MinRad, dcsd/2).
+                std::vector<double> svals;
+                svals.reserve(static_cast<size_t>(std::max(64, nsamples)));
+                for (int i = 0; i < std::max(64, nsamples); ++i) {
+                        svals.push_back(2.0 * M_PI * static_cast<double>(i) /
+                                        static_cast<double>(std::max(64, nsamples)));
+                }
+                const auto pts = FourierKnot::evaluate(block, svals);
+                const auto tube = ResolvedTubeGeometry::analyze(
+                        pts,
+                        std::max(1, exclude_window),
+                        1e-3,
+                        1e-2);
+                const auto contact = ContactStressMap::diagnose_length_criticality(pts, tube, false);
+
+                K.thickness_rad = tube.thickness_rad;
+                K.ropelength_rad = tube.ropelength_rad;
+                K.ropelength_diam = tube.ropelength_diam;
+                K.minrad_min = tube.minrad;
+                K.dcsd_min = tube.min_dcsd;
+                K.strut_count = static_cast<int>(tube.struts.size());
+                K.kink_count = static_cast<int>(tube.kinks.size());
+                K.contact_residual = contact.contact_residual;
+                K.contact_entropy = contact.contact_entropy;
+                K.ropelength_lower_bound_ok = tube.lower_bound_ok;
+
+                // Backward compatibility: historical SSTcore used the diameter convention.
+                K.ropelength_like = (tube.ropelength_diam > 0.0)
+                        ? tube.ropelength_diam
+                        : ((g.min_self_distance > 1e-12) ? (g.L / g.min_self_distance) : g.L);
                 K.ropelength = K.ropelength_like;
                 return K;
         }

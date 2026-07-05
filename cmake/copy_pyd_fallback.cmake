@@ -40,11 +40,15 @@ if(NOT PROJECT_ROOT)
 endif()
 
 get_filename_component(FILENAME "${SOURCE_FILE}" NAME)
+get_filename_component(FILENAME_WE "${SOURCE_FILE}" NAME_WE)
+string(REGEX REPLACE "^sstcore" "_native" NATIVE_FILENAME "${FILENAME}")
 
 set(DESTS
   "${PROJECT_ROOT}/${FILENAME}"
   "${PROJECT_ROOT}/examples/${FILENAME}"
   "${PROJECT_ROOT}/tests/${FILENAME}"
+  "${PROJECT_ROOT}/src/SSTcore/${FILENAME}"
+  "${PROJECT_ROOT}/src/SSTcore/${NATIVE_FILENAME}"
   "${PROJECT_ROOT}/../SwirlStringTheory/${FILENAME}"
   "${PROJECT_ROOT}/../SwirlStringTheory/papers/SST-31_Canon/${FILENAME}"
   "${PROJECT_ROOT}/../SST_Dashboard/${FILENAME}"

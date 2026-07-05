@@ -1,9 +1,0 @@
-==============================================================================
-Route B BEMv14 certified-length convergence audit complete
-==============================================================================
-outdir: outputs_routeB_BEM_v14_stageC\grids\C1_paired_fine
-selected normalizer: M_Lcert2
-stability gate: PASS_CERTIFIED_STABLE_NORMALIZER
-mean blind alpha inverse: 137.15477301864115
-CV: 7.168324914721296e-06
-wrote: certified_convergence_grid.csv, certified_stability_summary.csv, alpha_budget_v14_convergence.csv, certified_convergence_report.md

@@ -1,2 +1,0 @@
-inner_radius,outer_radius,density_mode,n0,xi,power,integral_I,Lambda_phi,E_eff,target_Eeff_over_2,Lambda_over_target,n0_required_to_match_target,K_cell_from_Lambda,K_target_Eeff_over_8piR,status
-0.0152703116982,1.0,constant,1.0,0.01,0.0,64.48700196342607,0.19486672091666185,274.0748756568,137.0374378284,0.0014219962369748653,703.2367414188,0.015507000938997784,10.905092809519074,OPEN_INTERIOR_HESSIAN_GATE

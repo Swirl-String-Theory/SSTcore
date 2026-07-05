@@ -922,6 +922,7 @@ src_files = [
     "src/trefoil_operator.cpp",
     "src/hyperbolic_volume.cpp",
     "src/knot_dynamics.cpp",
+    "src/resolved_tube_geometry.cpp",
     "src/radiation_flow.cpp",
     "src/swirl_field.cpp",
     "src/thermo_dynamics.cpp",

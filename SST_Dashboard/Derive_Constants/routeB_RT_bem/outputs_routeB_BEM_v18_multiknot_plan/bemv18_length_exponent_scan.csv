@@ -1,6 +1,0 @@
-a_M_exponent,b_L_exponent,n_knots,normalizer_formula,slope_logR_vs_logL,corr_logR_logL,std_logR,max_subleading_ratio,score,gate,note
-1.0,0.0,0,M^1 L^0,,,,,,FAIL_NOT_ENOUGH_KNOTS,
-1.0,1.0,0,M^1 L^1,,,,,,FAIL_NOT_ENOUGH_KNOTS,
-1.0,2.0,0,M^1 L^2,,,,,,FAIL_NOT_ENOUGH_KNOTS,CANONICAL_CANDIDATE_M_LCERT2
-1.0,3.0,0,M^1 L^3,,,,,,FAIL_NOT_ENOUGH_KNOTS,
-1.0,4.0,0,M^1 L^4,,,,,,FAIL_NOT_ENOUGH_KNOTS,

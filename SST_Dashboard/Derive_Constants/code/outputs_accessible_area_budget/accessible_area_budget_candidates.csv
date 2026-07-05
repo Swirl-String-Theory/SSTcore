@@ -1,7 +1,0 @@
-candidate,M,interpretation,Lambda_from_optimal_radial_profile,target_Eeff_over_2,ratio_to_target,relative_error,is_exact,epistemic_status
-half_budget_area_projected,132.88418376976742,M_total=Eeff/2 projected by accessible area fraction,137.0374378284,137.0374378284,1.0,0.0,True,exact_if_half_budget_is_independent
-half_budget_length_projected,134.9448334384358,M_total=Eeff/2 projected by accessible length fraction,139.16249246504142,137.0374378284,1.0155071101030249,0.015507110103024857,False,tested_alternative
-half_budget_volume_projected,137.03694986984559,M_total=Eeff/2 projected by accessible volume fraction,141.31999734836012,137.0374378284,1.0312510186108617,0.03125101861086166,False,tested_alternative
-full_budget_area_projected,265.76836753953484,M_total=Eeff projected by accessible area fraction,274.0748756568,137.0374378284,2.0,1.0,False,tested_alternative
-raw_half_budget,137.0374378284,no accessible projection,141.32050055790822,137.0374378284,1.0312546906697975,0.03125469066979747,False,tested_alternative
-required_budget,132.88418376976742,diagnostic required value,137.0374378284,137.0374378284,1.0,0.0,True,diagnostic_required_value

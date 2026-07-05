@@ -1,6 +1,0 @@
-step,formula,status
-accessible_radius,R_acc = R-a,geometric definition of phase-accessible radial scale
-accessible_area_fraction,f_A = A_acc/A_out = (R-a)^2/R^2,derived from spherical screen area scaling
-accessible_budget,M_acc = M_total f_A,derived if phase budget is area-carried
-half_budget_gate,M_total = E_eff/2,open primitive-equation gate
-interior_Hessian,"Lambda_phi = M_acc/(R-a)^2 = E_eff/(2 R^2); for R=1, E_eff/2",conditional on half_budget_gate

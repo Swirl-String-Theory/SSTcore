@@ -1,3 +1,0 @@
-knot,id,conway,L_database,D_database,raw_spectrum_file,n_eigenvalues,min_eig,max_eig,S_all,boundary_nodes,selected_nodes,tube_radius,outer_radius,screening_mu,n_center,n_theta,n_sphere,boundary_subspace,operator_backend,scipy
-0_1,0:1:1,0,6.283185,1.0,raw_spectrum_0_1.npy,215,0.8066286996915002,0.9999677495655076,2.3589229609215163,216,216,0.023941541217808126,0.5475909126634597,1.8261807799841694,24,5,96,all,BEM_V5_SOFT_INDEX_HEAT_KERNEL,True
-K11a247,K11a247,9 2,46.146275,1.0,raw_spectrum_K11a247.npy,215,0.7950735015610478,1.0516373938375374,2.3494866978885285,216,216,0.003703818195495826,0.20751126109583318,4.8190155788132305,24,5,96,all,BEM_V5_SOFT_INDEX_HEAT_KERNEL,True

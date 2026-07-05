@@ -35,6 +35,7 @@ void bind_sst_gravity(py::module_& m);
 void bind_sst_integrator(py::module_& m);
 void bind_extensions(py::module_& m);
 void bind_trefoil_operator(py::module_& m);
+void bind_resolved_tube_geometry(py::module_& m);
 
 
 // Pip/setuptools wheels use SSTcore._native; CMake builds keep the sstcore module name.
@@ -73,6 +74,7 @@ PYBIND11_MODULE(sstcore, m) {
   bind_sst_integrator(m);
   bind_extensions(m);
   bind_trefoil_operator(m);
+  bind_resolved_tube_geometry(m);
  // module-wide listing utility
     m.def(
         "list_bindings",

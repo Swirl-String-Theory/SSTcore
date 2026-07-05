@@ -46,6 +46,8 @@ public:
     [[nodiscard]] static double clock_impedance(double swirl_clock);
     [[nodiscard]] static double weak_swirl_clock_impedance(double v_norm, double c);
     [[nodiscard]] static double geometric_baseline_mass(double rho_m, double r_c, double lambda_c, double L_tot);
+    [[nodiscard]] static double geometric_baseline_mass_from_rho_m(double rho_m, double r_c, double lambda_c, double L_tot);
+    [[nodiscard]] static double geometric_horn_baseline_mass(double rho_horn, double r_c, double lambda_c, double L_tot);
     [[nodiscard]] static SSTMasterEquationOutput evaluate(const SSTMasterEquationInput& in);
 };
 

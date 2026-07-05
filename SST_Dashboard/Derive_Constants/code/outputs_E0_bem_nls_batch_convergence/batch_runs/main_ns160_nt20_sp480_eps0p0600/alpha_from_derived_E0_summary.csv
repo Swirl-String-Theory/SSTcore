@@ -1,2 +1,0 @@
-E_star_derived,ropelength_L_over_D,chi_R,beta_quad,eta,Xi_sph,E_eff,alpha_cell_from_derived_E0,alpha_cell_inverse_from_derived_E0,alpha_CODATA_2022,alpha_CODATA_2022_inverse,relative_error_vs_CODATA_2022,v_core_pred_m_per_s,status
-274.0749547050292,16.371637,2.0,1.0,0.015270311698213197,1.0460441175140003,274.0719571267586,0.007297353662034813,137.0359785633793,0.0072973525643,137.03599917759013,1.5042918690018714e-07,1093845.795618359,computed_from_derived_E_star_not_used_in_eigenvalue_scan

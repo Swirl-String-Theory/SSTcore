@@ -1,4 +1,5 @@
 #include "sst_extensions.h"
+#include "resolved_tube_geometry.h"
 
 #include <fstream>
 #include <sstream>
@@ -238,7 +239,7 @@ HelicityResult helicity_from_fseries(
     double L = 0.0, kappa_max = 0.0, kappa_mean = 0.0, bend_energy = 0.0;
     curve_metrics_from_points(pts, L, kappa_max, kappa_mean, bend_energy);
     double dmin = min_non_neighbor_distance(pts, 3);
-    double rproxy = 0.5 * dmin;
+    double rproxy = reach_proxy(pts, 3);
 
     auto blocks = sst::FourierKnot::parse_fseries_multi(path);
     if (blocks.empty()) throw std::runtime_error("no blocks parsed from: " + path);
@@ -343,7 +344,13 @@ double min_non_neighbor_distance(const std::vector<sst::Vec3>& pts, int skip) {
 }
 
 double reach_proxy(const std::vector<sst::Vec3>& pts, int skip) {
-    return 0.5 * min_non_neighbor_distance(pts, skip);
+    if (pts.size() < 4) return 0.0;
+    return ResolvedTubeGeometry::analyze(pts, std::max(1, skip), 1e-3, 1.0).thickness_rad;
+}
+
+ResolvedTubeMetrics resolved_tube_metrics_from_fseries(const std::string& path, int nsamples, int skip) {
+    auto pts = sample_curve_centered(path, nsamples);
+    return ResolvedTubeGeometry::analyze(pts, std::max(1, skip), 1e-3, 1e-2);
 }
 
 FilamentEnergyResult curve_metrics_from_fseries(const std::string& path, int nsamples, int skip) {
@@ -354,7 +361,7 @@ FilamentEnergyResult curve_metrics_from_fseries(const std::string& path, int nsa
     curve_metrics_from_points(pts, out.L, out.kappa_max, out.kappa_mean, out.bend_energy);
     out.ds_avg = (pts.empty() ? 0.0 : out.L / static_cast<double>(pts.size()));
     out.min_non_neighbor_dist = min_non_neighbor_distance(pts, skip);
-    out.reach_proxy = 0.5 * out.min_non_neighbor_dist;
+    out.reach_proxy = reach_proxy(pts, skip);
     return out;
 }
 
@@ -366,7 +373,7 @@ FilamentEnergyResult filament_energy_from_fseries(const std::string& path, const
     curve_metrics_from_points(pts, L, kappa_max, kappa_mean, bend_energy);
     const double ds = (N>0) ? (L / static_cast<double>(N)) : 0.0;
     const double dmin = min_non_neighbor_distance(pts, std::max(1, p.skip_neighbors_base));
-    const double rproxy = 0.5 * dmin;
+    const double rproxy = reach_proxy(pts, std::max(1, p.skip_neighbors_base));
 
     std::vector<sst::Vec3> t(N);
     for (size_t i=0;i<N;++i) {

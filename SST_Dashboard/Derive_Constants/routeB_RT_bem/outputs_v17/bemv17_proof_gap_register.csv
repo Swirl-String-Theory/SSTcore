@@ -1,6 +1,0 @@
-gap_id,gap,needed_for,current_status,closure_test
-G17-1,Construct the actual R--T boundary operators Lambda_R and Lambda_T as elliptic first-order pseudodifferential maps.,DtN/Steklov order assumption,FORMAL_ASSUMPTION,"principal symbols sigma_1(Lambda_R), sigma_1(Lambda_T) exist and share the required leading-order class"
-G17-2,Show that pair subtraction cancels common order 0 / area / cutoff terms in Tr log(Lambda_R Lambda_T^{-1}).,finite pair residual,PROOF_OBLIGATION,heat-kernel coefficient cancellation table has zero residual through orders above -2
-G17-3,"Derive that the first nonzero residual symbol is q_{-2}, not q_0, q_{-1}, or q_{-3}.",length exponent b=2,CENTRAL_OPEN_GATE,symbol expansion of log ratio exhibits q_{-2} as first surviving term
-G17-4,Relate certified length L_cert to the scale variable in the heat-kernel coefficient.,certified-length branch,SUPPORTED_BY_BEMV11_BEMV12_BUT_NEEDS_THEOREM,global rescaling of certified source-cell maps coefficient as L_cert^{-2}
-G17-5,Extend beyond single-knot trefoil data to test length exponent b using multiple L_cert values.,empirical identifiability of b,RECOMMENDED_NUMERICAL_CROSSCHECK,multi-knot certified-length regression selects b=2 without observed alpha

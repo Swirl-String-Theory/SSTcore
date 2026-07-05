@@ -1,3 +1,0 @@
-mesh_label,path,file_size_bytes,vertices,faces,watertight,euler_number,body_count,volume,surface_area,extent_x,extent_y,extent_z
-gear_stl,triple_gear_solid_with_mark.stl,12785784,127857,255714,YES,0,3,47171.8959873,26152.9282279,69.9119968414,74.1188621521,45.4024124146
-axle_stl,30cm_axle.stl,8229184,82291,164582,YES,0,1,16694.6295636,22684.1524896,13.2388634682,13.239464283,300.666748047

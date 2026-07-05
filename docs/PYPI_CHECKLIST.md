@@ -25,7 +25,7 @@ Use this checklist before publishing to PyPI.
   - [ ] Build succeeds: `python -m build`
   - [ ] Wheel installs: `pip install dist/SSTcore-*.whl`
   - [ ] Import works: `import SSTcore`
-  - [ ] Embedded knots work: Run `test_embedded_knots.py`
+  - [ ] Embedded knots work: Run Workbench `verification-suites/embedded-knots/test_embedded_knots.py` or pytest in `tests/`
 
 ## Build Process
 

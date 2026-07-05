@@ -1,6 +1,0 @@
-gate,claim,value,status,notes
-SST_pressure_identity,F_swirl/(2*pi*r_c^2) equals 1/2 rho_core v_swirl^2,1.0,MATCHED,relative mismatch=0.000000e+00; tolerance=5e-06
-inner_outer_equal_normalization,mu=P_inner/P_outer=1,1.0,SUPPORTED_BY_PRESSURE_IDENTITY,mu may be overridden to test robustness.
-self_dual_action,A_chi=chi_R+N_p/chi_R,A=chi+mu*Np/chi,DERIVED_IN_LAPLACE_MATCHED_RECIPROCAL_MODEL,Exact duality chi<->Np/chi requires mu=1.
-radius_stationarity,chi_R=sqrt(mu*N_p),2.0,CHI_R_2_FOR_NP_4,lambda_chi=4.0
-higher_order_terms,no same-order log/quadratic terms,not tested by pressure identity,OPEN_PRIMITIVE_EQUATION_GATE,Must be excluded by full matched asymptotics or shown subleading.

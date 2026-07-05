@@ -92,6 +92,7 @@ add_library(sstcore_lib STATIC
         src/trefoil_operator.cpp
         src/hyperbolic_volume.cpp
         src/knot_dynamics.cpp
+        src/resolved_tube_geometry.cpp
         src/radiation_flow.cpp
         src/swirl_field.cpp
         src/thermo_dynamics.cpp
@@ -137,6 +138,7 @@ if(SST_BUILD_PYTHON_BINDINGS)
             src/multisector_fitter_py.cpp
             src/trefoil_operator_py.cpp
             src/knot_dynamics_py.cpp
+            src/resolved_tube_geometry_py.cpp
             src/frenet_helicity_py.cpp
             src/potential_timefield_py.cpp
             src/hyperbolic_volume_py.cpp
@@ -158,6 +160,7 @@ if(SST_BUILD_PYTHON_BINDINGS)
         SST_DEFAULT_RESOURCE_SUBDIR="share/sstcore/resources"
         SST_DEFAULT_KNOT_FSERIES_SUBDIR="share/sstcore/resources/knot_fseries"
         SST_DEFAULT_KNOTS_FOURIER_SUBDIR="share/sstcore/resources/Knots_FourierSeries"
+        SSTCORE_PYBIND11_NATIVE_SUBMODULE=1
     )
 
     if(IS_LINUX)
@@ -188,6 +191,9 @@ target_link_libraries(test_frenet PRIVATE sstcore_lib)
 
 add_executable(test_sst_integrator tests/test_sst_integrator.cpp)
 target_link_libraries(test_sst_integrator PRIVATE sstcore_lib)
+
+add_executable(test_resolved_tube_geometry tests/test_resolved_tube_geometry.cpp)
+target_link_libraries(test_resolved_tube_geometry PRIVATE sstcore_lib)
 
 # Standalone examples/atoms (optional; requires GLFW3. Set -DSST_BUILD_ATOMS=ON and provide glfw3/GLEW/OpenGL.)
 set(SST_BUILD_ATOMS OFF CACHE BOOL "Build examples/atoms (requires GLFW3, GLEW, OpenGL)")

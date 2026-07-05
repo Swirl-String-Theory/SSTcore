@@ -1,2 +1,0 @@
-status,score,n_files,n_figures,n_channels,n_pairs,has_fig2_enantiomer_data,has_fig4_chiral_control_data,direct_time_traces_available,robust_chiral_control_contrast,direct_enantiomer_signflip,enantiomer_asymmetry_present,recommended_next_status
-SPECTRAL-CISS-CANON-CANDIDATE-DATA,95.0,8,8,20,16,True,True,False,True,False,True,Needs time-resolved EPR traces or replicate uncertainties for CANON-level claim

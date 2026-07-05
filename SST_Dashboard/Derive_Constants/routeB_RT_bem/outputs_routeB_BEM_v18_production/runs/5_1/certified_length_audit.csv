@@ -1,2 +1,0 @@
-target,target_id,reference,reference_id,L_cert_target_database,L_cert_reference_database,L_v8_geom_raw_if_available,L_v8_used_if_available,delta_L_v8_geom_minus_cert,scale_geom_to_cert,NsoftV,leading_full_cert,leading_half_alpha_inv_cert,status
-5_1,5:1:2,0_1,0:1:2,24.734148,12.0,23.601057528504974,23.601057528504974,-1.1330904714950272,1.0480101567536326,16.755160819145562,414.4246274645476,207.2123137322738,CERTIFIED_LENGTH_FROM_IDEAL_DATABASE_L_COLUMN_ALPHA_BLIND

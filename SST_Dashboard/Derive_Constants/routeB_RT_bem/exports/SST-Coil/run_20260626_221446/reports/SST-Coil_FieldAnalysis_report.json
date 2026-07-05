@@ -1,5 +1,0 @@
-{
-  "source_npz": "exports\\SST-Coil\\run_20260626_221446\\npz\\SST-Coil_BiotSavart_midplane.npz",
-  "B2_max_T2": 0.0012431380471252908,
-  "grad_B2_max_T2_per_m": 0.15539225557876668
-}

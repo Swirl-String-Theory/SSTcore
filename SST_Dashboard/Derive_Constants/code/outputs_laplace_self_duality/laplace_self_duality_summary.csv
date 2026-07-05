@@ -1,2 +1,0 @@
-P_kinetic_Pa,P_laplace_Pa,pressure_ratio_laplace_over_kinetic,relative_mismatch,mu_inner_over_outer,N_p,lambda_chi,chi_R_star,A_chi_star,second_derivative_at_star,duality_residual_max_abs,duality_residual_rms,pressure_ratio_used,pressure_match_within_tolerance,selfdual_exact_within_tolerance,chi_matches_2_for_Np4,selfdual_chi_R_star_for_mu1,selfdual_lambda_chi_for_mu1,selfdual_duality_residual_max_abs
-2.329244600448479e+30,2.329244600448479e+30,1.0,0.0,1.0,4.0,4.0,2.0,4.0,1.0,1.7763568394002505e-15,3.76822190084106e-16,1.0,True,True,True,2.0,4.0,1.7763568394002505e-15

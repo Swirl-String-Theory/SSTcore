@@ -34,6 +34,7 @@
 # Python bytecode (never commit; Linux CI is case-sensitive for SSTcore/)
 __pycache__/
 *.py[cod]
+*.pyd
 
 # Python packaging artifacts
 /dist/

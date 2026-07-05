@@ -1,2 +1,0 @@
-normalizer,n_grid_families_selected,grid_labels,aggregate_mean,aggregate_std,aggregate_span,aggregate_cv_abs,aggregate_abs_correction_ratio_max,cross_grid_gate
-M_Lcert2,3,"A1_paired_micro_low,A2_paired_micro_high,A3_cartesian_tiny",137.3910651707716,0.3883109923376618,1.294308030038792,0.0028263191049214646,0.00930461683469654,PASS_CROSS_GRID_CONSENSUS

@@ -1,2 +1,0 @@
-E_eff,E_eff_over_2,L_K,R,a,R_accessible,area_fraction,length_fraction,volume_fraction,M_required,M_required_over_Eeff_over_2,exact_candidate,closed_gate_if,status
-274.0748756568,137.0374378284,16.371637,1.0,0.015270311698213197,0.9847296883017868,0.969692559022934,0.9847296883017868,0.9999964392317738,132.88418376976742,0.969692559022934,half_budget_area_projected,derive M_total=E_eff/2 independently,ACCESSIBLE_AREA_FACTOR_DERIVED_HALF_BUDGET_OPEN

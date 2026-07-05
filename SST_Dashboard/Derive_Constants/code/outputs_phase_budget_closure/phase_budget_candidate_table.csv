@@ -1,9 +1,0 @@
-candidate,M,interpretation,Lambda_optimal,target_Eeff_over_2,ratio_to_target,relative_error,exact_match,epistemic_status
-M_unit,1.0,unit budget,1.0312546906697972,137.0374378284,0.007525350057705745,-0.9924746499422943,False,tested_candidate
-M_LK,16.371637,ropelength budget,16.883327450193207,137.0374378284,0.1232022994426875,-0.8767977005573125,False,tested_candidate
-M_8piL_over_3,137.1547054038369,leading inverse-alpha ropelength scale,141.44143329514102,137.0374378284,1.0321371702253788,0.032137170225378764,False,tested_candidate
-M_Eeff_over_2,137.0374378284,raw half effective scale,141.32050055790822,137.0374378284,1.0312546906697975,0.03125469066979747,False,tested_candidate
-M_Eeff_over_2_times_accessible_length,134.9448334384358,linear accessible-length budget,139.16249246504142,137.0374378284,1.0155071101030249,0.015507110103024857,False,tested_candidate
-M_Eeff_over_2_times_accessible_area,132.88418376976742,area / squared-accessible-length budget,137.0374378284,137.0374378284,1.0,0.0,True,candidate_exact_if_accessible_area_budget_is_derived
-M_Eeff_over_2_times_accessible_volume,137.03694986984559,volume fraction budget,141.31999734836012,137.0374378284,1.0312510186108617,0.03125101861086166,False,tested_candidate
-M_required,132.88418376976742,required by Lambda=Eeff/2 for optimal 1/r^2 profile,137.0374378284,137.0374378284,1.0,0.0,True,diagnostic_required_value

@@ -1,8 +1,0 @@
-weight_mode,input_user_w,effective_w_perp,reason,sigma,c2,matches_11_48,shell_factor_at_LK
-canonical,1.0,1.0,canonical unweighted isotropic GP/NLS gradient response,3.6666666666666665,0.22916666666666666,True,0.9991449977956779
-user,0.0,0.0,user-specified sensitivity weight,3.0,0.1875,False,0.9993004527419183
-user,0.5,0.5,user-specified sensitivity weight,3.3333333333333335,0.20833333333333334,False,0.9992227252687981
-user,1.0,1.0,user-specified sensitivity weight,3.6666666666666665,0.22916666666666666,True,0.9991449977956779
-user,1.1,1.1,user-specified sensitivity weight,3.7333333333333334,0.23333333333333334,False,0.9991294523010538
-profile_radial_ratio,1.0,0.35836920394250454,profile radial/(radial+potential) sensitivity proxy,3.2389128026283363,0.20243205016427102,False,0.9992447424765851
-profile_energy_ratio,1.0,0.867888579071313,profile transverse-gradient/total-energy sensitivity proxy,3.578592386047542,0.22366202412797137,False,0.999165535169516

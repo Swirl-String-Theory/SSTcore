@@ -1,2 +1,0 @@
-normalizer,normalizer_code,bemv16_status,bemv17_status,symbol_target,mode_exponent_a,length_exponent_b,uses_observed_alpha,stageD_alpha_inv_mean,stageD_alpha_inv_cv_abs,stageCD_alpha_inv_mean,stageCD_alpha_inv_cv_abs,next_gate
-M_max L_cert^2,M_Lcert2,CONDITIONAL_HEAT_KERNEL_DTN_CERTIFICATE,PRINCIPAL_SYMBOL_PROOF_OBLIGATION_CERTIFICATE,first surviving pair-subtracted residual q_{-2},1,2,no,137.15486676613227,5.894392513597222e-06,137.15528451885825,1.1352779235901546e-05,BEMv18_MULTI_KNOT_LENGTH_EXPONENT_OR_SYMBOL_EXPANSION_Q_MINUS_2

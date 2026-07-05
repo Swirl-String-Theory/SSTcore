@@ -4,13 +4,11 @@ After compiling the C++ library, you can verify that embedded knots are accessib
 
 ## Quick Test
 
-Run the test script:
+Standalone script (exploratory) moved to **SST-Workbench**:
 
-```bash
-python test_embedded_knots.py
-```
+`verification-suites/embedded-knots/test_embedded_knots.py`
 
-Or use Python directly:
+Release verification uses pytest in `tests/`. For a manual smoke test, use Python directly:
 
 ```python
 from SSTcore import VortexKnotSystem

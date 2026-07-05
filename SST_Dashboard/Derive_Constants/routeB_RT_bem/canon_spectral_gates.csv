@@ -1,8 +1,0 @@
-gate,passed,value,threshold,meaning
-G0_files_parsed,True,8,>=6,Automatic import of uploaded CASTLE Fig2/Fig4 files
-G1_fig4_chiral_control_present,True,1,1,Achiral/chiral field-swept spectra are available
-G2_robust_chiral_control_contrast,True,1,>=3 Fig4 pairs with contrast>0.05 or odd_fraction>0.003,Chiral spectra differ strongly from achiral spectra
-G3_fig2_enantiomer_pairs_present,True,1,1,R/S or en1/en2 field-swept spectra are available
-G4_enantiomer_asymmetry_present,True,1,contrast>0.02 or odd fraction>0.0004 in at least 3 figures,Spectra carry chirality-sensitive odd/asymmetric components
-G5_direct_full_spectrum_signflip,False,0,opposite corr>0.6 and anti-error<0.75 in at least 2 figures,Strict raw-spectrum R/S sign flip; optional and likely requires component fitting
-G6_time_domain_decoherence,False,0,requires time_s traces,Cannot be tested from field sweeps alone

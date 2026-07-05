@@ -1,4 +1,0 @@
-observable,E_candidate,value_interp,d2_interp,classification,derives_E0,is_interior,bracket_E_lo,bracket_E_hi,reason
-action_total,274.0748613650803,4080.9846569911538,20209.068751196253,interior_minimum,True,True,273.9313476574032,274.1195450381919,sign_change_in_log_derivative
-action_bem,290.0,1835.5364076529356,0.005447371916801697,no_interior_stationary_point,False,False,,,closest_abs_derivative_at_boundary
-lambda_min,290.0,171.6797718974969,0.001963824080098232,no_interior_stationary_point,False,False,,,closest_abs_derivative_at_boundary

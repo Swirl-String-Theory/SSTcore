@@ -1,7 +1,0 @@
-compound,J_MHz,J_unc_MHz,rD_nm,rD_unc_nm,source,found_compound_in_pdf_text
-(S)-1-h9,-0.21,0.09,2.48,0.01,Table_S2_OOP_ESEEM_fit_parameters,True
-(R)-1-h9,-0.28,0.11,2.48,0.01,Table_S2_OOP_ESEEM_fit_parameters,True
-2-h9,-0.14,0.1,2.28,0.01,Table_S2_OOP_ESEEM_fit_parameters,True
-(S)-1-d9,-0.31,0.1,2.53,0.01,Table_S2_OOP_ESEEM_fit_parameters,True
-(R)-1-d9,-0.18,0.1,2.51,0.01,Table_S2_OOP_ESEEM_fit_parameters,True
-2-d9,-0.25,0.1,2.29,0.01,Table_S2_OOP_ESEEM_fit_parameters,True

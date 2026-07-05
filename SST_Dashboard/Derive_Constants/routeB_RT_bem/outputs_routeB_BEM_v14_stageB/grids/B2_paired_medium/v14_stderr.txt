@@ -1,2 +1,0 @@
-C:\workspace\projects\SwirlStringTheory\papers\SST-CANON\Derive_Constants\routeB_RT_bem_v3_1_sstcore_package\routeB_RT_bem_v14_certified_convergence.py:451: SyntaxWarning: invalid escape sequence '\('
-  lines.append("The selected normalizer passes the certified-length convergence grid. This is still not a final derivation; it requires analytic justification of the normalizer and independent provenance of \(N_{\rm soft}V_{\rm soft}\).")

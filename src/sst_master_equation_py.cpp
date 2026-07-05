@@ -46,5 +46,9 @@ void bind_sst_master_equation(py::module_& m) {
                     py::arg("v_norm"), py::arg("c"))
         .def_static("geometric_baseline_mass", &sst::SSTMasterEquation::geometric_baseline_mass,
                     py::arg("rho_m"), py::arg("r_c"), py::arg("lambda_c"), py::arg("L_tot"))
+        .def_static("geometric_baseline_mass_from_rho_m", &sst::SSTMasterEquation::geometric_baseline_mass_from_rho_m,
+                    py::arg("rho_m"), py::arg("r_c"), py::arg("lambda_c"), py::arg("L_tot"))
+        .def_static("geometric_horn_baseline_mass", &sst::SSTMasterEquation::geometric_horn_baseline_mass,
+                    py::arg("rho_horn"), py::arg("r_c"), py::arg("lambda_c"), py::arg("L_tot"))
         .def_static("evaluate", &sst::SSTMasterEquation::evaluate, py::arg("input"));
 }

@@ -29,7 +29,7 @@ When you need to publish a new version:
    python -m build --wheel
    
    # Or rebuild all versions
-   python build_wheels_conda.py
+   python scripts/build_wheels_conda.py
    ```
 
 3. **Build source distribution:**

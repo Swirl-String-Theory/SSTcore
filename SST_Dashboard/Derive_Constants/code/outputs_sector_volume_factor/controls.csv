@@ -1,8 +1,0 @@
-control,axes,mode,W_a,ref_4pi_over_3,ref_ellipsoid_volume,differs_from_sphere
-non_spherical_rigid,"(1.0, 0.6, 1.7)",monopole_H0_ell0,4.269172222222237,4.1887902047863905,4.272566008882118,True
-non_spherical_rigid,"(1.0, 0.6, 1.7)",dipole_H1_ell1_x,4.269172222222237,4.1887902047863905,4.272566008882118,True
-non_spherical_rigid,"(1.0, 0.6, 1.7)",dipole_H1_ell1_y,4.269172222222237,4.1887902047863905,4.272566008882118,True
-non_spherical_rigid,"(1.0, 0.6, 1.7)",dipole_H1_ell1_z,4.269172222222237,4.1887902047863905,4.272566008882118,True
-non_spherical_surface_normalized_dipole,"(1.0, 0.6, 1.7)",dipole_x,3.013533333333344,4.1887902047863905,4.272566008882118,True
-non_spherical_surface_normalized_dipole,"(1.0, 0.6, 1.7)",dipole_y,1.0848720000000036,4.1887902047863905,4.272566008882118,True
-non_spherical_surface_normalized_dipole,"(1.0, 0.6, 1.7)",dipole_z,8.709111333333363,4.1887902047863905,4.272566008882118,True

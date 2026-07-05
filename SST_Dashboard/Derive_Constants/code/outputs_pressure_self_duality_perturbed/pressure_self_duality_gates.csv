@@ -1,5 +1,0 @@
-gate,claim,result,status,reason,dual_minus_original,b_over_a
-reciprocal_action_class,A_chi=a chi_R + b N_p/chi_R,a*chi_R + 4*b/chi_R,model_class_defined,Outer extension scales as chi_R; inner crowding scales as N_p/chi_R.,,
-self_duality,A(N_p/chi_R)=A(chi_R) requires a=b in the minimal class,,not_self_dual_sensitivity_variant,Equality under inner/outer exchange fixes equal normalization.,(4*a - 4*b + chi_R**2*(-a + b))/chi_R,21/20
-radius_stationarity,chi_R*=sqrt((b/a)N_p),sqrt(105)/5,shifted_chi_R,Stationarity of A_chi.,,
-lambda_chi,lambda_chi=(b/a)N_p,21/5,shifted_lambda_chi,"In A=chi+lambda/chi, lambda=(b/a)N_p.",,

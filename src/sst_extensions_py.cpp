@@ -90,6 +90,12 @@ void bind_extensions(py::module_& m) {
           py::arg("nsamples")=2048,
           py::arg("skip")=3);
 
+    m.def("resolved_tube_metrics_from_fseries",
+          &resolved_tube_metrics_from_fseries,
+          py::arg("path"),
+          py::arg("nsamples")=2048,
+          py::arg("skip")=3);
+
     m.def("curve_length_from_fseries",
           [](const std::string& path, int nsamples) {
               auto pts = sample_curve_centered(path, nsamples);

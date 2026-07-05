@@ -1,6 +1,0 @@
-gate,claim,value,status,notes
-H0_dimension,q_phi=dim H^0(S^2)=1,1,DERIVED,S^2 connected; single constant boundary phase mode.
-far_field_selection,only ell=0 contributes to 1/r,ell=0,DERIVED,"ell>=1 decays as r^-(ell+1), hence O(r^-2) or faster."
-constant_phase_capacity,capacity=4*pi*R,12.566370614359172,DERIVED,Direct Hodge/Dirichlet-to-Neumann exterior calculation.
-K_cell_from_interior_Hessian,K_cell=Lambda_phi/(4*pi*R),,NO_INTERIOR_HESSIAN_SUPPLIED,Requires independently supplied Lambda_phi.
-Eeff_over_2_target,Lambda_phi=E_eff/2,,OPEN_OPERATOR_GATE,"Must come from interior one-cell operator, not far-field normalization."
