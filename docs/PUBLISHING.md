@@ -77,7 +77,7 @@ CI and local release builds also produce a compact **`dist/SSTcore_source_vX.Y.Z
 ```bash
 python -m build --sdist
 python scripts/make_source_zip.py
-# -> dist/SSTcore_source_v0.8.13.zip
+# -> dist/SSTcore_source_v0.8.18.zip
 ```
 
 After extracting that ZIP:

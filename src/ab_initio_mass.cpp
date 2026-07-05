@@ -509,7 +509,7 @@ namespace sst {
         }
 
         metrics.helicity = static_cast<double>(FrenetHelicity::compute_helicity(velocity, vorticity));
-        metrics.time_dilation_map = TimeField::compute_time_dilation_map_sqrt(velocity, v_swirl);
+        metrics.time_dilation_map = TimeField::compute_time_dilation_map_sqrt(velocity, c_light);
 
         double sum_St = 0.0;
         for (double st : metrics.time_dilation_map) {

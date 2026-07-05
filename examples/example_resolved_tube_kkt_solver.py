@@ -33,11 +33,16 @@ def main() -> None:
 
     grad_len = sst.ResolvedTubeGeometry.length_gradient_flat(pts)
     rigidity = sst.ContactStressMap.build_rigidity_matrix(pts, metrics)
+    sparse = sst.ContactStressMap.build_sparse_rigidity_matrix(pts, metrics)
     nnls = sst.ContactStressMap.solve_nonnegative_least_squares(
         rigidity, grad_len, max_iterations=10000, tolerance=1e-12
     )
+    nnls_sparse = sst.ContactStressMap.solve_nonnegative_least_squares_sparse(
+        sparse, grad_len, max_iterations=10000, tolerance=1e-12
+    )
     diag = sst.ContactStressMap.diagnose_length_criticality(
-        pts, metrics, solve_nnls=True, max_iterations=10000, tolerance=1e-12
+        pts, metrics, solve_nnls=True, max_iterations=10000, tolerance=1e-12,
+        use_sparse_solver=True, use_analytic_kink_gradient=True
     )
 
     print("Resolved tube KKT/NNLS diagnostics")
@@ -45,10 +50,13 @@ def main() -> None:
     print("thickness_rad:", metrics.thickness_rad)
     print("struts/kinks:", len(metrics.struts), len(metrics.kinks))
     print("rigidity matrix rows/columns:", rigidity.row_count, rigidity.column_count)
+    print("sparse nonzeros:", sparse.nonzero_count)
     print("first column kind/norm:", rigidity.columns[0].kind, rigidity.columns[0].norm)
-    print("NNLS converged:", nnls.converged)
-    print("NNLS iterations:", nnls.iterations)
-    print("NNLS relative residual:", nnls.relative_residual)
+    print("dense NNLS converged:", nnls.converged)
+    print("dense NNLS iterations:", nnls.iterations)
+    print("dense NNLS relative residual:", nnls.relative_residual)
+    print("sparse NNLS converged:", nnls_sparse.converged)
+    print("sparse NNLS relative residual:", nnls_sparse.relative_residual)
     print("diagnostic contact residual:", diag.contact_residual)
     print("strut weight sum:", diag.strut_weight_sum)
     print("kink weight sum:", diag.kink_weight_sum)

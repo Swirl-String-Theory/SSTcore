@@ -40,6 +40,11 @@ void bind_resolved_tube_geometry(py::module_& m) {
         .def_readwrite("struts", &sst::ResolvedTubeMetrics::struts)
         .def_readwrite("kinks", &sst::ResolvedTubeMetrics::kinks);
 
+    py::class_<sst::SparseEntry>(m, "SparseEntry")
+        .def(py::init<>())
+        .def_readwrite("row", &sst::SparseEntry::row)
+        .def_readwrite("value", &sst::SparseEntry::value);
+
     py::class_<sst::RigidityColumn>(m, "RigidityColumn")
         .def(py::init<>())
         .def_readwrite("kind", &sst::RigidityColumn::kind)
@@ -55,6 +60,22 @@ void bind_resolved_tube_geometry(py::module_& m) {
         .def_readwrite("column_count", &sst::RigidityMatrix::column_count)
         .def_readwrite("columns", &sst::RigidityMatrix::columns);
 
+    py::class_<sst::SparseRigidityColumn>(m, "SparseRigidityColumn")
+        .def(py::init<>())
+        .def_readwrite("kind", &sst::SparseRigidityColumn::kind)
+        .def_readwrite("strut_index", &sst::SparseRigidityColumn::strut_index)
+        .def_readwrite("kink_index", &sst::SparseRigidityColumn::kink_index)
+        .def_readwrite("vertex", &sst::SparseRigidityColumn::vertex)
+        .def_readwrite("norm", &sst::SparseRigidityColumn::norm)
+        .def_readwrite("entries", &sst::SparseRigidityColumn::entries);
+
+    py::class_<sst::SparseRigidityMatrix>(m, "SparseRigidityMatrix")
+        .def(py::init<>())
+        .def_readwrite("row_count", &sst::SparseRigidityMatrix::row_count)
+        .def_readwrite("column_count", &sst::SparseRigidityMatrix::column_count)
+        .def_readwrite("nonzero_count", &sst::SparseRigidityMatrix::nonzero_count)
+        .def_readwrite("columns", &sst::SparseRigidityMatrix::columns);
+
     py::class_<sst::NNLSResult>(m, "NNLSResult")
         .def(py::init<>())
         .def_readwrite("multipliers", &sst::NNLSResult::multipliers)
@@ -62,7 +83,61 @@ void bind_resolved_tube_geometry(py::module_& m) {
         .def_readwrite("relative_residual", &sst::NNLSResult::relative_residual)
         .def_readwrite("objective", &sst::NNLSResult::objective)
         .def_readwrite("iterations", &sst::NNLSResult::iterations)
-        .def_readwrite("converged", &sst::NNLSResult::converged);
+        .def_readwrite("converged", &sst::NNLSResult::converged)
+        .def_readwrite("algorithm", &sst::NNLSResult::algorithm)
+        .def_readwrite("active_set_size", &sst::NNLSResult::active_set_size);
+
+    py::class_<sst::TighteningOptions>(m, "TighteningOptions")
+        .def(py::init<>())
+        .def_readwrite("max_steps", &sst::TighteningOptions::max_steps)
+        .def_readwrite("line_search_trials", &sst::TighteningOptions::line_search_trials)
+        .def_readwrite("nnls_max_iterations", &sst::TighteningOptions::nnls_max_iterations)
+        .def_readwrite("skip_neighbors", &sst::TighteningOptions::skip_neighbors)
+        .def_readwrite("contact_tol", &sst::TighteningOptions::contact_tol)
+        .def_readwrite("equilateral_tol", &sst::TighteningOptions::equilateral_tol)
+        .def_readwrite("target_kkt_residual", &sst::TighteningOptions::target_kkt_residual)
+        .def_readwrite("nnls_tolerance", &sst::TighteningOptions::nnls_tolerance)
+        .def_readwrite("max_step_size", &sst::TighteningOptions::max_step_size)
+        .def_readwrite("min_step_size", &sst::TighteningOptions::min_step_size)
+        .def_readwrite("line_search_shrink", &sst::TighteningOptions::line_search_shrink)
+        .def_readwrite("thickness_floor_fraction", &sst::TighteningOptions::thickness_floor_fraction)
+        .def_readwrite("ropelength_increase_tolerance", &sst::TighteningOptions::ropelength_increase_tolerance)
+        .def_readwrite("newton_correction_damping", &sst::TighteningOptions::newton_correction_damping)
+        .def_readwrite("newton_ridge", &sst::TighteningOptions::newton_ridge)
+        .def_readwrite("use_sparse_solver", &sst::TighteningOptions::use_sparse_solver)
+        .def_readwrite("use_active_set_solver", &sst::TighteningOptions::use_active_set_solver)
+        .def_readwrite("use_analytic_kink_gradient", &sst::TighteningOptions::use_analytic_kink_gradient)
+        .def_readwrite("normalize_direction", &sst::TighteningOptions::normalize_direction)
+        .def_readwrite("preserve_initial_thickness", &sst::TighteningOptions::preserve_initial_thickness)
+        .def_readwrite("correction_strategy", &sst::TighteningOptions::correction_strategy);
+
+    py::class_<sst::TighteningStepRecord>(m, "TighteningStepRecord")
+        .def(py::init<>())
+        .def_readwrite("step", &sst::TighteningStepRecord::step)
+        .def_readwrite("ropelength_before", &sst::TighteningStepRecord::ropelength_before)
+        .def_readwrite("ropelength_after", &sst::TighteningStepRecord::ropelength_after)
+        .def_readwrite("thickness_before", &sst::TighteningStepRecord::thickness_before)
+        .def_readwrite("thickness_after", &sst::TighteningStepRecord::thickness_after)
+        .def_readwrite("length_before", &sst::TighteningStepRecord::length_before)
+        .def_readwrite("length_after", &sst::TighteningStepRecord::length_after)
+        .def_readwrite("kkt_residual_before", &sst::TighteningStepRecord::kkt_residual_before)
+        .def_readwrite("projected_gradient_norm", &sst::TighteningStepRecord::projected_gradient_norm)
+        .def_readwrite("alpha", &sst::TighteningStepRecord::alpha)
+        .def_readwrite("strut_count", &sst::TighteningStepRecord::strut_count)
+        .def_readwrite("kink_count", &sst::TighteningStepRecord::kink_count)
+        .def_readwrite("rigidity_columns", &sst::TighteningStepRecord::rigidity_columns)
+        .def_readwrite("accepted", &sst::TighteningStepRecord::accepted)
+        .def_readwrite("thickness_corrected", &sst::TighteningStepRecord::thickness_corrected)
+        .def_readwrite("correction_strategy", &sst::TighteningStepRecord::correction_strategy)
+        .def_readwrite("solver_algorithm", &sst::TighteningStepRecord::solver_algorithm);
+
+    py::class_<sst::TighteningResult>(m, "TighteningResult")
+        .def(py::init<>())
+        .def_readwrite("points", &sst::TighteningResult::points)
+        .def_readwrite("metrics", &sst::TighteningResult::metrics)
+        .def_readwrite("steps", &sst::TighteningResult::steps)
+        .def_readwrite("converged", &sst::TighteningResult::converged)
+        .def_readwrite("reason", &sst::TighteningResult::reason);
 
     py::class_<sst::ContactStressDiagnostics>(m, "ContactStressDiagnostics")
         .def(py::init<>())
@@ -78,6 +153,8 @@ void bind_resolved_tube_geometry(py::module_& m) {
         .def_readwrite("rigidity_rows", &sst::ContactStressDiagnostics::rigidity_rows)
         .def_readwrite("rigidity_columns", &sst::ContactStressDiagnostics::rigidity_columns)
         .def_readwrite("nnls_iterations", &sst::ContactStressDiagnostics::nnls_iterations)
+        .def_readwrite("nnls_active_set_size", &sst::ContactStressDiagnostics::nnls_active_set_size)
+        .def_readwrite("nnls_algorithm", &sst::ContactStressDiagnostics::nnls_algorithm)
         .def_readwrite("solved_nnls", &sst::ContactStressDiagnostics::solved_nnls)
         .def_readwrite("nnls_converged", &sst::ContactStressDiagnostics::nnls_converged)
         .def_readwrite("multipliers", &sst::ContactStressDiagnostics::multipliers);
@@ -110,25 +187,75 @@ void bind_resolved_tube_geometry(py::module_& m) {
                     py::arg("points"))
         .def_static("strut_gradient_flat", &sst::ResolvedTubeGeometry::strut_gradient_flat,
                     py::arg("points"), py::arg("pair"))
+        .def_static("kink_minrad_plus_gradient_flat", &sst::ResolvedTubeGeometry::kink_minrad_plus_gradient_flat,
+                    py::arg("points"), py::arg("kink"))
+        .def_static("kink_minrad_minus_gradient_flat", &sst::ResolvedTubeGeometry::kink_minrad_minus_gradient_flat,
+                    py::arg("points"), py::arg("kink"))
         .def_static("kink_minrad_gradient_flat", &sst::ResolvedTubeGeometry::kink_minrad_gradient_flat,
-                    py::arg("points"), py::arg("kink"), py::arg("finite_difference_step") = 1e-6)
+                    py::arg("points"), py::arg("kink"),
+                    py::arg("use_analytic") = true, py::arg("finite_difference_step") = 1e-6)
         .def_static("nontrivial_knot_lower_bound_rad", &sst::ResolvedTubeGeometry::nontrivial_knot_lower_bound_rad)
         .def_static("radius_to_diameter_ropelength", &sst::ResolvedTubeGeometry::radius_to_diameter_ropelength,
                     py::arg("ropelength_rad"))
         .def_static("diameter_to_radius_ropelength", &sst::ResolvedTubeGeometry::diameter_to_radius_ropelength,
                     py::arg("ropelength_diam"));
 
+    py::class_<sst::ResolvedTubeTightener>(m, "ResolvedTubeTightener")
+        .def_static("rescale_to_thickness", &sst::ResolvedTubeTightener::rescale_to_thickness,
+                    py::arg("points"), py::arg("target_thickness"),
+                    py::arg("skip_neighbors") = 2, py::arg("contact_tol") = 1e-3,
+                    py::arg("equilateral_tol") = 1e-3)
+        .def_static("correct_thickness", &sst::ResolvedTubeTightener::correct_thickness,
+                    py::arg("points"), py::arg("target_thickness"),
+                    py::arg("options") = sst::TighteningOptions())
+        .def_static("projected_gradient_flat",
+                    [](const std::vector<sst::Vec3>& points, const sst::ResolvedTubeMetrics& tube,
+                       const sst::TighteningOptions& options) {
+                        sst::ContactStressDiagnostics diag;
+                        auto direction = sst::ResolvedTubeTightener::projected_gradient_flat(points, tube, options, &diag);
+                        return py::make_tuple(direction, diag);
+                    },
+                    py::arg("points"), py::arg("tube"), py::arg("options") = sst::TighteningOptions())
+        .def_static("tighten", &sst::ResolvedTubeTightener::tighten,
+                    py::arg("initial_points"), py::arg("options") = sst::TighteningOptions());
+
     py::class_<sst::ContactStressMap>(m, "ContactStressMap")
         .def_static("build_rigidity_matrix", &sst::ContactStressMap::build_rigidity_matrix,
                     py::arg("points"), py::arg("tube"),
                     py::arg("include_struts") = true, py::arg("include_kinks") = true,
-                    py::arg("kink_finite_difference_step") = 1e-6)
+                    py::arg("kink_finite_difference_step") = 1e-6,
+                    py::arg("use_analytic_kink_gradient") = true)
+        .def_static("build_sparse_rigidity_matrix", &sst::ContactStressMap::build_sparse_rigidity_matrix,
+                    py::arg("points"), py::arg("tube"),
+                    py::arg("include_struts") = true, py::arg("include_kinks") = true,
+                    py::arg("kink_finite_difference_step") = 1e-6,
+                    py::arg("use_analytic_kink_gradient") = true)
+        .def_static("sparse_to_dense", &sst::ContactStressMap::sparse_to_dense,
+                    py::arg("sparse"))
+        .def_static("write_sparse_matrix_market", &sst::ContactStressMap::write_sparse_matrix_market,
+                    py::arg("sparse"), py::arg("path"), py::arg("one_based_indices") = true)
+        .def_static("write_vector_market", &sst::ContactStressMap::write_vector_market,
+                    py::arg("vector"), py::arg("path"))
+        .def_static("write_vector_csv", &sst::ContactStressMap::write_vector_csv,
+                    py::arg("vector"), py::arg("path"))
         .def_static("solve_nonnegative_least_squares", &sst::ContactStressMap::solve_nonnegative_least_squares,
                     py::arg("matrix"), py::arg("target"),
                     py::arg("max_iterations") = 5000, py::arg("tolerance") = 1e-10)
+        .def_static("solve_nonnegative_least_squares_sparse", &sst::ContactStressMap::solve_nonnegative_least_squares_sparse,
+                    py::arg("matrix"), py::arg("target"),
+                    py::arg("max_iterations") = 5000, py::arg("tolerance") = 1e-10)
+        .def_static("solve_nonnegative_least_squares_active_set", &sst::ContactStressMap::solve_nonnegative_least_squares_active_set,
+                    py::arg("matrix"), py::arg("target"),
+                    py::arg("max_iterations") = 2000, py::arg("tolerance") = 1e-10, py::arg("ridge") = 1e-12)
+        .def_static("solve_nonnegative_least_squares_sparse_active_set", &sst::ContactStressMap::solve_nonnegative_least_squares_sparse_active_set,
+                    py::arg("matrix"), py::arg("target"),
+                    py::arg("max_iterations") = 2000, py::arg("tolerance") = 1e-10, py::arg("ridge") = 1e-12)
         .def_static("diagnose_length_criticality", &sst::ContactStressMap::diagnose_length_criticality,
                     py::arg("points"), py::arg("tube"), py::arg("solve_nnls") = true,
-                    py::arg("max_iterations") = 5000, py::arg("tolerance") = 1e-10);
+                    py::arg("max_iterations") = 5000, py::arg("tolerance") = 1e-10,
+                    py::arg("use_sparse_solver") = true,
+                    py::arg("use_analytic_kink_gradient") = true,
+                    py::arg("use_active_set_solver") = true);
 
     // Convenience flat functions for users who do not want to instantiate class namespaces.
     m.def("resolved_tube_analyze", &sst::ResolvedTubeGeometry::analyze,
@@ -141,8 +268,34 @@ void bind_resolved_tube_geometry(py::module_& m) {
     m.def("resolved_tube_build_rigidity_matrix", &sst::ContactStressMap::build_rigidity_matrix,
           py::arg("points"), py::arg("tube"),
           py::arg("include_struts") = true, py::arg("include_kinks") = true,
-          py::arg("kink_finite_difference_step") = 1e-6);
+          py::arg("kink_finite_difference_step") = 1e-6,
+          py::arg("use_analytic_kink_gradient") = true);
+    m.def("resolved_tube_build_sparse_rigidity_matrix", &sst::ContactStressMap::build_sparse_rigidity_matrix,
+          py::arg("points"), py::arg("tube"),
+          py::arg("include_struts") = true, py::arg("include_kinks") = true,
+          py::arg("kink_finite_difference_step") = 1e-6,
+          py::arg("use_analytic_kink_gradient") = true);
+    m.def("resolved_tube_write_matrix_market", &sst::ContactStressMap::write_sparse_matrix_market,
+          py::arg("sparse"), py::arg("path"), py::arg("one_based_indices") = true);
+    m.def("resolved_tube_write_vector_market", &sst::ContactStressMap::write_vector_market,
+          py::arg("vector"), py::arg("path"));
+    m.def("resolved_tube_solve_active_set", &sst::ContactStressMap::solve_nonnegative_least_squares_sparse_active_set,
+          py::arg("matrix"), py::arg("target"), py::arg("max_iterations") = 2000,
+          py::arg("tolerance") = 1e-10, py::arg("ridge") = 1e-12);
     m.def("resolved_tube_kkt_diagnostics", &sst::ContactStressMap::diagnose_length_criticality,
           py::arg("points"), py::arg("tube"), py::arg("solve_nnls") = true,
-          py::arg("max_iterations") = 5000, py::arg("tolerance") = 1e-10);
+          py::arg("max_iterations") = 5000, py::arg("tolerance") = 1e-10,
+          py::arg("use_sparse_solver") = true,
+          py::arg("use_analytic_kink_gradient") = true,
+          py::arg("use_active_set_solver") = true);
+    m.def("resolved_tube_tighten", &sst::ResolvedTubeTightener::tighten,
+          py::arg("initial_points"), py::arg("options") = sst::TighteningOptions());
+    m.def("resolved_tube_projected_gradient",
+          [](const std::vector<sst::Vec3>& points, const sst::ResolvedTubeMetrics& tube,
+             const sst::TighteningOptions& options) {
+              sst::ContactStressDiagnostics diag;
+              auto direction = sst::ResolvedTubeTightener::projected_gradient_flat(points, tube, options, &diag);
+              return py::make_tuple(direction, diag);
+          },
+          py::arg("points"), py::arg("tube"), py::arg("options") = sst::TighteningOptions());
 }

@@ -52,14 +52,23 @@ def main() -> None:
     print("struts/kinks:", len(metrics.struts), len(metrics.kinks))
 
     matrix = sst.ContactStressMap.build_rigidity_matrix(square, metrics)
+    sparse = sst.ContactStressMap.build_sparse_rigidity_matrix(square, metrics)
     grad = sst.ResolvedTubeGeometry.length_gradient_flat(square)
-    nnls = sst.ContactStressMap.solve_nonnegative_least_squares(matrix, grad)
+    nnls = sst.ContactStressMap.solve_nonnegative_least_squares_sparse(sparse, grad)
     diag = sst.ContactStressMap.diagnose_length_criticality(square, metrics, solve_nnls=True)
     print("rigidity rows/cols:", matrix.row_count, matrix.column_count)
-    print("NNLS converged / relative residual:", nnls.converged, nnls.relative_residual)
+    print("sparse nonzeros:", sparse.nonzero_count)
+    print("sparse NNLS converged / relative residual:", nnls.converged, nnls.relative_residual)
     print("KKT contact residual:", diag.contact_residual)
     print("contact entropy:", diag.contact_entropy)
     print("strut/kink weights:", diag.strut_weight_sum, diag.kink_weight_sum)
+
+    asymmetric = [[0, 0, 0], [2, 0, 0], [2, 1, 0], [0, 2, 0]]
+    ak = sst.ResolvedTubeGeometry.kink_at_vertex(asymmetric, 1)
+    g_analytic = sst.ResolvedTubeGeometry.kink_minrad_gradient_flat(asymmetric, ak, use_analytic=True)
+    g_fd = sst.ResolvedTubeGeometry.kink_minrad_gradient_flat(asymmetric, ak, use_analytic=False)
+    print("analytic MinRad gradient agrees with finite-difference max error:",
+          max(abs(a - b) for a, b in zip(g_analytic, g_fd)))
 
     print("\n=== Convention guards ===")
     lower = sst.ResolvedTubeGeometry.nontrivial_knot_lower_bound_rad()

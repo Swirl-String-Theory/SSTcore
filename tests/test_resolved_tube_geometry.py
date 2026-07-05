@@ -89,7 +89,7 @@ def test_lower_bound_and_convention_converters():
     assert sst.ResolvedTubeGeometry.diameter_to_radius_ropelength(16.371637) == pytest.approx(32.743274)
 
 
-def test_rigidity_matrix_gradient_columns_and_nnls_kkt_solver():
+def test_rigidity_matrix_gradient_columns_and_nnls_kkt_solver(tmp_path):
     pts = unit_square()
     metrics = sst.ResolvedTubeGeometry.analyze(pts, skip_neighbors=1, contact_tol=1e-9, equilateral_tol=1e-12)
 
@@ -101,9 +101,19 @@ def test_rigidity_matrix_gradient_columns_and_nnls_kkt_solver():
     assert len(strut_grad) == 3 * len(pts)
     assert math.sqrt(sum(g * g for g in strut_grad)) > 0.0
 
-    kink_grad = sst.ResolvedTubeGeometry.kink_minrad_gradient_flat(pts, metrics.kinks[0])
-    assert len(kink_grad) == 3 * len(pts)
+    asymmetric = [
+        [0.0, 0.0, 0.0],
+        [2.0, 0.0, 0.0],
+        [2.0, 1.0, 0.0],
+        [0.0, 2.0, 0.0],
+    ]
+    asym_kink = sst.ResolvedTubeGeometry.kink_at_vertex(asymmetric, 1)
+    assert abs(asym_kink.minrad_plus - asym_kink.minrad_minus) > 1e-6
+    kink_grad = sst.ResolvedTubeGeometry.kink_minrad_gradient_flat(asymmetric, asym_kink, use_analytic=True)
+    kink_grad_fd = sst.ResolvedTubeGeometry.kink_minrad_gradient_flat(asymmetric, asym_kink, use_analytic=False)
+    assert len(kink_grad) == 3 * len(asymmetric)
     assert math.sqrt(sum(g * g for g in kink_grad)) > 0.0
+    assert max(abs(a - b) for a, b in zip(kink_grad, kink_grad_fd)) < 1e-5
 
     matrix = sst.ContactStressMap.build_rigidity_matrix(pts, metrics)
     assert matrix.row_count == 3 * len(pts)
@@ -112,11 +122,46 @@ def test_rigidity_matrix_gradient_columns_and_nnls_kkt_solver():
     assert all(c.kind in {"strut", "kink"} for c in matrix.columns)
     assert all(len(c.values) == matrix.row_count for c in matrix.columns)
 
+    sparse = sst.ContactStressMap.build_sparse_rigidity_matrix(pts, metrics)
+    assert sparse.row_count == matrix.row_count
+    assert sparse.column_count == matrix.column_count
+    assert sparse.nonzero_count > 0
+    dense_from_sparse = sst.ContactStressMap.sparse_to_dense(sparse)
+    assert dense_from_sparse.column_count == matrix.column_count
+
     nnls = sst.ContactStressMap.solve_nonnegative_least_squares(matrix, grad, max_iterations=10000, tolerance=1e-12)
     assert nnls.converged is True
     assert nnls.relative_residual < 1e-5
     assert len(nnls.multipliers) == matrix.column_count
     assert all(x >= 0.0 for x in nnls.multipliers)
+
+    nnls_sparse = sst.ContactStressMap.solve_nonnegative_least_squares_sparse(sparse, grad, max_iterations=10000, tolerance=1e-12)
+    assert nnls_sparse.converged is True
+    assert nnls_sparse.relative_residual < 1e-5
+
+    nnls_active = sst.ContactStressMap.solve_nonnegative_least_squares_active_set(matrix, grad, max_iterations=1000, tolerance=1e-12)
+    assert nnls_active.converged is True
+    assert nnls_active.algorithm == "active_set"
+    assert nnls_active.relative_residual < 1e-5
+    assert nnls_active.active_set_size > 0
+
+    nnls_sparse_active = sst.ContactStressMap.solve_nonnegative_least_squares_sparse_active_set(sparse, grad, max_iterations=1000, tolerance=1e-12)
+    assert nnls_sparse_active.converged is True
+    assert nnls_sparse_active.algorithm == "active_set"
+    assert nnls_sparse_active.relative_residual < 1e-5
+
+    mtx = tmp_path / "A.mtx"
+    b_mtx = tmp_path / "b.mtx"
+    b_csv = tmp_path / "b.csv"
+    sst.ContactStressMap.write_sparse_matrix_market(sparse, str(mtx))
+    sst.ContactStressMap.write_vector_market(grad, str(b_mtx))
+    sst.ContactStressMap.write_vector_csv(grad, str(b_csv))
+    assert mtx.read_text().startswith("%%MatrixMarket matrix coordinate")
+    assert b_mtx.read_text().startswith("%%MatrixMarket matrix array")
+    assert b_csv.read_text().splitlines()[0] == "row,value"
+
+    flat_active = sst.resolved_tube_solve_active_set(sparse, grad, max_iterations=1000, tolerance=1e-12)
+    assert flat_active.relative_residual < 1e-5
 
     diag = sst.ContactStressMap.diagnose_length_criticality(pts, metrics, solve_nnls=True, max_iterations=10000, tolerance=1e-12)
     assert diag.strut_count == len(metrics.struts)
@@ -125,6 +170,8 @@ def test_rigidity_matrix_gradient_columns_and_nnls_kkt_solver():
     assert diag.rigidity_columns == matrix.column_count
     assert diag.solved_nnls is True
     assert diag.nnls_converged is True
+    assert diag.nnls_algorithm == "active_set"
+    assert diag.nnls_active_set_size > 0
     assert diag.contact_residual < 1e-5
     assert diag.contact_entropy >= 0.0
     assert len(diag.multipliers) == matrix.column_count
@@ -160,3 +207,52 @@ def test_master_equation_horn_baseline_is_separate_from_rho_m_baseline():
     )
     assert horn_mass > rho_m_mass * 1e20
     assert horn_mass / vals.m_e == pytest.approx(4.09, rel=0.05)
+
+
+def ellipse_points(n=24):
+    return [
+        [1.5 * math.cos(2.0 * math.pi * k / n),
+         0.75 * math.sin(2.0 * math.pi * k / n),
+         0.05 * math.sin(6.0 * math.pi * k / n)]
+        for k in range(n)
+    ]
+
+
+def test_projected_gradient_and_tightening_loop_smoke():
+    pts = ellipse_points()
+    before = sst.ResolvedTubeGeometry.analyze(pts, skip_neighbors=2, contact_tol=5e-2, equilateral_tol=1.0)
+    opts = sst.TighteningOptions()
+    opts.max_steps = 8
+    opts.max_step_size = 5e-3
+    opts.min_step_size = 1e-7
+    opts.line_search_trials = 16
+    opts.contact_tol = 5e-2
+    opts.equilateral_tol = 1.0
+    opts.target_kkt_residual = 1e-3
+    opts.correction_strategy = "newton"
+    opts.preserve_initial_thickness = True
+
+    direction, diag = sst.ResolvedTubeTightener.projected_gradient_flat(pts, before, opts)
+    assert len(direction) == 3 * len(pts)
+    assert diag.gradient_norm > 0.0
+
+    scaled = sst.ResolvedTubeTightener.rescale_to_thickness(
+        pts, before.thickness_rad * 1.01, opts.skip_neighbors, opts.contact_tol, opts.equilateral_tol
+    )
+    scaled_metrics = sst.ResolvedTubeGeometry.analyze(scaled, opts.skip_neighbors, opts.contact_tol, opts.equilateral_tol)
+    assert scaled_metrics.thickness_rad >= before.thickness_rad * 1.009
+
+    corrected = sst.ResolvedTubeTightener.correct_thickness(pts, before.thickness_rad * 1.001, opts)
+    corrected_metrics = sst.ResolvedTubeGeometry.analyze(corrected, opts.skip_neighbors, opts.contact_tol, opts.equilateral_tol)
+    assert corrected_metrics.thickness_rad >= before.thickness_rad * 1.0005
+
+    result = sst.ResolvedTubeTightener.tighten(pts, opts)
+    assert result.reason
+    assert result.metrics.thickness_rad > 0.0
+    assert result.metrics.ropelength_rad <= before.ropelength_rad * (1.0 + 1e-6)
+    if result.steps:
+        assert result.steps[0].projected_gradient_norm > 0.0
+        assert result.steps[0].solver_algorithm
+
+    flat = sst.resolved_tube_tighten(pts, opts)
+    assert flat.reason

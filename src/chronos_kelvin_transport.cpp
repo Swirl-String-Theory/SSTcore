@@ -30,12 +30,12 @@ double ChronosKelvinTransport::vorticity_from_swirl_clock(double S_t, double r_c
 
 double ChronosKelvinTransport::swirl_clock_from_omega(double omega, double r_c, double c) {
     if (r_c <= 0.0 || c <= 0.0) throw std::invalid_argument("r_c and c must be positive.");
-    const double x = 1.0 - (omega * r_c) * (omega * r_c) / (c * c);
+    const double x = 1.0 - (omega * r_c) * (omega * r_c) / (4.0 * c * c);
     return std::sqrt(x > 0.0 ? x : 0.0);
 }
 
 double ChronosKelvinTransport::chronos_kelvin_invariant(double R, double S_t, double r_c, double c) {
-    return kelvin_invariant(R, omega_from_swirl_clock(S_t, r_c, c));
+    return kelvin_invariant(R, vorticity_from_swirl_clock(S_t, r_c, c));
 }
 
 double ChronosKelvinTransport::clock_radius_derivative(double S_t, double R, double dR_dt) {
@@ -44,7 +44,7 @@ double ChronosKelvinTransport::clock_radius_derivative(double S_t, double R, dou
 }
 
 double ChronosKelvinTransport::radius_from_clock_invariant(double invariant, double S_t, double r_c, double c) {
-    const double omega = omega_from_swirl_clock(S_t, r_c, c);
+    const double omega = vorticity_from_swirl_clock(S_t, r_c, c);
     if (omega <= 0.0) throw std::invalid_argument("omega is zero; radius is not determined by invariant.");
     return std::sqrt(invariant / omega);
 }

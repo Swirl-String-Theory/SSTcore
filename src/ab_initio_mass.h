@@ -25,7 +25,7 @@ private:
   static constexpr double r_c = 1.40897017e-15;
   static constexpr double v_swirl = 1.09384563e6;
   static constexpr double rho_core = 3.8934358266918687e18;
-  static constexpr double rho_fluid = 6.87e-7;
+  static constexpr double rho_fluid = 7.0e-7;
   static constexpr double MeV_J_ = 1.602176634e-13;  // J/MeV
 
   bool extract_and_build_filament(const std::string& db_content, const std::string& ab_id, int resolution);

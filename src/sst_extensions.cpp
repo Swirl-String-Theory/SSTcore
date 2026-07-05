@@ -19,8 +19,8 @@
 #include <dirent.h>
 #endif
 
-#include "../src/knot_dynamics.h"
-#include "../src/biot_savart.h"
+#include "knot_dynamics.h"
+#include "biot_savart.h"
 
 namespace sst {
 

@@ -34,7 +34,7 @@ namespace sst {
         }
 
         std::vector<double> TimeField::compute_time_dilation_map_sqrt(const std::vector<Vec3>& tangents,
-                        double C_e) {
+                        double c) {
                 size_t n = tangents.size();
                 std::vector<double> time_factor(n, 1.0);
 
@@ -42,7 +42,7 @@ namespace sst {
                         double v2 = tangents[i][0]*tangents[i][0] +
                                                 tangents[i][1]*tangents[i][1] +
                                                 tangents[i][2]*tangents[i][2];
-                        double ratio = v2 / (C_e * C_e);
+                        double ratio = v2 / (c * c);
                         if (ratio >= 1.0) ratio = 0.999999;
                         time_factor[i] = std::sqrt(1.0 - ratio);
                 }
@@ -80,12 +80,12 @@ namespace sst {
 
         // Linear method from GravityTimeField
         std::vector<double> TimeField::compute_time_dilation_map_linear(const std::vector<Vec3>& tangents,
-                                                                         double C_e) {
+                                                                         double c) {
                 std::vector<double> gamma;
                 gamma.reserve(tangents.size());
                 for (const auto& t : tangents) {
                         double v2 = t[0]*t[0] + t[1]*t[1] + t[2]*t[2];
-                        double factor = 1.0 - (v2 / (C_e * C_e));
+                        double factor = 1.0 - (v2 / (c * c));
                         gamma.push_back(factor);
                 }
                 return gamma;

@@ -1,0 +1,11 @@
+severity	file	line	finding	status_after_patch
+P0	multiple	various	Flattened ZIP contains support files but include paths point to ../include, ../src, or missing knot_files_embedded.h	fixed in diff by flat-tree include paths
+P0	ab_initio_mass.h	28	rho_fluid is 6.87e-7 instead of canonical 7.0e-7	fixed in diff
+P0	chronos_kelvin_transport.cpp	37	chronos_kelvin_invariant uses angular-frequency convention instead of canon vorticity factor 2	fixed in diff
+P0	chronos_kelvin_transport.cpp	31	swirl_clock_from_omega inverse assumes angular convention; canon vorticity inverse requires denominator 4 c^2	fixed in diff
+P0	potential_timefield.h	30,54	time dilation default denominator is v_swirl=1093845.63 despite sqrt(1-v^2/c^2) comment	fixed in diff
+P0	ab_initio_mass.cpp	512	compute_relativistic_metrics passes v_swirl into time dilation denominator	fixed in diff
+P1	canonical_constants.cpp	90-92	core sound speed c_s=v_swirl/sqrt(2) is not exposed as a direct helper	not patched
+P1	canonical_constants.cpp	95-97	master bare mass scale exists; geometric baseline branch exists elsewhere but not selected in evaluate	documented, not patched
+P1	SST_Constants.h	42-44	RHO_FLUID_CANON and RHO_FLUID alias are correct	no patch needed
+P2	research-track	various	EMG/dark/galactic formulas are not fully implemented as stable API	not patched

@@ -36,3 +36,30 @@ def test_horn_envelope_density_alias() -> None:
     horn = SSTCanonicalConstants.horn_envelope_density(m_e, c, v_swirl, r_c)
     core = SSTCanonicalConstants.core_density_closure(m_e, c, v_swirl, r_c)
     assert horn == pytest.approx(core, rel=0, abs=0.0)
+
+
+def test_gate_lambda_c_over_pi_rc_vs_four_over_alpha() -> None:
+    vals = SSTCanonicalConstants.values()
+    gate = vals.lambda_c / (3.14159265358979323846 * vals.r_c)
+    alpha = SSTCanonicalConstants.alpha()
+    assert gate == pytest.approx(4.0 / alpha, rel=1e-8)
+
+
+def test_chronos_swirl_clock_vorticity_round_trip() -> None:
+    import math
+
+    r_c = SSTCanonicalConstants.values().r_c
+    c = SSTCanonicalConstants.speed_of_light()
+    s_t = 0.42
+    omega = ChronosKelvinTransport.vorticity_from_swirl_clock(s_t, r_c, c)
+    s_back = ChronosKelvinTransport.swirl_clock_from_omega(omega, r_c, c)
+    assert s_back == pytest.approx(s_t, rel=0, abs=1e-12)
+
+
+def test_chronos_kelvin_invariant_uses_vorticity_convention() -> None:
+    r_c = SSTCanonicalConstants.values().r_c
+    c = SSTCanonicalConstants.speed_of_light()
+    s_t, R = 0.55, 2.5e-15
+    omega = ChronosKelvinTransport.vorticity_from_swirl_clock(s_t, r_c, c)
+    expected = ChronosKelvinTransport.kelvin_invariant(R, omega)
+    assert ChronosKelvinTransport.chronos_kelvin_invariant(R, s_t, r_c, c) == pytest.approx(expected, rel=0, abs=1e-30)
