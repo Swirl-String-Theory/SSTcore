@@ -12,7 +12,7 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
-#include <knot_dynamics.h>
+#include <sst/knot.h>
 #include <regex>
 #include <sstream>
 #include <stdexcept>

@@ -1,0 +1,883 @@
+diff -ruN src/resolved_tube_geometry.cpp src/resolved_tube_geometry.cpp
+--- src/resolved_tube_geometry.cpp	2026-07-05 17:19:07.000000000 +0000
++++ src/resolved_tube_geometry.cpp	2026-07-05 19:20:50.873483737 +0000
+@@ -18,6 +18,11 @@
+ Vec3 sub(const Vec3& a, const Vec3& b) { return {a[0] - b[0], a[1] - b[1], a[2] - b[2]}; }
+ Vec3 mul(const Vec3& a, double s) { return {s * a[0], s * a[1], s * a[2]}; }
+ double dot(const Vec3& a, const Vec3& b) { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
++Vec3 cross(const Vec3& a, const Vec3& b) {
++    return {a[1] * b[2] - a[2] * b[1],
++            a[2] * b[0] - a[0] * b[2],
++            a[0] * b[1] - a[1] * b[0]};
++}
+ double norm2(const Vec3& a) { return dot(a, a); }
+ double norm(const Vec3& a) { return std::sqrt(norm2(a)); }
+ double dist(const Vec3& a, const Vec3& b) { return norm(sub(a, b)); }
+@@ -79,6 +84,43 @@
+     return y;
+ }
+ 
++double sparse_column_dot_target(const SparseRigidityColumn& col, const std::vector<double>& target) {
++    double acc = 0.0;
++    for (const auto& e : col.entries) {
++        if (e.row < target.size()) acc += e.value * target[e.row];
++    }
++    return acc;
++}
++
++double sparse_column_dot_column(const SparseRigidityColumn& a, const SparseRigidityColumn& b) {
++    double acc = 0.0;
++    std::size_t i = 0, j = 0;
++    while (i < a.entries.size() && j < b.entries.size()) {
++        if (a.entries[i].row == b.entries[j].row) {
++            acc += a.entries[i].value * b.entries[j].value;
++            ++i;
++            ++j;
++        } else if (a.entries[i].row < b.entries[j].row) {
++            ++i;
++        } else {
++            ++j;
++        }
++    }
++    return acc;
++}
++
++std::vector<double> matvec_sparse_columns(const SparseRigidityMatrix& matrix, const std::vector<double>& x) {
++    std::vector<double> y(matrix.row_count, 0.0);
++    const std::size_t cols = std::min(matrix.columns.size(), x.size());
++    for (std::size_t j = 0; j < cols; ++j) {
++        const double coeff = x[j];
++        for (const auto& e : matrix.columns[j].entries) {
++            if (e.row < y.size()) y[e.row] += coeff * e.value;
++        }
++    }
++    return y;
++}
++
+ std::vector<double> residual_vector(const RigidityMatrix& matrix, const std::vector<double>& x, const std::vector<double>& target) {
+     std::vector<double> r = matvec_columns(matrix, x);
+     const std::size_t n = std::min(r.size(), target.size());
+@@ -86,6 +128,22 @@
+     return r;
+ }
+ 
++std::vector<double> residual_vector(const SparseRigidityMatrix& matrix, const std::vector<double>& x, const std::vector<double>& target) {
++    std::vector<double> r = matvec_sparse_columns(matrix, x);
++    const std::size_t n = std::min(r.size(), target.size());
++    for (std::size_t i = 0; i < n; ++i) r[i] -= target[i];
++    return r;
++}
++
++std::vector<SparseEntry> dense_to_sparse_entries(const std::vector<double>& values, double drop_tol = 1e-15) {
++    std::vector<SparseEntry> out;
++    out.reserve(12);
++    for (std::size_t i = 0; i < values.size(); ++i) {
++        if (std::abs(values[i]) > drop_tol) out.push_back(SparseEntry{i, values[i]});
++    }
++    return out;
++}
++
+ } // namespace
+ 
+ double ResolvedTubeGeometry::length(const std::vector<Vec3>& pts) {
+@@ -394,17 +452,97 @@
+     return grad;
+ }
+ 
++std::vector<double> ResolvedTubeGeometry::kink_minrad_plus_gradient_flat(
++    const std::vector<Vec3>& pts,
++    const KinkRecord& kink) {
++    const std::size_t npts = pts.size();
++    std::vector<double> grad(3 * npts, 0.0);
++    if (npts < 3) return grad;
++
++    const std::size_t im = wrap_index(static_cast<long long>(kink.vertex) - 1, npts);
++    const std::size_t i0 = kink.vertex % npts;
++    const std::size_t ip = (kink.vertex + 1) % npts;
++    const Vec3 A = sub(pts[im], pts[i0]);
++    const Vec3 B = sub(pts[ip], pts[i0]);
++    const double a = norm(A);
++    const double b = norm(B);
++    const double theta = kink.turning_angle;
++    if (a <= eps_d || b <= eps_d || theta <= eps_d || !std::isfinite(theta)) return grad;
++
++    // Analytic Ridgerunner/Rawdon MinRad+ gradient.  The normal orientation below
++    // is chosen so that the closed-form derivative matches the finite-difference
++    // derivative of |B|/(2 tan(theta/2)) for the exterior polygonal turning angle.
++    Vec3 nvec = cross(B, A);
++    const double nn = norm(nvec);
++    if (nn <= eps_d) return grad;
++    nvec = mul(nvec, 1.0 / nn);
++
++    const double denom = 2.0 * std::cos(theta) - 2.0;
++    const double tan_half = std::tan(0.5 * theta);
++    if (std::abs(denom) <= eps_d || std::abs(tan_half) <= eps_d) return grad;
++
++    const double K = b / denom;
++    const Vec3 V = mul(B, 1.0 / (2.0 * tan_half * b));
++    const Vec3 W = mul(cross(A, nvec), K / (a * a));
++    const Vec3 X = mul(cross(nvec, B), K / (b * b));
++
++    add_to_flat(grad, im, W);
++    add_to_flat(grad, i0, sub(mul(add(W, X), -1.0), V));
++    add_to_flat(grad, ip, add(X, V));
++    return grad;
++}
++
++std::vector<double> ResolvedTubeGeometry::kink_minrad_minus_gradient_flat(
++    const std::vector<Vec3>& pts,
++    const KinkRecord& kink) {
++    const std::size_t npts = pts.size();
++    std::vector<double> grad(3 * npts, 0.0);
++    if (npts < 3) return grad;
++
++    // MinRad- is MinRad+ on the reversed local stencil.  Compute that analytic
++    // derivative and map [next,current,previous] back to [previous,current,next].
++    const std::size_t im = wrap_index(static_cast<long long>(kink.vertex) - 1, npts);
++    const std::size_t i0 = kink.vertex % npts;
++    const std::size_t ip = (kink.vertex + 1) % npts;
++    std::vector<Vec3> local = {pts[ip], pts[i0], pts[im]};
++    KinkRecord local_kink;
++    local_kink.vertex = 1;
++    local_kink.turning_angle = kink.turning_angle;
++    local_kink.minrad_plus = kink.minrad_minus;
++    local_kink.minrad = kink.minrad_minus;
++    const auto g = kink_minrad_plus_gradient_flat(local, local_kink);
++    if (g.size() != 9) return grad;
++    add_to_flat(grad, ip, Vec3{g[0], g[1], g[2]});
++    add_to_flat(grad, i0, Vec3{g[3], g[4], g[5]});
++    add_to_flat(grad, im, Vec3{g[6], g[7], g[8]});
++    return grad;
++}
++
+ std::vector<double> ResolvedTubeGeometry::kink_minrad_gradient_flat(
+     const std::vector<Vec3>& pts,
+     const KinkRecord& kink,
++    bool use_analytic,
+     double finite_difference_step) {
+     const std::size_t n = pts.size();
+     std::vector<double> grad(3 * n, 0.0);
+     if (n < 3) return grad;
++
++    if (use_analytic) {
++        const double rel = 1e-12 * std::max(1.0, std::abs(kink.minrad));
++        if (kink.minrad_minus <= kink.minrad_plus + rel) {
++            grad = kink_minrad_minus_gradient_flat(pts, kink);
++        } else {
++            grad = kink_minrad_plus_gradient_flat(pts, kink);
++        }
++        if (flat_norm(grad) > eps_d) return grad;
++        // Fall through to finite-difference if the local stencil is degenerate.
++    }
++
+     if (finite_difference_step <= 0.0) finite_difference_step = 1e-6;
+ 
+-    // Finite-difference only the local three-vertex stencil.  This keeps the column sparse
+-    // and mirrors Ridgerunner's kink-gradient role without pulling in external AD/sparse libs.
++    // Fallback finite-difference only on the local three-vertex stencil.  This is
++    // kept for degenerate/coplanar edge cases and as a regression oracle for the
++    // analytic MinRad± gradients.
+     const std::size_t ids[3] = {
+         wrap_index(static_cast<long long>(kink.vertex) - 1, n),
+         kink.vertex % n,
+@@ -452,7 +590,8 @@
+     const ResolvedTubeMetrics& tube,
+     bool include_struts,
+     bool include_kinks,
+-    double kink_finite_difference_step) {
++    double kink_finite_difference_step,
++    bool use_analytic_kink_gradient) {
+     RigidityMatrix matrix;
+     matrix.row_count = 3 * pts.size();
+     if (pts.empty()) return matrix;
+@@ -475,7 +614,7 @@
+             col.kink_index = k;
+             col.vertex = tube.kinks[k].vertex;
+             col.values = ResolvedTubeGeometry::kink_minrad_gradient_flat(
+-                pts, tube.kinks[k], kink_finite_difference_step);
++                pts, tube.kinks[k], use_analytic_kink_gradient, kink_finite_difference_step);
+             col.norm = flat_norm(col.values);
+             if (col.norm > eps_d) matrix.columns.push_back(std::move(col));
+         }
+@@ -485,6 +624,95 @@
+     return matrix;
+ }
+ 
++SparseRigidityMatrix ContactStressMap::build_sparse_rigidity_matrix(
++    const std::vector<Vec3>& pts,
++    const ResolvedTubeMetrics& tube,
++    bool include_struts,
++    bool include_kinks,
++    double kink_finite_difference_step,
++    bool use_analytic_kink_gradient) {
++    SparseRigidityMatrix sparse;
++    sparse.row_count = 3 * pts.size();
++    if (pts.empty()) return sparse;
++
++    auto append_column = [&sparse](RigidityColumn&& dense) {
++        SparseRigidityColumn col;
++        col.kind = dense.kind;
++        col.strut_index = dense.strut_index;
++        col.kink_index = dense.kink_index;
++        col.vertex = dense.vertex;
++        col.norm = dense.norm;
++        col.entries = dense_to_sparse_entries(dense.values);
++        if (!col.entries.empty()) {
++            sparse.nonzero_count += col.entries.size();
++            sparse.columns.push_back(std::move(col));
++        }
++    };
++
++    if (include_struts) {
++        for (std::size_t k = 0; k < tube.struts.size(); ++k) {
++            RigidityColumn dense;
++            dense.kind = "strut";
++            dense.strut_index = k;
++            dense.values = ResolvedTubeGeometry::strut_gradient_flat(pts, tube.struts[k]);
++            dense.norm = flat_norm(dense.values);
++            if (dense.norm > eps_d) append_column(std::move(dense));
++        }
++    }
++
++    if (include_kinks) {
++        for (std::size_t k = 0; k < tube.kinks.size(); ++k) {
++            RigidityColumn dense;
++            dense.kind = "kink";
++            dense.kink_index = k;
++            dense.vertex = tube.kinks[k].vertex;
++            dense.values = ResolvedTubeGeometry::kink_minrad_gradient_flat(
++                pts, tube.kinks[k], use_analytic_kink_gradient, kink_finite_difference_step);
++            dense.norm = flat_norm(dense.values);
++            if (dense.norm > eps_d) append_column(std::move(dense));
++        }
++    }
++
++    sparse.column_count = sparse.columns.size();
++    return sparse;
++}
++
++RigidityMatrix ContactStressMap::sparse_to_dense(const SparseRigidityMatrix& sparse) {
++    RigidityMatrix dense;
++    dense.row_count = sparse.row_count;
++    dense.column_count = sparse.column_count;
++    dense.columns.reserve(sparse.columns.size());
++    for (const auto& scol : sparse.columns) {
++        RigidityColumn col;
++        col.kind = scol.kind;
++        col.strut_index = scol.strut_index;
++        col.kink_index = scol.kink_index;
++        col.vertex = scol.vertex;
++        col.norm = scol.norm;
++        col.values.assign(sparse.row_count, 0.0);
++        for (const auto& e : scol.entries) {
++            if (e.row < col.values.size()) col.values[e.row] = e.value;
++        }
++        dense.columns.push_back(std::move(col));
++    }
++    return dense;
++}
++
++#ifdef SSTCORE_USE_EIGEN
++Eigen::SparseMatrix<double> ContactStressMap::to_eigen_sparse(const SparseRigidityMatrix& sparse) {
++    std::vector<Eigen::Triplet<double>> triplets;
++    triplets.reserve(sparse.nonzero_count);
++    for (std::size_t j = 0; j < sparse.columns.size(); ++j) {
++        for (const auto& e : sparse.columns[j].entries) {
++            triplets.emplace_back(static_cast<int>(e.row), static_cast<int>(j), e.value);
++        }
++    }
++    Eigen::SparseMatrix<double> A(static_cast<int>(sparse.row_count), static_cast<int>(sparse.column_count));
++    A.setFromTriplets(triplets.begin(), triplets.end());
++    return A;
++}
++#endif
++
+ NNLSResult ContactStressMap::solve_nonnegative_least_squares(
+     const RigidityMatrix& matrix,
+     const std::vector<double>& target,
+@@ -559,12 +787,89 @@
+     return out;
+ }
+ 
++
++NNLSResult ContactStressMap::solve_nonnegative_least_squares_sparse(
++    const SparseRigidityMatrix& matrix,
++    const std::vector<double>& target,
++    std::size_t max_iterations,
++    double tolerance) {
++    NNLSResult out;
++    const std::size_t p = matrix.columns.size();
++    const std::size_t m = matrix.row_count;
++    out.multipliers.assign(p, 0.0);
++    if (p == 0 || m == 0 || target.empty()) {
++        out.residual_norm = flat_norm(target);
++        out.relative_residual = (out.residual_norm > 0.0) ? 1.0 : 0.0;
++        out.objective = 0.5 * out.residual_norm * out.residual_norm;
++        out.converged = (out.residual_norm <= tolerance);
++        return out;
++    }
++    if (tolerance <= 0.0) tolerance = 1e-10;
++    if (max_iterations == 0) max_iterations = 1;
++
++    std::vector<double> Atb(p, 0.0);
++    std::vector<std::vector<double>> AtA(p, std::vector<double>(p, 0.0));
++    for (std::size_t i = 0; i < p; ++i) {
++        Atb[i] = sparse_column_dot_target(matrix.columns[i], target);
++        for (std::size_t j = 0; j <= i; ++j) {
++            const double v = sparse_column_dot_column(matrix.columns[i], matrix.columns[j]);
++            AtA[i][j] = v;
++            AtA[j][i] = v;
++        }
++    }
++
++    std::vector<double> x(p, 0.0);
++    std::vector<double> AtAx(p, 0.0);
++    const double target_norm = std::max(flat_norm(target), eps_d);
++    double max_change = std::numeric_limits<double>::infinity();
++
++    for (std::size_t iter = 0; iter < max_iterations; ++iter) {
++        max_change = 0.0;
++        std::fill(AtAx.begin(), AtAx.end(), 0.0);
++        for (std::size_t i = 0; i < p; ++i) {
++            if (x[i] == 0.0) continue;
++            for (std::size_t j = 0; j < p; ++j) AtAx[j] += AtA[j][i] * x[i];
++        }
++
++        for (std::size_t j = 0; j < p; ++j) {
++            const double diag = AtA[j][j];
++            if (diag <= eps_d) continue;
++            const double old = x[j];
++            const double grad = AtAx[j] - Atb[j];
++            const double updated = std::max(0.0, old - grad / diag);
++            const double delta = updated - old;
++            if (delta != 0.0) {
++                x[j] = updated;
++                max_change = std::max(max_change, std::abs(delta));
++                for (std::size_t r = 0; r < p; ++r) AtAx[r] += AtA[r][j] * delta;
++            }
++        }
++
++        out.iterations = iter + 1;
++        const auto r = residual_vector(matrix, x, target);
++        const double rel = flat_norm(r) / target_norm;
++        if (max_change <= tolerance * (1.0 + flat_norm(x)) || rel <= tolerance) {
++            out.converged = true;
++            break;
++        }
++    }
++
++    out.multipliers = x;
++    const auto r = residual_vector(matrix, x, target);
++    out.residual_norm = flat_norm(r);
++    out.relative_residual = out.residual_norm / target_norm;
++    out.objective = 0.5 * out.residual_norm * out.residual_norm;
++    return out;
++}
++
+ ContactStressDiagnostics ContactStressMap::diagnose_length_criticality(
+     const std::vector<Vec3>& pts,
+     const ResolvedTubeMetrics& tube,
+     bool solve_nnls,
+     std::size_t max_iterations,
+-    double tolerance) {
++    double tolerance,
++    bool use_sparse_solver,
++    bool use_analytic_kink_gradient) {
+     ContactStressDiagnostics out;
+     out.strut_count = tube.struts.size();
+     out.kink_count = tube.kinks.size();
+@@ -579,16 +884,33 @@
+         return out;
+     }
+ 
+-    const RigidityMatrix matrix = build_rigidity_matrix(pts, tube, true, true, 1e-6);
+-    out.rigidity_columns = matrix.column_count;
+-    if (!solve_nnls || matrix.column_count == 0) {
+-        out.solved_nnls = false;
+-        out.residual_norm = out.gradient_norm;
+-        out.contact_residual = 1.0;
+-        return out;
++    NNLSResult nnls;
++    std::vector<std::string> column_kinds;
++    if (use_sparse_solver) {
++        const SparseRigidityMatrix matrix = build_sparse_rigidity_matrix(
++            pts, tube, true, true, 1e-6, use_analytic_kink_gradient);
++        out.rigidity_columns = matrix.column_count;
++        if (!solve_nnls || matrix.column_count == 0) {
++            out.solved_nnls = false;
++            out.residual_norm = out.gradient_norm;
++            out.contact_residual = 1.0;
++            return out;
++        }
++        for (const auto& col : matrix.columns) column_kinds.push_back(col.kind);
++        nnls = solve_nonnegative_least_squares_sparse(matrix, grad_len, max_iterations, tolerance);
++    } else {
++        const RigidityMatrix matrix = build_rigidity_matrix(
++            pts, tube, true, true, 1e-6, use_analytic_kink_gradient);
++        out.rigidity_columns = matrix.column_count;
++        if (!solve_nnls || matrix.column_count == 0) {
++            out.solved_nnls = false;
++            out.residual_norm = out.gradient_norm;
++            out.contact_residual = 1.0;
++            return out;
++        }
++        for (const auto& col : matrix.columns) column_kinds.push_back(col.kind);
++        nnls = solve_nonnegative_least_squares(matrix, grad_len, max_iterations, tolerance);
+     }
+-
+-    const NNLSResult nnls = solve_nonnegative_least_squares(matrix, grad_len, max_iterations, tolerance);
+     out.solved_nnls = true;
+     out.nnls_converged = nnls.converged;
+     out.nnls_iterations = nnls.iterations;
+@@ -598,11 +920,11 @@
+     out.multipliers = nnls.multipliers;
+ 
+     double total_weight = 0.0;
+-    for (std::size_t j = 0; j < matrix.columns.size() && j < nnls.multipliers.size(); ++j) {
++    for (std::size_t j = 0; j < column_kinds.size() && j < nnls.multipliers.size(); ++j) {
+         const double w = std::max(0.0, nnls.multipliers[j]);
+         total_weight += w;
+-        if (matrix.columns[j].kind == "strut") out.strut_weight_sum += w;
+-        if (matrix.columns[j].kind == "kink") out.kink_weight_sum += w;
++        if (column_kinds[j] == "strut") out.strut_weight_sum += w;
++        if (column_kinds[j] == "kink") out.kink_weight_sum += w;
+     }
+     if (total_weight > 0.0) {
+         double H = 0.0;
+diff -ruN src/resolved_tube_geometry.h src/resolved_tube_geometry.h
+--- src/resolved_tube_geometry.h	2026-07-05 17:18:13.000000000 +0000
++++ src/resolved_tube_geometry.h	2026-07-05 19:19:23.780147062 +0000
+@@ -8,6 +8,10 @@
+ #include <string>
+ #include <vector>
+ 
++#ifdef SSTCORE_USE_EIGEN
++#include <Eigen/Sparse>
++#endif
++
+ namespace sst {
+ 
+ using Vec3 = std::array<double, 3>;
+@@ -47,6 +51,11 @@
+     std::vector<KinkRecord> kinks;
+ };
+ 
++struct SparseEntry {
++    std::size_t row = 0;
++    double value = 0.0;
++};
++
+ struct RigidityColumn {
+     std::string kind;                // "strut" or "kink"
+     std::size_t strut_index = 0;
+@@ -62,6 +71,22 @@
+     std::vector<RigidityColumn> columns;
+ };
+ 
++struct SparseRigidityColumn {
++    std::string kind;
++    std::size_t strut_index = 0;
++    std::size_t kink_index = 0;
++    std::size_t vertex = 0;
++    double norm = 0.0;
++    std::vector<SparseEntry> entries; // sparse flattened 3N gradient column
++};
++
++struct SparseRigidityMatrix {
++    std::size_t row_count = 0;
++    std::size_t column_count = 0;
++    std::size_t nonzero_count = 0;
++    std::vector<SparseRigidityColumn> columns;
++};
++
+ struct NNLSResult {
+     std::vector<double> multipliers;
+     double residual_norm = 0.0;
+@@ -121,9 +146,16 @@
+     [[nodiscard]] static std::vector<double> strut_gradient_flat(
+         const std::vector<Vec3>& pts,
+         const SegmentPair& pair);
++    [[nodiscard]] static std::vector<double> kink_minrad_plus_gradient_flat(
++        const std::vector<Vec3>& pts,
++        const KinkRecord& kink);
++    [[nodiscard]] static std::vector<double> kink_minrad_minus_gradient_flat(
++        const std::vector<Vec3>& pts,
++        const KinkRecord& kink);
+     [[nodiscard]] static std::vector<double> kink_minrad_gradient_flat(
+         const std::vector<Vec3>& pts,
+         const KinkRecord& kink,
++        bool use_analytic = true,
+         double finite_difference_step = 1e-6);
+ 
+     [[nodiscard]] static double nontrivial_knot_lower_bound_rad();
+@@ -138,7 +170,22 @@
+         const ResolvedTubeMetrics& tube,
+         bool include_struts = true,
+         bool include_kinks = true,
+-        double kink_finite_difference_step = 1e-6);
++        double kink_finite_difference_step = 1e-6,
++        bool use_analytic_kink_gradient = true);
++
++    [[nodiscard]] static SparseRigidityMatrix build_sparse_rigidity_matrix(
++        const std::vector<Vec3>& pts,
++        const ResolvedTubeMetrics& tube,
++        bool include_struts = true,
++        bool include_kinks = true,
++        double kink_finite_difference_step = 1e-6,
++        bool use_analytic_kink_gradient = true);
++
++    [[nodiscard]] static RigidityMatrix sparse_to_dense(const SparseRigidityMatrix& sparse);
++
++#ifdef SSTCORE_USE_EIGEN
++    [[nodiscard]] static Eigen::SparseMatrix<double> to_eigen_sparse(const SparseRigidityMatrix& sparse);
++#endif
+ 
+     [[nodiscard]] static NNLSResult solve_nonnegative_least_squares(
+         const RigidityMatrix& matrix,
+@@ -146,12 +193,20 @@
+         std::size_t max_iterations = 5000,
+         double tolerance = 1e-10);
+ 
++    [[nodiscard]] static NNLSResult solve_nonnegative_least_squares_sparse(
++        const SparseRigidityMatrix& matrix,
++        const std::vector<double>& target,
++        std::size_t max_iterations = 5000,
++        double tolerance = 1e-10);
++
+     [[nodiscard]] static ContactStressDiagnostics diagnose_length_criticality(
+         const std::vector<Vec3>& pts,
+         const ResolvedTubeMetrics& tube,
+         bool solve_nnls = true,
+         std::size_t max_iterations = 5000,
+-        double tolerance = 1e-10);
++        double tolerance = 1e-10,
++        bool use_sparse_solver = true,
++        bool use_analytic_kink_gradient = true);
+ };
+ 
+ } // namespace sst
+diff -ruN src/resolved_tube_geometry_py.cpp src/resolved_tube_geometry_py.cpp
+--- src/resolved_tube_geometry_py.cpp	2026-07-05 17:19:30.000000000 +0000
++++ src/resolved_tube_geometry_py.cpp	2026-07-05 19:21:16.581713896 +0000
+@@ -40,6 +40,11 @@
+         .def_readwrite("struts", &sst::ResolvedTubeMetrics::struts)
+         .def_readwrite("kinks", &sst::ResolvedTubeMetrics::kinks);
+ 
++    py::class_<sst::SparseEntry>(m, "SparseEntry")
++        .def(py::init<>())
++        .def_readwrite("row", &sst::SparseEntry::row)
++        .def_readwrite("value", &sst::SparseEntry::value);
++
+     py::class_<sst::RigidityColumn>(m, "RigidityColumn")
+         .def(py::init<>())
+         .def_readwrite("kind", &sst::RigidityColumn::kind)
+@@ -55,6 +60,22 @@
+         .def_readwrite("column_count", &sst::RigidityMatrix::column_count)
+         .def_readwrite("columns", &sst::RigidityMatrix::columns);
+ 
++    py::class_<sst::SparseRigidityColumn>(m, "SparseRigidityColumn")
++        .def(py::init<>())
++        .def_readwrite("kind", &sst::SparseRigidityColumn::kind)
++        .def_readwrite("strut_index", &sst::SparseRigidityColumn::strut_index)
++        .def_readwrite("kink_index", &sst::SparseRigidityColumn::kink_index)
++        .def_readwrite("vertex", &sst::SparseRigidityColumn::vertex)
++        .def_readwrite("norm", &sst::SparseRigidityColumn::norm)
++        .def_readwrite("entries", &sst::SparseRigidityColumn::entries);
++
++    py::class_<sst::SparseRigidityMatrix>(m, "SparseRigidityMatrix")
++        .def(py::init<>())
++        .def_readwrite("row_count", &sst::SparseRigidityMatrix::row_count)
++        .def_readwrite("column_count", &sst::SparseRigidityMatrix::column_count)
++        .def_readwrite("nonzero_count", &sst::SparseRigidityMatrix::nonzero_count)
++        .def_readwrite("columns", &sst::SparseRigidityMatrix::columns);
++
+     py::class_<sst::NNLSResult>(m, "NNLSResult")
+         .def(py::init<>())
+         .def_readwrite("multipliers", &sst::NNLSResult::multipliers)
+@@ -110,8 +131,13 @@
+                     py::arg("points"))
+         .def_static("strut_gradient_flat", &sst::ResolvedTubeGeometry::strut_gradient_flat,
+                     py::arg("points"), py::arg("pair"))
++        .def_static("kink_minrad_plus_gradient_flat", &sst::ResolvedTubeGeometry::kink_minrad_plus_gradient_flat,
++                    py::arg("points"), py::arg("kink"))
++        .def_static("kink_minrad_minus_gradient_flat", &sst::ResolvedTubeGeometry::kink_minrad_minus_gradient_flat,
++                    py::arg("points"), py::arg("kink"))
+         .def_static("kink_minrad_gradient_flat", &sst::ResolvedTubeGeometry::kink_minrad_gradient_flat,
+-                    py::arg("points"), py::arg("kink"), py::arg("finite_difference_step") = 1e-6)
++                    py::arg("points"), py::arg("kink"),
++                    py::arg("use_analytic") = true, py::arg("finite_difference_step") = 1e-6)
+         .def_static("nontrivial_knot_lower_bound_rad", &sst::ResolvedTubeGeometry::nontrivial_knot_lower_bound_rad)
+         .def_static("radius_to_diameter_ropelength", &sst::ResolvedTubeGeometry::radius_to_diameter_ropelength,
+                     py::arg("ropelength_rad"))
+@@ -122,13 +148,26 @@
+         .def_static("build_rigidity_matrix", &sst::ContactStressMap::build_rigidity_matrix,
+                     py::arg("points"), py::arg("tube"),
+                     py::arg("include_struts") = true, py::arg("include_kinks") = true,
+-                    py::arg("kink_finite_difference_step") = 1e-6)
++                    py::arg("kink_finite_difference_step") = 1e-6,
++                    py::arg("use_analytic_kink_gradient") = true)
++        .def_static("build_sparse_rigidity_matrix", &sst::ContactStressMap::build_sparse_rigidity_matrix,
++                    py::arg("points"), py::arg("tube"),
++                    py::arg("include_struts") = true, py::arg("include_kinks") = true,
++                    py::arg("kink_finite_difference_step") = 1e-6,
++                    py::arg("use_analytic_kink_gradient") = true)
++        .def_static("sparse_to_dense", &sst::ContactStressMap::sparse_to_dense,
++                    py::arg("sparse"))
+         .def_static("solve_nonnegative_least_squares", &sst::ContactStressMap::solve_nonnegative_least_squares,
+                     py::arg("matrix"), py::arg("target"),
+                     py::arg("max_iterations") = 5000, py::arg("tolerance") = 1e-10)
++        .def_static("solve_nonnegative_least_squares_sparse", &sst::ContactStressMap::solve_nonnegative_least_squares_sparse,
++                    py::arg("matrix"), py::arg("target"),
++                    py::arg("max_iterations") = 5000, py::arg("tolerance") = 1e-10)
+         .def_static("diagnose_length_criticality", &sst::ContactStressMap::diagnose_length_criticality,
+                     py::arg("points"), py::arg("tube"), py::arg("solve_nnls") = true,
+-                    py::arg("max_iterations") = 5000, py::arg("tolerance") = 1e-10);
++                    py::arg("max_iterations") = 5000, py::arg("tolerance") = 1e-10,
++                    py::arg("use_sparse_solver") = true,
++                    py::arg("use_analytic_kink_gradient") = true);
+ 
+     // Convenience flat functions for users who do not want to instantiate class namespaces.
+     m.def("resolved_tube_analyze", &sst::ResolvedTubeGeometry::analyze,
+@@ -141,8 +180,16 @@
+     m.def("resolved_tube_build_rigidity_matrix", &sst::ContactStressMap::build_rigidity_matrix,
+           py::arg("points"), py::arg("tube"),
+           py::arg("include_struts") = true, py::arg("include_kinks") = true,
+-          py::arg("kink_finite_difference_step") = 1e-6);
++          py::arg("kink_finite_difference_step") = 1e-6,
++          py::arg("use_analytic_kink_gradient") = true);
++    m.def("resolved_tube_build_sparse_rigidity_matrix", &sst::ContactStressMap::build_sparse_rigidity_matrix,
++          py::arg("points"), py::arg("tube"),
++          py::arg("include_struts") = true, py::arg("include_kinks") = true,
++          py::arg("kink_finite_difference_step") = 1e-6,
++          py::arg("use_analytic_kink_gradient") = true);
+     m.def("resolved_tube_kkt_diagnostics", &sst::ContactStressMap::diagnose_length_criticality,
+           py::arg("points"), py::arg("tube"), py::arg("solve_nnls") = true,
+-          py::arg("max_iterations") = 5000, py::arg("tolerance") = 1e-10);
++          py::arg("max_iterations") = 5000, py::arg("tolerance") = 1e-10,
++          py::arg("use_sparse_solver") = true,
++          py::arg("use_analytic_kink_gradient") = true);
+ }
+diff -ruN examples/example_resolved_tube_geometry.py examples/example_resolved_tube_geometry.py
+--- examples/example_resolved_tube_geometry.py	2026-07-05 17:20:16.000000000 +0000
++++ examples/example_resolved_tube_geometry.py	2026-07-05 19:22:22.077108748 +0000
+@@ -52,15 +52,24 @@
+     print("struts/kinks:", len(metrics.struts), len(metrics.kinks))
+ 
+     matrix = sst.ContactStressMap.build_rigidity_matrix(square, metrics)
++    sparse = sst.ContactStressMap.build_sparse_rigidity_matrix(square, metrics)
+     grad = sst.ResolvedTubeGeometry.length_gradient_flat(square)
+-    nnls = sst.ContactStressMap.solve_nonnegative_least_squares(matrix, grad)
++    nnls = sst.ContactStressMap.solve_nonnegative_least_squares_sparse(sparse, grad)
+     diag = sst.ContactStressMap.diagnose_length_criticality(square, metrics, solve_nnls=True)
+     print("rigidity rows/cols:", matrix.row_count, matrix.column_count)
+-    print("NNLS converged / relative residual:", nnls.converged, nnls.relative_residual)
++    print("sparse nonzeros:", sparse.nonzero_count)
++    print("sparse NNLS converged / relative residual:", nnls.converged, nnls.relative_residual)
+     print("KKT contact residual:", diag.contact_residual)
+     print("contact entropy:", diag.contact_entropy)
+     print("strut/kink weights:", diag.strut_weight_sum, diag.kink_weight_sum)
+ 
++    asymmetric = [[0, 0, 0], [2, 0, 0], [2, 1, 0], [0, 2, 0]]
++    ak = sst.ResolvedTubeGeometry.kink_at_vertex(asymmetric, 1)
++    g_analytic = sst.ResolvedTubeGeometry.kink_minrad_gradient_flat(asymmetric, ak, use_analytic=True)
++    g_fd = sst.ResolvedTubeGeometry.kink_minrad_gradient_flat(asymmetric, ak, use_analytic=False)
++    print("analytic MinRad gradient agrees with finite-difference max error:",
++          max(abs(a - b) for a, b in zip(g_analytic, g_fd)))
++
+     print("\n=== Convention guards ===")
+     lower = sst.ResolvedTubeGeometry.nontrivial_knot_lower_bound_rad()
+     print("nontrivial lower bound, radius convention:", lower)
+diff -ruN examples/example_resolved_tube_kkt_solver.py examples/example_resolved_tube_kkt_solver.py
+--- examples/example_resolved_tube_kkt_solver.py	2026-07-05 17:20:27.000000000 +0000
++++ examples/example_resolved_tube_kkt_solver.py	2026-07-05 19:22:22.076687478 +0000
+@@ -33,11 +33,16 @@
+ 
+     grad_len = sst.ResolvedTubeGeometry.length_gradient_flat(pts)
+     rigidity = sst.ContactStressMap.build_rigidity_matrix(pts, metrics)
++    sparse = sst.ContactStressMap.build_sparse_rigidity_matrix(pts, metrics)
+     nnls = sst.ContactStressMap.solve_nonnegative_least_squares(
+         rigidity, grad_len, max_iterations=10000, tolerance=1e-12
+     )
++    nnls_sparse = sst.ContactStressMap.solve_nonnegative_least_squares_sparse(
++        sparse, grad_len, max_iterations=10000, tolerance=1e-12
++    )
+     diag = sst.ContactStressMap.diagnose_length_criticality(
+-        pts, metrics, solve_nnls=True, max_iterations=10000, tolerance=1e-12
++        pts, metrics, solve_nnls=True, max_iterations=10000, tolerance=1e-12,
++        use_sparse_solver=True, use_analytic_kink_gradient=True
+     )
+ 
+     print("Resolved tube KKT/NNLS diagnostics")
+@@ -45,10 +50,13 @@
+     print("thickness_rad:", metrics.thickness_rad)
+     print("struts/kinks:", len(metrics.struts), len(metrics.kinks))
+     print("rigidity matrix rows/columns:", rigidity.row_count, rigidity.column_count)
++    print("sparse nonzeros:", sparse.nonzero_count)
+     print("first column kind/norm:", rigidity.columns[0].kind, rigidity.columns[0].norm)
+-    print("NNLS converged:", nnls.converged)
+-    print("NNLS iterations:", nnls.iterations)
+-    print("NNLS relative residual:", nnls.relative_residual)
++    print("dense NNLS converged:", nnls.converged)
++    print("dense NNLS iterations:", nnls.iterations)
++    print("dense NNLS relative residual:", nnls.relative_residual)
++    print("sparse NNLS converged:", nnls_sparse.converged)
++    print("sparse NNLS relative residual:", nnls_sparse.relative_residual)
+     print("diagnostic contact residual:", diag.contact_residual)
+     print("strut weight sum:", diag.strut_weight_sum)
+     print("kink weight sum:", diag.kink_weight_sum)
+diff -ruN examples/example_resolved_tube_sparse_large_knot.py examples/example_resolved_tube_sparse_large_knot.py
+--- examples/example_resolved_tube_sparse_large_knot.py	1970-01-01 00:00:00.000000000 +0000
++++ examples/example_resolved_tube_sparse_large_knot.py	2026-07-05 19:22:33.460635097 +0000
+@@ -0,0 +1,57 @@
++#!/usr/bin/env python3
++"""Large-knot resolved-tube sparse backend example.
++
++This example builds a moderately large torus-knot polygon, constructs the sparse
++strut/kink rigidity matrix, and runs the internal sparse NNLS contact-balance
++solver.  It is intentionally dependency-light: no Eigen, scipy, tsnnls, or TAUCS
++is required.  A C++ Eigen adapter is available behind the SSTCORE_USE_EIGEN macro
++for downstream builds that want to hand the matrix to an external sparse solver.
++"""
++from __future__ import annotations
++
++import math
++
++try:
++    import SSTcore as sst
++except ImportError:
++    import sstcore as sst
++
++
++def torus_knot(p: int = 2, q: int = 3, n: int = 240, R: float = 2.0, r: float = 0.65):
++    pts = []
++    for k in range(n):
++        t = 2.0 * math.pi * k / n
++        x = (R + r * math.cos(q * t)) * math.cos(p * t)
++        y = (R + r * math.cos(q * t)) * math.sin(p * t)
++        z = r * math.sin(q * t)
++        pts.append([x, y, z])
++    return pts
++
++
++def main() -> None:
++    pts = torus_knot()
++    metrics = sst.ResolvedTubeGeometry.analyze(
++        pts, skip_neighbors=8, contact_tol=2.5e-2, equilateral_tol=5e-2
++    )
++    sparse = sst.ContactStressMap.build_sparse_rigidity_matrix(
++        pts, metrics, include_struts=True, include_kinks=True, use_analytic_kink_gradient=True
++    )
++    grad = sst.ResolvedTubeGeometry.length_gradient_flat(pts)
++    nnls = sst.ContactStressMap.solve_nonnegative_least_squares_sparse(
++        sparse, grad, max_iterations=2000, tolerance=1e-8
++    )
++
++    print("large resolved-tube sparse path")
++    print("vertices:", len(pts))
++    print("length:", metrics.length)
++    print("thickness_rad:", metrics.thickness_rad)
++    print("ropelength_rad/diam:", metrics.ropelength_rad, metrics.ropelength_diam)
++    print("struts/kinks:", len(metrics.struts), len(metrics.kinks))
++    print("sparse matrix rows/cols/nonzeros:", sparse.row_count, sparse.column_count, sparse.nonzero_count)
++    print("NNLS converged:", nnls.converged)
++    print("NNLS iterations:", nnls.iterations)
++    print("NNLS relative residual:", nnls.relative_residual)
++
++
++if __name__ == "__main__":
++    main()
+diff -ruN tests/test_resolved_tube_geometry.cpp tests/test_resolved_tube_geometry.cpp
+--- tests/test_resolved_tube_geometry.cpp	2026-07-05 17:20:16.000000000 +0000
++++ tests/test_resolved_tube_geometry.cpp	2026-07-05 19:21:46.467955616 +0000
+@@ -23,16 +23,42 @@
+     const auto grad = sst::ResolvedTubeGeometry::length_gradient_flat(square);
+     assert(grad.size() == 12);
+ 
++    const std::vector<Vec3> asymmetric = {
++        {0.0, 0.0, 0.0},
++        {2.0, 0.0, 0.0},
++        {2.0, 1.0, 0.0},
++        {0.0, 2.0, 0.0},
++    };
++    const auto asym_kink = sst::ResolvedTubeGeometry::kink_at_vertex(asymmetric, 1);
++    assert(std::abs(asym_kink.minrad_plus - asym_kink.minrad_minus) > 1e-6);
++    const auto kink_grad_analytic = sst::ResolvedTubeGeometry::kink_minrad_gradient_flat(asymmetric, asym_kink, true);
++    const auto kink_grad_fd = sst::ResolvedTubeGeometry::kink_minrad_gradient_flat(asymmetric, asym_kink, false, 1e-6);
++    assert(kink_grad_analytic.size() == kink_grad_fd.size());
++    for (std::size_t i = 0; i < kink_grad_analytic.size(); ++i) {
++        assert(std::abs(kink_grad_analytic[i] - kink_grad_fd[i]) < 1e-5);
++    }
++
+     const auto matrix = sst::ContactStressMap::build_rigidity_matrix(square, metrics);
+     assert(matrix.row_count == 12);
+     assert(matrix.column_count == matrix.columns.size());
+     assert(matrix.column_count >= metrics.kinks.size());
+ 
++    const auto sparse = sst::ContactStressMap::build_sparse_rigidity_matrix(square, metrics);
++    assert(sparse.row_count == matrix.row_count);
++    assert(sparse.column_count == matrix.column_count);
++    assert(sparse.nonzero_count > 0);
++    const auto dense_from_sparse = sst::ContactStressMap::sparse_to_dense(sparse);
++    assert(dense_from_sparse.column_count == matrix.column_count);
++
+     const auto nnls = sst::ContactStressMap::solve_nonnegative_least_squares(matrix, grad, 10000, 1e-12);
+     assert(nnls.converged);
+     assert(nnls.relative_residual < 1e-5);
+     assert(nnls.multipliers.size() == matrix.column_count);
+ 
++    const auto nnls_sparse = sst::ContactStressMap::solve_nonnegative_least_squares_sparse(sparse, grad, 10000, 1e-12);
++    assert(nnls_sparse.converged);
++    assert(nnls_sparse.relative_residual < 1e-5);
++
+     const auto diag = sst::ContactStressMap::diagnose_length_criticality(square, metrics, true, 10000, 1e-12);
+     assert(diag.kink_count == metrics.kinks.size());
+     assert(diag.solved_nnls);
+diff -ruN tests/test_resolved_tube_geometry.py tests/test_resolved_tube_geometry.py
+--- tests/test_resolved_tube_geometry.py	2026-07-05 17:20:16.000000000 +0000
++++ tests/test_resolved_tube_geometry.py	2026-07-05 19:21:59.280367143 +0000
+@@ -101,9 +101,19 @@
+     assert len(strut_grad) == 3 * len(pts)
+     assert math.sqrt(sum(g * g for g in strut_grad)) > 0.0
+ 
+-    kink_grad = sst.ResolvedTubeGeometry.kink_minrad_gradient_flat(pts, metrics.kinks[0])
+-    assert len(kink_grad) == 3 * len(pts)
++    asymmetric = [
++        [0.0, 0.0, 0.0],
++        [2.0, 0.0, 0.0],
++        [2.0, 1.0, 0.0],
++        [0.0, 2.0, 0.0],
++    ]
++    asym_kink = sst.ResolvedTubeGeometry.kink_at_vertex(asymmetric, 1)
++    assert abs(asym_kink.minrad_plus - asym_kink.minrad_minus) > 1e-6
++    kink_grad = sst.ResolvedTubeGeometry.kink_minrad_gradient_flat(asymmetric, asym_kink, use_analytic=True)
++    kink_grad_fd = sst.ResolvedTubeGeometry.kink_minrad_gradient_flat(asymmetric, asym_kink, use_analytic=False)
++    assert len(kink_grad) == 3 * len(asymmetric)
+     assert math.sqrt(sum(g * g for g in kink_grad)) > 0.0
++    assert max(abs(a - b) for a, b in zip(kink_grad, kink_grad_fd)) < 1e-5
+ 
+     matrix = sst.ContactStressMap.build_rigidity_matrix(pts, metrics)
+     assert matrix.row_count == 3 * len(pts)
+@@ -112,12 +122,23 @@
+     assert all(c.kind in {"strut", "kink"} for c in matrix.columns)
+     assert all(len(c.values) == matrix.row_count for c in matrix.columns)
+ 
++    sparse = sst.ContactStressMap.build_sparse_rigidity_matrix(pts, metrics)
++    assert sparse.row_count == matrix.row_count
++    assert sparse.column_count == matrix.column_count
++    assert sparse.nonzero_count > 0
++    dense_from_sparse = sst.ContactStressMap.sparse_to_dense(sparse)
++    assert dense_from_sparse.column_count == matrix.column_count
++
+     nnls = sst.ContactStressMap.solve_nonnegative_least_squares(matrix, grad, max_iterations=10000, tolerance=1e-12)
+     assert nnls.converged is True
+     assert nnls.relative_residual < 1e-5
+     assert len(nnls.multipliers) == matrix.column_count
+     assert all(x >= 0.0 for x in nnls.multipliers)
+ 
++    nnls_sparse = sst.ContactStressMap.solve_nonnegative_least_squares_sparse(sparse, grad, max_iterations=10000, tolerance=1e-12)
++    assert nnls_sparse.converged is True
++    assert nnls_sparse.relative_residual < 1e-5
++
+     diag = sst.ContactStressMap.diagnose_length_criticality(pts, metrics, solve_nnls=True, max_iterations=10000, tolerance=1e-12)
+     assert diag.strut_count == len(metrics.struts)
+     assert diag.kink_count == len(metrics.kinks)

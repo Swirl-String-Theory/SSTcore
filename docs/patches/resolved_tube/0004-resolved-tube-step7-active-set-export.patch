@@ -1,0 +1,744 @@
+diff -ruN src/resolved_tube_geometry.cpp src/resolved_tube_geometry.cpp
+--- src/resolved_tube_geometry.cpp	2026-07-05 19:20:50.000000000 +0000
++++ src/resolved_tube_geometry.cpp	2026-07-05 19:47:48.976296945 +0000
+@@ -2,6 +2,8 @@
+ 
+ #include <algorithm>
+ #include <cmath>
++#include <fstream>
++#include <iomanip>
+ #include <limits>
+ #include <numeric>
+ #include <stdexcept>
+@@ -144,6 +146,211 @@
+     return out;
+ }
+ 
++bool solve_dense_linear_system(
++    std::vector<std::vector<double>> A,
++    std::vector<double> b,
++    std::vector<double>& x,
++    double ridge) {
++    const std::size_t n = b.size();
++    x.assign(n, 0.0);
++    if (n == 0) return true;
++    if (A.size() != n) return false;
++    for (std::size_t i = 0; i < n; ++i) {
++        if (A[i].size() != n) return false;
++        A[i][i] += std::max(0.0, ridge);
++    }
++
++    for (std::size_t k = 0; k < n; ++k) {
++        std::size_t piv = k;
++        double best = std::abs(A[k][k]);
++        for (std::size_t r = k + 1; r < n; ++r) {
++            const double cand = std::abs(A[r][k]);
++            if (cand > best) { best = cand; piv = r; }
++        }
++        if (best <= 1e-18) return false;
++        if (piv != k) {
++            std::swap(A[piv], A[k]);
++            std::swap(b[piv], b[k]);
++        }
++        const double diag = A[k][k];
++        for (std::size_t j = k; j < n; ++j) A[k][j] /= diag;
++        b[k] /= diag;
++        for (std::size_t r = 0; r < n; ++r) {
++            if (r == k) continue;
++            const double f = A[r][k];
++            if (std::abs(f) <= 0.0) continue;
++            for (std::size_t j = k; j < n; ++j) A[r][j] -= f * A[k][j];
++            b[r] -= f * b[k];
++        }
++    }
++    x = std::move(b);
++    return true;
++}
++
++NNLSResult active_set_nnls_from_gram(
++    const std::vector<std::vector<double>>& AtA,
++    const std::vector<double>& Atb,
++    const std::vector<double>& target,
++    std::size_t max_iterations,
++    double tolerance,
++    double ridge,
++    const RigidityMatrix* dense_matrix,
++    const SparseRigidityMatrix* sparse_matrix) {
++    NNLSResult out;
++    out.algorithm = "active_set";
++    const std::size_t n = Atb.size();
++    out.multipliers.assign(n, 0.0);
++    if (n == 0) {
++        out.residual_norm = flat_norm(target);
++        out.relative_residual = (out.residual_norm > 0.0) ? 1.0 : 0.0;
++        out.objective = 0.5 * out.residual_norm * out.residual_norm;
++        out.converged = out.residual_norm <= tolerance;
++        return out;
++    }
++    if (max_iterations == 0) max_iterations = 1;
++    if (tolerance <= 0.0) tolerance = 1e-10;
++    if (ridge < 0.0) ridge = 0.0;
++
++    std::vector<double> x(n, 0.0);
++    std::vector<bool> passive(n, false);
++    const double target_norm = std::max(flat_norm(target), eps_d);
++
++    auto gradient = [&]() {
++        std::vector<double> w = Atb;
++        for (std::size_t i = 0; i < n; ++i) {
++            if (x[i] == 0.0) continue;
++            for (std::size_t j = 0; j < n; ++j) w[j] -= AtA[j][i] * x[i];
++        }
++        return w;
++    };
++
++    auto solve_passive = [&](std::vector<double>& z_full) -> bool {
++        z_full.assign(n, 0.0);
++        std::vector<std::size_t> ids;
++        ids.reserve(n);
++        for (std::size_t i = 0; i < n; ++i) if (passive[i]) ids.push_back(i);
++        if (ids.empty()) return true;
++        std::vector<std::vector<double>> G(ids.size(), std::vector<double>(ids.size(), 0.0));
++        std::vector<double> c(ids.size(), 0.0);
++        for (std::size_t r = 0; r < ids.size(); ++r) {
++            c[r] = Atb[ids[r]];
++            for (std::size_t q = 0; q < ids.size(); ++q) G[r][q] = AtA[ids[r]][ids[q]];
++        }
++        std::vector<double> sol;
++        double local_ridge = ridge;
++        bool ok = false;
++        for (int attempt = 0; attempt < 6 && !ok; ++attempt) {
++            ok = solve_dense_linear_system(G, c, sol, local_ridge);
++            local_ridge = (local_ridge <= 0.0) ? 1e-14 : local_ridge * 10.0;
++        }
++        if (!ok) return false;
++        for (std::size_t r = 0; r < ids.size(); ++r) z_full[ids[r]] = sol[r];
++        return true;
++    };
++
++    bool singular = false;
++    for (std::size_t iter = 0; iter < max_iterations; ++iter) {
++        out.iterations = iter + 1;
++        const auto w = gradient();
++        std::size_t t = n;
++        double wmax = tolerance;
++        for (std::size_t j = 0; j < n; ++j) {
++            if (!passive[j] && w[j] > wmax) { wmax = w[j]; t = j; }
++        }
++        if (t == n) {
++            out.converged = true;
++            break;
++        }
++        passive[t] = true;
++
++        for (;;) {
++            std::vector<double> z;
++            if (!solve_passive(z)) {
++                passive[t] = false;
++                singular = true;
++                break;
++            }
++
++            bool all_positive = true;
++            for (std::size_t j = 0; j < n; ++j) {
++                if (passive[j] && z[j] <= tolerance) { all_positive = false; break; }
++            }
++            if (all_positive) {
++                x = std::move(z);
++                break;
++            }
++
++            double alpha = 1.0;
++            bool have_alpha = false;
++            for (std::size_t j = 0; j < n; ++j) {
++                if (!passive[j] || z[j] > tolerance) continue;
++                const double denom = x[j] - z[j];
++                if (denom <= eps_d) continue;
++                const double a = x[j] / denom;
++                if (!have_alpha || a < alpha) { alpha = a; have_alpha = true; }
++            }
++            if (!have_alpha) alpha = 1.0;
++            alpha = clamp(alpha, 0.0, 1.0);
++            for (std::size_t j = 0; j < n; ++j) x[j] += alpha * (z[j] - x[j]);
++            for (std::size_t j = 0; j < n; ++j) {
++                if (passive[j] && x[j] <= tolerance * (1.0 + flat_norm(x))) {
++                    x[j] = 0.0;
++                    passive[j] = false;
++                }
++            }
++        }
++        if (singular) continue;
++    }
++
++    out.multipliers = x;
++    out.active_set_size = 0;
++    for (double v : x) if (v > tolerance) ++out.active_set_size;
++    std::vector<double> r;
++    if (dense_matrix) r = residual_vector(*dense_matrix, x, target);
++    else if (sparse_matrix) r = residual_vector(*sparse_matrix, x, target);
++    else r = target;
++    out.residual_norm = flat_norm(r);
++    out.relative_residual = out.residual_norm / target_norm;
++    out.objective = 0.5 * out.residual_norm * out.residual_norm;
++    if (!out.converged) {
++        const auto w = gradient();
++        double max_dual = 0.0;
++        for (std::size_t j = 0; j < n; ++j) if (x[j] <= tolerance) max_dual = std::max(max_dual, w[j]);
++        out.converged = (max_dual <= std::sqrt(tolerance) || out.relative_residual <= tolerance);
++    }
++    return out;
++}
++
++std::vector<std::vector<double>> dense_gram(const RigidityMatrix& matrix, std::vector<double>& Atb, const std::vector<double>& target) {
++    const std::size_t p = matrix.columns.size();
++    Atb.assign(p, 0.0);
++    std::vector<std::vector<double>> AtA(p, std::vector<double>(p, 0.0));
++    for (std::size_t i = 0; i < p; ++i) {
++        Atb[i] = flat_dot(matrix.columns[i].values, target);
++        for (std::size_t j = 0; j <= i; ++j) {
++            const double v = flat_dot(matrix.columns[i].values, matrix.columns[j].values);
++            AtA[i][j] = v;
++            AtA[j][i] = v;
++        }
++    }
++    return AtA;
++}
++
++std::vector<std::vector<double>> sparse_gram(const SparseRigidityMatrix& matrix, std::vector<double>& Atb, const std::vector<double>& target) {
++    const std::size_t p = matrix.columns.size();
++    Atb.assign(p, 0.0);
++    std::vector<std::vector<double>> AtA(p, std::vector<double>(p, 0.0));
++    for (std::size_t i = 0; i < p; ++i) {
++        Atb[i] = sparse_column_dot_target(matrix.columns[i], target);
++        for (std::size_t j = 0; j <= i; ++j) {
++            const double v = sparse_column_dot_column(matrix.columns[i], matrix.columns[j]);
++            AtA[i][j] = v;
++            AtA[j][i] = v;
++        }
++    }
++    return AtA;
++}
++
+ } // namespace
+ 
+ double ResolvedTubeGeometry::length(const std::vector<Vec3>& pts) {
+@@ -713,12 +920,53 @@
+ }
+ #endif
+ 
++void ContactStressMap::write_sparse_matrix_market(
++    const SparseRigidityMatrix& sparse,
++    const std::string& path,
++    bool one_based_indices) {
++    std::ofstream out(path);
++    if (!out) throw std::runtime_error("could not open Matrix Market output path: " + path);
++    out << "%%MatrixMarket matrix coordinate real general\n";
++    out << "% SSTcore resolved-tube sparse rigidity matrix A, rows=3N, columns=struts+kinks\n";
++    out << sparse.row_count << " " << sparse.column_count << " " << sparse.nonzero_count << "\n";
++    out << std::setprecision(17);
++    const std::size_t offset = one_based_indices ? 1u : 0u;
++    for (std::size_t j = 0; j < sparse.columns.size(); ++j) {
++        for (const auto& e : sparse.columns[j].entries) {
++            out << (e.row + offset) << " " << (j + offset) << " " << e.value << "\n";
++        }
++    }
++}
++
++void ContactStressMap::write_vector_market(
++    const std::vector<double>& vector,
++    const std::string& path) {
++    std::ofstream out(path);
++    if (!out) throw std::runtime_error("could not open vector Matrix Market output path: " + path);
++    out << "%%MatrixMarket matrix array real general\n";
++    out << "% SSTcore resolved-tube dense vector\n";
++    out << vector.size() << " 1\n";
++    out << std::setprecision(17);
++    for (double v : vector) out << v << "\n";
++}
++
++void ContactStressMap::write_vector_csv(
++    const std::vector<double>& vector,
++    const std::string& path) {
++    std::ofstream out(path);
++    if (!out) throw std::runtime_error("could not open vector CSV output path: " + path);
++    out << "row,value\n";
++    out << std::setprecision(17);
++    for (std::size_t i = 0; i < vector.size(); ++i) out << i << "," << vector[i] << "\n";
++}
++
+ NNLSResult ContactStressMap::solve_nonnegative_least_squares(
+     const RigidityMatrix& matrix,
+     const std::vector<double>& target,
+     std::size_t max_iterations,
+     double tolerance) {
+     NNLSResult out;
++    out.algorithm = "coordinate_descent";
+     const std::size_t p = matrix.columns.size();
+     const std::size_t m = matrix.row_count;
+     out.multipliers.assign(p, 0.0);
+@@ -784,6 +1032,7 @@
+     out.residual_norm = flat_norm(r);
+     out.relative_residual = out.residual_norm / target_norm;
+     out.objective = 0.5 * out.residual_norm * out.residual_norm;
++    for (double v : out.multipliers) if (v > tolerance) ++out.active_set_size;
+     return out;
+ }
+ 
+@@ -794,6 +1043,7 @@
+     std::size_t max_iterations,
+     double tolerance) {
+     NNLSResult out;
++    out.algorithm = "coordinate_descent_sparse";
+     const std::size_t p = matrix.columns.size();
+     const std::size_t m = matrix.row_count;
+     out.multipliers.assign(p, 0.0);
+@@ -859,9 +1109,32 @@
+     out.residual_norm = flat_norm(r);
+     out.relative_residual = out.residual_norm / target_norm;
+     out.objective = 0.5 * out.residual_norm * out.residual_norm;
++    for (double v : out.multipliers) if (v > tolerance) ++out.active_set_size;
+     return out;
+ }
+ 
++NNLSResult ContactStressMap::solve_nonnegative_least_squares_active_set(
++    const RigidityMatrix& matrix,
++    const std::vector<double>& target,
++    std::size_t max_iterations,
++    double tolerance,
++    double ridge) {
++    std::vector<double> Atb;
++    const auto AtA = dense_gram(matrix, Atb, target);
++    return active_set_nnls_from_gram(AtA, Atb, target, max_iterations, tolerance, ridge, &matrix, nullptr);
++}
++
++NNLSResult ContactStressMap::solve_nonnegative_least_squares_sparse_active_set(
++    const SparseRigidityMatrix& matrix,
++    const std::vector<double>& target,
++    std::size_t max_iterations,
++    double tolerance,
++    double ridge) {
++    std::vector<double> Atb;
++    const auto AtA = sparse_gram(matrix, Atb, target);
++    return active_set_nnls_from_gram(AtA, Atb, target, max_iterations, tolerance, ridge, nullptr, &matrix);
++}
++
+ ContactStressDiagnostics ContactStressMap::diagnose_length_criticality(
+     const std::vector<Vec3>& pts,
+     const ResolvedTubeMetrics& tube,
+@@ -869,7 +1142,8 @@
+     std::size_t max_iterations,
+     double tolerance,
+     bool use_sparse_solver,
+-    bool use_analytic_kink_gradient) {
++    bool use_analytic_kink_gradient,
++    bool use_active_set_solver) {
+     ContactStressDiagnostics out;
+     out.strut_count = tube.struts.size();
+     out.kink_count = tube.kinks.size();
+@@ -897,7 +1171,9 @@
+             return out;
+         }
+         for (const auto& col : matrix.columns) column_kinds.push_back(col.kind);
+-        nnls = solve_nonnegative_least_squares_sparse(matrix, grad_len, max_iterations, tolerance);
++        nnls = use_active_set_solver
++            ? solve_nonnegative_least_squares_sparse_active_set(matrix, grad_len, max_iterations, tolerance)
++            : solve_nonnegative_least_squares_sparse(matrix, grad_len, max_iterations, tolerance);
+     } else {
+         const RigidityMatrix matrix = build_rigidity_matrix(
+             pts, tube, true, true, 1e-6, use_analytic_kink_gradient);
+@@ -909,11 +1185,15 @@
+             return out;
+         }
+         for (const auto& col : matrix.columns) column_kinds.push_back(col.kind);
+-        nnls = solve_nonnegative_least_squares(matrix, grad_len, max_iterations, tolerance);
++        nnls = use_active_set_solver
++            ? solve_nonnegative_least_squares_active_set(matrix, grad_len, max_iterations, tolerance)
++            : solve_nonnegative_least_squares(matrix, grad_len, max_iterations, tolerance);
+     }
+     out.solved_nnls = true;
+     out.nnls_converged = nnls.converged;
+     out.nnls_iterations = nnls.iterations;
++    out.nnls_active_set_size = nnls.active_set_size;
++    out.nnls_algorithm = nnls.algorithm;
+     out.nnls_objective = nnls.objective;
+     out.residual_norm = nnls.residual_norm;
+     out.contact_residual = nnls.relative_residual;
+diff -ruN src/resolved_tube_geometry.h src/resolved_tube_geometry.h
+--- src/resolved_tube_geometry.h	2026-07-05 19:19:23.000000000 +0000
++++ src/resolved_tube_geometry.h	2026-07-05 19:47:48.975566331 +0000
+@@ -94,6 +94,8 @@
+     double objective = 0.0;
+     std::size_t iterations = 0;
+     bool converged = false;
++    std::string algorithm;            // "coordinate_descent" or "active_set"
++    std::size_t active_set_size = 0;
+ };
+ 
+ struct ContactStressDiagnostics {
+@@ -109,6 +111,8 @@
+     std::size_t rigidity_rows = 0;
+     std::size_t rigidity_columns = 0;
+     std::size_t nnls_iterations = 0;
++    std::size_t nnls_active_set_size = 0;
++    std::string nnls_algorithm;
+     bool solved_nnls = false;
+     bool nnls_converged = false;
+     std::vector<double> multipliers;
+@@ -187,6 +191,19 @@
+     [[nodiscard]] static Eigen::SparseMatrix<double> to_eigen_sparse(const SparseRigidityMatrix& sparse);
+ #endif
+ 
++    static void write_sparse_matrix_market(
++        const SparseRigidityMatrix& sparse,
++        const std::string& path,
++        bool one_based_indices = true);
++
++    static void write_vector_market(
++        const std::vector<double>& vector,
++        const std::string& path);
++
++    static void write_vector_csv(
++        const std::vector<double>& vector,
++        const std::string& path);
++
+     [[nodiscard]] static NNLSResult solve_nonnegative_least_squares(
+         const RigidityMatrix& matrix,
+         const std::vector<double>& target,
+@@ -199,6 +216,20 @@
+         std::size_t max_iterations = 5000,
+         double tolerance = 1e-10);
+ 
++    [[nodiscard]] static NNLSResult solve_nonnegative_least_squares_active_set(
++        const RigidityMatrix& matrix,
++        const std::vector<double>& target,
++        std::size_t max_iterations = 2000,
++        double tolerance = 1e-10,
++        double ridge = 1e-12);
++
++    [[nodiscard]] static NNLSResult solve_nonnegative_least_squares_sparse_active_set(
++        const SparseRigidityMatrix& matrix,
++        const std::vector<double>& target,
++        std::size_t max_iterations = 2000,
++        double tolerance = 1e-10,
++        double ridge = 1e-12);
++
+     [[nodiscard]] static ContactStressDiagnostics diagnose_length_criticality(
+         const std::vector<Vec3>& pts,
+         const ResolvedTubeMetrics& tube,
+@@ -206,7 +237,8 @@
+         std::size_t max_iterations = 5000,
+         double tolerance = 1e-10,
+         bool use_sparse_solver = true,
+-        bool use_analytic_kink_gradient = true);
++        bool use_analytic_kink_gradient = true,
++        bool use_active_set_solver = true);
+ };
+ 
+ } // namespace sst
+diff -ruN src/resolved_tube_geometry_py.cpp src/resolved_tube_geometry_py.cpp
+--- src/resolved_tube_geometry_py.cpp	2026-07-05 19:21:16.000000000 +0000
++++ src/resolved_tube_geometry_py.cpp	2026-07-05 19:48:24.364832981 +0000
+@@ -83,7 +83,9 @@
+         .def_readwrite("relative_residual", &sst::NNLSResult::relative_residual)
+         .def_readwrite("objective", &sst::NNLSResult::objective)
+         .def_readwrite("iterations", &sst::NNLSResult::iterations)
+-        .def_readwrite("converged", &sst::NNLSResult::converged);
++        .def_readwrite("converged", &sst::NNLSResult::converged)
++        .def_readwrite("algorithm", &sst::NNLSResult::algorithm)
++        .def_readwrite("active_set_size", &sst::NNLSResult::active_set_size);
+ 
+     py::class_<sst::ContactStressDiagnostics>(m, "ContactStressDiagnostics")
+         .def(py::init<>())
+@@ -99,6 +101,8 @@
+         .def_readwrite("rigidity_rows", &sst::ContactStressDiagnostics::rigidity_rows)
+         .def_readwrite("rigidity_columns", &sst::ContactStressDiagnostics::rigidity_columns)
+         .def_readwrite("nnls_iterations", &sst::ContactStressDiagnostics::nnls_iterations)
++        .def_readwrite("nnls_active_set_size", &sst::ContactStressDiagnostics::nnls_active_set_size)
++        .def_readwrite("nnls_algorithm", &sst::ContactStressDiagnostics::nnls_algorithm)
+         .def_readwrite("solved_nnls", &sst::ContactStressDiagnostics::solved_nnls)
+         .def_readwrite("nnls_converged", &sst::ContactStressDiagnostics::nnls_converged)
+         .def_readwrite("multipliers", &sst::ContactStressDiagnostics::multipliers);
+@@ -157,17 +161,30 @@
+                     py::arg("use_analytic_kink_gradient") = true)
+         .def_static("sparse_to_dense", &sst::ContactStressMap::sparse_to_dense,
+                     py::arg("sparse"))
++        .def_static("write_sparse_matrix_market", &sst::ContactStressMap::write_sparse_matrix_market,
++                    py::arg("sparse"), py::arg("path"), py::arg("one_based_indices") = true)
++        .def_static("write_vector_market", &sst::ContactStressMap::write_vector_market,
++                    py::arg("vector"), py::arg("path"))
++        .def_static("write_vector_csv", &sst::ContactStressMap::write_vector_csv,
++                    py::arg("vector"), py::arg("path"))
+         .def_static("solve_nonnegative_least_squares", &sst::ContactStressMap::solve_nonnegative_least_squares,
+                     py::arg("matrix"), py::arg("target"),
+                     py::arg("max_iterations") = 5000, py::arg("tolerance") = 1e-10)
+         .def_static("solve_nonnegative_least_squares_sparse", &sst::ContactStressMap::solve_nonnegative_least_squares_sparse,
+                     py::arg("matrix"), py::arg("target"),
+                     py::arg("max_iterations") = 5000, py::arg("tolerance") = 1e-10)
++        .def_static("solve_nonnegative_least_squares_active_set", &sst::ContactStressMap::solve_nonnegative_least_squares_active_set,
++                    py::arg("matrix"), py::arg("target"),
++                    py::arg("max_iterations") = 2000, py::arg("tolerance") = 1e-10, py::arg("ridge") = 1e-12)
++        .def_static("solve_nonnegative_least_squares_sparse_active_set", &sst::ContactStressMap::solve_nonnegative_least_squares_sparse_active_set,
++                    py::arg("matrix"), py::arg("target"),
++                    py::arg("max_iterations") = 2000, py::arg("tolerance") = 1e-10, py::arg("ridge") = 1e-12)
+         .def_static("diagnose_length_criticality", &sst::ContactStressMap::diagnose_length_criticality,
+                     py::arg("points"), py::arg("tube"), py::arg("solve_nnls") = true,
+                     py::arg("max_iterations") = 5000, py::arg("tolerance") = 1e-10,
+                     py::arg("use_sparse_solver") = true,
+-                    py::arg("use_analytic_kink_gradient") = true);
++                    py::arg("use_analytic_kink_gradient") = true,
++                    py::arg("use_active_set_solver") = true);
+ 
+     // Convenience flat functions for users who do not want to instantiate class namespaces.
+     m.def("resolved_tube_analyze", &sst::ResolvedTubeGeometry::analyze,
+@@ -187,9 +204,17 @@
+           py::arg("include_struts") = true, py::arg("include_kinks") = true,
+           py::arg("kink_finite_difference_step") = 1e-6,
+           py::arg("use_analytic_kink_gradient") = true);
++    m.def("resolved_tube_write_matrix_market", &sst::ContactStressMap::write_sparse_matrix_market,
++          py::arg("sparse"), py::arg("path"), py::arg("one_based_indices") = true);
++    m.def("resolved_tube_write_vector_market", &sst::ContactStressMap::write_vector_market,
++          py::arg("vector"), py::arg("path"));
++    m.def("resolved_tube_solve_active_set", &sst::ContactStressMap::solve_nonnegative_least_squares_sparse_active_set,
++          py::arg("matrix"), py::arg("target"), py::arg("max_iterations") = 2000,
++          py::arg("tolerance") = 1e-10, py::arg("ridge") = 1e-12);
+     m.def("resolved_tube_kkt_diagnostics", &sst::ContactStressMap::diagnose_length_criticality,
+           py::arg("points"), py::arg("tube"), py::arg("solve_nnls") = true,
+           py::arg("max_iterations") = 5000, py::arg("tolerance") = 1e-10,
+           py::arg("use_sparse_solver") = true,
+-          py::arg("use_analytic_kink_gradient") = true);
++          py::arg("use_analytic_kink_gradient") = true,
++          py::arg("use_active_set_solver") = true);
+ }
+diff -ruN tests/test_resolved_tube_geometry.cpp tests/test_resolved_tube_geometry.cpp
+--- tests/test_resolved_tube_geometry.cpp	2026-07-05 19:21:46.000000000 +0000
++++ tests/test_resolved_tube_geometry.cpp	2026-07-05 19:48:52.855699850 +0000
+@@ -2,6 +2,9 @@
+ 
+ #include <cassert>
+ #include <cmath>
++#include <cstdio>
++#include <fstream>
++#include <string>
+ #include <vector>
+ 
+ int main() {
+@@ -59,10 +62,39 @@
+     assert(nnls_sparse.converged);
+     assert(nnls_sparse.relative_residual < 1e-5);
+ 
++    const auto nnls_active = sst::ContactStressMap::solve_nonnegative_least_squares_active_set(matrix, grad, 1000, 1e-12);
++    assert(nnls_active.converged);
++    assert(nnls_active.algorithm == "active_set");
++    assert(nnls_active.relative_residual < 1e-5);
++    assert(nnls_active.active_set_size > 0);
++
++    const auto nnls_sparse_active = sst::ContactStressMap::solve_nonnegative_least_squares_sparse_active_set(sparse, grad, 1000, 1e-12);
++    assert(nnls_sparse_active.converged);
++    assert(nnls_sparse_active.algorithm == "active_set");
++    assert(nnls_sparse_active.relative_residual < 1e-5);
++
++    const std::string mtx_path = "/tmp/sstcore_resolved_tube_A_test.mtx";
++    const std::string vec_path = "/tmp/sstcore_resolved_tube_b_test.mtx";
++    const std::string csv_path = "/tmp/sstcore_resolved_tube_b_test.csv";
++    sst::ContactStressMap::write_sparse_matrix_market(sparse, mtx_path);
++    sst::ContactStressMap::write_vector_market(grad, vec_path);
++    sst::ContactStressMap::write_vector_csv(grad, csv_path);
++    {
++        std::ifstream f(mtx_path);
++        std::string line;
++        std::getline(f, line);
++        assert(line.find("MatrixMarket") != std::string::npos);
++    }
++    std::remove(mtx_path.c_str());
++    std::remove(vec_path.c_str());
++    std::remove(csv_path.c_str());
++
+     const auto diag = sst::ContactStressMap::diagnose_length_criticality(square, metrics, true, 10000, 1e-12);
+     assert(diag.kink_count == metrics.kinks.size());
+     assert(diag.solved_nnls);
+     assert(diag.nnls_converged);
++    assert(diag.nnls_algorithm == "active_set");
++    assert(diag.nnls_active_set_size > 0);
+     assert(diag.contact_residual < 1e-5);
+     assert(diag.rigidity_columns == matrix.column_count);
+     assert(diag.multipliers.size() == matrix.column_count);
+diff -ruN tests/test_resolved_tube_geometry.py tests/test_resolved_tube_geometry.py
+--- tests/test_resolved_tube_geometry.py	2026-07-05 19:21:59.000000000 +0000
++++ tests/test_resolved_tube_geometry.py	2026-07-05 19:49:07.256946396 +0000
+@@ -89,7 +89,7 @@
+     assert sst.ResolvedTubeGeometry.diameter_to_radius_ropelength(16.371637) == pytest.approx(32.743274)
+ 
+ 
+-def test_rigidity_matrix_gradient_columns_and_nnls_kkt_solver():
++def test_rigidity_matrix_gradient_columns_and_nnls_kkt_solver(tmp_path):
+     pts = unit_square()
+     metrics = sst.ResolvedTubeGeometry.analyze(pts, skip_neighbors=1, contact_tol=1e-9, equilateral_tol=1e-12)
+ 
+@@ -139,6 +139,30 @@
+     assert nnls_sparse.converged is True
+     assert nnls_sparse.relative_residual < 1e-5
+ 
++    nnls_active = sst.ContactStressMap.solve_nonnegative_least_squares_active_set(matrix, grad, max_iterations=1000, tolerance=1e-12)
++    assert nnls_active.converged is True
++    assert nnls_active.algorithm == "active_set"
++    assert nnls_active.relative_residual < 1e-5
++    assert nnls_active.active_set_size > 0
++
++    nnls_sparse_active = sst.ContactStressMap.solve_nonnegative_least_squares_sparse_active_set(sparse, grad, max_iterations=1000, tolerance=1e-12)
++    assert nnls_sparse_active.converged is True
++    assert nnls_sparse_active.algorithm == "active_set"
++    assert nnls_sparse_active.relative_residual < 1e-5
++
++    mtx = tmp_path / "A.mtx"
++    b_mtx = tmp_path / "b.mtx"
++    b_csv = tmp_path / "b.csv"
++    sst.ContactStressMap.write_sparse_matrix_market(sparse, str(mtx))
++    sst.ContactStressMap.write_vector_market(grad, str(b_mtx))
++    sst.ContactStressMap.write_vector_csv(grad, str(b_csv))
++    assert mtx.read_text().startswith("%%MatrixMarket matrix coordinate")
++    assert b_mtx.read_text().startswith("%%MatrixMarket matrix array")
++    assert b_csv.read_text().splitlines()[0] == "row,value"
++
++    flat_active = sst.resolved_tube_solve_active_set(sparse, grad, max_iterations=1000, tolerance=1e-12)
++    assert flat_active.relative_residual < 1e-5
++
+     diag = sst.ContactStressMap.diagnose_length_criticality(pts, metrics, solve_nnls=True, max_iterations=10000, tolerance=1e-12)
+     assert diag.strut_count == len(metrics.struts)
+     assert diag.kink_count == len(metrics.kinks)
+@@ -146,6 +170,8 @@
+     assert diag.rigidity_columns == matrix.column_count
+     assert diag.solved_nnls is True
+     assert diag.nnls_converged is True
++    assert diag.nnls_algorithm == "active_set"
++    assert diag.nnls_active_set_size > 0
+     assert diag.contact_residual < 1e-5
+     assert diag.contact_entropy >= 0.0
+     assert len(diag.multipliers) == matrix.column_count
+diff -ruN examples/example_resolved_tube_active_set_nnls.py examples/example_resolved_tube_active_set_nnls.py
+--- examples/example_resolved_tube_active_set_nnls.py	1970-01-01 00:00:00.000000000 +0000
++++ examples/example_resolved_tube_active_set_nnls.py	2026-07-05 19:49:25.796046158 +0000
+@@ -0,0 +1,55 @@
++"""Resolved-tube active-set NNLS / KKT diagnostic example.
++
++Run after building SSTcore with the resolved_tube_geometry bindings.
++This example uses a unit-thickness square because its KKT balance is
++small and deterministic enough for a compact smoke test.
++"""
++from __future__ import annotations
++
++try:
++    import SSTcore as sst
++except ImportError:
++    import sstcore as sst
++
++
++def main() -> None:
++    points = [
++        [1.0, 1.0, 0.0],
++        [-1.0, 1.0, 0.0],
++        [-1.0, -1.0, 0.0],
++        [1.0, -1.0, 0.0],
++    ]
++
++    tube = sst.ResolvedTubeGeometry.analyze(points, skip_neighbors=1, contact_tol=1e-9)
++    grad_len = sst.ResolvedTubeGeometry.length_gradient_flat(points)
++    sparse = sst.ContactStressMap.build_sparse_rigidity_matrix(points, tube)
++
++    result = sst.ContactStressMap.solve_nonnegative_least_squares_sparse_active_set(
++        sparse, grad_len, max_iterations=1000, tolerance=1e-12
++    )
++
++    diagnostics = sst.ContactStressMap.diagnose_length_criticality(
++        points,
++        tube,
++        solve_nnls=True,
++        max_iterations=1000,
++        tolerance=1e-12,
++        use_sparse_solver=True,
++        use_active_set_solver=True,
++    )
++
++    print("Resolved tube active-set NNLS")
++    print(f"length              = {tube.length:.12g}")
++    print(f"thickness_rad       = {tube.thickness_rad:.12g}")
++    print(f"columns / nnz       = {sparse.column_count} / {sparse.nonzero_count}")
++    print(f"algorithm           = {result.algorithm}")
++    print(f"iterations          = {result.iterations}")
++    print(f"active set size     = {result.active_set_size}")
++    print(f"relative residual   = {result.relative_residual:.3e}")
++    print(f"KKT contact residual= {diagnostics.contact_residual:.3e}")
++    print(f"strut weight sum    = {diagnostics.strut_weight_sum:.12g}")
++    print(f"kink weight sum     = {diagnostics.kink_weight_sum:.12g}")
++
++
++if __name__ == "__main__":
++    main()
+diff -ruN examples/example_resolved_tube_scipy_export.py examples/example_resolved_tube_scipy_export.py
+--- examples/example_resolved_tube_scipy_export.py	1970-01-01 00:00:00.000000000 +0000
++++ examples/example_resolved_tube_scipy_export.py	2026-07-05 19:49:25.804042815 +0000
+@@ -0,0 +1,65 @@
++"""Export a resolved-tube sparse rigidity matrix to SciPy / Matrix Market.
++
++The C++ side writes a dependency-free Matrix Market file.  If SciPy is
++available, this example also solves the non-negative sparse least-squares
++problem with scipy.optimize.lsq_linear as a high-resolution external backend.
++"""
++from __future__ import annotations
++
++from pathlib import Path
++import tempfile
++
++try:
++    import SSTcore as sst
++except ImportError:
++    import sstcore as sst
++
++
++def torus_knot_points(p: int = 3, q: int = 2, n: int = 240):
++    import math
++
++    pts = []
++    for k in range(n):
++        t = 2.0 * math.pi * k / n
++        R = 2.2 + 0.7 * math.cos(q * t)
++        pts.append([R * math.cos(p * t), R * math.sin(p * t), 0.7 * math.sin(q * t)])
++    return pts
++
++
++def main() -> None:
++    pts = torus_knot_points()
++    tube = sst.ResolvedTubeGeometry.analyze(pts, skip_neighbors=3, contact_tol=5e-3)
++    sparse = sst.ContactStressMap.build_sparse_rigidity_matrix(pts, tube)
++    grad_len = sst.ResolvedTubeGeometry.length_gradient_flat(pts)
++
++    with tempfile.TemporaryDirectory() as tmp:
++        tmp = Path(tmp)
++        A_path = tmp / "sst_resolved_tube_A.mtx"
++        b_path = tmp / "sst_resolved_tube_b.mtx"
++        b_csv = tmp / "sst_resolved_tube_b.csv"
++        sst.ContactStressMap.write_sparse_matrix_market(sparse, str(A_path))
++        sst.ContactStressMap.write_vector_market(grad_len, str(b_path))
++        sst.ContactStressMap.write_vector_csv(grad_len, str(b_csv))
++        print(f"wrote Matrix Market A: {A_path}")
++        print(f"wrote Matrix Market b: {b_path}")
++        print(f"wrote CSV b:           {b_csv}")
++
++        try:
++            import scipy.io
++            import scipy.optimize
++        except ImportError:
++            print("SciPy not installed; Matrix Market export is still complete.")
++            return
++
++        A = scipy.io.mmread(A_path).tocsc()
++        b = grad_len
++        sol = scipy.optimize.lsq_linear(A, b, bounds=(0.0, float("inf")), method="trf", lsmr_tol="auto")
++        rel = float(__import__("numpy").linalg.norm(A @ sol.x - b) / max(__import__("numpy").linalg.norm(b), 1e-15))
++        print("SciPy sparse bounded least-squares")
++        print(f"success           = {sol.success}")
++        print(f"active multipliers= {(sol.x > 1e-10).sum()}")
++        print(f"relative residual = {rel:.3e}")
++
++
++if __name__ == "__main__":
++    main()

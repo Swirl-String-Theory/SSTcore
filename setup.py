@@ -921,8 +921,24 @@ src_files = [
     "src/multisector_fitter.cpp",
     "src/trefoil_operator.cpp",
     "src/hyperbolic_volume.cpp",
-    "src/knot_dynamics.cpp",
-    "src/resolved_tube_geometry.cpp",
+    "src/knot/resource_loader.cpp",
+    "src/knot/fourier_parser.cpp",
+    "src/knot/ideal_parser.cpp",
+    "src/knot/fourier_eval.cpp",
+    "src/knot/invariants.cpp",
+    "src/knot/invariants_bridge.cpp",
+    "src/particle/xi_model.cpp",
+    "src/particle/mass_functional.cpp",
+    "src/particle/knot_particle_model.cpp",
+    "src/filament/vortex_knot_system.cpp",
+    "src/filament/evolution.cpp",
+    "src/tube/detail/common.cpp",
+    "src/tube/geometry_core.cpp",
+    "src/tube/rigidity_matrix.cpp",
+    "src/tube/nnls.cpp",
+    "src/tube/io.cpp",
+    "src/tube/contact_stress.cpp",
+    "src/tube/tightener.cpp",
     "src/radiation_flow.cpp",
     "src/swirl_field.cpp",
     "src/thermo_dynamics.cpp",
@@ -941,6 +957,7 @@ src_files = [
 binding_files = sorted(
     os.path.relpath(p, base_dir).replace(os.sep, "/")
     for p in glob.glob(os.path.join(base_dir, "src", "*_py.cpp"))
+    + glob.glob(os.path.join(base_dir, "src", "tube", "*_py.cpp"))
 )
 
 # Include directories

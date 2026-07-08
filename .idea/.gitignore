@@ -7,3 +7,59 @@
 /dataSources/
 /dataSources.local.xml
 /.idea/runConfigurations/
+\usepackage{ulem}/vcpkg/
+/extern/pybind11/*
+/cmake-build-debug/
+/build/extern/
+/build/test_frenet.dir/
+/build/x64/
+/build/ALL_BUILD.vcxproj
+/build/ALL_BUILD.vcxproj.filters
+/build/cmake_install.cmake
+/build/CMakeCache.txt
+/build/INSTALL.vcxproj
+/build/INSTALL.vcxproj.filters
+/build/test_frenet.vcxproj
+/build/test_frenet.vcxproj.filters
+/build/VAMCore.sln
+/build/vamcore.vcxproj
+/build/vamcore.vcxproj.filters
+/build/ZERO_CHECK.vcxproj
+/build/ZERO_CHECK.vcxproj.filters
+/build/CMakeFiles/
+/sphSimulator_output/
+/build/
+/build*
+/build_node/
+/build_wasm/
+/dist*
+/cmake-build-debug-mingw/
+/cmake-build-relwithdebinfo-mingw/
+# Ignore other extern trees but keep pybind11 submodule path trackable
+/extern/*
+!/extern/pybind11
+
+# Example output files
+/examples/output/
+
+# Python bytecode (never commit; Linux CI is case-sensitive for SSTcore/)
+__pycache__/
+*.py[cod]
+*.pyd
+
+# Python packaging artifacts
+/dist/
+/*.egg-info/
+/python_build/
+/build/temp/
+/build/lib/
+*.egg
+/Secrets.md
+/.github/job-logs.txt
+
+# CMake/setuptools generated embed API header (stable path under include/)
+/include/generated/
+
+# Build-time junction to repo-root resources (created by setup.py for package_data)
+/SSTcore/resources/
+/src/SSTcore/resources/

@@ -6,26 +6,26 @@
 #define SSTCORE_AB_INITIO_MASS_H
 
 #pragma once
+#include "sst/types.h"
+#include "../include/SST_Constants.h"
 #include <cmath>
 #include <cstddef>
 #include <vector>
 #include <string>
-#include <array>
 #include <functional>
 
 namespace sst {
-using Vec3 = std::array<double, 3>;
 
 class ParticleEvaluator {
 private:
   // --- SST Canon Invariants ---
 
-  static constexpr double F_max = 29.053507;
-  static constexpr double c_light = 299792458.0;
-  static constexpr double r_c = 1.40897017e-15;
-  static constexpr double v_swirl = 1.09384563e6;
-  static constexpr double rho_core = 3.8934358266918687e18;
-  static constexpr double rho_fluid = 7.0e-7;
+  static constexpr double F_max = static_cast<double>(SST::Constants::F_SWIRL_MAX);
+  static constexpr double c_light = static_cast<double>(SST::Constants::C_VACUUM);
+  static constexpr double r_c = static_cast<double>(SST::Constants::RC_CORE);
+  static constexpr double v_swirl = static_cast<double>(SST::Constants::V_SWIRL);
+  static constexpr double rho_core = static_cast<double>(SST::Constants::RHO_CORE);
+  static constexpr double rho_fluid = static_cast<double>(SST::Constants::RHO_FLUID_CANON);
   static constexpr double MeV_J_ = 1.602176634e-13;  // J/MeV
 
   bool extract_and_build_filament(const std::string& db_content, const std::string& ab_id, int resolution);

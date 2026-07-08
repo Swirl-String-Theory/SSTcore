@@ -31,6 +31,7 @@ HEADER_MODULES: Dict[str, str] = {
     "multisector_fitter": "multisector_fitter.h",
     "potential_timefield": "potential_timefield.h",
     "radiation_flow": "radiation_flow.h",
+    "resolved_tube_geometry": "resolved_tube_geometry.h",
     "spectroscopic_gap": "spectroscopic_gap.h",
     "sst_extensions": "sst_extensions.h",
     "sst_gravity": "sst_gravity.h",
@@ -63,6 +64,11 @@ DEF_INIT_RE = re.compile(r'\.def\s*\(\s*py::init')
 DEF_READWRITE_RE = re.compile(r'\.def_readwrite\s*\(\s*"([^"]+)"')
 STATIC_METHOD_RE = re.compile(
     r"\bstatic\s+(?:[\w:<>\[\],*&\s]+\s+)+(\w+)\s*\(",
+    re.MULTILINE,
+)
+INSTANCE_METHOD_RE = re.compile(
+    r"(?:^|\n)\s+(?:virtual\s+)?(?:inline\s+)?"
+    r"([\w:<>\[\]]+(?:\s*[*&])?\s+)+(\w+)\s*\([^;]*\)\s*(?:const)?\s*;",
     re.MULTILINE,
 )
 FREE_FN_RE = re.compile(
@@ -141,10 +147,28 @@ def parse_header_symbols(module: str, header_path: Path) -> List[CppSymbol]:
     symbols: List[CppSymbol] = []
     header_file = header_path.name
 
+    skip_method_names = {
+        "if", "for", "while", "switch", "return", "class", "struct", "enum",
+        "using", "operator", "delete", "default",
+    }
+
     for class_name, body in extract_class_blocks(text):
-        for m in STATIC_METHOD_RE.finditer(body):
+        # Drop private/protected sections before instance-method scan.
+        public_body = re.split(r"\b(?:private|protected)\s*:", body, maxsplit=1)[0]
+        for m in STATIC_METHOD_RE.finditer(public_body):
             name = m.group(1)
-            if name in {"if", "for", "while", "switch", "return"}:
+            if name in skip_method_names:
+                continue
+            symbols.append(
+                CppSymbol(module=module, header_file=header_file, cpp_class=class_name, name=name)
+            )
+        for m in INSTANCE_METHOD_RE.finditer(public_body):
+            name = m.group(2)
+            if name in skip_method_names or name == class_name:
+                continue
+            line_start = public_body.rfind("\n", 0, m.start()) + 1
+            line = public_body[line_start : m.start() + 20]
+            if "static " in line:
                 continue
             symbols.append(
                 CppSymbol(module=module, header_file=header_file, cpp_class=class_name, name=name)

@@ -8,13 +8,12 @@
 
 #pragma once
 
-#include <array>
+#include "sst/types.h"
+#include "../include/SST_Constants.h"
 #include <vector>
 #include <cmath>
 
 namespace sst {
-
-        using Vec3 = std::array<double, 3>;
 
         class FluidDynamics {
         public:
@@ -41,7 +40,9 @@ namespace sst {
 			// Legacy name retained for compatibility: this returns local rotation rate, not the Canon Swirl-Clock.
 			static double swirl_clock_rate(double dv_dx, double du_dy);
 			static double local_rotation_rate(double dv_dx, double du_dy);
-			static double swirl_clock_factor_from_speed(double v_norm, double c = 2.99792458e8);
+			static double swirl_clock_factor_from_speed(
+					double v_norm,
+					double c = static_cast<double>(SST::Constants::C_VACUUM));
 
 			static double vorticity_from_curvature(double V, double R);
 
@@ -71,7 +72,7 @@ namespace sst {
 			// Pressure field methods (from PressureField)
 			static std::vector<double> compute_bernoulli_pressure(
 					const std::vector<double>& velocity_magnitude,
-					double rho = 7.0e-7,
+					double rho = static_cast<double>(SST::Constants::RHO_FLUID_CANON),
 					double p_inf = 0.0);
 			static std::vector<std::vector<Vec3>> pressure_gradient(
 					const std::vector<std::vector<double>>& pressure_field,

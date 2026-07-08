@@ -19,7 +19,7 @@ namespace {
     inline double norm_squared(const Vec3& a) {
         return a[0]*a[0] + a[1]*a[1] + a[2]*a[2];
     }
-    inline double norm(const Vec3& a) {
+    inline double vec_norm(const Vec3& a) {
         return std::sqrt(norm_squared(a));
     }
 }
@@ -34,7 +34,7 @@ void compute_sst_mass(const std::vector<Vec3>& points, double chi_spin,
     for (size_t i = 0; i < N; ++i) {
         size_t next = (i + 1) % N;
         dp[i] = subtract(points[next], points[i]);
-        L_K += norm(dp[i]);
+        L_K += vec_norm(dp[i]);
     }
 
     m_core = static_cast<double>(pi * (RC_CORE * RC_CORE) * RHO_CORE * L_K);

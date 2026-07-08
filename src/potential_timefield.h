@@ -9,12 +9,11 @@
 // include/potential_timefield.hpp
 #pragma once
 
-#include <array>
+#include "sst/types.h"
+#include "../include/SST_Constants.h"
 #include <vector>
 
 namespace sst {
-
-	using Vec3 = std::array<double, 3>;
 
         class TimeField {
         public:
@@ -27,7 +26,7 @@ namespace sst {
                 // Compute time dilation factor using sqrt (1 - v^2 / c^2) due to knot tangential velocities
                 static std::vector<double> compute_time_dilation_map_sqrt(
                                 const std::vector<Vec3>& tangential_velocities,
-                                double c = 299792458.0);
+                                double c = static_cast<double>(SST::Constants::C_VACUUM));
 
                 // Compute gravitational potential field (direct computation method from GravityTimeField)
                 static std::vector<double> compute_gravitational_potential_direct(
@@ -51,7 +50,7 @@ namespace sst {
 
         inline std::vector<double> compute_time_dilation_map(
                         const std::vector<Vec3>& tangential_velocities,
-                        double c = 299792458.0) {
+                        double c = static_cast<double>(SST::Constants::C_VACUUM)) {
                 return TimeField::compute_time_dilation_map_sqrt(tangential_velocities, c);
         }
 

@@ -1,5 +1,4 @@
 #include "sst_extensions.h"
-#include "resolved_tube_geometry.h"
 
 #include <fstream>
 #include <sstream>
@@ -19,12 +18,12 @@
 #include <dirent.h>
 #endif
 
-#include "knot_dynamics.h"
+#include <sst/knot.h>
 #include "biot_savart.h"
 
 namespace sst {
 
-namespace sstext {
+namespace workbench {
 
 namespace {
 
@@ -515,6 +514,6 @@ std::map<std::string, double> compare_fseries_files(
     return out;
 }
 
-} // namespace sstext
+} // namespace workbench
 
 } // namespace sst

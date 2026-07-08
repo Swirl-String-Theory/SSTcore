@@ -1,13 +1,10 @@
 #ifndef SSTCORE_FRENET_HELICITY_H
 #define SSTCORE_FRENET_HELICITY_H
 #pragma once
-#include "../include/vec3_utils.h"
-#include <array>
+#include "sst/types.h"
 #include <vector>
 
 namespace sst {
-
-        using Vec3 = std::array<double, 3>;
 
         class FrenetHelicity {
         public:

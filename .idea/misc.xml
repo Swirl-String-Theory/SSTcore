@@ -15,9 +15,16 @@
     </libraryRoots>
     <excludeRoots>
       <file path="$PROJECT_DIR$/build-judge" />
+      <file path="$PROJECT_DIR$/build-py" />
+      <file path="$PROJECT_DIR$/build-test" />
       <file path="$PROJECT_DIR$/cmake-build-debug-mingw" />
+      <file path="$PROJECT_DIR$/dist_py314" />
+      <file path="$PROJECT_DIR$/dist_test_wheel" />
+      <file path="$PROJECT_DIR$/dist_wheel_test" />
       <file path="$PROJECT_DIR$/emsdk" />
       <file path="$PROJECT_DIR$/extern/pybind11" />
+      <file path="$PROJECT_DIR$/output" />
+      <file path="$PROJECT_DIR$/python_build" />
       <file path="$PROJECT_DIR$/shared" />
     </excludeRoots>
   </component>

@@ -3,14 +3,14 @@
 #define SSTCORE_SST_GRAVITY_H
 #pragma once
 
-#include <array>
+#include "sst/types.h"
+#include "sst/clock/swirl_clock.h"
+#include "../include/SST_Constants.h"
 #include <vector>
 #include <cmath>
 #include <stdexcept>
 
 namespace sst {
-
-    using Vec3 = std::array<double, 3>;
 
     class SSTGravity {
     public:
@@ -109,27 +109,12 @@ namespace sst {
             return h_map;
         }
 
-        // ---------------------------------------------------------------------
         // Metric 4: Swirl Clock Factor S_t from local swirl velocity
-        // S_t = sqrt(1 - ||v_swirl||^2 / c^2), clamped to [0,1].
-        // This is the canonical SST time-dilation factor.
-        // ---------------------------------------------------------------------
         [[nodiscard]] static std::vector<double> compute_swirl_clock(
             const std::vector<Vec3>& v_swirl_field,
-            double c = 2.99792458e8 // m/s
-        ) {
-            std::vector<double> St_map(v_swirl_field.size());
-            const double c2 = c * c;
-
-            for (std::size_t i = 0; i < v_swirl_field.size(); ++i) {
-                const Vec3& v = v_swirl_field[i];
-                const double v2 = v[0]*v[0] + v[1]*v[1] + v[2]*v[2];
-
-                double arg = 1.0 - v2 / c2;
-                if (arg < 0.0) arg = 0.0; // superluminal guard
-                St_map[i] = std::sqrt(arg);
-            }
-            return St_map;
+            double c = static_cast<double>(SST::Constants::C_VACUUM))
+        {
+            return clock::map_from_velocity_field(v_swirl_field, c);
         }
 
         // ---------------------------------------------------------------------
@@ -211,7 +196,7 @@ namespace sst {
             double t_p,
             double F_max,
             double r_c,
-            double c = 2.99792458e8
+            double c = static_cast<double>(SST::Constants::C_VACUUM)
         ) {
             if (F_max <= 0.0 || r_c <= 0.0) {
                 throw std::invalid_argument("F_max and r_c must be positive.");

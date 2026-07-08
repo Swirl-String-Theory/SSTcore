@@ -93,6 +93,29 @@ except ImportError:
         except ImportError:
             pass
 
+# Future submodule migration (P3): flat names remain valid; warn once when mapped.
+_DEPRECATION_MAP: Dict[str, str] = {
+    # "compute_writhe": "knot.compute_writhe",
+}
+
+_warned_deprecated: set = set()
+
+
+def __getattr__(name: str):
+    target = _DEPRECATION_MAP.get(name)
+    if target is not None:
+        if name not in _warned_deprecated:
+            import warnings
+
+            warnings.warn(
+                f"SSTcore.{name} is deprecated; use SSTcore.{target} (flat alias retained).",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+            _warned_deprecated.add(name)
+        return globals()[name]
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
 
 def get_resources_dir() -> Optional[Path]:
     """Resolve resources directory for wheel, editable, and dev checkouts."""

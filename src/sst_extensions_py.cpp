@@ -4,7 +4,7 @@
 #include "./sst_extensions.h"
 
 namespace py = pybind11;
-using namespace sst::sstext;
+using namespace sst::workbench;
 
 void bind_extensions(py::module_& m) {
     py::class_<CanonicalizeResult>(m, "CanonicalizeResult")

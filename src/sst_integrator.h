@@ -2,13 +2,11 @@
 #define SSTCORE_SST_INTEGRATOR_H
 
 #pragma once
-#include <array>
+#include "sst/types.h"
 #include <vector>
 #include <cstddef>
 
 namespace sst {
-
-using Vec3 = std::array<double, 3>;
 
 /**
  * SST mass from closed curve: core (static) + fluid (Neumann hydrodynamic dressing).

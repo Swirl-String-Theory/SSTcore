@@ -2,6 +2,7 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include "fluid_dynamics.h"
+#include "canonical_constants.h"
 
 namespace py = pybind11;
 
@@ -48,7 +49,7 @@ void bind_fluid_dynamics(py::module_& m) {
                   R"pbdoc(Local angular rotation rate 0.5 * (dv/dx - du/dy).)pbdoc");
 
         m.def("swirl_clock_factor_from_speed", &sst::FluidDynamics::swirl_clock_factor_from_speed,
-                  py::arg("v_norm"), py::arg("c") = 2.99792458e8,
+                  py::arg("v_norm"), py::arg("c") = sst::SSTCanonicalConstants::speed_of_light(),
                   R"pbdoc(Canon Swirl-Clock factor S_t = sqrt(1 - v^2/c^2).)pbdoc");
 
         m.def("vorticity_from_curvature", &sst::FluidDynamics::vorticity_from_curvature,
@@ -130,7 +131,9 @@ void bind_fluid_dynamics(py::module_& m) {
 	)pbdoc");
 
 		m.def("compute_bernoulli_pressure", &sst::FluidDynamics::compute_bernoulli_pressure,
-			  py::arg("velocity_magnitude"), py::arg("rho") = 7.0e-7, py::arg("p_inf") = 0.0,
+			  py::arg("velocity_magnitude"),
+                          py::arg("rho") = sst::SSTCanonicalConstants::values().rho_f,
+                          py::arg("p_inf") = 0.0,
 			  R"pbdoc(Compute Bernoulli pressure field from velocity magnitude.
 	)pbdoc");
 

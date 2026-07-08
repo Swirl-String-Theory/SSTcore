@@ -2,6 +2,8 @@
 #include <napi.h>
 #include "node_utils.h"
 #include "../sst_gravity.h"
+#include "../canonical_constants.h"
+#include "../../include/SST_Constants.h"
 
 namespace {
 
@@ -33,7 +35,8 @@ void bind_sst_gravity(Napi::Env env, Napi::Object exports) {
     exports.Set("sstGravityDilation", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
         auto B = js_array_to_vec3_list(info[0].As<Napi::Array>());
         double od = info[1].As<Napi::Number>().DoubleValue();
-        double vs = (info.Length() > 2) ? info[2].As<Napi::Number>().DoubleValue() : 1.09384563e6;
+        double vs = (info.Length() > 2) ? info[2].As<Napi::Number>().DoubleValue()
+            : static_cast<double>(SST::Constants::V_SWIRL);
         double Bsat = (info.Length() > 3) ? info[3].As<Napi::Number>().DoubleValue() : 100.0;
         return doubles_to_js(info.Env(), sst::SSTGravity::compute_gravity_dilation(B, od, vs, Bsat));
     }));
@@ -44,7 +47,8 @@ void bind_sst_gravity(Napi::Env env, Napi::Object exports) {
     }));
     exports.Set("sstGravitySwirlClock", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
         auto v = js_array_to_vec3_list(info[0].As<Napi::Array>());
-        double c = (info.Length() > 1) ? info[1].As<Napi::Number>().DoubleValue() : 2.99792458e8;
+        double c = (info.Length() > 1) ? info[1].As<Napi::Number>().DoubleValue()
+            : sst::SSTCanonicalConstants::speed_of_light();
         return doubles_to_js(info.Env(), sst::SSTGravity::compute_swirl_clock(v, c));
     }));
     exports.Set("sstGravitySwirlCoulombPotential", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
@@ -69,7 +73,8 @@ void bind_sst_gravity(Napi::Env env, Napi::Object exports) {
         double tp = info[1].As<Napi::Number>().DoubleValue();
         double Fm = info[2].As<Napi::Number>().DoubleValue();
         double rc = info[3].As<Napi::Number>().DoubleValue();
-        double c = (info.Length() > 4) ? info[4].As<Napi::Number>().DoubleValue() : 2.99792458e8;
+        double c = (info.Length() > 4) ? info[4].As<Napi::Number>().DoubleValue()
+            : sst::SSTCanonicalConstants::speed_of_light();
         return Napi::Number::New(info.Env(), sst::SSTGravity::compute_G_swirl(vsw, tp, Fm, rc, c));
     }));
     exports.Set("sstGravityAvailable", Napi::Boolean::New(env, true));

@@ -6,12 +6,11 @@
 #define VORTEX_RING_H
 
 #pragma once
+#include "sst/types.h"
+#include "../include/SST_Constants.h"
 #include <vector>
-#include <array>
 
 namespace sst {
-
-using Vec3 = std::array<double, 3>;
 
 class VortexRing {
 public:
@@ -88,12 +87,12 @@ private:
     DensityRegime current_regime;
 
     // Canonical Constants for SST
-    static constexpr double c = 2.99792458e8;                     // Speed of light [m s^-1]
-    static constexpr double rho_core = 3.8934358266918687e18;     // Core mass density [kg m^-3]
-    static constexpr double rho_f = 7.0e-7;                       // Effective fluid density [kg m^-3]
-    static constexpr double r_c = 1.40897017e-15;                 // Classic electron core radius [m]
-    static constexpr double Gamma_0 = 9.68455e-9;                 // Circulation quantum [m^2 s^-1]
-    static constexpr double PHI = 1.61803398874989484820;         // Golden Ratio
+    static constexpr double c = static_cast<double>(SST::Constants::C_VACUUM);
+    static constexpr double rho_core = static_cast<double>(SST::Constants::RHO_CORE);
+    static constexpr double rho_f = static_cast<double>(SST::Constants::RHO_FLUID_CANON);
+    static constexpr double r_c = static_cast<double>(SST::Constants::RC_CORE);
+    static constexpr double Gamma_0 = static_cast<double>(SST::Constants::GAMMA_0);
+    inline static const double PHI = static_cast<double>(SST::Constants::PHI);
 };
 
 }

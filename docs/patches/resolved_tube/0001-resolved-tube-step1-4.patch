@@ -1,0 +1,1172 @@
+--- src/knot_dynamics.cpp
++++ src/knot_dynamics.cpp
+@@ -1,4 +1,5 @@
+ #include "knot_dynamics.h"
++#include "resolved_tube_geometry.h"
+ #include "../include/SST_Constants.h"
+ #include "biot_savart.h"
+ #include <algorithm>
+@@ -73,7 +74,9 @@
+                 KnotPrediction out;
+                 out.gate = assign_gate(K);
+ 
+-                const long double lambda_c = SST::Constants::H_BAR /
++                // Canon guard: the exposure gate uses the full Compton wavelength h/(m_e c),
++                // not the reduced Compton wavelength hbar/(m_e c).
++                const long double lambda_c = 2.0L * SST::Constants::PI * SST::Constants::H_BAR /
+                                              (SST::Constants::M_ELECTRON * SST::Constants::C_VACUUM);
+                 const long double gate_base = lambda_c / (SST::Constants::PI * SST::Constants::RC_CORE);
+ 
+@@ -141,11 +144,20 @@
+         }
+ 
+         double MassFunctional::baseline_mass_from_ropelength(double L_tot) const {
++                // Medium-scale rho_m form retained for master-equation diagnostics.
++                // Do not use this as the resolved horn-envelope mass baseline.
+                 constexpr double pi = 3.14159265358979323846;
+                 return 2.0 * pi * pi * pi * c_.rho_m *
+                        std::pow(c_.r_c, 5) / std::pow(c_.lambda_c, 2) * L_tot;
+         }
+ 
++        double MassFunctional::baseline_mass_from_horn_ropelength(double L_tot) const {
++                // Resolved-tube horn-envelope baseline from Canon guardrails v3.
++                constexpr double pi = 3.14159265358979323846;
++                return 2.0 * pi * pi * pi * c_.rho_horn *
++                       std::pow(c_.r_c, 5) / std::pow(c_.lambda_c, 2) * L_tot;
++        }
++
+         double MassFunctional::bare_master_mass_scale() const {
+                 return c_.rho_m * c_.r_c * c_.r_c * c_.r_c;
+         }
+@@ -258,9 +270,37 @@
+                 K.writhe = g.writhe;
+                 K.min_self_distance = g.min_self_distance;
+                 K.bending_energy = g.bending_energy;
+-                K.ropelength_like = (g.min_self_distance > 1e-12)
+-                        ? (g.L / g.min_self_distance)
+-                        : g.L;
++
++                // Resolved-tube metrics: Rawdon/Cantarella thickness = min(MinRad, dcsd/2).
++                std::vector<double> svals;
++                svals.reserve(static_cast<size_t>(std::max(64, nsamples)));
++                for (int i = 0; i < std::max(64, nsamples); ++i) {
++                        svals.push_back(2.0 * M_PI * static_cast<double>(i) /
++                                        static_cast<double>(std::max(64, nsamples)));
++                }
++                const auto pts = FourierKnot::evaluate(block, svals);
++                const auto tube = ResolvedTubeGeometry::analyze(
++                        pts,
++                        std::max(1, exclude_window),
++                        1e-3,
++                        1e-2);
++                const auto contact = ContactStressMap::diagnose_length_criticality(pts, tube, false);
++
++                K.thickness_rad = tube.thickness_rad;
++                K.ropelength_rad = tube.ropelength_rad;
++                K.ropelength_diam = tube.ropelength_diam;
++                K.minrad_min = tube.minrad;
++                K.dcsd_min = tube.min_dcsd;
++                K.strut_count = static_cast<int>(tube.struts.size());
++                K.kink_count = static_cast<int>(tube.kinks.size());
++                K.contact_residual = contact.contact_residual;
++                K.contact_entropy = contact.contact_entropy;
++                K.ropelength_lower_bound_ok = tube.lower_bound_ok;
++
++                // Backward compatibility: historical SSTcore used the diameter convention.
++                K.ropelength_like = (tube.ropelength_diam > 0.0)
++                        ? tube.ropelength_diam
++                        : ((g.min_self_distance > 1e-12) ? (g.L / g.min_self_distance) : g.L);
+                 K.ropelength = K.ropelength_like;
+                 return K;
+         }
+
+--- src/knot_dynamics.h
++++ src/knot_dynamics.h
+@@ -68,6 +68,19 @@
+     double writhe = 0.0;
+     double min_self_distance = 0.0;
+     double bending_energy = 0.0;
++
++    // Resolved-tube / ropelength geometry (radius convention unless stated otherwise).
++    // Canon guard: thickness_rad is reach/normal-injectivity radius, not necessarily r_c.
++    double thickness_rad = 0.0;
++    double ropelength_rad = 0.0;
++    double ropelength_diam = 0.0;
++    double minrad_min = 0.0;
++    double dcsd_min = 0.0;
++    int strut_count = 0;
++    int kink_count = 0;
++    double contact_residual = 0.0;
++    double contact_entropy = 0.0;
++    bool ropelength_lower_bound_ok = true;
+   };
+ 
+   enum class SectorGate : int {
+@@ -95,6 +108,9 @@
+     double v_swirl = static_cast<double>(SST::Constants::V_SWIRL);
+     double c = static_cast<double>(SST::Constants::C_VACUUM);
+     double rho_m = static_cast<double>(SST::Constants::mass_equivalent_density());
++    // Horn-envelope density closure for resolved-tube baseline masses.
++    // Distinct from rho_m = rho_E/c^2, the medium-scale density in the master equation.
++    double rho_horn = SSTCanonicalConstants::horn_envelope_density(m_e, c, v_swirl, r_c);
+   };
+ 
+   struct KnotDerived {
+@@ -159,7 +175,8 @@
+   public:
+     explicit MassFunctional(const CanonicalConstants& c = CanonicalConstants{});
+ 
+-    [[nodiscard]] double baseline_mass_from_ropelength(double L_tot) const;
++    [[nodiscard]] double baseline_mass_from_ropelength(double L_tot) const; // medium-scale rho_m form; retained for compatibility
++    [[nodiscard]] double baseline_mass_from_horn_ropelength(double L_tot) const;
+     [[nodiscard]] double bare_master_mass_scale() const;
+     [[nodiscard]] double gate_factor(SectorGate G) const;
+     [[nodiscard]] KnotDerived evaluate(const KnotInvariants& K, const XiModel& model) const;
+
+--- src/knot_dynamics_py.cpp
++++ src/knot_dynamics_py.cpp
+@@ -76,7 +76,17 @@
+       .def_readwrite("ropelength", &KnotInvariants::ropelength)
+       .def_readwrite("writhe", &KnotInvariants::writhe)
+       .def_readwrite("min_self_distance", &KnotInvariants::min_self_distance)
+-      .def_readwrite("bending_energy", &KnotInvariants::bending_energy);
++      .def_readwrite("bending_energy", &KnotInvariants::bending_energy)
++      .def_readwrite("thickness_rad", &KnotInvariants::thickness_rad)
++      .def_readwrite("ropelength_rad", &KnotInvariants::ropelength_rad)
++      .def_readwrite("ropelength_diam", &KnotInvariants::ropelength_diam)
++      .def_readwrite("minrad_min", &KnotInvariants::minrad_min)
++      .def_readwrite("dcsd_min", &KnotInvariants::dcsd_min)
++      .def_readwrite("strut_count", &KnotInvariants::strut_count)
++      .def_readwrite("kink_count", &KnotInvariants::kink_count)
++      .def_readwrite("contact_residual", &KnotInvariants::contact_residual)
++      .def_readwrite("contact_entropy", &KnotInvariants::contact_entropy)
++      .def_readwrite("ropelength_lower_bound_ok", &KnotInvariants::ropelength_lower_bound_ok);
+ 
+   py::class_<CanonicalConstants>(m, "CanonicalConstants")
+       .def(py::init<>())
+@@ -86,7 +96,8 @@
+       .def_readwrite("rho_f", &CanonicalConstants::rho_f)
+       .def_readwrite("v_swirl", &CanonicalConstants::v_swirl)
+       .def_readwrite("c", &CanonicalConstants::c)
+-      .def_readwrite("rho_m", &CanonicalConstants::rho_m);
++      .def_readwrite("rho_m", &CanonicalConstants::rho_m)
++      .def_readwrite("rho_horn", &CanonicalConstants::rho_horn);
+ 
+   py::class_<KnotDerived>(m, "KnotDerived")
+       .def(py::init<>())
+@@ -130,6 +141,7 @@
+   py::class_<MassFunctional>(m, "MassFunctional")
+       .def(py::init<const CanonicalConstants&>(), py::arg("constants") = CanonicalConstants{})
+       .def("baseline_mass_from_ropelength", &MassFunctional::baseline_mass_from_ropelength, py::arg("L_tot"))
++      .def("baseline_mass_from_horn_ropelength", &MassFunctional::baseline_mass_from_horn_ropelength, py::arg("L_tot"))
+       .def("bare_master_mass_scale", &MassFunctional::bare_master_mass_scale)
+       .def("gate_factor", &MassFunctional::gate_factor, py::arg("G"))
+       .def("evaluate",
+
+--- src/module_sst.cpp
++++ src/module_sst.cpp
+@@ -35,6 +35,7 @@
+ void bind_sst_integrator(py::module_& m);
+ void bind_extensions(py::module_& m);
+ void bind_trefoil_operator(py::module_& m);
++void bind_resolved_tube_geometry(py::module_& m);
+ 
+ 
+ // Pip/setuptools wheels use SSTcore._native; CMake builds keep the sstcore module name.
+@@ -73,6 +74,7 @@
+   bind_sst_integrator(m);
+   bind_extensions(m);
+   bind_trefoil_operator(m);
++  bind_resolved_tube_geometry(m);
+  // module-wide listing utility
+     m.def(
+         "list_bindings",
+
+--- /dev/null
++++ src/resolved_tube_geometry.cpp
+@@ -0,0 +1,357 @@
++#include "resolved_tube_geometry.h"
++
++#include <algorithm>
++#include <cmath>
++#include <limits>
++#include <numeric>
++#include <stdexcept>
++
++namespace sst {
++namespace {
++
++constexpr double pi_d = 3.141592653589793238462643383279502884;
++constexpr double eps_d = 1e-14;
++
++Vec3 add(const Vec3& a, const Vec3& b) { return {a[0] + b[0], a[1] + b[1], a[2] + b[2]}; }
++Vec3 sub(const Vec3& a, const Vec3& b) { return {a[0] - b[0], a[1] - b[1], a[2] - b[2]}; }
++Vec3 mul(const Vec3& a, double s) { return {s * a[0], s * a[1], s * a[2]}; }
++double dot(const Vec3& a, const Vec3& b) { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2]; }
++double norm2(const Vec3& a) { return dot(a, a); }
++double norm(const Vec3& a) { return std::sqrt(norm2(a)); }
++double dist(const Vec3& a, const Vec3& b) { return norm(sub(a, b)); }
++double clamp01(double x) { return std::max(0.0, std::min(1.0, x)); }
++double clamp(double x, double lo, double hi) { return std::max(lo, std::min(hi, x)); }
++
++std::size_t wrap_index(long long i, std::size_t n) {
++    const long long nn = static_cast<long long>(n);
++    long long r = i % nn;
++    if (r < 0) r += nn;
++    return static_cast<std::size_t>(r);
++}
++
++int cyclic_edge_distance(std::size_t i, std::size_t j, std::size_t n) {
++    const std::size_t d = (i > j) ? (i - j) : (j - i);
++    return static_cast<int>(std::min(d, n - d));
++}
++
++std::vector<double> cumulative_lengths(const std::vector<Vec3>& pts) {
++    std::vector<double> cum(pts.size() + 1, 0.0);
++    if (pts.size() < 2) return cum;
++    for (std::size_t i = 0; i < pts.size(); ++i) {
++        cum[i + 1] = cum[i] + dist(pts[i], pts[(i + 1) % pts.size()]);
++    }
++    return cum;
++}
++
++} // namespace
++
++double ResolvedTubeGeometry::length(const std::vector<Vec3>& pts) {
++    if (pts.size() < 2) return 0.0;
++    double L = 0.0;
++    for (std::size_t i = 0; i < pts.size(); ++i) {
++        L += dist(pts[i], pts[(i + 1) % pts.size()]);
++    }
++    return L;
++}
++
++double ResolvedTubeGeometry::edge_length_mean(const std::vector<Vec3>& pts) {
++    if (pts.size() < 2) return 0.0;
++    return length(pts) / static_cast<double>(pts.size());
++}
++
++double ResolvedTubeGeometry::edge_length_relative_std(const std::vector<Vec3>& pts) {
++    if (pts.size() < 2) return 0.0;
++    const double mean = edge_length_mean(pts);
++    if (mean <= 0.0) return 0.0;
++    double acc = 0.0;
++    for (std::size_t i = 0; i < pts.size(); ++i) {
++        const double e = dist(pts[i], pts[(i + 1) % pts.size()]);
++        const double d = e - mean;
++        acc += d * d;
++    }
++    return std::sqrt(acc / static_cast<double>(pts.size())) / mean;
++}
++
++double ResolvedTubeGeometry::turning_angle(const Vec3& a, const Vec3& b, const Vec3& c) {
++    const Vec3 u = sub(b, a);
++    const Vec3 v = sub(c, b);
++    const double nu = norm(u);
++    const double nv = norm(v);
++    if (nu <= eps_d || nv <= eps_d) return 0.0;
++    return std::acos(clamp(dot(u, v) / (nu * nv), -1.0, 1.0));
++}
++
++double ResolvedTubeGeometry::minrad_at_vertex(const std::vector<Vec3>& pts, std::size_t i) {
++    if (pts.size() < 3) return 0.0;
++    const std::size_t n = pts.size();
++    const Vec3& prev = pts[wrap_index(static_cast<long long>(i) - 1, n)];
++    const Vec3& cur = pts[i % n];
++    const Vec3& next = pts[(i + 1) % n];
++    const double e_prev = dist(prev, cur);
++    const double e_next = dist(cur, next);
++    const double theta = turning_angle(prev, cur, next);
++    if (e_prev <= eps_d || e_next <= eps_d) return 0.0;
++    if (theta <= eps_d) return std::numeric_limits<double>::infinity();
++    const double denom = 2.0 * std::tan(0.5 * theta);
++    if (std::abs(denom) <= eps_d) return std::numeric_limits<double>::infinity();
++    return std::min(e_prev, e_next) / denom;
++}
++
++KinkRecord ResolvedTubeGeometry::kink_at_vertex(const std::vector<Vec3>& pts, std::size_t i) {
++    if (pts.size() < 3) throw std::invalid_argument("kink_at_vertex requires at least 3 points.");
++    const std::size_t n = pts.size();
++    const Vec3& prev = pts[wrap_index(static_cast<long long>(i) - 1, n)];
++    const Vec3& cur = pts[i % n];
++    const Vec3& next = pts[(i + 1) % n];
++    const double e_prev = dist(prev, cur);
++    const double e_next = dist(cur, next);
++    const double theta = turning_angle(prev, cur, next);
++    KinkRecord out;
++    out.vertex = i % n;
++    out.turning_angle = theta;
++    if (theta <= eps_d) {
++        out.minrad_minus = std::numeric_limits<double>::infinity();
++        out.minrad_plus = std::numeric_limits<double>::infinity();
++        out.minrad = std::numeric_limits<double>::infinity();
++        return out;
++    }
++    const double denom = 2.0 * std::tan(0.5 * theta);
++    out.minrad_minus = (e_prev <= eps_d || std::abs(denom) <= eps_d) ? 0.0 : e_prev / denom;
++    out.minrad_plus = (e_next <= eps_d || std::abs(denom) <= eps_d) ? 0.0 : e_next / denom;
++    out.minrad = std::min(out.minrad_minus, out.minrad_plus);
++    return out;
++}
++
++double ResolvedTubeGeometry::global_minrad(const std::vector<Vec3>& pts) {
++    if (pts.size() < 3) return 0.0;
++    double mr = std::numeric_limits<double>::infinity();
++    for (std::size_t i = 0; i < pts.size(); ++i) {
++        mr = std::min(mr, minrad_at_vertex(pts, i));
++    }
++    return mr;
++}
++
++double ResolvedTubeGeometry::segment_segment_distance(
++    const Vec3& p0, const Vec3& p1,
++    const Vec3& q0, const Vec3& q1,
++    double* s_out,
++    double* t_out) {
++
++    const Vec3 u = sub(p1, p0);
++    const Vec3 v = sub(q1, q0);
++    const Vec3 w = sub(p0, q0);
++    const double a = dot(u, u);
++    const double b = dot(u, v);
++    const double c = dot(v, v);
++    const double d = dot(u, w);
++    const double e = dot(v, w);
++    const double D = a * c - b * b;
++
++    double sN, sD = D;
++    double tN, tD = D;
++
++    if (a <= eps_d && c <= eps_d) {
++        if (s_out) *s_out = 0.0;
++        if (t_out) *t_out = 0.0;
++        return dist(p0, q0);
++    }
++    if (a <= eps_d) {
++        const double t = clamp01(e / c);
++        if (s_out) *s_out = 0.0;
++        if (t_out) *t_out = t;
++        return dist(p0, add(q0, mul(v, t)));
++    }
++    if (c <= eps_d) {
++        const double s = clamp01(-d / a);
++        if (s_out) *s_out = s;
++        if (t_out) *t_out = 0.0;
++        return dist(add(p0, mul(u, s)), q0);
++    }
++
++    if (D < eps_d) {
++        sN = 0.0;
++        sD = 1.0;
++        tN = e;
++        tD = c;
++    } else {
++        sN = (b * e - c * d);
++        tN = (a * e - b * d);
++        if (sN < 0.0) {
++            sN = 0.0;
++            tN = e;
++            tD = c;
++        } else if (sN > sD) {
++            sN = sD;
++            tN = e + b;
++            tD = c;
++        }
++    }
++
++    if (tN < 0.0) {
++        tN = 0.0;
++        if (-d < 0.0) sN = 0.0;
++        else if (-d > a) sN = sD;
++        else { sN = -d; sD = a; }
++    } else if (tN > tD) {
++        tN = tD;
++        if ((-d + b) < 0.0) sN = 0.0;
++        else if ((-d + b) > a) sN = sD;
++        else { sN = (-d + b); sD = a; }
++    }
++
++    const double s = (std::abs(sN) < eps_d ? 0.0 : sN / sD);
++    const double t = (std::abs(tN) < eps_d ? 0.0 : tN / tD);
++    if (s_out) *s_out = clamp01(s);
++    if (t_out) *t_out = clamp01(t);
++    const Vec3 cp = add(p0, mul(u, clamp01(s)));
++    const Vec3 cq = add(q0, mul(v, clamp01(t)));
++    return dist(cp, cq);
++}
++
++std::vector<SegmentPair> ResolvedTubeGeometry::dcsd_candidates(
++    const std::vector<Vec3>& pts,
++    int skip_neighbors,
++    double distance_tol) {
++    std::vector<SegmentPair> out;
++    const std::size_t n = pts.size();
++    if (n < 4) return out;
++    if (skip_neighbors < 0) skip_neighbors = 0;
++
++    const auto cum = cumulative_lengths(pts);
++    double best = std::numeric_limits<double>::infinity();
++    std::vector<SegmentPair> all;
++
++    for (std::size_t i = 0; i < n; ++i) {
++        for (std::size_t j = i + 1; j < n; ++j) {
++            if (cyclic_edge_distance(i, j, n) <= skip_neighbors) continue;
++            double s = 0.0, t = 0.0;
++            const double d = segment_segment_distance(pts[i], pts[(i + 1) % n],
++                                                      pts[j], pts[(j + 1) % n],
++                                                      &s, &t);
++            SegmentPair pair;
++            pair.i = i;
++            pair.j = j;
++            pair.s = s;
++            pair.t = t;
++            pair.distance = d;
++            pair.arclength_i = cum[i] + s * dist(pts[i], pts[(i + 1) % n]);
++            pair.arclength_j = cum[j] + t * dist(pts[j], pts[(j + 1) % n]);
++            all.push_back(pair);
++            best = std::min(best, d);
++        }
++    }
++
++    if (all.empty()) return out;
++    const double tol = std::max(0.0, distance_tol);
++    for (const auto& pair : all) {
++        if (tol <= 0.0) {
++            if (pair.distance <= best + 1e-12) out.push_back(pair);
++        } else if (pair.distance <= best * (1.0 + tol) + tol) {
++            out.push_back(pair);
++        }
++    }
++    return out;
++}
++
++ResolvedTubeMetrics ResolvedTubeGeometry::analyze(
++    const std::vector<Vec3>& pts,
++    int skip_neighbors,
++    double contact_tol,
++    double equilateral_tol) {
++    if (pts.size() < 3) throw std::invalid_argument("analyze requires at least 3 points.");
++    if (contact_tol < 0.0) throw std::invalid_argument("contact_tol must be non-negative.");
++    if (equilateral_tol < 0.0) throw std::invalid_argument("equilateral_tol must be non-negative.");
++
++    ResolvedTubeMetrics out;
++    out.length = length(pts);
++    out.edge_length_mean = edge_length_mean(pts);
++    out.edge_length_rel_std = edge_length_relative_std(pts);
++    out.equilateral_ok = out.edge_length_rel_std <= equilateral_tol;
++    out.minrad = global_minrad(pts);
++
++    const auto candidates = dcsd_candidates(pts, skip_neighbors, 0.0);
++    if (!candidates.empty()) {
++        out.min_dcsd = candidates.front().distance;
++        for (const auto& c : candidates) out.min_dcsd = std::min(out.min_dcsd, c.distance);
++    } else {
++        out.min_dcsd = std::numeric_limits<double>::infinity();
++    }
++    out.half_min_dcsd = 0.5 * out.min_dcsd;
++    out.thickness_rad = std::min(out.minrad, out.half_min_dcsd);
++    out.reach_rad = out.thickness_rad;
++
++    if (out.thickness_rad > 0.0 && std::isfinite(out.thickness_rad)) {
++        out.ropelength_rad = out.length / out.thickness_rad;
++        out.ropelength_diam = radius_to_diameter_ropelength(out.ropelength_rad);
++    }
++    out.lower_bound_ok = !(out.ropelength_rad > 0.0) ||
++                         (out.ropelength_rad + 1e-9 >= nontrivial_knot_lower_bound_rad());
++
++    const double contact_radius = std::isfinite(out.thickness_rad) ? out.thickness_rad : 0.0;
++    if (contact_radius > 0.0) {
++        const auto strut_candidates = dcsd_candidates(pts, skip_neighbors, contact_tol);
++        for (const auto& c : strut_candidates) {
++            if (0.5 * c.distance <= contact_radius * (1.0 + contact_tol) + contact_tol) {
++                out.struts.push_back(c);
++            }
++        }
++        for (std::size_t i = 0; i < pts.size(); ++i) {
++            const auto k = kink_at_vertex(pts, i);
++            if (k.minrad <= contact_radius * (1.0 + contact_tol) + contact_tol) {
++                out.kinks.push_back(k);
++            }
++        }
++    }
++    return out;
++}
++
++double ResolvedTubeGeometry::nontrivial_knot_lower_bound_rad() {
++    return 4.0 * pi_d + 2.0 * pi_d * std::sqrt(2.0);
++}
++
++double ResolvedTubeGeometry::radius_to_diameter_ropelength(double ropelength_rad) {
++    return 0.5 * ropelength_rad;
++}
++
++double ResolvedTubeGeometry::diameter_to_radius_ropelength(double ropelength_diam) {
++    return 2.0 * ropelength_diam;
++}
++
++ContactStressDiagnostics ContactStressMap::diagnose_length_criticality(
++    const std::vector<Vec3>& pts,
++    const ResolvedTubeMetrics& tube,
++    bool solve_nnls) {
++    (void)pts;
++    ContactStressDiagnostics out;
++    out.solved_nnls = false;
++    out.strut_count = tube.struts.size();
++    out.kink_count = tube.kinks.size();
++
++    // Lightweight proxy: normalize active contacts by the total number of active constraints.
++    // A full Ridgerunner-style NNLS/KKT solve belongs in the next patch.
++    const double ns = static_cast<double>(out.strut_count);
++    const double nk = static_cast<double>(out.kink_count);
++    const double nt = ns + nk;
++    out.strut_weight_sum = ns;
++    out.kink_weight_sum = nk;
++    if (nt > 0.0) {
++        const double ps = ns / nt;
++        const double pk = nk / nt;
++        double H = 0.0;
++        if (ps > 0.0) H -= ps * std::log(ps);
++        if (pk > 0.0) H -= pk * std::log(pk);
++        out.contact_entropy = H;
++        out.contact_residual = 1.0 / (1.0 + nt);
++    } else {
++        out.contact_entropy = 0.0;
++        out.contact_residual = 1.0;
++    }
++    if (solve_nnls) {
++        // API placeholder: exposed now so examples/tests can lock the interface.
++        // The sparse NNLS implementation is intentionally deferred.
++        out.solved_nnls = false;
++    }
++    return out;
++}
++
++} // namespace sst
+
+--- /dev/null
++++ src/resolved_tube_geometry.h
+@@ -0,0 +1,103 @@
++#ifndef SSTCORE_RESOLVED_TUBE_GEOMETRY_H
++#define SSTCORE_RESOLVED_TUBE_GEOMETRY_H
++
++#pragma once
++
++#include <array>
++#include <cstddef>
++#include <string>
++#include <vector>
++
++namespace sst {
++
++using Vec3 = std::array<double, 3>;
++
++struct SegmentPair {
++    std::size_t i = 0;          // first polygon edge index
++    std::size_t j = 0;          // second polygon edge index
++    double s = 0.0;             // local parameter on edge i in [0,1]
++    double t = 0.0;             // local parameter on edge j in [0,1]
++    double distance = 0.0;      // Euclidean segment-to-segment distance
++    double arclength_i = 0.0;   // approximate arclength position of closest point on edge i
++    double arclength_j = 0.0;   // approximate arclength position of closest point on edge j
++};
++
++struct KinkRecord {
++    std::size_t vertex = 0;
++    double minrad_minus = 0.0;
++    double minrad_plus = 0.0;
++    double minrad = 0.0;
++    double turning_angle = 0.0;
++};
++
++struct ResolvedTubeMetrics {
++    double length = 0.0;
++    double minrad = 0.0;
++    double min_dcsd = 0.0;
++    double half_min_dcsd = 0.0;
++    double thickness_rad = 0.0;
++    double reach_rad = 0.0;          // alias: thickness_rad = reach = normal injectivity radius
++    double ropelength_rad = 0.0;     // Len / thickness radius convention
++    double ropelength_diam = 0.0;    // Len / tube diameter convention
++    double edge_length_mean = 0.0;
++    double edge_length_rel_std = 0.0;
++    bool equilateral_ok = false;
++    bool lower_bound_ok = true;
++    std::vector<SegmentPair> struts;
++    std::vector<KinkRecord> kinks;
++};
++
++struct ContactStressDiagnostics {
++    double contact_residual = 0.0;   // lightweight score; 0 is balanced/resolved in this proxy
++    double strut_weight_sum = 0.0;
++    double kink_weight_sum = 0.0;
++    double contact_entropy = 0.0;
++    std::size_t strut_count = 0;
++    std::size_t kink_count = 0;
++    bool solved_nnls = false;        // false for this lightweight implementation
++};
++
++class ResolvedTubeGeometry {
++public:
++    [[nodiscard]] static double length(const std::vector<Vec3>& pts);
++    [[nodiscard]] static double edge_length_mean(const std::vector<Vec3>& pts);
++    [[nodiscard]] static double edge_length_relative_std(const std::vector<Vec3>& pts);
++
++    [[nodiscard]] static double turning_angle(const Vec3& a, const Vec3& b, const Vec3& c);
++    [[nodiscard]] static double minrad_at_vertex(const std::vector<Vec3>& pts, std::size_t i);
++    [[nodiscard]] static KinkRecord kink_at_vertex(const std::vector<Vec3>& pts, std::size_t i);
++    [[nodiscard]] static double global_minrad(const std::vector<Vec3>& pts);
++
++    [[nodiscard]] static double segment_segment_distance(
++        const Vec3& p0, const Vec3& p1,
++        const Vec3& q0, const Vec3& q1,
++        double* s_out = nullptr,
++        double* t_out = nullptr);
++
++    [[nodiscard]] static std::vector<SegmentPair> dcsd_candidates(
++        const std::vector<Vec3>& pts,
++        int skip_neighbors = 2,
++        double distance_tol = 0.0);
++
++    [[nodiscard]] static ResolvedTubeMetrics analyze(
++        const std::vector<Vec3>& pts,
++        int skip_neighbors = 2,
++        double contact_tol = 1e-3,
++        double equilateral_tol = 1e-3);
++
++    [[nodiscard]] static double nontrivial_knot_lower_bound_rad();
++    [[nodiscard]] static double radius_to_diameter_ropelength(double ropelength_rad);
++    [[nodiscard]] static double diameter_to_radius_ropelength(double ropelength_diam);
++};
++
++class ContactStressMap {
++public:
++    [[nodiscard]] static ContactStressDiagnostics diagnose_length_criticality(
++        const std::vector<Vec3>& pts,
++        const ResolvedTubeMetrics& tube,
++        bool solve_nnls = false);
++};
++
++} // namespace sst
++
++#endif // SSTCORE_RESOLVED_TUBE_GEOMETRY_H
+
+--- /dev/null
++++ src/resolved_tube_geometry_py.cpp
+@@ -0,0 +1,94 @@
++#include <pybind11/pybind11.h>
++#include <pybind11/stl.h>
++#include "resolved_tube_geometry.h"
++
++namespace py = pybind11;
++
++void bind_resolved_tube_geometry(py::module_& m) {
++    py::class_<sst::SegmentPair>(m, "SegmentPair")
++        .def(py::init<>())
++        .def_readwrite("i", &sst::SegmentPair::i)
++        .def_readwrite("j", &sst::SegmentPair::j)
++        .def_readwrite("s", &sst::SegmentPair::s)
++        .def_readwrite("t", &sst::SegmentPair::t)
++        .def_readwrite("distance", &sst::SegmentPair::distance)
++        .def_readwrite("arclength_i", &sst::SegmentPair::arclength_i)
++        .def_readwrite("arclength_j", &sst::SegmentPair::arclength_j);
++
++    py::class_<sst::KinkRecord>(m, "KinkRecord")
++        .def(py::init<>())
++        .def_readwrite("vertex", &sst::KinkRecord::vertex)
++        .def_readwrite("minrad_minus", &sst::KinkRecord::minrad_minus)
++        .def_readwrite("minrad_plus", &sst::KinkRecord::minrad_plus)
++        .def_readwrite("minrad", &sst::KinkRecord::minrad)
++        .def_readwrite("turning_angle", &sst::KinkRecord::turning_angle);
++
++    py::class_<sst::ResolvedTubeMetrics>(m, "ResolvedTubeMetrics")
++        .def(py::init<>())
++        .def_readwrite("length", &sst::ResolvedTubeMetrics::length)
++        .def_readwrite("minrad", &sst::ResolvedTubeMetrics::minrad)
++        .def_readwrite("min_dcsd", &sst::ResolvedTubeMetrics::min_dcsd)
++        .def_readwrite("half_min_dcsd", &sst::ResolvedTubeMetrics::half_min_dcsd)
++        .def_readwrite("thickness_rad", &sst::ResolvedTubeMetrics::thickness_rad)
++        .def_readwrite("reach_rad", &sst::ResolvedTubeMetrics::reach_rad)
++        .def_readwrite("ropelength_rad", &sst::ResolvedTubeMetrics::ropelength_rad)
++        .def_readwrite("ropelength_diam", &sst::ResolvedTubeMetrics::ropelength_diam)
++        .def_readwrite("edge_length_mean", &sst::ResolvedTubeMetrics::edge_length_mean)
++        .def_readwrite("edge_length_rel_std", &sst::ResolvedTubeMetrics::edge_length_rel_std)
++        .def_readwrite("equilateral_ok", &sst::ResolvedTubeMetrics::equilateral_ok)
++        .def_readwrite("lower_bound_ok", &sst::ResolvedTubeMetrics::lower_bound_ok)
++        .def_readwrite("struts", &sst::ResolvedTubeMetrics::struts)
++        .def_readwrite("kinks", &sst::ResolvedTubeMetrics::kinks);
++
++    py::class_<sst::ContactStressDiagnostics>(m, "ContactStressDiagnostics")
++        .def(py::init<>())
++        .def_readwrite("contact_residual", &sst::ContactStressDiagnostics::contact_residual)
++        .def_readwrite("strut_weight_sum", &sst::ContactStressDiagnostics::strut_weight_sum)
++        .def_readwrite("kink_weight_sum", &sst::ContactStressDiagnostics::kink_weight_sum)
++        .def_readwrite("contact_entropy", &sst::ContactStressDiagnostics::contact_entropy)
++        .def_readwrite("strut_count", &sst::ContactStressDiagnostics::strut_count)
++        .def_readwrite("kink_count", &sst::ContactStressDiagnostics::kink_count)
++        .def_readwrite("solved_nnls", &sst::ContactStressDiagnostics::solved_nnls);
++
++    py::class_<sst::ResolvedTubeGeometry>(m, "ResolvedTubeGeometry")
++        .def_static("length", &sst::ResolvedTubeGeometry::length, py::arg("points"))
++        .def_static("edge_length_mean", &sst::ResolvedTubeGeometry::edge_length_mean, py::arg("points"))
++        .def_static("edge_length_relative_std", &sst::ResolvedTubeGeometry::edge_length_relative_std, py::arg("points"))
++        .def_static("turning_angle", &sst::ResolvedTubeGeometry::turning_angle,
++                    py::arg("a"), py::arg("b"), py::arg("c"))
++        .def_static("minrad_at_vertex", &sst::ResolvedTubeGeometry::minrad_at_vertex,
++                    py::arg("points"), py::arg("i"))
++        .def_static("kink_at_vertex", &sst::ResolvedTubeGeometry::kink_at_vertex,
++                    py::arg("points"), py::arg("i"))
++        .def_static("global_minrad", &sst::ResolvedTubeGeometry::global_minrad, py::arg("points"))
++        .def_static("segment_segment_distance",
++                    [](const sst::Vec3& p0, const sst::Vec3& p1,
++                       const sst::Vec3& q0, const sst::Vec3& q1) {
++                        double s = 0.0, t = 0.0;
++                        const double d = sst::ResolvedTubeGeometry::segment_segment_distance(p0, p1, q0, q1, &s, &t);
++                        return py::make_tuple(d, s, t);
++                    },
++                    py::arg("p0"), py::arg("p1"), py::arg("q0"), py::arg("q1"))
++        .def_static("dcsd_candidates", &sst::ResolvedTubeGeometry::dcsd_candidates,
++                    py::arg("points"), py::arg("skip_neighbors") = 2, py::arg("distance_tol") = 0.0)
++        .def_static("analyze", &sst::ResolvedTubeGeometry::analyze,
++                    py::arg("points"), py::arg("skip_neighbors") = 2,
++                    py::arg("contact_tol") = 1e-3, py::arg("equilateral_tol") = 1e-3)
++        .def_static("nontrivial_knot_lower_bound_rad", &sst::ResolvedTubeGeometry::nontrivial_knot_lower_bound_rad)
++        .def_static("radius_to_diameter_ropelength", &sst::ResolvedTubeGeometry::radius_to_diameter_ropelength,
++                    py::arg("ropelength_rad"))
++        .def_static("diameter_to_radius_ropelength", &sst::ResolvedTubeGeometry::diameter_to_radius_ropelength,
++                    py::arg("ropelength_diam"));
++
++    py::class_<sst::ContactStressMap>(m, "ContactStressMap")
++        .def_static("diagnose_length_criticality", &sst::ContactStressMap::diagnose_length_criticality,
++                    py::arg("points"), py::arg("tube"), py::arg("solve_nnls") = false);
++
++    // Convenience flat functions for users who do not want to instantiate class namespaces.
++    m.def("resolved_tube_analyze", &sst::ResolvedTubeGeometry::analyze,
++          py::arg("points"), py::arg("skip_neighbors") = 2,
++          py::arg("contact_tol") = 1e-3, py::arg("equilateral_tol") = 1e-3);
++    m.def("resolved_tube_length", &sst::ResolvedTubeGeometry::length, py::arg("points"));
++    m.def("resolved_tube_minrad", &sst::ResolvedTubeGeometry::global_minrad, py::arg("points"));
++    m.def("resolved_tube_lower_bound_rad", &sst::ResolvedTubeGeometry::nontrivial_knot_lower_bound_rad);
++}
+
+--- src/sst_extensions.cpp
++++ src/sst_extensions.cpp
+@@ -1,4 +1,5 @@
+ #include "sst_extensions.h"
++#include "resolved_tube_geometry.h"
+ 
+ #include <fstream>
+ #include <sstream>
+@@ -238,7 +239,7 @@
+     double L = 0.0, kappa_max = 0.0, kappa_mean = 0.0, bend_energy = 0.0;
+     curve_metrics_from_points(pts, L, kappa_max, kappa_mean, bend_energy);
+     double dmin = min_non_neighbor_distance(pts, 3);
+-    double rproxy = 0.5 * dmin;
++    double rproxy = reach_proxy(pts, 3);
+ 
+     auto blocks = sst::FourierKnot::parse_fseries_multi(path);
+     if (blocks.empty()) throw std::runtime_error("no blocks parsed from: " + path);
+@@ -343,7 +344,13 @@
+ }
+ 
+ double reach_proxy(const std::vector<sst::Vec3>& pts, int skip) {
+-    return 0.5 * min_non_neighbor_distance(pts, skip);
++    if (pts.size() < 4) return 0.0;
++    return ResolvedTubeGeometry::analyze(pts, std::max(1, skip), 1e-3, 1.0).thickness_rad;
++}
++
++ResolvedTubeMetrics resolved_tube_metrics_from_fseries(const std::string& path, int nsamples, int skip) {
++    auto pts = sample_curve_centered(path, nsamples);
++    return ResolvedTubeGeometry::analyze(pts, std::max(1, skip), 1e-3, 1e-2);
+ }
+ 
+ FilamentEnergyResult curve_metrics_from_fseries(const std::string& path, int nsamples, int skip) {
+@@ -354,7 +361,7 @@
+     curve_metrics_from_points(pts, out.L, out.kappa_max, out.kappa_mean, out.bend_energy);
+     out.ds_avg = (pts.empty() ? 0.0 : out.L / static_cast<double>(pts.size()));
+     out.min_non_neighbor_dist = min_non_neighbor_distance(pts, skip);
+-    out.reach_proxy = 0.5 * out.min_non_neighbor_dist;
++    out.reach_proxy = reach_proxy(pts, skip);
+     return out;
+ }
+ 
+@@ -366,7 +373,7 @@
+     curve_metrics_from_points(pts, L, kappa_max, kappa_mean, bend_energy);
+     const double ds = (N>0) ? (L / static_cast<double>(N)) : 0.0;
+     const double dmin = min_non_neighbor_distance(pts, std::max(1, p.skip_neighbors_base));
+-    const double rproxy = 0.5 * dmin;
++    const double rproxy = reach_proxy(pts, std::max(1, p.skip_neighbors_base));
+ 
+     std::vector<sst::Vec3> t(N);
+     for (size_t i=0;i<N;++i) {
+
+--- src/sst_extensions.h
++++ src/sst_extensions.h
+@@ -8,6 +8,7 @@
+ #include <vector>
+ 
+ #include "../include/vec3_utils.h"
++#include "resolved_tube_geometry.h"
+ 
+ namespace sst {
+ 
+@@ -93,6 +94,7 @@
+ double curve_length(const std::vector<sst::Vec3>& pts);
+ double min_non_neighbor_distance(const std::vector<sst::Vec3>& pts, int skip);
+ double reach_proxy(const std::vector<sst::Vec3>& pts, int skip);
++ResolvedTubeMetrics resolved_tube_metrics_from_fseries(const std::string& path, int nsamples, int skip);
+ void curve_metrics_from_points(
+     const std::vector<sst::Vec3>& pts,
+     double& L,
+
+--- src/sst_extensions_py.cpp
++++ src/sst_extensions_py.cpp
+@@ -90,6 +90,12 @@
+           py::arg("nsamples")=2048,
+           py::arg("skip")=3);
+ 
++    m.def("resolved_tube_metrics_from_fseries",
++          &resolved_tube_metrics_from_fseries,
++          py::arg("path"),
++          py::arg("nsamples")=2048,
++          py::arg("skip")=3);
++
+     m.def("curve_length_from_fseries",
+           [](const std::string& path, int nsamples) {
+               auto pts = sample_curve_centered(path, nsamples);
+
+--- src/sst_master_equation.cpp
++++ src/sst_master_equation.cpp
+@@ -30,12 +30,24 @@
+ }
+ 
+ double SSTMasterEquation::geometric_baseline_mass(double rho_m, double r_c, double lambda_c, double L_tot) {
++    // Backward-compatible alias for the medium-scale rho_m version.
++    return geometric_baseline_mass_from_rho_m(rho_m, r_c, lambda_c, L_tot);
++}
++
++double SSTMasterEquation::geometric_baseline_mass_from_rho_m(double rho_m, double r_c, double lambda_c, double L_tot) {
+     if (rho_m < 0.0 || r_c <= 0.0 || lambda_c <= 0.0) {
+         throw std::invalid_argument("rho_m must be non-negative; r_c and lambda_c must be positive.");
+     }
+     return 2.0 * pi_d * pi_d * pi_d * rho_m * std::pow(r_c, 5) / (lambda_c * lambda_c) * L_tot;
+ }
+ 
++double SSTMasterEquation::geometric_horn_baseline_mass(double rho_horn, double r_c, double lambda_c, double L_tot) {
++    if (rho_horn < 0.0 || r_c <= 0.0 || lambda_c <= 0.0) {
++        throw std::invalid_argument("rho_horn must be non-negative; r_c and lambda_c must be positive.");
++    }
++    return 2.0 * pi_d * pi_d * pi_d * rho_horn * std::pow(r_c, 5) / (lambda_c * lambda_c) * L_tot;
++}
++
+ SSTMasterEquationOutput SSTMasterEquation::evaluate(const SSTMasterEquationInput& in) {
+     if (in.rho_f < 0.0 || in.r_c <= 0.0 || in.c <= 0.0) {
+         throw std::invalid_argument("rho_f must be non-negative; r_c and c must be positive.");
+
+--- src/sst_master_equation.h
++++ src/sst_master_equation.h
+@@ -46,6 +46,8 @@
+     [[nodiscard]] static double clock_impedance(double swirl_clock);
+     [[nodiscard]] static double weak_swirl_clock_impedance(double v_norm, double c);
+     [[nodiscard]] static double geometric_baseline_mass(double rho_m, double r_c, double lambda_c, double L_tot);
++    [[nodiscard]] static double geometric_baseline_mass_from_rho_m(double rho_m, double r_c, double lambda_c, double L_tot);
++    [[nodiscard]] static double geometric_horn_baseline_mass(double rho_horn, double r_c, double lambda_c, double L_tot);
+     [[nodiscard]] static SSTMasterEquationOutput evaluate(const SSTMasterEquationInput& in);
+ };
+ 
+
+--- src/sst_master_equation_py.cpp
++++ src/sst_master_equation_py.cpp
+@@ -46,5 +46,9 @@
+                     py::arg("v_norm"), py::arg("c"))
+         .def_static("geometric_baseline_mass", &sst::SSTMasterEquation::geometric_baseline_mass,
+                     py::arg("rho_m"), py::arg("r_c"), py::arg("lambda_c"), py::arg("L_tot"))
++        .def_static("geometric_baseline_mass_from_rho_m", &sst::SSTMasterEquation::geometric_baseline_mass_from_rho_m,
++                    py::arg("rho_m"), py::arg("r_c"), py::arg("lambda_c"), py::arg("L_tot"))
++        .def_static("geometric_horn_baseline_mass", &sst::SSTMasterEquation::geometric_horn_baseline_mass,
++                    py::arg("rho_horn"), py::arg("r_c"), py::arg("lambda_c"), py::arg("L_tot"))
+         .def_static("evaluate", &sst::SSTMasterEquation::evaluate, py::arg("input"));
+ }
+
+--- /dev/null
++++ examples/example_resolved_tube_from_fseries.py
+@@ -0,0 +1,38 @@
++#!/usr/bin/env python3
++"""Analyze resolved-tube metrics from an SST/Gilbert .fseries file.
++
++Usage:
++    python example_resolved_tube_from_fseries.py path/to/knot.3_1.fseries
++"""
++from __future__ import annotations
++
++import sys
++
++try:
++    import SSTcore as sst
++except ImportError:
++    import sstcore as sst
++
++
++def main(argv: list[str]) -> int:
++    if len(argv) < 2:
++        print(__doc__)
++        return 0
++
++    path = argv[1]
++    metrics = sst.resolved_tube_metrics_from_fseries(path, nsamples=2048, skip=4)
++    print(f"path: {path}")
++    print(f"length: {metrics.length:.9g}")
++    print(f"thickness_rad/reach: {metrics.thickness_rad:.9g}")
++    print(f"minrad: {metrics.minrad:.9g}")
++    print(f"min_dcsd: {metrics.min_dcsd:.9g}")
++    print(f"ropelength_rad: {metrics.ropelength_rad:.9g}")
++    print(f"ropelength_diam: {metrics.ropelength_diam:.9g}")
++    print(f"struts: {len(metrics.struts)}")
++    print(f"kinks: {len(metrics.kinks)}")
++    print(f"nontrivial lower-bound guard: {metrics.lower_bound_ok}")
++    return 0
++
++
++if __name__ == "__main__":
++    raise SystemExit(main(sys.argv))
+
+--- /dev/null
++++ examples/example_resolved_tube_geometry.py
+@@ -0,0 +1,75 @@
++#!/usr/bin/env python3
++"""Resolved-tube geometry example.
++
++Covers the lightweight Rawdon/Cantarella API: length, MinRad, dcsd candidates,
++thickness/reach, radius/diameter ropelength conventions, and contact diagnostics.
++"""
++from __future__ import annotations
++
++import math
++
++try:
++    import SSTcore as sst
++except ImportError:
++    import sstcore as sst
++
++
++def regular_polygon(n: int = 64, radius: float = 1.0):
++    return [
++        [radius * math.cos(2.0 * math.pi * i / n),
++         radius * math.sin(2.0 * math.pi * i / n),
++         0.0]
++        for i in range(n)
++    ]
++
++
++def main() -> None:
++    square = [
++        [1.0, 1.0, 0.0],
++        [-1.0, 1.0, 0.0],
++        [-1.0, -1.0, 0.0],
++        [1.0, -1.0, 0.0],
++    ]
++
++    print("=== ResolvedTubeGeometry: square sanity case ===")
++    print("length:", sst.ResolvedTubeGeometry.length(square))
++    print("edge mean:", sst.ResolvedTubeGeometry.edge_length_mean(square))
++    print("edge rel std:", sst.ResolvedTubeGeometry.edge_length_relative_std(square))
++    print("turning angle v0:", sst.ResolvedTubeGeometry.turning_angle(square[-1], square[0], square[1]))
++    print("minrad v0:", sst.ResolvedTubeGeometry.minrad_at_vertex(square, 0))
++    print("global minrad:", sst.ResolvedTubeGeometry.global_minrad(square))
++    print("segment distance:", sst.ResolvedTubeGeometry.segment_segment_distance(
++        [0, 0, 0], [1, 0, 0], [0, 2, 0], [1, 2, 0]
++    ))
++
++    candidates = sst.ResolvedTubeGeometry.dcsd_candidates(square, skip_neighbors=1, distance_tol=1e-9)
++    print("dcsd candidates:", len(candidates))
++
++    metrics = sst.ResolvedTubeGeometry.analyze(square, skip_neighbors=1, contact_tol=1e-9, equilateral_tol=1e-12)
++    print("thickness_rad = reach_rad:", metrics.thickness_rad)
++    print("ropelength_rad:", metrics.ropelength_rad)
++    print("ropelength_diam:", metrics.ropelength_diam)
++    print("struts/kinks:", len(metrics.struts), len(metrics.kinks))
++
++    diag = sst.ContactStressMap.diagnose_length_criticality(square, metrics)
++    print("contact residual:", diag.contact_residual)
++    print("contact entropy:", diag.contact_entropy)
++
++    print("\n=== Convention guards ===")
++    lower = sst.ResolvedTubeGeometry.nontrivial_knot_lower_bound_rad()
++    print("nontrivial lower bound, radius convention:", lower)
++    print("trefoil diameter 16.371637 -> radius:",
++          sst.ResolvedTubeGeometry.diameter_to_radius_ropelength(16.371637))
++    print("trefoil radius 32.743274 -> diameter:",
++          sst.ResolvedTubeGeometry.radius_to_diameter_ropelength(32.743274))
++
++    print("\n=== Smooth unknot polygon ===")
++    circle = regular_polygon(96)
++    cm = sst.resolved_tube_analyze(circle, skip_neighbors=8, contact_tol=1e-3, equilateral_tol=1e-3)
++    print("circle ropelength_rad ~ 2*pi:", cm.ropelength_rad)
++    print("circle lower_bound_ok is false because the nontrivial-knot bound does not apply to the unknot:",
++          cm.lower_bound_ok)
++
++
++if __name__ == "__main__":
++    main()
+
+--- /dev/null
++++ tests/test_resolved_tube_geometry.cpp
+@@ -0,0 +1,30 @@
++#include "../src/resolved_tube_geometry.h"
++
++#include <cassert>
++#include <cmath>
++#include <vector>
++
++int main() {
++    using sst::Vec3;
++    const std::vector<Vec3> square = {
++        {1.0, 1.0, 0.0},
++        {-1.0, 1.0, 0.0},
++        {-1.0, -1.0, 0.0},
++        {1.0, -1.0, 0.0},
++    };
++
++    const auto metrics = sst::ResolvedTubeGeometry::analyze(square, 1, 1e-9, 1e-12);
++    assert(std::abs(metrics.length - 8.0) < 1e-12);
++    assert(std::abs(metrics.thickness_rad - 1.0) < 1e-12);
++    assert(std::abs(metrics.ropelength_rad - 8.0) < 1e-12);
++    assert(std::abs(metrics.ropelength_diam - 4.0) < 1e-12);
++    assert(metrics.kinks.size() == 4);
++
++    const auto diag = sst::ContactStressMap::diagnose_length_criticality(square, metrics, false);
++    assert(diag.kink_count == metrics.kinks.size());
++    assert(diag.contact_residual >= 0.0);
++
++    const double lower = sst::ResolvedTubeGeometry::nontrivial_knot_lower_bound_rad();
++    assert(std::abs(lower - (4.0 * 3.14159265358979323846 + 2.0 * 3.14159265358979323846 * std::sqrt(2.0))) < 1e-12);
++    return 0;
++}
+
+--- /dev/null
++++ tests/test_resolved_tube_geometry.py
+@@ -0,0 +1,125 @@
++"""Resolved-tube / ropelength regression tests.
++
++These tests lock the lightweight Rawdon/Cantarella geometry API added for
++Canon guardrails v3.  They avoid external knot resources and use simple
++closed polygons with analytically checkable lengths and distances.
++"""
++from __future__ import annotations
++
++import math
++
++import pytest
++
++try:
++    import SSTcore as sst
++except ImportError:  # wheels may expose lower-case module in local CMake builds
++    sst = pytest.importorskip("sstcore", exc_type=ImportError)
++
++
++def unit_square():
++    return [
++        [1.0, 1.0, 0.0],
++        [-1.0, 1.0, 0.0],
++        [-1.0, -1.0, 0.0],
++        [1.0, -1.0, 0.0],
++    ]
++
++
++def two_parallel_segments():
++    return ([0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 2.0, 0.0], [1.0, 2.0, 0.0])
++
++
++def test_basic_length_edge_stats_and_turning_angle():
++    pts = unit_square()
++    assert sst.ResolvedTubeGeometry.length(pts) == pytest.approx(8.0)
++    assert sst.resolved_tube_length(pts) == pytest.approx(8.0)
++    assert sst.ResolvedTubeGeometry.edge_length_mean(pts) == pytest.approx(2.0)
++    assert sst.ResolvedTubeGeometry.edge_length_relative_std(pts) == pytest.approx(0.0)
++    assert sst.ResolvedTubeGeometry.turning_angle(pts[0], pts[1], pts[2]) == pytest.approx(math.pi / 2)
++
++
++def test_minrad_kink_and_global_minrad():
++    pts = unit_square()
++    expected = 1.0 / math.tan(math.pi / 4.0)
++    assert sst.ResolvedTubeGeometry.minrad_at_vertex(pts, 0) == pytest.approx(expected)
++    kink = sst.ResolvedTubeGeometry.kink_at_vertex(pts, 0)
++    assert kink.vertex == 0
++    assert kink.minrad == pytest.approx(expected)
++    assert kink.turning_angle == pytest.approx(math.pi / 2)
++    assert sst.ResolvedTubeGeometry.global_minrad(pts) == pytest.approx(expected)
++    assert sst.resolved_tube_minrad(pts) == pytest.approx(expected)
++
++
++def test_segment_distance_and_dcsd_candidates():
++    p0, p1, q0, q1 = two_parallel_segments()
++    distance, s, t = sst.ResolvedTubeGeometry.segment_segment_distance(p0, p1, q0, q1)
++    assert distance == pytest.approx(2.0)
++    assert 0.0 <= s <= 1.0
++    assert 0.0 <= t <= 1.0
++
++    pts = unit_square()
++    candidates = sst.ResolvedTubeGeometry.dcsd_candidates(pts, skip_neighbors=1, distance_tol=1e-9)
++    assert len(candidates) >= 1
++    assert min(c.distance for c in candidates) == pytest.approx(2.0)
++
++
++def test_analyze_ropelength_radius_and_diameter_conventions():
++    pts = unit_square()
++    metrics = sst.ResolvedTubeGeometry.analyze(pts, skip_neighbors=1, contact_tol=1e-9, equilateral_tol=1e-12)
++    assert metrics.length == pytest.approx(8.0)
++    assert metrics.minrad == pytest.approx(1.0)
++    assert metrics.min_dcsd == pytest.approx(2.0)
++    assert metrics.thickness_rad == pytest.approx(1.0)
++    assert metrics.reach_rad == pytest.approx(metrics.thickness_rad)
++    assert metrics.ropelength_rad == pytest.approx(8.0)
++    assert metrics.ropelength_diam == pytest.approx(4.0)
++    assert metrics.equilateral_ok is True
++    assert len(metrics.struts) >= 1
++    assert len(metrics.kinks) == 4
++
++    flat = sst.resolved_tube_analyze(pts, skip_neighbors=1, contact_tol=1e-9, equilateral_tol=1e-12)
++    assert flat.ropelength_rad == pytest.approx(metrics.ropelength_rad)
++
++
++def test_lower_bound_and_convention_converters():
++    lower = sst.ResolvedTubeGeometry.nontrivial_knot_lower_bound_rad()
++    assert lower == pytest.approx(4.0 * math.pi + 2.0 * math.pi * math.sqrt(2.0))
++    assert sst.resolved_tube_lower_bound_rad() == pytest.approx(lower)
++    assert sst.ResolvedTubeGeometry.radius_to_diameter_ropelength(32.743274) == pytest.approx(16.371637)
++    assert sst.ResolvedTubeGeometry.diameter_to_radius_ropelength(16.371637) == pytest.approx(32.743274)
++
++
++def test_contact_stress_map_lightweight_diagnostic():
++    pts = unit_square()
++    metrics = sst.ResolvedTubeGeometry.analyze(pts, skip_neighbors=1, contact_tol=1e-9, equilateral_tol=1e-12)
++    diag = sst.ContactStressMap.diagnose_length_criticality(pts, metrics)
++    assert diag.strut_count == len(metrics.struts)
++    assert diag.kink_count == len(metrics.kinks)
++    assert diag.contact_residual >= 0.0
++    assert diag.contact_entropy >= 0.0
++    assert diag.solved_nnls is False
++
++
++def test_knot_particle_gate_uses_full_compton_wavelength():
++    params = sst.KnotParticleModelParams()
++    model = sst.KnotParticleModel(params)
++    K = sst.KnotInvariants()
++    K.name = "gate-guard"
++    K.crossing_number = 8  # force exposed sector in the simple v1 gate
++    K.min_self_distance = 1.0
++    pred = model.predict(K)
++    alpha = sst.SSTCanonicalConstants.alpha()
++    assert pred.gate_factor == pytest.approx(4.0 / alpha, rel=1e-10)
++
++
++def test_master_equation_horn_baseline_is_separate_from_rho_m_baseline():
++    vals = sst.SSTCanonicalConstants.values()
++    L_diam_trefoil = 16.371637
++    rho_m_mass = sst.SSTMasterEquation.geometric_baseline_mass_from_rho_m(
++        vals.rho_m, vals.r_c, vals.lambda_c, L_diam_trefoil
++    )
++    horn_mass = sst.SSTMasterEquation.geometric_horn_baseline_mass(
++        vals.rho_horn, vals.r_c, vals.lambda_c, L_diam_trefoil
++    )
++    assert horn_mass > rho_m_mass * 1e20
++    assert horn_mass / vals.m_e == pytest.approx(4.09, rel=0.05)

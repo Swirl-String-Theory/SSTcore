@@ -3,6 +3,7 @@
 #include <pybind11/stl.h>
 #include <pybind11/numpy.h>
 #include "sst_gravity.h"
+#include "canonical_constants.h"
 
 namespace py = pybind11;
 using namespace sst;
@@ -95,7 +96,7 @@ void bind_sst_gravity(py::module_& m) {
                 return SSTGravity::compute_swirl_clock(v_vec, c);
             },
             py::arg("v_swirl_field"),
-            py::arg("c") = 2.99792458e8,
+            py::arg("c") = SSTCanonicalConstants::speed_of_light(),
             R"pbdoc(
                 Compute the Swirl Clock factor S_t at each sample.
             )pbdoc"
@@ -156,7 +157,7 @@ void bind_sst_gravity(py::module_& m) {
             py::arg("t_p"),
             py::arg("F_max"),
             py::arg("r_c"),
-            py::arg("c") = 2.99792458e8,
+            py::arg("c") = SSTCanonicalConstants::speed_of_light(),
             R"pbdoc(
                 Compute the effective Swirl gravitational coupling G_swirl.
             )pbdoc"

@@ -1,0 +1,4 @@
+path,kind
+C:\workspace\projects\SSTcore\examples\example_potential_flow.py,pure_python
+C:\workspace\projects\SSTcore\examples\example_relative_vorticity.py,stub
+C:\workspace\projects\SSTcore\examples\example_vorticity_transport.py,stub

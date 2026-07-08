@@ -6,7 +6,7 @@
 #define SSTCORE_BIOT_SAVART_H
 
 #pragma once
-#include <array>
+#include "sst/types.h"
 #include <vector>
 #include <tuple>
 
@@ -15,7 +15,6 @@
 #endif
 
 namespace sst {
-        using Vec3 = std::array<double, 3>;
 
         class BiotSavart {
         public:

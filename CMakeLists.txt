@@ -91,8 +91,24 @@ add_library(sstcore_lib STATIC
         src/multisector_fitter.cpp
         src/trefoil_operator.cpp
         src/hyperbolic_volume.cpp
-        src/knot_dynamics.cpp
-        src/resolved_tube_geometry.cpp
+        src/knot/resource_loader.cpp
+        src/knot/fourier_parser.cpp
+        src/knot/ideal_parser.cpp
+        src/knot/fourier_eval.cpp
+        src/knot/invariants.cpp
+        src/knot/invariants_bridge.cpp
+        src/particle/xi_model.cpp
+        src/particle/mass_functional.cpp
+        src/particle/knot_particle_model.cpp
+        src/filament/vortex_knot_system.cpp
+        src/filament/evolution.cpp
+        src/tube/detail/common.cpp
+        src/tube/geometry_core.cpp
+        src/tube/rigidity_matrix.cpp
+        src/tube/nnls.cpp
+        src/tube/io.cpp
+        src/tube/contact_stress.cpp
+        src/tube/tightener.cpp
         src/radiation_flow.cpp
         src/swirl_field.cpp
         src/thermo_dynamics.cpp
@@ -138,7 +154,7 @@ if(SST_BUILD_PYTHON_BINDINGS)
             src/multisector_fitter_py.cpp
             src/trefoil_operator_py.cpp
             src/knot_dynamics_py.cpp
-            src/resolved_tube_geometry_py.cpp
+            src/tube/geometry_py.cpp
             src/frenet_helicity_py.cpp
             src/potential_timefield_py.cpp
             src/hyperbolic_volume_py.cpp
@@ -366,7 +382,17 @@ if(NODE_EXECUTABLE)
             src/frenet_helicity.cpp
             src/potential_timefield.cpp
             src/hyperbolic_volume.cpp
-            src/knot_dynamics.cpp
+            src/knot/resource_loader.cpp
+            src/knot/fourier_parser.cpp
+            src/knot/ideal_parser.cpp
+            src/knot/fourier_eval.cpp
+            src/knot/invariants.cpp
+            src/knot/invariants_bridge.cpp
+            src/particle/xi_model.cpp
+            src/particle/mass_functional.cpp
+            src/particle/knot_particle_model.cpp
+            src/filament/vortex_knot_system.cpp
+            src/filament/evolution.cpp
             src/radiation_flow.cpp
             src/swirl_field.cpp
             src/thermo_dynamics.cpp

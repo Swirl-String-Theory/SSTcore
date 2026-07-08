@@ -1,0 +1,747 @@
+diff -ruN src/resolved_tube_geometry.cpp src/resolved_tube_geometry.cpp
+--- src/resolved_tube_geometry.cpp	2026-07-05 19:47:48.000000000 +0000
++++ src/resolved_tube_geometry.cpp	2026-07-05 19:57:22.461072577 +0000
+@@ -351,6 +351,56 @@
+     return AtA;
+ }
+ 
++
++Vec3 centroid_of(const std::vector<Vec3>& pts) {
++    Vec3 c{0.0, 0.0, 0.0};
++    if (pts.empty()) return c;
++    for (const auto& p : pts) c = add(c, p);
++    return mul(c, 1.0 / static_cast<double>(pts.size()));
++}
++
++std::vector<Vec3> apply_flat_step(
++    const std::vector<Vec3>& pts,
++    const std::vector<double>& direction,
++    double alpha) {
++    std::vector<Vec3> out = pts;
++    const std::size_t n = std::min(pts.size(), direction.size() / 3);
++    for (std::size_t i = 0; i < n; ++i) {
++        out[i][0] += alpha * direction[3 * i + 0];
++        out[i][1] += alpha * direction[3 * i + 1];
++        out[i][2] += alpha * direction[3 * i + 2];
++    }
++    return out;
++}
++
++double max_vertex_step_norm(const std::vector<double>& direction) {
++    double mx = 0.0;
++    for (std::size_t i = 0; i + 2 < direction.size(); i += 3) {
++        const double n = std::sqrt(direction[i] * direction[i] +
++                                   direction[i + 1] * direction[i + 1] +
++                                   direction[i + 2] * direction[i + 2]);
++        mx = std::max(mx, n);
++    }
++    return mx;
++}
++
++std::vector<double> normalized_direction_by_vertex_step(std::vector<double> direction) {
++    const double mx = max_vertex_step_norm(direction);
++    if (mx <= eps_d) return direction;
++    for (double& v : direction) v /= mx;
++    return direction;
++}
++
++double sparse_constraint_value(const ResolvedTubeMetrics& tube, const SparseRigidityColumn& col) {
++    if (col.kind == "strut" && col.strut_index < tube.struts.size()) {
++        return 0.5 * tube.struts[col.strut_index].distance;
++    }
++    if (col.kind == "kink" && col.kink_index < tube.kinks.size()) {
++        return tube.kinks[col.kink_index].minrad;
++    }
++    return std::numeric_limits<double>::infinity();
++}
++
+ } // namespace
+ 
+ double ResolvedTubeGeometry::length(const std::vector<Vec3>& pts) {
+@@ -792,6 +842,268 @@
+ }
+ 
+ 
++std::vector<Vec3> ResolvedTubeTightener::rescale_to_thickness(
++    const std::vector<Vec3>& pts,
++    double target_thickness,
++    int skip_neighbors,
++    double contact_tol,
++    double equilateral_tol) {
++    if (pts.empty()) return pts;
++    if (!(target_thickness > 0.0) || !std::isfinite(target_thickness)) return pts;
++    const auto metrics = ResolvedTubeGeometry::analyze(pts, skip_neighbors, contact_tol, equilateral_tol);
++    if (!(metrics.thickness_rad > 0.0) || !std::isfinite(metrics.thickness_rad)) return pts;
++    if (metrics.thickness_rad >= target_thickness) return pts;
++    const double scale = (target_thickness / metrics.thickness_rad) * (1.0 + 1e-12);
++    const Vec3 c = centroid_of(pts);
++    std::vector<Vec3> out = pts;
++    for (auto& p : out) p = add(c, mul(sub(p, c), scale));
++    return out;
++}
++
++std::vector<Vec3> ResolvedTubeTightener::correct_thickness(
++    const std::vector<Vec3>& pts,
++    double target_thickness,
++    const TighteningOptions& options) {
++    if (pts.empty()) return pts;
++    if (!(target_thickness > 0.0) || !std::isfinite(target_thickness)) return pts;
++    if (options.correction_strategy == "none") return pts;
++
++    auto current = ResolvedTubeGeometry::analyze(
++        pts, options.skip_neighbors, options.contact_tol, options.equilateral_tol);
++    if (current.thickness_rad >= target_thickness) return pts;
++
++    if (options.correction_strategy == "scale") {
++        return rescale_to_thickness(pts, target_thickness, options.skip_neighbors,
++                                    options.contact_tol, options.equilateral_tol);
++    }
++
++    // Newton-like minimum-norm correction in the active constraint basis:
++    // choose W = A y with A^T W approximately equal to the missing constraint margins.
++    // Falls back to isotropic scaling if the local active set is empty or singular.
++    std::vector<Vec3> out = pts;
++    for (int attempt = 0; attempt < 3; ++attempt) {
++        current = ResolvedTubeGeometry::analyze(
++            out, options.skip_neighbors, options.contact_tol, options.equilateral_tol);
++        if (current.thickness_rad >= target_thickness) return out;
++
++        const auto A = ContactStressMap::build_sparse_rigidity_matrix(
++            out, current, true, true, 1e-6, options.use_analytic_kink_gradient);
++        if (A.column_count == 0) break;
++
++        std::vector<double> margin(A.column_count, 0.0);
++        bool any = false;
++        for (std::size_t j = 0; j < A.columns.size(); ++j) {
++            const double g = sparse_constraint_value(current, A.columns[j]);
++            if (std::isfinite(g) && g < target_thickness) {
++                margin[j] = target_thickness - g;
++                any = true;
++            }
++        }
++        if (!any) break;
++
++        std::vector<double> dummy;
++        auto AtA = sparse_gram(A, dummy, std::vector<double>(A.row_count, 0.0));
++        std::vector<double> y;
++        if (!solve_dense_linear_system(AtA, margin, y, std::max(0.0, options.newton_ridge))) break;
++        auto W = matvec_sparse_columns(A, y);
++        const double max_step = max_vertex_step_norm(W);
++        if (!(max_step > 0.0) || !std::isfinite(max_step)) break;
++        const double damping = clamp(options.newton_correction_damping, 0.0, 1.0);
++        out = apply_flat_step(out, W, damping);
++    }
++
++    current = ResolvedTubeGeometry::analyze(
++        out, options.skip_neighbors, options.contact_tol, options.equilateral_tol);
++    if (current.thickness_rad < target_thickness) {
++        out = rescale_to_thickness(out, target_thickness, options.skip_neighbors,
++                                   options.contact_tol, options.equilateral_tol);
++    }
++    return out;
++}
++
++std::vector<double> ResolvedTubeTightener::projected_gradient_flat(
++    const std::vector<Vec3>& pts,
++    const ResolvedTubeMetrics& tube,
++    const TighteningOptions& options,
++    ContactStressDiagnostics* diagnostics_out) {
++    const auto grad = ResolvedTubeGeometry::length_gradient_flat(pts);
++    if (grad.empty()) return grad;
++
++    std::vector<double> projected(grad.size(), 0.0);
++    if (options.use_sparse_solver) {
++        const auto A = ContactStressMap::build_sparse_rigidity_matrix(
++            pts, tube, true, true, 1e-6, options.use_analytic_kink_gradient);
++        NNLSResult nnls;
++        if (A.column_count > 0) {
++            nnls = options.use_active_set_solver
++                ? ContactStressMap::solve_nonnegative_least_squares_sparse_active_set(
++                      A, grad, options.nnls_max_iterations, options.nnls_tolerance)
++                : ContactStressMap::solve_nonnegative_least_squares_sparse(
++                      A, grad, options.nnls_max_iterations, options.nnls_tolerance);
++            projected = matvec_sparse_columns(A, nnls.multipliers);
++        }
++        for (std::size_t i = 0; i < projected.size() && i < grad.size(); ++i) projected[i] -= grad[i];
++        if (diagnostics_out) {
++            *diagnostics_out = ContactStressDiagnostics{};
++            diagnostics_out->gradient_norm = flat_norm(grad);
++            diagnostics_out->residual_norm = flat_norm(projected);
++            diagnostics_out->contact_residual = diagnostics_out->residual_norm / std::max(diagnostics_out->gradient_norm, eps_d);
++            diagnostics_out->rigidity_rows = A.row_count;
++            diagnostics_out->rigidity_columns = A.column_count;
++            diagnostics_out->strut_count = tube.struts.size();
++            diagnostics_out->kink_count = tube.kinks.size();
++            diagnostics_out->solved_nnls = A.column_count > 0;
++            diagnostics_out->nnls_converged = nnls.converged;
++            diagnostics_out->nnls_iterations = nnls.iterations;
++            diagnostics_out->nnls_active_set_size = nnls.active_set_size;
++            diagnostics_out->nnls_algorithm = nnls.algorithm;
++            diagnostics_out->nnls_objective = nnls.objective;
++            diagnostics_out->multipliers = nnls.multipliers;
++        }
++    } else {
++        const auto A = ContactStressMap::build_rigidity_matrix(
++            pts, tube, true, true, 1e-6, options.use_analytic_kink_gradient);
++        NNLSResult nnls;
++        if (A.column_count > 0) {
++            nnls = options.use_active_set_solver
++                ? ContactStressMap::solve_nonnegative_least_squares_active_set(
++                      A, grad, options.nnls_max_iterations, options.nnls_tolerance)
++                : ContactStressMap::solve_nonnegative_least_squares(
++                      A, grad, options.nnls_max_iterations, options.nnls_tolerance);
++            projected = matvec_columns(A, nnls.multipliers);
++        }
++        for (std::size_t i = 0; i < projected.size() && i < grad.size(); ++i) projected[i] -= grad[i];
++        if (diagnostics_out) {
++            *diagnostics_out = ContactStressDiagnostics{};
++            diagnostics_out->gradient_norm = flat_norm(grad);
++            diagnostics_out->residual_norm = flat_norm(projected);
++            diagnostics_out->contact_residual = diagnostics_out->residual_norm / std::max(diagnostics_out->gradient_norm, eps_d);
++            diagnostics_out->rigidity_rows = A.row_count;
++            diagnostics_out->rigidity_columns = A.column_count;
++            diagnostics_out->strut_count = tube.struts.size();
++            diagnostics_out->kink_count = tube.kinks.size();
++            diagnostics_out->solved_nnls = A.column_count > 0;
++            diagnostics_out->nnls_converged = nnls.converged;
++            diagnostics_out->nnls_iterations = nnls.iterations;
++            diagnostics_out->nnls_active_set_size = nnls.active_set_size;
++            diagnostics_out->nnls_algorithm = nnls.algorithm;
++            diagnostics_out->nnls_objective = nnls.objective;
++            diagnostics_out->multipliers = nnls.multipliers;
++        }
++    }
++    return projected;
++}
++
++TighteningResult ResolvedTubeTightener::tighten(
++    const std::vector<Vec3>& initial_points,
++    const TighteningOptions& options) {
++    if (initial_points.size() < 3) throw std::invalid_argument("tighten requires at least 3 points.");
++    TighteningResult result;
++    result.points = initial_points;
++    result.metrics = ResolvedTubeGeometry::analyze(
++        result.points, options.skip_neighbors, options.contact_tol, options.equilateral_tol);
++    if (options.max_steps == 0) {
++        result.reason = "max_steps_zero";
++        return result;
++    }
++
++    const double initial_thickness = result.metrics.thickness_rad;
++    if (!(initial_thickness > 0.0) || !std::isfinite(initial_thickness)) {
++        result.reason = "nonpositive_initial_thickness";
++        return result;
++    }
++
++    for (std::size_t step = 0; step < options.max_steps; ++step) {
++        ContactStressDiagnostics diag;
++        auto direction = projected_gradient_flat(result.points, result.metrics, options, &diag);
++        const double projected_norm = flat_norm(direction);
++        const double rel = projected_norm / std::max(diag.gradient_norm, eps_d);
++        if (rel <= options.target_kkt_residual) {
++            result.converged = true;
++            result.reason = "target_kkt_residual";
++            break;
++        }
++        if (!(projected_norm > eps_d) || !std::isfinite(projected_norm)) {
++            result.reason = "zero_projected_gradient";
++            break;
++        }
++        if (options.normalize_direction) direction = normalized_direction_by_vertex_step(std::move(direction));
++
++        TighteningStepRecord rec;
++        rec.step = step;
++        rec.ropelength_before = result.metrics.ropelength_rad;
++        rec.thickness_before = result.metrics.thickness_rad;
++        rec.length_before = result.metrics.length;
++        rec.kkt_residual_before = rel;
++        rec.projected_gradient_norm = projected_norm;
++        rec.strut_count = result.metrics.struts.size();
++        rec.kink_count = result.metrics.kinks.size();
++        rec.rigidity_columns = diag.rigidity_columns;
++        rec.solver_algorithm = diag.nnls_algorithm;
++        rec.correction_strategy = options.correction_strategy;
++
++        const double target_thickness = options.preserve_initial_thickness
++            ? initial_thickness
++            : result.metrics.thickness_rad * std::max(0.0, options.thickness_floor_fraction);
++        const double min_allowed_thickness = result.metrics.thickness_rad * std::max(0.0, options.thickness_floor_fraction);
++        double alpha = std::max(options.min_step_size, options.max_step_size);
++        bool accepted = false;
++        std::vector<Vec3> best_points = result.points;
++        ResolvedTubeMetrics best_metrics = result.metrics;
++        bool corrected = false;
++
++        for (std::size_t trial = 0; trial < options.line_search_trials && alpha >= options.min_step_size; ++trial) {
++            auto candidate = apply_flat_step(result.points, direction, alpha);
++            bool did_correct = false;
++            auto cand_metrics = ResolvedTubeGeometry::analyze(
++                candidate, options.skip_neighbors, options.contact_tol, options.equilateral_tol);
++            if (cand_metrics.thickness_rad < min_allowed_thickness ||
++                (options.preserve_initial_thickness && cand_metrics.thickness_rad < target_thickness)) {
++                candidate = correct_thickness(candidate, target_thickness, options);
++                did_correct = true;
++                cand_metrics = ResolvedTubeGeometry::analyze(
++                    candidate, options.skip_neighbors, options.contact_tol, options.equilateral_tol);
++            }
++            const bool thickness_ok = cand_metrics.thickness_rad + 1e-12 >= min_allowed_thickness &&
++                (!options.preserve_initial_thickness || cand_metrics.thickness_rad + 1e-12 >= target_thickness * options.thickness_floor_fraction);
++            const double allowed_rop = result.metrics.ropelength_rad +
++                std::max(0.0, options.ropelength_increase_tolerance) *
++                std::max(1.0, result.metrics.ropelength_rad);
++            const bool rop_ok = cand_metrics.ropelength_rad <= allowed_rop ||
++                                cand_metrics.length < result.metrics.length;
++            if (thickness_ok && rop_ok && cand_metrics.thickness_rad > 0.0) {
++                accepted = true;
++                best_points = std::move(candidate);
++                best_metrics = cand_metrics;
++                corrected = did_correct;
++                break;
++            }
++            alpha *= clamp(options.line_search_shrink, 0.05, 0.95);
++        }
++
++        rec.alpha = alpha;
++        rec.accepted = accepted;
++        rec.thickness_corrected = corrected;
++        rec.ropelength_after = best_metrics.ropelength_rad;
++        rec.thickness_after = best_metrics.thickness_rad;
++        rec.length_after = best_metrics.length;
++        result.steps.push_back(rec);
++
++        if (!accepted) {
++            result.reason = "line_search_failed";
++            break;
++        }
++        result.points = std::move(best_points);
++        result.metrics = best_metrics;
++    }
++
++    if (result.reason.empty()) {
++        result.reason = result.converged ? "target_kkt_residual" : "max_steps";
++    }
++    return result;
++}
++
++
+ RigidityMatrix ContactStressMap::build_rigidity_matrix(
+     const std::vector<Vec3>& pts,
+     const ResolvedTubeMetrics& tube,
+diff -ruN src/resolved_tube_geometry.h src/resolved_tube_geometry.h
+--- src/resolved_tube_geometry.h	2026-07-05 19:47:48.000000000 +0000
++++ src/resolved_tube_geometry.h	2026-07-05 19:56:38.446474580 +0000
+@@ -98,6 +98,59 @@
+     std::size_t active_set_size = 0;
+ };
+ 
++
++struct TighteningOptions {
++    std::size_t max_steps = 100;
++    std::size_t line_search_trials = 24;
++    std::size_t nnls_max_iterations = 2000;
++    int skip_neighbors = 2;
++    double contact_tol = 1e-3;
++    double equilateral_tol = 1e-3;
++    double target_kkt_residual = 1e-4;
++    double nnls_tolerance = 1e-10;
++    double max_step_size = 1e-2;
++    double min_step_size = 1e-8;
++    double line_search_shrink = 0.5;
++    double thickness_floor_fraction = 0.999;
++    double ropelength_increase_tolerance = 1e-10;
++    double newton_correction_damping = 1.0;
++    double newton_ridge = 1e-10;
++    bool use_sparse_solver = true;
++    bool use_active_set_solver = true;
++    bool use_analytic_kink_gradient = true;
++    bool normalize_direction = true;
++    bool preserve_initial_thickness = true;
++    std::string correction_strategy = "newton"; // "none", "scale", or "newton"
++};
++
++struct TighteningStepRecord {
++    std::size_t step = 0;
++    double ropelength_before = 0.0;
++    double ropelength_after = 0.0;
++    double thickness_before = 0.0;
++    double thickness_after = 0.0;
++    double length_before = 0.0;
++    double length_after = 0.0;
++    double kkt_residual_before = 0.0;
++    double projected_gradient_norm = 0.0;
++    double alpha = 0.0;
++    std::size_t strut_count = 0;
++    std::size_t kink_count = 0;
++    std::size_t rigidity_columns = 0;
++    bool accepted = false;
++    bool thickness_corrected = false;
++    std::string correction_strategy;
++    std::string solver_algorithm;
++};
++
++struct TighteningResult {
++    std::vector<Vec3> points;
++    ResolvedTubeMetrics metrics;
++    std::vector<TighteningStepRecord> steps;
++    bool converged = false;
++    std::string reason;
++};
++
+ struct ContactStressDiagnostics {
+     double contact_residual = 0.0;   // KKT relative residual; 0 is exactly balanced
+     double strut_weight_sum = 0.0;
+@@ -167,6 +220,32 @@
+     [[nodiscard]] static double diameter_to_radius_ropelength(double ropelength_diam);
+ };
+ 
++
++class ResolvedTubeTightener {
++public:
++    [[nodiscard]] static std::vector<Vec3> rescale_to_thickness(
++        const std::vector<Vec3>& pts,
++        double target_thickness,
++        int skip_neighbors = 2,
++        double contact_tol = 1e-3,
++        double equilateral_tol = 1e-3);
++
++    [[nodiscard]] static std::vector<Vec3> correct_thickness(
++        const std::vector<Vec3>& pts,
++        double target_thickness,
++        const TighteningOptions& options = TighteningOptions());
++
++    [[nodiscard]] static std::vector<double> projected_gradient_flat(
++        const std::vector<Vec3>& pts,
++        const ResolvedTubeMetrics& tube,
++        const TighteningOptions& options,
++        ContactStressDiagnostics* diagnostics_out = nullptr);
++
++    [[nodiscard]] static TighteningResult tighten(
++        const std::vector<Vec3>& initial_points,
++        const TighteningOptions& options = TighteningOptions());
++};
++
+ class ContactStressMap {
+ public:
+     [[nodiscard]] static RigidityMatrix build_rigidity_matrix(
+diff -ruN src/resolved_tube_geometry_py.cpp src/resolved_tube_geometry_py.cpp
+--- src/resolved_tube_geometry_py.cpp	2026-07-05 19:48:24.000000000 +0000
++++ src/resolved_tube_geometry_py.cpp	2026-07-05 19:57:47.998342742 +0000
+@@ -87,6 +87,59 @@
+         .def_readwrite("algorithm", &sst::NNLSResult::algorithm)
+         .def_readwrite("active_set_size", &sst::NNLSResult::active_set_size);
+ 
++
++    py::class_<sst::TighteningOptions>(m, "TighteningOptions")
++        .def(py::init<>())
++        .def_readwrite("max_steps", &sst::TighteningOptions::max_steps)
++        .def_readwrite("line_search_trials", &sst::TighteningOptions::line_search_trials)
++        .def_readwrite("nnls_max_iterations", &sst::TighteningOptions::nnls_max_iterations)
++        .def_readwrite("skip_neighbors", &sst::TighteningOptions::skip_neighbors)
++        .def_readwrite("contact_tol", &sst::TighteningOptions::contact_tol)
++        .def_readwrite("equilateral_tol", &sst::TighteningOptions::equilateral_tol)
++        .def_readwrite("target_kkt_residual", &sst::TighteningOptions::target_kkt_residual)
++        .def_readwrite("nnls_tolerance", &sst::TighteningOptions::nnls_tolerance)
++        .def_readwrite("max_step_size", &sst::TighteningOptions::max_step_size)
++        .def_readwrite("min_step_size", &sst::TighteningOptions::min_step_size)
++        .def_readwrite("line_search_shrink", &sst::TighteningOptions::line_search_shrink)
++        .def_readwrite("thickness_floor_fraction", &sst::TighteningOptions::thickness_floor_fraction)
++        .def_readwrite("ropelength_increase_tolerance", &sst::TighteningOptions::ropelength_increase_tolerance)
++        .def_readwrite("newton_correction_damping", &sst::TighteningOptions::newton_correction_damping)
++        .def_readwrite("newton_ridge", &sst::TighteningOptions::newton_ridge)
++        .def_readwrite("use_sparse_solver", &sst::TighteningOptions::use_sparse_solver)
++        .def_readwrite("use_active_set_solver", &sst::TighteningOptions::use_active_set_solver)
++        .def_readwrite("use_analytic_kink_gradient", &sst::TighteningOptions::use_analytic_kink_gradient)
++        .def_readwrite("normalize_direction", &sst::TighteningOptions::normalize_direction)
++        .def_readwrite("preserve_initial_thickness", &sst::TighteningOptions::preserve_initial_thickness)
++        .def_readwrite("correction_strategy", &sst::TighteningOptions::correction_strategy);
++
++    py::class_<sst::TighteningStepRecord>(m, "TighteningStepRecord")
++        .def(py::init<>())
++        .def_readwrite("step", &sst::TighteningStepRecord::step)
++        .def_readwrite("ropelength_before", &sst::TighteningStepRecord::ropelength_before)
++        .def_readwrite("ropelength_after", &sst::TighteningStepRecord::ropelength_after)
++        .def_readwrite("thickness_before", &sst::TighteningStepRecord::thickness_before)
++        .def_readwrite("thickness_after", &sst::TighteningStepRecord::thickness_after)
++        .def_readwrite("length_before", &sst::TighteningStepRecord::length_before)
++        .def_readwrite("length_after", &sst::TighteningStepRecord::length_after)
++        .def_readwrite("kkt_residual_before", &sst::TighteningStepRecord::kkt_residual_before)
++        .def_readwrite("projected_gradient_norm", &sst::TighteningStepRecord::projected_gradient_norm)
++        .def_readwrite("alpha", &sst::TighteningStepRecord::alpha)
++        .def_readwrite("strut_count", &sst::TighteningStepRecord::strut_count)
++        .def_readwrite("kink_count", &sst::TighteningStepRecord::kink_count)
++        .def_readwrite("rigidity_columns", &sst::TighteningStepRecord::rigidity_columns)
++        .def_readwrite("accepted", &sst::TighteningStepRecord::accepted)
++        .def_readwrite("thickness_corrected", &sst::TighteningStepRecord::thickness_corrected)
++        .def_readwrite("correction_strategy", &sst::TighteningStepRecord::correction_strategy)
++        .def_readwrite("solver_algorithm", &sst::TighteningStepRecord::solver_algorithm);
++
++    py::class_<sst::TighteningResult>(m, "TighteningResult")
++        .def(py::init<>())
++        .def_readwrite("points", &sst::TighteningResult::points)
++        .def_readwrite("metrics", &sst::TighteningResult::metrics)
++        .def_readwrite("steps", &sst::TighteningResult::steps)
++        .def_readwrite("converged", &sst::TighteningResult::converged)
++        .def_readwrite("reason", &sst::TighteningResult::reason);
++
+     py::class_<sst::ContactStressDiagnostics>(m, "ContactStressDiagnostics")
+         .def(py::init<>())
+         .def_readwrite("contact_residual", &sst::ContactStressDiagnostics::contact_residual)
+@@ -148,6 +201,26 @@
+         .def_static("diameter_to_radius_ropelength", &sst::ResolvedTubeGeometry::diameter_to_radius_ropelength,
+                     py::arg("ropelength_diam"));
+ 
++
++    py::class_<sst::ResolvedTubeTightener>(m, "ResolvedTubeTightener")
++        .def_static("rescale_to_thickness", &sst::ResolvedTubeTightener::rescale_to_thickness,
++                    py::arg("points"), py::arg("target_thickness"),
++                    py::arg("skip_neighbors") = 2, py::arg("contact_tol") = 1e-3,
++                    py::arg("equilateral_tol") = 1e-3)
++        .def_static("correct_thickness", &sst::ResolvedTubeTightener::correct_thickness,
++                    py::arg("points"), py::arg("target_thickness"),
++                    py::arg("options") = sst::TighteningOptions())
++        .def_static("projected_gradient_flat",
++                    [](const std::vector<sst::Vec3>& points, const sst::ResolvedTubeMetrics& tube,
++                       const sst::TighteningOptions& options) {
++                        sst::ContactStressDiagnostics diag;
++                        auto direction = sst::ResolvedTubeTightener::projected_gradient_flat(points, tube, options, &diag);
++                        return py::make_tuple(direction, diag);
++                    },
++                    py::arg("points"), py::arg("tube"), py::arg("options") = sst::TighteningOptions())
++        .def_static("tighten", &sst::ResolvedTubeTightener::tighten,
++                    py::arg("initial_points"), py::arg("options") = sst::TighteningOptions());
++
+     py::class_<sst::ContactStressMap>(m, "ContactStressMap")
+         .def_static("build_rigidity_matrix", &sst::ContactStressMap::build_rigidity_matrix,
+                     py::arg("points"), py::arg("tube"),
+@@ -217,4 +290,14 @@
+           py::arg("use_sparse_solver") = true,
+           py::arg("use_analytic_kink_gradient") = true,
+           py::arg("use_active_set_solver") = true);
++    m.def("resolved_tube_tighten", &sst::ResolvedTubeTightener::tighten,
++          py::arg("initial_points"), py::arg("options") = sst::TighteningOptions());
++    m.def("resolved_tube_projected_gradient",
++          [](const std::vector<sst::Vec3>& points, const sst::ResolvedTubeMetrics& tube,
++             const sst::TighteningOptions& options) {
++              sst::ContactStressDiagnostics diag;
++              auto direction = sst::ResolvedTubeTightener::projected_gradient_flat(points, tube, options, &diag);
++              return py::make_tuple(direction, diag);
++          },
++          py::arg("points"), py::arg("tube"), py::arg("options") = sst::TighteningOptions());
+ }
+diff -ruN examples/example_resolved_tube_tightener_backends.py examples/example_resolved_tube_tightener_backends.py
+--- examples/example_resolved_tube_tightener_backends.py	1970-01-01 00:00:00.000000000 +0000
++++ examples/example_resolved_tube_tightener_backends.py	2026-07-05 19:58:45.143192118 +0000
+@@ -0,0 +1,45 @@
++"""Compare resolved-tube tightening backend choices.
++
++The same initial polygon is tightened with the sparse active-set path and with the
++older coordinate-descent fallback.  For high-resolution knots, prefer the sparse
++active-set path or export the rigidity system to SciPy/Eigen.
++"""
++from __future__ import annotations
++
++import math
++
++try:
++    import SSTcore as sst
++except ImportError:
++    import sstcore as sst
++
++
++def wavy_circle(n: int = 40):
++    return [
++        [(1.0 + 0.12 * math.cos(5 * 2.0 * math.pi * k / n)) * math.cos(2.0 * math.pi * k / n),
++         (1.0 + 0.08 * math.sin(3 * 2.0 * math.pi * k / n)) * math.sin(2.0 * math.pi * k / n),
++         0.03 * math.sin(4 * 2.0 * math.pi * k / n)]
++        for k in range(n)
++    ]
++
++
++def run(label: str, active_set: bool, sparse: bool):
++    opts = sst.TighteningOptions()
++    opts.max_steps = 12
++    opts.max_step_size = 2e-3
++    opts.contact_tol = 5e-2
++    opts.equilateral_tol = 1.0
++    opts.correction_strategy = "newton"
++    opts.use_active_set_solver = active_set
++    opts.use_sparse_solver = sparse
++    result = sst.ResolvedTubeTightener.tighten(wavy_circle(), opts)
++    print(
++        f"{label:28s} steps={len(result.steps):2d} reason={result.reason:24s} "
++        f"rop_rad={result.metrics.ropelength_rad:.6f} "
++        f"thick={result.metrics.thickness_rad:.6f}"
++    )
++
++
++run("sparse active-set", active_set=True, sparse=True)
++run("sparse coordinate", active_set=False, sparse=True)
++run("dense active-set", active_set=True, sparse=False)
+diff -ruN examples/example_resolved_tube_tightening_loop.py examples/example_resolved_tube_tightening_loop.py
+--- examples/example_resolved_tube_tightening_loop.py	1970-01-01 00:00:00.000000000 +0000
++++ examples/example_resolved_tube_tightening_loop.py	2026-07-05 19:58:45.135466181 +0000
+@@ -0,0 +1,58 @@
++"""Projected-gradient resolved-tube tightening demo.
++
++This example uses the lightweight SSTcore tightener added after the resolved-tube
++KKT/NNLS modules.  It is not a full ridgerunner clone; it performs conservative
++projected-gradient steps, keeps polygonal thickness from dropping, and records a
++KKT residual history.
++"""
++from __future__ import annotations
++
++import math
++
++try:
++    import SSTcore as sst
++except ImportError:  # local editable builds may use lower-case name
++    import sstcore as sst
++
++
++def ellipse_points(n: int = 48):
++    return [
++        [1.5 * math.cos(2.0 * math.pi * k / n),
++         0.75 * math.sin(2.0 * math.pi * k / n),
++         0.04 * math.sin(6.0 * math.pi * k / n)]
++        for k in range(n)
++    ]
++
++
++points = ellipse_points()
++before = sst.ResolvedTubeGeometry.analyze(points, skip_neighbors=2, contact_tol=5e-2, equilateral_tol=1.0)
++
++opts = sst.TighteningOptions()
++opts.max_steps = 25
++opts.max_step_size = 2.5e-3
++opts.contact_tol = 5e-2
++opts.equilateral_tol = 1.0
++opts.target_kkt_residual = 1e-4
++opts.correction_strategy = "newton"      # try "scale" for SONO-like rescaling
++opts.preserve_initial_thickness = True
++opts.use_sparse_solver = True
++opts.use_active_set_solver = True
++
++result = sst.ResolvedTubeTightener.tighten(points, opts)
++
++after = result.metrics
++print("Resolved-tube tightening")
++print(f"  reason: {result.reason}")
++print(f"  converged: {result.converged}")
++print(f"  steps: {len(result.steps)}")
++print(f"  ropelength_rad: {before.ropelength_rad:.9f} -> {after.ropelength_rad:.9f}")
++print(f"  thickness_rad:  {before.thickness_rad:.9f} -> {after.thickness_rad:.9f}")
++print(f"  struts/kinks:   {len(after.struts)} / {len(after.kinks)}")
++
++for step in result.steps[:10]:
++    print(
++        f"  step {step.step:02d}: alpha={step.alpha:.3e}, "
++        f"KKT={step.kkt_residual_before:.3e}, "
++        f"Rop={step.ropelength_before:.6f}->{step.ropelength_after:.6f}, "
++        f"corrected={step.thickness_corrected}"
++    )
+diff -ruN tests/test_resolved_tube_geometry.cpp tests/test_resolved_tube_geometry.cpp
+--- tests/test_resolved_tube_geometry.cpp	2026-07-05 19:48:52.000000000 +0000
++++ tests/test_resolved_tube_geometry.cpp	2026-07-05 19:58:16.746430550 +0000
+@@ -99,6 +99,46 @@
+     assert(diag.rigidity_columns == matrix.column_count);
+     assert(diag.multipliers.size() == matrix.column_count);
+ 
++
++
++    std::vector<Vec3> ellipse;
++    const int N = 24;
++    for (int k = 0; k < N; ++k) {
++        const double t = 2.0 * 3.14159265358979323846 * static_cast<double>(k) / static_cast<double>(N);
++        ellipse.push_back({1.5 * std::cos(t), 0.75 * std::sin(t), 0.05 * std::sin(3.0 * t)});
++    }
++    const auto before_tight = sst::ResolvedTubeGeometry::analyze(ellipse, 2, 5e-2, 1.0);
++    sst::TighteningOptions opts;
++    opts.max_steps = 8;
++    opts.max_step_size = 5e-3;
++    opts.min_step_size = 1e-7;
++    opts.line_search_trials = 16;
++    opts.contact_tol = 5e-2;
++    opts.equilateral_tol = 1.0;
++    opts.target_kkt_residual = 1e-3;
++    opts.correction_strategy = "newton";
++    opts.preserve_initial_thickness = true;
++    const auto projected_pair_metrics = sst::ResolvedTubeGeometry::analyze(ellipse, opts.skip_neighbors, opts.contact_tol, opts.equilateral_tol);
++    sst::ContactStressDiagnostics pg_diag;
++    const auto projected = sst::ResolvedTubeTightener::projected_gradient_flat(ellipse, projected_pair_metrics, opts, &pg_diag);
++    assert(projected.size() == 3 * ellipse.size());
++    assert(pg_diag.gradient_norm > 0.0);
++
++    auto scaled = sst::ResolvedTubeTightener::rescale_to_thickness(
++        ellipse, before_tight.thickness_rad * 1.01, opts.skip_neighbors, opts.contact_tol, opts.equilateral_tol);
++    const auto scaled_metrics = sst::ResolvedTubeGeometry::analyze(scaled, opts.skip_neighbors, opts.contact_tol, opts.equilateral_tol);
++    assert(scaled_metrics.thickness_rad >= before_tight.thickness_rad * 1.009);
++
++    const auto tightened = sst::ResolvedTubeTightener::tighten(ellipse, opts);
++    assert(!tightened.points.empty());
++    assert(!tightened.reason.empty());
++    assert(tightened.metrics.thickness_rad > 0.0);
++    assert(tightened.metrics.ropelength_rad <= before_tight.ropelength_rad * (1.0 + 1e-6));
++    if (!tightened.steps.empty()) {
++        assert(tightened.steps.front().projected_gradient_norm > 0.0);
++        assert(!tightened.steps.front().solver_algorithm.empty());
++    }
++
+     const double lower = sst::ResolvedTubeGeometry::nontrivial_knot_lower_bound_rad();
+     assert(std::abs(lower - (4.0 * 3.14159265358979323846 + 2.0 * 3.14159265358979323846 * std::sqrt(2.0))) < 1e-12);
+     return 0;
+diff -ruN tests/test_resolved_tube_geometry.py tests/test_resolved_tube_geometry.py
+--- tests/test_resolved_tube_geometry.py	2026-07-05 19:49:07.000000000 +0000
++++ tests/test_resolved_tube_geometry.py	2026-07-05 19:58:28.268699241 +0000
+@@ -203,3 +203,52 @@
+     )
+     assert horn_mass > rho_m_mass * 1e20
+     assert horn_mass / vals.m_e == pytest.approx(4.09, rel=0.05)
++
++
++def ellipse_points(n=24):
++    return [
++        [1.5 * math.cos(2.0 * math.pi * k / n),
++         0.75 * math.sin(2.0 * math.pi * k / n),
++         0.05 * math.sin(6.0 * math.pi * k / n)]
++        for k in range(n)
++    ]
++
++
++def test_projected_gradient_and_tightening_loop_smoke():
++    pts = ellipse_points()
++    before = sst.ResolvedTubeGeometry.analyze(pts, skip_neighbors=2, contact_tol=5e-2, equilateral_tol=1.0)
++    opts = sst.TighteningOptions()
++    opts.max_steps = 8
++    opts.max_step_size = 5e-3
++    opts.min_step_size = 1e-7
++    opts.line_search_trials = 16
++    opts.contact_tol = 5e-2
++    opts.equilateral_tol = 1.0
++    opts.target_kkt_residual = 1e-3
++    opts.correction_strategy = "newton"
++    opts.preserve_initial_thickness = True
++
++    direction, diag = sst.ResolvedTubeTightener.projected_gradient_flat(pts, before, opts)
++    assert len(direction) == 3 * len(pts)
++    assert diag.gradient_norm > 0.0
++
++    scaled = sst.ResolvedTubeTightener.rescale_to_thickness(
++        pts, before.thickness_rad * 1.01, opts.skip_neighbors, opts.contact_tol, opts.equilateral_tol
++    )
++    scaled_metrics = sst.ResolvedTubeGeometry.analyze(scaled, opts.skip_neighbors, opts.contact_tol, opts.equilateral_tol)
++    assert scaled_metrics.thickness_rad >= before.thickness_rad * 1.009
++
++    corrected = sst.ResolvedTubeTightener.correct_thickness(pts, before.thickness_rad * 1.001, opts)
++    corrected_metrics = sst.ResolvedTubeGeometry.analyze(corrected, opts.skip_neighbors, opts.contact_tol, opts.equilateral_tol)
++    assert corrected_metrics.thickness_rad >= before.thickness_rad * 1.0005
++
++    result = sst.ResolvedTubeTightener.tighten(pts, opts)
++    assert result.reason
++    assert result.metrics.thickness_rad > 0.0
++    assert result.metrics.ropelength_rad <= before.ropelength_rad * (1.0 + 1e-6)
++    if result.steps:
++        assert result.steps[0].projected_gradient_norm > 0.0
++        assert result.steps[0].solver_algorithm
++
++    flat = sst.resolved_tube_tighten(pts, opts)
++    assert flat.reason

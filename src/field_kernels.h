@@ -8,15 +8,13 @@
 // Static kernels for Biot–Savart over a wire polyline and dipole superposition.
 // Units: mu0 = 1, so factor = 1/(4π).
 #pragma once
-#include <array>
+#include "sst/types.h"
 #include <vector>
 #include <cstddef>
 #include <cmath>
 #include <algorithm>
 
 namespace sst {
-
-using Vec3 = std::array<double, 3>;
 
 class FieldKernels {
 public:

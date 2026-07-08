@@ -1,11 +1,11 @@
 {
   "manifest_version": 1,
-  "generated_at": "2026-07-05T20:19:29.963309+00:00",
+  "generated_at": "2026-07-06T10:13:21.036675+00:00",
   "summary": {
-    "cpp_public": 311,
+    "cpp_public": 370,
     "py_bound": 647,
-    "cpp_unbound": 151,
-    "binding_without_cpp_match": 79
+    "cpp_unbound": 153,
+    "binding_without_cpp_match": 22
   },
   "entries": [
     {
@@ -3464,7 +3464,7 @@
       "py_export": "SegmentPair.i",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SegmentPair",
       "py_name": "i"
     },
@@ -3474,7 +3474,7 @@
       "py_export": "SegmentPair.j",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SegmentPair",
       "py_name": "j"
     },
@@ -3484,7 +3484,7 @@
       "py_export": "SegmentPair.s",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SegmentPair",
       "py_name": "s"
     },
@@ -3494,7 +3494,7 @@
       "py_export": "SegmentPair.t",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SegmentPair",
       "py_name": "t"
     },
@@ -3504,7 +3504,7 @@
       "py_export": "SegmentPair.distance",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SegmentPair",
       "py_name": "distance"
     },
@@ -3514,7 +3514,7 @@
       "py_export": "SegmentPair.arclength_i",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SegmentPair",
       "py_name": "arclength_i"
     },
@@ -3524,7 +3524,7 @@
       "py_export": "SegmentPair.arclength_j",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SegmentPair",
       "py_name": "arclength_j"
     },
@@ -3534,7 +3534,7 @@
       "py_export": "SegmentPair.__init__",
       "export_kind": "constructor",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SegmentPair",
       "py_name": "__init__"
     },
@@ -3544,7 +3544,7 @@
       "py_export": "KinkRecord.vertex",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "KinkRecord",
       "py_name": "vertex"
     },
@@ -3554,7 +3554,7 @@
       "py_export": "KinkRecord.minrad_minus",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "KinkRecord",
       "py_name": "minrad_minus"
     },
@@ -3564,7 +3564,7 @@
       "py_export": "KinkRecord.minrad_plus",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "KinkRecord",
       "py_name": "minrad_plus"
     },
@@ -3574,7 +3574,7 @@
       "py_export": "KinkRecord.minrad",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "KinkRecord",
       "py_name": "minrad"
     },
@@ -3584,7 +3584,7 @@
       "py_export": "KinkRecord.turning_angle",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "KinkRecord",
       "py_name": "turning_angle"
     },
@@ -3594,7 +3594,7 @@
       "py_export": "KinkRecord.__init__",
       "export_kind": "constructor",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "KinkRecord",
       "py_name": "__init__"
     },
@@ -3604,7 +3604,7 @@
       "py_export": "ResolvedTubeMetrics.length",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeMetrics",
       "py_name": "length"
     },
@@ -3614,7 +3614,7 @@
       "py_export": "ResolvedTubeMetrics.minrad",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeMetrics",
       "py_name": "minrad"
     },
@@ -3624,7 +3624,7 @@
       "py_export": "ResolvedTubeMetrics.min_dcsd",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeMetrics",
       "py_name": "min_dcsd"
     },
@@ -3634,7 +3634,7 @@
       "py_export": "ResolvedTubeMetrics.half_min_dcsd",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeMetrics",
       "py_name": "half_min_dcsd"
     },
@@ -3644,7 +3644,7 @@
       "py_export": "ResolvedTubeMetrics.thickness_rad",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeMetrics",
       "py_name": "thickness_rad"
     },
@@ -3654,7 +3654,7 @@
       "py_export": "ResolvedTubeMetrics.reach_rad",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeMetrics",
       "py_name": "reach_rad"
     },
@@ -3664,7 +3664,7 @@
       "py_export": "ResolvedTubeMetrics.ropelength_rad",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeMetrics",
       "py_name": "ropelength_rad"
     },
@@ -3674,7 +3674,7 @@
       "py_export": "ResolvedTubeMetrics.ropelength_diam",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeMetrics",
       "py_name": "ropelength_diam"
     },
@@ -3684,7 +3684,7 @@
       "py_export": "ResolvedTubeMetrics.edge_length_mean",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeMetrics",
       "py_name": "edge_length_mean"
     },
@@ -3694,7 +3694,7 @@
       "py_export": "ResolvedTubeMetrics.edge_length_rel_std",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeMetrics",
       "py_name": "edge_length_rel_std"
     },
@@ -3704,7 +3704,7 @@
       "py_export": "ResolvedTubeMetrics.equilateral_ok",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeMetrics",
       "py_name": "equilateral_ok"
     },
@@ -3714,7 +3714,7 @@
       "py_export": "ResolvedTubeMetrics.lower_bound_ok",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeMetrics",
       "py_name": "lower_bound_ok"
     },
@@ -3724,7 +3724,7 @@
       "py_export": "ResolvedTubeMetrics.struts",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeMetrics",
       "py_name": "struts"
     },
@@ -3734,7 +3734,7 @@
       "py_export": "ResolvedTubeMetrics.kinks",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeMetrics",
       "py_name": "kinks"
     },
@@ -3744,7 +3744,7 @@
       "py_export": "ResolvedTubeMetrics.__init__",
       "export_kind": "constructor",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeMetrics",
       "py_name": "__init__"
     },
@@ -3754,7 +3754,7 @@
       "py_export": "SparseEntry.row",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SparseEntry",
       "py_name": "row"
     },
@@ -3764,7 +3764,7 @@
       "py_export": "SparseEntry.value",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SparseEntry",
       "py_name": "value"
     },
@@ -3774,7 +3774,7 @@
       "py_export": "SparseEntry.__init__",
       "export_kind": "constructor",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SparseEntry",
       "py_name": "__init__"
     },
@@ -3784,7 +3784,7 @@
       "py_export": "RigidityColumn.kind",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "RigidityColumn",
       "py_name": "kind"
     },
@@ -3794,7 +3794,7 @@
       "py_export": "RigidityColumn.strut_index",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "RigidityColumn",
       "py_name": "strut_index"
     },
@@ -3804,7 +3804,7 @@
       "py_export": "RigidityColumn.kink_index",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "RigidityColumn",
       "py_name": "kink_index"
     },
@@ -3814,7 +3814,7 @@
       "py_export": "RigidityColumn.vertex",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "RigidityColumn",
       "py_name": "vertex"
     },
@@ -3824,7 +3824,7 @@
       "py_export": "RigidityColumn.norm",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "RigidityColumn",
       "py_name": "norm"
     },
@@ -3834,7 +3834,7 @@
       "py_export": "RigidityColumn.values",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "RigidityColumn",
       "py_name": "values"
     },
@@ -3844,7 +3844,7 @@
       "py_export": "RigidityColumn.__init__",
       "export_kind": "constructor",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "RigidityColumn",
       "py_name": "__init__"
     },
@@ -3854,7 +3854,7 @@
       "py_export": "RigidityMatrix.row_count",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "RigidityMatrix",
       "py_name": "row_count"
     },
@@ -3864,7 +3864,7 @@
       "py_export": "RigidityMatrix.column_count",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "RigidityMatrix",
       "py_name": "column_count"
     },
@@ -3874,7 +3874,7 @@
       "py_export": "RigidityMatrix.columns",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "RigidityMatrix",
       "py_name": "columns"
     },
@@ -3884,7 +3884,7 @@
       "py_export": "RigidityMatrix.__init__",
       "export_kind": "constructor",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "RigidityMatrix",
       "py_name": "__init__"
     },
@@ -3894,7 +3894,7 @@
       "py_export": "SparseRigidityColumn.kind",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SparseRigidityColumn",
       "py_name": "kind"
     },
@@ -3904,7 +3904,7 @@
       "py_export": "SparseRigidityColumn.strut_index",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SparseRigidityColumn",
       "py_name": "strut_index"
     },
@@ -3914,7 +3914,7 @@
       "py_export": "SparseRigidityColumn.kink_index",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SparseRigidityColumn",
       "py_name": "kink_index"
     },
@@ -3924,7 +3924,7 @@
       "py_export": "SparseRigidityColumn.vertex",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SparseRigidityColumn",
       "py_name": "vertex"
     },
@@ -3934,7 +3934,7 @@
       "py_export": "SparseRigidityColumn.norm",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SparseRigidityColumn",
       "py_name": "norm"
     },
@@ -3944,7 +3944,7 @@
       "py_export": "SparseRigidityColumn.entries",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SparseRigidityColumn",
       "py_name": "entries"
     },
@@ -3954,7 +3954,7 @@
       "py_export": "SparseRigidityColumn.__init__",
       "export_kind": "constructor",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SparseRigidityColumn",
       "py_name": "__init__"
     },
@@ -3964,7 +3964,7 @@
       "py_export": "SparseRigidityMatrix.row_count",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SparseRigidityMatrix",
       "py_name": "row_count"
     },
@@ -3974,7 +3974,7 @@
       "py_export": "SparseRigidityMatrix.column_count",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SparseRigidityMatrix",
       "py_name": "column_count"
     },
@@ -3984,7 +3984,7 @@
       "py_export": "SparseRigidityMatrix.nonzero_count",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SparseRigidityMatrix",
       "py_name": "nonzero_count"
     },
@@ -3994,7 +3994,7 @@
       "py_export": "SparseRigidityMatrix.columns",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SparseRigidityMatrix",
       "py_name": "columns"
     },
@@ -4004,7 +4004,7 @@
       "py_export": "SparseRigidityMatrix.__init__",
       "export_kind": "constructor",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "SparseRigidityMatrix",
       "py_name": "__init__"
     },
@@ -4014,7 +4014,7 @@
       "py_export": "NNLSResult.multipliers",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "NNLSResult",
       "py_name": "multipliers"
     },
@@ -4024,7 +4024,7 @@
       "py_export": "NNLSResult.residual_norm",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "NNLSResult",
       "py_name": "residual_norm"
     },
@@ -4034,7 +4034,7 @@
       "py_export": "NNLSResult.relative_residual",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "NNLSResult",
       "py_name": "relative_residual"
     },
@@ -4044,7 +4044,7 @@
       "py_export": "NNLSResult.objective",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "NNLSResult",
       "py_name": "objective"
     },
@@ -4054,7 +4054,7 @@
       "py_export": "NNLSResult.iterations",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "NNLSResult",
       "py_name": "iterations"
     },
@@ -4064,7 +4064,7 @@
       "py_export": "NNLSResult.converged",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "NNLSResult",
       "py_name": "converged"
     },
@@ -4074,7 +4074,7 @@
       "py_export": "NNLSResult.algorithm",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "NNLSResult",
       "py_name": "algorithm"
     },
@@ -4084,7 +4084,7 @@
       "py_export": "NNLSResult.active_set_size",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "NNLSResult",
       "py_name": "active_set_size"
     },
@@ -4094,7 +4094,7 @@
       "py_export": "NNLSResult.__init__",
       "export_kind": "constructor",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "NNLSResult",
       "py_name": "__init__"
     },
@@ -4104,7 +4104,7 @@
       "py_export": "TighteningOptions.max_steps",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "max_steps"
     },
@@ -4114,7 +4114,7 @@
       "py_export": "TighteningOptions.line_search_trials",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "line_search_trials"
     },
@@ -4124,7 +4124,7 @@
       "py_export": "TighteningOptions.nnls_max_iterations",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "nnls_max_iterations"
     },
@@ -4134,7 +4134,7 @@
       "py_export": "TighteningOptions.skip_neighbors",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "skip_neighbors"
     },
@@ -4144,7 +4144,7 @@
       "py_export": "TighteningOptions.contact_tol",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "contact_tol"
     },
@@ -4154,7 +4154,7 @@
       "py_export": "TighteningOptions.equilateral_tol",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "equilateral_tol"
     },
@@ -4164,7 +4164,7 @@
       "py_export": "TighteningOptions.target_kkt_residual",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "target_kkt_residual"
     },
@@ -4174,7 +4174,7 @@
       "py_export": "TighteningOptions.nnls_tolerance",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "nnls_tolerance"
     },
@@ -4184,7 +4184,7 @@
       "py_export": "TighteningOptions.max_step_size",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "max_step_size"
     },
@@ -4194,7 +4194,7 @@
       "py_export": "TighteningOptions.min_step_size",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "min_step_size"
     },
@@ -4204,7 +4204,7 @@
       "py_export": "TighteningOptions.line_search_shrink",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "line_search_shrink"
     },
@@ -4214,7 +4214,7 @@
       "py_export": "TighteningOptions.thickness_floor_fraction",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "thickness_floor_fraction"
     },
@@ -4224,7 +4224,7 @@
       "py_export": "TighteningOptions.ropelength_increase_tolerance",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "ropelength_increase_tolerance"
     },
@@ -4234,7 +4234,7 @@
       "py_export": "TighteningOptions.newton_correction_damping",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "newton_correction_damping"
     },
@@ -4244,7 +4244,7 @@
       "py_export": "TighteningOptions.newton_ridge",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "newton_ridge"
     },
@@ -4254,7 +4254,7 @@
       "py_export": "TighteningOptions.use_sparse_solver",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "use_sparse_solver"
     },
@@ -4264,7 +4264,7 @@
       "py_export": "TighteningOptions.use_active_set_solver",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "use_active_set_solver"
     },
@@ -4274,7 +4274,7 @@
       "py_export": "TighteningOptions.use_analytic_kink_gradient",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "use_analytic_kink_gradient"
     },
@@ -4284,7 +4284,7 @@
       "py_export": "TighteningOptions.normalize_direction",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "normalize_direction"
     },
@@ -4294,7 +4294,7 @@
       "py_export": "TighteningOptions.preserve_initial_thickness",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "preserve_initial_thickness"
     },
@@ -4304,7 +4304,7 @@
       "py_export": "TighteningOptions.correction_strategy",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "correction_strategy"
     },
@@ -4314,7 +4314,7 @@
       "py_export": "TighteningOptions.__init__",
       "export_kind": "constructor",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningOptions",
       "py_name": "__init__"
     },
@@ -4324,7 +4324,7 @@
       "py_export": "TighteningStepRecord.step",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningStepRecord",
       "py_name": "step"
     },
@@ -4334,7 +4334,7 @@
       "py_export": "TighteningStepRecord.ropelength_before",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningStepRecord",
       "py_name": "ropelength_before"
     },
@@ -4344,7 +4344,7 @@
       "py_export": "TighteningStepRecord.ropelength_after",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningStepRecord",
       "py_name": "ropelength_after"
     },
@@ -4354,7 +4354,7 @@
       "py_export": "TighteningStepRecord.thickness_before",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningStepRecord",
       "py_name": "thickness_before"
     },
@@ -4364,7 +4364,7 @@
       "py_export": "TighteningStepRecord.thickness_after",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningStepRecord",
       "py_name": "thickness_after"
     },
@@ -4374,7 +4374,7 @@
       "py_export": "TighteningStepRecord.length_before",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningStepRecord",
       "py_name": "length_before"
     },
@@ -4384,7 +4384,7 @@
       "py_export": "TighteningStepRecord.length_after",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningStepRecord",
       "py_name": "length_after"
     },
@@ -4394,7 +4394,7 @@
       "py_export": "TighteningStepRecord.kkt_residual_before",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningStepRecord",
       "py_name": "kkt_residual_before"
     },
@@ -4404,7 +4404,7 @@
       "py_export": "TighteningStepRecord.projected_gradient_norm",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningStepRecord",
       "py_name": "projected_gradient_norm"
     },
@@ -4414,7 +4414,7 @@
       "py_export": "TighteningStepRecord.alpha",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningStepRecord",
       "py_name": "alpha"
     },
@@ -4424,7 +4424,7 @@
       "py_export": "TighteningStepRecord.strut_count",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningStepRecord",
       "py_name": "strut_count"
     },
@@ -4434,7 +4434,7 @@
       "py_export": "TighteningStepRecord.kink_count",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningStepRecord",
       "py_name": "kink_count"
     },
@@ -4444,7 +4444,7 @@
       "py_export": "TighteningStepRecord.rigidity_columns",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningStepRecord",
       "py_name": "rigidity_columns"
     },
@@ -4454,7 +4454,7 @@
       "py_export": "TighteningStepRecord.accepted",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningStepRecord",
       "py_name": "accepted"
     },
@@ -4464,7 +4464,7 @@
       "py_export": "TighteningStepRecord.thickness_corrected",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningStepRecord",
       "py_name": "thickness_corrected"
     },
@@ -4474,7 +4474,7 @@
       "py_export": "TighteningStepRecord.correction_strategy",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningStepRecord",
       "py_name": "correction_strategy"
     },
@@ -4484,7 +4484,7 @@
       "py_export": "TighteningStepRecord.solver_algorithm",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningStepRecord",
       "py_name": "solver_algorithm"
     },
@@ -4494,7 +4494,7 @@
       "py_export": "TighteningStepRecord.__init__",
       "export_kind": "constructor",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningStepRecord",
       "py_name": "__init__"
     },
@@ -4504,7 +4504,7 @@
       "py_export": "TighteningResult.points",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningResult",
       "py_name": "points"
     },
@@ -4514,7 +4514,7 @@
       "py_export": "TighteningResult.metrics",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningResult",
       "py_name": "metrics"
     },
@@ -4524,7 +4524,7 @@
       "py_export": "TighteningResult.steps",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningResult",
       "py_name": "steps"
     },
@@ -4534,7 +4534,7 @@
       "py_export": "TighteningResult.converged",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningResult",
       "py_name": "converged"
     },
@@ -4544,7 +4544,7 @@
       "py_export": "TighteningResult.reason",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningResult",
       "py_name": "reason"
     },
@@ -4554,7 +4554,7 @@
       "py_export": "TighteningResult.__init__",
       "export_kind": "constructor",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "TighteningResult",
       "py_name": "__init__"
     },
@@ -4564,7 +4564,7 @@
       "py_export": "ContactStressDiagnostics.contact_residual",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressDiagnostics",
       "py_name": "contact_residual"
     },
@@ -4574,7 +4574,7 @@
       "py_export": "ContactStressDiagnostics.strut_weight_sum",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressDiagnostics",
       "py_name": "strut_weight_sum"
     },
@@ -4584,7 +4584,7 @@
       "py_export": "ContactStressDiagnostics.kink_weight_sum",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressDiagnostics",
       "py_name": "kink_weight_sum"
     },
@@ -4594,7 +4594,7 @@
       "py_export": "ContactStressDiagnostics.contact_entropy",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressDiagnostics",
       "py_name": "contact_entropy"
     },
@@ -4604,7 +4604,7 @@
       "py_export": "ContactStressDiagnostics.gradient_norm",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressDiagnostics",
       "py_name": "gradient_norm"
     },
@@ -4614,7 +4614,7 @@
       "py_export": "ContactStressDiagnostics.residual_norm",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressDiagnostics",
       "py_name": "residual_norm"
     },
@@ -4624,7 +4624,7 @@
       "py_export": "ContactStressDiagnostics.nnls_objective",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressDiagnostics",
       "py_name": "nnls_objective"
     },
@@ -4634,7 +4634,7 @@
       "py_export": "ContactStressDiagnostics.strut_count",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressDiagnostics",
       "py_name": "strut_count"
     },
@@ -4644,7 +4644,7 @@
       "py_export": "ContactStressDiagnostics.kink_count",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressDiagnostics",
       "py_name": "kink_count"
     },
@@ -4654,7 +4654,7 @@
       "py_export": "ContactStressDiagnostics.rigidity_rows",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressDiagnostics",
       "py_name": "rigidity_rows"
     },
@@ -4664,7 +4664,7 @@
       "py_export": "ContactStressDiagnostics.rigidity_columns",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressDiagnostics",
       "py_name": "rigidity_columns"
     },
@@ -4674,7 +4674,7 @@
       "py_export": "ContactStressDiagnostics.nnls_iterations",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressDiagnostics",
       "py_name": "nnls_iterations"
     },
@@ -4684,7 +4684,7 @@
       "py_export": "ContactStressDiagnostics.nnls_active_set_size",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressDiagnostics",
       "py_name": "nnls_active_set_size"
     },
@@ -4694,7 +4694,7 @@
       "py_export": "ContactStressDiagnostics.nnls_algorithm",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressDiagnostics",
       "py_name": "nnls_algorithm"
     },
@@ -4704,7 +4704,7 @@
       "py_export": "ContactStressDiagnostics.solved_nnls",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressDiagnostics",
       "py_name": "solved_nnls"
     },
@@ -4714,7 +4714,7 @@
       "py_export": "ContactStressDiagnostics.nnls_converged",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressDiagnostics",
       "py_name": "nnls_converged"
     },
@@ -4724,7 +4724,7 @@
       "py_export": "ContactStressDiagnostics.multipliers",
       "export_kind": "property",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressDiagnostics",
       "py_name": "multipliers"
     },
@@ -4734,7 +4734,7 @@
       "py_export": "ContactStressDiagnostics.__init__",
       "export_kind": "constructor",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressDiagnostics",
       "py_name": "__init__"
     },
@@ -4744,7 +4744,7 @@
       "py_export": "ResolvedTubeGeometry.length",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeGeometry",
       "py_name": "length"
     },
@@ -4754,7 +4754,7 @@
       "py_export": "ResolvedTubeGeometry.edge_length_mean",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeGeometry",
       "py_name": "edge_length_mean"
     },
@@ -4764,7 +4764,7 @@
       "py_export": "ResolvedTubeGeometry.edge_length_relative_std",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeGeometry",
       "py_name": "edge_length_relative_std"
     },
@@ -4774,7 +4774,7 @@
       "py_export": "ResolvedTubeGeometry.turning_angle",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeGeometry",
       "py_name": "turning_angle"
     },
@@ -4784,7 +4784,7 @@
       "py_export": "ResolvedTubeGeometry.minrad_at_vertex",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeGeometry",
       "py_name": "minrad_at_vertex"
     },
@@ -4794,7 +4794,7 @@
       "py_export": "ResolvedTubeGeometry.kink_at_vertex",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeGeometry",
       "py_name": "kink_at_vertex"
     },
@@ -4804,7 +4804,7 @@
       "py_export": "ResolvedTubeGeometry.global_minrad",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeGeometry",
       "py_name": "global_minrad"
     },
@@ -4814,7 +4814,7 @@
       "py_export": "ResolvedTubeGeometry.segment_segment_distance",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeGeometry",
       "py_name": "segment_segment_distance"
     },
@@ -4824,7 +4824,7 @@
       "py_export": "ResolvedTubeGeometry.dcsd_candidates",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeGeometry",
       "py_name": "dcsd_candidates"
     },
@@ -4834,7 +4834,7 @@
       "py_export": "ResolvedTubeGeometry.analyze",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeGeometry",
       "py_name": "analyze"
     },
@@ -4844,7 +4844,7 @@
       "py_export": "ResolvedTubeGeometry.length_gradient_flat",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeGeometry",
       "py_name": "length_gradient_flat"
     },
@@ -4854,7 +4854,7 @@
       "py_export": "ResolvedTubeGeometry.strut_gradient_flat",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeGeometry",
       "py_name": "strut_gradient_flat"
     },
@@ -4864,7 +4864,7 @@
       "py_export": "ResolvedTubeGeometry.kink_minrad_plus_gradient_flat",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeGeometry",
       "py_name": "kink_minrad_plus_gradient_flat"
     },
@@ -4874,7 +4874,7 @@
       "py_export": "ResolvedTubeGeometry.kink_minrad_minus_gradient_flat",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeGeometry",
       "py_name": "kink_minrad_minus_gradient_flat"
     },
@@ -4884,7 +4884,7 @@
       "py_export": "ResolvedTubeGeometry.kink_minrad_gradient_flat",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeGeometry",
       "py_name": "kink_minrad_gradient_flat"
     },
@@ -4894,7 +4894,7 @@
       "py_export": "ResolvedTubeGeometry.nontrivial_knot_lower_bound_rad",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeGeometry",
       "py_name": "nontrivial_knot_lower_bound_rad"
     },
@@ -4904,7 +4904,7 @@
       "py_export": "ResolvedTubeGeometry.radius_to_diameter_ropelength",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeGeometry",
       "py_name": "radius_to_diameter_ropelength"
     },
@@ -4914,7 +4914,7 @@
       "py_export": "ResolvedTubeGeometry.diameter_to_radius_ropelength",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeGeometry",
       "py_name": "diameter_to_radius_ropelength"
     },
@@ -4924,7 +4924,7 @@
       "py_export": "ResolvedTubeTightener.rescale_to_thickness",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeTightener",
       "py_name": "rescale_to_thickness"
     },
@@ -4934,7 +4934,7 @@
       "py_export": "ResolvedTubeTightener.correct_thickness",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeTightener",
       "py_name": "correct_thickness"
     },
@@ -4944,7 +4944,7 @@
       "py_export": "ResolvedTubeTightener.projected_gradient_flat",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeTightener",
       "py_name": "projected_gradient_flat"
     },
@@ -4954,7 +4954,7 @@
       "py_export": "ResolvedTubeTightener.tighten",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ResolvedTubeTightener",
       "py_name": "tighten"
     },
@@ -4964,7 +4964,7 @@
       "py_export": "ContactStressMap.build_rigidity_matrix",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressMap",
       "py_name": "build_rigidity_matrix"
     },
@@ -4974,7 +4974,7 @@
       "py_export": "ContactStressMap.build_sparse_rigidity_matrix",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressMap",
       "py_name": "build_sparse_rigidity_matrix"
     },
@@ -4984,7 +4984,7 @@
       "py_export": "ContactStressMap.sparse_to_dense",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressMap",
       "py_name": "sparse_to_dense"
     },
@@ -4994,7 +4994,7 @@
       "py_export": "ContactStressMap.write_sparse_matrix_market",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressMap",
       "py_name": "write_sparse_matrix_market"
     },
@@ -5004,7 +5004,7 @@
       "py_export": "ContactStressMap.write_vector_market",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressMap",
       "py_name": "write_vector_market"
     },
@@ -5014,7 +5014,7 @@
       "py_export": "ContactStressMap.write_vector_csv",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressMap",
       "py_name": "write_vector_csv"
     },
@@ -5024,7 +5024,7 @@
       "py_export": "ContactStressMap.solve_nonnegative_least_squares",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressMap",
       "py_name": "solve_nonnegative_least_squares"
     },
@@ -5034,7 +5034,7 @@
       "py_export": "ContactStressMap.solve_nonnegative_least_squares_sparse",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressMap",
       "py_name": "solve_nonnegative_least_squares_sparse"
     },
@@ -5044,7 +5044,7 @@
       "py_export": "ContactStressMap.solve_nonnegative_least_squares_active_set",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressMap",
       "py_name": "solve_nonnegative_least_squares_active_set"
     },
@@ -5054,7 +5054,7 @@
       "py_export": "ContactStressMap.solve_nonnegative_least_squares_sparse_active_set",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressMap",
       "py_name": "solve_nonnegative_least_squares_sparse_active_set"
     },
@@ -5064,7 +5064,7 @@
       "py_export": "ContactStressMap.diagnose_length_criticality",
       "export_kind": "class_static",
       "binding_file": "resolved_tube_geometry_py.cpp",
-      "header_file": null,
+      "header_file": "resolved_tube_geometry.h",
       "py_class": "ContactStressMap",
       "py_name": "diagnose_length_criticality"
     },
@@ -6992,41 +6992,6 @@
   "gaps": {
     "cpp_without_binding": [
       {
-        "module": "ab_initio_mass",
-        "cpp_symbol": "ParticleEvaluator::v_add",
-        "header_file": "ab_initio_mass.h"
-      },
-      {
-        "module": "ab_initio_mass",
-        "cpp_symbol": "ParticleEvaluator::v_sub",
-        "header_file": "ab_initio_mass.h"
-      },
-      {
-        "module": "ab_initio_mass",
-        "cpp_symbol": "ParticleEvaluator::v_mul",
-        "header_file": "ab_initio_mass.h"
-      },
-      {
-        "module": "ab_initio_mass",
-        "cpp_symbol": "ParticleEvaluator::v_dot",
-        "header_file": "ab_initio_mass.h"
-      },
-      {
-        "module": "ab_initio_mass",
-        "cpp_symbol": "ParticleEvaluator::v_cross",
-        "header_file": "ab_initio_mass.h"
-      },
-      {
-        "module": "ab_initio_mass",
-        "cpp_symbol": "ParticleEvaluator::v_norm",
-        "header_file": "ab_initio_mass.h"
-      },
-      {
-        "module": "ab_initio_mass",
-        "cpp_symbol": "ParticleEvaluator::v_unit",
-        "header_file": "ab_initio_mass.h"
-      },
-      {
         "module": "biot_savart",
         "cpp_symbol": "BiotSavart::computeVelocity",
         "header_file": "biot_savart.h"
@@ -7054,6 +7019,11 @@
       {
         "module": "field_kernels",
         "cpp_symbol": "FieldKernels::dipole_ring_field_grid",
+        "header_file": "field_kernels.h"
+      },
+      {
+        "module": "field_kernels",
+        "cpp_symbol": "FieldKernels::mid",
         "header_file": "field_kernels.h"
       },
       {
@@ -7110,6 +7080,16 @@
         "module": "frenet_helicity",
         "cpp_symbol": "evolve_vortex_knot",
         "header_file": "frenet_helicity.h"
+      },
+      {
+        "module": "knot_dynamics",
+        "cpp_symbol": "MassFunctional::evaluate",
+        "header_file": "knot_dynamics.h"
+      },
+      {
+        "module": "knot_dynamics",
+        "cpp_symbol": "MassFunctional::evaluate_electron_normalized",
+        "header_file": "knot_dynamics.h"
       },
       {
         "module": "knot_dynamics",
@@ -7313,11 +7293,6 @@
       },
       {
         "module": "knot_dynamics",
-        "cpp_symbol": "VortexKnotSystem::find_knot_file",
-        "header_file": "knot_dynamics.h"
-      },
-      {
-        "module": "knot_dynamics",
         "cpp_symbol": "get_embedded_knot_files",
         "header_file": "knot_dynamics.h"
       },
@@ -7477,9 +7452,19 @@
         "header_file": "multisector_fitter.h"
       },
       {
-        "module": "multisector_fitter",
-        "cpp_symbol": "MultisectorFitter::completionFactor",
-        "header_file": "multisector_fitter.h"
+        "module": "resolved_tube_geometry",
+        "cpp_symbol": "ResolvedTubeGeometry::segment_segment_distance",
+        "header_file": "resolved_tube_geometry.h"
+      },
+      {
+        "module": "resolved_tube_geometry",
+        "cpp_symbol": "ResolvedTubeTightener::projected_gradient_flat",
+        "header_file": "resolved_tube_geometry.h"
+      },
+      {
+        "module": "resolved_tube_geometry",
+        "cpp_symbol": "ContactStressMap::to_eigen_sparse",
+        "header_file": "resolved_tube_geometry.h"
       },
       {
         "module": "sst_extensions",
@@ -7589,6 +7574,31 @@
       {
         "module": "sst_gravity",
         "cpp_symbol": "SSTGravity::compute_G_swirl",
+        "header_file": "sst_gravity.h"
+      },
+      {
+        "module": "sst_gravity",
+        "cpp_symbol": "SSTGravity::shear",
+        "header_file": "sst_gravity.h"
+      },
+      {
+        "module": "sst_gravity",
+        "cpp_symbol": "SSTGravity::g_map",
+        "header_file": "sst_gravity.h"
+      },
+      {
+        "module": "sst_gravity",
+        "cpp_symbol": "SSTGravity::h_map",
+        "header_file": "sst_gravity.h"
+      },
+      {
+        "module": "sst_gravity",
+        "cpp_symbol": "SSTGravity::V",
+        "header_file": "sst_gravity.h"
+      },
+      {
+        "module": "sst_gravity",
+        "cpp_symbol": "SSTGravity::F",
         "header_file": "sst_gravity.h"
       },
       {
@@ -7750,6 +7760,12 @@
     "binding_without_cpp_match": [
       {
         "module": "ab_initio_mass",
+        "cpp_symbol": "ParticleEvaluator::print_canonical_derivation",
+        "py_export": "ParticleEvaluator.print_canonical_derivation",
+        "binding_file": "ab_initio_mass_py.cpp"
+      },
+      {
+        "module": "ab_initio_mass",
         "cpp_symbol": "ParticleEvaluator::get_dimless_ropelength",
         "py_export": "ParticleEvaluator.get_dimless_ropelength",
         "binding_file": "ab_initio_mass_py.cpp"
@@ -7845,102 +7861,6 @@
         "binding_file": "knot_dynamics_py.cpp"
       },
       {
-        "module": "knot_dynamics",
-        "cpp_symbol": "MassFunctional::baseline_mass_from_ropelength",
-        "py_export": "MassFunctional.baseline_mass_from_ropelength",
-        "binding_file": "knot_dynamics_py.cpp"
-      },
-      {
-        "module": "knot_dynamics",
-        "cpp_symbol": "MassFunctional::baseline_mass_from_horn_ropelength",
-        "py_export": "MassFunctional.baseline_mass_from_horn_ropelength",
-        "binding_file": "knot_dynamics_py.cpp"
-      },
-      {
-        "module": "knot_dynamics",
-        "cpp_symbol": "MassFunctional::bare_master_mass_scale",
-        "py_export": "MassFunctional.bare_master_mass_scale",
-        "binding_file": "knot_dynamics_py.cpp"
-      },
-      {
-        "module": "knot_dynamics",
-        "cpp_symbol": "MassFunctional::gate_factor",
-        "py_export": "MassFunctional.gate_factor",
-        "binding_file": "knot_dynamics_py.cpp"
-      },
-      {
-        "module": "knot_dynamics",
-        "cpp_symbol": "KnotParticleModel::assign_gate",
-        "py_export": "KnotParticleModel.assign_gate",
-        "binding_file": "knot_dynamics_py.cpp"
-      },
-      {
-        "module": "knot_dynamics",
-        "cpp_symbol": "KnotParticleModel::compute_xi",
-        "py_export": "KnotParticleModel.compute_xi",
-        "binding_file": "knot_dynamics_py.cpp"
-      },
-      {
-        "module": "knot_dynamics",
-        "cpp_symbol": "KnotParticleModel::predict",
-        "py_export": "KnotParticleModel.predict",
-        "binding_file": "knot_dynamics_py.cpp"
-      },
-      {
-        "module": "knot_dynamics",
-        "cpp_symbol": "FourierKnot::loadBlocks",
-        "py_export": "fourier_knot.loadBlocks",
-        "binding_file": "knot_dynamics_py.cpp"
-      },
-      {
-        "module": "knot_dynamics",
-        "cpp_symbol": "FourierKnot::selectMaxHarmonics",
-        "py_export": "fourier_knot.selectMaxHarmonics",
-        "binding_file": "knot_dynamics_py.cpp"
-      },
-      {
-        "module": "knot_dynamics",
-        "cpp_symbol": "FourierKnot::reconstruct",
-        "py_export": "fourier_knot.reconstruct",
-        "binding_file": "knot_dynamics_py.cpp"
-      },
-      {
-        "module": "knot_dynamics",
-        "cpp_symbol": "VortexKnotSystem::initialize_trefoil_knot",
-        "py_export": "VortexKnotSystem.initialize_trefoil_knot",
-        "binding_file": "knot_dynamics_py.cpp"
-      },
-      {
-        "module": "knot_dynamics",
-        "cpp_symbol": "VortexKnotSystem::initialize_figure8_knot",
-        "py_export": "VortexKnotSystem.initialize_figure8_knot",
-        "binding_file": "knot_dynamics_py.cpp"
-      },
-      {
-        "module": "knot_dynamics",
-        "cpp_symbol": "VortexKnotSystem::initialize_knot_from_name",
-        "py_export": "VortexKnotSystem.initialize_knot_from_name",
-        "binding_file": "knot_dynamics_py.cpp"
-      },
-      {
-        "module": "knot_dynamics",
-        "cpp_symbol": "VortexKnotSystem::evolve",
-        "py_export": "VortexKnotSystem.evolve",
-        "binding_file": "knot_dynamics_py.cpp"
-      },
-      {
-        "module": "knot_dynamics",
-        "cpp_symbol": "VortexKnotSystem::get_positions",
-        "py_export": "VortexKnotSystem.get_positions",
-        "binding_file": "knot_dynamics_py.cpp"
-      },
-      {
-        "module": "knot_dynamics",
-        "cpp_symbol": "VortexKnotSystem::get_tangents",
-        "py_export": "VortexKnotSystem.get_tangents",
-        "binding_file": "knot_dynamics_py.cpp"
-      },
-      {
         "module": "magnus_integrator",
         "cpp_symbol": "MagnusBernoulliIntegrator::compute_magnus_force",
         "py_export": "MagnusBernoulliIntegrator.compute_magnus_force",
@@ -7954,122 +7874,8 @@
       },
       {
         "module": "resolved_tube_geometry",
-        "cpp_symbol": "ResolvedTubeGeometry::length",
-        "py_export": "ResolvedTubeGeometry.length",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ResolvedTubeGeometry::edge_length_mean",
-        "py_export": "ResolvedTubeGeometry.edge_length_mean",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ResolvedTubeGeometry::edge_length_relative_std",
-        "py_export": "ResolvedTubeGeometry.edge_length_relative_std",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ResolvedTubeGeometry::turning_angle",
-        "py_export": "ResolvedTubeGeometry.turning_angle",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ResolvedTubeGeometry::minrad_at_vertex",
-        "py_export": "ResolvedTubeGeometry.minrad_at_vertex",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ResolvedTubeGeometry::kink_at_vertex",
-        "py_export": "ResolvedTubeGeometry.kink_at_vertex",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ResolvedTubeGeometry::global_minrad",
-        "py_export": "ResolvedTubeGeometry.global_minrad",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
         "cpp_symbol": "s",
         "py_export": "ResolvedTubeGeometry.segment_segment_distance",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ResolvedTubeGeometry::dcsd_candidates",
-        "py_export": "ResolvedTubeGeometry.dcsd_candidates",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ResolvedTubeGeometry::analyze",
-        "py_export": "ResolvedTubeGeometry.analyze",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ResolvedTubeGeometry::length_gradient_flat",
-        "py_export": "ResolvedTubeGeometry.length_gradient_flat",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ResolvedTubeGeometry::strut_gradient_flat",
-        "py_export": "ResolvedTubeGeometry.strut_gradient_flat",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ResolvedTubeGeometry::kink_minrad_plus_gradient_flat",
-        "py_export": "ResolvedTubeGeometry.kink_minrad_plus_gradient_flat",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ResolvedTubeGeometry::kink_minrad_minus_gradient_flat",
-        "py_export": "ResolvedTubeGeometry.kink_minrad_minus_gradient_flat",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ResolvedTubeGeometry::kink_minrad_gradient_flat",
-        "py_export": "ResolvedTubeGeometry.kink_minrad_gradient_flat",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ResolvedTubeGeometry::nontrivial_knot_lower_bound_rad",
-        "py_export": "ResolvedTubeGeometry.nontrivial_knot_lower_bound_rad",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ResolvedTubeGeometry::radius_to_diameter_ropelength",
-        "py_export": "ResolvedTubeGeometry.radius_to_diameter_ropelength",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ResolvedTubeGeometry::diameter_to_radius_ropelength",
-        "py_export": "ResolvedTubeGeometry.diameter_to_radius_ropelength",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ResolvedTubeTightener::rescale_to_thickness",
-        "py_export": "ResolvedTubeTightener.rescale_to_thickness",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ResolvedTubeTightener::correct_thickness",
-        "py_export": "ResolvedTubeTightener.correct_thickness",
         "binding_file": "resolved_tube_geometry_py.cpp"
       },
       {
@@ -8079,148 +7885,10 @@
         "binding_file": "resolved_tube_geometry_py.cpp"
       },
       {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ResolvedTubeTightener::tighten",
-        "py_export": "ResolvedTubeTightener.tighten",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ContactStressMap::build_rigidity_matrix",
-        "py_export": "ContactStressMap.build_rigidity_matrix",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ContactStressMap::build_sparse_rigidity_matrix",
-        "py_export": "ContactStressMap.build_sparse_rigidity_matrix",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ContactStressMap::sparse_to_dense",
-        "py_export": "ContactStressMap.sparse_to_dense",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ContactStressMap::write_sparse_matrix_market",
-        "py_export": "ContactStressMap.write_sparse_matrix_market",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ContactStressMap::write_vector_market",
-        "py_export": "ContactStressMap.write_vector_market",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ContactStressMap::write_vector_csv",
-        "py_export": "ContactStressMap.write_vector_csv",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ContactStressMap::solve_nonnegative_least_squares",
-        "py_export": "ContactStressMap.solve_nonnegative_least_squares",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ContactStressMap::solve_nonnegative_least_squares_sparse",
-        "py_export": "ContactStressMap.solve_nonnegative_least_squares_sparse",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ContactStressMap::solve_nonnegative_least_squares_active_set",
-        "py_export": "ContactStressMap.solve_nonnegative_least_squares_active_set",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ContactStressMap::solve_nonnegative_least_squares_sparse_active_set",
-        "py_export": "ContactStressMap.solve_nonnegative_least_squares_sparse_active_set",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "resolved_tube_geometry",
-        "cpp_symbol": "ContactStressMap::diagnose_length_criticality",
-        "py_export": "ContactStressMap.diagnose_length_criticality",
-        "binding_file": "resolved_tube_geometry_py.cpp"
-      },
-      {
-        "module": "time_evolution",
-        "cpp_symbol": "TimeEvolution::evolve",
-        "py_export": "TimeEvolution.evolve",
-        "binding_file": "time_evolution_py.cpp"
-      },
-      {
-        "module": "time_evolution",
-        "cpp_symbol": "TimeEvolution::get_positions",
-        "py_export": "TimeEvolution.get_positions",
-        "binding_file": "time_evolution_py.cpp"
-      },
-      {
-        "module": "time_evolution",
-        "cpp_symbol": "TimeEvolution::get_tangents",
-        "py_export": "TimeEvolution.get_tangents",
-        "binding_file": "time_evolution_py.cpp"
-      },
-      {
         "module": "trefoil_operator",
         "cpp_symbol": "Grid1D::spacing",
         "py_export": "Grid1D.spacing",
         "binding_file": "trefoil_operator_py.cpp"
-      },
-      {
-        "module": "vortex_ring",
-        "cpp_symbol": "GoldenNLSClosure::set_regime",
-        "py_export": "GoldenNLSClosure.set_regime",
-        "binding_file": "vortex_ring_py.cpp"
-      },
-      {
-        "module": "vortex_ring",
-        "cpp_symbol": "GoldenNLSClosure::get_active_density",
-        "py_export": "GoldenNLSClosure.get_active_density",
-        "binding_file": "vortex_ring_py.cpp"
-      },
-      {
-        "module": "vortex_ring",
-        "cpp_symbol": "GoldenNLSClosure::calculate_loop_energy",
-        "py_export": "GoldenNLSClosure.calculate_loop_energy",
-        "binding_file": "vortex_ring_py.cpp"
-      },
-      {
-        "module": "vortex_ring",
-        "cpp_symbol": "GoldenNLSClosure::calculate_loop_mass",
-        "py_export": "GoldenNLSClosure.calculate_loop_mass",
-        "binding_file": "vortex_ring_py.cpp"
-      },
-      {
-        "module": "vortex_ring",
-        "cpp_symbol": "GoldenNLSClosure::calculate_screened_mass",
-        "py_export": "GoldenNLSClosure.calculate_screened_mass",
-        "binding_file": "vortex_ring_py.cpp"
-      },
-      {
-        "module": "vortex_ring",
-        "cpp_symbol": "GoldenNLSClosure::infer_geometric_ratio",
-        "py_export": "GoldenNLSClosure.infer_geometric_ratio",
-        "binding_file": "vortex_ring_py.cpp"
-      },
-      {
-        "module": "vortex_ring",
-        "cpp_symbol": "GoldenNLSClosure::infer_geometric_ratio_safe",
-        "py_export": "GoldenNLSClosure.infer_geometric_ratio_safe",
-        "binding_file": "vortex_ring_py.cpp"
-      },
-      {
-        "module": "vortex_ring",
-        "cpp_symbol": "GoldenNLSClosure::geometric_ratio_residual",
-        "py_export": "GoldenNLSClosure.geometric_ratio_residual",
-        "binding_file": "vortex_ring_py.cpp"
       }
     ]
   }

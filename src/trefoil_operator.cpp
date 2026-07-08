@@ -1,4 +1,4 @@
-#include "trefoil_operator.h"
+#include "sst/spectral/trefoil_operator.h"
 #include <algorithm>
 #include <cmath>
 #include <limits>
@@ -6,6 +6,7 @@
 #include <stdexcept>
 
 namespace sst {
+namespace spectral {
 namespace {
 
 inline std::size_t idx(std::size_t i, std::size_t j, std::size_t n) {
@@ -18,9 +19,9 @@ inline double safe_sigma(double x) {
 
 } // namespace
 
-std::vector<double> TrefoilOperator::buildUniformGrid(const Grid1D& grid) {
+std::vector<double> spectral::build_uniform_grid(const Grid1D& grid) {
     if (grid.n < 2) {
-        throw std::runtime_error("TrefoilOperator::buildUniformGrid: grid.n must be >= 2");
+        throw std::runtime_error("spectral::build_uniform_grid: grid.n must be >= 2");
     }
     std::vector<double> u(grid.n, 0.0);
     const double h = grid.spacing();
@@ -30,7 +31,7 @@ std::vector<double> TrefoilOperator::buildUniformGrid(const Grid1D& grid) {
     return u;
 }
 
-std::vector<double> TrefoilOperator::buildIdentity(std::size_t n) {
+std::vector<double> spectral::build_identity(std::size_t n) {
     std::vector<double> I(n * n, 0.0);
     for (std::size_t i = 0; i < n; ++i) {
         I[idx(i, i, n)] = 1.0;
@@ -38,13 +39,13 @@ std::vector<double> TrefoilOperator::buildIdentity(std::size_t n) {
     return I;
 }
 
-std::vector<double> TrefoilOperator::buildSecondDifference(
+std::vector<double> spectral::build_second_difference(
     const Grid1D& grid,
     const BoundaryOptions& bc)
 {
     const std::size_t n = grid.n;
     if (n < 3) {
-        throw std::runtime_error("TrefoilOperator::buildSecondDifference: grid.n must be >= 3");
+        throw std::runtime_error("spectral::build_second_difference: grid.n must be >= 3");
     }
     const double h = grid.spacing();
     const double inv_h2 = 1.0 / (h * h);
@@ -70,12 +71,12 @@ std::vector<double> TrefoilOperator::buildSecondDifference(
         D2[idx(n - 1, n - 2, n)] = 2.0 * inv_h2;
         D2[idx(n - 1, n - 1, n)] = -2.0 * inv_h2;
     } else {
-        throw std::runtime_error("TrefoilOperator::buildSecondDifference: unsupported boundary mode");
+        throw std::runtime_error("spectral::build_second_difference: unsupported boundary mode");
     }
 
     // Optional center Dirichlet for odd symmetry when the grid contains u=0.
     if (bc.mode == 1 && bc.force_center_dirichlet) {
-        const auto u = buildUniformGrid(grid);
+        const auto u = build_uniform_grid(grid);
         std::size_t best = 0;
         double best_abs = std::abs(u[0]);
         for (std::size_t i = 1; i < n; ++i) {
@@ -96,23 +97,23 @@ std::vector<double> TrefoilOperator::buildSecondDifference(
     return D2;
 }
 
-std::vector<double> TrefoilOperator::buildLaplacianSchrodingerKinetic(
+std::vector<double> spectral::build_laplacian_schrodinger_kinetic(
     const Grid1D& grid,
     const BoundaryOptions& bc,
     double kinetic_prefactor)
 {
-    auto D2 = buildSecondDifference(grid, bc);
+    auto D2 = build_second_difference(grid, bc);
     for (double& v : D2) {
         v *= -kinetic_prefactor;
     }
     return D2;
 }
 
-std::vector<double> TrefoilOperator::buildPotentialFromOptions(
+std::vector<double> spectral::build_potential_from_options(
     const Grid1D& grid,
     const PotentialOptions& opts)
 {
-    const auto u = buildUniformGrid(grid);
+    const auto u = build_uniform_grid(grid);
     std::vector<double> V(grid.n, opts.constant_shift);
     for (std::size_t i = 0; i < grid.n; ++i) {
         const double x = u[i];
@@ -129,7 +130,7 @@ std::vector<double> TrefoilOperator::buildPotentialFromOptions(
     return V;
 }
 
-std::vector<double> TrefoilOperator::buildPotentialFromNodes(
+std::vector<double> spectral::build_potential_from_nodes(
     const Grid1D& grid,
     const double* target_nodes,
     std::size_t n_targets,
@@ -151,10 +152,10 @@ std::vector<double> TrefoilOperator::buildPotentialFromNodes(
         g.sigma = well_sigma;
         opts.gaussians.push_back(g);
     }
-    return buildPotentialFromOptions(grid, opts);
+    return build_potential_from_options(grid, opts);
 }
 
-std::vector<double> TrefoilOperator::buildPotentialFromTraceDensity(
+std::vector<double> spectral::build_potential_from_trace_density(
     const double* trace_density,
     std::size_t n,
     double scale,
@@ -167,7 +168,7 @@ std::vector<double> TrefoilOperator::buildPotentialFromTraceDensity(
     return V;
 }
 
-std::vector<double> TrefoilOperator::smoothPotentialBox(
+std::vector<double> spectral::smooth_potential_box(
     const double* v,
     std::size_t n,
     int radius)
@@ -190,7 +191,7 @@ std::vector<double> TrefoilOperator::smoothPotentialBox(
     return out;
 }
 
-std::vector<double> TrefoilOperator::buildPotentialFromPhiAbs(
+std::vector<double> spectral::build_potential_from_phi_abs(
     const double* phi_abs,
     std::size_t n,
     double scale,
@@ -205,24 +206,24 @@ std::vector<double> TrefoilOperator::buildPotentialFromPhiAbs(
         return base;
     }
     const int radius = std::max(1, static_cast<int>(std::round(smooth_strength)));
-    return smoothPotentialBox(base.data(), n, radius);
+    return smooth_potential_box(base.data(), n, radius);
 }
 
-std::vector<double> TrefoilOperator::assembleSchrodingerMatrix(
+std::vector<double> spectral::assemble_schrodinger_matrix(
     const Grid1D& grid,
     const BoundaryOptions& bc,
     const double* potential,
     double kinetic_prefactor)
 {
     const std::size_t n = grid.n;
-    auto H = buildLaplacianSchrodingerKinetic(grid, bc, kinetic_prefactor);
+    auto H = build_laplacian_schrodinger_kinetic(grid, bc, kinetic_prefactor);
     for (std::size_t i = 0; i < n; ++i) {
         H[idx(i, i, n)] += potential[i];
     }
     return H;
 }
 
-std::vector<double> TrefoilOperator::applyDiagonalShift(
+std::vector<double> spectral::apply_diagonal_shift(
     const double* matrix,
     std::size_t n,
     double shift)
@@ -234,7 +235,7 @@ std::vector<double> TrefoilOperator::applyDiagonalShift(
     return out;
 }
 
-std::vector<double> TrefoilOperator::assembleTransferKernel(
+std::vector<double> spectral::assemble_transfer_kernel(
     const Grid1D& grid,
     const double* potential,
     double diffusion_scale,
@@ -242,7 +243,7 @@ std::vector<double> TrefoilOperator::assembleTransferKernel(
     bool normalize_rows)
 {
     const std::size_t n = grid.n;
-    const auto u = buildUniformGrid(grid);
+    const auto u = build_uniform_grid(grid);
     std::vector<double> K(n * n, 0.0);
     const double diff = safe_sigma(diffusion_scale);
     for (std::size_t i = 0; i < n; ++i) {
@@ -262,14 +263,14 @@ std::vector<double> TrefoilOperator::assembleTransferKernel(
     return K;
 }
 
-std::vector<double> TrefoilOperator::generatorFromTransferKernel(
+std::vector<double> spectral::generator_from_transfer_kernel(
     const double* kernel,
     std::size_t n,
     double dt,
     bool subtract_identity_first)
 {
     if (dt == 0.0) {
-        throw std::runtime_error("TrefoilOperator::generatorFromTransferKernel: dt must be nonzero");
+        throw std::runtime_error("spectral::generator_from_transfer_kernel: dt must be nonzero");
     }
     std::vector<double> G(n * n, 0.0);
     for (std::size_t i = 0; i < n; ++i) {
@@ -284,7 +285,7 @@ std::vector<double> TrefoilOperator::generatorFromTransferKernel(
     return G;
 }
 
-std::vector<double> TrefoilOperator::matrixVectorMultiply(
+std::vector<double> spectral::matrix_vector_multiply(
     const double* matrix,
     std::size_t n,
     const double* x)
@@ -300,12 +301,12 @@ std::vector<double> TrefoilOperator::matrixVectorMultiply(
     return y;
 }
 
-double TrefoilOperator::rayleighQuotient(
+double spectral::rayleigh_quotient(
     const double* matrix,
     std::size_t n,
     const double* x)
 {
-    auto y = matrixVectorMultiply(matrix, n, x);
+    auto y = matrix_vector_multiply(matrix, n, x);
     double num = 0.0;
     double den = 0.0;
     for (std::size_t i = 0; i < n; ++i) {
@@ -315,7 +316,7 @@ double TrefoilOperator::rayleighQuotient(
     return (den != 0.0) ? (num / den) : std::numeric_limits<double>::quiet_NaN();
 }
 
-void TrefoilOperator::normalizeVector(double* x, std::size_t n) {
+void spectral::normalize_vector(double* x, std::size_t n) {
     double norm2 = 0.0;
     for (std::size_t i = 0; i < n; ++i) {
         norm2 += x[i] * x[i];
@@ -329,13 +330,13 @@ void TrefoilOperator::normalizeVector(double* x, std::size_t n) {
     }
 }
 
-double TrefoilOperator::residualNorm(
+double spectral::residual_norm(
     const double* matrix,
     std::size_t n,
     const double* x,
     double lambda)
 {
-    auto y = matrixVectorMultiply(matrix, n, x);
+    auto y = matrix_vector_multiply(matrix, n, x);
     double sum2 = 0.0;
     for (std::size_t i = 0; i < n; ++i) {
         const double r = y[i] - lambda * x[i];
@@ -344,7 +345,7 @@ double TrefoilOperator::residualNorm(
     return std::sqrt(sum2);
 }
 
-SpectralResult TrefoilOperator::jacobiEigenSolveSymmetric(
+SpectralResult spectral::jacobi_eigen_solve_symmetric(
     const double* matrix,
     std::size_t n,
     bool compute_eigenvectors,
@@ -355,7 +356,7 @@ SpectralResult TrefoilOperator::jacobiEigenSolveSymmetric(
     std::vector<double> A(matrix, matrix + n * n);
     std::vector<double> V;
     if (compute_eigenvectors) {
-        V = buildIdentity(n);
+        V = build_identity(n);
     }
 
     for (std::size_t sweep = 0; sweep < max_sweeps; ++sweep) {
@@ -450,17 +451,17 @@ SpectralResult TrefoilOperator::jacobiEigenSolveSymmetric(
     return out;
 }
 
-std::vector<double> TrefoilOperator::eigenvalues(
+std::vector<double> spectral::eigenvalues(
     const double* matrix,
     std::size_t n,
     std::size_t max_sweeps,
     double tol,
     bool sort_ascending)
 {
-    return jacobiEigenSolveSymmetric(matrix, n, false, max_sweeps, tol, sort_ascending).eigenvalues;
+    return jacobi_eigen_solve_symmetric(matrix, n, false, max_sweeps, tol, sort_ascending).eigenvalues;
 }
 
-double TrefoilOperator::traceFromDiagonal(const double* matrix, std::size_t n) {
+double spectral::trace_from_diagonal(const double* matrix, std::size_t n) {
     double tr = 0.0;
     for (std::size_t i = 0; i < n; ++i) {
         tr += matrix[idx(i, i, n)];
@@ -468,7 +469,7 @@ double TrefoilOperator::traceFromDiagonal(const double* matrix, std::size_t n) {
     return tr;
 }
 
-double TrefoilOperator::logDetFromEigenvalues(
+double spectral::log_det_from_eigenvalues(
     const double* eigenvalues,
     std::size_t n,
     double regularization)
@@ -480,7 +481,7 @@ double TrefoilOperator::logDetFromEigenvalues(
     return out;
 }
 
-std::vector<double> TrefoilOperator::spectralDensityHistogram(
+std::vector<double> spectral::spectral_density_histogram(
     const double* eigenvalues,
     std::size_t n,
     double x_min,
@@ -488,7 +489,7 @@ std::vector<double> TrefoilOperator::spectralDensityHistogram(
     std::size_t n_bins)
 {
     if (x_max <= x_min || n_bins == 0) {
-        throw std::runtime_error("TrefoilOperator::spectralDensityHistogram: invalid histogram range");
+        throw std::runtime_error("spectral::spectral_density_histogram: invalid histogram range");
     }
     std::vector<double> hist(n_bins, 0.0);
     const double dx = (x_max - x_min) / static_cast<double>(n_bins);
@@ -503,7 +504,7 @@ std::vector<double> TrefoilOperator::spectralDensityHistogram(
     return hist;
 }
 
-std::vector<double> TrefoilOperator::nearestEigenvaluesToTargets(
+std::vector<double> spectral::nearest_eigenvalues_to_targets(
     const double* eigenvalues,
     std::size_t n,
     const double* targets,
@@ -525,6 +526,8 @@ std::vector<double> TrefoilOperator::nearestEigenvaluesToTargets(
     return out;
 }
 
+} // namespace spectral
+
 SpectralResult TrefoilOperator::buildAndSolveNodeAnchoredOperator(
     const Grid1D& grid,
     const BoundaryOptions& bc,
@@ -540,13 +543,13 @@ SpectralResult TrefoilOperator::buildAndSolveNodeAnchoredOperator(
     double tol,
     bool sort_ascending)
 {
-    auto V = buildPotentialFromNodes(
+    auto V = spectral::build_potential_from_nodes(
         grid, target_nodes, n_targets,
         well_amplitude, well_sigma,
         harmonic_coeff, quartic_coeff,
         constant_shift);
-    auto H = assembleSchrodingerMatrix(grid, bc, V.data(), kinetic_prefactor);
-    return jacobiEigenSolveSymmetric(H.data(), grid.n, true, max_sweeps, tol, sort_ascending);
+    auto H = spectral::assemble_schrodinger_matrix(grid, bc, V.data(), kinetic_prefactor);
+    return spectral::jacobi_eigen_solve_symmetric(H.data(), grid.n, true, max_sweeps, tol, sort_ascending);
 }
 
 SpectralResult TrefoilOperator::buildAndSolveTraceAnchoredOperator(
@@ -565,13 +568,13 @@ SpectralResult TrefoilOperator::buildAndSolveTraceAnchoredOperator(
     if (n_trace != grid.n) {
         throw std::runtime_error("TrefoilOperator::buildAndSolveTraceAnchoredOperator: n_trace must equal grid.n");
     }
-    auto V = buildPotentialFromTraceDensity(trace_density, n_trace, trace_scale, constant_shift);
+    auto V = spectral::build_potential_from_trace_density(trace_density, n_trace, trace_scale, constant_shift);
     if (smooth_strength > 0.0) {
         const int radius = std::max(1, static_cast<int>(std::round(smooth_strength)));
-        V = smoothPotentialBox(V.data(), V.size(), radius);
+        V = spectral::smooth_potential_box(V.data(), V.size(), radius);
     }
-    auto H = assembleSchrodingerMatrix(grid, bc, V.data(), kinetic_prefactor);
-    return jacobiEigenSolveSymmetric(H.data(), grid.n, true, max_sweeps, tol, sort_ascending);
+    auto H = spectral::assemble_schrodinger_matrix(grid, bc, V.data(), kinetic_prefactor);
+    return spectral::jacobi_eigen_solve_symmetric(H.data(), grid.n, true, max_sweeps, tol, sort_ascending);
 }
 
 } // namespace sst

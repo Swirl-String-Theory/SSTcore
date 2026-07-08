@@ -13,9 +13,16 @@ Designed for:
     - PyCharm / JetBrains
     - conda / venv environments
 
-Typical Colab usage:
-    !pip install -q --upgrade SSTcore==0.8.0
-    !python sstcore_full_probe.py --json-out sstcore_probe_report.json
+Typical Colab usage (recommended — keeps __file__ and full binding inventory):
+    !pip install -q --upgrade SSTcore==0.8.18
+    !wget -q -O SSTcore_full_probe.py \\
+        https://raw.githubusercontent.com/Swirl-String-Theory/SSTcore/main/SSTcore_full_probe.py
+    !python SSTcore_full_probe.py --json-out sstcore_probe_report.json
+
+Notebook cell after uploading SSTcore_full_probe.py to the runtime:
+    from SSTcore_full_probe import import_sstcore, make_report, print_report_summary
+    sst, info = import_sstcore()
+    print_report_summary(make_report(sst, info))
 
 Typical local usage:
     python sstcore_full_probe.py
@@ -46,7 +53,34 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
-_PROBE_ROOT = Path(__file__).resolve().parent
+
+def _probe_script_path() -> Optional[Path]:
+    """Path to this probe file when run as a script; None in notebooks/exec()."""
+    try:
+        return Path(__file__).resolve()
+    except NameError:
+        return None
+
+
+def _resolve_probe_root() -> Path:
+    """Repo root for scripts/, tests/, and binding manifest regeneration."""
+    script = _probe_script_path()
+    if script is not None:
+        return script.parent
+
+    cwd = Path.cwd()
+    for marker in (
+        "SSTcore_full_probe.py",
+        "sstcore_full_probe.py",
+        Path("scripts") / "binding_inventory.py",
+    ):
+        if (cwd / marker).exists():
+            return cwd
+    return cwd
+
+
+_PROBE_SCRIPT = _probe_script_path()
+_PROBE_ROOT = _resolve_probe_root()
 _SCRIPTS_DIR = _PROBE_ROOT / "scripts"
 if _SCRIPTS_DIR.is_dir() and str(_SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS_DIR))
@@ -61,6 +95,14 @@ try:
     _BINDING_INVENTORY_AVAILABLE = True
 except ImportError:
     _BINDING_INVENTORY_AVAILABLE = False
+
+try:
+    from audit_binding_examples import BINDING_MODULES, build_audit  # type: ignore[import-not-found]
+    from binding_inventory import generate_manifest  # type: ignore[import-not-found]
+
+    _AUDIT_EXAMPLES_AVAILABLE = True
+except ImportError:
+    _AUDIT_EXAMPLES_AVAILABLE = False
 
 
 # ---------------------------------------------------------------------
@@ -726,7 +768,7 @@ def probe_binding_catalog(sst: Any) -> Dict[str, Any]:
     manifest, manifest_err = load_binding_manifest(
         sst,
         root=_PROBE_ROOT,
-        probe_script=Path(__file__),
+        probe_script=_PROBE_SCRIPT,
     )
     if manifest is None:
         result["manifest_error"] = manifest_err
@@ -1346,6 +1388,60 @@ def probe_trefoil_triad(sst: Any) -> Dict[str, Any]:
     return result
 
 
+def probe_examples_coverage() -> Dict[str, Any]:
+    """Summary: canonical src/*_example.py files vs binding modules."""
+    result: Dict[str, Any] = {
+        "modules_expected": 30,
+        "src_example_files": 0,
+        "missing_modules": [],
+        "present_modules": [],
+        "audit_available": _AUDIT_EXAMPLES_AVAILABLE,
+        "bound_without_example_total": None,
+        "errors": [],
+    }
+    src_dir = _PROBE_ROOT / "src"
+    if not src_dir.is_dir():
+        result["errors"].append(f"src directory not found: {src_dir}")
+        return result
+
+    modules = list(BINDING_MODULES) if _AUDIT_EXAMPLES_AVAILABLE else []
+    if not modules:
+        modules = sorted(
+            p.name.replace("_example.py", "")
+            for p in src_dir.glob("*_example.py")
+            if p.name != "_example_bootstrap.py"
+        )
+        result["modules_expected"] = len(modules)
+
+    for mod in modules if modules else []:
+        path = src_dir / f"{mod}_example.py"
+        if path.is_file():
+            result["present_modules"].append(mod)
+        else:
+            result["missing_modules"].append(mod)
+
+    result["src_example_files"] = len(result["present_modules"])
+    result["coverage_ok"] = len(result["missing_modules"]) == 0
+
+    if _AUDIT_EXAMPLES_AVAILABLE:
+        try:
+            examples_dir = _PROBE_ROOT / "examples"
+            manifest_path = default_manifest_path(_PROBE_ROOT)
+            if manifest_path.is_file():
+                import json as _json
+
+                manifest = _json.loads(manifest_path.read_text(encoding="utf-8"))
+            else:
+                manifest = generate_manifest(src_dir)
+            audit = build_audit(_PROBE_ROOT, examples_dir, src_dir, manifest)
+            result["bound_without_example_total"] = audit["summary"]["bound_without_example_total"]
+            result["bound_exports_total"] = audit["summary"]["bound_exports_total"]
+        except Exception as exc:
+            result["errors"].append(f"audit summary failed: {type(exc).__name__}: {exc}")
+
+    return result
+
+
 def make_report(
     sst: Any,
     import_info: Dict[str, Any],
@@ -1362,6 +1458,7 @@ def make_report(
     report["knots_fourier_series_catalog"] = probe_knots_fourier_series_catalog(sst)
     report["knotplot_catalog"] = probe_knotplot_catalog(sst)
     report["binding_catalog"] = probe_binding_catalog(sst)
+    report["examples_coverage"] = probe_examples_coverage()
     report["native_bindings"] = probe_native_bindings(sst)
     report["topology_candidates"] = probe_topologies(sst)
     report["particle_evaluator"] = probe_particle_evaluator(sst)
@@ -1497,6 +1594,16 @@ def print_report_summary(report: Dict[str, Any]) -> None:
         print("Binding catalog errors:")
         for err in bc["errors"]:
             print("  -", err)
+
+    ec = report.get("examples_coverage") or {}
+    if ec:
+        print_header("Examples coverage (src/*_example.py)")
+        print_kv("modules_expected", ec.get("modules_expected"))
+        print_kv("src_example_files", ec.get("src_example_files"))
+        print_kv("coverage_ok", ec.get("coverage_ok"))
+        print_kv("bound_without_example_total", ec.get("bound_without_example_total"))
+        if ec.get("missing_modules"):
+            print("missing_modules:", ", ".join(ec["missing_modules"]))
 
     bt = report.get("binding_tests")
     if bt is not None:

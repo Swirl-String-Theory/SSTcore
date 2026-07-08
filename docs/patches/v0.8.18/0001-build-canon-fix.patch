@@ -1,0 +1,144 @@
+warning: in the working copy of 'src/ab_initio_mass.h', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/potential_timefield.h', LF will be replaced by CRLF the next time Git touches it
+diff --git a/src/ab_initio_mass.cpp b/src/ab_initio_mass.cpp
+index f739724..635cd26 100644
+--- a/src/ab_initio_mass.cpp
++++ b/src/ab_initio_mass.cpp
+@@ -509,7 +509,7 @@ namespace sst {
+         }
+ 
+         metrics.helicity = static_cast<double>(FrenetHelicity::compute_helicity(velocity, vorticity));
+-        metrics.time_dilation_map = TimeField::compute_time_dilation_map_sqrt(velocity, v_swirl);
++        metrics.time_dilation_map = TimeField::compute_time_dilation_map_sqrt(velocity, c_light);
+ 
+         double sum_St = 0.0;
+         for (double st : metrics.time_dilation_map) {
+diff --git a/src/ab_initio_mass.h b/src/ab_initio_mass.h
+index c01e31f..3728017 100644
+--- a/src/ab_initio_mass.h
++++ b/src/ab_initio_mass.h
+@@ -25,7 +25,7 @@ private:
+   static constexpr double r_c = 1.40897017e-15;
+   static constexpr double v_swirl = 1.09384563e6;
+   static constexpr double rho_core = 3.8934358266918687e18;
+-  static constexpr double rho_fluid = 6.87e-7;
++  static constexpr double rho_fluid = 7.0e-7;
+   static constexpr double MeV_J_ = 1.602176634e-13;  // J/MeV
+ 
+   bool extract_and_build_filament(const std::string& db_content, const std::string& ab_id, int resolution);
+diff --git a/src/chronos_kelvin_transport.cpp b/src/chronos_kelvin_transport.cpp
+index 1855553..d61cabf 100644
+--- a/src/chronos_kelvin_transport.cpp
++++ b/src/chronos_kelvin_transport.cpp
+@@ -30,12 +30,12 @@ double ChronosKelvinTransport::vorticity_from_swirl_clock(double S_t, double r_c
+ 
+ double ChronosKelvinTransport::swirl_clock_from_omega(double omega, double r_c, double c) {
+     if (r_c <= 0.0 || c <= 0.0) throw std::invalid_argument("r_c and c must be positive.");
+-    const double x = 1.0 - (omega * r_c) * (omega * r_c) / (c * c);
++    const double x = 1.0 - (omega * r_c) * (omega * r_c) / (4.0 * c * c);
+     return std::sqrt(x > 0.0 ? x : 0.0);
+ }
+ 
+ double ChronosKelvinTransport::chronos_kelvin_invariant(double R, double S_t, double r_c, double c) {
+-    return kelvin_invariant(R, omega_from_swirl_clock(S_t, r_c, c));
++    return kelvin_invariant(R, vorticity_from_swirl_clock(S_t, r_c, c));
+ }
+ 
+ double ChronosKelvinTransport::clock_radius_derivative(double S_t, double R, double dR_dt) {
+@@ -44,7 +44,7 @@ double ChronosKelvinTransport::clock_radius_derivative(double S_t, double R, dou
+ }
+ 
+ double ChronosKelvinTransport::radius_from_clock_invariant(double invariant, double S_t, double r_c, double c) {
+-    const double omega = omega_from_swirl_clock(S_t, r_c, c);
++    const double omega = vorticity_from_swirl_clock(S_t, r_c, c);
+     if (omega <= 0.0) throw std::invalid_argument("omega is zero; radius is not determined by invariant.");
+     return std::sqrt(invariant / omega);
+ }
+diff --git a/src/chronos_kelvin_transport.h b/src/chronos_kelvin_transport.h
+index 707b630..f249dc0 100644
+--- a/src/chronos_kelvin_transport.h
++++ b/src/chronos_kelvin_transport.h
+@@ -16,6 +16,7 @@ public:
+     // Returns the canon chronos-Kelvin VORTICITY omega = 2 * Omega (Canon Sec. 2.9):
+     //   omega = (2c / r_c) * sqrt(1 - S_t^2).
+     [[nodiscard]] static double vorticity_from_swirl_clock(double S_t, double r_c, double c = static_cast<double>(SST::Constants::C_VACUUM));
++    // Inverse of vorticity_from_swirl_clock for the canon vorticity convention.
+     [[nodiscard]] static double swirl_clock_from_omega(double omega, double r_c, double c = static_cast<double>(SST::Constants::C_VACUUM));
+     [[nodiscard]] static double chronos_kelvin_invariant(double R, double S_t, double r_c, double c = static_cast<double>(SST::Constants::C_VACUUM));
+     [[nodiscard]] static double clock_radius_derivative(double S_t, double R, double dR_dt);
+diff --git a/src/potential_timefield.cpp b/src/potential_timefield.cpp
+index 70d61bd..afffaf6 100644
+--- a/src/potential_timefield.cpp
++++ b/src/potential_timefield.cpp
+@@ -34,7 +34,7 @@ namespace sst {
+         }
+ 
+         std::vector<double> TimeField::compute_time_dilation_map_sqrt(const std::vector<Vec3>& tangents,
+-                        double C_e) {
++                        double c) {
+                 size_t n = tangents.size();
+                 std::vector<double> time_factor(n, 1.0);
+ 
+@@ -42,7 +42,7 @@ namespace sst {
+                         double v2 = tangents[i][0]*tangents[i][0] +
+                                                 tangents[i][1]*tangents[i][1] +
+                                                 tangents[i][2]*tangents[i][2];
+-                        double ratio = v2 / (C_e * C_e);
++                        double ratio = v2 / (c * c);
+                         if (ratio >= 1.0) ratio = 0.999999;
+                         time_factor[i] = std::sqrt(1.0 - ratio);
+                 }
+@@ -80,12 +80,12 @@ namespace sst {
+ 
+         // Linear method from GravityTimeField
+         std::vector<double> TimeField::compute_time_dilation_map_linear(const std::vector<Vec3>& tangents,
+-                                                                         double C_e) {
++                                                                         double c) {
+                 std::vector<double> gamma;
+                 gamma.reserve(tangents.size());
+                 for (const auto& t : tangents) {
+                         double v2 = t[0]*t[0] + t[1]*t[1] + t[2]*t[2];
+-                        double factor = 1.0 - (v2 / (C_e * C_e));
++                        double factor = 1.0 - (v2 / (c * c));
+                         gamma.push_back(factor);
+                 }
+                 return gamma;
+diff --git a/src/potential_timefield.h b/src/potential_timefield.h
+index c566a9e..39ac91f 100644
+--- a/src/potential_timefield.h
++++ b/src/potential_timefield.h
+@@ -27,7 +27,7 @@ namespace sst {
+                 // Compute time dilation factor using sqrt (1 - v^2 / c^2) due to knot tangential velocities
+                 static std::vector<double> compute_time_dilation_map_sqrt(
+                                 const std::vector<Vec3>& tangential_velocities,
+-                                double ce = 1093845.63);
++                                double c = 299792458.0);
+ 
+                 // Compute gravitational potential field (direct computation method from GravityTimeField)
+                 static std::vector<double> compute_gravitational_potential_direct(
+@@ -51,8 +51,8 @@ namespace sst {
+ 
+         inline std::vector<double> compute_time_dilation_map(
+                         const std::vector<Vec3>& tangential_velocities,
+-                        double ce = 1093845.63) {
+-                return TimeField::compute_time_dilation_map_sqrt(tangential_velocities, ce);
++                        double c = 299792458.0) {
++                return TimeField::compute_time_dilation_map_sqrt(tangential_velocities, c);
+         }
+ 
+ } // namespace sst
+diff --git a/src/sst_extensions.cpp b/src/sst_extensions.cpp
+index 21095e3..7793400 100644
+--- a/src/sst_extensions.cpp
++++ b/src/sst_extensions.cpp
+@@ -19,8 +19,8 @@
+ #include <dirent.h>
+ #endif
+ 
+-#include "../src/knot_dynamics.h"
+-#include "../src/biot_savart.h"
++#include "knot_dynamics.h"
++#include "biot_savart.h"
+ 
+ namespace sst {
+ 

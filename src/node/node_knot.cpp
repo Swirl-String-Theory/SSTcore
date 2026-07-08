@@ -2,7 +2,7 @@
 #include <map>
 #include <napi.h>
 #include "node_utils.h"
-#include "../knot_dynamics.h"
+#include <sst/knot.h>
 
 using namespace sst;
 
