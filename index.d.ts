@@ -1,229 +1,166 @@
-// index.d.ts - TypeScript definitions for SSTcore (npm)
+// index.d.ts - TypeScript definitions for SSTcore (npm) — aligned with N-API exports
 
 export type Vec3 = [number, number, number] | { x: number; y: number; z: number };
-export type Vec3Array = Vec3[] | Float64Array;
+export type Vec3Array = Vec3[] | Float64Array | number[];
+
+export interface EngineInfo {
+  packageVersion: string;
+  engineVersion: string;
+  canonVersion: string;
+  nodeApiVersion: number;
+  numericProfile: string;
+  compiler: string;
+  platform: string;
+  architecture: string;
+}
+
+export interface Capabilities {
+  biotSavart: boolean;
+  knotGeometry: boolean;
+  frenetHelicity: boolean;
+  magnusIntegrator: boolean;
+  sstIntegrator: boolean;
+  continuousReach: boolean;
+  wasmFallback: boolean;
+}
 
 export interface BiotSavartInvariants {
-    hCharge: number;
-    hMass: number;
-    aMu: number;
+  hCharge: number;
+  hMass: number;
+  aMu: number;
 }
 
 export interface FrenetFrames {
-    T: Float64Array;
-    N: Float64Array;
-    B: Float64Array;
+  T: Float64Array;
+  N: Float64Array;
+  B: Float64Array;
 }
 
 export interface CurvatureTorsion {
-    curvature: number[];
-    torsion: number[];
+  curvature: number[];
+  torsion: number[];
+}
+
+export interface ListBindingsResult {
+  functions: string[];
+  classes: string[];
+  attributes: string[];
+  counts: { functions: number; classes: number; attributes: number };
 }
 
 /**
- * Biot-Savart module for computing velocity fields from vortex filaments
+ * SSTcore Node surface (native N-API). Optional members may be absent on WASM stubs.
  */
-export interface BiotSavartModule {
-    /**
-     * Compute velocity field from a closed curve at given grid points
-     * @param curve Array of [x, y, z] points or Float64Array (flat, length = N*3)
-     * @param gridPoints Array of [x, y, z] points or Float64Array (flat, length = M*3)
-     * @returns Float64Array of velocities (flat, length = M*3)
-     */
-    computeVelocity(curve: Vec3Array, gridPoints: Vec3Array): Float64Array;
+export interface SSTcoreModule {
+  version: string;
+  engineVersion?: string;
+  canonVersion?: string;
+  nodeApiVersion?: number;
+  numericProfile?: string;
+  nativeAddonName?: string;
+  isAvailable: boolean;
+  isNative: boolean;
+  isWasm: boolean;
+  error?: string;
 
-    /**
-     * Compute vorticity from velocity field on a regular grid
-     * @param velocity Velocity field as Float64Array (flat)
-     * @param shape Grid shape [nx, ny, nz]
-     * @param spacing Grid spacing
-     * @returns Float64Array of vorticity (flat)
-     */
-    computeVorticity(velocity: Vec3Array, shape: [number, number, number], spacing: number): Float64Array;
+  engineInfo(): EngineInfo;
+  getCapabilities(): Capabilities;
+  listBindings(pattern?: string, includePrivate?: boolean): ListBindingsResult;
 
-    /**
-     * Extract cubic interior field subset
-     * @param field Field as Float64Array (flat)
-     * @param shape Grid shape [nx, ny, nz]
-     * @param margin Margin size
-     * @returns Float64Array of interior field (flat)
-     */
-    extractInterior(field: Vec3Array, shape: [number, number, number], margin: number): Float64Array;
+  // Biot–Savart
+  computeVelocity(curve: Vec3Array, gridPoints: Vec3Array): Float64Array;
+  computeVorticity(velocity: Vec3Array, shape: [number, number, number], spacing: number): Float64Array;
+  extractInterior(field: Vec3Array, shape: [number, number, number], margin: number): Float64Array;
+  computeInvariants(vSub: Vec3Array, wSub: Vec3Array, rSq: number[]): BiotSavartInvariants;
+  biotSavartVelocity(
+    r: Vec3,
+    filamentPoints: Vec3Array,
+    tangentVectors: Vec3Array,
+    circulation?: number,
+  ): Vec3;
+  biotSavartVelocityGrid(polyline: Vec3Array, grid: Vec3Array): Float64Array;
 
-    /**
-     * Compute invariants (H_charge, H_mass, a_mu)
-     * @param vSub Velocity subset
-     * @param wSub Vorticity subset
-     * @param rSq Squared distances
-     * @returns Object with hCharge, hMass, aMu
-     */
-    computeInvariants(vSub: Vec3Array, wSub: Vec3Array, rSq: number[]): BiotSavartInvariants;
+  // Field kernels / ops
+  dipoleFieldAtPoint?: (...args: any[]) => any;
+  biotSavartWireGrid?: (...args: any[]) => any;
+  dipoleRingFieldGrid?: (...args: any[]) => any;
+  biotSavartVectorPotentialGrid?: (...args: any[]) => any;
+  fieldKernelsAvailable?: boolean;
+  curl3dCentral?: (...args: any[]) => any;
+  fieldOpsAvailable?: boolean;
 
-    /**
-     * Compute velocity at a single point due to a filament
-     * @param r Point [x, y, z]
-     * @param filamentPoints Filament points
-     * @param tangentVectors Tangent vectors
-     * @param circulation Circulation (default: 1.0)
-     * @returns Velocity vector [vx, vy, vz]
-     */
-    biotSavartVelocity(r: Vec3, filamentPoints: Vec3Array, tangentVectors: Vec3Array, circulation?: number): Vec3;
+  // Fluid
+  computePressureField(velocityMagnitude: number[], rhoAe: number, pInfinity: number): number[];
+  computeVelocityMagnitude(velocity: Vec3Array): number[];
+  evolvePositionsEuler(positions: Vec3Array, velocity: Vec3Array, dt: number): Float64Array;
+  computeHelicityField(velocity: Vec3Array, vorticity: Vec3Array, dV: number): number;
+  swirlClockRate(dvDx: number, duDy: number): number;
+  computeKineticEnergy(velocity: Vec3Array, rhoAe: number): number;
 
-    /**
-     * Compute velocity at grid points for a polyline
-     * @param polyline Polyline points
-     * @param grid Grid points
-     * @returns Float64Array of velocities (flat, length = grid.length*3)
-     */
-    biotSavartVelocityGrid(polyline: Vec3Array, grid: Vec3Array): Float64Array;
+  // Frenet / helicity / RK4
+  computeFrenetFrames(X: Vec3Array): FrenetFrames;
+  computeCurvatureTorsion(T: Vec3Array, N: Vec3Array): CurvatureTorsion;
+  computeHelicity(velocity: Vec3Array, vorticity: Vec3Array): number;
+  evolveVortexKnot(positions: Vec3Array, tangents: Vec3Array, dt: number, gamma?: number): Float64Array;
+  rk4Integrate(positions: Vec3Array, tangents: Vec3Array, dt: number, gamma?: number): Float64Array;
+
+  // Knot geometry / topology
+  computeWrithe(curve: Vec3Array): number;
+  computeLinkingNumber(curveA: Vec3Array, curveB: Vec3Array): number;
+  computeTwist?: (...args: any[]) => any;
+  computeCenterlineHelicity?: (...args: any[]) => any;
+  detectReconnectionCandidates?: (...args: any[]) => any;
+  knotComputeBiotSavartVelocityGrid?: (...args: any[]) => any;
+  knotComputeVorticityGrid?: (...args: any[]) => any;
+  knotExtractInteriorField?: (...args: any[]) => any;
+  computeHelicityInvariants?: (...args: any[]) => any;
+  parseFseriesMulti?: (...args: any[]) => any;
+  indexOfLargestFourierBlock?: (...args: any[]) => any;
+  evaluateFourierBlock?: (...args: any[]) => any;
+  pdFromCurve?: (...args: any[]) => any;
+  loadKnot?: (...args: any[]) => any;
+  getEmbeddedKnotFiles?: (...args: any[]) => any;
+  getEmbeddedIdealFiles?: (...args: any[]) => any;
+  knotAvailable?: boolean;
+
+  // Integrators
+  createMagnusBernoulliIntegrator?: (...args: any[]) => any;
+  magnusComputeForce?: (...args: any[]) => any;
+  magnusComputeSwirlCoulombAccel?: (...args: any[]) => any;
+  magnusIntegratorAvailable?: boolean;
+  computeSstMass(points: Vec3Array, gamma?: number): number | number[];
+  sstIntegratorAvailable?: boolean;
+
+  // SST extensions (fseries metrics)
+  sampleCurveCentered?: (...args: any[]) => any;
+  computeCurveMetricsFromFseries?: (...args: any[]) => any;
+  curveLengthFromFseries?: (...args: any[]) => any;
+  minNonNeighborDistanceFromFseries?: (...args: any[]) => any;
+  reachProxyFromFseries?: (...args: any[]) => any;
+  computeFilamentEnergyFromFseries?: (...args: any[]) => any;
+  computeHelicityFromFseries?: (...args: any[]) => any;
+  canonicalizeFseriesFileInplace?: (...args: any[]) => any;
+  batchHelicityFromDir?: (...args: any[]) => any;
+  compareFseriesFiles?: (...args: any[]) => any;
+  sstExtensionsAvailable?: boolean;
+
+  // Timefield / gravity / vortex / vorticity / thermo / radiation / swirl / hyperbolic / ab initio
+  timeFieldAvailable?: boolean;
+  hyperbolicVolumeAvailable?: boolean;
+  radiationFlowAvailable?: boolean;
+  swirlFieldAvailable?: boolean;
+  thermoDynamicsAvailable?: boolean;
+  timeEvolutionAvailable?: boolean;
+  vortexRingAvailable?: boolean;
+  vorticityDynamicsAvailable?: boolean;
+  sstGravityAvailable?: boolean;
+  abInitioAvailable?: boolean;
+  ParticleEvaluator?: new (...args: any[]) => any;
+  TimeEvolution?: new (...args: any[]) => any;
+  GoldenNLSClosure?: new (...args: any[]) => any;
+
+  [key: string]: any;
 }
 
-/**
- * Fluid dynamics module
- */
-export interface FluidDynamicsModule {
-    /**
-     * Compute Bernoulli pressure field from velocity magnitude
-     */
-    computePressureField(velocityMagnitude: number[], rhoAe: number, pInfinity: number): number[];
-
-    /**
-     * Compute velocity magnitude from vector field
-     */
-    computeVelocityMagnitude(velocity: Vec3Array): number[];
-
-    /**
-     * Euler-step update of particle positions
-     * @returns Updated positions
-     */
-    evolvePositionsEuler(positions: Vec3Array, velocity: Vec3Array, dt: number): Float64Array;
-
-    /**
-     * Compute helicity H = ∫ v · ω dV over a discretized field (with volume element)
-     */
-    computeHelicityField(velocity: Vec3Array, vorticity: Vec3Array, dV: number): number;
-
-    /**
-     * Swirl clock rate: 0.5 * (dv/dx - du/dy)
-     */
-    swirlClockRate(dvDx: number, duDy: number): number;
-
-    /**
-     * Compute kinetic energy E = (1/2) * ρ * ∑ |v|^2
-     */
-    computeKineticEnergy(velocity: Vec3Array, rhoAe: number): number;
-}
-
-/**
- * Frenet helicity module
- */
-export interface FrenetHelicityModule {
-    /**
-     * Compute Frenet frames (T, N, B) from 3D filament points
-     */
-    computeFrenetFrames(X: Vec3Array): FrenetFrames;
-
-    /**
-     * Compute curvature and torsion from tangent and normal vectors
-     */
-    computeCurvatureTorsion(T: Vec3Array, N: Vec3Array): CurvatureTorsion;
-
-    /**
-     * Compute helicity H = ∫ v · ω dV
-     */
-    computeHelicity(velocity: Vec3Array, vorticity: Vec3Array): number;
-
-    /**
-     * Evolve vortex knot filaments using Biot-Savart dynamics
-     */
-    evolveVortexKnot(positions: Vec3Array, tangents: Vec3Array, dt: number, gamma?: number): Float64Array;
-
-    /**
-     * Runge-Kutta 4th order time integrator
-     */
-    rk4Integrate(positions: Vec3Array, tangents: Vec3Array, dt: number, gamma?: number): Float64Array;
-}
-
-/**
- * Main module interface
- */
-export interface SwirlStringCore {
-    version: string;
-    isAvailable: boolean;
-    isNative: boolean;
-    isWasm: boolean;
-    error?: string;
-
-    // Biot-Savart functions
-    computeVelocity: BiotSavartModule['computeVelocity'];
-    computeVorticity: BiotSavartModule['computeVorticity'];
-    extractInterior: BiotSavartModule['extractInterior'];
-    computeInvariants: BiotSavartModule['computeInvariants'];
-    biotSavartVelocity: BiotSavartModule['biotSavartVelocity'];
-    biotSavartVelocityGrid: BiotSavartModule['biotSavartVelocityGrid'];
-
-    // Fluid dynamics functions
-    computePressureField: FluidDynamicsModule['computePressureField'];
-    computeVelocityMagnitude: FluidDynamicsModule['computeVelocityMagnitude'];
-    evolvePositionsEuler: FluidDynamicsModule['evolvePositionsEuler'];
-    computeHelicityField: FluidDynamicsModule['computeHelicityField'];
-    swirlClockRate: FluidDynamicsModule['swirlClockRate'];
-    computeKineticEnergy: FluidDynamicsModule['computeKineticEnergy'];
-
-    // Frenet helicity functions
-    computeFrenetFrames: FrenetHelicityModule['computeFrenetFrames'];
-    computeCurvatureTorsion: FrenetHelicityModule['computeCurvatureTorsion'];
-    computeHelicity: FrenetHelicityModule['computeHelicity'];
-    evolveVortexKnot: FrenetHelicityModule['evolveVortexKnot'];
-    rk4Integrate: FrenetHelicityModule['rk4Integrate'];
-
-    // Placeholder flags for modules not yet implemented
-    fieldKernelsAvailable?: boolean;
-    fieldOpsAvailable?: boolean;
-    knotAvailable?: boolean;
-    timeFieldAvailable?: boolean;
-    hyperbolicVolumeAvailable?: boolean;
-    radiationFlowAvailable?: boolean;
-    swirlFieldAvailable?: boolean;
-    thermoDynamicsAvailable?: boolean;
-    timeEvolutionAvailable?: boolean;
-    vortexRingAvailable?: boolean;
-    vorticityDynamicsAvailable?: boolean;
-    sstGravityAvailable?: boolean;
-    sstExtensionsAvailable?: boolean;
-    magnusIntegratorAvailable?: boolean;
-    sstIntegratorAvailable?: boolean;
-    abInitioAvailable?: boolean;
-    nativeAddonName?: string;
-
-    listBindings(pattern?: string, includePrivate?: boolean): {
-        functions: string[];
-        classes: string[];
-        attributes: string[];
-        counts: { functions: number; classes: number; attributes: number };
-    };
-
-    computeSstMass?(points: Vec3Array, chiSpin: number): [number, number];
-    createMagnusBernoulliIntegrator?(rho_f: number, v_swirl: number, r_c: number, Gamma: number): unknown;
-    magnusComputeForce?(integrator: unknown, tangent: Vec3, normal: Vec3, R: number, v_knot: Vec3, v_bg: Vec3): number[];
-    magnusComputeSwirlCoulombAccel?(integrator: unknown, eval_pos: Vec3, source_pos: Vec3): number[];
-
-    ParticleEvaluator?: new (knotId: string, resolution?: number) => {
-        relax(iterations?: number, timestep?: number): void;
-        getMassMevAbInitio(includeTail?: boolean): number;
-        getFilaments(): number[][][];
-    };
-
-    TimeEvolution?: new (positions: Vec3Array, tangents: Vec3Array, gamma?: number) => {
-        evolve(dt: number, steps: number): void;
-        getPositions(): Float64Array;
-        getTangents(): Float64Array;
-    };
-
-    GoldenNLSClosure?: new (regime?: number) => {
-        calculateLoopMass(R: number): number;
-    };
-}
-
-declare const swirlStringCore: SwirlStringCore;
-export default swirlStringCore;
+declare const sstcore: SSTcoreModule;
+export = sstcore;

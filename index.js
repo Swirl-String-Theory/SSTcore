@@ -4,7 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 
-let pkgVersion = '0.8.0';
+let pkgVersion = '0.8.18';
 try {
     pkgVersion = JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json'), 'utf8')).version || pkgVersion;
 } catch (_) { /* keep default */ }
@@ -13,25 +13,44 @@ let nativeModule = null;
 let wasmModule = null;
 /** Resolved addon object used for listBindings (sync load only). */
 let bindingSource = null;
+let loadErrors = [];
 
 const isNode = typeof process !== 'undefined' && process.versions && process.versions.node;
 const isBrowser = typeof window !== 'undefined' || (typeof self !== 'undefined' && typeof importScripts === 'function');
 
 function tryRequireNative(p) {
     try {
-        return require(p);
-    } catch (_) {
+        if (!fs.existsSync(p)) {
+            loadErrors.push(`${p} (missing)`);
+            return null;
+        }
+        const m = require(p);
+        return m;
+    } catch (err) {
+        loadErrors.push(`${p} (${err && err.message ? err.message : err})`);
         return null;
     }
+}
+
+function nativeCandidates() {
+    const plat = process.platform;
+    const arch = process.arch;
+    return [
+        path.join(__dirname, 'prebuilds', `${plat}-${arch}`, 'sstcore.node'),
+        path.join(__dirname, 'build', 'Release', 'sstcore.node'),
+        path.join(__dirname, 'build_node', 'Release', 'sstcore.node'),
+        path.join(__dirname, 'build_node', 'sstcore.node'),
+        path.join(__dirname, 'build_node', 'Debug', 'sstcore.node'),
+        path.join(__dirname, 'build_node', 'RelWithDebInfo', 'sstcore.node'),
+        path.join(__dirname, 'build', 'sstcore.node'),
+    ];
 }
 
 function loadNativeModule() {
     if (!isNode) {
         return null;
     }
-    const candidates = [
-        path.join(__dirname, 'build', 'Release', 'sstcore.node'),
-    ];
+    const candidates = nativeCandidates();
     for (const p of candidates) {
         const m = tryRequireNative(p);
         if (m) {
@@ -40,8 +59,17 @@ function loadNativeModule() {
             return m;
         }
     }
-    console.warn('Native addon not found (tried sstcore.node); falling back to WASM if available');
     return null;
+}
+
+function wasmLooksUsable(mod) {
+    if (!mod || typeof mod !== 'object') return false;
+    return (
+        typeof mod.computeVelocity === 'function' ||
+        typeof mod.biotSavartVelocity === 'function' ||
+        typeof mod.engineInfo === 'function' ||
+        Object.keys(mod).some((k) => typeof mod[k] === 'function' && k !== 'default')
+    );
 }
 
 function loadWasmModule() {
@@ -59,39 +87,68 @@ function loadWasmModule() {
                     return module;
                 }),
             ).catch(err => {
-                console.warn('WASM module not available:', err.message);
+                loadErrors.push(`WASM async: ${err.message}`);
                 return null;
             });
         } catch (err) {
-            console.warn('WASM module not available:', err.message);
+            loadErrors.push(`WASM async: ${err.message}`);
             return null;
         }
     } else if (isNode) {
-        try {
+        const paths = [
+            path.join(__dirname, 'dist', 'sstcore_wasm.js'),
+            path.join(__dirname, 'dist', 'swirl_string_core_wasm.js'),
+        ];
+        for (const p of paths) {
             try {
-                wasmModule = require('./dist/sstcore_wasm.js');
-            } catch (_) {
-                wasmModule = require('./dist/swirl_string_core_wasm.js');
+                if (!fs.existsSync(p)) {
+                    loadErrors.push(`${p} (missing)`);
+                    continue;
+                }
+                const mod = require(p);
+                if (!wasmLooksUsable(mod)) {
+                    loadErrors.push(`${p} (no usable exports)`);
+                    continue;
+                }
+                wasmModule = mod;
+                bindingSource = mod;
+                return mod;
+            } catch (err) {
+                loadErrors.push(`${p} (${err.message})`);
             }
-            bindingSource = wasmModule;
-            return wasmModule;
-        } catch (err) {
-            console.warn('WASM module not available:', err.message);
-            return null;
         }
+        return null;
     }
     return null;
 }
 
+function buildLoadError() {
+    const plat = isNode ? process.platform : 'browser';
+    const arch = isNode ? process.arch : 'n/a';
+    const tried = loadErrors.length ? loadErrors.join('\n  - ') : '(none recorded)';
+    return [
+        'SSTcore native addon could not be loaded and no usable WASM fallback is available.',
+        `platform=${plat} architecture=${arch}`,
+        'Tried paths:',
+        `  - ${tried}`,
+        'Build with: npm run build:node',
+        'Or: cmake -S . -B build_node -DSST_BUILD_PYTHON_BINDINGS=OFF -DSST_NUMERIC_PROFILE=deterministic',
+        '    cmake --build build_node --target sstcore_node --config Release',
+    ].join('\n');
+}
+
 let loadedModule = null;
+let usedWasm = false;
 
 if (isNode) {
     loadedModule = loadNativeModule();
     if (!loadedModule) {
         loadedModule = loadWasmModule();
+        usedWasm = !!loadedModule;
     }
 } else if (isBrowser) {
     loadedModule = loadWasmModule();
+    usedWasm = !!loadedModule;
 }
 
 function listBindings(pattern, includePrivate) {
@@ -132,40 +189,117 @@ function listBindings(pattern, includePrivate) {
     };
 }
 
-let exportsObj = {};
+function wrapEngineInfo(nativeInfo) {
+    const base = nativeInfo && typeof nativeInfo === 'object' ? Object.assign({}, nativeInfo) : {};
+    base.packageVersion = pkgVersion;
+    if (!base.engineVersion) base.engineVersion = pkgVersion;
+    if (!base.canonVersion) base.canonVersion = '0.8.20';
+    if (base.nodeApiVersion == null) base.nodeApiVersion = 1;
+    if (!base.numericProfile) base.numericProfile = 'deterministic';
+    if (!base.platform && isNode) base.platform = process.platform;
+    if (!base.architecture && isNode) base.architecture = process.arch;
+    return base;
+}
+
+function wrapCapabilities(nativeCaps) {
+    const caps = nativeCaps && typeof nativeCaps === 'object' ? Object.assign({}, nativeCaps) : {
+        biotSavart: false,
+        knotGeometry: false,
+        frenetHelicity: false,
+        magnusIntegrator: false,
+        sstIntegrator: false,
+        continuousReach: false,
+        wasmFallback: false,
+    };
+    caps.wasmFallback = !!usedWasm;
+    return caps;
+}
+
+function attachMeta(exportsObj) {
+    exportsObj.version = pkgVersion;
+    exportsObj.listBindings = listBindings;
+
+    const nativeEngineInfo = typeof exportsObj.engineInfo === 'function'
+        ? (() => { try { return exportsObj.engineInfo(); } catch (_) { return null; } })()
+        : null;
+    const nativeCaps = typeof exportsObj.getCapabilities === 'function'
+        ? (() => { try { return exportsObj.getCapabilities(); } catch (_) { return null; } })()
+        : null;
+
+    exportsObj.engineInfo = function engineInfo() {
+        return wrapEngineInfo(nativeEngineInfo || {
+            engineVersion: exportsObj.engineVersion || pkgVersion,
+            canonVersion: exportsObj.canonVersion || '0.8.20',
+            nodeApiVersion: exportsObj.nodeApiVersion || 1,
+            numericProfile: exportsObj.numericProfile || 'deterministic',
+            compiler: 'unknown',
+        });
+    };
+
+    exportsObj.getCapabilities = function getCapabilities() {
+        if (nativeCaps) return wrapCapabilities(nativeCaps);
+        return wrapCapabilities({
+            biotSavart: typeof exportsObj.computeVelocity === 'function',
+            knotGeometry: typeof exportsObj.computeWrithe === 'function' || !!exportsObj.knotAvailable,
+            frenetHelicity: typeof exportsObj.rk4Integrate === 'function',
+            magnusIntegrator: !!exportsObj.magnusIntegratorAvailable ||
+                typeof exportsObj.createMagnusBernoulliIntegrator === 'function',
+            sstIntegrator: typeof exportsObj.computeSstMass === 'function',
+            continuousReach: false,
+            wasmFallback: usedWasm,
+        });
+    };
+
+    return exportsObj;
+}
 
 if (!loadedModule) {
-    exportsObj.version = pkgVersion;
-    exportsObj.error = 'No module available. Please build the native addon or WASM module.';
-    exportsObj.isAvailable = false;
-    exportsObj.isNative = false;
-    exportsObj.isWasm = false;
-    exportsObj.listBindings = listBindings;
+    if (isNode) {
+        throw new Error(buildLoadError());
+    }
+    const exportsObj = {
+        version: pkgVersion,
+        error: 'No module available. Please build the native addon or WASM module.',
+        isAvailable: false,
+        isNative: false,
+        isWasm: false,
+        listBindings,
+        engineInfo() {
+            return wrapEngineInfo({ engineVersion: pkgVersion, compiler: 'none' });
+        },
+        getCapabilities() {
+            return wrapCapabilities(null);
+        },
+    };
     module.exports = exportsObj;
 } else if (typeof loadedModule.then === 'function') {
-    exportsObj.version = pkgVersion;
-    exportsObj.isAvailable = false;
-    exportsObj.isNative = false;
-    exportsObj.isWasm = false;
-    exportsObj.error = 'WASM module is loading asynchronously. Use await or .then() on the module.';
-    exportsObj.listBindings = listBindings;
+    const exportsObj = {
+        version: pkgVersion,
+        isAvailable: false,
+        isNative: false,
+        isWasm: false,
+        error: 'WASM module is loading asynchronously. Use await or .then() on the module.',
+        listBindings,
+        engineInfo() {
+            return wrapEngineInfo({ engineVersion: pkgVersion, compiler: 'wasm' });
+        },
+        getCapabilities() {
+            return wrapCapabilities({ wasmFallback: true });
+        },
+    };
     module.exports = exportsObj;
     module.exports.load = loadedModule.then(module => {
         bindingSource = module || null;
-        const asyncExports = Object.assign({}, module || {});
-        asyncExports.version = pkgVersion;
+        const asyncExports = attachMeta(Object.assign({}, module || {}));
         asyncExports.isAvailable = true;
         asyncExports.isNative = false;
         asyncExports.isWasm = true;
-        asyncExports.listBindings = listBindings;
         return asyncExports;
     });
 } else {
-    Object.assign(exportsObj, loadedModule || {});
-    exportsObj.version = pkgVersion;
+    const exportsObj = attachMeta(Object.assign({}, loadedModule || {}));
     exportsObj.isAvailable = true;
     exportsObj.isNative = !!nativeModule;
-    exportsObj.isWasm = !!wasmModule;
-    exportsObj.listBindings = listBindings;
+    exportsObj.isWasm = !!wasmModule && !nativeModule;
     module.exports = exportsObj;
 }

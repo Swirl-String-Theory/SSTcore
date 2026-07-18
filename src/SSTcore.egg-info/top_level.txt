@@ -1,4 +1,0 @@
-SSTcore
-sstbindings
-sstcore
-swirl_string_core

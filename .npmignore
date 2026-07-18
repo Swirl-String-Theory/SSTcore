@@ -1,5 +1,6 @@
 # Build artifacts
 build/
+build_node/
 dist/
 *.node
 *.pyd
@@ -8,8 +9,9 @@ dist/
 *.dll
 *.wasm
 *.js.map
+prebuilds/**/*.pdb
 
-# CMake files
+# CMake / MSVC debris
 CMakeCache.txt
 cmake_install.cmake
 CMakeFiles/
@@ -17,52 +19,72 @@ CMakeFiles/
 *.vcxproj.filters
 *.sln
 *.slnx
+*.obj
+*.lib
+*.exp
+*.ilk
+*.pdb
 
-# Python artifacts
-__pycache__/
-*.pyc
-*.pyo
-*.egg-info/
+# Python artifacts (not needed for Node install/build)
+**/__pycache__/
+**/__pycache__/**
+**/*.pyc
+**/*.pyo
+**/*.egg-info/
+**/*.egg-info/**
 *.egg
 *.whl
+src/SSTcore/
+src/SSTcore/**
+src/SSTcore.egg-info/
+src/SSTcore.egg-info/**
+setup.py
+pyproject.toml
+**/*_py.cpp
+src/module_sst.cpp
+resources/knotplot/__pycache__/
+resources/knotplot/__pycache__/**
 
-# IDE files
+# IDE / OS
 .vscode/
 .idea/
 *.iml
 *.swp
 *.swo
 *~
-
-# OS files
 .DS_Store
 Thumbs.db
 
-# Test files
-tests/
+# Tests except smoke entry used by npm test
+tests/**
+!tests/test_basic.js
+!tests/test_python_node_parity.js
 examples/
+node_examples/
 *.test.js
 *.spec.js
 
-# Documentation (keep README.md)
-docs/
+# Docs: keep recovery/build docs listed in package.json files
 *.md
 !README.md
+!NODE_BUILD.md
+!NODE_RECOVERY_REPORT.md
+!docs/VORTEXLAB_NODE_CAPABILITIES.md
 
-# Source files (optional - uncomment if you want to exclude source)
-# src/
-# src_bindings/
-# extern/
-
-# Git
+# Git / Node
 .git/
 .gitignore
-
-# Node
+.node/
 node_modules/
 .npm/
 
-# Logs
+# Logs / temp
 *.log
 npm-debug.log*
+output/
+nul
+empty.synctex.gz
 
+# Large archives not required for embed (cmake uses extracted dirs)
+resources/**/*.zip
+SST_Dashboard/
