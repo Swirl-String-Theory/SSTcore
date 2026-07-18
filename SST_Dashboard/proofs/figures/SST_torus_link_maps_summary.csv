@@ -1,0 +1,5 @@
+knot,gcd,total_strands,phase_step_deg,rhoE_min,rhoE_med,rhoE_max,rhoE_ref_p%,rhoE_log10_MIP,SwirlClock_abs,SwirlClock_norm_MIP,velmag_heatmap
+"T(3,2)",1,3,120.0,0.2016300083744265,14.917893217205215,492168.40634022385,41488.06961258067,T3_2_rhoE_log10_MIP.png,T3_2_SwirlClock_abs.png,T3_2_SwirlClock_norm_MIP.png,T3_2_velmag_heatmap.png
+"T(2,3)",1,3,120.0,0.4702831202537203,33.379799965339295,1402811.671998349,60967.0243328433,T2_3_rhoE_log10_MIP.png,T2_3_SwirlClock_abs.png,T2_3_SwirlClock_norm_MIP.png,T2_3_velmag_heatmap.png
+"T(6,9)",3,9,40.0,38.05972578280341,2698.9874216406383,40291858.55058457,5143170.055824948,T6_9_rhoE_log10_MIP.png,T6_9_SwirlClock_abs.png,T6_9_SwirlClock_norm_MIP.png,T6_9_velmag_heatmap.png
+"T(9,6)",3,9,40.0,16.325222561350326,1207.2286495401897,49107062.0551293,3368945.7319902214,T9_6_rhoE_log10_MIP.png,T9_6_SwirlClock_abs.png,T9_6_SwirlClock_norm_MIP.png,T9_6_velmag_heatmap.png

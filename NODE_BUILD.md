@@ -65,9 +65,17 @@ Central header: `include/sstcore_version.h`
 
 `engineInfo()` reports `packageVersion`, `engineVersion`, `canonVersion`, `nodeApiVersion`, `numericProfile`, `compiler`, `platform`, `architecture`.
 
-## Fallback: node-gyp
+## Node headers (CI / setup-node)
 
-`binding.gyp` is secondary. It uses the post-split sources (`src/knot/*`, `src/particle/*`, `src/filament/*`) and does **not** reference deleted `src/knot_dynamics.cpp`. Prefer CMake so the core is not compiled twice.
+GitHub Actions Node installs often lack `include/node/node_api.h` next to the binary.
+`scripts/install-native.js` downloads headers into the node-gyp cache via `node-gyp install`
+and passes `-DNODE_CORE_INCLUDE_DIR=...` to CMake before building `sstcore_node`.
+
+You can also set:
+
+```bash
+set NODE_CORE_INCLUDE_DIR=C:\Users\...\AppData\Local\node-gyp\Cache\20.20.2\include\node
+```
 
 ## Tests
 

@@ -83,6 +83,7 @@ Then builds `knot_files_embedded` + `sstcore_node` (wrappers only, `target_link_
 
 ## 5. Open blockers / follow-ups
 
+- **CI (fixed 2026-07-18):** GitHub Actions `npm ci` failed on all OS/Node combos because setup-node does not ship `node_api.h`; CMake skipped `sstcore_node` → `No rule to make target 'sstcore_node'`. Fix: `install-native.js` runs `node-gyp install` first and passes `-DNODE_CORE_INCLUDE_DIR`; CMake probes more header paths; workflow no longer `continue-on-error` on build/test.
 - **Tarball size / install time:** packing `resources/` makes install rebuild ~3 minutes from source; shipping `prebuilds/<plat>-<arch>/sstcore.node` would speed consumer installs.
 - **VortexLab gaps (documented, not implemented):** topology clearance, resolved-tube DCSD, exact Fourier curvature, tube `reach_rad` — need wrappers or new C++, not JS copies. See `docs/VORTEXLAB_NODE_CAPABILITIES.md`.
 - **WASM:** real numerical WASM still stub-level; installer only accepts WASM with usable exports.

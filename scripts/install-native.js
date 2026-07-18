@@ -104,9 +104,85 @@ function run(cmd, args, opts = {}) {
   if (r.status !== 0) {
     fail(`${cmd} exited with code ${r.status}`);
   }
+  return r;
+}
+
+/** Candidate dirs that may contain node_api.h (GHA hosts often lack install-tree headers). */
+function nodeCoreIncludeCandidates() {
+  const ver = process.versions.node;
+  const execDir = path.dirname(process.execPath);
+  const home = process.env.HOME || process.env.USERPROFILE || '';
+  const local = process.env.LOCALAPPDATA || '';
+  return [
+    process.env.NODE_CORE_INCLUDE_DIR,
+    path.join(execDir, 'include', 'node'),
+    path.join(execDir, '..', 'include', 'node'),
+    path.join(local, 'node-gyp', 'Cache', ver, 'include', 'node'),
+    path.join(home, '.node-gyp', ver, 'include', 'node'),
+    path.join(home, '.cache', 'node-gyp', ver, 'include', 'node'),
+    path.join(home, 'Library', 'Caches', 'node-gyp', ver, 'include', 'node'),
+  ].filter(Boolean);
+}
+
+function findNodeCoreInclude() {
+  for (const d of nodeCoreIncludeCandidates()) {
+    try {
+      if (fs.existsSync(path.join(d, 'node_api.h'))) return path.resolve(d);
+    } catch (_) { /* continue */ }
+  }
+  return null;
+}
+
+/**
+ * GitHub Actions / setup-node installs do not ship node_api.h next to the binary.
+ * Download headers (and Windows node.lib) into the node-gyp cache before CMake.
+ */
+function ensureNodeHeaders() {
+  let dir = findNodeCoreInclude();
+  if (dir) {
+    log(`Node headers found: ${dir}`);
+    return dir;
+  }
+
+  log('Node headers (node_api.h) missing; downloading via node-gyp install...');
+  const localGyp = path.join(root, 'node_modules', 'node-gyp', 'bin', 'node-gyp.js');
+  if (fs.existsSync(localGyp)) {
+    run(process.execPath, [localGyp, 'install']);
+  } else {
+    run('npx', ['--yes', 'node-gyp@10.2.0', 'install']);
+  }
+
+  dir = findNodeCoreInclude();
+  if (!dir) {
+    fail(
+      [
+        'node_api.h still not found after node-gyp install.',
+        'Tried:',
+        ...nodeCoreIncludeCandidates().map((d) => `  - ${d}`),
+        'Set NODE_CORE_INCLUDE_DIR to a directory containing node_api.h, or run: npx node-gyp install',
+      ].join('\n'),
+    );
+  }
+  log(`Node headers ready: ${dir}`);
+  return dir;
+}
+
+function cmakeHasNodeTarget() {
+  const cachePath = path.join(buildNodeDir, 'CMakeCache.txt');
+  if (!fs.existsSync(cachePath)) return false;
+  const cache = fs.readFileSync(cachePath, 'utf8');
+  if (/HAVE_SSTCORE_NODE:BOOL=ON/.test(cache) || /HAVE_SWIRL_STRING_CORE_NODE:BOOL=ON/.test(cache)) {
+    return true;
+  }
+  // Fallback: target project/makefile may exist even if cache flag is stale
+  return (
+    fs.existsSync(path.join(buildNodeDir, 'sstcore_node.vcxproj')) ||
+    fs.existsSync(path.join(buildNodeDir, 'CMakeFiles', 'sstcore_node.dir'))
+  );
 }
 
 function cmakeConfigureAndBuild() {
+  const headerDir = ensureNodeHeaders();
   log(`Building native addon via CMake (profile=${numericProfile})...`);
   const configureArgs = [
     '-S', '.',
@@ -115,8 +191,20 @@ function cmakeConfigureAndBuild() {
     '-DSST_BUILD_CPP_TESTS=OFF',
     '-DSST_COPY_RUNTIME_RESOURCES=OFF',
     `-DSST_NUMERIC_PROFILE=${numericProfile}`,
+    `-DNODE_CORE_INCLUDE_DIR=${headerDir}`,
   ];
   run('cmake', configureArgs);
+
+  if (!cmakeHasNodeTarget()) {
+    fail(
+      [
+        'CMake configured but sstcore_node target was not enabled (HAVE_SSTCORE_NODE!=ON).',
+        `NODE_CORE_INCLUDE_DIR=${headerDir}`,
+        'Check that node-addon-api is installed and node_api.h / node.lib are discoverable.',
+        'See build_node/CMakeCache.txt and re-run with a clean build_node/.',
+      ].join('\n  '),
+    );
+  }
 
   const buildEmbed = ['--build', 'build_node', '--target', 'knot_files_embedded'];
   const buildNode = ['--build', 'build_node', '--target', 'sstcore_node'];

@@ -254,6 +254,7 @@ endif()
 find_program(NODE_EXECUTABLE NAMES node)
 
 # Written by the Node addon configure logic below (also consumed by scripts/build_node_target.js).
+# Default OFF until headers/node.lib are resolved; updated with FORCE at decision points.
 set(HAVE_SSTCORE_NODE OFF CACHE BOOL "Node.js addon target is available")
 
 # Allow manual override of node-addon-api include dir for robustness (especially on Windows)
@@ -278,58 +279,32 @@ if(NODE_EXECUTABLE)
     endif()
 
     # Node.js core headers (node_api.h) - required by node-addon-api's napi.h
-    # Prefer: 1) NODE_CORE_INCLUDE_DIR override, 2) <node_install>/include/node, 3) node-gyp cache
+    # Prefer: 1) NODE_CORE_INCLUDE_DIR override, 2) Node install include/, 3) node-gyp cache
     set(NODE_CORE_INCLUDE_DIR "" CACHE PATH "Path to Node.js core include directory (optional override)")
-    if(NOT NODE_CORE_INCLUDE_DIR)
-        execute_process(
-            COMMAND ${NODE_EXECUTABLE} -p "require('path').join(require('path').dirname(process.execPath), 'include', 'node')"
-            OUTPUT_VARIABLE NODE_CORE_INCLUDE_RAW
-            OUTPUT_STRIP_TRAILING_WHITESPACE
-            ERROR_QUIET
-        )
-        set(NODE_CORE_INCLUDE_DIR "${NODE_CORE_INCLUDE_RAW}")
-    endif()
+    set(NODE_CORE_INCLUDE_NORM "")
     if(NODE_CORE_INCLUDE_DIR)
         file(TO_CMAKE_PATH "${NODE_CORE_INCLUDE_DIR}" NODE_CORE_INCLUDE_NORM)
         string(REPLACE "\"" "" NODE_CORE_INCLUDE_NORM "${NODE_CORE_INCLUDE_NORM}")
     endif()
 
-    # Fallback: node-gyp cache (e.g. after "node-gyp install") when Node install has no include/
-    set(NODE_CORE_HEADER "${NODE_CORE_INCLUDE_NORM}/node_api.h")
-    if(NODE_CORE_INCLUDE_NORM AND NOT EXISTS "${NODE_CORE_HEADER}")
+    # Probe common locations (GitHub Actions hosts Node without headers next to the binary)
+    if(NOT NODE_CORE_INCLUDE_NORM OR NOT EXISTS "${NODE_CORE_INCLUDE_NORM}/node_api.h")
         execute_process(
-            COMMAND ${NODE_EXECUTABLE} -p "process.versions.node"
-            OUTPUT_VARIABLE NODE_VERSION_RAW
+            COMMAND ${NODE_EXECUTABLE} -p "(()=>{const p=require('path');const fs=require('fs');const ver=process.versions.node;const execDir=p.dirname(process.execPath);const home=process.env.HOME||process.env.USERPROFILE||'';const local=process.env.LOCALAPPDATA||'';const cands=[p.join(execDir,'include','node'),p.join(execDir,'..','include','node'),p.join(local,'node-gyp','Cache',ver,'include','node'),p.join(home,'.node-gyp',ver,'include','node'),p.join(home,'.cache','node-gyp',ver,'include','node'),p.join(home,'Library','Caches','node-gyp',ver,'include','node')];for(const d of cands){if(d&&fs.existsSync(p.join(d,'node_api.h'))){process.stdout.write(d);break;}}})()"
+            OUTPUT_VARIABLE NODE_CORE_INCLUDE_RAW
             OUTPUT_STRIP_TRAILING_WHITESPACE
             ERROR_QUIET
         )
-        if(NODE_VERSION_RAW)
-            string(STRIP "${NODE_VERSION_RAW}" NODE_VERSION_RAW)
-            if(IS_WINDOWS)
-                execute_process(
-                    COMMAND ${NODE_EXECUTABLE} -p "require('path').join(process.env.LOCALAPPDATA || '', 'node-gyp', 'Cache', process.versions.node, 'include', 'node')"
-                    OUTPUT_VARIABLE NODE_GYP_INCLUDE_RAW
-                    OUTPUT_STRIP_TRAILING_WHITESPACE
-                    ERROR_QUIET
-                )
-            else()
-                execute_process(
-                    COMMAND ${NODE_EXECUTABLE} -p "require('path').join(process.env.HOME || '', '.node-gyp', process.versions.node, 'include', 'node')"
-                    OUTPUT_VARIABLE NODE_GYP_INCLUDE_RAW
-                    OUTPUT_STRIP_TRAILING_WHITESPACE
-                    ERROR_QUIET
-                )
-            endif()
-            if(NODE_GYP_INCLUDE_RAW)
-                file(TO_CMAKE_PATH "${NODE_GYP_INCLUDE_RAW}" NODE_GYP_INCLUDE_NORM)
-                string(REPLACE "\"" "" NODE_GYP_INCLUDE_NORM "${NODE_GYP_INCLUDE_NORM}")
-                if(EXISTS "${NODE_GYP_INCLUDE_NORM}/node_api.h")
-                    set(NODE_CORE_INCLUDE_NORM "${NODE_GYP_INCLUDE_NORM}")
-                    set(NODE_CORE_HEADER "${NODE_CORE_INCLUDE_NORM}/node_api.h")
-                    message(STATUS "Using Node.js headers from node-gyp cache: ${NODE_CORE_INCLUDE_NORM}")
-                endif()
-            endif()
+        if(NODE_CORE_INCLUDE_RAW)
+            file(TO_CMAKE_PATH "${NODE_CORE_INCLUDE_RAW}" NODE_CORE_INCLUDE_NORM)
+            string(REPLACE "\"" "" NODE_CORE_INCLUDE_NORM "${NODE_CORE_INCLUDE_NORM}")
+            message(STATUS "Using Node.js headers: ${NODE_CORE_INCLUDE_NORM}")
         endif()
+    endif()
+
+    set(NODE_CORE_HEADER "")
+    if(NODE_CORE_INCLUDE_NORM)
+        set(NODE_CORE_HEADER "${NODE_CORE_INCLUDE_NORM}/node_api.h")
     endif()
 
     # Require both node-addon-api and Node core include dir (with node_api.h) to enable addon
@@ -445,18 +420,18 @@ if(NODE_EXECUTABLE)
             COMMENT "Copying Node.js addon to build/Release"
         )
 
-        set(HAVE_SSTCORE_NODE ON CACHE BOOL "Node.js addon target is available")
+        set(HAVE_SSTCORE_NODE ON CACHE BOOL "Node.js addon target is available" FORCE)
         message(STATUS "Node.js native addon build enabled (links sstcore_lib)")
         else()
-            set(HAVE_SSTCORE_NODE OFF CACHE BOOL "Node.js addon target is available")
+            set(HAVE_SSTCORE_NODE OFF CACHE BOOL "Node.js addon target is available" FORCE)
         endif()
     else()
         if(NOT NODE_ADDON_API_INCLUDE_NORM OR NOT EXISTS "${NODE_ADDON_API_INCLUDE_NORM}")
             message(STATUS "node-addon-api not found or include dir invalid, skipping Node.js addon build")
         else()
-            message(STATUS "Node.js core headers (node_api.h) not found at ${NODE_CORE_INCLUDE_NORM}, skipping Node.js addon build. Install Node.js with 'Install native build tools' or set NODE_CORE_INCLUDE_DIR.")
+            message(STATUS "Node.js core headers (node_api.h) not found at '${NODE_CORE_INCLUDE_NORM}'. Run 'npx node-gyp install' or set NODE_CORE_INCLUDE_DIR.")
         endif()
-        set(HAVE_SSTCORE_NODE OFF CACHE BOOL "Node.js addon target is available")
+        set(HAVE_SSTCORE_NODE OFF CACHE BOOL "Node.js addon target is available" FORCE)
     endif()
 endif()
 
