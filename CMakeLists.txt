@@ -405,6 +405,12 @@ if(NODE_EXECUTABLE)
             SUFFIX ".node"
         )
 
+        # N-API symbols resolve at Node load time; macOS linker needs deferred lookup.
+        # Windows/Linux must not get this flag (Windows uses node.lib).
+        if(APPLE)
+            target_link_options(sstcore_node PRIVATE "-undefined" "dynamic_lookup")
+        endif()
+
         add_dependencies(sstcore_node knot_files_embedded sstcore_lib)
 
         # Copy into CMake build tree and repo build/Release (index.js / npm layout)

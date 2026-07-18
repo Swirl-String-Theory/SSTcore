@@ -19,7 +19,7 @@ inline double safe_sigma(double x) {
 
 } // namespace
 
-std::vector<double> spectral::build_uniform_grid(const Grid1D& grid) {
+std::vector<double> build_uniform_grid(const Grid1D& grid) {
     if (grid.n < 2) {
         throw std::runtime_error("spectral::build_uniform_grid: grid.n must be >= 2");
     }
@@ -31,7 +31,7 @@ std::vector<double> spectral::build_uniform_grid(const Grid1D& grid) {
     return u;
 }
 
-std::vector<double> spectral::build_identity(std::size_t n) {
+std::vector<double> build_identity(std::size_t n) {
     std::vector<double> I(n * n, 0.0);
     for (std::size_t i = 0; i < n; ++i) {
         I[idx(i, i, n)] = 1.0;
@@ -39,7 +39,7 @@ std::vector<double> spectral::build_identity(std::size_t n) {
     return I;
 }
 
-std::vector<double> spectral::build_second_difference(
+std::vector<double> build_second_difference(
     const Grid1D& grid,
     const BoundaryOptions& bc)
 {
@@ -97,7 +97,7 @@ std::vector<double> spectral::build_second_difference(
     return D2;
 }
 
-std::vector<double> spectral::build_laplacian_schrodinger_kinetic(
+std::vector<double> build_laplacian_schrodinger_kinetic(
     const Grid1D& grid,
     const BoundaryOptions& bc,
     double kinetic_prefactor)
@@ -109,7 +109,7 @@ std::vector<double> spectral::build_laplacian_schrodinger_kinetic(
     return D2;
 }
 
-std::vector<double> spectral::build_potential_from_options(
+std::vector<double> build_potential_from_options(
     const Grid1D& grid,
     const PotentialOptions& opts)
 {
@@ -130,7 +130,7 @@ std::vector<double> spectral::build_potential_from_options(
     return V;
 }
 
-std::vector<double> spectral::build_potential_from_nodes(
+std::vector<double> build_potential_from_nodes(
     const Grid1D& grid,
     const double* target_nodes,
     std::size_t n_targets,
@@ -155,7 +155,7 @@ std::vector<double> spectral::build_potential_from_nodes(
     return build_potential_from_options(grid, opts);
 }
 
-std::vector<double> spectral::build_potential_from_trace_density(
+std::vector<double> build_potential_from_trace_density(
     const double* trace_density,
     std::size_t n,
     double scale,
@@ -168,7 +168,7 @@ std::vector<double> spectral::build_potential_from_trace_density(
     return V;
 }
 
-std::vector<double> spectral::smooth_potential_box(
+std::vector<double> smooth_potential_box(
     const double* v,
     std::size_t n,
     int radius)
@@ -191,7 +191,7 @@ std::vector<double> spectral::smooth_potential_box(
     return out;
 }
 
-std::vector<double> spectral::build_potential_from_phi_abs(
+std::vector<double> build_potential_from_phi_abs(
     const double* phi_abs,
     std::size_t n,
     double scale,
@@ -209,7 +209,7 @@ std::vector<double> spectral::build_potential_from_phi_abs(
     return smooth_potential_box(base.data(), n, radius);
 }
 
-std::vector<double> spectral::assemble_schrodinger_matrix(
+std::vector<double> assemble_schrodinger_matrix(
     const Grid1D& grid,
     const BoundaryOptions& bc,
     const double* potential,
@@ -223,7 +223,7 @@ std::vector<double> spectral::assemble_schrodinger_matrix(
     return H;
 }
 
-std::vector<double> spectral::apply_diagonal_shift(
+std::vector<double> apply_diagonal_shift(
     const double* matrix,
     std::size_t n,
     double shift)
@@ -235,7 +235,7 @@ std::vector<double> spectral::apply_diagonal_shift(
     return out;
 }
 
-std::vector<double> spectral::assemble_transfer_kernel(
+std::vector<double> assemble_transfer_kernel(
     const Grid1D& grid,
     const double* potential,
     double diffusion_scale,
@@ -263,7 +263,7 @@ std::vector<double> spectral::assemble_transfer_kernel(
     return K;
 }
 
-std::vector<double> spectral::generator_from_transfer_kernel(
+std::vector<double> generator_from_transfer_kernel(
     const double* kernel,
     std::size_t n,
     double dt,
@@ -285,7 +285,7 @@ std::vector<double> spectral::generator_from_transfer_kernel(
     return G;
 }
 
-std::vector<double> spectral::matrix_vector_multiply(
+std::vector<double> matrix_vector_multiply(
     const double* matrix,
     std::size_t n,
     const double* x)
@@ -301,7 +301,7 @@ std::vector<double> spectral::matrix_vector_multiply(
     return y;
 }
 
-double spectral::rayleigh_quotient(
+double rayleigh_quotient(
     const double* matrix,
     std::size_t n,
     const double* x)
@@ -316,7 +316,7 @@ double spectral::rayleigh_quotient(
     return (den != 0.0) ? (num / den) : std::numeric_limits<double>::quiet_NaN();
 }
 
-void spectral::normalize_vector(double* x, std::size_t n) {
+void normalize_vector(double* x, std::size_t n) {
     double norm2 = 0.0;
     for (std::size_t i = 0; i < n; ++i) {
         norm2 += x[i] * x[i];
@@ -330,7 +330,7 @@ void spectral::normalize_vector(double* x, std::size_t n) {
     }
 }
 
-double spectral::residual_norm(
+double residual_norm(
     const double* matrix,
     std::size_t n,
     const double* x,
@@ -345,7 +345,7 @@ double spectral::residual_norm(
     return std::sqrt(sum2);
 }
 
-SpectralResult spectral::jacobi_eigen_solve_symmetric(
+SpectralResult jacobi_eigen_solve_symmetric(
     const double* matrix,
     std::size_t n,
     bool compute_eigenvectors,
@@ -451,7 +451,7 @@ SpectralResult spectral::jacobi_eigen_solve_symmetric(
     return out;
 }
 
-std::vector<double> spectral::eigenvalues(
+std::vector<double> eigenvalues(
     const double* matrix,
     std::size_t n,
     std::size_t max_sweeps,
@@ -461,7 +461,7 @@ std::vector<double> spectral::eigenvalues(
     return jacobi_eigen_solve_symmetric(matrix, n, false, max_sweeps, tol, sort_ascending).eigenvalues;
 }
 
-double spectral::trace_from_diagonal(const double* matrix, std::size_t n) {
+double trace_from_diagonal(const double* matrix, std::size_t n) {
     double tr = 0.0;
     for (std::size_t i = 0; i < n; ++i) {
         tr += matrix[idx(i, i, n)];
@@ -469,7 +469,7 @@ double spectral::trace_from_diagonal(const double* matrix, std::size_t n) {
     return tr;
 }
 
-double spectral::log_det_from_eigenvalues(
+double log_det_from_eigenvalues(
     const double* eigenvalues,
     std::size_t n,
     double regularization)
@@ -481,7 +481,7 @@ double spectral::log_det_from_eigenvalues(
     return out;
 }
 
-std::vector<double> spectral::spectral_density_histogram(
+std::vector<double> spectral_density_histogram(
     const double* eigenvalues,
     std::size_t n,
     double x_min,
@@ -504,7 +504,7 @@ std::vector<double> spectral::spectral_density_histogram(
     return hist;
 }
 
-std::vector<double> spectral::nearest_eigenvalues_to_targets(
+std::vector<double> nearest_eigenvalues_to_targets(
     const double* eigenvalues,
     std::size_t n,
     const double* targets,

@@ -81,7 +81,8 @@
           "cflags_cc": [ "-std=c++20", "-O2" ],
           "xcode_settings": {
             "OTHER_CPPFLAGS": [ "-std=c++20", "-O2" ],
-            "GCC_ENABLE_CPP_EXCEPTIONS": "YES"
+            "GCC_ENABLE_CPP_EXCEPTIONS": "YES",
+            "OTHER_LDFLAGS": [ "-undefined", "dynamic_lookup" ]
           }
         }],
         ["OS=='linux'", {
