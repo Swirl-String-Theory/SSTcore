@@ -143,7 +143,6 @@ jobs:
             --rootdir="${GITHUB_WORKSPACE}" \
             --ignore="${GITHUB_WORKSPACE}/tests/TestLibraryGravityModification.py" \
             --ignore="${GITHUB_WORKSPACE}/tests/TestLibraryTrefoil.py" \
-            --ignore="${GITHUB_WORKSPACE}/tests/test_audit_binding_examples.py" \
             -q --tb=short
         shell: bash
 

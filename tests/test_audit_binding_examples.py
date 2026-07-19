@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests for binding/examples audit tooling."""
+"""Tests for binding/examples audit tooling (canonical demos under examples/)."""
 
 from __future__ import annotations
 
@@ -12,7 +12,15 @@ import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = ROOT / "scripts"
-SRC = ROOT / "src"
+EXAMPLES = ROOT / "examples"
+
+# Import map from audit script
+sys.path.insert(0, str(SCRIPTS))
+from audit_binding_examples import (  # noqa: E402
+    BINDING_MODULES,
+    MODULE_TO_EXAMPLES,
+    missing_modules,
+)
 
 
 @pytest.fixture(scope="module")
@@ -25,34 +33,30 @@ def audit_report(tmp_path_factory):
         str(out),
     ]
     completed = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-    assert completed.returncode == 0, completed.stderr
+    assert completed.returncode == 0, completed.stderr or completed.stdout
     return json.loads((out / "audit.json").read_text(encoding="utf-8"))
 
 
-def test_all_binding_modules_have_src_example():
-    missing = [
-        mod
-        for mod in [
-            "ab_initio_mass", "atomic_bridge_model", "biot_savart", "canonical_constants",
-            "chronos_kelvin_transport", "clock_field_eft", "delay_mode_selector", "field_kernels",
-            "field_ops", "fluid_dynamics", "frenet_helicity", "hyperbolic_volume", "knot_dynamics",
-            "magnus_integrator", "multisector_fitter", "potential_timefield", "radiation_flow",
-            "resolved_tube_geometry", "spectroscopic_gap", "sst_extensions", "sst_gravity",
-            "sst_integrator", "sst_master_equation", "sst_tension_scales", "swirl_field",
-            "thermo_dynamics", "time_evolution", "trefoil_operator", "vortex_ring", "vorticity_dynamics",
-        ]
-        if not (SRC / f"{mod}_example.py").is_file()
-    ]
-    assert not missing, f"missing src examples: {missing}"
+def test_all_binding_modules_have_examples_demo():
+    missing = missing_modules(EXAMPLES)
+    assert not missing, f"missing examples/ demos for modules: {missing}"
+    # Every mapped primary file must exist (or an alternate in the tuple)
+    for mod in BINDING_MODULES:
+        names = MODULE_TO_EXAMPLES[mod]
+        assert any((EXAMPLES / n).is_file() for n in names), f"{mod}: none of {names} exist"
 
 
 def test_audit_generates_summary(audit_report):
     assert audit_report["summary"]["binding_modules"] == 30
+    assert audit_report["summary"]["missing_example_files"] == 0
+    assert audit_report["summary"]["example_files"] == 30
+    # Compat aliases
     assert audit_report["summary"]["src_example_files"] == 30
+    assert audit_report["summary"]["missing_src_example_files"] == 0
 
 
 def test_example_bootstrap_importable():
-    sys.path.insert(0, str(SRC))
+    sys.path.insert(0, str(EXAMPLES))
     import _example_bootstrap as boot  # noqa: WPS433
 
     sst, info = boot.import_sstcore()

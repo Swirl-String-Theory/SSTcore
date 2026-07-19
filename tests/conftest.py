@@ -3,8 +3,6 @@
 - **Local / CMake**: prepend typical build output dirs so native modules (e.g. ``sstcore._native``) resolve.
 - **Wheel CI** (``SST_WHEEL_TEST=1``): remove checkout paths so site-packages wins, then re-add
   ``tests/`` only so test helpers (``sstcore_test_import``) remain importable.
-  Source-audit tests (binding examples, manifest ``--check``) are skipped — they validate the
-  checkout tree, not an installed wheel.
 """
 
 from __future__ import annotations
@@ -12,8 +10,6 @@ from __future__ import annotations
 import os
 import sys
 from pathlib import Path
-
-import pytest
 
 
 def _repo_root() -> Path:
@@ -87,17 +83,3 @@ def pytest_configure(config) -> None:  # noqa: ARG001
 def pytest_sessionstart(session) -> None:  # noqa: ARG001
     _strip_repo_root_from_sys_path()
     _ensure_tests_helpers_on_sys_path()
-
-
-def pytest_collection_modifyitems(config, items) -> None:  # noqa: ARG001
-    """Skip checkout-only audits when validating an installed wheel."""
-    if os.environ.get("SST_WHEEL_TEST") != "1":
-        return
-    skip_audit = pytest.mark.skip(reason="source-audit only; skipped under SST_WHEEL_TEST")
-    for item in items:
-        nodeid = item.nodeid.replace("\\", "/")
-        if "test_audit_binding_examples.py" in nodeid:
-            item.add_marker(skip_audit)
-            continue
-        if item.name == "test_gen_binding_manifest_check":
-            item.add_marker(skip_audit)
