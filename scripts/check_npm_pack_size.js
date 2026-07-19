@@ -58,11 +58,14 @@ if (files > MAX_FILES) {
   console.error(`[pack-size] FAIL: file count ${files} > ${MAX_FILES}`);
   failed = true;
 }
-if (!/^sstcore-/i.test(String(filename)) && !String(filename).includes('sstcore')) {
-  // npm pack --json may use "name" field as package name without .tgz
+{
   const pkgName = entry.name || '';
-  if (pkgName && pkgName !== 'sstcore') {
-    console.error(`[pack-size] FAIL: expected package name sstcore, got ${pkgName}`);
+  const okName =
+    pkgName === 'sst-core' ||
+    /^sst-core-/i.test(String(filename)) ||
+    String(filename).includes('sst-core');
+  if (!okName) {
+    console.error(`[pack-size] FAIL: expected package name sst-core (filename=${filename}, name=${pkgName})`);
     failed = true;
   }
 }

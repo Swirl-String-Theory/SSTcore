@@ -125,8 +125,8 @@ jobs:
         run: |
           NAME=$(node -p "require('./package.json').name")
           echo "name=$NAME" >> "$GITHUB_OUTPUT"
-          if [ "$NAME" != "sstcore" ]; then
-            echo "ERROR: package.json name must be lowercase 'sstcore' (got: $NAME)"
+          if [ "$NAME" != "sst-core" ]; then
+            echo "ERROR: package.json name must be 'sst-core' (got: $NAME)"
             exit 1
           fi
           if [ "${{ github.event_name }}" = "release" ]; then
@@ -209,7 +209,7 @@ jobs:
 
             Install with:
             ```bash
-            npm install sstcore
+            npm install sst-core
             ```
           draft: false
           prerelease: false

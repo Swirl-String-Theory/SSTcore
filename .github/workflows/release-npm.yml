@@ -61,8 +61,8 @@ jobs:
           echo "name=$NAME" >> "$GITHUB_OUTPUT"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "Publishing npm package ${NAME}@${VERSION} (ref: ${{ inputs.git_ref }})"
-          if [ "$NAME" != "sstcore" ]; then
-            echo "ERROR: package.json name must be lowercase 'sstcore' (got: $NAME)"
+          if [ "$NAME" != "sst-core" ]; then
+            echo "ERROR: package.json name must be 'sst-core' (got: $NAME)"
             exit 1
           fi
 
