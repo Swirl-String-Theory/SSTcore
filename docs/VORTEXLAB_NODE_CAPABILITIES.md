@@ -66,6 +66,21 @@ The Node full probe (`SSTcore_full_probe.js`) loads all three catalogs and repor
 
 Workbench/VortexLab HTML may still reference older filenames (`ideal_knots_data.js`, …) until those trees are synced.
 
+### Python-parity resource helpers (Node)
+
+The following Python package helpers are also on `require('sst-core')` via [`lib/resource_helpers.js`](../lib/resource_helpers.js) (camelCase + snake_case):
+
+`get_resources_dir`, `get_ideal_txt_path`, `get_knots_fourier_series_dir`, `get_knotplot_dir`, `get_ideal_ab`, `get_ideal_link`, `list_ideal_source_files`, `list_embedded_fseries_ids`, `load_fseries_knot`, `knotplot`, `resolve_knot_ref`
+
+```js
+const sst = require('sst-core');
+console.log(sst.get_resources_dir());
+console.log(sst.get_ideal_ab('3:1:1')?.slice(0, 60));
+console.log(sst.resolve_knot_ref('3:1:1')?.ropelength);
+```
+
+`get_knotplot_dir` / `knotplot` return a path or file text when `resources/knotplot/` is present (dev checkout); published npm packs omit that large tree, so those may be `null`.
+
 ## Needs wrapper only (C++ already in `sstcore_lib`)
 
 - Exact / continuous Fourier curvature  

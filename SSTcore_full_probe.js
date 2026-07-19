@@ -55,7 +55,7 @@ const TOPOLOGY_CANDIDATES = [
   ['solomon_link', 'LINK', 'L4a1'],
 ];
 
-/** Node-facing helpers (camelCase) expected on the addon / package surface. */
+/** Node-facing helpers expected on the addon / package surface. */
 const EXPECTED_NODE_HELPERS = [
   'engineInfo',
   'getCapabilities',
@@ -74,10 +74,7 @@ const EXPECTED_NODE_HELPERS = [
   'computeVelocity',
   'ParticleEvaluator',
   'ZooEvaluator',
-];
-
-/** Python-only helpers (reported as missing on Node for cross-probe comparison). */
-const PYTHON_ONLY_HELPERS = [
+  // Python-parity resource helpers (JS layer on index.js)
   'get_resources_dir',
   'get_ideal_txt_path',
   'get_knots_fourier_series_dir',
@@ -90,6 +87,9 @@ const PYTHON_ONLY_HELPERS = [
   'knotplot',
   'resolve_knot_ref',
 ];
+
+/** Formerly Python-only; kept empty so reports stay comparable if we reintroduce gaps. */
+const PYTHON_ONLY_HELPERS = [];
 
 const FSERIES_PROBE_LABELS = ['3_1', '4_1', '5_2', '6_1'];
 const CANON_TREFOIL_ROPELENGTH = 16.371637;
@@ -357,7 +357,45 @@ function probePublicApi(sst) {
 }
 
 /** Only these may be invoked with zero args during the helper probe (N-API wrappers often report .length===0). */
-const SAFE_NOARG_HELPERS = new Set(['engineInfo', 'getCapabilities', 'listBindings']);
+const SAFE_NOARG_HELPERS = new Set([
+  'engineInfo',
+  'getCapabilities',
+  'listBindings',
+  'get_resources_dir',
+  'get_ideal_txt_path',
+  'get_knots_fourier_series_dir',
+  'get_knotplot_dir',
+  'list_ideal_source_files',
+  'list_embedded_fseries_ids',
+]);
+
+function summarizeHelperSample(name, value) {
+  if (value == null) return { kind: 'null' };
+  if (typeof value === 'string') {
+    return { kind: 'string', length: value.length, preview: value.slice(0, 80) };
+  }
+  if (Array.isArray(value)) {
+    return { kind: 'array', count: value.length, sample: value.slice(0, 8) };
+  }
+  if (typeof value === 'object') {
+    const keys = Object.keys(value);
+    const out = { kind: 'object', keys: keys.slice(0, 12) };
+    if (name === 'resolve_knot_ref') {
+      out.ref = value.ref;
+      out.source = value.source;
+      out.role = value.role;
+      out.ropelength = value.ropelength;
+      out.canonicalAbId = value.canonicalAbId;
+      out.hasIdealXml = !!value.idealXml;
+      out.idealXmlLength = value.idealXml ? String(value.idealXml).length : 0;
+    }
+    if (name === 'list_ideal_source_files') {
+      out.count = keys.length;
+    }
+    return out;
+  }
+  return { kind: typeof value, preview: safeRepr(value, 80) };
+}
 
 function summarizeEmbeddedValue(value) {
   if (value == null) return { empty: true };
@@ -396,7 +434,18 @@ function probeExpectedHelpers(sst) {
       try {
         const value = obj();
         row.call_ok = true;
-        row.value = jsonable(value);
+        if (name === 'list_embedded_fseries_ids' || name === 'list_ideal_source_files') {
+          row.value = summarizeHelperSample(name, value);
+        } else if (
+          name === 'get_resources_dir' ||
+          name === 'get_ideal_txt_path' ||
+          name === 'get_knots_fourier_series_dir' ||
+          name === 'get_knotplot_dir'
+        ) {
+          row.value = value == null ? null : String(value);
+        } else {
+          row.value = jsonable(value);
+        }
       } catch (exc) {
         row.call_ok = false;
         row.error = `${exc && exc.name}: ${exc && exc.message}`;
@@ -405,6 +454,46 @@ function probeExpectedHelpers(sst) {
       try {
         row.call_ok = true;
         row.value = summarizeEmbeddedValue(obj());
+      } catch (exc) {
+        row.call_ok = false;
+        row.error = `${exc && exc.name}: ${exc && exc.message}`;
+      }
+    } else if (row.callable && name === 'get_ideal_ab') {
+      try {
+        row.call_ok = true;
+        row.value = summarizeHelperSample(name, obj('3:1:1'));
+      } catch (exc) {
+        row.call_ok = false;
+        row.error = `${exc && exc.name}: ${exc && exc.message}`;
+      }
+    } else if (row.callable && name === 'get_ideal_link') {
+      try {
+        row.call_ok = true;
+        row.value = summarizeHelperSample(name, obj('L2a1'));
+      } catch (exc) {
+        row.call_ok = false;
+        row.error = `${exc && exc.name}: ${exc && exc.message}`;
+      }
+    } else if (row.callable && name === 'load_fseries_knot') {
+      try {
+        row.call_ok = true;
+        row.value = summarizeHelperSample(name, obj('3_1'));
+      } catch (exc) {
+        row.call_ok = false;
+        row.error = `${exc && exc.name}: ${exc && exc.message}`;
+      }
+    } else if (row.callable && name === 'resolve_knot_ref') {
+      try {
+        row.call_ok = true;
+        row.value = summarizeHelperSample(name, obj('3:1:1'));
+      } catch (exc) {
+        row.call_ok = false;
+        row.error = `${exc && exc.name}: ${exc && exc.message}`;
+      }
+    } else if (row.callable && name === 'knotplot') {
+      try {
+        row.call_ok = true;
+        row.value = summarizeHelperSample(name, obj('knot_3.1'));
       } catch (exc) {
         row.call_ok = false;
         row.error = `${exc && exc.name}: ${exc && exc.message}`;

@@ -250,6 +250,13 @@ function attachMeta(exportsObj) {
         });
     };
 
+    try {
+        const { attachResourceHelpers } = require('./lib/resource_helpers');
+        attachResourceHelpers(exportsObj, __dirname);
+    } catch (err) {
+        loadErrors.push(`resource_helpers: ${err && err.message ? err.message : err}`);
+    }
+
     return exportsObj;
 }
 

@@ -9,6 +9,8 @@
   "files": [
     "index.js",
     "index.d.ts",
+    "lib/resource_helpers.js",
+    "lib/resource_helpers.d.ts",
     "LICENSE",
     "README.md",
     "NODE_BUILD.md",

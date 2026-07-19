@@ -159,6 +159,29 @@ export interface SSTcoreModule {
   TimeEvolution?: new (...args: any[]) => any;
   GoldenNLSClosure?: new (...args: any[]) => any;
 
+  // Python-parity resource helpers (JS layer; camelCase + snake_case)
+  getResourcesDir?: () => string | null;
+  getIdealTxtPath?: () => string | null;
+  getKnotsFourierSeriesDir?: () => string | null;
+  getKnotplotDir?: () => string | null;
+  listIdealSourceFiles?: () => Record<string, string>;
+  getIdealAb?: (abId: string, source?: string | null) => string | null;
+  getIdealLink?: (linkId: string, source?: string | null) => string | null;
+  listEmbeddedFseriesIds?: () => string[];
+  loadFseriesKnot?: (label: string) => string | null;
+  knotplot?: (knotId: string) => string | null;
+  resolveKnotRef?: (...args: any[]) => any;
+  get_resources_dir?: () => string | null;
+  get_ideal_txt_path?: () => string | null;
+  get_knots_fourier_series_dir?: () => string | null;
+  get_knotplot_dir?: () => string | null;
+  list_ideal_source_files?: () => Record<string, string>;
+  get_ideal_ab?: (abId: string, source?: string | null) => string | null;
+  get_ideal_link?: (linkId: string, source?: string | null) => string | null;
+  list_embedded_fseries_ids?: () => string[];
+  load_fseries_knot?: (label: string) => string | null;
+  resolve_knot_ref?: (...args: any[]) => any;
+
   [key: string]: any;
 }
 
