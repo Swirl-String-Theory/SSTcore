@@ -117,6 +117,17 @@ add_library(sstcore_lib STATIC
         src/particle/knot_particle_model.cpp
         src/filament/vortex_knot_system.cpp
         src/filament/evolution.cpp
+        src/filament/velocity_solver.cpp
+        src/filament/integrator.cpp
+        src/geometry/periodic_spline.cpp
+        src/geometry/continuous_reach.cpp
+        src/geometry/polygonal_clearance.cpp
+        src/topology/topology_guard.cpp
+        src/analysis/intrinsic_frame.cpp
+        src/analysis/rigid_motion.cpp
+        src/curve/sampling.cpp
+        src/catalog/knot_catalog.cpp
+        src/knot/polygonal_gauss.cpp
         src/tube/detail/common.cpp
         src/tube/geometry_core.cpp
         src/tube/rigidity_matrix.cpp
@@ -180,6 +191,7 @@ if(SST_BUILD_PYTHON_BINDINGS)
             src/time_evolution_py.cpp
             src/vortex_ring_py.cpp
             src/vorticity_dynamics_py.cpp
+            src/vortexlab_kernels_py.cpp
             src/sst_gravity_py.cpp
             src/sst_extensions_py.cpp
             src/sst_integrator_py.cpp)
@@ -395,7 +407,8 @@ if(NODE_EXECUTABLE)
             src/time_evolution_node.cpp
             src/vortex_ring_node.cpp
             src/vorticity_dynamics_node.cpp
-        )
+            src/vortexlab_kernels_node.cpp
+    )
 
         target_include_directories(sstcore_node PRIVATE
             ${NODE_CORE_INCLUDE_NORM}

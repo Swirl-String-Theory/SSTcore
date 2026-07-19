@@ -66,6 +66,7 @@ void bind_sst_integrator(Napi::Env env, Napi::Object exports);
 void bind_sst_master_equation(Napi::Env env, Napi::Object exports);
 void bind_sst_tension_scales(Napi::Env env, Napi::Object exports);
 void bind_extensions(Napi::Env env, Napi::Object exports);
+void bind_vortexlab_kernels(Napi::Env env, Napi::Object exports);
 
 static Napi::Object EngineInfo(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
@@ -101,7 +102,13 @@ static Napi::Object GetCapabilities(const Napi::CallbackInfo& info) {
     o.Set("trefoilOperator", true);
     o.Set("multisectorFitter", true);
     o.Set("resolvedTubeGeometry", true);
-    o.Set("continuousReach", false);
+    o.Set("continuousReach", true);
+    o.Set("polygonalGauss", true);
+    o.Set("filamentVelocity", true);
+    o.Set("filamentIntegrator", true);
+    o.Set("topologyGuard", true);
+    o.Set("intrinsicFrame", true);
+    o.Set("rigidMotion", true);
     o.Set("wasmFallback", false);
     return o;
 }
@@ -144,6 +151,7 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
     bind_sst_master_equation(env, exports);
     bind_sst_tension_scales(env, exports);
     bind_extensions(env, exports);
+    bind_vortexlab_kernels(env, exports);
 
     exports.Set("engineInfo", Napi::Function::New(env, EngineInfo));
     exports.Set("getCapabilities", Napi::Function::New(env, GetCapabilities));
