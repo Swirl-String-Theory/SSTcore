@@ -33,17 +33,32 @@ set(SST_RESOURCES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/resources")
 set(SST_KNOT_FSERIES_DIR "${SST_RESOURCES_DIR}/knot_fseries")
 set(SST_KNOTS_FOURIER_DIR "${SST_RESOURCES_DIR}/Knots_FourierSeries")
 
-# Optimization flags for scientific calculation
+# Numeric build profiles: deterministic (default, npm/regressions) | fast (optional)
+set(SST_NUMERIC_PROFILE "deterministic" CACHE STRING "Numeric profile: deterministic|fast")
+set_property(CACHE SST_NUMERIC_PROFILE PROPERTY STRINGS deterministic fast)
+if(NOT SST_NUMERIC_PROFILE STREQUAL "deterministic" AND NOT SST_NUMERIC_PROFILE STREQUAL "fast")
+    message(FATAL_ERROR "SST_NUMERIC_PROFILE must be 'deterministic' or 'fast' (got '${SST_NUMERIC_PROFILE}')")
+endif()
+message(STATUS "SST_NUMERIC_PROFILE=${SST_NUMERIC_PROFILE}")
+
 if(MSVC)
-    # Only apply /O2 in Release mode (Debug uses /RTC1 which is incompatible)
-    add_compile_options($<$<CONFIG:Release>:/O2> /fp:fast)
+    # Release uses /O2; Debug keeps MSVC defaults (/RTC1 incompatible with /O2)
+    add_compile_options($<$<CONFIG:Release>:/O2>)
+    if(SST_NUMERIC_PROFILE STREQUAL "fast")
+        add_compile_options(/fp:fast)
+    endif()
 else()
-    add_compile_options(-O3 -march=native -ffast-math)
-    # Linux-specific optimizations
+    if(SST_NUMERIC_PROFILE STREQUAL "fast")
+        add_compile_options(-O3 -march=native -ffast-math)
+    else()
+        add_compile_options(-O2)
+    endif()
     if(IS_LINUX)
-        add_compile_options(-fPIC)  # Position-independent code for shared libraries
+        add_compile_options(-fPIC)
     endif()
 endif()
+
+add_compile_definitions(SSTCORE_NUMERIC_PROFILE="${SST_NUMERIC_PROFILE}")
 
 if(SST_BUILD_PYTHON_BINDINGS)
     if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/extern/pybind11/CMakeLists.txt")
@@ -126,6 +141,7 @@ target_include_directories(sstcore_lib PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
         ${CMAKE_CURRENT_SOURCE_DIR}/include/generated
 )
+set_target_properties(sstcore_lib PROPERTIES POSITION_INDEPENDENT_CODE ON)
 target_compile_definitions(sstcore_lib PRIVATE
     SST_DEFAULT_RESOURCE_SUBDIR="share/sstcore/resources"
     SST_DEFAULT_KNOT_FSERIES_SUBDIR="share/sstcore/resources/knot_fseries"
@@ -186,8 +202,10 @@ if(SST_BUILD_PYTHON_BINDINGS)
     endif()
 endif()
 
-# Copy runtime resources into build tree for local runs (examples/tests/python)
-if(EXISTS "${SST_RESOURCES_DIR}")
+# Copy runtime resources into build tree for local runs (examples/tests/python).
+# Skip for Node-only installs (embedded knot data is already compiled into sstcore_lib).
+option(SST_COPY_RUNTIME_RESOURCES "Copy resources/ into the build tree" ON)
+if(SST_COPY_RUNTIME_RESOURCES AND EXISTS "${SST_RESOURCES_DIR}")
     add_custom_target(copy_sst_resources ALL
         COMMAND ${CMAKE_COMMAND} -E make_directory
                 "${CMAKE_BINARY_DIR}/share/sstcore/resources"
@@ -200,16 +218,28 @@ if(EXISTS "${SST_RESOURCES_DIR}")
     if(SST_BUILD_PYTHON_BINDINGS)
         add_dependencies(sstcore copy_sst_resources)
     endif()
+elseif(NOT SST_COPY_RUNTIME_RESOURCES)
+    message(STATUS "SST_COPY_RUNTIME_RESOURCES=OFF: skipping resource tree copy")
 endif()
 
-add_executable(test_frenet tests/test_frenet_helicity.cpp)
-target_link_libraries(test_frenet PRIVATE sstcore_lib)
-
-add_executable(test_sst_integrator tests/test_sst_integrator.cpp)
-target_link_libraries(test_sst_integrator PRIVATE sstcore_lib)
-
-add_executable(test_resolved_tube_geometry tests/test_resolved_tube_geometry.cpp)
-target_link_libraries(test_resolved_tube_geometry PRIVATE sstcore_lib)
+# C++ unit test executables (optional; often absent from npm source tarballs)
+option(SST_BUILD_CPP_TESTS "Build C++ test_frenet / test_sst_integrator / test_resolved_tube_geometry" ON)
+if(SST_BUILD_CPP_TESTS)
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_frenet_helicity.cpp")
+        add_executable(test_frenet tests/test_frenet_helicity.cpp)
+        target_link_libraries(test_frenet PRIVATE sstcore_lib)
+    endif()
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_sst_integrator.cpp")
+        add_executable(test_sst_integrator tests/test_sst_integrator.cpp)
+        target_link_libraries(test_sst_integrator PRIVATE sstcore_lib)
+    endif()
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_resolved_tube_geometry.cpp")
+        add_executable(test_resolved_tube_geometry tests/test_resolved_tube_geometry.cpp)
+        target_link_libraries(test_resolved_tube_geometry PRIVATE sstcore_lib)
+    endif()
+else()
+    message(STATUS "SST_BUILD_CPP_TESTS=OFF: skipping C++ test executables")
+endif()
 
 # Standalone examples/atoms (optional; requires GLFW3. Set -DSST_BUILD_ATOMS=ON and provide glfw3/GLEW/OpenGL.)
 set(SST_BUILD_ATOMS OFF CACHE BOOL "Build examples/atoms (requires GLFW3, GLEW, OpenGL)")
@@ -224,6 +254,7 @@ endif()
 find_program(NODE_EXECUTABLE NAMES node)
 
 # Written by the Node addon configure logic below (also consumed by scripts/build_node_target.js).
+# Default OFF until headers/node.lib are resolved; updated with FORCE at decision points.
 set(HAVE_SSTCORE_NODE OFF CACHE BOOL "Node.js addon target is available")
 
 # Allow manual override of node-addon-api include dir for robustness (especially on Windows)
@@ -248,58 +279,32 @@ if(NODE_EXECUTABLE)
     endif()
 
     # Node.js core headers (node_api.h) - required by node-addon-api's napi.h
-    # Prefer: 1) NODE_CORE_INCLUDE_DIR override, 2) <node_install>/include/node, 3) node-gyp cache
+    # Prefer: 1) NODE_CORE_INCLUDE_DIR override, 2) Node install include/, 3) node-gyp cache
     set(NODE_CORE_INCLUDE_DIR "" CACHE PATH "Path to Node.js core include directory (optional override)")
-    if(NOT NODE_CORE_INCLUDE_DIR)
-        execute_process(
-            COMMAND ${NODE_EXECUTABLE} -p "require('path').join(require('path').dirname(process.execPath), 'include', 'node')"
-            OUTPUT_VARIABLE NODE_CORE_INCLUDE_RAW
-            OUTPUT_STRIP_TRAILING_WHITESPACE
-            ERROR_QUIET
-        )
-        set(NODE_CORE_INCLUDE_DIR "${NODE_CORE_INCLUDE_RAW}")
-    endif()
+    set(NODE_CORE_INCLUDE_NORM "")
     if(NODE_CORE_INCLUDE_DIR)
         file(TO_CMAKE_PATH "${NODE_CORE_INCLUDE_DIR}" NODE_CORE_INCLUDE_NORM)
         string(REPLACE "\"" "" NODE_CORE_INCLUDE_NORM "${NODE_CORE_INCLUDE_NORM}")
     endif()
 
-    # Fallback: node-gyp cache (e.g. after "node-gyp install") when Node install has no include/
-    set(NODE_CORE_HEADER "${NODE_CORE_INCLUDE_NORM}/node_api.h")
-    if(NODE_CORE_INCLUDE_NORM AND NOT EXISTS "${NODE_CORE_HEADER}")
+    # Probe common locations (GitHub Actions hosts Node without headers next to the binary)
+    if(NOT NODE_CORE_INCLUDE_NORM OR NOT EXISTS "${NODE_CORE_INCLUDE_NORM}/node_api.h")
         execute_process(
-            COMMAND ${NODE_EXECUTABLE} -p "process.versions.node"
-            OUTPUT_VARIABLE NODE_VERSION_RAW
+            COMMAND ${NODE_EXECUTABLE} -p "(()=>{const p=require('path');const fs=require('fs');const ver=process.versions.node;const execDir=p.dirname(process.execPath);const home=process.env.HOME||process.env.USERPROFILE||'';const local=process.env.LOCALAPPDATA||'';const cands=[p.join(execDir,'include','node'),p.join(execDir,'..','include','node'),p.join(local,'node-gyp','Cache',ver,'include','node'),p.join(home,'.node-gyp',ver,'include','node'),p.join(home,'.cache','node-gyp',ver,'include','node'),p.join(home,'Library','Caches','node-gyp',ver,'include','node')];for(const d of cands){if(d&&fs.existsSync(p.join(d,'node_api.h'))){process.stdout.write(d);break;}}})()"
+            OUTPUT_VARIABLE NODE_CORE_INCLUDE_RAW
             OUTPUT_STRIP_TRAILING_WHITESPACE
             ERROR_QUIET
         )
-        if(NODE_VERSION_RAW)
-            string(STRIP "${NODE_VERSION_RAW}" NODE_VERSION_RAW)
-            if(IS_WINDOWS)
-                execute_process(
-                    COMMAND ${NODE_EXECUTABLE} -p "require('path').join(process.env.LOCALAPPDATA || '', 'node-gyp', 'Cache', process.versions.node, 'include', 'node')"
-                    OUTPUT_VARIABLE NODE_GYP_INCLUDE_RAW
-                    OUTPUT_STRIP_TRAILING_WHITESPACE
-                    ERROR_QUIET
-                )
-            else()
-                execute_process(
-                    COMMAND ${NODE_EXECUTABLE} -p "require('path').join(process.env.HOME || '', '.node-gyp', process.versions.node, 'include', 'node')"
-                    OUTPUT_VARIABLE NODE_GYP_INCLUDE_RAW
-                    OUTPUT_STRIP_TRAILING_WHITESPACE
-                    ERROR_QUIET
-                )
-            endif()
-            if(NODE_GYP_INCLUDE_RAW)
-                file(TO_CMAKE_PATH "${NODE_GYP_INCLUDE_RAW}" NODE_GYP_INCLUDE_NORM)
-                string(REPLACE "\"" "" NODE_GYP_INCLUDE_NORM "${NODE_GYP_INCLUDE_NORM}")
-                if(EXISTS "${NODE_GYP_INCLUDE_NORM}/node_api.h")
-                    set(NODE_CORE_INCLUDE_NORM "${NODE_GYP_INCLUDE_NORM}")
-                    set(NODE_CORE_HEADER "${NODE_CORE_INCLUDE_NORM}/node_api.h")
-                    message(STATUS "Using Node.js headers from node-gyp cache: ${NODE_CORE_INCLUDE_NORM}")
-                endif()
-            endif()
+        if(NODE_CORE_INCLUDE_RAW)
+            file(TO_CMAKE_PATH "${NODE_CORE_INCLUDE_RAW}" NODE_CORE_INCLUDE_NORM)
+            string(REPLACE "\"" "" NODE_CORE_INCLUDE_NORM "${NODE_CORE_INCLUDE_NORM}")
+            message(STATUS "Using Node.js headers: ${NODE_CORE_INCLUDE_NORM}")
         endif()
+    endif()
+
+    set(NODE_CORE_HEADER "")
+    if(NODE_CORE_INCLUDE_NORM)
+        set(NODE_CORE_HEADER "${NODE_CORE_INCLUDE_NORM}/node_api.h")
     endif()
 
     # Require both node-addon-api and Node core include dir (with node_api.h) to enable addon
@@ -357,53 +362,30 @@ if(NODE_EXECUTABLE)
         endif()
 
         if(BUILD_SSTCORE_NODE)
-        # Build Node.js native addon
+        # Node addon: thin N-API wrappers only; numeric truth lives in sstcore_lib
         add_library(sstcore_node SHARED
             src/node/module_node.cpp
+            src/node/node_ab_initio.cpp
             src/node/node_biot_savart.cpp
             src/node/node_field_kernels.cpp
             src/node/node_field_ops.cpp
             src/node/node_fluid_dynamics.cpp
-            src/node/node_knot.cpp
             src/node/node_frenet_helicity.cpp
-            src/node/node_potential_timefield.cpp
             src/node/node_hyperbolic_volume.cpp
+            src/node/node_knot.cpp
+            src/node/node_magnus_integrator.cpp
+            src/node/node_potential_timefield.cpp
             src/node/node_radiation_flow.cpp
+            src/node/node_sst_extensions.cpp
+            src/node/node_sst_gravity.cpp
+            src/node/node_sst_integrator.cpp
             src/node/node_swirl_field.cpp
             src/node/node_thermo_dynamics.cpp
             src/node/node_time_evolution.cpp
             src/node/node_vortex_ring.cpp
             src/node/node_vorticity_dynamics.cpp
-            src/node/node_sst_gravity.cpp
-            src/node/node_sst_extensions.cpp
-            src/biot_savart.cpp
-            src/fluid_dynamics.cpp
-            src/field_kernels.cpp
-            src/frenet_helicity.cpp
-            src/potential_timefield.cpp
-            src/hyperbolic_volume.cpp
-            src/knot/resource_loader.cpp
-            src/knot/fourier_parser.cpp
-            src/knot/ideal_parser.cpp
-            src/knot/fourier_eval.cpp
-            src/knot/invariants.cpp
-            src/knot/invariants_bridge.cpp
-            src/particle/xi_model.cpp
-            src/particle/mass_functional.cpp
-            src/particle/knot_particle_model.cpp
-            src/filament/vortex_knot_system.cpp
-            src/filament/evolution.cpp
-            src/radiation_flow.cpp
-            src/swirl_field.cpp
-            src/thermo_dynamics.cpp
-            src/time_evolution.cpp
-            src/vortex_ring.cpp
-            src/vorticity_dynamics.cpp
-            src/sst_gravity.cpp
-            src/sst_extensions.cpp
-            ${CMAKE_BINARY_DIR}/generated/knot_files_embedded.cpp
         )
-        
+
         target_include_directories(sstcore_node PRIVATE
             ${NODE_CORE_INCLUDE_NORM}
             ${NODE_ADDON_API_INCLUDE_NORM}
@@ -411,51 +393,51 @@ if(NODE_EXECUTABLE)
             include
             include/generated
         )
+        target_link_libraries(sstcore_node PRIVATE sstcore_lib)
         if(NODE_LIBRARY)
             target_link_libraries(sstcore_node PRIVATE "${NODE_LIBRARY}")
         endif()
-        
-        # Set C++ standard (use 20 for better compatibility with node-gyp)
+
         set_target_properties(sstcore_node PROPERTIES
             CXX_STANDARD 20
             CXX_STANDARD_REQUIRED ON
+            PREFIX ""
+            SUFFIX ".node"
         )
-        
-        if(IS_WINDOWS)
-            set_target_properties(sstcore_node PROPERTIES
-                PREFIX ""
-                SUFFIX ".node"
-            )
-        else()
-            set_target_properties(sstcore_node PROPERTIES
-                PREFIX ""
-                SUFFIX ".node"
-            )
+
+        # N-API symbols resolve at Node load time; macOS linker needs deferred lookup.
+        # Windows/Linux must not get this flag (Windows uses node.lib).
+        if(APPLE)
+            target_link_options(sstcore_node PRIVATE "-undefined" "dynamic_lookup")
         endif()
-        
-        # Ensure generated files are created before building
-        add_dependencies(sstcore_node knot_files_embedded)
-        
-        # Copy the built .node file to build/Release for node-gyp compatibility
+
+        add_dependencies(sstcore_node knot_files_embedded sstcore_lib)
+
+        # Copy into CMake build tree and repo build/Release (index.js / npm layout)
         add_custom_command(TARGET sstcore_node POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy
-            $<TARGET_FILE:sstcore_node>
-            ${CMAKE_BINARY_DIR}/Release/sstcore.node
+            COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_BINARY_DIR}/Release"
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                $<TARGET_FILE:sstcore_node>
+                "${CMAKE_BINARY_DIR}/Release/sstcore.node"
+            COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_SOURCE_DIR}/build/Release"
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                $<TARGET_FILE:sstcore_node>
+                "${CMAKE_SOURCE_DIR}/build/Release/sstcore.node"
             COMMENT "Copying Node.js addon to build/Release"
         )
-        
-        set(HAVE_SSTCORE_NODE ON CACHE BOOL "Node.js addon target is available")
-        message(STATUS "Node.js native addon build enabled")
+
+        set(HAVE_SSTCORE_NODE ON CACHE BOOL "Node.js addon target is available" FORCE)
+        message(STATUS "Node.js native addon build enabled (links sstcore_lib)")
         else()
-            set(HAVE_SSTCORE_NODE OFF CACHE BOOL "Node.js addon target is available")
+            set(HAVE_SSTCORE_NODE OFF CACHE BOOL "Node.js addon target is available" FORCE)
         endif()
     else()
         if(NOT NODE_ADDON_API_INCLUDE_NORM OR NOT EXISTS "${NODE_ADDON_API_INCLUDE_NORM}")
             message(STATUS "node-addon-api not found or include dir invalid, skipping Node.js addon build")
         else()
-            message(STATUS "Node.js core headers (node_api.h) not found at ${NODE_CORE_INCLUDE_NORM}, skipping Node.js addon build. Install Node.js with 'Install native build tools' or set NODE_CORE_INCLUDE_DIR.")
+            message(STATUS "Node.js core headers (node_api.h) not found at '${NODE_CORE_INCLUDE_NORM}'. Run 'npx node-gyp install' or set NODE_CORE_INCLUDE_DIR.")
         endif()
-        set(HAVE_SSTCORE_NODE OFF CACHE BOOL "Node.js addon target is available")
+        set(HAVE_SSTCORE_NODE OFF CACHE BOOL "Node.js addon target is available" FORCE)
     endif()
 endif()
 

@@ -1,6 +1,6 @@
 {
   "name": "SSTcore",
-  "version": "0.8.0",
+  "version": "0.8.18",
   "description": "SSTcore - Swirl String Theory Canonical Core. High-performance C++ library for knot dynamics, vortex systems, and fluid mechanics (Node native addon + optional WASM). Same project as pip install SSTcore.",
   "main": "index.js",
   "module": "index.js",
@@ -10,27 +10,40 @@
     "index.js",
     "index.d.ts",
     "dist/",
+    "prebuilds/",
     "binding.gyp",
     "CMakeLists.txt",
     "cmake/",
     "src/",
-    "src_bindings/",
-    "extern/",
+    "extern/pybind11/",
     "include/",
-    "docs/",
-    "node_examples/",
+    "resources/",
+    "scripts/install-native.js",
     "scripts/ensure_knot_embedded.js",
+    "scripts/build_node_target.js",
+    "scripts/build_wasm.js",
+    "scripts/prebuild.js",
+    "scripts/prepack-clean.js",
+    "scripts/smoke_packaged_tarball.js",
     "scripts/run_node_examples.js",
-    "scripts/preflight_wheel_check.py"
+    "tests/test_basic.js",
+    "tests/test_python_node_parity.js",
+    "NODE_BUILD.md",
+    "NODE_RECOVERY_REPORT.md",
+    "docs/VORTEXLAB_NODE_CAPABILITIES.md",
+    "README.md"
   ],
   "scripts": {
     "build": "npm run build:node",
-    "build:node": "node scripts/ensure_knot_embedded.js && node scripts/build_node_target.js && node-gyp rebuild",
+    "build:node": "node scripts/install-native.js",
     "build:wasm": "node scripts/build_wasm.js",
     "build:all": "npm run build:node && npm run build:wasm",
-    "install": "node scripts/prebuild.js || node-gyp rebuild || echo 'Native build failed, using WASM fallback'",
+    "install": "node scripts/install-native.js",
+    "prepack": "node scripts/prepack-clean.js",
     "prepublishOnly": "npm run build:all",
-    "test": "node tests/test_basic.js || echo 'Tests not available'",
+    "test": "node tests/test_basic.js",
+    "test:parity": "node tests/test_python_node_parity.js",
+    "test:pack": "node scripts/smoke_packaged_tarball.js",
     "example:biot": "tsx node_examples/biot_savart.example.ts",
     "example:fluid": "tsx node_examples/fluid_dynamics.example.ts",
     "example:frenet": "tsx node_examples/frenet_helicity.example.ts",
@@ -68,7 +81,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18.0.0"
   },
   "dependencies": {
     "node-addon-api": "^7.0.0"

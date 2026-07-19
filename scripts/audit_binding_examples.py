@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Audit C++ bindings vs Python examples coverage for SSTcore."""
+"""Audit C++ bindings vs Python examples coverage for SSTcore.
+
+Canonical demos live under ``examples/example_*.py`` (not ``src/*_example.py``).
+"""
 
 from __future__ import annotations
 
@@ -10,7 +13,7 @@ import json
 import sys
 from collections import defaultdict
 from pathlib import Path
-from typing import Any, DefaultDict, Dict, Iterable, List, Optional, Set, Tuple
+from typing import Any, DefaultDict, Dict, List, Optional, Set, Tuple
 
 # scripts/ on path when run as script
 _SCRIPTS = Path(__file__).resolve().parent
@@ -18,14 +21,13 @@ if str(_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS))
 
 from binding_inventory import (  # noqa: E402
-    HEADER_MODULES,
     default_manifest_path,
     generate_manifest,
     load_binding_manifest,
     repo_root_from_here,
 )
 
-# bind_* modules from module_sst.cpp (canonical example file stems)
+# bind_* modules from module_sst.cpp
 BINDING_MODULES: Tuple[str, ...] = (
     "ab_initio_mass",
     "atomic_bridge_model",
@@ -59,33 +61,98 @@ BINDING_MODULES: Tuple[str, ...] = (
     "vorticity_dynamics",
 )
 
+# Binding module → one or more files under examples/
+MODULE_TO_EXAMPLES: Dict[str, Tuple[str, ...]] = {
+    "ab_initio_mass": (
+        "example_ab_initio.py",
+        "example_particle_zoo_eval.py",
+        "example_golden_nls.py",
+    ),
+    "atomic_bridge_model": ("example_atomic_bridge_model.py",),
+    "biot_savart": ("example_biot_savart.py",),
+    "canonical_constants": ("example_canonical_constants.py",),
+    "chronos_kelvin_transport": ("example_chronos_kelvin_transport.py",),
+    "clock_field_eft": ("example_clock_field_eft.py",),
+    "delay_mode_selector": ("example_delay_mode_selector.py",),
+    "field_kernels": ("example_field_kernels.py",),
+    "field_ops": ("example_field_ops.py",),
+    "fluid_dynamics": ("example_fluid_rotation.py",),
+    "frenet_helicity": ("example_frenet_helicity.py",),
+    "hyperbolic_volume": ("knot_pd_and_volume_example.py",),
+    "knot_dynamics": (
+        "example_fetching_knots.py",
+        "example_knot_visualization.py",
+        "example_heavy_knot.py",
+        "example_ideal_knot_showcase.py",
+        "example_fremlin_4_1_showcase.py",
+    ),
+    "magnus_integrator": ("example_magnus_integrator.py",),
+    "multisector_fitter": ("example_multisector_fitter.py",),
+    "potential_timefield": ("example_potential_flow.py",),
+    "radiation_flow": ("example_radiation_flow.py",),
+    "resolved_tube_geometry": (
+        "example_resolved_tube_geometry.py",
+        "example_resolved_tube_from_fseries.py",
+        "example_resolved_tube_tightening_loop.py",
+    ),
+    "spectroscopic_gap": ("example_spectroscopic_gap.py",),
+    "sst_extensions": ("example_sst_extensions.py",),
+    "sst_gravity": ("example_sst_gravity.py",),
+    "sst_integrator": ("example_sst_integrator.py",),
+    "sst_master_equation": ("example_sst_master_equation.py",),
+    "sst_tension_scales": ("example_sst_tension_scales.py",),
+    "swirl_field": ("example_swirl_field.py",),
+    "thermo_dynamics": ("example_thermo_dynamics.py",),
+    "time_evolution": ("example_time_evolution.py",),
+    "trefoil_operator": ("trefoil.py", "example_trefoil_operator.py"),
+    "vortex_ring": ("example_vortex_ring.py",),
+    "vorticity_dynamics": (
+        "example_vorticity_transport.py",
+        "example_relative_vorticity.py",
+        "example_enstrophy_circulation.py",
+    ),
+}
+
 UTILITY_EXAMPLE_NAMES = {
     "inspectSSTfunctions.py",
     "sstBindings.py",
     "export_sstcore_resources.py",
     "sstcore_resource_helpers.py",
+    "_example_bootstrap.py",
 }
 
 
 def _is_excluded_example(path: Path) -> bool:
     parts = {p.lower() for p in path.parts}
-    if "node_examples" in parts or "node" in parts and "examples" in parts:
+    if "node_examples" in parts:
         return True
     return False
 
 
-def collect_python_files(examples_dir: Path, src_dir: Path) -> List[Path]:
+def collect_python_files(examples_dir: Path, _src_dir: Path) -> List[Path]:
+    """Collect Python demos under examples/ (canonical location)."""
     files: List[Path] = []
-    if src_dir.is_dir():
-        files.extend(sorted(src_dir.glob("*_example.py")))
     if examples_dir.is_dir():
         for p in sorted(examples_dir.rglob("*.py")):
             if _is_excluded_example(p):
                 continue
-            if p.name.startswith("_"):
+            if p.name.startswith("_") and p.name != "_example_bootstrap.py":
+                continue
+            if p.name in UTILITY_EXAMPLE_NAMES and p.name != "_example_bootstrap.py":
+                # still scan utilities for symbol coverage, keep them
+                files.append(p)
                 continue
             files.append(p)
     return files
+
+
+def resolved_example_paths(examples_dir: Path, module: str) -> List[Path]:
+    names = MODULE_TO_EXAMPLES.get(module, ())
+    return [examples_dir / name for name in names if (examples_dir / name).is_file()]
+
+
+def missing_modules(examples_dir: Path) -> List[str]:
+    return [mod for mod in BINDING_MODULES if not resolved_example_paths(examples_dir, mod)]
 
 
 class ExampleUsageVisitor(ast.NodeVisitor):
@@ -158,7 +225,10 @@ def scan_example_file(path: Path) -> Dict[str, Any]:
         kind = "real_binding"
     elif has_import and not has_call:
         kind = "stub"
-    elif any("SSTcore" in line or "sstcore" in line for line in path.read_text(encoding="utf-8").splitlines()[:30]):
+    elif any(
+        "SSTcore" in line or "sstcore" in line
+        for line in path.read_text(encoding="utf-8").splitlines()[:30]
+    ):
         kind = "stub"
     else:
         kind = "pure_python"
@@ -189,19 +259,19 @@ def build_audit(root: Path, examples_dir: Path, src_dir: Path, manifest: Dict[st
     scans = [scan_example_file(p) for p in example_files]
 
     symbol_to_files: DefaultDict[str, List[str]] = defaultdict(list)
-    src_example_files: Dict[str, str] = {}
-    legacy_by_module: DefaultDict[str, List[str]] = defaultdict(list)
+    mapped_example_files: Dict[str, List[str]] = {}
 
     for scan in scans:
         path = Path(scan["path"])
         rel = str(path.relative_to(root)) if path.is_relative_to(root) else str(path)
         for sym in scan.get("symbols", set()):
             symbol_to_files[sym].append(rel)
-        if path.name.endswith("_example.py") and path.parent == src_dir:
-            stem = path.name.replace("_example.py", "")
-            src_example_files[stem] = rel
-        elif "examples" in path.parts and scan.get("kind") == "real_binding":
-            legacy_by_module["_any"].append(rel)
+
+    for mod in BINDING_MODULES:
+        paths = resolved_example_paths(examples_dir, mod)
+        mapped_example_files[mod] = [
+            str(p.relative_to(root)) if p.is_relative_to(root) else str(p) for p in paths
+        ]
 
     entries = manifest.get("entries", [])
     bound_by_module: DefaultDict[str, List[Dict[str, Any]]] = defaultdict(list)
@@ -226,6 +296,7 @@ def build_audit(root: Path, examples_dir: Path, src_dir: Path, manifest: Dict[st
         bound = bound_by_module.get(mod, [])
         demonstrated: List[str] = []
         missing: List[str] = []
+        mapped_paths = {p.resolve() for p in resolved_example_paths(examples_dir, mod)}
         for entry in bound:
             py_export = entry["py_export"]
             base = export_base_name(py_export)
@@ -234,32 +305,40 @@ def build_audit(root: Path, examples_dir: Path, src_dir: Path, manifest: Dict[st
                 py_export in all_symbols_used
                 or base in all_symbols_used
                 or short in all_symbols_used
-                or any(py_export in scan.get("symbols", set()) for scan in scans if mod in Path(scan["path"]).name)
+                or any(
+                    py_export in scan.get("symbols", set())
+                    for scan in scans
+                    if mod.replace("_", "") in Path(scan["path"]).name.replace("_", "")
+                )
             )
-            if not hit:
-                # canonical src example counts first
-                src_path = src_dir / f"{mod}_example.py"
-                if src_path.is_file():
-                    src_scan = next((s for s in scans if Path(s["path"]) == src_path), None)
-                    if src_scan:
-                        syms = src_scan.get("symbols", set())
-                        hit = base in syms or short in syms or py_export in syms
+            if not hit and mapped_paths:
+                for scan in scans:
+                    if Path(scan["path"]).resolve() not in mapped_paths:
+                        continue
+                    syms = scan.get("symbols", set())
+                    if base in syms or short in syms or py_export in syms:
+                        hit = True
+                        break
             if hit:
                 demonstrated.append(py_export)
             else:
                 missing.append(py_export)
                 bound_without_example.append({**entry, "module": mod})
 
+        has_example = bool(mapped_example_files.get(mod))
         modules_report.append({
             "module": mod,
-            "has_src_example_file": (src_dir / f"{mod}_example.py").is_file(),
-            "src_example_file": src_example_files.get(mod),
+            "has_example_file": has_example,
+            "has_src_example_file": has_example,  # compat alias
+            "example_files": mapped_example_files.get(mod, []),
+            "src_example_file": (mapped_example_files.get(mod) or [None])[0],
             "bound_exports": len(bound),
             "demonstrated_exports": len(demonstrated),
             "missing_exports": len(missing),
             "cpp_unbound": len(cpp_unbound_by_module.get(mod, [])),
             "legacy_real_binding_examples": [
-                s["path"] for s in scans
+                s["path"]
+                for s in scans
                 if "examples" in Path(s["path"]).parts
                 and s.get("kind") == "real_binding"
                 and mod.replace("_", "") in Path(s["path"]).name.replace("_", "")
@@ -272,11 +351,17 @@ def build_audit(root: Path, examples_dir: Path, src_dir: Path, manifest: Dict[st
         if s.get("kind") in ("stub", "pure_python") and "examples" in Path(s["path"]).parts
     ]
 
+    present_count = sum(1 for mod in BINDING_MODULES if mapped_example_files.get(mod))
+    missing_count = len(BINDING_MODULES) - present_count
+
     return {
         "summary": {
             "binding_modules": len(BINDING_MODULES),
-            "src_example_files": len(src_example_files),
-            "missing_src_example_files": len([m for m in BINDING_MODULES if m not in src_example_files]),
+            "example_files": present_count,
+            "missing_example_files": missing_count,
+            # Compat aliases for older report consumers / tests
+            "src_example_files": present_count,
+            "missing_src_example_files": missing_count,
             "bound_exports_total": sum(len(v) for v in bound_by_module.values()),
             "bound_without_example_total": len(bound_without_example),
             "cpp_unbound_total": len(cpp_unbound),
@@ -307,19 +392,19 @@ def write_summary_md(path: Path, audit: Dict[str, Any]) -> None:
         "# SSTcore binding / examples audit",
         "",
         f"- Binding modules: {audit['summary']['binding_modules']}",
-        f"- src `*_example.py` files: {audit['summary']['src_example_files']}",
-        f"- Missing src example files: {audit['summary']['missing_src_example_files']}",
+        f"- Modules with `examples/` demos: {audit['summary']['example_files']}",
+        f"- Missing example coverage: {audit['summary']['missing_example_files']}",
         f"- Bound exports without example: {audit['summary']['bound_without_example_total']}",
         f"- C++ unbound symbols: {audit['summary']['cpp_unbound_total']}",
         "",
         "## Per module",
         "",
-        "| module | src example | bound | demonstrated | missing | cpp unbound |",
-        "|--------|-------------|-------|--------------|---------|-------------|",
+        "| module | examples demo | bound | demonstrated | missing | cpp unbound |",
+        "|--------|---------------|-------|--------------|---------|-------------|",
     ]
     for row in audit["modules"]:
         lines.append(
-            f"| {row['module']} | {'yes' if row['has_src_example_file'] else '**no**'} "
+            f"| {row['module']} | {'yes' if row['has_example_file'] else '**no**'} "
             f"| {row['bound_exports']} | {row['demonstrated_exports']} | {row['missing_exports']} "
             f"| {row['cpp_unbound']} |"
         )
@@ -345,7 +430,9 @@ def main(argv: Optional[List[str]] = None) -> int:
         manifest = generate_manifest(src_dir)
         manifest_path = default_manifest_path(root)
         manifest_path.parent.mkdir(parents=True, exist_ok=True)
-        manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        manifest_path.write_text(
+            json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+        )
     else:
         manifest, _err = load_binding_manifest(root=root)
         if manifest is None:
@@ -371,8 +458,14 @@ def main(argv: Optional[List[str]] = None) -> int:
         out_dir / "modules.csv",
         audit["modules"],
         [
-            "module", "has_src_example_file", "src_example_file",
-            "bound_exports", "demonstrated_exports", "missing_exports", "cpp_unbound",
+            "module",
+            "has_example_file",
+            "has_src_example_file",
+            "src_example_file",
+            "bound_exports",
+            "demonstrated_exports",
+            "missing_exports",
+            "cpp_unbound",
         ],
     )
     write_csv(

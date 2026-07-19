@@ -3,7 +3,7 @@ name: NPM package
 
 on:
   push:
-    branches: [main, master, develop]
+    branches: [main, master, develop, 'sstcore/**']
     tags:
       - 'v*'
   pull_request:
@@ -20,7 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        node-version: [18.x, 20.x]
+        node-version: [18.x, 20.x, 22.x, 24.x]
 
     steps:
       - name: Checkout code
@@ -58,21 +58,11 @@ jobs:
       - name: Install npm dependencies
         run: npm ci
 
-      - name: Generate embedded knot files
-        shell: bash
-        run: |
-          rm -rf build_node build
-          mkdir -p build/generated
-          cmake -B build_node -S . -DSST_BUILD_PYTHON_BINDINGS=OFF
-        continue-on-error: true
-
       - name: Build native addon
         run: npm run build:node
-        continue-on-error: true
 
       - name: Run tests
         run: npm test
-        continue-on-error: true
 
       - name: Check package.json syntax
         run: node -e "require('./package.json')"

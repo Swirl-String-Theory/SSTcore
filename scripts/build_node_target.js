@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // Conditionally build the CMake Node addon target (sstcore_node) after configure.
-// Reads build_node/CMakeCache.txt for HAVE_SSTCORE_NODE=ON (legacy: HAVE_SWIRL_STRING_CORE_NODE).
+// Prefer scripts/install-native.js for full install/verify.
 
 const fs = require('fs');
 const path = require('path');
@@ -12,8 +12,8 @@ const buildDir = path.join(repoRoot, 'build_node');
 const cachePath = path.join(buildDir, 'CMakeCache.txt');
 
 if (!fs.existsSync(buildDir) || !fs.existsSync(cachePath)) {
-  console.log('[SSTcore] build_node or CMakeCache.txt missing; skipping CMake Node target build');
-  process.exit(0);
+  console.log('[SSTcore] build_node or CMakeCache.txt missing; run scripts/install-native.js');
+  process.exit(1);
 }
 
 const cache = fs.readFileSync(cachePath, 'utf8');
@@ -21,8 +21,8 @@ const hasNodeTarget =
   /HAVE_SSTCORE_NODE:BOOL=ON/.test(cache) || /HAVE_SWIRL_STRING_CORE_NODE:BOOL=ON/.test(cache);
 
 if (!hasNodeTarget) {
-  console.log('[SSTcore] CMake Node addon target not enabled; skipping sstcore_node build');
-  process.exit(0);
+  console.error('[SSTcore] CMake Node addon target not enabled (HAVE_SSTCORE_NODE!=ON)');
+  process.exit(1);
 }
 
 console.log('[SSTcore] Building CMake Node addon target sstcore_node...');
@@ -40,6 +40,7 @@ const result = spawnSync('cmake', buildArgs, {
 
 if (result.error) {
   console.error('[SSTcore] Error spawning cmake:', result.error.message);
+  process.exit(1);
 }
 
 process.exit(result.status ?? 1);

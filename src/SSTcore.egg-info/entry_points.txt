@@ -1,2 +1,0 @@
-[console_scripts]
-sstcore-export-resources = SSTcore.cli:export_resources_entry
