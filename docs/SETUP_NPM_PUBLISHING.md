@@ -4,7 +4,7 @@ This guide explains how to set up automated npm publishing using GitHub Actions.
 
 ## Overview
 
-The repository uses a single workflow, **`.github/workflows/npm.yml`** (workflow name: **NPM package**):
+The repository uses a single workflow, **`.github/workflows/build-npm.yml`** (workflow name: **Build npm**):
 
 - Runs the **test matrix** on push/PR to `main`, `master`, and `develop` (and on `workflow_dispatch`).
 - **Publishes to npm** when you publish a **GitHub release** or push a **`v*` tag**, matching the pattern used for PyPI in `build-wheels.yml`.
@@ -56,7 +56,7 @@ If the name is taken, update `package.json`:
 ### Option A: Manual Trigger
 
 1. Go to **Actions** tab in your GitHub repository
-2. Open the **"NPM package"** workflow
+2. Open the **"Build npm"** workflow
 3. Click **"Run workflow"** (on the right), choose a branch, then **"Run workflow"**
 
 This runs the **test matrix only**. npm publish runs only on a **published release** or a **push of a `v*` tag** (same idea as PyPI in **Build Wheels**).
@@ -110,7 +110,7 @@ This runs the **test matrix only**. npm publish runs only on a **published relea
 
 The workflow will automatically publish to npm.
 
-## Workflow Details (`npm.yml`)
+## Workflow Details (`build-npm.yml`)
 
 **Test job** runs on:
 - Push to `main`, `master`, or `develop` (and on `v*` tag pushes — tests run before publish)

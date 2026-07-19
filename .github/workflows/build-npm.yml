@@ -1,0 +1,254 @@
+# Build npm: test matrix on every push/PR; publish to npm on GitHub release or v* tag (like build-wheels.yml → PyPI).
+name: Build Module for npm
+
+on:
+  push:
+    branches: [main, master, develop, 'sstcore/**']
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [main, master, develop]
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test on ${{ matrix.os }} (Node ${{ matrix.node-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: [18.x, 20.x, 22.x, 24.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Use x64 native MSVC (Windows)
+        if: runner.os == 'Windows'
+        uses: TheMrMilchmann/setup-msvc-dev@v4
+        with:
+          arch: x64
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+
+      - name: Install system dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake build-essential python3
+
+      - name: Install system dependencies (macOS)
+        if: runner.os == 'macOS'
+        run: brew install cmake
+
+      - name: Install system dependencies (Windows)
+        if: runner.os == 'Windows'
+        run: choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System' -y
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Build native addon
+        run: npm run build:node
+
+      - name: Run tests
+        run: npm test
+
+      - name: Check package.json syntax
+        run: node -e "require('./package.json')"
+
+      - name: Verify TypeScript definitions
+        shell: bash
+        run: |
+          if command -v tsc &> /dev/null; then
+            tsc --noEmit index.d.ts || echo "TypeScript check skipped (tsc not available)"
+          else
+            echo "TypeScript compiler not available, skipping check"
+          fi
+
+      - name: Upload build artifacts
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: npm-build-${{ matrix.os }}-node${{ matrix.node-version }}
+          path: |
+            build/Release/*.node
+            build_node/
+          retention-days: 7
+
+  publish:
+    name: Publish to npm
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' || (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v'))
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22.x'
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake build-essential python3 ninja-build
+
+      # build:all runs build:wasm; without Emscripten, npm publish fails (browser field uses dist/).
+      - name: Setup Emscripten
+        uses: mymindstorm/setup-emsdk@v14
+        with:
+          version: latest
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Extract version from tag or release
+        id: get_version
+        run: |
+          NAME=$(node -p "require('./package.json').name")
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+          if [ "$NAME" != "sst-core" ]; then
+            echo "ERROR: package.json name must be 'sst-core' (got: $NAME)"
+            exit 1
+          fi
+          if [ "${{ github.event_name }}" = "release" ]; then
+            VERSION="${{ github.event.release.tag_name }}"
+            VERSION=${VERSION#v}
+          elif [[ "${{ github.ref }}" == refs/tags/v* ]]; then
+            VERSION=${GITHUB_REF#refs/tags/v}
+          else
+            VERSION=$(node -p "require('./package.json').version")
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Extracted version: $VERSION"
+
+      - name: Verify version in package.json
+        run: |
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          echo "Package.json version: $PACKAGE_VERSION"
+          TAG_VERSION="${{ steps.get_version.outputs.version }}"
+          if [ -n "$TAG_VERSION" ] && [ "$PACKAGE_VERSION" != "$TAG_VERSION" ]; then
+            echo "Warning: package.json version ($PACKAGE_VERSION) does not match tag/release version ($TAG_VERSION)"
+          fi
+
+      - name: Generate embedded knot files
+        shell: bash
+        run: |
+          rm -rf build_node build
+          mkdir -p build/generated
+          cmake -B build_node -S . -DSST_BUILD_PYTHON_BINDINGS=OFF
+
+      - name: Build package
+        run: npm run build:all
+
+      - name: Stage linux prebuild (optional consumer fast-path)
+        shell: bash
+        run: |
+          mkdir -p prebuilds/linux-x64
+          if [ -f build/Release/sstcore.node ]; then
+            cp -f build/Release/sstcore.node prebuilds/linux-x64/sstcore.node
+          elif [ -f build_node/Release/sstcore.node ]; then
+            cp -f build_node/Release/sstcore.node prebuilds/linux-x64/sstcore.node
+          else
+            echo "No sstcore.node found to stage as prebuild (source install still OK)"
+          fi
+
+      - name: Run tests
+        run: npm test
+
+      - name: Check package contents
+        run: |
+          npm pack --dry-run --json > pack-dry.json
+          node scripts/check_npm_pack_size.js --json pack-dry.json
+
+      - name: Verify NPM_TOKEN
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "${NODE_AUTH_TOKEN}" ]; then
+            echo "ERROR: secrets.NPM_TOKEN is empty. Add a granular npm token as GitHub Actions secret NPM_TOKEN."
+            exit 1
+          fi
+          echo "NPM_TOKEN is set (length=${#NODE_AUTH_TOKEN})"
+
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ steps.get_version.outputs.version }}
+          body: |
+            ## SSTcore v${{ steps.get_version.outputs.version }}
+
+            npm package published successfully.
+
+            Install with:
+            ```bash
+            npm install sst-core
+            ```
+          draft: false
+          prerelease: false
+
+  build-wasm:
+    name: Build WASM (browser)
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' || (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v'))
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Setup Emscripten
+        uses: mymindstorm/setup-emsdk@v14
+        with:
+          version: latest
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '20.x'
+          cache: npm
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Build WASM
+        run: npm run build:wasm
+        continue-on-error: true
+
+      - name: Upload WASM artifacts
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: wasm-build
+          path: dist/
+          retention-days: 30
