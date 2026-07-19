@@ -18,8 +18,8 @@ After `require('SSTcore')` (or local `index.js`), call **`listBindings()`** — 
 
 ## TypeScript
 
-Use [index.d.ts](../index.d.ts). Run per-domain demos under [node_examples/](../node_examples/) (see `node_examples/README.md`).
+Use [index.d.ts](../index.d.ts). Run per-domain demos under [examples/](../examples/) (see `examples/README.md`).
 
 ## Dashboard bridge (optional)
 
-Use `node_examples/*.example.ts` as the **contract** for HTTP request/response shapes when wiring an Angular app to your Node API.
+Use `examples/example_*.ts` as the **contract** for HTTP request/response shapes when wiring an Angular app to your Node API.

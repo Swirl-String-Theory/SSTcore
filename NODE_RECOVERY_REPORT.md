@@ -4,6 +4,8 @@ Branch: `sstcore/0.8.18-node-recovery`
 Date: 2026-07-18  
 Base: `master` @ post-split (`391aca9` Dividing Knot Dynamics; `e66c9fb` 0.8.18 patch)
 
+> **Layout note (later):** N-API sources moved from `src/node/node_*.cpp` to colocated `src/*_node.cpp` (see `docs/BINDING_COVERAGE.md`). Names below reflect the recovery-era paths.
+
 ## 1. Original failures (audit)
 
 | Failure | Evidence |

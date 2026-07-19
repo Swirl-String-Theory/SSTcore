@@ -364,26 +364,26 @@ if(NODE_EXECUTABLE)
         if(BUILD_SSTCORE_NODE)
         # Node addon: thin N-API wrappers only; numeric truth lives in sstcore_lib
         add_library(sstcore_node SHARED
-            src/node/module_node.cpp
-            src/node/node_ab_initio.cpp
-            src/node/node_biot_savart.cpp
-            src/node/node_field_kernels.cpp
-            src/node/node_field_ops.cpp
-            src/node/node_fluid_dynamics.cpp
-            src/node/node_frenet_helicity.cpp
-            src/node/node_hyperbolic_volume.cpp
-            src/node/node_knot.cpp
-            src/node/node_magnus_integrator.cpp
-            src/node/node_potential_timefield.cpp
-            src/node/node_radiation_flow.cpp
-            src/node/node_sst_extensions.cpp
-            src/node/node_sst_gravity.cpp
-            src/node/node_sst_integrator.cpp
-            src/node/node_swirl_field.cpp
-            src/node/node_thermo_dynamics.cpp
-            src/node/node_time_evolution.cpp
-            src/node/node_vortex_ring.cpp
-            src/node/node_vorticity_dynamics.cpp
+            src/module_node.cpp
+            src/ab_initio_mass_node.cpp
+            src/biot_savart_node.cpp
+            src/field_kernels_node.cpp
+            src/field_ops_node.cpp
+            src/fluid_dynamics_node.cpp
+            src/frenet_helicity_node.cpp
+            src/hyperbolic_volume_node.cpp
+            src/knot_dynamics_node.cpp
+            src/magnus_integrator_node.cpp
+            src/potential_timefield_node.cpp
+            src/radiation_flow_node.cpp
+            src/sst_extensions_node.cpp
+            src/sst_gravity_node.cpp
+            src/sst_integrator_node.cpp
+            src/swirl_field_node.cpp
+            src/thermo_dynamics_node.cpp
+            src/time_evolution_node.cpp
+            src/vortex_ring_node.cpp
+            src/vorticity_dynamics_node.cpp
         )
 
         target_include_directories(sstcore_node PRIVATE

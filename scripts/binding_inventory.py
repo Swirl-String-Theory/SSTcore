@@ -381,6 +381,15 @@ def generate_manifest(src_dir: Path) -> Dict[str, Any]:
         stem = py_path.name.replace("_py.cpp", "")
         binding_exports.extend(parse_binding_exports(stem, py_path))
 
+    node_stems = {
+        p.name.replace("_node.cpp", "")
+        for p in src_dir.glob("*_node.cpp")
+        if p.name != "module_node.cpp"
+    }
+    py_stems = {p.name.replace("_py.cpp", "") for p in src_dir.glob("*_py.cpp")}
+    if (src_dir / "tube" / "geometry_py.cpp").is_file():
+        py_stems.add("resolved_tube_geometry")
+
     # Attach trefoil_closure exports to trefoil_closure_kernels module entries when matched.
     trefoil_names = {
         "trefoil_neumann_self_energy",
@@ -444,6 +453,9 @@ def generate_manifest(src_dir: Path) -> Dict[str, Any]:
             )
 
     py_bound = len([e for e in entries if e["export_kind"] != "constructor"])
+    py_only_modules = sorted(py_stems - node_stems)
+    node_only_modules = sorted(node_stems - py_stems)
+    both_modules = sorted(py_stems & node_stems)
     return {
         "manifest_version": MANIFEST_VERSION,
         "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -452,11 +464,23 @@ def generate_manifest(src_dir: Path) -> Dict[str, Any]:
             "py_bound": py_bound,
             "cpp_unbound": len(cpp_without_binding),
             "binding_without_cpp_match": len(binding_without_cpp_match),
+            "node_modules": len(node_stems),
+            "py_modules": len(py_stems),
+            "both_py_node": len(both_modules),
+            "py_only_modules": len(py_only_modules),
+            "node_only_modules": len(node_only_modules),
+        },
+        "module_coverage": {
+            "both": both_modules,
+            "py_only": py_only_modules,
+            "node_only": node_only_modules,
+            "node_files": sorted(f"{s}_node.cpp" for s in node_stems),
         },
         "entries": entries,
         "gaps": {
             "cpp_without_binding": cpp_without_binding,
             "binding_without_cpp_match": binding_without_cpp_match,
+            "py_without_node": py_only_modules,
         },
     }
 

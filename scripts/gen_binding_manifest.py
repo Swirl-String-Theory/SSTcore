@@ -59,7 +59,9 @@ def main(argv: list[str] | None = None) -> int:
         f"cpp_public={summary['cpp_public']} "
         f"py_bound={summary['py_bound']} "
         f"cpp_unbound={summary['cpp_unbound']} "
-        f"binding_without_cpp_match={summary['binding_without_cpp_match']}"
+        f"binding_without_cpp_match={summary['binding_without_cpp_match']} "
+        f"node_modules={summary.get('node_modules', 0)} "
+        f"py_only={summary.get('py_only_modules', 0)}"
     )
     return 0
 

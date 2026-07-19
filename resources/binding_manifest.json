@@ -1,11 +1,74 @@
 {
   "manifest_version": 1,
-  "generated_at": "2026-07-19T10:20:02.195173+00:00",
+  "generated_at": "2026-07-19T13:39:21.065785+00:00",
   "summary": {
     "cpp_public": 208,
     "py_bound": 499,
     "cpp_unbound": 91,
-    "binding_without_cpp_match": 89
+    "binding_without_cpp_match": 89,
+    "node_modules": 19,
+    "py_modules": 30,
+    "both_py_node": 19,
+    "py_only_modules": 11,
+    "node_only_modules": 0
+  },
+  "module_coverage": {
+    "both": [
+      "ab_initio_mass",
+      "biot_savart",
+      "field_kernels",
+      "field_ops",
+      "fluid_dynamics",
+      "frenet_helicity",
+      "hyperbolic_volume",
+      "knot_dynamics",
+      "magnus_integrator",
+      "potential_timefield",
+      "radiation_flow",
+      "sst_extensions",
+      "sst_gravity",
+      "sst_integrator",
+      "swirl_field",
+      "thermo_dynamics",
+      "time_evolution",
+      "vortex_ring",
+      "vorticity_dynamics"
+    ],
+    "py_only": [
+      "atomic_bridge_model",
+      "canonical_constants",
+      "chronos_kelvin_transport",
+      "clock_field_eft",
+      "delay_mode_selector",
+      "multisector_fitter",
+      "resolved_tube_geometry",
+      "spectroscopic_gap",
+      "sst_master_equation",
+      "sst_tension_scales",
+      "trefoil_operator"
+    ],
+    "node_only": [],
+    "node_files": [
+      "ab_initio_mass_node.cpp",
+      "biot_savart_node.cpp",
+      "field_kernels_node.cpp",
+      "field_ops_node.cpp",
+      "fluid_dynamics_node.cpp",
+      "frenet_helicity_node.cpp",
+      "hyperbolic_volume_node.cpp",
+      "knot_dynamics_node.cpp",
+      "magnus_integrator_node.cpp",
+      "potential_timefield_node.cpp",
+      "radiation_flow_node.cpp",
+      "sst_extensions_node.cpp",
+      "sst_gravity_node.cpp",
+      "sst_integrator_node.cpp",
+      "swirl_field_node.cpp",
+      "thermo_dynamics_node.cpp",
+      "time_evolution_node.cpp",
+      "vortex_ring_node.cpp",
+      "vorticity_dynamics_node.cpp"
+    ]
   },
   "entries": [
     {
@@ -6372,6 +6435,19 @@
         "py_export": "compute_vorticity_rhs",
         "binding_file": "vorticity_dynamics_py.cpp"
       }
+    ],
+    "py_without_node": [
+      "atomic_bridge_model",
+      "canonical_constants",
+      "chronos_kelvin_transport",
+      "clock_field_eft",
+      "delay_mode_selector",
+      "multisector_fitter",
+      "resolved_tube_geometry",
+      "spectroscopic_gap",
+      "sst_master_equation",
+      "sst_tension_scales",
+      "trefoil_operator"
     ]
   }
 }

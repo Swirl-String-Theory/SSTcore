@@ -123,8 +123,8 @@ UTILITY_EXAMPLE_NAMES = {
 
 
 def _is_excluded_example(path: Path) -> bool:
-    parts = {p.lower() for p in path.parts}
-    if "node_examples" in parts:
+    # TypeScript N-API demos live beside Python as example_*.ts; this audit is Python-only.
+    if path.suffix.lower() == ".ts":
         return True
     return False
 

@@ -3,6 +3,8 @@
 This document maps VortexLab needs to existing SSTcore surfaces.  
 **No JavaScript re-implementation of missing C++ kernels.** Missing Node items need thin N-API wrappers around existing C++ (or new C++ work first).
 
+For the full per-module C++ / Python / Node file matrix, see [`BINDING_COVERAGE.md`](BINDING_COVERAGE.md).
+
 Legend: **Y** present · **P** partial/proxy · **W** wrapper needed (C++ exists) · **N** new C++ needed · **—** absent
 
 | Capability | C++ | Python | Node | Notes |
