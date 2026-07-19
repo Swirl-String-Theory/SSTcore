@@ -46,7 +46,14 @@ assert.strictEqual(caps.knotGeometry, true);
 assert.strictEqual(caps.frenetHelicity, true);
 assert.strictEqual(caps.magnusIntegrator, true);
 assert.strictEqual(caps.sstIntegrator, true);
-assert.strictEqual(caps.continuousReach, false);
+assert.strictEqual(caps.continuousReach, true);
+assert.strictEqual(caps.polygonalGauss, true);
+assert.strictEqual(caps.filamentVelocity, true);
+assert.strictEqual(caps.filamentIntegrator, true);
+assert.strictEqual(caps.topologyGuard, true);
+assert.strictEqual(caps.intrinsicFrame, true);
+assert.strictEqual(caps.rigidMotion, true);
+assert.strictEqual(caps.resolvedTubeGeometry, true);
 
 if (typeof sst.listBindings === 'function') {
   const lb = sst.listBindings();
