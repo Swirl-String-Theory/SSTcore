@@ -1,6 +1,6 @@
 # Release wheel matrix (Linux / Windows / macOS) and PyPI upload on tags/releases.
 # Linux experiments: build-wheels-experiments-parallel.yml (push). Manual: build-wheels-approach-{A..D}.yml.
-name: Build Wheels
+name: Build Wheels for PyPI
 
 env:
   SETUPTOOLS_PIN: "setuptools==75.8.2"

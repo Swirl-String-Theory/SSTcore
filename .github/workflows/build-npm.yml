@@ -1,5 +1,5 @@
 # Build npm: test matrix on every push/PR; publish to npm on GitHub release or v* tag (like build-wheels.yml → PyPI).
-name: Build npm
+name: Build Module for npm
 
 on:
   push:
