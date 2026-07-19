@@ -36,7 +36,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: '22.x'
           registry-url: https://registry.npmjs.org
           cache: npm
 
@@ -56,9 +56,15 @@ jobs:
       - name: Show version
         id: meta
         run: |
+          NAME=$(node -p "require('./package.json').name")
           VERSION=$(node -p "require('./package.json').version")
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "Publishing SSTcore npm package version: $VERSION (ref: ${{ inputs.git_ref }})"
+          echo "Publishing npm package ${NAME}@${VERSION} (ref: ${{ inputs.git_ref }})"
+          if [ "$NAME" != "sst-core" ]; then
+            echo "ERROR: package.json name must be 'sst-core' (got: $NAME)"
+            exit 1
+          fi
 
       - name: Generate embedded knot files
         shell: bash
@@ -70,19 +76,44 @@ jobs:
       - name: Build package
         run: npm run build:all
 
+      - name: Stage linux prebuild (optional consumer fast-path)
+        shell: bash
+        run: |
+          mkdir -p prebuilds/linux-x64
+          if [ -f build/Release/sstcore.node ]; then
+            cp -f build/Release/sstcore.node prebuilds/linux-x64/sstcore.node
+          elif [ -f build_node/Release/sstcore.node ]; then
+            cp -f build_node/Release/sstcore.node prebuilds/linux-x64/sstcore.node
+          else
+            echo "No sstcore.node found to stage as prebuild (source install still OK)"
+          fi
+
       - name: Run tests
         run: npm test
 
       - name: Check package contents
-        run: npm pack --dry-run
+        run: |
+          npm pack --dry-run --json > pack-dry.json
+          node scripts/check_npm_pack_size.js --json pack-dry.json
+
+      - name: Verify NPM_TOKEN
+        if: ${{ inputs.dry_run == false }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "${NODE_AUTH_TOKEN}" ]; then
+            echo "ERROR: secrets.NPM_TOKEN is empty. Add a granular npm token as GitHub Actions secret NPM_TOKEN."
+            exit 1
+          fi
+          echo "NPM_TOKEN is set (length=${#NODE_AUTH_TOKEN})"
 
       - name: Publish to npm
         if: ${{ inputs.dry_run == false }}
-        run: npm publish
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Dry run summary
         if: ${{ inputs.dry_run == true }}
         run: |
-          echo "dry_run=true: skipped npm publish. Version ${{ steps.meta.outputs.version }} — verify with npm pack output above."
+          echo "dry_run=true: skipped npm publish. Package ${{ steps.meta.outputs.name }}@${{ steps.meta.outputs.version }} — verify pack-size output above."

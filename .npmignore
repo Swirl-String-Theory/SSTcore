@@ -1,15 +1,22 @@
-# Build artifacts
+# Build artifacts (keep packaged WASM + prebuilds via negations below)
 build/
 build_node/
-dist/
-*.node
 *.pyd
+**/*.pyd
 *.so
 *.dylib
 *.dll
-*.wasm
 *.js.map
+*.whl
+**/*.whl
 prebuilds/**/*.pdb
+
+# Allow shipping compiled addon + WASM listed in package.json "files"
+!dist/
+!dist/**
+dist/**/*.whl
+!prebuilds/
+!prebuilds/**/*.node
 
 # CMake / MSVC debris
 CMakeCache.txt
@@ -25,25 +32,30 @@ CMakeFiles/
 *.ilk
 *.pdb
 
-# Python artifacts (not needed for Node install/build)
-**/__pycache__/
-**/__pycache__/**
-**/*.pyc
-**/*.pyo
-**/*.egg-info/
-**/*.egg-info/**
-*.egg
-*.whl
+# Python package tree + bindings (never ship in npm)
 src/SSTcore/
 src/SSTcore/**
-src/SSTcore.egg-info/
-src/SSTcore.egg-info/**
+**/SSTcore.egg-info/**
+**/*_py.cpp
+src/*_py.cpp
+src/**/*_py.cpp
+src/module_sst.cpp
+extern/
 setup.py
 pyproject.toml
-**/*_py.cpp
-src/module_sst.cpp
-resources/knotplot/__pycache__/
-resources/knotplot/__pycache__/**
+
+# Large / non-embed resources (keep .fseries + small ideal txt for CMake embed)
+resources/knotplot/**
+resources/ideal_12_data/**
+resources/Results/**
+resources/**/*.zip
+**/*.stl
+resources/*.csv
+resources/fseries_batch_results.csv
+resources/ideal_11a.txt
+resources/ideal_11n.txt
+resources/idealLinks_10a.txt
+resources/idealLinks_10n.txt
 
 # IDE / OS
 .vscode/
@@ -58,18 +70,16 @@ Thumbs.db
 # Tests except smoke entry used by npm test
 tests/**
 !tests/test_basic.js
-!tests/test_python_node_parity.js
 examples/
 node_examples/
 *.test.js
 *.spec.js
 
-# Docs: keep recovery/build docs listed in package.json files
+# Docs: keep build docs listed in package.json files
 *.md
 !README.md
 !NODE_BUILD.md
-!NODE_RECOVERY_REPORT.md
-!docs/VORTEXLAB_NODE_CAPABILITIES.md
+!LICENSE
 
 # Git / Node
 .git/
@@ -84,7 +94,4 @@ npm-debug.log*
 output/
 nul
 empty.synctex.gz
-
-# Large archives not required for embed (cmake uses extracted dirs)
-resources/**/*.zip
 SST_Dashboard/

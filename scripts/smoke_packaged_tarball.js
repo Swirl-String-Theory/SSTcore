@@ -57,8 +57,8 @@ try {
   const entry = Array.isArray(parsed) ? parsed[0] : parsed;
   tgzName = entry.filename || entry.name;
 } catch (_) {
-  // fallback: glob newest sstcore-*.tgz
-  const files = fs.readdirSync(root).filter((f) => /^sstcore-.*\.tgz$/i.test(f) || /^SSTcore-.*\.tgz$/i.test(f));
+  // fallback: glob newest sst-core-*.tgz (legacy SSTcore-/sstcore- names accepted)
+  const files = fs.readdirSync(root).filter((f) => /^sst-core-.*\.tgz$/i.test(f) || /^sstcore-.*\.tgz$/i.test(f) || /^SSTcore-.*\.tgz$/i.test(f));
   if (!files.length) {
     console.error('[smoke] could not determine tarball name from npm pack');
     process.exit(1);
@@ -84,7 +84,7 @@ const probePath = path.join(tmp, 'smoke_probe.js');
 fs.writeFileSync(
   probePath,
   [
-    "const s = require('SSTcore');",
+    "const s = require('sst-core');",
     'const info = s.engineInfo();',
     'console.log(JSON.stringify(info));',
     "if (info.engineVersion !== '0.8.18') process.exit(2);",
@@ -100,7 +100,7 @@ fs.writeFileSync(
 run('node', [probePath], { cwd: tmp });
 
 // npm test from the installed package directory
-const pkgRoot = path.join(tmp, 'node_modules', 'SSTcore');
+const pkgRoot = path.join(tmp, 'node_modules', 'sst-core');
 if (!fs.existsSync(pkgRoot)) {
   console.error('[smoke] installed package not found at', pkgRoot);
   process.exit(1);
