@@ -33,6 +33,38 @@ Legend: **Y** present · **P** partial/proxy · **W** wrapper needed (C++ exists
 - Writhe / linking / twist (discrete curve forms)  
 - Reach proxy and min non-neighbor distance from fseries  
 - Magnus + SST mass helpers  
+- **Knot catalog JS** (VortexLab-compatible): `resources/knots_data_{ideal,fourier,knotplot}.js` via `resources/load_knot_catalogs.js`
+
+### Knot catalog JS (Node)
+
+VortexLab loads these as browser `<script>` files. In Node/TS use the loader (does not attach catalogs to `require('sst-core')`):
+
+```js
+// CommonJS (published package)
+const { loadIdealCatalog, loadFseriesCatalog, loadKnotplotCatalog } =
+  require('sst-core/resources/load_knot_catalogs');
+
+const ideal = loadIdealCatalog();
+console.log(ideal.ids.length, ideal.db['3:1:1']);
+```
+
+```ts
+// TypeScript / tsx (repo checkout)
+import {
+  loadIdealCatalog,
+  loadFseriesCatalog,
+  loadKnotplotCatalog,
+} from '../resources/load_knot_catalogs';
+
+const fseries = loadFseriesCatalog();
+const entry = fseries.db['3_1'];
+```
+
+Example: `npm run example:knot-catalogs` → [`examples/example_knot_catalogs.ts`](../examples/example_knot_catalogs.ts).
+
+The Node full probe (`SSTcore_full_probe.js`) loads all three catalogs and reports `js_catalog` summaries (id counts + sample hits; never dumps coefficients).
+
+Workbench/VortexLab HTML may still reference older filenames (`ideal_knots_data.js`, …) until those trees are synced.
 
 ## Needs wrapper only (C++ already in `sstcore_lib`)
 

@@ -24,9 +24,83 @@ Napi::Array doubles_to_js(Napi::Env env, const std::vector<double>& v) {
     return a;
 }
 
+class SSTGravityWrap : public Napi::ObjectWrap<SSTGravityWrap> {
+public:
+    static void Init(Napi::Env env, Napi::Object exports) {
+        Napi::Function func = DefineClass(
+            env, "SSTGravity",
+            {StaticMethod("computeBeltramiShear", &SSTGravityWrap::ComputeBeltramiShear),
+             StaticMethod("computeGravityDilation", &SSTGravityWrap::ComputeGravityDilation),
+             StaticMethod("computeHelicityDensity", &SSTGravityWrap::ComputeHelicityDensity),
+             StaticMethod("computeSwirlClock", &SSTGravityWrap::ComputeSwirlClock),
+             StaticMethod("computeSwirlCoulombPotential", &SSTGravityWrap::ComputeSwirlCoulombPotential),
+             StaticMethod("computeSwirlCoulombForce", &SSTGravityWrap::ComputeSwirlCoulombForce),
+             StaticMethod("computeSwirlEnergyDensity", &SSTGravityWrap::ComputeSwirlEnergyDensity),
+             StaticMethod("computeGSwirl", &SSTGravityWrap::ComputeGSwirl)});
+        exports.Set("SSTGravity", func);
+    }
+
+    SSTGravityWrap(const Napi::CallbackInfo& info) : Napi::ObjectWrap<SSTGravityWrap>(info) {}
+
+private:
+    static Napi::Value ComputeBeltramiShear(const Napi::CallbackInfo& info) {
+        auto B = js_array_to_vec3_list(info[0].As<Napi::Array>());
+        auto C = js_array_to_vec3_list(info[1].As<Napi::Array>());
+        return doubles_to_js(info.Env(), sst::SSTGravity::compute_beltrami_shear(B, C));
+    }
+    static Napi::Value ComputeGravityDilation(const Napi::CallbackInfo& info) {
+        auto B = js_array_to_vec3_list(info[0].As<Napi::Array>());
+        double od = info[1].As<Napi::Number>().DoubleValue();
+        double vs = (info.Length() > 2) ? info[2].As<Napi::Number>().DoubleValue()
+                                        : static_cast<double>(SST::Constants::V_SWIRL);
+        double Bsat = (info.Length() > 3) ? info[3].As<Napi::Number>().DoubleValue() : 100.0;
+        return doubles_to_js(info.Env(), sst::SSTGravity::compute_gravity_dilation(B, od, vs, Bsat));
+    }
+    static Napi::Value ComputeHelicityDensity(const Napi::CallbackInfo& info) {
+        auto A = js_array_to_vec3_list(info[0].As<Napi::Array>());
+        auto B = js_array_to_vec3_list(info[1].As<Napi::Array>());
+        return doubles_to_js(info.Env(), sst::SSTGravity::compute_helicity_density(A, B));
+    }
+    static Napi::Value ComputeSwirlClock(const Napi::CallbackInfo& info) {
+        auto v = js_array_to_vec3_list(info[0].As<Napi::Array>());
+        double c = (info.Length() > 1) ? info[1].As<Napi::Number>().DoubleValue()
+                                       : sst::SSTCanonicalConstants::speed_of_light();
+        return doubles_to_js(info.Env(), sst::SSTGravity::compute_swirl_clock(v, c));
+    }
+    static Napi::Value ComputeSwirlCoulombPotential(const Napi::CallbackInfo& info) {
+        auto r = read_scalar_array(info[0].As<Napi::Array>());
+        double L = info[1].As<Napi::Number>().DoubleValue();
+        double rc = info[2].As<Napi::Number>().DoubleValue();
+        return doubles_to_js(info.Env(), sst::SSTGravity::compute_swirl_coulomb_potential(r, L, rc));
+    }
+    static Napi::Value ComputeSwirlCoulombForce(const Napi::CallbackInfo& info) {
+        auto r = read_scalar_array(info[0].As<Napi::Array>());
+        double L = info[1].As<Napi::Number>().DoubleValue();
+        double rc = info[2].As<Napi::Number>().DoubleValue();
+        return doubles_to_js(info.Env(), sst::SSTGravity::compute_swirl_coulomb_force(r, L, rc));
+    }
+    static Napi::Value ComputeSwirlEnergyDensity(const Napi::CallbackInfo& info) {
+        auto v = js_array_to_vec3_list(info[0].As<Napi::Array>());
+        double rf = info[1].As<Napi::Number>().DoubleValue();
+        return doubles_to_js(info.Env(), sst::SSTGravity::compute_swirl_energy_density(v, rf));
+    }
+    static Napi::Value ComputeGSwirl(const Napi::CallbackInfo& info) {
+        double vsw = info[0].As<Napi::Number>().DoubleValue();
+        double tp = info[1].As<Napi::Number>().DoubleValue();
+        double Fm = info[2].As<Napi::Number>().DoubleValue();
+        double rc = info[3].As<Napi::Number>().DoubleValue();
+        double c = (info.Length() > 4) ? info[4].As<Napi::Number>().DoubleValue()
+                                       : sst::SSTCanonicalConstants::speed_of_light();
+        return Napi::Number::New(info.Env(), sst::SSTGravity::compute_G_swirl(vsw, tp, Fm, rc, c));
+    }
+};
+
 } // namespace
 
 void bind_sst_gravity(Napi::Env env, Napi::Object exports) {
+    SSTGravityWrap::Init(env, exports);
+
+    // Existing free helpers (kept for backward compatibility)
     exports.Set("sstGravityBeltramiShear", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
         auto B = js_array_to_vec3_list(info[0].As<Napi::Array>());
         auto C = js_array_to_vec3_list(info[1].As<Napi::Array>());

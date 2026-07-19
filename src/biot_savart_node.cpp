@@ -1,17 +1,65 @@
 // node_biot_savart.cpp - Node.js bindings for BiotSavart
 #include <napi.h>
+#include <cstdint>
+#include <string>
 #include "node_utils.h"
 #include "biot_savart.h"
+#include "trefoil_closure_kernels.h"
 
 using namespace sst;
 
-// Forward declarations
-void bind_biot_savart(Napi::Env env, Napi::Object exports);
+namespace {
+
+std::vector<double> value_to_flat_xyz(Napi::Env env, const Napi::Value& v, const char* name) {
+    if (v.IsTypedArray()) {
+        Napi::TypedArray ta = v.As<Napi::TypedArray>();
+        if (ta.TypedArrayType() != napi_float64_array) {
+            throw Napi::TypeError::New(env, std::string(name) + " must be Float64Array or array of [x,y,z]");
+        }
+        Napi::Float64Array f = ta.As<Napi::Float64Array>();
+        if (f.ElementLength() % 3u != 0u) {
+            throw Napi::TypeError::New(env, std::string(name) + " length must be a multiple of 3");
+        }
+        const size_t n = f.ElementLength();
+        const double* data = reinterpret_cast<const double*>(
+            static_cast<const uint8_t*>(f.ArrayBuffer().Data()) + f.ByteOffset());
+        return std::vector<double>(data, data + n);
+    }
+    if (!v.IsArray()) {
+        throw Napi::TypeError::New(env, std::string(name) + " must be Float64Array or array of [x,y,z]");
+    }
+    std::vector<Vec3> pts = js_array_to_vec3_list(v.As<Napi::Array>());
+    std::vector<double> out;
+    out.reserve(pts.size() * 3u);
+    for (const auto& p : pts) {
+        out.push_back(p[0]);
+        out.push_back(p[1]);
+        out.push_back(p[2]);
+    }
+    return out;
+}
+
+std::vector<double> value_to_doubles(Napi::Env env, const Napi::Value& v, const char* name) {
+    if (v.IsTypedArray()) {
+        Napi::TypedArray ta = v.As<Napi::TypedArray>();
+        if (ta.TypedArrayType() != napi_float64_array) {
+            throw Napi::TypeError::New(env, std::string(name) + " must be Float64Array or number[]");
+        }
+        Napi::Float64Array f = ta.As<Napi::Float64Array>();
+        const size_t n = f.ElementLength();
+        const double* data = reinterpret_cast<const double*>(
+            static_cast<const uint8_t*>(f.ArrayBuffer().Data()) + f.ByteOffset());
+        return std::vector<double>(data, data + n);
+    }
+    if (!v.IsArray()) {
+        throw Napi::TypeError::New(env, std::string(name) + " must be Float64Array or number[]");
+    }
+    return js_array_to_double_vector(v.As<Napi::Array>());
+}
+
+} // namespace
 
 void bind_biot_savart(Napi::Env env, Napi::Object exports) {
-    // BiotSavart class with static methods
-    Napi::Function biotSavartClass = Napi::Object::New(env).Get("constructor").As<Napi::Function>();
-    
     // Static method: computeVelocity
     exports.Set("computeVelocity", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
         Napi::Env env = info.Env();
@@ -218,4 +266,94 @@ void bind_biot_savart(Napi::Env env, Napi::Object exports) {
         std::vector<Vec3> result = BiotSavart::computeVelocity(polyline, grid);
         return vec3_list_to_js_typedarray(env, result);
     }, "biotSavartVelocityGrid"));
+
+    // Trefoil-closure / sst_core compatibility free functions (parity with biot_savart_py.cpp)
+    exports.Set("calculateNeumannSelfEnergy", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
+        Napi::Env e = info.Env();
+        if (info.Length() < 2) {
+            throw Napi::TypeError::New(e, "Expected (points, rc)");
+        }
+        std::vector<double> pts = value_to_flat_xyz(e, info[0], "points");
+        const double rc = info[1].As<Napi::Number>().DoubleValue();
+        const std::size_t n = pts.size() / 3u;
+        return Napi::Number::New(e, trefoil_neumann_self_energy(pts.data(), n, rc));
+    }));
+
+    exports.Set("calculateCoreRepulsion", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
+        Napi::Env e = info.Env();
+        if (info.Length() < 2) {
+            throw Napi::TypeError::New(e, "Expected (points, rc)");
+        }
+        std::vector<double> pts = value_to_flat_xyz(e, info[0], "points");
+        const double rc = info[1].As<Napi::Number>().DoubleValue();
+        const std::size_t n = pts.size() / 3u;
+        return Napi::Number::New(e, trefoil_core_repulsion(pts.data(), n, rc));
+    }));
+
+    exports.Set("calculateLength", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
+        Napi::Env e = info.Env();
+        if (info.Length() < 1) {
+            throw Napi::TypeError::New(e, "Expected (points)");
+        }
+        std::vector<double> pts = value_to_flat_xyz(e, info[0], "points");
+        const std::size_t n = pts.size() / 3u;
+        return Napi::Number::New(e, trefoil_polyline_length(pts.data(), n));
+    }));
+
+    exports.Set("calculateWrithe", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
+        Napi::Env e = info.Env();
+        if (info.Length() < 2) {
+            throw Napi::TypeError::New(e, "Expected (points, rc)");
+        }
+        std::vector<double> pts = value_to_flat_xyz(e, info[0], "points");
+        const double rc = info[1].As<Napi::Number>().DoubleValue();
+        const std::size_t n = pts.size() / 3u;
+        return Napi::Number::New(e, trefoil_writhe_reg(pts.data(), n, rc));
+    }));
+
+    exports.Set("calculateCurvaturePenalty", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
+        Napi::Env e = info.Env();
+        if (info.Length() < 1) {
+            throw Napi::TypeError::New(e, "Expected (points)");
+        }
+        std::vector<double> pts = value_to_flat_xyz(e, info[0], "points");
+        const std::size_t n = pts.size() / 3u;
+        return Napi::Number::New(e, trefoil_curvature_penalty_menger(pts.data(), n));
+    }));
+
+    exports.Set("calculateBsCutoffEnergyScan", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
+        Napi::Env e = info.Env();
+        if (info.Length() < 4) {
+            throw Napi::TypeError::New(e, "Expected (points, tangents, dsArr, aValues)");
+        }
+        std::vector<double> pts = value_to_flat_xyz(e, info[0], "points");
+        std::vector<double> tans = value_to_flat_xyz(e, info[1], "tangents");
+        std::vector<double> ds = value_to_doubles(e, info[2], "dsArr");
+        std::vector<double> avals = value_to_doubles(e, info[3], "aValues");
+        const std::size_t n = pts.size() / 3u;
+        if (tans.size() / 3u != n || ds.size() != n) {
+            throw Napi::Error::New(e, "calculateBsCutoffEnergyScan: inconsistent N dimensions");
+        }
+        std::vector<double> out = bs_cutoff_energy_scan(
+            pts.data(), tans.data(), ds.data(), n, avals.data(), avals.size());
+        return double_vector_to_js_array(e, out);
+    }));
+
+    exports.Set("calculateBsCutoffEnergy", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
+        Napi::Env e = info.Env();
+        if (info.Length() < 4) {
+            throw Napi::TypeError::New(e, "Expected (points, tangents, dsArr, aCutoff)");
+        }
+        std::vector<double> pts = value_to_flat_xyz(e, info[0], "points");
+        std::vector<double> tans = value_to_flat_xyz(e, info[1], "tangents");
+        std::vector<double> ds = value_to_doubles(e, info[2], "dsArr");
+        const double a_cutoff = info[3].As<Napi::Number>().DoubleValue();
+        const std::size_t n = pts.size() / 3u;
+        if (tans.size() / 3u != n || ds.size() != n) {
+            throw Napi::Error::New(e, "calculateBsCutoffEnergy: inconsistent N dimensions");
+        }
+        double aone = a_cutoff;
+        std::vector<double> out = bs_cutoff_energy_scan(pts.data(), tans.data(), ds.data(), n, &aone, 1);
+        return Napi::Number::New(e, out.empty() ? 0.0 : out[0]);
+    }));
 }

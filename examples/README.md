@@ -28,6 +28,7 @@ npm run examples:node:all
 | `field_kernels_node.cpp` | `example_field_kernels.ts` | `example_field_kernels.py` |
 | `field_ops_node.cpp` | `example_field_ops.ts` | `example_field_ops.py` |
 | `knot_dynamics_node.cpp` | `example_knot.ts` | knot / f-series examples |
+| JS catalogs (`knots_data_*.js`) | `example_knot_catalogs.ts` | VortexLab ideal / fseries / knotplot data via `resources/load_knot_catalogs` |
 | `potential_timefield_node.cpp` | `example_potential_flow.ts` | `example_potential_flow.py` |
 | `hyperbolic_volume_node.cpp` | `example_hyperbolic_volume.ts` | `knot_pd_and_volume_example.py` |
 | `radiation_flow_node.cpp` | `example_radiation_flow.ts` | `example_radiation_flow.py` |

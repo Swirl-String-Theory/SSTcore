@@ -1,4 +1,5 @@
 // node_ab_initio.cpp — ParticleEvaluator & ZooEvaluator (N-API)
+#include <memory>
 #include <napi.h>
 #include "node_utils.h"
 #include "ab_initio_mass.h"
@@ -65,6 +66,47 @@ private:
     Napi::Value GetFilaments(const Napi::CallbackInfo& info);
 };
 
+class ZooEvaluatorWrap : public Napi::ObjectWrap<ZooEvaluatorWrap> {
+public:
+    static void Init(Napi::Env env, Napi::Object exports) {
+        Napi::Function func = DefineClass(
+            env, "ZooEvaluator",
+            {StaticMethod("evaluateAllGoldenNls", &ZooEvaluatorWrap::EvaluateAllGoldenNls),
+             StaticMethod("getEntryMass", &ZooEvaluatorWrap::GetEntryMass)});
+        exports.Set("ZooEvaluator", func);
+    }
+
+    ZooEvaluatorWrap(const Napi::CallbackInfo& info) : Napi::ObjectWrap<ZooEvaluatorWrap>(info) {}
+
+private:
+    static Napi::Object result_to_js(Napi::Env env, const ZooEvaluator::Result& r) {
+        Napi::Object o = Napi::Object::New(env);
+        o.Set("identifier", Napi::String::New(env, r.identifier));
+        o.Set("massMev", Napi::Number::New(env, r.mass_mev));
+        o.Set("bridgeB", Napi::Number::New(env, r.bridge_b));
+        o.Set("genusG", Napi::Number::New(env, r.genus_g));
+        return o;
+    }
+
+    static Napi::Value EvaluateAllGoldenNls(const Napi::CallbackInfo& info) {
+        Napi::Env e = info.Env();
+        std::vector<ZooEvaluator::Result> r = ZooEvaluator::evaluate_all_golden_nls();
+        Napi::Array arr = Napi::Array::New(e, r.size());
+        for (size_t i = 0; i < r.size(); ++i) {
+            arr.Set(static_cast<uint32_t>(i), result_to_js(e, r[i]));
+        }
+        return arr;
+    }
+
+    static Napi::Value GetEntryMass(const Napi::CallbackInfo& info) {
+        if (info.Length() < 1 || !info[0].IsString()) {
+            throw Napi::TypeError::New(info.Env(), "Expected identifier string");
+        }
+        const std::string id = info[0].As<Napi::String>().Utf8Value();
+        return Napi::Number::New(info.Env(), ZooEvaluator::get_entry_mass(id));
+    }
+};
+
 Napi::Object ParticleEvaluatorWrap::Init(Napi::Env env, Napi::Object exports) {
     Napi::Function func = DefineClass(env, "ParticleEvaluator", {
         InstanceMethod("relax", &ParticleEvaluatorWrap::Relax),
@@ -93,7 +135,10 @@ ParticleEvaluatorWrap::ParticleEvaluatorWrap(const Napi::CallbackInfo& info)
     if (info[0].IsString()) {
         const std::string id = info[0].As<Napi::String>().Utf8Value();
         int res = (info.Length() >= 2 && info[1].IsNumber()) ? info[1].As<Napi::Number>().Int32Value() : 4000;
-        pe_ = std::make_unique<ParticleEvaluator>(id, res);
+        bool allow_non_canonical = (info.Length() >= 3 && info[2].IsBoolean())
+                                       ? info[2].As<Napi::Boolean>().Value()
+                                       : false;
+        pe_ = std::make_unique<ParticleEvaluator>(id, res, allow_non_canonical);
     } else if (info[0].IsArray()) {
         Napi::Array outer = info[0].As<Napi::Array>();
         std::vector<std::vector<Vec3>> fils;
@@ -188,12 +233,14 @@ Napi::Value ParticleEvaluatorWrap::GetFilaments(const Napi::CallbackInfo& info) 
 
 void bind_ab_initio(Napi::Env env, Napi::Object exports) {
     ParticleEvaluatorWrap::Init(env, exports);
+    ZooEvaluatorWrap::Init(env, exports);
 
     exports.Set("particlePrintCanonicalDerivation", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
         ParticleEvaluator::print_canonical_derivation();
         return info.Env().Undefined();
     }));
 
+    // Existing free helpers (kept for backward compatibility)
     exports.Set("zooEvaluateAllGoldenNls", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
         Napi::Env e = info.Env();
         std::vector<ZooEvaluator::Result> r = ZooEvaluator::evaluate_all_golden_nls();

@@ -366,7 +366,12 @@ if(NODE_EXECUTABLE)
         add_library(sstcore_node SHARED
             src/module_node.cpp
             src/ab_initio_mass_node.cpp
+            src/atomic_bridge_model_node.cpp
             src/biot_savart_node.cpp
+            src/canonical_constants_node.cpp
+            src/chronos_kelvin_transport_node.cpp
+            src/clock_field_eft_node.cpp
+            src/delay_mode_selector_node.cpp
             src/field_kernels_node.cpp
             src/field_ops_node.cpp
             src/fluid_dynamics_node.cpp
@@ -374,11 +379,17 @@ if(NODE_EXECUTABLE)
             src/hyperbolic_volume_node.cpp
             src/knot_dynamics_node.cpp
             src/magnus_integrator_node.cpp
+            src/multisector_fitter_node.cpp
             src/potential_timefield_node.cpp
             src/radiation_flow_node.cpp
+            src/spectroscopic_gap_node.cpp
+            src/trefoil_operator_node.cpp
+            src/tube/geometry_node.cpp
             src/sst_extensions_node.cpp
             src/sst_gravity_node.cpp
             src/sst_integrator_node.cpp
+            src/sst_master_equation_node.cpp
+            src/sst_tension_scales_node.cpp
             src/swirl_field_node.cpp
             src/thermo_dynamics_node.cpp
             src/time_evolution_node.cpp

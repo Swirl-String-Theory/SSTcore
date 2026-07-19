@@ -1,4 +1,5 @@
 // node_magnus_integrator.cpp — N-API bindings for MagnusBernoulliIntegrator
+#include <memory>
 #include <napi.h>
 #include "node_utils.h"
 #include "magnus_integrator.h"
@@ -39,9 +40,63 @@ Napi::Array v3d_to_js(Napi::Env env, const Vec3D& a) {
     return o;
 }
 
+class MagnusBernoulliIntegratorWrap : public Napi::ObjectWrap<MagnusBernoulliIntegratorWrap> {
+public:
+    static void Init(Napi::Env env, Napi::Object exports) {
+        Napi::Function func = DefineClass(
+            env, "MagnusBernoulliIntegrator",
+            {InstanceMethod("computeMagnusForce", &MagnusBernoulliIntegratorWrap::ComputeMagnusForce),
+             InstanceMethod("computeSwirlCoulombAccel",
+                            &MagnusBernoulliIntegratorWrap::ComputeSwirlCoulombAccel)});
+        exports.Set("MagnusBernoulliIntegrator", func);
+    }
+
+    MagnusBernoulliIntegratorWrap(const Napi::CallbackInfo& info)
+        : Napi::ObjectWrap<MagnusBernoulliIntegratorWrap>(info) {
+        Napi::Env e = info.Env();
+        if (info.Length() < 4) {
+            throw Napi::TypeError::New(e, "Expected (rho_f, v_swirl, r_c, Gamma)");
+        }
+        const double rho_f = info[0].As<Napi::Number>().DoubleValue();
+        const double v_swirl = info[1].As<Napi::Number>().DoubleValue();
+        const double r_c = info[2].As<Napi::Number>().DoubleValue();
+        const double Gamma = info[3].As<Napi::Number>().DoubleValue();
+        integ_ = std::make_unique<MagnusBernoulliIntegrator>(rho_f, v_swirl, r_c, Gamma);
+    }
+
+private:
+    std::unique_ptr<MagnusBernoulliIntegrator> integ_;
+
+    Napi::Value ComputeMagnusForce(const Napi::CallbackInfo& info) {
+        Napi::Env e = info.Env();
+        if (info.Length() < 5) {
+            throw Napi::TypeError::New(e, "Expected (tangent, normal, R, v_knot, v_bg)");
+        }
+        Vec3D T = to_v3d(read_vec3(e, info[0]));
+        Vec3D N = to_v3d(read_vec3(e, info[1]));
+        const double R = info[2].As<Napi::Number>().DoubleValue();
+        Vec3D vk = to_v3d(read_vec3(e, info[3]));
+        Vec3D vb = to_v3d(read_vec3(e, info[4]));
+        return v3d_to_js(e, integ_->compute_magnus_force(T, N, R, vk, vb));
+    }
+
+    Napi::Value ComputeSwirlCoulombAccel(const Napi::CallbackInfo& info) {
+        Napi::Env e = info.Env();
+        if (info.Length() < 2) {
+            throw Napi::TypeError::New(e, "Expected (eval_pos, source_pos)");
+        }
+        Vec3D pe = to_v3d(read_vec3(e, info[0]));
+        Vec3D ps = to_v3d(read_vec3(e, info[1]));
+        return v3d_to_js(e, integ_->compute_swirl_coulomb_accel(pe, ps));
+    }
+};
+
 } // namespace
 
 void bind_magnus_integrator(Napi::Env env, Napi::Object exports) {
+    MagnusBernoulliIntegratorWrap::Init(env, exports);
+
+    // Existing factory helpers (kept for backward compatibility)
     exports.Set("createMagnusBernoulliIntegrator", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
         Napi::Env e = info.Env();
         if (info.Length() < 4) {

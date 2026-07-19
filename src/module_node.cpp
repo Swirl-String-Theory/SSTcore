@@ -37,16 +37,25 @@
 #endif
 
 void bind_ab_initio(Napi::Env env, Napi::Object exports);
+void bind_atomic_bridge_model(Napi::Env env, Napi::Object exports);
 void bind_biot_savart(Napi::Env env, Napi::Object exports);
+void bind_canonical_constants(Napi::Env env, Napi::Object exports);
+void bind_chronos_kelvin_transport(Napi::Env env, Napi::Object exports);
+void bind_clock_field_eft(Napi::Env env, Napi::Object exports);
+void bind_delay_mode_selector(Napi::Env env, Napi::Object exports);
 void bind_fluid_dynamics(Napi::Env env, Napi::Object exports);
 void bind_field_kernels(Napi::Env env, Napi::Object exports);
 void bind_field_ops(Napi::Env env, Napi::Object exports);
 void bind_knot(Napi::Env env, Napi::Object exports);
 void bind_frenet_helicity(Napi::Env env, Napi::Object exports);
 void bind_magnus_integrator(Napi::Env env, Napi::Object exports);
+void bind_multisector_fitter(Napi::Env env, Napi::Object exports);
 void bind_timefield(Napi::Env env, Napi::Object exports);
 void bind_hyperbolic_volume(Napi::Env env, Napi::Object exports);
 void bind_radiation_flow(Napi::Env env, Napi::Object exports);
+void bind_resolved_tube_geometry(Napi::Env env, Napi::Object exports);
+void bind_spectroscopic_gap(Napi::Env env, Napi::Object exports);
+void bind_trefoil_operator(Napi::Env env, Napi::Object exports);
 void bind_swirl_field(Napi::Env env, Napi::Object exports);
 void bind_thermo_dynamics(Napi::Env env, Napi::Object exports);
 void bind_time_evolution(Napi::Env env, Napi::Object exports);
@@ -54,6 +63,8 @@ void bind_vortex_ring(Napi::Env env, Napi::Object exports);
 void bind_vorticity_dynamics(Napi::Env env, Napi::Object exports);
 void bind_sst_gravity(Napi::Env env, Napi::Object exports);
 void bind_sst_integrator(Napi::Env env, Napi::Object exports);
+void bind_sst_master_equation(Napi::Env env, Napi::Object exports);
+void bind_sst_tension_scales(Napi::Env env, Napi::Object exports);
 void bind_extensions(Napi::Env env, Napi::Object exports);
 
 static Napi::Object EngineInfo(const Napi::CallbackInfo& info) {
@@ -79,6 +90,17 @@ static Napi::Object GetCapabilities(const Napi::CallbackInfo& info) {
     o.Set("frenetHelicity", true);
     o.Set("magnusIntegrator", true);
     o.Set("sstIntegrator", true);
+    o.Set("atomicBridgeModel", true);
+    o.Set("canonicalConstants", true);
+    o.Set("chronosKelvinTransport", true);
+    o.Set("clockFieldEft", true);
+    o.Set("delayModeSelector", true);
+    o.Set("spectroscopicGap", true);
+    o.Set("sstMasterEquation", true);
+    o.Set("sstTensionScales", true);
+    o.Set("trefoilOperator", true);
+    o.Set("multisectorFitter", true);
+    o.Set("resolvedTubeGeometry", true);
     o.Set("continuousReach", false);
     o.Set("wasmFallback", false);
     return o;
@@ -93,16 +115,25 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
     exports.Set(Napi::String::New(env, "numericProfile"), Napi::String::New(env, SSTCORE_NUMERIC_PROFILE));
 
     bind_ab_initio(env, exports);
+    bind_atomic_bridge_model(env, exports);
     bind_biot_savart(env, exports);
+    bind_canonical_constants(env, exports);
+    bind_chronos_kelvin_transport(env, exports);
+    bind_clock_field_eft(env, exports);
+    bind_delay_mode_selector(env, exports);
     bind_fluid_dynamics(env, exports);
     bind_field_kernels(env, exports);
     bind_field_ops(env, exports);
     bind_knot(env, exports);
     bind_frenet_helicity(env, exports);
     bind_magnus_integrator(env, exports);
+    bind_multisector_fitter(env, exports);
     bind_timefield(env, exports);
     bind_hyperbolic_volume(env, exports);
     bind_radiation_flow(env, exports);
+    bind_resolved_tube_geometry(env, exports);
+    bind_spectroscopic_gap(env, exports);
+    bind_trefoil_operator(env, exports);
     bind_swirl_field(env, exports);
     bind_thermo_dynamics(env, exports);
     bind_time_evolution(env, exports);
@@ -110,6 +141,8 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
     bind_vorticity_dynamics(env, exports);
     bind_sst_gravity(env, exports);
     bind_sst_integrator(env, exports);
+    bind_sst_master_equation(env, exports);
+    bind_sst_tension_scales(env, exports);
     bind_extensions(env, exports);
 
     exports.Set("engineInfo", Napi::Function::New(env, EngineInfo));

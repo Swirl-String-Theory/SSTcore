@@ -86,6 +86,51 @@ Napi::TypedArray vec3s_to_flat(Napi::Env env, const std::vector<sst::Vec3>& pts)
     return Napi::Float64Array::New(env, n, buf, 0);
 }
 
+Napi::Object tube_metrics_to_js(Napi::Env env, const sst::ResolvedTubeMetrics& r) {
+    Napi::Object o = Napi::Object::New(env);
+    o.Set("length", Napi::Number::New(env, r.length));
+    o.Set("minrad", Napi::Number::New(env, r.minrad));
+    o.Set("minDcsd", Napi::Number::New(env, r.min_dcsd));
+    o.Set("halfMinDcsd", Napi::Number::New(env, r.half_min_dcsd));
+    o.Set("thicknessRad", Napi::Number::New(env, r.thickness_rad));
+    o.Set("reachRad", Napi::Number::New(env, r.reach_rad));
+    o.Set("ropelengthRad", Napi::Number::New(env, r.ropelength_rad));
+    o.Set("ropelengthDiam", Napi::Number::New(env, r.ropelength_diam));
+    o.Set("edgeLengthMean", Napi::Number::New(env, r.edge_length_mean));
+    o.Set("edgeLengthRelStd", Napi::Number::New(env, r.edge_length_rel_std));
+    o.Set("equilateralOk", Napi::Boolean::New(env, r.equilateral_ok));
+    o.Set("lowerBoundOk", Napi::Boolean::New(env, r.lower_bound_ok));
+
+    Napi::Array struts = Napi::Array::New(env, r.struts.size());
+    for (size_t i = 0; i < r.struts.size(); ++i) {
+        const auto& s = r.struts[i];
+        Napi::Object so = Napi::Object::New(env);
+        so.Set("i", Napi::Number::New(env, static_cast<double>(s.i)));
+        so.Set("j", Napi::Number::New(env, static_cast<double>(s.j)));
+        so.Set("s", Napi::Number::New(env, s.s));
+        so.Set("t", Napi::Number::New(env, s.t));
+        so.Set("distance", Napi::Number::New(env, s.distance));
+        so.Set("arclengthI", Napi::Number::New(env, s.arclength_i));
+        so.Set("arclengthJ", Napi::Number::New(env, s.arclength_j));
+        struts.Set(static_cast<uint32_t>(i), so);
+    }
+    o.Set("struts", struts);
+
+    Napi::Array kinks = Napi::Array::New(env, r.kinks.size());
+    for (size_t i = 0; i < r.kinks.size(); ++i) {
+        const auto& k = r.kinks[i];
+        Napi::Object ko = Napi::Object::New(env);
+        ko.Set("vertex", Napi::Number::New(env, static_cast<double>(k.vertex)));
+        ko.Set("minradMinus", Napi::Number::New(env, k.minrad_minus));
+        ko.Set("minradPlus", Napi::Number::New(env, k.minrad_plus));
+        ko.Set("minrad", Napi::Number::New(env, k.minrad));
+        ko.Set("turningAngle", Napi::Number::New(env, k.turning_angle));
+        kinks.Set(static_cast<uint32_t>(i), ko);
+    }
+    o.Set("kinks", kinks);
+    return o;
+}
+
 } // namespace
 
 void bind_extensions(Napi::Env env, Napi::Object exports) {
@@ -131,6 +176,18 @@ void bind_extensions(Napi::Env env, Napi::Object exports) {
         int sk = (info.Length() > 2) ? info[2].As<Napi::Number>().Int32Value() : 3;
         FilamentEnergyResult r = curve_metrics_from_fseries(path, ns, sk);
         return filament_energy_to_js(e, r);
+    }));
+
+    exports.Set("resolvedTubeMetricsFromFseries", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
+        Napi::Env e = info.Env();
+        if (info.Length() < 1 || !info[0].IsString()) {
+            throw Napi::TypeError::New(e, "Expected path string");
+        }
+        const std::string path = info[0].As<Napi::String>().Utf8Value();
+        int ns = (info.Length() > 1) ? info[1].As<Napi::Number>().Int32Value() : 2048;
+        int sk = (info.Length() > 2) ? info[2].As<Napi::Number>().Int32Value() : 3;
+        sst::ResolvedTubeMetrics r = resolved_tube_metrics_from_fseries(path, ns, sk);
+        return tube_metrics_to_js(e, r);
     }));
 
     exports.Set("curveLengthFromFseries", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {

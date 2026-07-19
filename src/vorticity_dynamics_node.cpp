@@ -41,6 +41,25 @@ std::array<sst::Vec3, 3> read_grad_u(Napi::Env env, Napi::Array outer) {
     return g;
 }
 
+Napi::Value compute_vorticity_2d_fn(const Napi::CallbackInfo& info) {
+    Napi::Env en = info.Env();
+    if (info.Length() < 6) {
+        throw Napi::TypeError::New(en, "Expected (u, v, nx, ny, dx, dy) as arrays + ints + floats");
+    }
+    std::vector<double> u = read_doubles(info[0].As<Napi::Array>());
+    std::vector<double> v = read_doubles(info[1].As<Napi::Array>());
+    int nx = info[2].As<Napi::Number>().Int32Value();
+    int ny = info[3].As<Napi::Number>().Int32Value();
+    double dx = info[4].As<Napi::Number>().DoubleValue();
+    double dy = info[5].As<Napi::Number>().DoubleValue();
+    std::vector<double> om = sst::VorticityDynamics::compute_vorticity2D(u, v, nx, ny, dx, dy);
+    Napi::Array out = Napi::Array::New(en, om.size());
+    for (size_t i = 0; i < om.size(); ++i) {
+        out.Set(static_cast<uint32_t>(i), Napi::Number::New(en, om[i]));
+    }
+    return out;
+}
+
 } // namespace
 
 void bind_vorticity_dynamics(Napi::Env env, Napi::Object exports) {
@@ -70,24 +89,9 @@ void bind_vorticity_dynamics(Napi::Env env, Napi::Object exports) {
         auto r = sst::VorticityDynamics::crocco_relation(w, rho, gp);
         return v3_to_arr(en, r);
     }));
-    exports.Set("computeVorticity2D", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
-        Napi::Env en = info.Env();
-        if (info.Length() < 6) {
-            throw Napi::TypeError::New(en, "Expected (u, v, nx, ny, dx, dy) as arrays + ints + floats");
-        }
-        std::vector<double> u = read_doubles(info[0].As<Napi::Array>());
-        std::vector<double> v = read_doubles(info[1].As<Napi::Array>());
-        int nx = info[2].As<Napi::Number>().Int32Value();
-        int ny = info[3].As<Napi::Number>().Int32Value();
-        double dx = info[4].As<Napi::Number>().DoubleValue();
-        double dy = info[5].As<Napi::Number>().DoubleValue();
-        std::vector<double> om = sst::VorticityDynamics::compute_vorticity2D(u, v, nx, ny, dx, dy);
-        Napi::Array out = Napi::Array::New(en, om.size());
-        for (size_t i = 0; i < om.size(); ++i) {
-            out.Set(static_cast<uint32_t>(i), Napi::Number::New(en, om[i]));
-        }
-        return out;
-    }));
+    // Keep computeVorticity2D; add computeVorticity alias (py: compute_vorticity)
+    exports.Set("computeVorticity2D", Napi::Function::New(env, compute_vorticity_2d_fn));
+    exports.Set("computeVorticity", Napi::Function::New(env, compute_vorticity_2d_fn));
     exports.Set("rotatingFrameRhs", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
         Napi::Env en = info.Env();
         auto vel = read_v3(en, info[0].As<Napi::Array>());
