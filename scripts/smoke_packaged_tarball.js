@@ -84,7 +84,7 @@ const probePath = path.join(tmp, 'smoke_probe.js');
 fs.writeFileSync(
   probePath,
   [
-    "const s = require('SSTcore');",
+    "const s = require('sstcore');",
     'const info = s.engineInfo();',
     'console.log(JSON.stringify(info));',
     "if (info.engineVersion !== '0.8.18') process.exit(2);",

@@ -102,7 +102,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: '22.x'
           registry-url: https://registry.npmjs.org
           cache: npm
 
@@ -123,6 +123,12 @@ jobs:
       - name: Extract version from tag or release
         id: get_version
         run: |
+          NAME=$(node -p "require('./package.json').name")
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+          if [ "$NAME" != "sstcore" ]; then
+            echo "ERROR: package.json name must be lowercase 'sstcore' (got: $NAME)"
+            exit 1
+          fi
           if [ "${{ github.event_name }}" = "release" ]; then
             VERSION="${{ github.event.release.tag_name }}"
             VERSION=${VERSION#v}
@@ -153,14 +159,38 @@ jobs:
       - name: Build package
         run: npm run build:all
 
+      - name: Stage linux prebuild (optional consumer fast-path)
+        shell: bash
+        run: |
+          mkdir -p prebuilds/linux-x64
+          if [ -f build/Release/sstcore.node ]; then
+            cp -f build/Release/sstcore.node prebuilds/linux-x64/sstcore.node
+          elif [ -f build_node/Release/sstcore.node ]; then
+            cp -f build_node/Release/sstcore.node prebuilds/linux-x64/sstcore.node
+          else
+            echo "No sstcore.node found to stage as prebuild (source install still OK)"
+          fi
+
       - name: Run tests
         run: npm test
 
       - name: Check package contents
-        run: npm pack --dry-run
+        run: |
+          npm pack --dry-run --json > pack-dry.json
+          node scripts/check_npm_pack_size.js --json pack-dry.json
+
+      - name: Verify NPM_TOKEN
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "${NODE_AUTH_TOKEN}" ]; then
+            echo "ERROR: secrets.NPM_TOKEN is empty. Add a granular npm token as GitHub Actions secret NPM_TOKEN."
+            exit 1
+          fi
+          echo "NPM_TOKEN is set (length=${#NODE_AUTH_TOKEN})"
 
       - name: Publish to npm
-        run: npm publish
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -179,7 +209,7 @@ jobs:
 
             Install with:
             ```bash
-            npm install SSTcore
+            npm install sstcore
             ```
           draft: false
           prerelease: false
