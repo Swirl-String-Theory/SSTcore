@@ -20,7 +20,14 @@ export interface Capabilities {
   frenetHelicity: boolean;
   magnusIntegrator: boolean;
   sstIntegrator: boolean;
+  resolvedTubeGeometry?: boolean;
   continuousReach: boolean;
+  polygonalGauss?: boolean;
+  filamentVelocity?: boolean;
+  filamentIntegrator?: boolean;
+  topologyGuard?: boolean;
+  intrinsicFrame?: boolean;
+  rigidMotion?: boolean;
   wasmFallback: boolean;
 }
 
@@ -181,6 +188,70 @@ export interface SSTcoreModule {
   list_embedded_fseries_ids?: () => string[];
   load_fseries_knot?: (label: string) => string | null;
   resolve_knot_ref?: (...args: any[]) => any;
+
+  // VortexLab kernel migration (C++ parity APIs)
+  resampleClosedCurve?: (points: Vec3Array, n: number) => Vec3[];
+  sampleCurve?: (points: Vec3Array, n: number, arclengthUniform?: boolean) => Vec3[];
+  computePolygonalGauss?: (curveA: Vec3Array, curveB?: Vec3Array, sameCurve?: boolean) => {
+    signedIntegral: number;
+    absoluteIntegral: number;
+    linkingIntegerAudit: number;
+  };
+  analyzeResolvedTube?: (curves: Vec3Array[], coreRadius?: number) => {
+    clearance: number;
+    selfMin: number;
+    interMin: number;
+  };
+  computeTopologyClearance?: (curves: Vec3Array[], coreRadius?: number) => {
+    clearance: number;
+    selfMin: number;
+    interMin: number;
+  };
+  computeContinuousReach?: (curves: Vec3Array[]) => {
+    reach: number;
+    limiter: string;
+    curvatureRadius: number;
+    selfRadius: number;
+    interComponentRadius: number;
+    orthResidual: number;
+  };
+  computeFilamentVelocity?: (filaments: any[], options?: object) => {
+    velocity: Vec3[][];
+    maximumSpeed: number;
+  };
+  computeRegularizedMutualVelocity?: (filaments: any[], options?: object) => {
+    velocity: Vec3[][];
+    maximumSpeed: number;
+  };
+  rk4Step?: (filaments: any[], dt: number, options?: object) => {
+    filaments: any[];
+    maximumStageSpeed: number;
+  };
+  estimateCflDt?: (filaments: any[], options?: object, cfl?: number) => number;
+  guardTopologyStep?: (
+    before: Vec3Array[],
+    after: Vec3Array[],
+    contactThreshold: number,
+    maxDisplacement: number,
+    coreRadius?: number,
+  ) => {
+    contact: boolean;
+    safeDtFraction: number;
+    message: string;
+  };
+  computeIntrinsicFrame?: (points: Vec3Array, weights?: number[]) => {
+    centroid: Vec3;
+    axisX: Vec3;
+    axisY: Vec3;
+    axisZ: Vec3;
+    eigenvalues: Vec3;
+  };
+  computeRigidMotion?: (points: Vec3Array, velocity: Vec3Array, weights?: number[]) => {
+    centroid: Vec3;
+    translation: Vec3;
+    omega: Vec3;
+    reconstructionRelativeError: number;
+  };
 
   [key: string]: any;
 }

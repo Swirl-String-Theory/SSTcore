@@ -1,14 +1,14 @@
 {
   "manifest_version": 1,
-  "generated_at": "2026-07-19T15:47:43.733312+00:00",
+  "generated_at": "2026-07-19T16:26:33.143045+00:00",
   "summary": {
     "cpp_public": 208,
-    "py_bound": 499,
+    "py_bound": 513,
     "cpp_unbound": 91,
     "binding_without_cpp_match": 89,
-    "node_modules": 29,
-    "py_modules": 30,
-    "both_py_node": 29,
+    "node_modules": 30,
+    "py_modules": 31,
+    "both_py_node": 30,
     "py_only_modules": 1,
     "node_only_modules": 0
   },
@@ -42,6 +42,7 @@
       "time_evolution",
       "trefoil_operator",
       "vortex_ring",
+      "vortexlab_kernels",
       "vorticity_dynamics"
     ],
     "py_only": [
@@ -77,6 +78,7 @@
       "time_evolution_node.cpp",
       "trefoil_operator_node.cpp",
       "vortex_ring_node.cpp",
+      "vortexlab_kernels_node.cpp",
       "vorticity_dynamics_node.cpp"
     ]
   },
@@ -5350,6 +5352,146 @@
       "header_file": "vortex_ring.h",
       "py_class": null,
       "py_name": "hill_velocity"
+    },
+    {
+      "module": "vortexlab_kernels",
+      "cpp_symbol": null,
+      "py_export": "resample_closed_curve",
+      "export_kind": "module_function",
+      "binding_file": "vortexlab_kernels_py.cpp",
+      "header_file": null,
+      "py_class": null,
+      "py_name": "resample_closed_curve"
+    },
+    {
+      "module": "vortexlab_kernels",
+      "cpp_symbol": null,
+      "py_export": "sample_curve",
+      "export_kind": "module_function",
+      "binding_file": "vortexlab_kernels_py.cpp",
+      "header_file": null,
+      "py_class": null,
+      "py_name": "sample_curve"
+    },
+    {
+      "module": "vortexlab_kernels",
+      "cpp_symbol": null,
+      "py_export": "sample_circle",
+      "export_kind": "module_function",
+      "binding_file": "vortexlab_kernels_py.cpp",
+      "header_file": null,
+      "py_class": null,
+      "py_name": "sample_circle"
+    },
+    {
+      "module": "vortexlab_kernels",
+      "cpp_symbol": null,
+      "py_export": "compute_polygonal_gauss",
+      "export_kind": "module_function",
+      "binding_file": "vortexlab_kernels_py.cpp",
+      "header_file": null,
+      "py_class": null,
+      "py_name": "compute_polygonal_gauss"
+    },
+    {
+      "module": "vortexlab_kernels",
+      "cpp_symbol": null,
+      "py_export": "analyze_resolved_tube_clearance",
+      "export_kind": "module_function",
+      "binding_file": "vortexlab_kernels_py.cpp",
+      "header_file": null,
+      "py_class": null,
+      "py_name": "analyze_resolved_tube_clearance"
+    },
+    {
+      "module": "vortexlab_kernels",
+      "cpp_symbol": null,
+      "py_export": "compute_topology_clearance",
+      "export_kind": "module_function",
+      "binding_file": "vortexlab_kernels_py.cpp",
+      "header_file": null,
+      "py_class": null,
+      "py_name": "compute_topology_clearance"
+    },
+    {
+      "module": "vortexlab_kernels",
+      "cpp_symbol": null,
+      "py_export": "compute_continuous_reach",
+      "export_kind": "module_function",
+      "binding_file": "vortexlab_kernels_py.cpp",
+      "header_file": null,
+      "py_class": null,
+      "py_name": "compute_continuous_reach"
+    },
+    {
+      "module": "vortexlab_kernels",
+      "cpp_symbol": null,
+      "py_export": "compute_filament_velocity",
+      "export_kind": "module_function",
+      "binding_file": "vortexlab_kernels_py.cpp",
+      "header_file": null,
+      "py_class": null,
+      "py_name": "compute_filament_velocity"
+    },
+    {
+      "module": "vortexlab_kernels",
+      "cpp_symbol": null,
+      "py_export": "compute_regularized_mutual_velocity",
+      "export_kind": "module_function",
+      "binding_file": "vortexlab_kernels_py.cpp",
+      "header_file": null,
+      "py_class": null,
+      "py_name": "compute_regularized_mutual_velocity"
+    },
+    {
+      "module": "vortexlab_kernels",
+      "cpp_symbol": null,
+      "py_export": "rk4_step",
+      "export_kind": "module_function",
+      "binding_file": "vortexlab_kernels_py.cpp",
+      "header_file": null,
+      "py_class": null,
+      "py_name": "rk4_step"
+    },
+    {
+      "module": "vortexlab_kernels",
+      "cpp_symbol": null,
+      "py_export": "estimate_cfl_dt",
+      "export_kind": "module_function",
+      "binding_file": "vortexlab_kernels_py.cpp",
+      "header_file": null,
+      "py_class": null,
+      "py_name": "estimate_cfl_dt"
+    },
+    {
+      "module": "vortexlab_kernels",
+      "cpp_symbol": null,
+      "py_export": "guard_topology_step",
+      "export_kind": "module_function",
+      "binding_file": "vortexlab_kernels_py.cpp",
+      "header_file": null,
+      "py_class": null,
+      "py_name": "guard_topology_step"
+    },
+    {
+      "module": "vortexlab_kernels",
+      "cpp_symbol": null,
+      "py_export": "compute_intrinsic_frame",
+      "export_kind": "module_function",
+      "binding_file": "vortexlab_kernels_py.cpp",
+      "header_file": null,
+      "py_class": null,
+      "py_name": "compute_intrinsic_frame"
+    },
+    {
+      "module": "vortexlab_kernels",
+      "cpp_symbol": null,
+      "py_export": "compute_rigid_motion",
+      "export_kind": "module_function",
+      "binding_file": "vortexlab_kernels_py.cpp",
+      "header_file": null,
+      "py_class": null,
+      "py_name": "compute_rigid_motion"
     },
     {
       "module": "vorticity_dynamics",
