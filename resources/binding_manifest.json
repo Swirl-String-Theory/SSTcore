@@ -1,21 +1,26 @@
 {
   "manifest_version": 1,
-  "generated_at": "2026-07-19T13:39:21.065785+00:00",
+  "generated_at": "2026-07-19T15:47:43.733312+00:00",
   "summary": {
     "cpp_public": 208,
     "py_bound": 499,
     "cpp_unbound": 91,
     "binding_without_cpp_match": 89,
-    "node_modules": 19,
+    "node_modules": 29,
     "py_modules": 30,
-    "both_py_node": 19,
-    "py_only_modules": 11,
+    "both_py_node": 29,
+    "py_only_modules": 1,
     "node_only_modules": 0
   },
   "module_coverage": {
     "both": [
       "ab_initio_mass",
+      "atomic_bridge_model",
       "biot_savart",
+      "canonical_constants",
+      "chronos_kelvin_transport",
+      "clock_field_eft",
+      "delay_mode_selector",
       "field_kernels",
       "field_ops",
       "fluid_dynamics",
@@ -23,34 +28,34 @@
       "hyperbolic_volume",
       "knot_dynamics",
       "magnus_integrator",
+      "multisector_fitter",
       "potential_timefield",
       "radiation_flow",
+      "spectroscopic_gap",
       "sst_extensions",
       "sst_gravity",
       "sst_integrator",
+      "sst_master_equation",
+      "sst_tension_scales",
       "swirl_field",
       "thermo_dynamics",
       "time_evolution",
+      "trefoil_operator",
       "vortex_ring",
       "vorticity_dynamics"
     ],
     "py_only": [
-      "atomic_bridge_model",
-      "canonical_constants",
-      "chronos_kelvin_transport",
-      "clock_field_eft",
-      "delay_mode_selector",
-      "multisector_fitter",
-      "resolved_tube_geometry",
-      "spectroscopic_gap",
-      "sst_master_equation",
-      "sst_tension_scales",
-      "trefoil_operator"
+      "resolved_tube_geometry"
     ],
     "node_only": [],
     "node_files": [
       "ab_initio_mass_node.cpp",
+      "atomic_bridge_model_node.cpp",
       "biot_savart_node.cpp",
+      "canonical_constants_node.cpp",
+      "chronos_kelvin_transport_node.cpp",
+      "clock_field_eft_node.cpp",
+      "delay_mode_selector_node.cpp",
       "field_kernels_node.cpp",
       "field_ops_node.cpp",
       "fluid_dynamics_node.cpp",
@@ -58,14 +63,19 @@
       "hyperbolic_volume_node.cpp",
       "knot_dynamics_node.cpp",
       "magnus_integrator_node.cpp",
+      "multisector_fitter_node.cpp",
       "potential_timefield_node.cpp",
       "radiation_flow_node.cpp",
+      "spectroscopic_gap_node.cpp",
       "sst_extensions_node.cpp",
       "sst_gravity_node.cpp",
       "sst_integrator_node.cpp",
+      "sst_master_equation_node.cpp",
+      "sst_tension_scales_node.cpp",
       "swirl_field_node.cpp",
       "thermo_dynamics_node.cpp",
       "time_evolution_node.cpp",
+      "trefoil_operator_node.cpp",
       "vortex_ring_node.cpp",
       "vorticity_dynamics_node.cpp"
     ]
@@ -6437,17 +6447,7 @@
       }
     ],
     "py_without_node": [
-      "atomic_bridge_model",
-      "canonical_constants",
-      "chronos_kelvin_transport",
-      "clock_field_eft",
-      "delay_mode_selector",
-      "multisector_fitter",
-      "resolved_tube_geometry",
-      "spectroscopic_gap",
-      "sst_master_equation",
-      "sst_tension_scales",
-      "trefoil_operator"
+      "resolved_tube_geometry"
     ]
   }
 }
