@@ -121,6 +121,7 @@ add_library(sstcore_lib STATIC
         src/filament/integrator.cpp
         src/geometry/periodic_spline.cpp
         src/geometry/continuous_reach.cpp
+        src/geometry/smooth_tube_metrics.cpp
         src/geometry/polygonal_clearance.cpp
         src/topology/topology_guard.cpp
         src/analysis/intrinsic_frame.cpp

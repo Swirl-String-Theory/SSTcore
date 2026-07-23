@@ -163,6 +163,7 @@ Napi::Object metrics_to_js(Napi::Env env, const ResolvedTubeMetrics& m) {
     o.Set("ropelength_diam", Napi::Number::New(env, m.ropelength_diam));
     o.Set("edge_length_mean", Napi::Number::New(env, m.edge_length_mean));
     o.Set("edge_length_rel_std", Napi::Number::New(env, m.edge_length_rel_std));
+    o.Set("edge_length_max_rel_dev", Napi::Number::New(env, m.edge_length_max_rel_dev));
     o.Set("equilateral_ok", Napi::Boolean::New(env, m.equilateral_ok));
     o.Set("lower_bound_ok", Napi::Boolean::New(env, m.lower_bound_ok));
     Napi::Array struts = Napi::Array::New(env, m.struts.size());
@@ -189,6 +190,7 @@ ResolvedTubeMetrics metrics_from_js(Napi::Object o) {
     m.ropelength_diam = num(o, "ropelength_diam", 0.0);
     m.edge_length_mean = num(o, "edge_length_mean", 0.0);
     m.edge_length_rel_std = num(o, "edge_length_rel_std", 0.0);
+    m.edge_length_max_rel_dev = num(o, "edge_length_max_rel_dev", 0.0);
     m.equilateral_ok = bval(o, "equilateral_ok", false);
     m.lower_bound_ok = bval(o, "lower_bound_ok", true);
     if (o.Has("struts") && o.Get("struts").IsArray()) {
@@ -439,6 +441,8 @@ public:
             {StaticMethod("length", &ResolvedTubeGeometryWrap::Length),
              StaticMethod("edgeLengthMean", &ResolvedTubeGeometryWrap::EdgeLengthMean),
              StaticMethod("edgeLengthRelativeStd", &ResolvedTubeGeometryWrap::EdgeLengthRelativeStd),
+             StaticMethod("edgeLengthMaxRelativeDeviation",
+                          &ResolvedTubeGeometryWrap::EdgeLengthMaxRelativeDeviation),
              StaticMethod("turningAngle", &ResolvedTubeGeometryWrap::TurningAngle),
              StaticMethod("minradAtVertex", &ResolvedTubeGeometryWrap::MinradAtVertex),
              StaticMethod("kinkAtVertex", &ResolvedTubeGeometryWrap::KinkAtVertex),
@@ -467,6 +471,10 @@ private:
     }
     static Napi::Value EdgeLengthRelativeStd(const Napi::CallbackInfo& info) {
         return Napi::Number::New(info.Env(), ResolvedTubeGeometry::edge_length_relative_std(read_points(info[0])));
+    }
+    static Napi::Value EdgeLengthMaxRelativeDeviation(const Napi::CallbackInfo& info) {
+        return Napi::Number::New(
+            info.Env(), ResolvedTubeGeometry::edge_length_max_relative_deviation(read_points(info[0])));
     }
     static Napi::Value TurningAngle(const Napi::CallbackInfo& info) {
         return Napi::Number::New(info.Env(), ResolvedTubeGeometry::turning_angle(

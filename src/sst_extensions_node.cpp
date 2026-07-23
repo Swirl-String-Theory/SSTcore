@@ -98,6 +98,7 @@ Napi::Object tube_metrics_to_js(Napi::Env env, const sst::ResolvedTubeMetrics& r
     o.Set("ropelengthDiam", Napi::Number::New(env, r.ropelength_diam));
     o.Set("edgeLengthMean", Napi::Number::New(env, r.edge_length_mean));
     o.Set("edgeLengthRelStd", Napi::Number::New(env, r.edge_length_rel_std));
+    o.Set("edgeLengthMaxRelDev", Napi::Number::New(env, r.edge_length_max_rel_dev));
     o.Set("equilateralOk", Napi::Boolean::New(env, r.equilateral_ok));
     o.Set("lowerBoundOk", Napi::Boolean::New(env, r.lower_bound_ok));
 

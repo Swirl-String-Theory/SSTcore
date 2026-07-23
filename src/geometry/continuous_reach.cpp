@@ -65,6 +65,7 @@ struct CurvLimit {
     double radius = std::numeric_limits<double>::infinity();
     double kappa = 0.0;
     double s = 0.0;
+    std::size_t intervals_examined = 0;
 };
 
 CurvLimit continuous_curvature_limit(const PeriodicCubicSpline3D& spline) {
@@ -95,6 +96,7 @@ CurvLimit continuous_curvature_limit(const PeriodicCubicSpline3D& spline) {
     out.kappa = best.value;
     out.s = best.x;
     out.radius = best.value > 1e-20 ? 1.0 / best.value : std::numeric_limits<double>::infinity();
+    out.intervals_examined = n;
     return out;
 }
 
@@ -256,13 +258,24 @@ struct Seed {
     double s, t, score, orth, d;
 };
 
+struct PairSearchStats {
+    std::size_t seed_count = 0;
+    std::size_t refined_count = 0;
+    std::size_t rejected_count = 0;
+    double search_resolution = 0.0;
+    bool found = false;
+};
+
 bool continuous_pair_distance(const PeriodicCubicSpline3D& sa, const PeriodicCubicSpline3D& sb,
-                              bool self_pair, RefineResult& out) {
+                              bool self_pair, RefineResult& out, PairSearchStats* stats) {
     const int M = std::min(192, std::max(64, static_cast<int>(std::round(
         10.0 * std::sqrt(static_cast<double>(std::max(sa.n(), sb.n())))))));
     const double min_arc = self_pair
         ? std::max(4.0 * sa.length() / static_cast<double>(sa.n()), 0.015 * sa.length())
         : 0.0;
+    if (stats) {
+        stats->search_resolution = sa.length() / static_cast<double>(M);
+    }
     std::vector<Seed> seeds;
     for (int i = 0; i < M; ++i) {
         const double s = sa.length() * i / static_cast<double>(M);
@@ -308,13 +321,22 @@ bool continuous_pair_distance(const PeriodicCubicSpline3D& sa, const PeriodicCub
     push_unique(take_unique(seeds, 48, [](const Seed& a, const Seed& b) { return a.orth < b.orth; }));
     push_unique(take_unique(seeds, 32, [](const Seed& a, const Seed& b) { return a.d < b.d; }));
 
+    if (stats) stats->seed_count = chosen.size();
+
     std::vector<RefineResult> refined;
+    std::size_t rejected = 0;
     for (const Seed& seed : chosen) {
         RefineResult r = refine_pair(sa, sb, seed.s, seed.t, self_pair);
-        if (!std::isfinite(r.distance) || r.orth_residual >= 5e-9) continue;
+        if (!std::isfinite(r.distance) || r.orth_residual >= 5e-9) {
+            ++rejected;
+            continue;
+        }
         if (self_pair) {
             const double arc = std::min(std::abs(r.s - r.t), sa.length() - std::abs(r.s - r.t));
-            if (arc < min_arc) continue;
+            if (arc < min_arc) {
+                ++rejected;
+                continue;
+            }
         }
         bool dup = false;
         for (const RefineResult& x : refined) {
@@ -325,7 +347,16 @@ bool continuous_pair_distance(const PeriodicCubicSpline3D& sa, const PeriodicCub
                 break;
             }
         }
-        if (!dup) refined.push_back(r);
+        if (dup) {
+            ++rejected;
+            continue;
+        }
+        refined.push_back(r);
+    }
+    if (stats) {
+        stats->refined_count = refined.size();
+        stats->rejected_count = rejected;
+        stats->found = !refined.empty();
     }
     if (refined.empty()) return false;
     std::sort(refined.begin(), refined.end(),
@@ -359,19 +390,29 @@ ContinuousReachResult ContinuousReachSolver::compute(
     const std::vector<PeriodicCubicSpline3D>& splines) {
     ContinuousReachResult out;
     out.component_count = splines.size();
+    out.refinement_tolerance = 1e-13;
     if (splines.empty()) {
         out.limiter = ReachLimiter::Error;
+        out.search_converged = false;
         return out;
     }
 
     std::vector<CurvLimit> curv;
     curv.reserve(splines.size());
-    for (const auto& sp : splines) curv.push_back(continuous_curvature_limit(sp));
+    for (const auto& sp : splines) {
+        curv.push_back(continuous_curvature_limit(sp));
+        out.curvature_intervals_examined += curv.back().intervals_examined;
+    }
 
     std::vector<RefineResult> self_res(splines.size());
     std::vector<bool> self_ok(splines.size(), false);
     for (std::size_t i = 0; i < splines.size(); ++i) {
-        self_ok[i] = continuous_pair_distance(splines[i], splines[i], true, self_res[i]);
+        PairSearchStats st;
+        self_ok[i] = continuous_pair_distance(splines[i], splines[i], true, self_res[i], &st);
+        out.dcsd_seed_count += st.seed_count;
+        out.dcsd_refined_count += st.refined_count;
+        out.dcsd_rejected_count += st.rejected_count;
+        out.search_resolution = std::max(out.search_resolution, st.search_resolution);
     }
 
     struct InterHit {
@@ -382,9 +423,14 @@ ContinuousReachResult ContinuousReachSolver::compute(
     for (std::size_t i = 0; i < splines.size(); ++i) {
         for (std::size_t j = i + 1; j < splines.size(); ++j) {
             RefineResult r;
-            if (continuous_pair_distance(splines[i], splines[j], false, r)) {
+            PairSearchStats st;
+            if (continuous_pair_distance(splines[i], splines[j], false, r, &st)) {
                 inter.push_back({r, i, j});
             }
+            out.dcsd_seed_count += st.seed_count;
+            out.dcsd_refined_count += st.refined_count;
+            out.dcsd_rejected_count += st.rejected_count;
+            out.search_resolution = std::max(out.search_resolution, st.search_resolution);
         }
     }
 
@@ -457,6 +503,19 @@ ContinuousReachResult ContinuousReachSolver::compute(
     for (const InterHit& h : inter) {
         out.orth_residual = std::max(out.orth_residual, h.r.orth_residual);
     }
+
+    // Numerical search considered converged when curvature ran and at least one
+    // self-DCSD search produced a refined local minimum (or multi-component
+    // inter search succeeded when multiple components are present).
+    bool self_ok_any = false;
+    for (bool ok : self_ok) self_ok_any = self_ok_any || ok;
+    const bool multi = splines.size() > 1;
+    out.search_converged =
+        out.curvature_intervals_examined > 0
+        && std::isfinite(out.reach)
+        && out.reach > 0.0
+        && (self_ok_any || (multi && i_best >= 0))
+        && out.orth_residual < 5e-9;
     return out;
 }
 

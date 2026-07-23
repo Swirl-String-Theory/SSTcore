@@ -37,6 +37,18 @@ double ResolvedTubeGeometry::edge_length_relative_std(const std::vector<Vec3>& p
     return std::sqrt(acc / static_cast<double>(pts.size())) / mean;
 }
 
+double ResolvedTubeGeometry::edge_length_max_relative_deviation(const std::vector<Vec3>& pts) {
+    if (pts.size() < 2) return 0.0;
+    const double mean = edge_length_mean(pts);
+    if (mean <= 0.0) return 0.0;
+    double max_dev = 0.0;
+    for (std::size_t i = 0; i < pts.size(); ++i) {
+        const double e = dist(pts[i], pts[(i + 1) % pts.size()]);
+        max_dev = std::max(max_dev, std::abs(e / mean - 1.0));
+    }
+    return max_dev;
+}
+
 double ResolvedTubeGeometry::turning_angle(const Vec3& a, const Vec3& b, const Vec3& c) {
     const Vec3 u = sub(b, a);
     const Vec3 v = sub(c, b);
@@ -231,7 +243,8 @@ ResolvedTubeMetrics ResolvedTubeGeometry::analyze(
     out.length = length(pts);
     out.edge_length_mean = edge_length_mean(pts);
     out.edge_length_rel_std = edge_length_relative_std(pts);
-    out.equilateral_ok = out.edge_length_rel_std <= equilateral_tol;
+    out.edge_length_max_rel_dev = edge_length_max_relative_deviation(pts);
+    out.equilateral_ok = out.edge_length_max_rel_dev <= equilateral_tol;
     out.minrad = global_minrad(pts);
 
     const auto candidates = dcsd_candidates(pts, skip_neighbors, 0.0);
