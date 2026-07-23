@@ -87,7 +87,7 @@ fs.writeFileSync(
     "const s = require('sst-core');",
     'const info = s.engineInfo();',
     'console.log(JSON.stringify(info));',
-    "if (info.engineVersion !== '0.8.18') process.exit(2);",
+    "if (info.engineVersion !== '0.8.19') process.exit(2);",
     'if (!info.canonVersion) process.exit(3);',
     "if (typeof s.computeVelocity !== 'function') process.exit(4);",
     'const curve = [[0,0,0],[1,0,0],[1,1,0],[0,1,0]];',

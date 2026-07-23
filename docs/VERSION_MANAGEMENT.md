@@ -3,8 +3,8 @@
 ## Current Version
 
 The package version is defined in two places:
-- `setup.py`: `__version__ = "0.8.18"`
-- `src/SSTcore/__init__.py`: `__version__ = "0.8.18"`
+- `setup.py`: `__version__ = "0.8.19"`
+- `src/SSTcore/__init__.py`: `__version__ = "0.8.19"`
 
 **Always update both files when changing the version!** (`pyproject.toml` has no `[project]` version; metadata lives in `setup.py`.)
 

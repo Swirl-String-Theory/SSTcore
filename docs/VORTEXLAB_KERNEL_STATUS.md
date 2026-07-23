@@ -10,6 +10,7 @@ Modular M1: `SST-Workbench/GUI/vortexlab-modular-v7.6.25b-m1` (byte-parity extra
 | K0 | Typed datacontracts (`src/vortexlab/types.h`) | done |
 | K1 | CurveSampling, KnotCatalog, PolygonalGauss, polygonal clearance | done |
 | K2 | PeriodicCubicSpline3D + ContinuousReachSolver | done |
+| K2b | Spline arclength + SmoothTubeMetrics + reach diagnostics (geometry certificate) | done |
 | K3 | FilamentVelocitySolver (LIA / self / mutual / a_sim) | done |
 | K4 | FilamentIntegrator + TopologyGuard | done |
 | K5 | IntrinsicFrame + RigidMotion | done |
@@ -24,6 +25,7 @@ Modular M1: `SST-Workbench/GUI/vortexlab-modular-v7.6.25b-m1` (byte-parity extra
 | `analyze_resolved_tube_clearance` | `analyzeResolvedTube` |
 | `compute_topology_clearance` | `computeTopologyClearance` |
 | `compute_continuous_reach` | `computeContinuousReach` |
+| `analyze_smooth_resolved_tube` | `analyzeSmoothResolvedTube` |
 | `compute_filament_velocity` | `computeFilamentVelocity` |
 | `compute_regularized_mutual_velocity` | `computeRegularizedMutualVelocity` |
 | `rk4_step` | `rk4Step` |
@@ -34,7 +36,11 @@ Modular M1: `SST-Workbench/GUI/vortexlab-modular-v7.6.25b-m1` (byte-parity extra
 
 Bindings: `src/vortexlab_kernels_py.cpp`, `src/vortexlab_kernels_node.cpp`.
 
-Tests: `tests/test_vortexlab_kernels.py` (circle reach, two-circle inter, Hopf Gauss, velocity/RK4 smoke, frame/rigid).
+Tests: `tests/test_vortexlab_kernels.py` (circle reach, two-circle inter, smooth
+`Rop_*`, multiresolution, ideal trefoil dual convention);
+`tests/test_resolved_tube_geometry.py` (ε_eq max-rel-dev gate).
+
+Protocol: [`GEOMETRY_CERTIFICATE_PROTOCOL_v0.1.md`](GEOMETRY_CERTIFICATE_PROTOCOL_v0.1.md).
 
 ## Capability flags (`getCapabilities`)
 

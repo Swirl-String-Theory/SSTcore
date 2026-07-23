@@ -4,7 +4,7 @@
 // Package/engine version tracks the SSTcore release; canon is separate.
 
 #ifndef SSTCORE_VERSION
-#define SSTCORE_VERSION "0.8.18"
+#define SSTCORE_VERSION "0.8.19"
 #endif
 
 #ifndef SSTCORE_CANON_VERSION

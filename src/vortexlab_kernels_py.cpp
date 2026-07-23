@@ -11,6 +11,7 @@
 #include "filament/velocity_solver.h"
 #include "geometry/continuous_reach.h"
 #include "geometry/polygonal_clearance.h"
+#include "geometry/smooth_tube_metrics.h"
 #include "knot/polygonal_gauss.h"
 #include "topology/topology_guard.h"
 #include "vortexlab/types.h"
@@ -138,9 +139,49 @@ void bind_vortexlab_kernels(py::module_& m) {
                   "reach"_a = r.reach,
                   "limiter"_a = reach_limiter_name(r.limiter),
                   "orth_residual"_a = r.orth_residual,
-                  "component_count"_a = r.component_count);
+                  "component_count"_a = r.component_count,
+                  "curvature_intervals_examined"_a = r.curvature_intervals_examined,
+                  "dcsd_seed_count"_a = r.dcsd_seed_count,
+                  "dcsd_refined_count"_a = r.dcsd_refined_count,
+                  "dcsd_rejected_count"_a = r.dcsd_rejected_count,
+                  "search_resolution"_a = r.search_resolution,
+                  "refinement_tolerance"_a = r.refinement_tolerance,
+                  "search_converged"_a = r.search_converged);
           },
           py::arg("curves"));
+
+    m.def("analyze_smooth_resolved_tube",
+          [](py::list curves, double length_abs_tol, double length_rel_tol) {
+              std::vector<std::vector<Vec3>> comps;
+              for (auto c : curves) comps.push_back(as_points(py::cast<py::array>(c)));
+              auto mtr = geometry::SmoothTubeAnalyzer::analyze(comps, length_abs_tol, length_rel_tol);
+              const auto& r = mtr.reach_detail;
+              return py::dict(
+                  "spline_length"_a = mtr.spline_length,
+                  "spline_length_error"_a = mtr.spline_length_error,
+                  "curvature_radius"_a = mtr.curvature_radius,
+                  "self_dcsd"_a = mtr.self_dcsd,
+                  "self_radius"_a = mtr.self_radius,
+                  "inter_component_radius"_a = mtr.inter_component_radius,
+                  "reach"_a = mtr.reach,
+                  "ropelength_rad"_a = mtr.ropelength_rad,
+                  "ropelength_diam"_a = mtr.ropelength_diam,
+                  "orthogonality_residual"_a = mtr.orthogonality_residual,
+                  "converged"_a = mtr.converged,
+                  "limiter"_a = reach_limiter_name(r.limiter),
+                  "curvature_intervals_examined"_a = r.curvature_intervals_examined,
+                  "dcsd_seed_count"_a = r.dcsd_seed_count,
+                  "dcsd_refined_count"_a = r.dcsd_refined_count,
+                  "dcsd_rejected_count"_a = r.dcsd_rejected_count,
+                  "search_resolution"_a = r.search_resolution,
+                  "refinement_tolerance"_a = r.refinement_tolerance,
+                  "search_converged"_a = r.search_converged,
+                  "length_interval_count"_a = mtr.length_detail.interval_count,
+                  "length_converged"_a = mtr.length_detail.converged);
+          },
+          py::arg("curves"),
+          py::arg("length_abs_tol") = 1e-10,
+          py::arg("length_rel_tol") = 1e-10);
 
     m.def("compute_filament_velocity",
           [](py::list filaments, py::dict options) {

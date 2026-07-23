@@ -32,6 +32,7 @@
 /build*
 /build_node/
 /build_wasm/
+/output/*
 /dist*
 /cmake-build-debug-mingw/
 /cmake-build-relwithdebinfo-mingw/
@@ -46,6 +47,7 @@
 __pycache__/
 *.py[cod]
 *.pyd
+*.zip
 
 # Python packaging artifacts
 /dist/

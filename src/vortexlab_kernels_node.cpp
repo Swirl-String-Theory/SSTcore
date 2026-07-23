@@ -12,6 +12,7 @@
 #include "filament/velocity_solver.h"
 #include "geometry/continuous_reach.h"
 #include "geometry/polygonal_clearance.h"
+#include "geometry/smooth_tube_metrics.h"
 #include "knot/polygonal_gauss.h"
 #include "topology/topology_guard.h"
 #include "vortexlab/types.h"
@@ -140,6 +141,45 @@ static Napi::Value ComputeContinuousReach(const Napi::CallbackInfo& info) {
     o.Set("limiter", reach_limiter_name(r.limiter));
     o.Set("orthResidual", r.orth_residual);
     o.Set("componentCount", static_cast<double>(r.component_count));
+    o.Set("curvatureIntervalsExamined", static_cast<double>(r.curvature_intervals_examined));
+    o.Set("dcsdSeedCount", static_cast<double>(r.dcsd_seed_count));
+    o.Set("dcsdRefinedCount", static_cast<double>(r.dcsd_refined_count));
+    o.Set("dcsdRejectedCount", static_cast<double>(r.dcsd_rejected_count));
+    o.Set("searchResolution", r.search_resolution);
+    o.Set("refinementTolerance", r.refinement_tolerance);
+    o.Set("searchConverged", r.search_converged);
+    return o;
+}
+
+static Napi::Value AnalyzeSmoothResolvedTube(const Napi::CallbackInfo& info) {
+    Napi::Env env = info.Env();
+    auto curves = read_curve_list(info[0].As<Napi::Array>());
+    const double abs_tol = info.Length() > 1 ? info[1].As<Napi::Number>().DoubleValue() : 1e-10;
+    const double rel_tol = info.Length() > 2 ? info[2].As<Napi::Number>().DoubleValue() : 1e-10;
+    auto mtr = geometry::SmoothTubeAnalyzer::analyze(curves, abs_tol, rel_tol);
+    const auto& r = mtr.reach_detail;
+    Napi::Object o = Napi::Object::New(env);
+    o.Set("splineLength", mtr.spline_length);
+    o.Set("splineLengthError", mtr.spline_length_error);
+    o.Set("curvatureRadius", mtr.curvature_radius);
+    o.Set("selfDcsd", mtr.self_dcsd);
+    o.Set("selfRadius", mtr.self_radius);
+    o.Set("interComponentRadius", mtr.inter_component_radius);
+    o.Set("reach", mtr.reach);
+    o.Set("ropelengthRad", mtr.ropelength_rad);
+    o.Set("ropelengthDiam", mtr.ropelength_diam);
+    o.Set("orthogonalityResidual", mtr.orthogonality_residual);
+    o.Set("converged", mtr.converged);
+    o.Set("limiter", reach_limiter_name(r.limiter));
+    o.Set("curvatureIntervalsExamined", static_cast<double>(r.curvature_intervals_examined));
+    o.Set("dcsdSeedCount", static_cast<double>(r.dcsd_seed_count));
+    o.Set("dcsdRefinedCount", static_cast<double>(r.dcsd_refined_count));
+    o.Set("dcsdRejectedCount", static_cast<double>(r.dcsd_rejected_count));
+    o.Set("searchResolution", r.search_resolution);
+    o.Set("refinementTolerance", r.refinement_tolerance);
+    o.Set("searchConverged", r.search_converged);
+    o.Set("lengthIntervalCount", static_cast<double>(mtr.length_detail.interval_count));
+    o.Set("lengthConverged", mtr.length_detail.converged);
     return o;
 }
 
@@ -247,6 +287,7 @@ void bind_vortexlab_kernels(Napi::Env env, Napi::Object exports) {
     exports.Set("analyzeResolvedTube", Napi::Function::New(env, AnalyzeResolvedTube));
     exports.Set("computeTopologyClearance", Napi::Function::New(env, ComputeTopologyClearance));
     exports.Set("computeContinuousReach", Napi::Function::New(env, ComputeContinuousReach));
+    exports.Set("analyzeSmoothResolvedTube", Napi::Function::New(env, AnalyzeSmoothResolvedTube));
     exports.Set("computeFilamentVelocity", Napi::Function::New(env, ComputeFilamentVelocity));
     exports.Set("computeRegularizedMutualVelocity", Napi::Function::New(env, ComputeRegularizedMutualVelocity));
     exports.Set("rk4Step", Napi::Function::New(env, Rk4Step));

@@ -235,7 +235,7 @@ def _windows_msvc_toolset_defaults() -> None:
 
 _windows_msvc_toolset_defaults()
 
-__version__ = "0.8.18"
+__version__ = "0.8.19"
 base_dir = os.path.dirname(os.path.abspath(__file__))
 # Python import package: src/SSTcore/ (repo root is not the import package).
 _PYTHON_PKG = "SSTcore"
@@ -936,6 +936,7 @@ src_files = [
     "src/filament/integrator.cpp",
     "src/geometry/periodic_spline.cpp",
     "src/geometry/continuous_reach.cpp",
+    "src/geometry/smooth_tube_metrics.cpp",
     "src/geometry/polygonal_clearance.cpp",
     "src/topology/topology_guard.cpp",
     "src/analysis/intrinsic_frame.cpp",

@@ -35,7 +35,44 @@ def test_basic_length_edge_stats_and_turning_angle():
     assert sst.resolved_tube_length(pts) == pytest.approx(8.0)
     assert sst.ResolvedTubeGeometry.edge_length_mean(pts) == pytest.approx(2.0)
     assert sst.ResolvedTubeGeometry.edge_length_relative_std(pts) == pytest.approx(0.0)
+    assert sst.ResolvedTubeGeometry.edge_length_max_relative_deviation(pts) == pytest.approx(0.0)
     assert sst.ResolvedTubeGeometry.turning_angle(pts[0], pts[1], pts[2]) == pytest.approx(math.pi / 2)
+
+
+def test_equilateral_max_rel_dev_gate_vs_rel_std():
+    """Test C: rel_std can pass while max-rel-dev fails the canon ε_eq gate."""
+    n = 100
+    pts = [
+        [math.cos(2.0 * math.pi * i / n), math.sin(2.0 * math.pi * i / n), 0.0]
+        for i in range(n)
+    ]
+    # Radial nudge of one vertex: two adjacent edges change; with large n,
+    # relative std stays below 1e-3 while max relative deviation exceeds it.
+    found = False
+    for eps in (1e-4, 2e-4, 3e-4, 5e-4, 8e-4, 1e-3, 1.5e-3, 2e-3):
+        trial = [list(p) for p in pts]
+        trial[1][0] *= 1.0 + eps
+        trial[1][1] *= 1.0 + eps
+        rel_std = sst.ResolvedTubeGeometry.edge_length_relative_std(trial)
+        max_dev = sst.ResolvedTubeGeometry.edge_length_max_relative_deviation(trial)
+        if rel_std < 1e-3 < max_dev:
+            pts = trial
+            found = True
+            break
+    assert found, "failed to construct std/max-dev mismatch polygon"
+
+    rel_std = sst.ResolvedTubeGeometry.edge_length_relative_std(pts)
+    max_dev = sst.ResolvedTubeGeometry.edge_length_max_relative_deviation(pts)
+    assert rel_std < 1e-3
+    assert max_dev > 1e-3
+
+    metrics = sst.ResolvedTubeGeometry.analyze(
+        pts, skip_neighbors=2, contact_tol=1e-3, equilateral_tol=1e-3
+    )
+    assert metrics.edge_length_rel_std == pytest.approx(rel_std)
+    assert metrics.edge_length_max_rel_dev == pytest.approx(max_dev)
+    # Old gate (rel_std) would have passed; normative max-dev gate must fail.
+    assert metrics.equilateral_ok is False
 
 
 def test_minrad_kink_and_global_minrad():
