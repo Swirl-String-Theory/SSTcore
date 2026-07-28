@@ -29,6 +29,7 @@ Legend: **Y** present · **—** absent · **via** exposed only through another 
 | field_ops | — (bind-only) | Y | Y |
 | fluid_dynamics | Y | Y | Y |
 | frenet_helicity | Y | Y | Y |
+| geometry_certificate | Y | Y | Y |
 | hyperbolic_volume | Y | Y | Y |
 | knot_dynamics | Y (+ `src/knot/*`) | Y | Y |
 | magnus_integrator | Y | Y | Y |

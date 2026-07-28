@@ -25,10 +25,10 @@ if (typeof sst.engineInfo !== 'function') {
 }
 const info = sst.engineInfo();
 console.log('engineInfo:', JSON.stringify(info));
-assert.strictEqual(info.engineVersion, '0.8.19', 'engineVersion must be 0.8.19');
+assert.strictEqual(info.engineVersion, '0.8.20', 'engineVersion must be 0.8.20');
 assert.ok(info.canonVersion, 'canonVersion must be present');
-assert.strictEqual(info.canonVersion, '0.8.19', 'canonVersion must equal package (Optie A)');
-assert.strictEqual(info.packageVersion, '0.8.19', 'packageVersion must be 0.8.19');
+assert.strictEqual(info.canonVersion, '0.8.20', 'canonVersion must equal package (Optie A)');
+assert.strictEqual(info.packageVersion, '0.8.20', 'packageVersion must be 0.8.20');
 assert.strictEqual(info.canonVersion, info.packageVersion, 'canonVersion must equal packageVersion');
 assert.ok(info.numericProfile, 'numericProfile must be present');
 assert.notStrictEqual(
@@ -55,6 +55,7 @@ assert.strictEqual(caps.topologyGuard, true);
 assert.strictEqual(caps.intrinsicFrame, true);
 assert.strictEqual(caps.rigidMotion, true);
 assert.strictEqual(caps.resolvedTubeGeometry, true);
+assert.strictEqual(caps.geometryCertificate, true);
 
 if (typeof sst.listBindings === 'function') {
   const lb = sst.listBindings();
@@ -108,6 +109,58 @@ if (typeof sst.computeWrithe === 'function') {
   console.log('✓ computeWrithe (sample ring):', w);
 } else {
   fail('computeWrithe missing');
+}
+
+if (typeof sst.evaluateContactSaturation !== 'function') {
+  fail('evaluateContactSaturation missing');
+}
+{
+  const under = sst.evaluateContactSaturation([0.4], 1.0);
+  assert.strictEqual(under.status, 'Pass');
+  const over = sst.evaluateContactSaturation([1.2], 1.0);
+  assert.strictEqual(over.status, 'Fail');
+  console.log('✓ evaluateContactSaturation');
+}
+
+if (typeof sst.chronosFirstHitting !== 'function') {
+  fail('chronosFirstHitting missing');
+}
+{
+  const hit = sst.chronosFirstHitting([0, 1, 2], [0, 0.5, 1.5], 1.0);
+  assert.strictEqual(hit.status, 'Pass');
+  assert.ok(Math.abs(hit.firstHittingTime - 1.5) < 1e-12);
+  const miss = sst.chronosFirstHitting([0, 1, 2], [0, 0.2, 0.4], 1.0);
+  assert.strictEqual(miss.status, 'Fail');
+  console.log('✓ chronosFirstHitting');
+}
+
+if (typeof sst.rank9FromSingularValues !== 'function') {
+  fail('rank9FromSingularValues missing');
+}
+{
+  const full = sst.rank9FromSingularValues([9, 8, 7, 6, 5, 4, 3, 2, 1]);
+  assert.strictEqual(full.status, 'Pass');
+  assert.strictEqual(full.numericalRank, 9);
+  const short = sst.rank9FromSingularValues([9, 8, 7, 6, 5, 4, 3, 2, 0]);
+  assert.strictEqual(short.status, 'Fail');
+  assert.strictEqual(short.numericalRank, 8);
+  console.log('✓ rank9FromSingularValues');
+}
+
+if (typeof sst.evaluateTubeGeometry !== 'function') {
+  fail('evaluateTubeGeometry missing');
+}
+{
+  const ring = [];
+  for (let i = 0; i < 64; i++) {
+    const t = (i / 64) * 2 * Math.PI;
+    ring.push([Math.cos(t), Math.sin(t), 0]);
+  }
+  const pass = sst.evaluateTubeGeometry(ring, 0.05);
+  assert.strictEqual(pass.status, 'Pass');
+  const failGeom = sst.evaluateTubeGeometry(ring, 2.0);
+  assert.strictEqual(failGeom.status, 'Fail');
+  console.log('✓ evaluateTubeGeometry');
 }
 
 console.log('\nBasic test completed OK');

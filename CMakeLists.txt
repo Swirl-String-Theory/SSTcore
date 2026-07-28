@@ -145,6 +145,7 @@ add_library(sstcore_lib STATIC
         src/sst_gravity.cpp
         src/sst_extensions.cpp
         src/sst_integrator.cpp
+        src/geometry_certificate.cpp
         ${CMAKE_BINARY_DIR}/generated/knot_files_embedded.cpp
 )
 
@@ -193,6 +194,7 @@ if(SST_BUILD_PYTHON_BINDINGS)
             src/vortex_ring_py.cpp
             src/vorticity_dynamics_py.cpp
             src/vortexlab_kernels_py.cpp
+            src/geometry_certificate_py.cpp
             src/sst_gravity_py.cpp
             src/sst_extensions_py.cpp
             src/sst_integrator_py.cpp)
@@ -409,6 +411,7 @@ if(NODE_EXECUTABLE)
             src/vortex_ring_node.cpp
             src/vorticity_dynamics_node.cpp
             src/vortexlab_kernels_node.cpp
+            src/geometry_certificate_node.cpp
     )
 
         target_include_directories(sstcore_node PRIVATE

@@ -1,14 +1,14 @@
 {
   "manifest_version": 1,
-  "generated_at": "2026-07-28T20:14:51.519967+00:00",
+  "generated_at": "2026-07-28T20:26:55.626968+00:00",
   "summary": {
     "cpp_public": 208,
-    "py_bound": 514,
+    "py_bound": 519,
     "cpp_unbound": 91,
-    "binding_without_cpp_match": 89,
-    "node_modules": 30,
-    "py_modules": 31,
-    "both_py_node": 30,
+    "binding_without_cpp_match": 94,
+    "node_modules": 31,
+    "py_modules": 32,
+    "both_py_node": 31,
     "py_only_modules": 1,
     "node_only_modules": 0
   },
@@ -25,6 +25,7 @@
       "field_ops",
       "fluid_dynamics",
       "frenet_helicity",
+      "geometry_certificate",
       "hyperbolic_volume",
       "knot_dynamics",
       "magnus_integrator",
@@ -61,6 +62,7 @@
       "field_ops_node.cpp",
       "fluid_dynamics_node.cpp",
       "frenet_helicity_node.cpp",
+      "geometry_certificate_node.cpp",
       "hyperbolic_volume_node.cpp",
       "knot_dynamics_node.cpp",
       "magnus_integrator_node.cpp",
@@ -1742,6 +1744,56 @@
       "header_file": "frenet_helicity.h",
       "py_class": null,
       "py_name": "rk4_integrate"
+    },
+    {
+      "module": "geometry_certificate",
+      "cpp_symbol": "GeometryCertificateAPI::evaluate_tube_geometry",
+      "py_export": "GeometryCertificateAPI.evaluate_tube_geometry",
+      "export_kind": "class_static",
+      "binding_file": "geometry_certificate_py.cpp",
+      "header_file": null,
+      "py_class": "GeometryCertificateAPI",
+      "py_name": "evaluate_tube_geometry"
+    },
+    {
+      "module": "geometry_certificate",
+      "cpp_symbol": "GeometryCertificateAPI::evaluate_contact_saturation",
+      "py_export": "GeometryCertificateAPI.evaluate_contact_saturation",
+      "export_kind": "class_static",
+      "binding_file": "geometry_certificate_py.cpp",
+      "header_file": null,
+      "py_class": "GeometryCertificateAPI",
+      "py_name": "evaluate_contact_saturation"
+    },
+    {
+      "module": "geometry_certificate",
+      "cpp_symbol": "GeometryCertificateAPI::chronos_first_hitting",
+      "py_export": "GeometryCertificateAPI.chronos_first_hitting",
+      "export_kind": "class_static",
+      "binding_file": "geometry_certificate_py.cpp",
+      "header_file": null,
+      "py_class": "GeometryCertificateAPI",
+      "py_name": "chronos_first_hitting"
+    },
+    {
+      "module": "geometry_certificate",
+      "cpp_symbol": "GeometryCertificateAPI::rank9_from_singular_values",
+      "py_export": "GeometryCertificateAPI.rank9_from_singular_values",
+      "export_kind": "class_static",
+      "binding_file": "geometry_certificate_py.cpp",
+      "header_file": null,
+      "py_class": "GeometryCertificateAPI",
+      "py_name": "rank9_from_singular_values"
+    },
+    {
+      "module": "geometry_certificate",
+      "cpp_symbol": "GeometryCertificateAPI::sha256_hex_of_points",
+      "py_export": "GeometryCertificateAPI.sha256_hex_of_points",
+      "export_kind": "class_static",
+      "binding_file": "geometry_certificate_py.cpp",
+      "header_file": null,
+      "py_class": "GeometryCertificateAPI",
+      "py_name": "sha256_hex_of_points"
     },
     {
       "module": "hyperbolic_volume",
@@ -6230,6 +6282,36 @@
         "cpp_symbol": "dipole_ring_field_grid_np",
         "py_export": "dipole_ring_field_grid",
         "binding_file": "field_kernels_py.cpp"
+      },
+      {
+        "module": "geometry_certificate",
+        "cpp_symbol": "GeometryCertificateAPI::evaluate_tube_geometry",
+        "py_export": "GeometryCertificateAPI.evaluate_tube_geometry",
+        "binding_file": "geometry_certificate_py.cpp"
+      },
+      {
+        "module": "geometry_certificate",
+        "cpp_symbol": "GeometryCertificateAPI::evaluate_contact_saturation",
+        "py_export": "GeometryCertificateAPI.evaluate_contact_saturation",
+        "binding_file": "geometry_certificate_py.cpp"
+      },
+      {
+        "module": "geometry_certificate",
+        "cpp_symbol": "GeometryCertificateAPI::chronos_first_hitting",
+        "py_export": "GeometryCertificateAPI.chronos_first_hitting",
+        "binding_file": "geometry_certificate_py.cpp"
+      },
+      {
+        "module": "geometry_certificate",
+        "cpp_symbol": "GeometryCertificateAPI::rank9_from_singular_values",
+        "py_export": "GeometryCertificateAPI.rank9_from_singular_values",
+        "binding_file": "geometry_certificate_py.cpp"
+      },
+      {
+        "module": "geometry_certificate",
+        "cpp_symbol": "GeometryCertificateAPI::sha256_hex_of_points",
+        "py_export": "GeometryCertificateAPI.sha256_hex_of_points",
+        "binding_file": "geometry_certificate_py.cpp"
       },
       {
         "module": "knot_dynamics",

@@ -37,6 +37,7 @@ void bind_extensions(py::module_& m);
 void bind_trefoil_operator(py::module_& m);
 void bind_resolved_tube_geometry(py::module_& m);
 void bind_vortexlab_kernels(py::module_& m);
+void bind_geometry_certificate(py::module_& m);
 
 
 // Pip/setuptools wheels use SSTcore._native; CMake builds keep the sstcore module name.
@@ -77,6 +78,7 @@ PYBIND11_MODULE(sstcore, m) {
   bind_trefoil_operator(m);
   bind_resolved_tube_geometry(m);
   bind_vortexlab_kernels(m);
+  bind_geometry_certificate(m);
  // module-wide listing utility
     m.def(
         "list_bindings",
