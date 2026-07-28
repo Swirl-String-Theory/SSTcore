@@ -21,10 +21,10 @@ Do **not** bump only the package or only the canon field. Optional build metadat
 
 The package version is defined in:
 
-- `setup.py`: `__version__ = "0.8.22"`
-- `src/SSTcore/__init__.py`: `__version__ = "0.8.22"`
-- `include/sstcore_version.h`: `SSTCORE_VERSION` / `SSTCORE_CANON_VERSION` = `"0.8.22"`
-- `package.json`: `"version": "0.8.22"`
+- `setup.py`: `__version__ = "0.8.23"`
+- `src/SSTcore/__init__.py`: `__version__ = "0.8.23"`
+- `include/sstcore_version.h`: `SSTCORE_VERSION` / `SSTCORE_CANON_VERSION` = `"0.8.23"`
+- `package.json`: `"version": "0.8.23"`
 
 **Always update all of the above when changing the version!** (`pyproject.toml` has no `[project]` version; metadata lives in `setup.py`.)
 

@@ -34,6 +34,7 @@ Legend: **Y** present · **—** absent · **via** exposed only through another 
 | biot_savart_gate | Y | via polygonal_smooth_certificate | via polygonal_smooth_certificate |
 | operational_spacetime | Y | Y | Y |
 | qss_spectroscopy | Y | Y | Y |
+| pipeline_provenance | Y | Y | Y |
 | hyperbolic_volume | Y | Y | Y |
 | knot_dynamics | Y (+ `src/knot/*`) | Y | Y |
 | magnus_integrator | Y | Y | Y |

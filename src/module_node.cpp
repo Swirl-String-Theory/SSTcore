@@ -71,6 +71,7 @@ void bind_geometry_certificate(Napi::Env env, Napi::Object exports);
 void bind_polygonal_smooth_certificate(Napi::Env env, Napi::Object exports);
 void bind_operational_spacetime(Napi::Env env, Napi::Object exports);
 void bind_qss_spectroscopy(Napi::Env env, Napi::Object exports);
+void bind_pipeline_provenance(Napi::Env env, Napi::Object exports);
 
 static Napi::Object EngineInfo(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
@@ -111,6 +112,7 @@ static Napi::Object GetCapabilities(const Napi::CallbackInfo& info) {
     o.Set("biotSavartGate", true);
     o.Set("operationalSpacetime", true);
     o.Set("qssSpectroscopy", true);
+    o.Set("pipelineProvenance", true);
     o.Set("continuousReach", true);
     o.Set("polygonalGauss", true);
     o.Set("filamentVelocity", true);
@@ -165,6 +167,7 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
     bind_polygonal_smooth_certificate(env, exports);
     bind_operational_spacetime(env, exports);
     bind_qss_spectroscopy(env, exports);
+    bind_pipeline_provenance(env, exports);
 
     exports.Set("engineInfo", Napi::Function::New(env, EngineInfo));
     exports.Set("getCapabilities", Napi::Function::New(env, GetCapabilities));

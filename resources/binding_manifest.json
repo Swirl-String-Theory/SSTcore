@@ -1,14 +1,14 @@
 {
   "manifest_version": 1,
-  "generated_at": "2026-07-28T20:42:59.460110+00:00",
+  "generated_at": "2026-07-28T20:51:43.384940+00:00",
   "summary": {
     "cpp_public": 208,
-    "py_bound": 527,
+    "py_bound": 544,
     "cpp_unbound": 91,
-    "binding_without_cpp_match": 102,
-    "node_modules": 33,
-    "py_modules": 35,
-    "both_py_node": 33,
+    "binding_without_cpp_match": 108,
+    "node_modules": 34,
+    "py_modules": 36,
+    "both_py_node": 34,
     "py_only_modules": 2,
     "node_only_modules": 0
   },
@@ -31,6 +31,7 @@
       "magnus_integrator",
       "multisector_fitter",
       "operational_spacetime",
+      "pipeline_provenance",
       "polygonal_smooth_certificate",
       "potential_timefield",
       "radiation_flow",
@@ -71,6 +72,7 @@
       "magnus_integrator_node.cpp",
       "multisector_fitter_node.cpp",
       "operational_spacetime_node.cpp",
+      "pipeline_provenance_node.cpp",
       "polygonal_smooth_certificate_node.cpp",
       "potential_timefield_node.cpp",
       "radiation_flow_node.cpp",
@@ -3531,6 +3533,186 @@
       "py_name": "minkowski_interval2"
     },
     {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.stage",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "stage"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.certification",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "certification"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.tool_name",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "tool_name"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.tool_version",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "tool_version"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.input_sha256",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "input_sha256"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.output_sha256",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "output_sha256"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.parameter_sha256",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "parameter_sha256"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.parent_record_sha256",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "parent_record_sha256"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.coordinate_convention",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "coordinate_convention"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.scale_convention",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "scale_convention"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.timestamp_utc",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "timestamp_utc"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.__init__",
+      "export_kind": "constructor",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "__init__"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": "PipelineProvenanceAPI::stage_name",
+      "py_export": "PipelineProvenanceAPI.stage_name",
+      "export_kind": "class_static",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "PipelineProvenanceAPI",
+      "py_name": "stage_name"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": "PipelineProvenanceAPI::certification_name",
+      "py_export": "PipelineProvenanceAPI.certification_name",
+      "export_kind": "class_static",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "PipelineProvenanceAPI",
+      "py_name": "certification_name"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": "PipelineProvenanceAPI::fingerprint_hex",
+      "py_export": "PipelineProvenanceAPI.fingerprint_hex",
+      "export_kind": "class_static",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "PipelineProvenanceAPI",
+      "py_name": "fingerprint_hex"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": "PipelineProvenanceAPI::record_fingerprint",
+      "py_export": "PipelineProvenanceAPI.record_fingerprint",
+      "export_kind": "class_static",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "PipelineProvenanceAPI",
+      "py_name": "record_fingerprint"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": "PipelineProvenanceAPI::evaluate_chain",
+      "py_export": "PipelineProvenanceAPI.evaluate_chain",
+      "export_kind": "class_static",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "PipelineProvenanceAPI",
+      "py_name": "evaluate_chain"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": "PipelineProvenanceAPI::record_complete",
+      "py_export": "PipelineProvenanceAPI.record_complete",
+      "export_kind": "class_static",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "PipelineProvenanceAPI",
+      "py_name": "record_complete"
+    },
+    {
       "module": "polygonal_smooth_certificate",
       "cpp_symbol": "PolygonalSmoothCertificateAPI::evaluate",
       "py_export": "PolygonalSmoothCertificateAPI.evaluate",
@@ -6547,6 +6729,42 @@
         "cpp_symbol": "OperationalSpacetimeAPI::minkowski_interval2",
         "py_export": "OperationalSpacetimeAPI.minkowski_interval2",
         "binding_file": "operational_spacetime_py.cpp"
+      },
+      {
+        "module": "pipeline_provenance",
+        "cpp_symbol": "PipelineProvenanceAPI::stage_name",
+        "py_export": "PipelineProvenanceAPI.stage_name",
+        "binding_file": "pipeline_provenance_py.cpp"
+      },
+      {
+        "module": "pipeline_provenance",
+        "cpp_symbol": "PipelineProvenanceAPI::certification_name",
+        "py_export": "PipelineProvenanceAPI.certification_name",
+        "binding_file": "pipeline_provenance_py.cpp"
+      },
+      {
+        "module": "pipeline_provenance",
+        "cpp_symbol": "PipelineProvenanceAPI::fingerprint_hex",
+        "py_export": "PipelineProvenanceAPI.fingerprint_hex",
+        "binding_file": "pipeline_provenance_py.cpp"
+      },
+      {
+        "module": "pipeline_provenance",
+        "cpp_symbol": "PipelineProvenanceAPI::record_fingerprint",
+        "py_export": "PipelineProvenanceAPI.record_fingerprint",
+        "binding_file": "pipeline_provenance_py.cpp"
+      },
+      {
+        "module": "pipeline_provenance",
+        "cpp_symbol": "PipelineProvenanceAPI::evaluate_chain",
+        "py_export": "PipelineProvenanceAPI.evaluate_chain",
+        "binding_file": "pipeline_provenance_py.cpp"
+      },
+      {
+        "module": "pipeline_provenance",
+        "cpp_symbol": "PipelineProvenanceAPI::record_complete",
+        "py_export": "PipelineProvenanceAPI.record_complete",
+        "binding_file": "pipeline_provenance_py.cpp"
       },
       {
         "module": "polygonal_smooth_certificate",

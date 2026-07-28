@@ -25,10 +25,10 @@ if (typeof sst.engineInfo !== 'function') {
 }
 const info = sst.engineInfo();
 console.log('engineInfo:', JSON.stringify(info));
-assert.strictEqual(info.engineVersion, '0.8.22', 'engineVersion must be 0.8.22');
+assert.strictEqual(info.engineVersion, '0.8.23', 'engineVersion must be 0.8.23');
 assert.ok(info.canonVersion, 'canonVersion must be present');
-assert.strictEqual(info.canonVersion, '0.8.22', 'canonVersion must equal package (Optie A)');
-assert.strictEqual(info.packageVersion, '0.8.22', 'packageVersion must be 0.8.22');
+assert.strictEqual(info.canonVersion, '0.8.23', 'canonVersion must equal package (Optie A)');
+assert.strictEqual(info.packageVersion, '0.8.23', 'packageVersion must be 0.8.23');
 assert.strictEqual(info.canonVersion, info.packageVersion, 'canonVersion must equal packageVersion');
 assert.ok(info.numericProfile, 'numericProfile must be present');
 assert.notStrictEqual(
@@ -60,6 +60,7 @@ assert.strictEqual(caps.polygonalSmoothCertificate, true);
 assert.strictEqual(caps.biotSavartGate, true);
 assert.strictEqual(caps.operationalSpacetime, true);
 assert.strictEqual(caps.qssSpectroscopy, true);
+assert.strictEqual(caps.pipelineProvenance, true);
 
 if (typeof sst.listBindings === 'function') {
   const lb = sst.listBindings();
