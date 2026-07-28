@@ -1,15 +1,15 @@
 {
   "manifest_version": 1,
-  "generated_at": "2026-07-28T20:35:34.127406+00:00",
+  "generated_at": "2026-07-28T20:42:59.460110+00:00",
   "summary": {
     "cpp_public": 208,
-    "py_bound": 522,
+    "py_bound": 527,
     "cpp_unbound": 91,
-    "binding_without_cpp_match": 97,
-    "node_modules": 32,
-    "py_modules": 33,
-    "both_py_node": 32,
-    "py_only_modules": 1,
+    "binding_without_cpp_match": 102,
+    "node_modules": 33,
+    "py_modules": 35,
+    "both_py_node": 33,
+    "py_only_modules": 2,
     "node_only_modules": 0
   },
   "module_coverage": {
@@ -30,6 +30,7 @@
       "knot_dynamics",
       "magnus_integrator",
       "multisector_fitter",
+      "operational_spacetime",
       "polygonal_smooth_certificate",
       "potential_timefield",
       "radiation_flow",
@@ -48,6 +49,7 @@
       "vorticity_dynamics"
     ],
     "py_only": [
+      "qss_spectroscopy",
       "resolved_tube_geometry"
     ],
     "node_only": [],
@@ -68,6 +70,7 @@
       "knot_dynamics_node.cpp",
       "magnus_integrator_node.cpp",
       "multisector_fitter_node.cpp",
+      "operational_spacetime_node.cpp",
       "polygonal_smooth_certificate_node.cpp",
       "potential_timefield_node.cpp",
       "radiation_flow_node.cpp",
@@ -3498,6 +3501,36 @@
       "py_name": "phase_invariants"
     },
     {
+      "module": "operational_spacetime",
+      "cpp_symbol": "OperationalSpacetimeAPI::radar_interval",
+      "py_export": "OperationalSpacetimeAPI.radar_interval",
+      "export_kind": "class_static",
+      "binding_file": "operational_spacetime_py.cpp",
+      "header_file": null,
+      "py_class": "OperationalSpacetimeAPI",
+      "py_name": "radar_interval"
+    },
+    {
+      "module": "operational_spacetime",
+      "cpp_symbol": "OperationalSpacetimeAPI::lorentz_boost_x",
+      "py_export": "OperationalSpacetimeAPI.lorentz_boost_x",
+      "export_kind": "class_static",
+      "binding_file": "operational_spacetime_py.cpp",
+      "header_file": null,
+      "py_class": "OperationalSpacetimeAPI",
+      "py_name": "lorentz_boost_x"
+    },
+    {
+      "module": "operational_spacetime",
+      "cpp_symbol": "OperationalSpacetimeAPI::minkowski_interval2",
+      "py_export": "OperationalSpacetimeAPI.minkowski_interval2",
+      "export_kind": "class_static",
+      "binding_file": "operational_spacetime_py.cpp",
+      "header_file": null,
+      "py_class": "OperationalSpacetimeAPI",
+      "py_name": "minkowski_interval2"
+    },
+    {
       "module": "polygonal_smooth_certificate",
       "cpp_symbol": "PolygonalSmoothCertificateAPI::evaluate",
       "py_export": "PolygonalSmoothCertificateAPI.evaluate",
@@ -3586,6 +3619,26 @@
       "header_file": "potential_timefield.h",
       "py_class": null,
       "py_name": "compute_time_dilation_map"
+    },
+    {
+      "module": "qss_spectroscopy",
+      "cpp_symbol": "QSSSpectroscopyAPI::eigen_2x2",
+      "py_export": "QSSSpectroscopyAPI.eigen_2x2",
+      "export_kind": "class_static",
+      "binding_file": "qss_spectroscopy_py.cpp",
+      "header_file": null,
+      "py_class": "QSSSpectroscopyAPI",
+      "py_name": "eigen_2x2"
+    },
+    {
+      "module": "qss_spectroscopy",
+      "cpp_symbol": "QSSSpectroscopyAPI::pseudospectrum_diag_2x2",
+      "py_export": "QSSSpectroscopyAPI.pseudospectrum_diag_2x2",
+      "export_kind": "class_static",
+      "binding_file": "qss_spectroscopy_py.cpp",
+      "header_file": null,
+      "py_class": "QSSSpectroscopyAPI",
+      "py_name": "pseudospectrum_diag_2x2"
     },
     {
       "module": "radiation_flow",
@@ -6478,6 +6531,24 @@
         "binding_file": "magnus_integrator_py.cpp"
       },
       {
+        "module": "operational_spacetime",
+        "cpp_symbol": "OperationalSpacetimeAPI::radar_interval",
+        "py_export": "OperationalSpacetimeAPI.radar_interval",
+        "binding_file": "operational_spacetime_py.cpp"
+      },
+      {
+        "module": "operational_spacetime",
+        "cpp_symbol": "OperationalSpacetimeAPI::lorentz_boost_x",
+        "py_export": "OperationalSpacetimeAPI.lorentz_boost_x",
+        "binding_file": "operational_spacetime_py.cpp"
+      },
+      {
+        "module": "operational_spacetime",
+        "cpp_symbol": "OperationalSpacetimeAPI::minkowski_interval2",
+        "py_export": "OperationalSpacetimeAPI.minkowski_interval2",
+        "binding_file": "operational_spacetime_py.cpp"
+      },
+      {
         "module": "polygonal_smooth_certificate",
         "cpp_symbol": "PolygonalSmoothCertificateAPI::evaluate",
         "py_export": "PolygonalSmoothCertificateAPI.evaluate",
@@ -6494,6 +6565,18 @@
         "cpp_symbol": "BiotSavartGateAPI::evaluate",
         "py_export": "BiotSavartGateAPI.evaluate",
         "binding_file": "polygonal_smooth_certificate_py.cpp"
+      },
+      {
+        "module": "qss_spectroscopy",
+        "cpp_symbol": "QSSSpectroscopyAPI::eigen_2x2",
+        "py_export": "QSSSpectroscopyAPI.eigen_2x2",
+        "binding_file": "qss_spectroscopy_py.cpp"
+      },
+      {
+        "module": "qss_spectroscopy",
+        "cpp_symbol": "QSSSpectroscopyAPI::pseudospectrum_diag_2x2",
+        "py_export": "QSSSpectroscopyAPI.pseudospectrum_diag_2x2",
+        "binding_file": "qss_spectroscopy_py.cpp"
       },
       {
         "module": "radiation_flow",
@@ -6731,6 +6814,7 @@
       }
     ],
     "py_without_node": [
+      "qss_spectroscopy",
       "resolved_tube_geometry"
     ]
   }

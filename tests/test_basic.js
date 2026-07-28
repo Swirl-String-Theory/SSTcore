@@ -25,10 +25,10 @@ if (typeof sst.engineInfo !== 'function') {
 }
 const info = sst.engineInfo();
 console.log('engineInfo:', JSON.stringify(info));
-assert.strictEqual(info.engineVersion, '0.8.21', 'engineVersion must be 0.8.21');
+assert.strictEqual(info.engineVersion, '0.8.22', 'engineVersion must be 0.8.22');
 assert.ok(info.canonVersion, 'canonVersion must be present');
-assert.strictEqual(info.canonVersion, '0.8.21', 'canonVersion must equal package (Optie A)');
-assert.strictEqual(info.packageVersion, '0.8.21', 'packageVersion must be 0.8.21');
+assert.strictEqual(info.canonVersion, '0.8.22', 'canonVersion must equal package (Optie A)');
+assert.strictEqual(info.packageVersion, '0.8.22', 'packageVersion must be 0.8.22');
 assert.strictEqual(info.canonVersion, info.packageVersion, 'canonVersion must equal packageVersion');
 assert.ok(info.numericProfile, 'numericProfile must be present');
 assert.notStrictEqual(
@@ -58,6 +58,8 @@ assert.strictEqual(caps.resolvedTubeGeometry, true);
 assert.strictEqual(caps.geometryCertificate, true);
 assert.strictEqual(caps.polygonalSmoothCertificate, true);
 assert.strictEqual(caps.biotSavartGate, true);
+assert.strictEqual(caps.operationalSpacetime, true);
+assert.strictEqual(caps.qssSpectroscopy, true);
 
 if (typeof sst.listBindings === 'function') {
   const lb = sst.listBindings();
@@ -189,6 +191,25 @@ if (typeof sst.evaluateBiotSavartGate !== 'function') {
   const missing = sst.evaluateBiotSavartGate(aK, 0, 1.0, 0.1, 128, '', 1e-12, true);
   assert.strictEqual(missing.status, 'Indeterminate');
   console.log('✓ evaluateBiotSavartGate');
+}
+
+if (typeof sst.radarInterval !== 'function') {
+  fail('radarInterval missing');
+}
+{
+  const r = sst.radarInterval(1.0, 3.0, 1.0);
+  assert.strictEqual(r.causal, true);
+  assert.ok(Math.abs(r.radarTime - 2.0) < 1e-12);
+  console.log('✓ radarInterval');
+}
+
+if (typeof sst.qssEigen2x2 !== 'function') {
+  fail('qssEigen2x2 missing');
+}
+{
+  const r = sst.qssEigen2x2([2, 0, 0, 5]);
+  assert.strictEqual(r.epistemicStatus, 'SYNTHETIC_DIAGNOSTIC');
+  console.log('✓ qssEigen2x2');
 }
 
 console.log('\nBasic test completed OK');

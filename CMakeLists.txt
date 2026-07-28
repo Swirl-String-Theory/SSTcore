@@ -148,6 +148,8 @@ add_library(sstcore_lib STATIC
         src/geometry_certificate.cpp
         src/polygonal_smooth_certificate.cpp
         src/biot_savart_gate.cpp
+        src/operational_spacetime.cpp
+        src/qss_spectroscopy.cpp
         ${CMAKE_BINARY_DIR}/generated/knot_files_embedded.cpp
 )
 
@@ -198,6 +200,8 @@ if(SST_BUILD_PYTHON_BINDINGS)
             src/vortexlab_kernels_py.cpp
             src/geometry_certificate_py.cpp
             src/polygonal_smooth_certificate_py.cpp
+            src/operational_spacetime_py.cpp
+            src/qss_spectroscopy_py.cpp
             src/sst_gravity_py.cpp
             src/sst_extensions_py.cpp
             src/sst_integrator_py.cpp)
@@ -416,6 +420,7 @@ if(NODE_EXECUTABLE)
             src/vortexlab_kernels_node.cpp
             src/geometry_certificate_node.cpp
             src/polygonal_smooth_certificate_node.cpp
+            src/operational_spacetime_node.cpp
     )
 
         target_include_directories(sstcore_node PRIVATE
