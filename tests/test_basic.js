@@ -25,10 +25,10 @@ if (typeof sst.engineInfo !== 'function') {
 }
 const info = sst.engineInfo();
 console.log('engineInfo:', JSON.stringify(info));
-assert.strictEqual(info.engineVersion, '0.8.26', 'engineVersion must be 0.8.26');
+assert.strictEqual(info.engineVersion, '0.8.27', 'engineVersion must be 0.8.27');
 assert.ok(info.canonVersion, 'canonVersion must be present');
-assert.strictEqual(info.canonVersion, '0.8.26', 'canonVersion must equal package (Optie A)');
-assert.strictEqual(info.packageVersion, '0.8.26', 'packageVersion must be 0.8.26');
+assert.strictEqual(info.canonVersion, '0.8.27', 'canonVersion must equal package (Optie A)');
+assert.strictEqual(info.packageVersion, '0.8.27', 'packageVersion must be 0.8.27');
 assert.strictEqual(info.canonVersion, info.packageVersion, 'canonVersion must equal packageVersion');
 assert.ok(info.numericProfile, 'numericProfile must be present');
 assert.notStrictEqual(
@@ -65,6 +65,7 @@ assert.strictEqual(caps.coreTorsion, true);
 assert.strictEqual(caps.linkFieldGate, true);
 assert.strictEqual(caps.kamDiagnostics, true);
 assert.strictEqual(caps.valueOrigin, true);
+assert.strictEqual(caps.evidenceReport, true);
 
 if (typeof sst.listBindings === 'function') {
   const lb = sst.listBindings();
@@ -241,6 +242,12 @@ if (typeof sst.fmaxSnapshot !== 'function') fail('fmaxSnapshot missing');
   assert.ok(Math.abs(sst.fmaxSnapshot() - 29.053507) < 1e-9);
   assert.ok(Math.abs(sst.bareMassRatioFromDimensionlessLength(16.3716) - 4.0929) < 1e-6);
   console.log('✓ fmaxSnapshot/bareMass');
+}
+
+if (typeof sst.checkKindExportString !== 'function') fail('checkKindExportString missing');
+{
+  assert.strictEqual(sst.checkKindExportString(6), 'SYNTHETIC_DIAGNOSTIC');
+  console.log('✓ checkKindExportString');
 }
 
 console.log('\nBasic test completed OK');

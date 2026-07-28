@@ -1,14 +1,14 @@
 {
   "manifest_version": 1,
-  "generated_at": "2026-07-28T21:15:36.817017+00:00",
+  "generated_at": "2026-07-28T21:23:50.860097+00:00",
   "summary": {
     "cpp_public": 208,
-    "py_bound": 563,
+    "py_bound": 580,
     "cpp_unbound": 91,
-    "binding_without_cpp_match": 127,
-    "node_modules": 37,
-    "py_modules": 39,
-    "both_py_node": 37,
+    "binding_without_cpp_match": 131,
+    "node_modules": 38,
+    "py_modules": 40,
+    "both_py_node": 38,
     "py_only_modules": 2,
     "node_only_modules": 0
   },
@@ -22,6 +22,7 @@
       "clock_field_eft",
       "core_torsion",
       "delay_mode_selector",
+      "evidence_report",
       "field_kernels",
       "field_ops",
       "fluid_dynamics",
@@ -66,6 +67,7 @@
       "clock_field_eft_node.cpp",
       "core_torsion_node.cpp",
       "delay_mode_selector_node.cpp",
+      "evidence_report_node.cpp",
       "field_kernels_node.cpp",
       "field_ops_node.cpp",
       "fluid_dynamics_node.cpp",
@@ -1407,6 +1409,196 @@
       "header_file": "delay_mode_selector.h",
       "py_class": "DelayModeSelector",
       "py_name": "solve_phase_locked_frequency"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "CheckResult.name",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "CheckResult",
+      "py_name": "name"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "CheckResult.passed",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "CheckResult",
+      "py_name": "passed"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "CheckResult.kind",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "CheckResult",
+      "py_name": "kind"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "CheckResult.residual",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "CheckResult",
+      "py_name": "residual"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "CheckResult.tolerance",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "CheckResult",
+      "py_name": "tolerance"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "CheckResult.supports_empirical_claim",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "CheckResult",
+      "py_name": "supports_empirical_claim"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "CheckResult.message",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "CheckResult",
+      "py_name": "message"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "CheckResult.__init__",
+      "export_kind": "constructor",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "CheckResult",
+      "py_name": "__init__"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "EvidenceReportMeta.sstcore_version",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "EvidenceReportMeta",
+      "py_name": "sstcore_version"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "EvidenceReportMeta.canon_version",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "EvidenceReportMeta",
+      "py_name": "canon_version"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "EvidenceReportMeta.git_commit",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "EvidenceReportMeta",
+      "py_name": "git_commit"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "EvidenceReportMeta.numeric_profile",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "EvidenceReportMeta",
+      "py_name": "numeric_profile"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "EvidenceReportMeta.compiler",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "EvidenceReportMeta",
+      "py_name": "compiler"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "EvidenceReportMeta.platform",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "EvidenceReportMeta",
+      "py_name": "platform"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "EvidenceReportMeta.__init__",
+      "export_kind": "constructor",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "EvidenceReportMeta",
+      "py_name": "__init__"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": "EvidenceReportAPI::build_report_json",
+      "py_export": "EvidenceReportAPI.build_report_json",
+      "export_kind": "class_static",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "EvidenceReportAPI",
+      "py_name": "build_report_json"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": "EvidenceReportAPI::write_evidence_report",
+      "py_export": "EvidenceReportAPI.write_evidence_report",
+      "export_kind": "class_static",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "EvidenceReportAPI",
+      "py_name": "write_evidence_report"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": "check_kind_export_string",
+      "py_export": "check_kind_export_string",
+      "export_kind": "module_function",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": null,
+      "py_name": "check_kind_export_string"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": "check_kind_from_export_string",
+      "py_export": "check_kind_from_export_string",
+      "export_kind": "module_function",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": null,
+      "py_name": "check_kind_from_export_string"
     },
     {
       "module": "field_kernels",
@@ -6763,6 +6955,30 @@
         "cpp_symbol": "LinkFieldGateAPI::evaluate",
         "py_export": "LinkFieldGateAPI.evaluate",
         "binding_file": "core_torsion_py.cpp"
+      },
+      {
+        "module": "evidence_report",
+        "cpp_symbol": "EvidenceReportAPI::build_report_json",
+        "py_export": "EvidenceReportAPI.build_report_json",
+        "binding_file": "evidence_report_py.cpp"
+      },
+      {
+        "module": "evidence_report",
+        "cpp_symbol": "EvidenceReportAPI::write_evidence_report",
+        "py_export": "EvidenceReportAPI.write_evidence_report",
+        "binding_file": "evidence_report_py.cpp"
+      },
+      {
+        "module": "evidence_report",
+        "cpp_symbol": "check_kind_export_string",
+        "py_export": "check_kind_export_string",
+        "binding_file": "evidence_report_py.cpp"
+      },
+      {
+        "module": "evidence_report",
+        "cpp_symbol": "check_kind_from_export_string",
+        "py_export": "check_kind_from_export_string",
+        "binding_file": "evidence_report_py.cpp"
       },
       {
         "module": "field_kernels",

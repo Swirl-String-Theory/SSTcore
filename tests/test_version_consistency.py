@@ -11,14 +11,14 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_python_canon_alias_matches_version() -> None:
-    assert sst.__version__ == "0.8.26"
+    assert sst.__version__ == "0.8.27"
     assert getattr(sst, "CANON_VERSION", None) == sst.__version__
 
 
 def test_header_macros_match() -> None:
     text = (ROOT / "include" / "sstcore_version.h").read_text(encoding="utf-8")
-    assert '#define SSTCORE_VERSION "0.8.26"' in text
-    assert '#define SSTCORE_CANON_VERSION "0.8.26"' in text
+    assert '#define SSTCORE_VERSION "0.8.27"' in text
+    assert '#define SSTCORE_CANON_VERSION "0.8.27"' in text
 
 
 def test_package_json_matches() -> None:
