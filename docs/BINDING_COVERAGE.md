@@ -38,6 +38,7 @@ Legend: **Y** present · **—** absent · **via** exposed only through another 
 | core_torsion | Y | Y | Y |
 | link_field_gate | Y | via core_torsion | via core_torsion |
 | sst_kam_diagnostics | Y | Y | Y |
+| value_origin | Y | Y | Y |
 | hyperbolic_volume | Y | Y | Y |
 | knot_dynamics | Y (+ `src/knot/*`) | Y | Y |
 | magnus_integrator | Y | Y | Y |

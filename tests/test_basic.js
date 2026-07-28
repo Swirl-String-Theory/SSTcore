@@ -25,10 +25,10 @@ if (typeof sst.engineInfo !== 'function') {
 }
 const info = sst.engineInfo();
 console.log('engineInfo:', JSON.stringify(info));
-assert.strictEqual(info.engineVersion, '0.8.25', 'engineVersion must be 0.8.25');
+assert.strictEqual(info.engineVersion, '0.8.26', 'engineVersion must be 0.8.26');
 assert.ok(info.canonVersion, 'canonVersion must be present');
-assert.strictEqual(info.canonVersion, '0.8.25', 'canonVersion must equal package (Optie A)');
-assert.strictEqual(info.packageVersion, '0.8.25', 'packageVersion must be 0.8.25');
+assert.strictEqual(info.canonVersion, '0.8.26', 'canonVersion must equal package (Optie A)');
+assert.strictEqual(info.packageVersion, '0.8.26', 'packageVersion must be 0.8.26');
 assert.strictEqual(info.canonVersion, info.packageVersion, 'canonVersion must equal packageVersion');
 assert.ok(info.numericProfile, 'numericProfile must be present');
 assert.notStrictEqual(
@@ -64,6 +64,7 @@ assert.strictEqual(caps.pipelineProvenance, true);
 assert.strictEqual(caps.coreTorsion, true);
 assert.strictEqual(caps.linkFieldGate, true);
 assert.strictEqual(caps.kamDiagnostics, true);
+assert.strictEqual(caps.valueOrigin, true);
 
 if (typeof sst.listBindings === 'function') {
   const lb = sst.listBindings();
@@ -233,6 +234,13 @@ if (typeof sst.kamStage1 !== 'function') fail('kamStage1 missing');
   const r = sst.kamStage1(true, [1.0, Math.SQRT2], [2,0,0,3], 1e-4);
   assert.strictEqual(r.status, 'Pass');
   console.log('✓ kamStage1');
+}
+
+if (typeof sst.fmaxSnapshot !== 'function') fail('fmaxSnapshot missing');
+{
+  assert.ok(Math.abs(sst.fmaxSnapshot() - 29.053507) < 1e-9);
+  assert.ok(Math.abs(sst.bareMassRatioFromDimensionlessLength(16.3716) - 4.0929) < 1e-6);
+  console.log('✓ fmaxSnapshot/bareMass');
 }
 
 console.log('\nBasic test completed OK');

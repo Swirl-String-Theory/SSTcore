@@ -1,14 +1,14 @@
 {
   "manifest_version": 1,
-  "generated_at": "2026-07-28T21:06:57.918805+00:00",
+  "generated_at": "2026-07-28T21:15:36.817017+00:00",
   "summary": {
     "cpp_public": 208,
-    "py_bound": 553,
+    "py_bound": 563,
     "cpp_unbound": 91,
-    "binding_without_cpp_match": 117,
-    "node_modules": 36,
-    "py_modules": 38,
-    "both_py_node": 36,
+    "binding_without_cpp_match": 127,
+    "node_modules": 37,
+    "py_modules": 39,
+    "both_py_node": 37,
     "py_only_modules": 2,
     "node_only_modules": 0
   },
@@ -47,6 +47,7 @@
       "thermo_dynamics",
       "time_evolution",
       "trefoil_operator",
+      "value_origin",
       "vortex_ring",
       "vortexlab_kernels",
       "vorticity_dynamics"
@@ -90,6 +91,7 @@
       "thermo_dynamics_node.cpp",
       "time_evolution_node.cpp",
       "trefoil_operator_node.cpp",
+      "value_origin_node.cpp",
       "vortex_ring_node.cpp",
       "vortexlab_kernels_node.cpp",
       "vorticity_dynamics_node.cpp"
@@ -5587,6 +5589,106 @@
       "py_name": "nearest_eigenvalues_to_targets"
     },
     {
+      "module": "value_origin",
+      "cpp_symbol": "ValueOriginAPI::origin_name",
+      "py_export": "ValueOriginAPI.origin_name",
+      "export_kind": "class_static",
+      "binding_file": "value_origin_py.cpp",
+      "header_file": null,
+      "py_class": "ValueOriginAPI",
+      "py_name": "origin_name"
+    },
+    {
+      "module": "value_origin",
+      "cpp_symbol": "ValueOriginAPI::fmax_snapshot",
+      "py_export": "ValueOriginAPI.fmax_snapshot",
+      "export_kind": "class_static",
+      "binding_file": "value_origin_py.cpp",
+      "header_file": null,
+      "py_class": "ValueOriginAPI",
+      "py_name": "fmax_snapshot"
+    },
+    {
+      "module": "value_origin",
+      "cpp_symbol": "ValueOriginAPI::fmax_recompute_from_primitives",
+      "py_export": "ValueOriginAPI.fmax_recompute_from_primitives",
+      "export_kind": "class_static",
+      "binding_file": "value_origin_py.cpp",
+      "header_file": null,
+      "py_class": "ValueOriginAPI",
+      "py_name": "fmax_recompute_from_primitives"
+    },
+    {
+      "module": "value_origin",
+      "cpp_symbol": "ValueOriginAPI::fmax_rydberg_16pi2",
+      "py_export": "ValueOriginAPI.fmax_rydberg_16pi2",
+      "export_kind": "class_static",
+      "binding_file": "value_origin_py.cpp",
+      "header_file": null,
+      "py_class": "ValueOriginAPI",
+      "py_name": "fmax_rydberg_16pi2"
+    },
+    {
+      "module": "value_origin",
+      "cpp_symbol": "ValueOriginAPI::fmax_rydberg_32pi2",
+      "py_export": "ValueOriginAPI.fmax_rydberg_32pi2",
+      "export_kind": "class_static",
+      "binding_file": "value_origin_py.cpp",
+      "header_file": null,
+      "py_class": "ValueOriginAPI",
+      "py_name": "fmax_rydberg_32pi2"
+    },
+    {
+      "module": "value_origin",
+      "cpp_symbol": "ValueOriginAPI::compare_fmax_snapshot_to_recomputed",
+      "py_export": "ValueOriginAPI.compare_fmax_snapshot_to_recomputed",
+      "export_kind": "class_static",
+      "binding_file": "value_origin_py.cpp",
+      "header_file": null,
+      "py_class": "ValueOriginAPI",
+      "py_name": "compare_fmax_snapshot_to_recomputed"
+    },
+    {
+      "module": "value_origin",
+      "cpp_symbol": "ValueOriginAPI::bare_mass_ratio_from_dimensionless_length",
+      "py_export": "ValueOriginAPI.bare_mass_ratio_from_dimensionless_length",
+      "export_kind": "class_static",
+      "binding_file": "value_origin_py.cpp",
+      "header_file": null,
+      "py_class": "ValueOriginAPI",
+      "py_name": "bare_mass_ratio_from_dimensionless_length"
+    },
+    {
+      "module": "value_origin",
+      "cpp_symbol": "ValueOriginAPI::bare_mass_from_dimensionless_length",
+      "py_export": "ValueOriginAPI.bare_mass_from_dimensionless_length",
+      "export_kind": "class_static",
+      "binding_file": "value_origin_py.cpp",
+      "header_file": null,
+      "py_class": "ValueOriginAPI",
+      "py_name": "bare_mass_from_dimensionless_length"
+    },
+    {
+      "module": "value_origin",
+      "cpp_symbol": "ValueOriginAPI::rho_f_two_sigfig",
+      "py_export": "ValueOriginAPI.rho_f_two_sigfig",
+      "export_kind": "class_static",
+      "binding_file": "value_origin_py.cpp",
+      "header_file": null,
+      "py_class": "ValueOriginAPI",
+      "py_name": "rho_f_two_sigfig"
+    },
+    {
+      "module": "value_origin",
+      "cpp_symbol": "ValueOriginAPI::make_canonical_value",
+      "py_export": "ValueOriginAPI.make_canonical_value",
+      "export_kind": "class_static",
+      "binding_file": "value_origin_py.cpp",
+      "header_file": null,
+      "py_class": "ValueOriginAPI",
+      "py_name": "make_canonical_value"
+    },
+    {
       "module": "vortex_ring",
       "cpp_symbol": "GoldenNLSClosure::infer_effective_base",
       "py_export": "GoldenNLSClosure.infer_effective_base",
@@ -7117,6 +7219,66 @@
         "cpp_symbol": "Grid1D::spacing",
         "py_export": "Grid1D.spacing",
         "binding_file": "trefoil_operator_py.cpp"
+      },
+      {
+        "module": "value_origin",
+        "cpp_symbol": "ValueOriginAPI::origin_name",
+        "py_export": "ValueOriginAPI.origin_name",
+        "binding_file": "value_origin_py.cpp"
+      },
+      {
+        "module": "value_origin",
+        "cpp_symbol": "ValueOriginAPI::fmax_snapshot",
+        "py_export": "ValueOriginAPI.fmax_snapshot",
+        "binding_file": "value_origin_py.cpp"
+      },
+      {
+        "module": "value_origin",
+        "cpp_symbol": "ValueOriginAPI::fmax_recompute_from_primitives",
+        "py_export": "ValueOriginAPI.fmax_recompute_from_primitives",
+        "binding_file": "value_origin_py.cpp"
+      },
+      {
+        "module": "value_origin",
+        "cpp_symbol": "ValueOriginAPI::fmax_rydberg_16pi2",
+        "py_export": "ValueOriginAPI.fmax_rydberg_16pi2",
+        "binding_file": "value_origin_py.cpp"
+      },
+      {
+        "module": "value_origin",
+        "cpp_symbol": "ValueOriginAPI::fmax_rydberg_32pi2",
+        "py_export": "ValueOriginAPI.fmax_rydberg_32pi2",
+        "binding_file": "value_origin_py.cpp"
+      },
+      {
+        "module": "value_origin",
+        "cpp_symbol": "ValueOriginAPI::compare_fmax_snapshot_to_recomputed",
+        "py_export": "ValueOriginAPI.compare_fmax_snapshot_to_recomputed",
+        "binding_file": "value_origin_py.cpp"
+      },
+      {
+        "module": "value_origin",
+        "cpp_symbol": "ValueOriginAPI::bare_mass_ratio_from_dimensionless_length",
+        "py_export": "ValueOriginAPI.bare_mass_ratio_from_dimensionless_length",
+        "binding_file": "value_origin_py.cpp"
+      },
+      {
+        "module": "value_origin",
+        "cpp_symbol": "ValueOriginAPI::bare_mass_from_dimensionless_length",
+        "py_export": "ValueOriginAPI.bare_mass_from_dimensionless_length",
+        "binding_file": "value_origin_py.cpp"
+      },
+      {
+        "module": "value_origin",
+        "cpp_symbol": "ValueOriginAPI::rho_f_two_sigfig",
+        "py_export": "ValueOriginAPI.rho_f_two_sigfig",
+        "binding_file": "value_origin_py.cpp"
+      },
+      {
+        "module": "value_origin",
+        "cpp_symbol": "ValueOriginAPI::make_canonical_value",
+        "py_export": "ValueOriginAPI.make_canonical_value",
+        "binding_file": "value_origin_py.cpp"
       },
       {
         "module": "vorticity_dynamics",

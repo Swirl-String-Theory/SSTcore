@@ -59,8 +59,8 @@ Missing native + missing WASM throws with tried paths, platform/arch, and build 
 
 Central header: `include/sstcore_version.h`
 
-- `SSTCORE_VERSION` = `0.8.25` (package + engine)
-- `SSTCORE_CANON_VERSION` = `0.8.25` (Optie A: identical to package)
+- `SSTCORE_VERSION` = `0.8.26` (package + engine)
+- `SSTCORE_CANON_VERSION` = `0.8.26` (Optie A: identical to package)
 - `SSTCORE_NODE_API_VERSION` = `1`
 
 `engineInfo()` reports `packageVersion`, `engineVersion`, `canonVersion`, `nodeApiVersion`, `numericProfile`, `compiler`, `platform`, `architecture`.

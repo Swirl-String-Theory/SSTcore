@@ -154,6 +154,7 @@ add_library(sstcore_lib STATIC
         src/core_torsion.cpp
         src/link_field_gate.cpp
         src/sst_kam_diagnostics.cpp
+        src/value_origin.cpp
         ${CMAKE_BINARY_DIR}/generated/knot_files_embedded.cpp
 )
 
@@ -209,6 +210,7 @@ if(SST_BUILD_PYTHON_BINDINGS)
             src/pipeline_provenance_py.cpp
             src/core_torsion_py.cpp
             src/sst_kam_diagnostics_py.cpp
+            src/value_origin_py.cpp
             src/sst_gravity_py.cpp
             src/sst_extensions_py.cpp
             src/sst_integrator_py.cpp)
@@ -431,6 +433,7 @@ if(NODE_EXECUTABLE)
             src/pipeline_provenance_node.cpp
             src/core_torsion_node.cpp
             src/sst_kam_diagnostics_node.cpp
+            src/value_origin_node.cpp
     )
 
         target_include_directories(sstcore_node PRIVATE
