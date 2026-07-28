@@ -30,6 +30,8 @@ Legend: **Y** present · **—** absent · **via** exposed only through another 
 | fluid_dynamics | Y | Y | Y |
 | frenet_helicity | Y | Y | Y |
 | geometry_certificate | Y | Y | Y |
+| polygonal_smooth_certificate | Y | Y | Y |
+| biot_savart_gate | Y | via polygonal_smooth_certificate | via polygonal_smooth_certificate |
 | hyperbolic_volume | Y | Y | Y |
 | knot_dynamics | Y (+ `src/knot/*`) | Y | Y |
 | magnus_integrator | Y | Y | Y |

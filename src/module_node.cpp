@@ -68,6 +68,7 @@ void bind_sst_tension_scales(Napi::Env env, Napi::Object exports);
 void bind_extensions(Napi::Env env, Napi::Object exports);
 void bind_vortexlab_kernels(Napi::Env env, Napi::Object exports);
 void bind_geometry_certificate(Napi::Env env, Napi::Object exports);
+void bind_polygonal_smooth_certificate(Napi::Env env, Napi::Object exports);
 
 static Napi::Object EngineInfo(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
@@ -104,6 +105,8 @@ static Napi::Object GetCapabilities(const Napi::CallbackInfo& info) {
     o.Set("multisectorFitter", true);
     o.Set("resolvedTubeGeometry", true);
     o.Set("geometryCertificate", true);
+    o.Set("polygonalSmoothCertificate", true);
+    o.Set("biotSavartGate", true);
     o.Set("continuousReach", true);
     o.Set("polygonalGauss", true);
     o.Set("filamentVelocity", true);
@@ -155,6 +158,7 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
     bind_extensions(env, exports);
     bind_vortexlab_kernels(env, exports);
     bind_geometry_certificate(env, exports);
+    bind_polygonal_smooth_certificate(env, exports);
 
     exports.Set("engineInfo", Napi::Function::New(env, EngineInfo));
     exports.Set("getCapabilities", Napi::Function::New(env, GetCapabilities));

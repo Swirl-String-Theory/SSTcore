@@ -1,14 +1,14 @@
 {
   "manifest_version": 1,
-  "generated_at": "2026-07-28T20:26:55.626968+00:00",
+  "generated_at": "2026-07-28T20:35:34.127406+00:00",
   "summary": {
     "cpp_public": 208,
-    "py_bound": 519,
+    "py_bound": 522,
     "cpp_unbound": 91,
-    "binding_without_cpp_match": 94,
-    "node_modules": 31,
-    "py_modules": 32,
-    "both_py_node": 31,
+    "binding_without_cpp_match": 97,
+    "node_modules": 32,
+    "py_modules": 33,
+    "both_py_node": 32,
     "py_only_modules": 1,
     "node_only_modules": 0
   },
@@ -30,6 +30,7 @@
       "knot_dynamics",
       "magnus_integrator",
       "multisector_fitter",
+      "polygonal_smooth_certificate",
       "potential_timefield",
       "radiation_flow",
       "spectroscopic_gap",
@@ -67,6 +68,7 @@
       "knot_dynamics_node.cpp",
       "magnus_integrator_node.cpp",
       "multisector_fitter_node.cpp",
+      "polygonal_smooth_certificate_node.cpp",
       "potential_timefield_node.cpp",
       "radiation_flow_node.cpp",
       "spectroscopic_gap_node.cpp",
@@ -3496,6 +3498,36 @@
       "py_name": "phase_invariants"
     },
     {
+      "module": "polygonal_smooth_certificate",
+      "cpp_symbol": "PolygonalSmoothCertificateAPI::evaluate",
+      "py_export": "PolygonalSmoothCertificateAPI.evaluate",
+      "export_kind": "class_static",
+      "binding_file": "polygonal_smooth_certificate_py.cpp",
+      "header_file": null,
+      "py_class": "PolygonalSmoothCertificateAPI",
+      "py_name": "evaluate"
+    },
+    {
+      "module": "polygonal_smooth_certificate",
+      "cpp_symbol": "PolygonalSmoothCertificateAPI::fingerprint_points",
+      "py_export": "PolygonalSmoothCertificateAPI.fingerprint_points",
+      "export_kind": "class_static",
+      "binding_file": "polygonal_smooth_certificate_py.cpp",
+      "header_file": null,
+      "py_class": "PolygonalSmoothCertificateAPI",
+      "py_name": "fingerprint_points"
+    },
+    {
+      "module": "polygonal_smooth_certificate",
+      "cpp_symbol": "BiotSavartGateAPI::evaluate",
+      "py_export": "BiotSavartGateAPI.evaluate",
+      "export_kind": "class_static",
+      "binding_file": "polygonal_smooth_certificate_py.cpp",
+      "header_file": null,
+      "py_class": "BiotSavartGateAPI",
+      "py_name": "evaluate"
+    },
+    {
       "module": "potential_timefield",
       "cpp_symbol": "TimeField::compute_gravitational_potential_gradient",
       "py_export": "compute_gravitational_potential_gradient",
@@ -6444,6 +6476,24 @@
         "cpp_symbol": "MagnusBernoulliIntegrator::compute_swirl_coulomb_accel",
         "py_export": "MagnusBernoulliIntegrator.compute_swirl_coulomb_accel",
         "binding_file": "magnus_integrator_py.cpp"
+      },
+      {
+        "module": "polygonal_smooth_certificate",
+        "cpp_symbol": "PolygonalSmoothCertificateAPI::evaluate",
+        "py_export": "PolygonalSmoothCertificateAPI.evaluate",
+        "binding_file": "polygonal_smooth_certificate_py.cpp"
+      },
+      {
+        "module": "polygonal_smooth_certificate",
+        "cpp_symbol": "PolygonalSmoothCertificateAPI::fingerprint_points",
+        "py_export": "PolygonalSmoothCertificateAPI.fingerprint_points",
+        "binding_file": "polygonal_smooth_certificate_py.cpp"
+      },
+      {
+        "module": "polygonal_smooth_certificate",
+        "cpp_symbol": "BiotSavartGateAPI::evaluate",
+        "py_export": "BiotSavartGateAPI.evaluate",
+        "binding_file": "polygonal_smooth_certificate_py.cpp"
       },
       {
         "module": "radiation_flow",

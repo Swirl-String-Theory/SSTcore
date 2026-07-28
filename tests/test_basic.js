@@ -25,10 +25,10 @@ if (typeof sst.engineInfo !== 'function') {
 }
 const info = sst.engineInfo();
 console.log('engineInfo:', JSON.stringify(info));
-assert.strictEqual(info.engineVersion, '0.8.20', 'engineVersion must be 0.8.20');
+assert.strictEqual(info.engineVersion, '0.8.21', 'engineVersion must be 0.8.21');
 assert.ok(info.canonVersion, 'canonVersion must be present');
-assert.strictEqual(info.canonVersion, '0.8.20', 'canonVersion must equal package (Optie A)');
-assert.strictEqual(info.packageVersion, '0.8.20', 'packageVersion must be 0.8.20');
+assert.strictEqual(info.canonVersion, '0.8.21', 'canonVersion must equal package (Optie A)');
+assert.strictEqual(info.packageVersion, '0.8.21', 'packageVersion must be 0.8.21');
 assert.strictEqual(info.canonVersion, info.packageVersion, 'canonVersion must equal packageVersion');
 assert.ok(info.numericProfile, 'numericProfile must be present');
 assert.notStrictEqual(
@@ -56,6 +56,8 @@ assert.strictEqual(caps.intrinsicFrame, true);
 assert.strictEqual(caps.rigidMotion, true);
 assert.strictEqual(caps.resolvedTubeGeometry, true);
 assert.strictEqual(caps.geometryCertificate, true);
+assert.strictEqual(caps.polygonalSmoothCertificate, true);
+assert.strictEqual(caps.biotSavartGate, true);
 
 if (typeof sst.listBindings === 'function') {
   const lb = sst.listBindings();
@@ -161,6 +163,32 @@ if (typeof sst.evaluateTubeGeometry !== 'function') {
   const failGeom = sst.evaluateTubeGeometry(ring, 2.0);
   assert.strictEqual(failGeom.status, 'Fail');
   console.log('✓ evaluateTubeGeometry');
+}
+
+if (typeof sst.evaluatePolygonalSmoothCertificate !== 'function') {
+  fail('evaluatePolygonalSmoothCertificate missing');
+}
+{
+  const ring = [];
+  for (let i = 0; i < 48; i++) {
+    const t = (i / 48) * 2 * Math.PI;
+    ring.push([Math.cos(t), Math.sin(t), 0]);
+  }
+  const ok = sst.evaluatePolygonalSmoothCertificate(ring, ring, 0.05, 1e-9, 1e-9, 1e-6);
+  assert.strictEqual(ok.status, 'Pass');
+  console.log('✓ evaluatePolygonalSmoothCertificate');
+}
+
+if (typeof sst.evaluateBiotSavartGate !== 'function') {
+  fail('evaluateBiotSavartGate missing');
+}
+{
+  const aK = 1 / (4 * Math.PI);
+  const ok = sst.evaluateBiotSavartGate(aK, 0, 1.0, 0.1, 128, 'desing_core_v1', 1e-12, true);
+  assert.strictEqual(ok.status, 'Pass');
+  const missing = sst.evaluateBiotSavartGate(aK, 0, 1.0, 0.1, 128, '', 1e-12, true);
+  assert.strictEqual(missing.status, 'Indeterminate');
+  console.log('✓ evaluateBiotSavartGate');
 }
 
 console.log('\nBasic test completed OK');

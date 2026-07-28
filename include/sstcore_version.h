@@ -4,11 +4,11 @@
 // Optie A: package/engine and canon version strings are always identical.
 
 #ifndef SSTCORE_VERSION
-#define SSTCORE_VERSION "0.8.20"
+#define SSTCORE_VERSION "0.8.21"
 #endif
 
 #ifndef SSTCORE_CANON_VERSION
-#define SSTCORE_CANON_VERSION "0.8.20"
+#define SSTCORE_CANON_VERSION "0.8.21"
 #endif
 
 #ifndef SSTCORE_NODE_API_VERSION
