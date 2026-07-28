@@ -151,6 +151,8 @@ add_library(sstcore_lib STATIC
         src/operational_spacetime.cpp
         src/qss_spectroscopy.cpp
         src/pipeline_provenance.cpp
+        src/core_torsion.cpp
+        src/link_field_gate.cpp
         ${CMAKE_BINARY_DIR}/generated/knot_files_embedded.cpp
 )
 
@@ -204,6 +206,7 @@ if(SST_BUILD_PYTHON_BINDINGS)
             src/operational_spacetime_py.cpp
             src/qss_spectroscopy_py.cpp
             src/pipeline_provenance_py.cpp
+            src/core_torsion_py.cpp
             src/sst_gravity_py.cpp
             src/sst_extensions_py.cpp
             src/sst_integrator_py.cpp)
@@ -424,6 +427,7 @@ if(NODE_EXECUTABLE)
             src/polygonal_smooth_certificate_node.cpp
             src/operational_spacetime_node.cpp
             src/pipeline_provenance_node.cpp
+            src/core_torsion_node.cpp
     )
 
         target_include_directories(sstcore_node PRIVATE

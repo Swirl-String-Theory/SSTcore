@@ -1,14 +1,14 @@
 {
   "manifest_version": 1,
-  "generated_at": "2026-07-28T20:51:43.384940+00:00",
+  "generated_at": "2026-07-28T20:58:59.597294+00:00",
   "summary": {
     "cpp_public": 208,
-    "py_bound": 544,
+    "py_bound": 549,
     "cpp_unbound": 91,
-    "binding_without_cpp_match": 108,
-    "node_modules": 34,
-    "py_modules": 36,
-    "both_py_node": 34,
+    "binding_without_cpp_match": 113,
+    "node_modules": 35,
+    "py_modules": 37,
+    "both_py_node": 35,
     "py_only_modules": 2,
     "node_only_modules": 0
   },
@@ -20,6 +20,7 @@
       "canonical_constants",
       "chronos_kelvin_transport",
       "clock_field_eft",
+      "core_torsion",
       "delay_mode_selector",
       "field_kernels",
       "field_ops",
@@ -61,6 +62,7 @@
       "canonical_constants_node.cpp",
       "chronos_kelvin_transport_node.cpp",
       "clock_field_eft_node.cpp",
+      "core_torsion_node.cpp",
       "delay_mode_selector_node.cpp",
       "field_kernels_node.cpp",
       "field_ops_node.cpp",
@@ -1231,6 +1233,56 @@
       "header_file": "clock_field_eft.h",
       "py_class": "ClockFieldEFT",
       "py_name": "unit_timelike_from_gradient_minkowski"
+    },
+    {
+      "module": "core_torsion",
+      "cpp_symbol": "CoreTorsionAPI::torsion_inertial_mass",
+      "py_export": "CoreTorsionAPI.torsion_inertial_mass",
+      "export_kind": "class_static",
+      "binding_file": "core_torsion_py.cpp",
+      "header_file": null,
+      "py_class": "CoreTorsionAPI",
+      "py_name": "torsion_inertial_mass"
+    },
+    {
+      "module": "core_torsion",
+      "cpp_symbol": "CoreTorsionAPI::torsion_inertial_mass_legacy_factor2",
+      "py_export": "CoreTorsionAPI.torsion_inertial_mass_legacy_factor2",
+      "export_kind": "class_static",
+      "binding_file": "core_torsion_py.cpp",
+      "header_file": null,
+      "py_class": "CoreTorsionAPI",
+      "py_name": "torsion_inertial_mass_legacy_factor2"
+    },
+    {
+      "module": "core_torsion",
+      "cpp_symbol": "CoreTorsionAPI::anisotropy_residuals",
+      "py_export": "CoreTorsionAPI.anisotropy_residuals",
+      "export_kind": "class_static",
+      "binding_file": "core_torsion_py.cpp",
+      "header_file": null,
+      "py_class": "CoreTorsionAPI",
+      "py_name": "anisotropy_residuals"
+    },
+    {
+      "module": "core_torsion",
+      "cpp_symbol": "LinkFieldGateAPI::failure_name",
+      "py_export": "LinkFieldGateAPI.failure_name",
+      "export_kind": "class_static",
+      "binding_file": "core_torsion_py.cpp",
+      "header_file": null,
+      "py_class": "LinkFieldGateAPI",
+      "py_name": "failure_name"
+    },
+    {
+      "module": "core_torsion",
+      "cpp_symbol": "LinkFieldGateAPI::evaluate",
+      "py_export": "LinkFieldGateAPI.evaluate",
+      "export_kind": "class_static",
+      "binding_file": "core_torsion_py.cpp",
+      "header_file": null,
+      "py_class": "LinkFieldGateAPI",
+      "py_name": "evaluate"
     },
     {
       "module": "delay_mode_selector",
@@ -6537,6 +6589,36 @@
         "cpp_symbol": "AtomicBridgeModel::helical_packet_gamma",
         "py_export": "AtomicBridgeModel.helical_packet_gamma",
         "binding_file": "atomic_bridge_model_py.cpp"
+      },
+      {
+        "module": "core_torsion",
+        "cpp_symbol": "CoreTorsionAPI::torsion_inertial_mass",
+        "py_export": "CoreTorsionAPI.torsion_inertial_mass",
+        "binding_file": "core_torsion_py.cpp"
+      },
+      {
+        "module": "core_torsion",
+        "cpp_symbol": "CoreTorsionAPI::torsion_inertial_mass_legacy_factor2",
+        "py_export": "CoreTorsionAPI.torsion_inertial_mass_legacy_factor2",
+        "binding_file": "core_torsion_py.cpp"
+      },
+      {
+        "module": "core_torsion",
+        "cpp_symbol": "CoreTorsionAPI::anisotropy_residuals",
+        "py_export": "CoreTorsionAPI.anisotropy_residuals",
+        "binding_file": "core_torsion_py.cpp"
+      },
+      {
+        "module": "core_torsion",
+        "cpp_symbol": "LinkFieldGateAPI::failure_name",
+        "py_export": "LinkFieldGateAPI.failure_name",
+        "binding_file": "core_torsion_py.cpp"
+      },
+      {
+        "module": "core_torsion",
+        "cpp_symbol": "LinkFieldGateAPI::evaluate",
+        "py_export": "LinkFieldGateAPI.evaluate",
+        "binding_file": "core_torsion_py.cpp"
       },
       {
         "module": "field_kernels",
