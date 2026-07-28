@@ -1,14 +1,14 @@
 {
   "manifest_version": 1,
-  "generated_at": "2026-07-28T20:58:59.597294+00:00",
+  "generated_at": "2026-07-28T21:06:57.918805+00:00",
   "summary": {
     "cpp_public": 208,
-    "py_bound": 549,
+    "py_bound": 553,
     "cpp_unbound": 91,
-    "binding_without_cpp_match": 113,
-    "node_modules": 35,
-    "py_modules": 37,
-    "both_py_node": 35,
+    "binding_without_cpp_match": 117,
+    "node_modules": 36,
+    "py_modules": 38,
+    "both_py_node": 36,
     "py_only_modules": 2,
     "node_only_modules": 0
   },
@@ -40,6 +40,7 @@
       "sst_extensions",
       "sst_gravity",
       "sst_integrator",
+      "sst_kam_diagnostics",
       "sst_master_equation",
       "sst_tension_scales",
       "swirl_field",
@@ -82,6 +83,7 @@
       "sst_extensions_node.cpp",
       "sst_gravity_node.cpp",
       "sst_integrator_node.cpp",
+      "sst_kam_diagnostics_node.cpp",
       "sst_master_equation_node.cpp",
       "sst_tension_scales_node.cpp",
       "swirl_field_node.cpp",
@@ -4585,6 +4587,46 @@
       "py_name": "compute_sst_mass"
     },
     {
+      "module": "sst_kam_diagnostics",
+      "cpp_symbol": "KAMDiagnosticsAPI::sector_name",
+      "py_export": "KAMDiagnosticsAPI.sector_name",
+      "export_kind": "class_static",
+      "binding_file": "sst_kam_diagnostics_py.cpp",
+      "header_file": null,
+      "py_class": "KAMDiagnosticsAPI",
+      "py_name": "sector_name"
+    },
+    {
+      "module": "sst_kam_diagnostics",
+      "cpp_symbol": "KAMDiagnosticsAPI::stage_name",
+      "py_export": "KAMDiagnosticsAPI.stage_name",
+      "export_kind": "class_static",
+      "binding_file": "sst_kam_diagnostics_py.cpp",
+      "header_file": null,
+      "py_class": "KAMDiagnosticsAPI",
+      "py_name": "stage_name"
+    },
+    {
+      "module": "sst_kam_diagnostics",
+      "cpp_symbol": "KAMDiagnosticsAPI::stage1",
+      "py_export": "KAMDiagnosticsAPI.stage1",
+      "export_kind": "class_static",
+      "binding_file": "sst_kam_diagnostics_py.cpp",
+      "header_file": null,
+      "py_class": "KAMDiagnosticsAPI",
+      "py_name": "stage1"
+    },
+    {
+      "module": "sst_kam_diagnostics",
+      "cpp_symbol": "KAMDiagnosticsAPI::golden_ratio_null_test",
+      "py_export": "KAMDiagnosticsAPI.golden_ratio_null_test",
+      "export_kind": "class_static",
+      "binding_file": "sst_kam_diagnostics_py.cpp",
+      "header_file": null,
+      "py_class": "KAMDiagnosticsAPI",
+      "py_name": "golden_ratio_null_test"
+    },
+    {
       "module": "sst_master_equation",
       "cpp_symbol": null,
       "py_export": "SSTTopologyKernelInput.alpha_C",
@@ -6937,6 +6979,30 @@
         "cpp_symbol": "SpectroscopicGap::gap_ratio",
         "py_export": "SpectroscopicGap.gap_ratio",
         "binding_file": "spectroscopic_gap_py.cpp"
+      },
+      {
+        "module": "sst_kam_diagnostics",
+        "cpp_symbol": "KAMDiagnosticsAPI::sector_name",
+        "py_export": "KAMDiagnosticsAPI.sector_name",
+        "binding_file": "sst_kam_diagnostics_py.cpp"
+      },
+      {
+        "module": "sst_kam_diagnostics",
+        "cpp_symbol": "KAMDiagnosticsAPI::stage_name",
+        "py_export": "KAMDiagnosticsAPI.stage_name",
+        "binding_file": "sst_kam_diagnostics_py.cpp"
+      },
+      {
+        "module": "sst_kam_diagnostics",
+        "cpp_symbol": "KAMDiagnosticsAPI::stage1",
+        "py_export": "KAMDiagnosticsAPI.stage1",
+        "binding_file": "sst_kam_diagnostics_py.cpp"
+      },
+      {
+        "module": "sst_kam_diagnostics",
+        "cpp_symbol": "KAMDiagnosticsAPI::golden_ratio_null_test",
+        "py_export": "KAMDiagnosticsAPI.golden_ratio_null_test",
+        "binding_file": "sst_kam_diagnostics_py.cpp"
       },
       {
         "module": "sst_tension_scales",

@@ -43,6 +43,7 @@ void bind_operational_spacetime(py::module_& m);
 void bind_qss_spectroscopy(py::module_& m);
 void bind_pipeline_provenance(py::module_& m);
 void bind_core_torsion(py::module_& m);
+void bind_kam_diagnostics(py::module_& m);
 
 
 // Pip/setuptools wheels use SSTcore._native; CMake builds keep the sstcore module name.
@@ -89,6 +90,7 @@ PYBIND11_MODULE(sstcore, m) {
   bind_qss_spectroscopy(m);
   bind_pipeline_provenance(m);
   bind_core_torsion(m);
+  bind_kam_diagnostics(m);
  // module-wide listing utility
     m.def(
         "list_bindings",
