@@ -9,6 +9,8 @@ from dataclasses import dataclass
 from enum import Enum
 
 __version__ = "0.8.19"
+# Optie A: alias of __version__ (same string; not a separate compat channel).
+CANON_VERSION = __version__
 
 # Known ideal-style files in resources/ (knots: AB/HT, links: TL).
 IDEAL_SOURCE_FILES = {

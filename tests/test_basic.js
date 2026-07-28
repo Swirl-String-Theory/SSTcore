@@ -27,8 +27,9 @@ const info = sst.engineInfo();
 console.log('engineInfo:', JSON.stringify(info));
 assert.strictEqual(info.engineVersion, '0.8.19', 'engineVersion must be 0.8.19');
 assert.ok(info.canonVersion, 'canonVersion must be present');
-assert.strictEqual(info.canonVersion, '0.8.20', 'canonVersion must be 0.8.20');
+assert.strictEqual(info.canonVersion, '0.8.19', 'canonVersion must equal package (Optie A)');
 assert.strictEqual(info.packageVersion, '0.8.19', 'packageVersion must be 0.8.19');
+assert.strictEqual(info.canonVersion, info.packageVersion, 'canonVersion must equal packageVersion');
 assert.ok(info.numericProfile, 'numericProfile must be present');
 assert.notStrictEqual(
   String(info.numericProfile).toLowerCase(),

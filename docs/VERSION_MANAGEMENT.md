@@ -1,12 +1,32 @@
 # Version Management
 
+## Optie A — package and canon stay identical
+
+SSTcore uses **Optie A**: `SSTCORE_VERSION` and `SSTCORE_CANON_VERSION` are always the
+same string. There is no separate `CANON_COMPAT_VERSION`.
+
+Required bump places on every release:
+
+- `include/sstcore_version.h` (`SSTCORE_VERSION` **and** `SSTCORE_CANON_VERSION`)
+- `setup.py` (`__version__`)
+- `package.json` (`version`)
+- `src/SSTcore/__init__.py` (`__version__`; `CANON_VERSION` is an alias of `__version__`)
+- `tests/test_basic.js` (and any other version pins)
+- Rebuild the Node native addon so `engineInfo()` matches
+
+Do **not** bump only the package or only the canon field. Optional build metadata
+(`BUILD_COMMIT`, `NUMERIC_PROFILE`, `NODE_API_VERSION`) is not a second canon version.
+
 ## Current Version
 
-The package version is defined in two places:
+The package version is defined in:
+
 - `setup.py`: `__version__ = "0.8.19"`
 - `src/SSTcore/__init__.py`: `__version__ = "0.8.19"`
+- `include/sstcore_version.h`: `SSTCORE_VERSION` / `SSTCORE_CANON_VERSION` = `"0.8.19"`
+- `package.json`: `"version": "0.8.19"`
 
-**Always update both files when changing the version!** (`pyproject.toml` has no `[project]` version; metadata lives in `setup.py`.)
+**Always update all of the above when changing the version!** (`pyproject.toml` has no `[project]` version; metadata lives in `setup.py`.)
 
 ## Incrementing Version
 

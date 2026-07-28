@@ -1,9 +1,9 @@
 {
   "manifest_version": 1,
-  "generated_at": "2026-07-19T16:26:33.143045+00:00",
+  "generated_at": "2026-07-28T20:14:51.519967+00:00",
   "summary": {
     "cpp_public": 208,
-    "py_bound": 513,
+    "py_bound": 514,
     "cpp_unbound": 91,
     "binding_without_cpp_match": 89,
     "node_modules": 30,
@@ -5422,6 +5422,16 @@
       "header_file": null,
       "py_class": null,
       "py_name": "compute_continuous_reach"
+    },
+    {
+      "module": "vortexlab_kernels",
+      "cpp_symbol": null,
+      "py_export": "analyze_smooth_resolved_tube",
+      "export_kind": "module_function",
+      "binding_file": "vortexlab_kernels_py.cpp",
+      "header_file": null,
+      "py_class": null,
+      "py_name": "analyze_smooth_resolved_tube"
     },
     {
       "module": "vortexlab_kernels",
