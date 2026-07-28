@@ -76,6 +76,7 @@ void bind_core_torsion(Napi::Env env, Napi::Object exports);
 void bind_kam_diagnostics(Napi::Env env, Napi::Object exports);
 void bind_value_origin(Napi::Env env, Napi::Object exports);
 void bind_evidence_report(Napi::Env env, Napi::Object exports);
+void bind_action_phase(Napi::Env env, Napi::Object exports);
 
 static Napi::Object EngineInfo(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
@@ -122,6 +123,7 @@ static Napi::Object GetCapabilities(const Napi::CallbackInfo& info) {
     o.Set("kamDiagnostics", true);
     o.Set("valueOrigin", true);
     o.Set("evidenceReport", true);
+    o.Set("actionPhase", true);
     o.Set("continuousReach", true);
     o.Set("polygonalGauss", true);
     o.Set("filamentVelocity", true);
@@ -181,6 +183,7 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
     bind_kam_diagnostics(env, exports);
     bind_value_origin(env, exports);
     bind_evidence_report(env, exports);
+    bind_action_phase(env, exports);
 
     exports.Set("engineInfo", Napi::Function::New(env, EngineInfo));
     exports.Set("getCapabilities", Napi::Function::New(env, GetCapabilities));

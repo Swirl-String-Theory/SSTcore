@@ -40,6 +40,7 @@ Legend: **Y** present · **—** absent · **via** exposed only through another 
 | sst_kam_diagnostics | Y | Y | Y |
 | value_origin | Y | Y | Y |
 | evidence_report | Y | Y | Y |
+| sst_action_phase | Y | Y | Y |
 | hyperbolic_volume | Y | Y | Y |
 | knot_dynamics | Y (+ `src/knot/*`) | Y | Y |
 | magnus_integrator | Y | Y | Y |

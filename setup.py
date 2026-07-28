@@ -235,7 +235,7 @@ def _windows_msvc_toolset_defaults() -> None:
 
 _windows_msvc_toolset_defaults()
 
-__version__ = "0.8.27"
+__version__ = "0.8.28"
 base_dir = os.path.dirname(os.path.abspath(__file__))
 # Python import package: src/SSTcore/ (repo root is not the import package).
 _PYTHON_PKG = "SSTcore"
@@ -971,6 +971,7 @@ src_files = [
     "src/sst_kam_diagnostics.cpp",
     "src/value_origin.cpp",
     "src/evidence_report.cpp",
+    "src/sst_action_phase.cpp",
 ]
 
 # Generated embedded files will be added by CustomBuildExt during build

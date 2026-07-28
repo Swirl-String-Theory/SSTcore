@@ -25,10 +25,10 @@ if (typeof sst.engineInfo !== 'function') {
 }
 const info = sst.engineInfo();
 console.log('engineInfo:', JSON.stringify(info));
-assert.strictEqual(info.engineVersion, '0.8.27', 'engineVersion must be 0.8.27');
+assert.strictEqual(info.engineVersion, '0.8.28', 'engineVersion must be 0.8.28');
 assert.ok(info.canonVersion, 'canonVersion must be present');
-assert.strictEqual(info.canonVersion, '0.8.27', 'canonVersion must equal package (Optie A)');
-assert.strictEqual(info.packageVersion, '0.8.27', 'packageVersion must be 0.8.27');
+assert.strictEqual(info.canonVersion, '0.8.28', 'canonVersion must equal package (Optie A)');
+assert.strictEqual(info.packageVersion, '0.8.28', 'packageVersion must be 0.8.28');
 assert.strictEqual(info.canonVersion, info.packageVersion, 'canonVersion must equal packageVersion');
 assert.ok(info.numericProfile, 'numericProfile must be present');
 assert.notStrictEqual(
@@ -66,6 +66,7 @@ assert.strictEqual(caps.linkFieldGate, true);
 assert.strictEqual(caps.kamDiagnostics, true);
 assert.strictEqual(caps.valueOrigin, true);
 assert.strictEqual(caps.evidenceReport, true);
+assert.strictEqual(caps.actionPhase, true);
 
 if (typeof sst.listBindings === 'function') {
   const lb = sst.listBindings();
@@ -248,6 +249,12 @@ if (typeof sst.checkKindExportString !== 'function') fail('checkKindExportString
 {
   assert.strictEqual(sst.checkKindExportString(6), 'SYNTHETIC_DIAGNOSTIC');
   console.log('✓ checkKindExportString');
+}
+
+if (typeof sst.massShellHamiltonian !== 'function') fail('massShellHamiltonian missing');
+{
+  assert.ok(Math.abs(sst.massShellHamiltonian(3,4,1) - 5) < 1e-12);
+  console.log('✓ massShellHamiltonian');
 }
 
 console.log('\nBasic test completed OK');

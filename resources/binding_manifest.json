@@ -1,14 +1,14 @@
 {
   "manifest_version": 1,
-  "generated_at": "2026-07-28T21:23:50.860097+00:00",
+  "generated_at": "2026-07-28T21:30:44.711515+00:00",
   "summary": {
     "cpp_public": 208,
-    "py_bound": 580,
+    "py_bound": 586,
     "cpp_unbound": 91,
-    "binding_without_cpp_match": 131,
-    "node_modules": 38,
-    "py_modules": 40,
-    "both_py_node": 38,
+    "binding_without_cpp_match": 137,
+    "node_modules": 39,
+    "py_modules": 41,
+    "both_py_node": 39,
     "py_only_modules": 2,
     "node_only_modules": 0
   },
@@ -38,6 +38,7 @@
       "potential_timefield",
       "radiation_flow",
       "spectroscopic_gap",
+      "sst_action_phase",
       "sst_extensions",
       "sst_gravity",
       "sst_integrator",
@@ -83,6 +84,7 @@
       "potential_timefield_node.cpp",
       "radiation_flow_node.cpp",
       "spectroscopic_gap_node.cpp",
+      "sst_action_phase_node.cpp",
       "sst_extensions_node.cpp",
       "sst_gravity_node.cpp",
       "sst_integrator_node.cpp",
@@ -4171,6 +4173,66 @@
       "py_name": "gap_ratio"
     },
     {
+      "module": "sst_action_phase",
+      "cpp_symbol": "ActionPhaseAPI::mass_shell_hamiltonian",
+      "py_export": "ActionPhaseAPI.mass_shell_hamiltonian",
+      "export_kind": "class_static",
+      "binding_file": "sst_action_phase_py.cpp",
+      "header_file": null,
+      "py_class": "ActionPhaseAPI",
+      "py_name": "mass_shell_hamiltonian"
+    },
+    {
+      "module": "sst_action_phase",
+      "cpp_symbol": "ActionPhaseAPI::velocity_from_mass_shell",
+      "py_export": "ActionPhaseAPI.velocity_from_mass_shell",
+      "export_kind": "class_static",
+      "binding_file": "sst_action_phase_py.cpp",
+      "header_file": null,
+      "py_class": "ActionPhaseAPI",
+      "py_name": "velocity_from_mass_shell"
+    },
+    {
+      "module": "sst_action_phase",
+      "cpp_symbol": "ActionPhaseAPI::gamma_from_mass_shell",
+      "py_export": "ActionPhaseAPI.gamma_from_mass_shell",
+      "export_kind": "class_static",
+      "binding_file": "sst_action_phase_py.cpp",
+      "header_file": null,
+      "py_class": "ActionPhaseAPI",
+      "py_name": "gamma_from_mass_shell"
+    },
+    {
+      "module": "sst_action_phase",
+      "cpp_symbol": "ActionPhaseAPI::proper_time_rate",
+      "py_export": "ActionPhaseAPI.proper_time_rate",
+      "export_kind": "class_static",
+      "binding_file": "sst_action_phase_py.cpp",
+      "header_file": null,
+      "py_class": "ActionPhaseAPI",
+      "py_name": "proper_time_rate"
+    },
+    {
+      "module": "sst_action_phase",
+      "cpp_symbol": "ActionPhaseAPI::internal_phase_rate_at_fixed_momentum",
+      "py_export": "ActionPhaseAPI.internal_phase_rate_at_fixed_momentum",
+      "export_kind": "class_static",
+      "binding_file": "sst_action_phase_py.cpp",
+      "header_file": null,
+      "py_class": "ActionPhaseAPI",
+      "py_name": "internal_phase_rate_at_fixed_momentum"
+    },
+    {
+      "module": "sst_action_phase",
+      "cpp_symbol": "ActionPhaseAPI::action_phase_residuals",
+      "py_export": "ActionPhaseAPI.action_phase_residuals",
+      "export_kind": "class_static",
+      "binding_file": "sst_action_phase_py.cpp",
+      "header_file": null,
+      "py_class": "ActionPhaseAPI",
+      "py_name": "action_phase_residuals"
+    },
+    {
       "module": "sst_extensions",
       "cpp_symbol": null,
       "py_export": "CanonicalizeResult.path",
@@ -7297,6 +7359,42 @@
         "cpp_symbol": "SpectroscopicGap::gap_ratio",
         "py_export": "SpectroscopicGap.gap_ratio",
         "binding_file": "spectroscopic_gap_py.cpp"
+      },
+      {
+        "module": "sst_action_phase",
+        "cpp_symbol": "ActionPhaseAPI::mass_shell_hamiltonian",
+        "py_export": "ActionPhaseAPI.mass_shell_hamiltonian",
+        "binding_file": "sst_action_phase_py.cpp"
+      },
+      {
+        "module": "sst_action_phase",
+        "cpp_symbol": "ActionPhaseAPI::velocity_from_mass_shell",
+        "py_export": "ActionPhaseAPI.velocity_from_mass_shell",
+        "binding_file": "sst_action_phase_py.cpp"
+      },
+      {
+        "module": "sst_action_phase",
+        "cpp_symbol": "ActionPhaseAPI::gamma_from_mass_shell",
+        "py_export": "ActionPhaseAPI.gamma_from_mass_shell",
+        "binding_file": "sst_action_phase_py.cpp"
+      },
+      {
+        "module": "sst_action_phase",
+        "cpp_symbol": "ActionPhaseAPI::proper_time_rate",
+        "py_export": "ActionPhaseAPI.proper_time_rate",
+        "binding_file": "sst_action_phase_py.cpp"
+      },
+      {
+        "module": "sst_action_phase",
+        "cpp_symbol": "ActionPhaseAPI::internal_phase_rate_at_fixed_momentum",
+        "py_export": "ActionPhaseAPI.internal_phase_rate_at_fixed_momentum",
+        "binding_file": "sst_action_phase_py.cpp"
+      },
+      {
+        "module": "sst_action_phase",
+        "cpp_symbol": "ActionPhaseAPI::action_phase_residuals",
+        "py_export": "ActionPhaseAPI.action_phase_residuals",
+        "binding_file": "sst_action_phase_py.cpp"
       },
       {
         "module": "sst_kam_diagnostics",

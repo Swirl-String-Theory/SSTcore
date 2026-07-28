@@ -46,6 +46,7 @@ void bind_core_torsion(py::module_& m);
 void bind_kam_diagnostics(py::module_& m);
 void bind_value_origin(py::module_& m);
 void bind_evidence_report(py::module_& m);
+void bind_action_phase(py::module_& m);
 
 
 // Pip/setuptools wheels use SSTcore._native; CMake builds keep the sstcore module name.
@@ -95,6 +96,7 @@ PYBIND11_MODULE(sstcore, m) {
   bind_kam_diagnostics(m);
   bind_value_origin(m);
   bind_evidence_report(m);
+  bind_action_phase(m);
  // module-wide listing utility
     m.def(
         "list_bindings",
