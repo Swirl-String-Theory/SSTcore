@@ -253,6 +253,20 @@ export interface SSTcoreModule {
     reconstructionRelativeError: number;
   };
 
+  // Canon 0.8.20–0.8.28 Node surface (explicit; avoid relying solely on index signature)
+  radarInterval?: (Tminus: number, Tplus: number, c?: number) => object;
+  lorentzBoostX?: (event: number[], v: number, c?: number) => object;
+  lorentzBoost?: (event: number[], velocity: number[], c?: number) => object;
+  qssEigen2x2?: (matrixRowMajor: number[]) => object;
+  massShellHamiltonian?: (P: number, E0: number, c: number) => number;
+  velocityFromMassShell?: (P: number, E0: number, c: number) => number;
+  gammaFromMassShell?: (P: number, E0: number, c: number) => number;
+  properTimeRate?: (P: number, E0: number, c: number) => number;
+  internalPhaseRateAtFixedMomentum?: (P: number, E0: number, c: number, Omega0: number) => number;
+  actionPhaseResiduals?: (P: number, E0: number, c: number, Omega0: number) => object;
+  fixedVPhaseErrorFactor?: (P: number, E0: number, c: number) => number;
+  deltaShapeSeparability?: (P: number, E0: number, dE0_dq: number, c: number) => number;
+
   [key: string]: any;
 }
 

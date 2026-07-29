@@ -2,6 +2,7 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <algorithm>
+#include <Python.h>
 
 namespace py = pybind11;
 
@@ -121,10 +122,10 @@ PYBIND11_MODULE(sstcore, m) {
                 }
 
                 if (const py::object obj = m.attr(name.c_str());
-                    py::isinstance<py::function>(obj)) {
-                    funcs.append(py::str(name));
-                } else if (py::isinstance<py::type>(obj)) {
+                    PyType_Check(obj.ptr()) || py::isinstance<py::type>(obj)) {
                     classes.append(py::str(name));
+                } else if (py::isinstance<py::function>(obj)) {
+                    funcs.append(py::str(name));
                 } else {
                     attrs.append(py::str(name));
                 }

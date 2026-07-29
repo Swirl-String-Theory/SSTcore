@@ -45,11 +45,12 @@ void bind_geometry_certificate(py::module_& m) {
                     py::arg("separation_tol") = 1e-9, py::arg("curvature_tol") = 1e-9)
         .def_static("evaluate_contact_saturation", &sst::GeometryCertificateAPI::evaluate_contact_saturation,
                     py::arg("contact_pressures"), py::arg("saturation_pressure"),
-                    py::arg("epsilon") = 1e-9)
+                    py::arg("ratio_epsilon") = 1e-9, py::arg("pressure_floor") = 0.0)
         .def_static("chronos_first_hitting", &sst::GeometryCertificateAPI::chronos_first_hitting,
                     py::arg("times"), py::arg("observable"), py::arg("threshold"))
         .def_static("rank9_from_singular_values", &sst::GeometryCertificateAPI::rank9_from_singular_values,
-                    py::arg("singular_values"), py::arg("tau_rank") = 1e-12)
+                    py::arg("singular_values"), py::arg("tau_rank") = 1e-12,
+                    py::arg("max_conditioning") = 1e12)
         .def_static("sha256_hex_of_points", &sst::GeometryCertificateAPI::sha256_hex_of_points,
                     py::arg("pts"));
 }

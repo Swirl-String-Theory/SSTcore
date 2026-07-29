@@ -28,6 +28,12 @@ public:
     // Boost along +x with velocity v (|v|<c). Events are (t,x,y,z).
     [[nodiscard]] static LorentzMapResult lorentz_boost_x(const std::array<double, 4>& event, double v, double c = 1.0);
 
+    // Arbitrary-direction boost with velocity vector (vx,vy,vz), |v|<c.
+    [[nodiscard]] static LorentzMapResult lorentz_boost(
+        const std::array<double, 4>& event,
+        const std::array<double, 3>& velocity,
+        double c = 1.0);
+
     [[nodiscard]] static double minkowski_interval2(const std::array<double, 4>& a, const std::array<double, 4>& b, double c = 1.0);
 };
 

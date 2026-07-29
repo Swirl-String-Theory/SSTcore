@@ -56,4 +56,24 @@ void bind_operational_spacetime(Napi::Env env, Napi::Object exports) {
         const double c = info.Length() > 2 ? info[2].As<Napi::Number>().DoubleValue() : 1.0;
         return LorentzToJs(env, sst::OperationalSpacetimeAPI::lorentz_boost_x(ev, v, c));
     }));
+
+    exports.Set("lorentzBoost", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
+        Napi::Env env = info.Env();
+        if (info.Length() < 2 || !info[0].IsArray() || !info[1].IsArray()) {
+            Napi::TypeError::New(env, "lorentzBoost(event[4], velocity[3], c=1)").ThrowAsJavaScriptException();
+            return env.Null();
+        }
+        Napi::Array arr = info[0].As<Napi::Array>();
+        Napi::Array vel = info[1].As<Napi::Array>();
+        if (arr.Length() != 4 || vel.Length() != 3) {
+            Napi::TypeError::New(env, "event length 4 and velocity length 3 required").ThrowAsJavaScriptException();
+            return env.Null();
+        }
+        std::array<double, 4> ev{};
+        std::array<double, 3> v3{};
+        for (uint32_t i = 0; i < 4; ++i) ev[i] = arr.Get(i).As<Napi::Number>().DoubleValue();
+        for (uint32_t i = 0; i < 3; ++i) v3[i] = vel.Get(i).As<Napi::Number>().DoubleValue();
+        const double c = info.Length() > 2 ? info[2].As<Napi::Number>().DoubleValue() : 1.0;
+        return LorentzToJs(env, sst::OperationalSpacetimeAPI::lorentz_boost(ev, v3, c));
+    }));
 }

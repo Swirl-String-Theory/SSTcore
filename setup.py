@@ -1057,7 +1057,8 @@ setup(
     description="SSTcore - Swirl String Theory Canonical Core. High-performance C++ library for knot dynamics, vortex systems, and fluid mechanics",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    license="CC BY-NC 4.0",
+    license="CC-BY-NC-4.0",
+    license_files=["LICENSE"],
     url="https://github.com/Swirl-String-Theory/SSTcore",
     project_urls={
         "Bug Tracker": "https://github.com/Swirl-String-Theory/SSTcore/issues",

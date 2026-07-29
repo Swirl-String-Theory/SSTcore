@@ -53,7 +53,8 @@ public:
     [[nodiscard]] static ContactSaturationResult evaluate_contact_saturation(
         const std::vector<double>& contact_pressures,
         double saturation_pressure,
-        double epsilon = 1e-9);
+        double ratio_epsilon = 1e-9,
+        double pressure_floor = 0.0);
 
     // First hitting time t* = inf{t>=0: g(t) >= g_*}; linear interpolation between samples.
     [[nodiscard]] static ChronosFirstHittingResult chronos_first_hitting(
@@ -62,9 +63,11 @@ public:
         double threshold);
 
     // Rank via singular values with relative threshold tau_rank.
+    // Pass for rank==9 only if conditioning <= max_conditioning.
     [[nodiscard]] static Rank9ChannelDiagnostics rank9_from_singular_values(
         const std::array<double, 9>& singular_values,
-        double tau_rank = 1e-12);
+        double tau_rank = 1e-12,
+        double max_conditioning = 1e12);
 
     [[nodiscard]] static std::string sha256_hex_of_points(const std::vector<Vec3>& pts);
 };

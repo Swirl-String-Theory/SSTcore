@@ -23,6 +23,8 @@ void bind_operational_spacetime(py::module_& m) {
                     py::arg("emission_time"), py::arg("reception_time"), py::arg("c") = 1.0)
         .def_static("lorentz_boost_x", &sst::OperationalSpacetimeAPI::lorentz_boost_x,
                     py::arg("event"), py::arg("v"), py::arg("c") = 1.0)
+        .def_static("lorentz_boost", &sst::OperationalSpacetimeAPI::lorentz_boost,
+                    py::arg("event"), py::arg("velocity"), py::arg("c") = 1.0)
         .def_static("minkowski_interval2", &sst::OperationalSpacetimeAPI::minkowski_interval2,
                     py::arg("a"), py::arg("b"), py::arg("c") = 1.0);
 }

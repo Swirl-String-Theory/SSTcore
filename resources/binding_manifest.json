@@ -1,11 +1,11 @@
 {
   "manifest_version": 1,
-  "generated_at": "2026-07-29T02:42:13.608653+00:00",
+  "generated_at": "2026-07-29T02:50:39.400583+00:00",
   "summary": {
     "cpp_public": 208,
-    "py_bound": 589,
+    "py_bound": 590,
     "cpp_unbound": 91,
-    "binding_without_cpp_match": 140,
+    "binding_without_cpp_match": 141,
     "node_modules": 40,
     "py_modules": 41,
     "both_py_node": 40,
@@ -3775,6 +3775,16 @@
     },
     {
       "module": "operational_spacetime",
+      "cpp_symbol": "OperationalSpacetimeAPI::lorentz_boost",
+      "py_export": "OperationalSpacetimeAPI.lorentz_boost",
+      "export_kind": "class_static",
+      "binding_file": "operational_spacetime_py.cpp",
+      "header_file": null,
+      "py_class": "OperationalSpacetimeAPI",
+      "py_name": "lorentz_boost"
+    },
+    {
+      "module": "operational_spacetime",
       "cpp_symbol": "OperationalSpacetimeAPI::minkowski_interval2",
       "py_export": "OperationalSpacetimeAPI.minkowski_interval2",
       "export_kind": "class_static",
@@ -7257,6 +7267,12 @@
         "module": "operational_spacetime",
         "cpp_symbol": "OperationalSpacetimeAPI::lorentz_boost_x",
         "py_export": "OperationalSpacetimeAPI.lorentz_boost_x",
+        "binding_file": "operational_spacetime_py.cpp"
+      },
+      {
+        "module": "operational_spacetime",
+        "cpp_symbol": "OperationalSpacetimeAPI::lorentz_boost",
+        "py_export": "OperationalSpacetimeAPI.lorentz_boost",
         "binding_file": "operational_spacetime_py.cpp"
       },
       {

@@ -80,11 +80,12 @@ GeometryCertificate GeometryCertificateAPI::evaluate_tube_geometry(
 ContactSaturationResult GeometryCertificateAPI::evaluate_contact_saturation(
     const std::vector<double>& contact_pressures,
     double saturation_pressure,
-    double epsilon) {
+    double ratio_epsilon,
+    double pressure_floor) {
     ContactSaturationResult out;
     out.saturation_pressure = saturation_pressure;
 
-    if (!(saturation_pressure > 0.0) || !(epsilon >= 0.0)) {
+    if (!(saturation_pressure > 0.0) || !(ratio_epsilon >= 0.0) || !(pressure_floor >= 0.0)) {
         out.status = CertificateStatus::Indeterminate;
         return out;
     }
@@ -96,20 +97,20 @@ ContactSaturationResult GeometryCertificateAPI::evaluate_contact_saturation(
     double peak = 0.0;
     std::size_t active = 0;
     for (double p : contact_pressures) {
-        if (!std::isfinite(p)) {
+        if (!std::isfinite(p) || p < 0.0) {
             out.status = CertificateStatus::Indeterminate;
             return out;
         }
         peak = std::max(peak, p);
-        if (p > epsilon) ++active;
+        if (p > pressure_floor) ++active;
     }
     out.peak_contact_pressure = peak;
     out.active_contact_count = active;
     out.saturation_ratio = peak / saturation_pressure;
 
-    if (out.saturation_ratio < 1.0 - epsilon) {
+    if (out.saturation_ratio < 1.0 - ratio_epsilon) {
         out.status = CertificateStatus::Pass; // under saturation
-    } else if (std::abs(out.saturation_ratio - 1.0) <= epsilon) {
+    } else if (std::abs(out.saturation_ratio - 1.0) <= ratio_epsilon) {
         out.status = CertificateStatus::Pass; // on threshold
     } else {
         out.status = CertificateStatus::Fail; // above saturation
@@ -169,11 +170,12 @@ ChronosFirstHittingResult GeometryCertificateAPI::chronos_first_hitting(
 
 Rank9ChannelDiagnostics GeometryCertificateAPI::rank9_from_singular_values(
     const std::array<double, 9>& singular_values,
-    double tau_rank) {
+    double tau_rank,
+    double max_conditioning) {
     Rank9ChannelDiagnostics out;
     out.singular_values = singular_values;
 
-    if (!(tau_rank > 0.0)) {
+    if (!(tau_rank > 0.0) || !(max_conditioning > 0.0)) {
         out.status = CertificateStatus::Indeterminate;
         return out;
     }
@@ -206,8 +208,10 @@ Rank9ChannelDiagnostics GeometryCertificateAPI::rank9_from_singular_values(
     out.conditioning = sigma_max / sigma_min_pos;
 
     // rank==9 is a numerical diagnosis, not automatic physical closure.
-    if (rank == 9) {
+    if (rank == 9 && out.conditioning <= max_conditioning) {
         out.status = CertificateStatus::Pass;
+    } else if (rank == 9) {
+        out.status = CertificateStatus::Indeterminate;
     } else if (rank >= 0) {
         out.status = CertificateStatus::Fail;
     } else {

@@ -18,7 +18,7 @@ def test_under_saturation_passes():
 
 
 def test_on_threshold_passes():
-    r = sst.GeometryCertificateAPI.evaluate_contact_saturation([1.0], saturation_pressure=1.0, epsilon=1e-9)
+    r = sst.GeometryCertificateAPI.evaluate_contact_saturation([1.0], saturation_pressure=1.0, ratio_epsilon=1e-9)
     assert r.status == sst.CertificateStatus.Pass
     assert r.saturation_ratio == pytest.approx(1.0)
 
