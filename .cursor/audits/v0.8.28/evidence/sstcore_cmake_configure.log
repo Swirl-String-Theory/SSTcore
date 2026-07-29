@@ -1,0 +1,18 @@
+-- The CXX compiler identification is GNU 14.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- SST_NUMERIC_PROFILE=deterministic
+-- SST_BUILD_PYTHON_BINDINGS=OFF: skipping pybind11 (embed/Node-only configure)
+-- Embedded 78 .fseries files from /mnt/data/SSTcore-source-bundle-0.8.28_extracted/resources/Knots_FourierSeries
+-- Embedded 2229 ideal text files from /mnt/data/SSTcore-source-bundle-0.8.28_extracted/resources
+-- SST_COPY_RUNTIME_RESOURCES=OFF: skipping resource tree copy
+-- Skipping examples/atoms (set SST_BUILD_ATOMS=ON and install GLFW3 to build)
+-- Using Node.js headers: /opt/nvm/versions/node/v22.16.0/include/nodeundefined
+-- node-addon-api not found or include dir invalid, skipping Node.js addon build
+-- Emscripten not detected, skipping WASM build
+-- Configuring done (3.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /mnt/data/sstcore_build_cpp

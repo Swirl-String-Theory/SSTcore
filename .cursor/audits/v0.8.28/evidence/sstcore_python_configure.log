@@ -1,0 +1,23 @@
+-- The CXX compiler identification is GNU 14.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- SST_NUMERIC_PROFILE=deterministic
+-- pybind11 v3.0.1 
+-- Found Python: /opt/pyvenv/bin/python3 (found suitable version "3.13.5", minimum required is "3.8") found components: Interpreter Development.Module Development.Embed
+Using compatibility mode for Python, set PYBIND11_FINDPYTHON to NEW/OLD to silence this message
+-- Performing Test HAS_FLTO_AUTO
+-- Performing Test HAS_FLTO_AUTO - Success
+-- Embedded 78 .fseries files from /mnt/data/SSTcore-source-bundle-0.8.28_extracted/resources/Knots_FourierSeries
+-- Embedded 2229 ideal text files from /mnt/data/SSTcore-source-bundle-0.8.28_extracted/resources
+-- SST_COPY_RUNTIME_RESOURCES=OFF: skipping resource tree copy
+-- SST_BUILD_CPP_TESTS=OFF: skipping C++ test executables
+-- Skipping examples/atoms (set SST_BUILD_ATOMS=ON and install GLFW3 to build)
+-- Using Node.js headers: /opt/nvm/versions/node/v22.16.0/include/nodeundefined
+-- node-addon-api not found or include dir invalid, skipping Node.js addon build
+-- Emscripten not detected, skipping WASM build
+-- Configuring done (10.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /mnt/data/sstcore_build_python

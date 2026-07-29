@@ -1,0 +1,171 @@
+-- SST_NUMERIC_PROFILE=deterministic
+-- SST_BUILD_PYTHON_BINDINGS=OFF: skipping pybind11 (embed/Node-only configure)
+-- Embedded 78 .fseries files from /mnt/data/SSTcore-source-bundle-0.8.28_extracted/resources/Knots_FourierSeries
+-- Embedded 2229 ideal text files from /mnt/data/SSTcore-source-bundle-0.8.28_extracted/resources
+-- SST_COPY_RUNTIME_RESOURCES=OFF: skipping resource tree copy
+-- Skipping examples/atoms (set SST_BUILD_ATOMS=ON and install GLFW3 to build)
+-- Using Node.js headers: /opt/nvm/versions/node/v22.16.0/include/nodeundefined
+-- node-addon-api not found or include dir invalid, skipping Node.js addon build
+-- Emscripten not detected, skipping WASM build
+-- Configuring done (3.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /mnt/data/sstcore_build_cpp
+[  1%] Ensuring knot files are embedded
+[  2%] Building CXX object CMakeFiles/sstcore_lib.dir/src/ab_initio_mass.cpp.o
+[  2%] Built target knot_files_embedded
+[  3%] Building CXX object CMakeFiles/sstcore_lib.dir/src/canonical_constants.cpp.o
+[  5%] Building CXX object CMakeFiles/sstcore_lib.dir/src/sst_master_equation.cpp.o
+[  6%] Building CXX object CMakeFiles/sstcore_lib.dir/src/chronos_kelvin_transport.cpp.o
+[  7%] Building CXX object CMakeFiles/sstcore_lib.dir/src/sst_tension_scales.cpp.o
+[  8%] Building CXX object CMakeFiles/sstcore_lib.dir/src/delay_mode_selector.cpp.o
+[ 10%] Building CXX object CMakeFiles/sstcore_lib.dir/src/atomic_bridge_model.cpp.o
+[ 11%] Building CXX object CMakeFiles/sstcore_lib.dir/src/spectroscopic_gap.cpp.o
+[ 12%] Building CXX object CMakeFiles/sstcore_lib.dir/src/clock_field_eft.cpp.o
+[ 13%] Building CXX object CMakeFiles/sstcore_lib.dir/src/trefoil_closure_kernels.cpp.o
+[ 15%] Building CXX object CMakeFiles/sstcore_lib.dir/src/biot_savart.cpp.o
+[ 16%] Building CXX object CMakeFiles/sstcore_lib.dir/src/fluid_dynamics.cpp.o
+[ 17%] Building CXX object CMakeFiles/sstcore_lib.dir/src/field_kernels.cpp.o
+[ 18%] Building CXX object CMakeFiles/sstcore_lib.dir/src/frenet_helicity.cpp.o
+[ 20%] Building CXX object CMakeFiles/sstcore_lib.dir/src/potential_timefield.cpp.o
+[ 21%] Building CXX object CMakeFiles/sstcore_lib.dir/src/magnus_integrator.cpp.o
+[ 22%] Building CXX object CMakeFiles/sstcore_lib.dir/src/multisector_fitter.cpp.o
+[ 24%] Building CXX object CMakeFiles/sstcore_lib.dir/src/trefoil_operator.cpp.o
+[ 25%] Building CXX object CMakeFiles/sstcore_lib.dir/src/hyperbolic_volume.cpp.o
+[ 26%] Building CXX object CMakeFiles/sstcore_lib.dir/src/knot/resource_loader.cpp.o
+[ 27%] Building CXX object CMakeFiles/sstcore_lib.dir/src/knot/fourier_parser.cpp.o
+[ 29%] Building CXX object CMakeFiles/sstcore_lib.dir/src/knot/ideal_parser.cpp.o
+[ 30%] Building CXX object CMakeFiles/sstcore_lib.dir/src/knot/fourier_eval.cpp.o
+[ 31%] Building CXX object CMakeFiles/sstcore_lib.dir/src/knot/invariants.cpp.o
+[ 32%] Building CXX object CMakeFiles/sstcore_lib.dir/src/knot/invariants_bridge.cpp.o
+[ 34%] Building CXX object CMakeFiles/sstcore_lib.dir/src/particle/xi_model.cpp.o
+[ 35%] Building CXX object CMakeFiles/sstcore_lib.dir/src/particle/mass_functional.cpp.o
+[ 36%] Building CXX object CMakeFiles/sstcore_lib.dir/src/particle/knot_particle_model.cpp.o
+[ 37%] Building CXX object CMakeFiles/sstcore_lib.dir/src/filament/vortex_knot_system.cpp.o
+gmake[2]: Warning: File '/mnt/data/SSTcore-source-bundle-0.8.28_extracted/src/filament/velocity_solver.cpp' has modification time 503 s in the future
+[ 39%] Building CXX object CMakeFiles/sstcore_lib.dir/src/filament/evolution.cpp.o
+[ 40%] Building CXX object CMakeFiles/sstcore_lib.dir/src/filament/velocity_solver.cpp.o
+[ 41%] Building CXX object CMakeFiles/sstcore_lib.dir/src/filament/integrator.cpp.o
+[ 43%] Building CXX object CMakeFiles/sstcore_lib.dir/src/geometry/periodic_spline.cpp.o
+[ 44%] Building CXX object CMakeFiles/sstcore_lib.dir/src/geometry/continuous_reach.cpp.o
+[ 45%] Building CXX object CMakeFiles/sstcore_lib.dir/src/geometry/smooth_tube_metrics.cpp.o
+[ 46%] Building CXX object CMakeFiles/sstcore_lib.dir/src/geometry/polygonal_clearance.cpp.o
+[ 48%] Building CXX object CMakeFiles/sstcore_lib.dir/src/topology/topology_guard.cpp.o
+[ 49%] Building CXX object CMakeFiles/sstcore_lib.dir/src/analysis/intrinsic_frame.cpp.o
+[ 50%] Building CXX object CMakeFiles/sstcore_lib.dir/src/analysis/rigid_motion.cpp.o
+[ 51%] Building CXX object CMakeFiles/sstcore_lib.dir/src/curve/sampling.cpp.o
+[ 53%] Building CXX object CMakeFiles/sstcore_lib.dir/src/catalog/knot_catalog.cpp.o
+[ 54%] Building CXX object CMakeFiles/sstcore_lib.dir/src/knot/polygonal_gauss.cpp.o
+[ 55%] Building CXX object CMakeFiles/sstcore_lib.dir/src/tube/detail/common.cpp.o
+[ 56%] Building CXX object CMakeFiles/sstcore_lib.dir/src/tube/geometry_core.cpp.o
+[ 58%] Building CXX object CMakeFiles/sstcore_lib.dir/src/tube/rigidity_matrix.cpp.o
+[ 59%] Building CXX object CMakeFiles/sstcore_lib.dir/src/tube/nnls.cpp.o
+[ 60%] Building CXX object CMakeFiles/sstcore_lib.dir/src/tube/io.cpp.o
+[ 62%] Building CXX object CMakeFiles/sstcore_lib.dir/src/tube/contact_stress.cpp.o
+[ 63%] Building CXX object CMakeFiles/sstcore_lib.dir/src/tube/tightener.cpp.o
+[ 64%] Building CXX object CMakeFiles/sstcore_lib.dir/src/radiation_flow.cpp.o
+[ 65%] Building CXX object CMakeFiles/sstcore_lib.dir/src/swirl_field.cpp.o
+[ 67%] Building CXX object CMakeFiles/sstcore_lib.dir/src/thermo_dynamics.cpp.o
+[ 68%] Building CXX object CMakeFiles/sstcore_lib.dir/src/time_evolution.cpp.o
+[ 69%] Building CXX object CMakeFiles/sstcore_lib.dir/src/vortex_ring.cpp.o
+[ 70%] Building CXX object CMakeFiles/sstcore_lib.dir/src/vorticity_dynamics.cpp.o
+[ 72%] Building CXX object CMakeFiles/sstcore_lib.dir/src/sst_gravity.cpp.o
+[ 73%] Building CXX object CMakeFiles/sstcore_lib.dir/src/sst_extensions.cpp.o
+[ 74%] Building CXX object CMakeFiles/sstcore_lib.dir/src/sst_integrator.cpp.o
+[ 75%] Building CXX object CMakeFiles/sstcore_lib.dir/src/geometry_certificate.cpp.o
+[ 77%] Building CXX object CMakeFiles/sstcore_lib.dir/src/polygonal_smooth_certificate.cpp.o
+[ 78%] Building CXX object CMakeFiles/sstcore_lib.dir/src/biot_savart_gate.cpp.o
+[ 79%] Building CXX object CMakeFiles/sstcore_lib.dir/src/operational_spacetime.cpp.o
+[ 81%] Building CXX object CMakeFiles/sstcore_lib.dir/src/qss_spectroscopy.cpp.o
+[ 82%] Building CXX object CMakeFiles/sstcore_lib.dir/src/pipeline_provenance.cpp.o
+[ 83%] Building CXX object CMakeFiles/sstcore_lib.dir/src/core_torsion.cpp.o
+[ 84%] Building CXX object CMakeFiles/sstcore_lib.dir/src/link_field_gate.cpp.o
+[ 86%] Building CXX object CMakeFiles/sstcore_lib.dir/src/sst_kam_diagnostics.cpp.o
+[ 87%] Building CXX object CMakeFiles/sstcore_lib.dir/src/value_origin.cpp.o
+[ 88%] Building CXX object CMakeFiles/sstcore_lib.dir/src/evidence_report.cpp.o
+[ 89%] Building CXX object CMakeFiles/sstcore_lib.dir/src/sst_action_phase.cpp.o
+[ 91%] Building CXX object CMakeFiles/sstcore_lib.dir/generated/knot_files_embedded.cpp.o
+-- SST_NUMERIC_PROFILE=deterministic
+-- SST_BUILD_PYTHON_BINDINGS=OFF: skipping pybind11 (embed/Node-only configure)
+-- Embedded 78 .fseries files from /mnt/data/SSTcore-source-bundle-0.8.28_extracted/resources/Knots_FourierSeries
+-- Embedded 2229 ideal text files from /mnt/data/SSTcore-source-bundle-0.8.28_extracted/resources
+-- SST_COPY_RUNTIME_RESOURCES=OFF: skipping resource tree copy
+-- Skipping examples/atoms (set SST_BUILD_ATOMS=ON and install GLFW3 to build)
+-- Using Node.js headers: /opt/nvm/versions/node/v22.16.0/include/nodeundefined
+-- node-addon-api not found or include dir invalid, skipping Node.js addon build
+-- Emscripten not detected, skipping WASM build
+-- Configuring done (3.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /mnt/data/sstcore_build_cpp
+[  1%] Ensuring knot files are embedded
+[  1%] Built target knot_files_embedded
+gmake[2]: Warning: File '/mnt/data/SSTcore-source-bundle-0.8.28_extracted/include/SST_Constants.h' has modification time 476 s in the future
+[  3%] Building CXX object CMakeFiles/sstcore_lib.dir/src/ab_initio_mass.cpp.o
+[  3%] Building CXX object CMakeFiles/sstcore_lib.dir/src/canonical_constants.cpp.o
+[  5%] Building CXX object CMakeFiles/sstcore_lib.dir/src/sst_master_equation.cpp.o
+[  6%] Building CXX object CMakeFiles/sstcore_lib.dir/src/chronos_kelvin_transport.cpp.o
+[  7%] Building CXX object CMakeFiles/sstcore_lib.dir/src/sst_tension_scales.cpp.o
+[  8%] Building CXX object CMakeFiles/sstcore_lib.dir/src/atomic_bridge_model.cpp.o
+[ 10%] Building CXX object CMakeFiles/sstcore_lib.dir/src/spectroscopic_gap.cpp.o
+[ 11%] Building CXX object CMakeFiles/sstcore_lib.dir/src/clock_field_eft.cpp.o
+[ 12%] Building CXX object CMakeFiles/sstcore_lib.dir/src/fluid_dynamics.cpp.o
+[ 13%] Building CXX object CMakeFiles/sstcore_lib.dir/src/potential_timefield.cpp.o
+[ 15%] Building CXX object CMakeFiles/sstcore_lib.dir/src/knot/resource_loader.cpp.o
+[ 16%] Building CXX object CMakeFiles/sstcore_lib.dir/src/knot/fourier_parser.cpp.o
+[ 17%] Building CXX object CMakeFiles/sstcore_lib.dir/src/knot/ideal_parser.cpp.o
+[ 18%] Building CXX object CMakeFiles/sstcore_lib.dir/src/knot/fourier_eval.cpp.o
+[ 20%] Building CXX object CMakeFiles/sstcore_lib.dir/src/knot/invariants.cpp.o
+[ 21%] Building CXX object CMakeFiles/sstcore_lib.dir/src/knot/invariants_bridge.cpp.o
+[ 22%] Building CXX object CMakeFiles/sstcore_lib.dir/src/particle/xi_model.cpp.o
+[ 24%] Building CXX object CMakeFiles/sstcore_lib.dir/src/particle/mass_functional.cpp.o
+[ 25%] Building CXX object CMakeFiles/sstcore_lib.dir/src/particle/knot_particle_model.cpp.o
+[ 26%] Building CXX object CMakeFiles/sstcore_lib.dir/src/filament/evolution.cpp.o
+[ 27%] Building CXX object CMakeFiles/sstcore_lib.dir/src/filament/velocity_solver.cpp.o
+[ 29%] Building CXX object CMakeFiles/sstcore_lib.dir/src/filament/integrator.cpp.o
+[ 30%] Building CXX object CMakeFiles/sstcore_lib.dir/src/geometry/periodic_spline.cpp.o
+[ 31%] Building CXX object CMakeFiles/sstcore_lib.dir/src/geometry/continuous_reach.cpp.o
+[ 32%] Building CXX object CMakeFiles/sstcore_lib.dir/src/geometry/smooth_tube_metrics.cpp.o
+[ 34%] Building CXX object CMakeFiles/sstcore_lib.dir/src/geometry/polygonal_clearance.cpp.o
+[ 35%] Building CXX object CMakeFiles/sstcore_lib.dir/src/topology/topology_guard.cpp.o
+[ 36%] Building CXX object CMakeFiles/sstcore_lib.dir/src/analysis/intrinsic_frame.cpp.o
+[ 37%] Building CXX object CMakeFiles/sstcore_lib.dir/src/analysis/rigid_motion.cpp.o
+[ 39%] Building CXX object CMakeFiles/sstcore_lib.dir/src/curve/sampling.cpp.o
+[ 40%] Building CXX object CMakeFiles/sstcore_lib.dir/src/catalog/knot_catalog.cpp.o
+[ 41%] Building CXX object CMakeFiles/sstcore_lib.dir/src/knot/polygonal_gauss.cpp.o
+[ 44%] Building CXX object CMakeFiles/sstcore_lib.dir/src/tube/geometry_core.cpp.o
+[ 44%] Building CXX object CMakeFiles/sstcore_lib.dir/src/tube/detail/common.cpp.o
+[ 45%] Building CXX object CMakeFiles/sstcore_lib.dir/src/tube/rigidity_matrix.cpp.o
+[ 46%] Building CXX object CMakeFiles/sstcore_lib.dir/src/tube/nnls.cpp.o
+[ 48%] Building CXX object CMakeFiles/sstcore_lib.dir/src/tube/io.cpp.o
+[ 49%] Building CXX object CMakeFiles/sstcore_lib.dir/src/tube/contact_stress.cpp.o
+[ 50%] Building CXX object CMakeFiles/sstcore_lib.dir/src/tube/tightener.cpp.o
+[ 51%] Building CXX object CMakeFiles/sstcore_lib.dir/src/vortex_ring.cpp.o
+[ 53%] Building CXX object CMakeFiles/sstcore_lib.dir/src/sst_gravity.cpp.o
+[ 54%] Building CXX object CMakeFiles/sstcore_lib.dir/src/sst_extensions.cpp.o
+[ 55%] Building CXX object CMakeFiles/sstcore_lib.dir/src/sst_integrator.cpp.o
+[ 56%] Building CXX object CMakeFiles/sstcore_lib.dir/src/geometry_certificate.cpp.o
+[ 58%] Building CXX object CMakeFiles/sstcore_lib.dir/src/polygonal_smooth_certificate.cpp.o
+[ 59%] Building CXX object CMakeFiles/sstcore_lib.dir/src/biot_savart_gate.cpp.o
+[ 60%] Building CXX object CMakeFiles/sstcore_lib.dir/src/operational_spacetime.cpp.o
+[ 62%] Building CXX object CMakeFiles/sstcore_lib.dir/src/qss_spectroscopy.cpp.o
+[ 63%] Building CXX object CMakeFiles/sstcore_lib.dir/src/pipeline_provenance.cpp.o
+[ 64%] Building CXX object CMakeFiles/sstcore_lib.dir/src/core_torsion.cpp.o
+[ 65%] Building CXX object CMakeFiles/sstcore_lib.dir/src/link_field_gate.cpp.o
+[ 67%] Building CXX object CMakeFiles/sstcore_lib.dir/src/sst_kam_diagnostics.cpp.o
+[ 68%] Building CXX object CMakeFiles/sstcore_lib.dir/src/value_origin.cpp.o
+[ 69%] Building CXX object CMakeFiles/sstcore_lib.dir/src/evidence_report.cpp.o
+[ 70%] Building CXX object CMakeFiles/sstcore_lib.dir/src/sst_action_phase.cpp.o
+[ 72%] Building CXX object CMakeFiles/sstcore_lib.dir/generated/knot_files_embedded.cpp.o
+[  1%] Ensuring knot files are embedded
+[  1%] Built target knot_files_embedded
+[  2%] Building CXX object CMakeFiles/sstcore_lib.dir/generated/knot_files_embedded.cpp.o
+[  3%] Linking CXX static library libsstcore_lib.a
+[ 92%] Built target sstcore_lib
+[ 93%] Building CXX object CMakeFiles/test_sst_integrator.dir/tests/test_sst_integrator.cpp.o
+[ 94%] Building CXX object CMakeFiles/test_frenet.dir/tests/test_frenet_helicity.cpp.o
+[ 96%] Building CXX object CMakeFiles/test_resolved_tube_geometry.dir/tests/test_resolved_tube_geometry.cpp.o
+[ 97%] Linking CXX executable test_sst_integrator
+[ 98%] Linking CXX executable test_frenet
+[ 98%] Built target test_sst_integrator
+[ 98%] Built target test_frenet
+[100%] Linking CXX executable test_resolved_tube_geometry
+[100%] Built target test_resolved_tube_geometry

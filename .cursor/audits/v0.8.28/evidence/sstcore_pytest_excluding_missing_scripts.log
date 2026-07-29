@@ -1,0 +1,82 @@
+........................................................Fs...F.....s.... [ 50%]
+.Fss..FFss........sF..............................sss.sss............... [100%]
+=================================== FAILURES ===================================
+________________________ test_get_ideal_12_points_12a4 _________________________
+
+    def test_get_ideal_12_points_12a4():
+        pts = sstcore.get_ideal_12_points("12a4")
+>       assert pts is not None
+E       assert None is not None
+
+tests/test_ideal_gilbert_formats.py:52: AssertionError
+_______________________ test_resources_dir_and_ideal_txt _______________________
+
+    def test_resources_dir_and_ideal_txt():
+        root = sstcore.get_resources_dir()
+>       assert root is not None
+E       assert None is not None
+
+tests/test_ideal_resources.py:19: AssertionError
+______________________ test_resolve_knot_ref_fremlin_role ______________________
+
+    def test_resolve_knot_ref_fremlin_role():
+        res = sstcore.resolve_knot_ref("3_1", source="fremlin")
+>       assert res is not None
+E       assert None is not None
+
+tests/test_knot_registry.py:23: AssertionError
+__________________ test_resources_dir_available_after_install __________________
+
+    def test_resources_dir_available_after_install() -> None:
+        resources_dir = SST.get_resources_dir()
+>       assert resources_dir is not None, "SSTcore resources directory is not resolved"
+E       AssertionError: SSTcore resources directory is not resolved
+E       assert None is not None
+
+tests/test_knotplot_resources_install.py:25: AssertionError
+________________ test_knotplot_ideal_files_load_via_public_api _________________
+
+    def test_knotplot_ideal_files_load_via_public_api() -> None:
+        knotplot_dir = SST.get_knotplot_dir()
+>       assert knotplot_dir is not None, "knotplot directory is not resolved by SSTcore"
+E       AssertionError: knotplot directory is not resolved by SSTcore
+E       assert None is not None
+
+tests/test_knotplot_resources_install.py:31: AssertionError
+__________________________ test_export_resources_cli ___________________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-0/test_export_resources_cli0')
+
+    def test_export_resources_cli(tmp_path):
+        from SSTcore.cli import export_resources
+    
+        manifest = tmp_path / "manifest.json"
+>       report = export_resources(tmp_path / "out", manifest_path=manifest)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_patch_c_cli.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/SSTcore/cli.py:112: in export_resources
+    resources = _resources_root(pkg)
+                ^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+pkg = <module 'SSTcore' from '/mnt/data/SSTcore-source-bundle-0.8.28_extracted/src/SSTcore/__init__.py'>
+
+    def _resources_root(pkg) -> Path:
+        root = pkg.get_resources_dir()
+        if root is None:
+>           raise SystemExit("SSTcore resources directory not found.")
+E           SystemExit: SSTcore resources directory not found.
+
+src/SSTcore/cli.py:47: SystemExit
+=========================== short test summary info ============================
+FAILED tests/test_ideal_gilbert_formats.py::test_get_ideal_12_points_12a4 - assert None is not None
+FAILED tests/test_ideal_resources.py::test_resources_dir_and_ideal_txt - assert None is not None
+FAILED tests/test_knot_registry.py::test_resolve_knot_ref_fremlin_role - assert None is not None
+FAILED tests/test_knotplot_resources_install.py::test_resources_dir_available_after_install - AssertionError: SSTcore resources directory is not resolved
+assert None is not None
+FAILED tests/test_knotplot_resources_install.py::test_knotplot_ideal_files_load_via_public_api - AssertionError: knotplot directory is not resolved by SSTcore
+assert None is not None
+FAILED tests/test_patch_c_cli.py::test_export_resources_cli - SystemExit: SSTcore resources directory not found.
+6 failed, 125 passed, 33 skipped in 0.79s
