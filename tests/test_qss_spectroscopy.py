@@ -16,6 +16,14 @@ def test_diagonal_eigenvalues():
     assert vals[0] == pytest.approx(2.0)
     assert vals[1] == pytest.approx(5.0)
     assert r.eigen_residual < 1e-12
+    assert r.eigenvalue_magnitude_ratio == pytest.approx(2.5)
+    assert r.conditioning == r.eigenvalue_magnitude_ratio
+
+
+def test_defective_matrix_magnitude_ratio_not_true_conditioning():
+    # Huge off-diagonal: eigenvalue magnitude ratio can be ~1 while matrix is ill for eigenvectors.
+    r = sst.QSSSpectroscopyAPI.eigen_2x2([1.0, 1e12, 0.0, 1.0])
+    assert r.eigenvalue_magnitude_ratio == pytest.approx(1.0)
 
 
 def test_jordan_block_complex_possible():

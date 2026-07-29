@@ -9,6 +9,9 @@ namespace sst {
 struct QSSSpectrumResult {
     std::vector<std::complex<double>> eigenvalues;
     double eigen_residual = 0.0;
+    /** |λ|_max / |λ|_min — NOT eigenproblem conditioning (audit H-007). */
+    double eigenvalue_magnitude_ratio = 0.0;
+    /** Deprecated alias of eigenvalue_magnitude_ratio (kept for binding compatibility). */
     double conditioning = 0.0;
     std::string epistemic_status; // CONDITIONAL_BRIDGE / SYNTHETIC_DIAGNOSTIC / OPEN_RESEARCH_GATE
 };

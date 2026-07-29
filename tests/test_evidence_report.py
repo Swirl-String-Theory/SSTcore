@@ -32,6 +32,7 @@ def test_build_and_write_roundtrip(tmp_path: Path):
 
     js = sst.EvidenceReportAPI.build_report_json(meta, [c])
     data = json.loads(js)
+    assert data["schema_version"] == "1.0"
     assert data["sstcore_version"] == data["canon_version"] == sst.__version__
     assert data["checks"][0]["kind"] == "ALGEBRAIC_IDENTITY"
 
@@ -43,3 +44,18 @@ def test_build_and_write_roundtrip(tmp_path: Path):
 def test_empty_path_fails():
     meta = sst.EvidenceReportMeta()
     assert not sst.EvidenceReportAPI.write_evidence_report("", meta, [])
+
+
+def test_nonfinite_residual_is_null_json():
+    meta = sst.EvidenceReportMeta()
+    c = sst.CheckResult()
+    c.name = "nan_check"
+    c.passed = False
+    c.kind = sst.CheckKind.AlgebraicIdentity
+    c.residual = float("nan")
+    c.tolerance = float("inf")
+    c.message = "ctrl\x01"
+    js = sst.EvidenceReportAPI.build_report_json(meta, [c])
+    data = json.loads(js)
+    assert data["checks"][0]["residual"] is None
+    assert data["checks"][0]["tolerance"] is None

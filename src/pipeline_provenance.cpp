@@ -49,6 +49,28 @@ bool hashes_look_like_sha256(const ProvenanceRecord& r) {
     return true;
 }
 
+bool timestamp_looks_utc(const std::string& ts) {
+    // Minimal ISO-8601 UTC: YYYY-MM-DDTHH:MM:SSZ (optionally with fractional seconds).
+    if (ts.size() < 20 || ts.back() != 'Z') return false;
+    if (ts[4] != '-' || ts[7] != '-' || ts[10] != 'T' || ts[13] != ':' || ts[16] != ':') return false;
+    for (std::size_t i = 0; i < ts.size() - 1; ++i) {
+        if (i == 4 || i == 7 || i == 10 || i == 13 || i == 16) continue;
+        if (i == 19 && ts[i] == '.') continue;
+        if (i > 19 && ts[i] == '.') continue;
+        if (i > 19) {
+            if (!(ts[i] >= '0' && ts[i] <= '9')) return false;
+            continue;
+        }
+        if (!(ts[i] >= '0' && ts[i] <= '9')) return false;
+    }
+    return true;
+}
+
+bool exact_stage_step(PipelineStage prev, PipelineStage cur) {
+    // Exact adjacent transitions on the KnotPlot → … → VortexLab ladder (no skips).
+    return static_cast<int>(cur) == static_cast<int>(prev) + 1 || cur == prev;
+}
+
 } // namespace
 
 std::string PipelineProvenanceAPI::record_fingerprint(const ProvenanceRecord& r) {
@@ -68,9 +90,8 @@ PipelineCertificationStatus PipelineProvenanceAPI::evaluate_chain(const std::vec
         if (!record_complete(r)) return PipelineCertificationStatus::Unknown;
     }
 
-    // SHA-256 contract: non-empty hash fields must be 64-hex (parent may be empty on root).
     for (const auto& r : records) {
-        if (!hashes_look_like_sha256(r)) {
+        if (!hashes_look_like_sha256(r) || !timestamp_looks_utc(r.timestamp_utc)) {
             return PipelineCertificationStatus::Candidate;
         }
     }
@@ -90,8 +111,11 @@ PipelineCertificationStatus PipelineProvenanceAPI::evaluate_chain(const std::vec
         if (cur.input_sha256 != prev.output_sha256) {
             return PipelineCertificationStatus::Candidate;
         }
-        // Stages should be nondecreasing along the ladder.
-        if (static_cast<int>(cur.stage) < static_cast<int>(prev.stage)) {
+        if (!exact_stage_step(prev.stage, cur.stage)) {
+            return PipelineCertificationStatus::Candidate;
+        }
+        if (prev.coordinate_convention != cur.coordinate_convention ||
+            prev.scale_convention != cur.scale_convention) {
             return PipelineCertificationStatus::Candidate;
         }
     }

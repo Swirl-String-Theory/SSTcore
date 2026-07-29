@@ -75,7 +75,33 @@ void bind_action_phase(Napi::Env env, Napi::Object exports) {
         o.Set("gammaConsistency", Napi::Number::New(env, r.gamma_consistency));
         o.Set("properTimeConsistency", Napi::Number::New(env, r.proper_time_consistency));
         o.Set("phaseRateConsistency", Napi::Number::New(env, r.phase_rate_consistency));
+        o.Set("deltaShapeSeparability", Napi::Number::New(env, r.delta_shape_separability));
+        o.Set("finite", Napi::Boolean::New(env, r.finite));
+        o.Set("withinTolerance", Napi::Boolean::New(env, r.within_tolerance));
         o.Set("ok", Napi::Boolean::New(env, r.ok));
         return o;
+    }));
+    exports.Set("deltaShapeSeparability", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
+        Napi::Env env = info.Env();
+        if (info.Length() < 4) {
+            Napi::TypeError::New(env, "deltaShapeSeparability(P, E0, dE0_dq, c)").ThrowAsJavaScriptException();
+            return env.Null();
+        }
+        return Napi::Number::New(env, sst::ActionPhaseAPI::delta_shape_separability(
+            info[0].As<Napi::Number>().DoubleValue(),
+            info[1].As<Napi::Number>().DoubleValue(),
+            info[2].As<Napi::Number>().DoubleValue(),
+            info[3].As<Napi::Number>().DoubleValue()));
+    }));
+    exports.Set("fixedVPhaseErrorFactor", Napi::Function::New(env, [](const Napi::CallbackInfo& info) -> Napi::Value {
+        Napi::Env env = info.Env();
+        if (info.Length() < 3) {
+            Napi::TypeError::New(env, "fixedVPhaseErrorFactor(P, E0, c)").ThrowAsJavaScriptException();
+            return env.Null();
+        }
+        return Napi::Number::New(env, sst::ActionPhaseAPI::fixed_v_phase_error_factor(
+            info[0].As<Napi::Number>().DoubleValue(),
+            info[1].As<Napi::Number>().DoubleValue(),
+            info[2].As<Napi::Number>().DoubleValue()));
     }));
 }

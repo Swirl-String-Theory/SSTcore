@@ -23,7 +23,8 @@ def test_identical_circle_samples_pass():
     cert = sst.PolygonalSmoothCertificateAPI.evaluate(
         pts, pts, tube_radius=0.05, hausdorff_tol=1e-9, tangent_tol=1e-9, curvature_tol=1e-6
     )
-    assert cert.status == sst.CertificateStatus.Pass
+    # Diagnostic-only: Pass reserved for reach/isotopy (audit H-004).
+    assert cert.status == sst.CertificateStatus.Indeterminate
     assert cert.hausdorff_bound == pytest.approx(0.0)
     assert cert.tangent_error == pytest.approx(0.0)
     assert cert.thickness_lower_bound > 0.05
@@ -36,7 +37,7 @@ def test_refinement_series_within_loose_tangent_budget():
     cert = sst.PolygonalSmoothCertificateAPI.evaluate(
         poly, smooth, tube_radius=0.05, hausdorff_tol=0.2, tangent_tol=2.1, curvature_tol=0.5
     )
-    assert cert.status == sst.CertificateStatus.Pass
+    assert cert.status == sst.CertificateStatus.Indeterminate
     assert cert.hausdorff_bound <= 0.2
     assert cert.polygon_hash != cert.smooth_hash
 

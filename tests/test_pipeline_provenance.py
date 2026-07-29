@@ -49,12 +49,29 @@ def test_valid_chain_certified():
         parent_record_sha256=sst.PipelineProvenanceAPI.record_fingerprint(a),
     )
     c = _base(
-        stage=sst.PipelineStage.SSTcore,
+        stage=sst.PipelineStage.Smoothing,
         input_sha256=_h("a2"),
         output_sha256=_h("a3"),
         parent_record_sha256=sst.PipelineProvenanceAPI.record_fingerprint(b),
     )
-    assert sst.PipelineProvenanceAPI.evaluate_chain([a, b, c]) == sst.PipelineCertificationStatus.Certified
+    d = _base(
+        stage=sst.PipelineStage.SSTcore,
+        input_sha256=_h("a3"),
+        output_sha256=_h("a4"),
+        parent_record_sha256=sst.PipelineProvenanceAPI.record_fingerprint(c),
+    )
+    assert sst.PipelineProvenanceAPI.evaluate_chain([a, b, c, d]) == sst.PipelineCertificationStatus.Certified
+
+
+def test_skipped_stage_is_candidate():
+    a = _base(stage=sst.PipelineStage.KnotPlot, input_sha256=_h("a0"), output_sha256=_h("a1"), parent_record_sha256="")
+    b = _base(
+        stage=sst.PipelineStage.SSTcore,  # skip Ridgerunner/Smoothing
+        input_sha256=_h("a1"),
+        output_sha256=_h("a2"),
+        parent_record_sha256=sst.PipelineProvenanceAPI.record_fingerprint(a),
+    )
+    assert sst.PipelineProvenanceAPI.evaluate_chain([a, b]) == sst.PipelineCertificationStatus.Candidate
 
 
 def test_tampered_parent_is_candidate():

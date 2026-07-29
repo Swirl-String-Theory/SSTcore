@@ -124,7 +124,13 @@ PolygonalSmoothCertificate PolygonalSmoothCertificateAPI::evaluate(
         const bool geom_ok = out.hausdorff_bound <= hausdorff_tol &&
                              out.tangent_error <= tangent_tol &&
                              out.curvature_error <= curvature_tol;
-        out.status = (thick_ok && geom_ok) ? CertificateStatus::Pass : CertificateStatus::Fail;
+        // Diagnostic-only: sampled Hausdorff/tangent/curvature do not prove reach/isotopy.
+        // Never return Pass here (audit H-004); reserve Pass for future rigorous guards.
+        if (thick_ok && geom_ok) {
+            out.status = CertificateStatus::Indeterminate;
+        } else {
+            out.status = CertificateStatus::Fail;
+        }
     } catch (const std::exception&) {
         out.status = CertificateStatus::Indeterminate;
     }

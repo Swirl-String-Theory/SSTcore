@@ -1,11 +1,11 @@
 {
   "manifest_version": 1,
-  "generated_at": "2026-07-29T02:33:40.682722+00:00",
+  "generated_at": "2026-07-29T02:42:13.608653+00:00",
   "summary": {
     "cpp_public": 208,
-    "py_bound": 586,
+    "py_bound": 589,
     "cpp_unbound": 91,
-    "binding_without_cpp_match": 137,
+    "binding_without_cpp_match": 140,
     "node_modules": 40,
     "py_modules": 41,
     "both_py_node": 40,
@@ -4234,6 +4234,36 @@
       "py_name": "action_phase_residuals"
     },
     {
+      "module": "sst_action_phase",
+      "cpp_symbol": "ActionPhaseAPI::delta_shape_separability",
+      "py_export": "ActionPhaseAPI.delta_shape_separability",
+      "export_kind": "class_static",
+      "binding_file": "sst_action_phase_py.cpp",
+      "header_file": null,
+      "py_class": "ActionPhaseAPI",
+      "py_name": "delta_shape_separability"
+    },
+    {
+      "module": "sst_action_phase",
+      "cpp_symbol": "ActionPhaseAPI::coupled_shape_residual",
+      "py_export": "ActionPhaseAPI.coupled_shape_residual",
+      "export_kind": "class_static",
+      "binding_file": "sst_action_phase_py.cpp",
+      "header_file": null,
+      "py_class": "ActionPhaseAPI",
+      "py_name": "coupled_shape_residual"
+    },
+    {
+      "module": "sst_action_phase",
+      "cpp_symbol": "ActionPhaseAPI::fixed_v_phase_error_factor",
+      "py_export": "ActionPhaseAPI.fixed_v_phase_error_factor",
+      "export_kind": "class_static",
+      "binding_file": "sst_action_phase_py.cpp",
+      "header_file": null,
+      "py_class": "ActionPhaseAPI",
+      "py_name": "fixed_v_phase_error_factor"
+    },
+    {
       "module": "sst_extensions",
       "cpp_symbol": null,
       "py_export": "CanonicalizeResult.path",
@@ -7395,6 +7425,24 @@
         "module": "sst_action_phase",
         "cpp_symbol": "ActionPhaseAPI::action_phase_residuals",
         "py_export": "ActionPhaseAPI.action_phase_residuals",
+        "binding_file": "sst_action_phase_py.cpp"
+      },
+      {
+        "module": "sst_action_phase",
+        "cpp_symbol": "ActionPhaseAPI::delta_shape_separability",
+        "py_export": "ActionPhaseAPI.delta_shape_separability",
+        "binding_file": "sst_action_phase_py.cpp"
+      },
+      {
+        "module": "sst_action_phase",
+        "cpp_symbol": "ActionPhaseAPI::coupled_shape_residual",
+        "py_export": "ActionPhaseAPI.coupled_shape_residual",
+        "binding_file": "sst_action_phase_py.cpp"
+      },
+      {
+        "module": "sst_action_phase",
+        "cpp_symbol": "ActionPhaseAPI::fixed_v_phase_error_factor",
+        "py_export": "ActionPhaseAPI.fixed_v_phase_error_factor",
         "binding_file": "sst_action_phase_py.cpp"
       },
       {

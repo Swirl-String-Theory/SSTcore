@@ -16,7 +16,8 @@ QSSSpectrumResult QSSSpectroscopyAPI::eigen_2x2(const std::vector<double>& m) {
     out.epistemic_status = kSynthetic;
     if (m.size() != 4) {
         out.eigen_residual = std::numeric_limits<double>::quiet_NaN();
-        out.conditioning = std::numeric_limits<double>::quiet_NaN();
+        out.eigenvalue_magnitude_ratio = std::numeric_limits<double>::quiet_NaN();
+        out.conditioning = out.eigenvalue_magnitude_ratio;
         out.epistemic_status = "OPEN_RESEARCH_GATE";
         return out;
     }
@@ -44,7 +45,8 @@ QSSSpectrumResult QSSSpectroscopyAPI::eigen_2x2(const std::vector<double>& m) {
     const double l1 = std::abs(lam1), l2 = std::abs(lam2);
     const double lmax = std::max(l1, l2);
     const double lmin = std::min(l1, l2);
-    out.conditioning = (lmin > 0.0) ? (lmax / lmin) : std::numeric_limits<double>::infinity();
+    out.eigenvalue_magnitude_ratio = (lmin > 0.0) ? (lmax / lmin) : std::numeric_limits<double>::infinity();
+    out.conditioning = out.eigenvalue_magnitude_ratio; // deprecated alias
     return out;
 }
 

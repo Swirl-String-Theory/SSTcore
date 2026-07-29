@@ -9,6 +9,7 @@ void bind_qss_spectroscopy(py::module_& m) {
     py::class_<sst::QSSSpectrumResult>(m, "QSSSpectrumResult")
         .def_readonly("eigenvalues", &sst::QSSSpectrumResult::eigenvalues)
         .def_readonly("eigen_residual", &sst::QSSSpectrumResult::eigen_residual)
+        .def_readonly("eigenvalue_magnitude_ratio", &sst::QSSSpectrumResult::eigenvalue_magnitude_ratio)
         .def_readonly("conditioning", &sst::QSSSpectrumResult::conditioning)
         .def_readonly("epistemic_status", &sst::QSSSpectrumResult::epistemic_status);
 
