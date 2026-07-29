@@ -1,24 +1,9 @@
 #include "sst_pipeline_provenance.h"
+#include "sst_sha256.h"
 
-#include <cstdint>
-#include <iomanip>
 #include <sstream>
 
 namespace sst {
-namespace {
-
-std::string fnv1a_hex(const std::string& s) {
-    std::uint64_t h = 14695981039346656037ull;
-    for (unsigned char c : s) {
-        h ^= c;
-        h *= 1099511628211ull;
-    }
-    std::ostringstream oss;
-    oss << std::hex << std::setfill('0') << std::setw(16) << h;
-    return oss.str();
-}
-
-} // namespace
 
 const char* PipelineProvenanceAPI::stage_name(PipelineStage s) {
     switch (s) {
@@ -41,7 +26,7 @@ const char* PipelineProvenanceAPI::certification_name(PipelineCertificationStatu
 }
 
 std::string PipelineProvenanceAPI::fingerprint_hex(const std::string& payload) {
-    return fnv1a_hex(payload);
+    return sha256_hex(payload);
 }
 
 bool PipelineProvenanceAPI::record_complete(const ProvenanceRecord& r) {
@@ -50,6 +35,21 @@ bool PipelineProvenanceAPI::record_complete(const ProvenanceRecord& r) {
            !r.parameter_sha256.empty() && !r.coordinate_convention.empty() &&
            !r.scale_convention.empty() && !r.timestamp_utc.empty();
 }
+
+namespace {
+
+bool hashes_look_like_sha256(const ProvenanceRecord& r) {
+    if (!is_sha256_hex(r.input_sha256) || !is_sha256_hex(r.output_sha256) ||
+        !is_sha256_hex(r.parameter_sha256)) {
+        return false;
+    }
+    if (!r.parent_record_sha256.empty() && !is_sha256_hex(r.parent_record_sha256)) {
+        return false;
+    }
+    return true;
+}
+
+} // namespace
 
 std::string PipelineProvenanceAPI::record_fingerprint(const ProvenanceRecord& r) {
     std::ostringstream oss;
@@ -66,6 +66,13 @@ PipelineCertificationStatus PipelineProvenanceAPI::evaluate_chain(const std::vec
 
     for (const auto& r : records) {
         if (!record_complete(r)) return PipelineCertificationStatus::Unknown;
+    }
+
+    // SHA-256 contract: non-empty hash fields must be 64-hex (parent may be empty on root).
+    for (const auto& r : records) {
+        if (!hashes_look_like_sha256(r)) {
+            return PipelineCertificationStatus::Candidate;
+        }
     }
 
     // First stage must be KnotPlot with empty parent.

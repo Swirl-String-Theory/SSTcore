@@ -45,3 +45,21 @@ def test_golden_ratio_null_test_only():
 def test_indeterminate_bad_shape():
     r = sst.KAMDiagnosticsAPI.stage1(sst.KAMSector.S, [1.0], [1.0, 2.0])
     assert r.status == sst.CertificateStatus.Indeterminate
+
+
+def test_stage1_singular_3x3_not_pass():
+    # Audit adversarial: diag product is 1 but det=0 → must not Pass/KAM1.
+    hess = [
+        1.0, 1.0, 0.0,
+        1.0, 1.0, 0.0,
+        0.0, 0.0, 1.0,
+    ]
+    r = sst.KAMDiagnosticsAPI.stage1(
+        sst.KAMSector.S,
+        frequencies=[1.0, math.sqrt(2.0), math.sqrt(3.0)],
+        hessian_row_major=hess,
+        diophantine_tau=1e-4,
+    )
+    assert r.hessian_determinant == pytest.approx(0.0, abs=1e-12)
+    assert r.status != sst.CertificateStatus.Pass
+    assert r.achieved_stage != sst.KAMStage.KAM1

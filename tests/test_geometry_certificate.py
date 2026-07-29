@@ -26,7 +26,7 @@ def test_valid_resolved_tube_circle_passes():
     assert cert.minimum_radius_of_curvature == pytest.approx(1.0, rel=5e-2)
     assert cert.minimum_separation > 2.0 * cert.tube_radius
     assert cert.thickness_margin > 0.0
-    assert isinstance(cert.geometry_hash, str) and len(cert.geometry_hash) >= 8
+    assert isinstance(cert.geometry_hash, str) and len(cert.geometry_hash) == 64
 
 
 def test_self_contact_failure_large_tube_radius():

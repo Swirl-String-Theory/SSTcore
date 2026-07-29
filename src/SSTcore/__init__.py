@@ -133,10 +133,14 @@ def get_resources_dir() -> Optional[Path]:
     if pkg_resources.is_dir():
         return pkg_resources
 
-    # 3) Repo-root resources (dev checkout with project_root/resources).
-    repo_resources = Path(__file__).resolve().parent.parent / "resources"
-    if repo_resources.is_dir():
-        return repo_resources
+    # 3) Repo-root resources (dev checkout: src/SSTcore/__init__.py → ../../resources).
+    here = Path(__file__).resolve().parent
+    for candidate in (
+        here.parent.parent / "resources",  # src/SSTcore → repo root
+        here.parent / "resources",  # fallback: sibling of package dir
+    ):
+        if candidate.is_dir():
+            return candidate.resolve()
 
     # 4) CMake / legacy install prefixes.
     prefix = Path(sys.prefix)

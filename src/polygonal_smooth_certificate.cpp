@@ -1,32 +1,33 @@
 #include "polygonal_smooth_certificate.h"
+#include "sst_sha256.h"
 
 #include "sst/tube/geometry_core.h"
 
 #include <algorithm>
 #include <cmath>
 #include <cstdint>
-#include <iomanip>
+#include <cstring>
 #include <limits>
-#include <sstream>
+#include <vector>
 
 namespace sst {
 namespace {
 
-std::string fnv1a_hex(const std::vector<Vec3>& pts) {
-    std::uint64_t h = 14695981039346656037ull;
-    for (const auto& p : pts) {
-        for (std::size_t k = 0; k < 3; ++k) {
-            const double c = p[k];
-            const auto* bytes = reinterpret_cast<const unsigned char*>(&c);
-            for (std::size_t i = 0; i < sizeof(double); ++i) {
-                h ^= bytes[i];
-                h *= 1099511628211ull;
-            }
-        }
+void append_le_f64(std::vector<std::uint8_t>& out, double c) {
+    std::uint64_t u = 0;
+    std::memcpy(&u, &c, sizeof(u));
+    for (int i = 0; i < 8; ++i) {
+        out.push_back(static_cast<std::uint8_t>((u >> (8 * i)) & 0xffu));
     }
-    std::ostringstream oss;
-    oss << std::hex << std::setfill('0') << std::setw(16) << h;
-    return oss.str();
+}
+
+std::string points_sha256_hex(const std::vector<Vec3>& pts) {
+    std::vector<std::uint8_t> bytes;
+    bytes.reserve(pts.size() * 24);
+    for (const auto& p : pts) {
+        for (std::size_t k = 0; k < 3; ++k) append_le_f64(bytes, p[k]);
+    }
+    return sha256_hex(bytes);
 }
 
 double dist2(const Vec3& a, const Vec3& b) {
@@ -80,7 +81,7 @@ double max_tangent_error(const std::vector<Vec3>& poly, const std::vector<Vec3>&
 } // namespace
 
 std::string PolygonalSmoothCertificateAPI::fingerprint_points(const std::vector<Vec3>& pts) {
-    return fnv1a_hex(pts);
+    return points_sha256_hex(pts);
 }
 
 PolygonalSmoothCertificate PolygonalSmoothCertificateAPI::evaluate(

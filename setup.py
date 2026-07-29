@@ -972,6 +972,7 @@ src_files = [
     "src/value_origin.cpp",
     "src/evidence_report.cpp",
     "src/sst_action_phase.cpp",
+    "src/sst_sha256.cpp",
 ]
 
 # Generated embedded files will be added by CustomBuildExt during build

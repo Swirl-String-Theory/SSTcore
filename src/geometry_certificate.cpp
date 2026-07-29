@@ -1,41 +1,42 @@
 #include "geometry_certificate.h"
+#include "sst_sha256.h"
 
 #include "sst/tube/geometry_core.h"
 
 #include <algorithm>
 #include <cmath>
 #include <cstdint>
-#include <iomanip>
+#include <cstring>
 #include <limits>
-#include <sstream>
 #include <stdexcept>
+#include <vector>
 
 namespace sst {
 namespace {
 
-// FNV-1a 64-bit folded to hex (stable geometry fingerprint; not cryptographic SHA-256).
-std::string fnv1a_hex(const std::vector<Vec3>& pts) {
-    std::uint64_t h = 14695981039346656037ull;
-    for (const auto& p : pts) {
-        for (std::size_t k = 0; k < 3; ++k) {
-            const double c = p[k];
-            const auto* bytes = reinterpret_cast<const unsigned char*>(&c);
-            for (std::size_t i = 0; i < sizeof(double); ++i) {
-                h ^= bytes[i];
-                h *= 1099511628211ull;
-            }
-        }
+// Canonical little-endian IEEE-754 bytes for portable SHA-256 geometry fingerprints.
+void append_le_f64(std::vector<std::uint8_t>& out, double c) {
+    std::uint64_t u = 0;
+    static_assert(sizeof(double) == 8, "double must be 8 bytes");
+    std::memcpy(&u, &c, sizeof(u));
+    for (int i = 0; i < 8; ++i) {
+        out.push_back(static_cast<std::uint8_t>((u >> (8 * i)) & 0xffu));
     }
-    std::ostringstream oss;
-    oss << std::hex << std::setfill('0') << std::setw(16) << h;
-    return oss.str();
+}
+
+std::string points_sha256_hex(const std::vector<Vec3>& pts) {
+    std::vector<std::uint8_t> bytes;
+    bytes.reserve(pts.size() * 24);
+    for (const auto& p : pts) {
+        for (std::size_t k = 0; k < 3; ++k) append_le_f64(bytes, p[k]);
+    }
+    return sha256_hex(bytes);
 }
 
 } // namespace
 
 std::string GeometryCertificateAPI::sha256_hex_of_points(const std::vector<Vec3>& pts) {
-    // Name retained for API stability; implementation is a deterministic FNV-1a fingerprint.
-    return fnv1a_hex(pts);
+    return points_sha256_hex(pts);
 }
 
 GeometryCertificate GeometryCertificateAPI::evaluate_tube_geometry(

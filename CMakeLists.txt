@@ -157,6 +157,7 @@ add_library(sstcore_lib STATIC
         src/value_origin.cpp
         src/evidence_report.cpp
         src/sst_action_phase.cpp
+        src/sst_sha256.cpp
         ${CMAKE_BINARY_DIR}/generated/knot_files_embedded.cpp
 )
 
@@ -231,6 +232,12 @@ if(SST_BUILD_PYTHON_BINDINGS)
     )
 
     if(IS_LINUX)
+        # --no-undefined requires explicit Python link so Py* symbols resolve at link time.
+        if(TARGET Python::Python)
+            target_link_libraries(sstcore PRIVATE Python::Python)
+        elseif(TARGET Python::Module)
+            target_link_libraries(sstcore PRIVATE Python::Module)
+        endif()
         set_target_properties(sstcore PROPERTIES
             LINK_FLAGS "-Wl,--no-undefined"
         )
@@ -434,6 +441,7 @@ if(NODE_EXECUTABLE)
             src/geometry_certificate_node.cpp
             src/polygonal_smooth_certificate_node.cpp
             src/operational_spacetime_node.cpp
+            src/qss_spectroscopy_node.cpp
             src/pipeline_provenance_node.cpp
             src/core_torsion_node.cpp
             src/sst_kam_diagnostics_node.cpp

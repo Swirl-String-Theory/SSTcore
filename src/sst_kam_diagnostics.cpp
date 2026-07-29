@@ -3,11 +3,48 @@
 #include <cmath>
 #include <functional>
 #include <limits>
+#include <vector>
 
 namespace sst {
 namespace {
 
 double det2(double a, double b, double c, double d) { return a * d - b * c; }
+
+/** Gaussian elimination determinant; returns 0 for singular / non-finite. */
+double det_n(const std::vector<double>& a_in, std::size_t n) {
+    if (a_in.size() != n * n || n == 0) return 0.0;
+    std::vector<double> a = a_in;
+    double det = 1.0;
+    for (std::size_t i = 0; i < n; ++i) {
+        std::size_t pivot = i;
+        double best = std::abs(a[i * n + i]);
+        for (std::size_t r = i + 1; r < n; ++r) {
+            const double v = std::abs(a[r * n + i]);
+            if (v > best) {
+                best = v;
+                pivot = r;
+            }
+        }
+        if (!(best > 0.0) || !std::isfinite(best)) {
+            return 0.0;
+        }
+        if (pivot != i) {
+            for (std::size_t c = i; c < n; ++c) {
+                std::swap(a[i * n + c], a[pivot * n + c]);
+            }
+            det = -det;
+        }
+        const double piv = a[i * n + i];
+        det *= piv;
+        for (std::size_t r = i + 1; r < n; ++r) {
+            const double f = a[r * n + i] / piv;
+            for (std::size_t c = i; c < n; ++c) {
+                a[r * n + c] -= f * a[i * n + c];
+            }
+        }
+    }
+    return std::isfinite(det) ? det : 0.0;
+}
 
 } // namespace
 
@@ -54,6 +91,12 @@ KAMStage1Result KAMDiagnosticsAPI::stage1(
             return out;
         }
     }
+    for (double h : hessian_row_major) {
+        if (!std::isfinite(h)) {
+            out.status = CertificateStatus::Indeterminate;
+            return out;
+        }
+    }
 
     if (n == 1) {
         out.hessian_determinant = hessian_row_major[0];
@@ -61,10 +104,7 @@ KAMStage1Result KAMDiagnosticsAPI::stage1(
         out.hessian_determinant = det2(hessian_row_major[0], hessian_row_major[1],
                                        hessian_row_major[2], hessian_row_major[3]);
     } else {
-        // Conservative: product of diagonal as proxy when n>2 (scaffolding).
-        double d = 1.0;
-        for (std::size_t i = 0; i < n; ++i) d *= hessian_row_major[i * n + i];
-        out.hessian_determinant = d;
+        out.hessian_determinant = det_n(hessian_row_major, n);
     }
 
     // Minimum |k·Ω| over small integer vectors (exclude zero).

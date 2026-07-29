@@ -1,15 +1,15 @@
 {
   "manifest_version": 1,
-  "generated_at": "2026-07-28T21:30:44.711515+00:00",
+  "generated_at": "2026-07-29T02:33:40.682722+00:00",
   "summary": {
     "cpp_public": 208,
     "py_bound": 586,
     "cpp_unbound": 91,
     "binding_without_cpp_match": 137,
-    "node_modules": 39,
+    "node_modules": 40,
     "py_modules": 41,
-    "both_py_node": 39,
-    "py_only_modules": 2,
+    "both_py_node": 40,
+    "py_only_modules": 1,
     "node_only_modules": 0
   },
   "module_coverage": {
@@ -36,6 +36,7 @@
       "pipeline_provenance",
       "polygonal_smooth_certificate",
       "potential_timefield",
+      "qss_spectroscopy",
       "radiation_flow",
       "spectroscopic_gap",
       "sst_action_phase",
@@ -55,7 +56,6 @@
       "vorticity_dynamics"
     ],
     "py_only": [
-      "qss_spectroscopy",
       "resolved_tube_geometry"
     ],
     "node_only": [],
@@ -82,6 +82,7 @@
       "pipeline_provenance_node.cpp",
       "polygonal_smooth_certificate_node.cpp",
       "potential_timefield_node.cpp",
+      "qss_spectroscopy_node.cpp",
       "radiation_flow_node.cpp",
       "spectroscopic_gap_node.cpp",
       "sst_action_phase_node.cpp",
@@ -7656,7 +7657,6 @@
       }
     ],
     "py_without_node": [
-      "qss_spectroscopy",
       "resolved_tube_geometry"
     ]
   }
