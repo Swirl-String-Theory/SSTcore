@@ -90,7 +90,15 @@ def _normalize_ref(ref: str) -> str:
 def _resolve_triple_gear(ref: str) -> str:
     key = ref.lower().replace(" ", "-")
     if key in _TRIPLE_GEAR_ALIASES or key == "knot_tl3.3_gear":
-        return "knot_TL3.3_Gear"
+        # Prefer INDEX alias target when present (torus_3.3).
+        try:
+            sst = _sstcore_package()
+            normalized = sst.normalize_knotplot_id("knot_TL3.3_Gear")
+            if normalized:
+                return normalized
+        except Exception:
+            pass
+        return "torus_3.3"
     return ref
 
 

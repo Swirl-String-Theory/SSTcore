@@ -139,12 +139,12 @@ def require_knotplot():
             "knotplot directory not resolved via get_knotplot_dir() "
             "(deelplan res-0/res-3). Expected resources/knotplot/."
         )
-    kp_path = sst.get_knotplot_ideal_path("knot_3.1")
+    kp_path = sst.get_knotplot_ab_path("knot_3.1")
     if kp_path is None or not kp_path.is_file():
         if _allow_missing_resources():
-            pytest.skip("SSTCORE_ALLOW_MISSING_RESOURCES=1 and knot_3.1 ideal missing")
+            pytest.skip("SSTCORE_ALLOW_MISSING_RESOURCES=1 and knot_3.1 ab missing")
         pytest.fail(
-            "knotplot trefoil not resolved via get_knotplot_ideal_path('knot_3.1') "
-            "(deelplan res-0/res-3). Expected a knotplot ideal/AB file for knot_3.1."
+            "knotplot trefoil not resolved via get_knotplot_ab_path('knot_3.1') "
+            "(deelplan res-0/res-3/res-4). Expected a knotplot AB file for knot_3.1."
         )
     return sst

@@ -23,6 +23,14 @@ export interface ResourceHelpers {
   listEmbeddedFseriesIds(): string[];
   loadFseriesKnot(label: string): string | null;
   knotplot(knotId: string): string | null;
+  getKnotplotIdealPath(knotId: string): string | null;
+  normalizeKnotplotId(knotId: string): string | null;
+  listKnotplotIds(status?: string | null): string[];
+  getKnotplotEntry(knotId: string): Record<string, unknown> | null;
+  getKnotplotPolishPath(knotId: string, uniform?: boolean): string | null;
+  getKnotplotAbPath(knotId: string): string | null;
+  getKnotplotAb(knotId: string): string | null;
+  getKnotplotBuildScript(knotId: string): string | null;
   resolveKnotRef(
     ref: string,
     source?: string | null,
@@ -38,6 +46,14 @@ export interface ResourceHelpers {
   list_ideal_source_files(): Record<string, string>;
   get_ideal_ab(abId: string, source?: string | null): string | null;
   get_ideal_link(linkId: string, source?: string | null): string | null;
+  get_knotplot_ideal_path(knotId: string): string | null;
+  normalize_knotplot_id(knotId: string): string | null;
+  list_knotplot_ids(status?: string | null): string[];
+  get_knotplot_entry(knotId: string): Record<string, unknown> | null;
+  get_knotplot_polish_path(knotId: string, uniform?: boolean): string | null;
+  get_knotplot_ab_path(knotId: string): string | null;
+  get_knotplot_ab(knotId: string): string | null;
+  get_knotplot_build_script(knotId: string): string | null;
   list_embedded_fseries_ids(): string[];
   load_fseries_knot(label: string): string | null;
   resolve_knot_ref(

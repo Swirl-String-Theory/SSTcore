@@ -713,12 +713,13 @@ def _collect_ideal_rel_paths(resources_dir: Path):
             break
     knotplot = resources_dir / "knotplot"
     if knotplot.is_dir():
-        for p in sorted(knotplot.rglob("knot_*_ideal.txt")):
-            if p.is_file():
-                rel = p.relative_to(resources_dir).as_posix()
-                if rel not in seen:
-                    seen.add(rel)
-                    rels.append(rel)
+        for pattern in ("*_ab.xml", "knot_*_ideal.txt"):
+            for p in sorted(knotplot.rglob(pattern)):
+                if p.is_file():
+                    rel = p.relative_to(resources_dir).as_posix()
+                    if rel not in seen:
+                        seen.add(rel)
+                        rels.append(rel)
     return rels
 
 
