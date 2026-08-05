@@ -1,0 +1,5 @@
+kp_dir C:\Users\oscar\AppData\Roaming\Python\Python313\site-packages\SSTcore\resources\knotplot
+kp_ideal C:\Users\oscar\AppData\Roaming\Python\Python313\site-packages\SSTcore\resources\knotplot\knot_3.1\knot_3.1_ideal.txt
+ab True
+embedded_keys_sample ['ideal.txt', 'idealLinks.txt', 'idealLinks_10a.txt', 'idealLinks_10n.txt', 'ideal_11a.txt']
+any_knotplot_embed True

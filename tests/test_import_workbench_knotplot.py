@@ -12,6 +12,7 @@ import numpy as np
 import pytest
 
 REPO = Path(__file__).resolve().parent.parent
+sys.dont_write_bytecode = True
 sys.path.insert(0, str(REPO / "tools" / "knotplot"))
 
 import import_workbench_knotplot as imp  # noqa: E402

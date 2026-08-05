@@ -1,0 +1,113 @@
+..F.F.EEEEEEEEEEE.......E..EE...E...F                                    [100%]
+=================================== ERRORS ====================================
+_____________________ ERROR at setup of test_index_schema _____________________
+E   assert None is not None
+__________________ ERROR at setup of test_files_match_sha256 __________________
+E   assert None is not None
+_____________ ERROR at setup of test_relaxed_have_geometry_and_ab _____________
+E   assert None is not None
+______________ ERROR at setup of test_stubs_have_kpc_no_geometry ______________
+E   assert None is not None
+_______________ ERROR at setup of test_no_monopole_or_pyd_or_rr _______________
+E   assert None is not None
+________________ ERROR at setup of test_legacy_aliases_resolve ________________
+E   assert None is not None
+____________________ ERROR at setup of test_list_and_entry ____________________
+E   Failed: resources/knotplot/INDEX.json required for API tests
+_______________ ERROR at setup of test_getters_relaxed_vs_stub ________________
+E   Failed: resources/knotplot/INDEX.json required for API tests
+___________________ ERROR at setup of test_id_normalization ___________________
+E   Failed: resources/knotplot/INDEX.json required for API tests
+_____________ ERROR at setup of test_deprecation_shims_warn_once ______________
+E   Failed: resources/knotplot/INDEX.json required for API tests
+________________ ERROR at setup of test_resolve_relaxed_import ________________
+E   Failed: resources/knotplot/INDEX.json required for API tests
+________ ERROR at setup of test_knotplot_ideal_not_used_for_ab_lookup _________
+E   Failed: knotplot directory not resolved via get_knotplot_dir() (deelplan res-0/res-3). Expected resources/knotplot/.
+___________ ERROR at setup of test_resolve_knot_ref_knotplot_legacy ___________
+E   Failed: knotplot directory not resolved via get_knotplot_dir() (deelplan res-0/res-3). Expected resources/knotplot/.
+_________ ERROR at setup of test_assert_canon_ideal_rejects_knotplot __________
+E   Failed: knotplot directory not resolved via get_knotplot_dir() (deelplan res-0/res-3). Expected resources/knotplot/.
+______________ ERROR at setup of test_knotplot_raw_length_factor ______________
+E   Failed: knotplot directory not resolved via get_knotplot_dir() (deelplan res-0/res-3). Expected resources/knotplot/.
+================================== FAILURES ===================================
+E   AssertionError: Missing resource files:
+        - knot_0.1: missing file knotplot/knot_0.1/knot_0.1_ab.xml
+        - knot_3.1: missing file knotplot/knot_3.1/knot_3.1_ab.xml
+        - knot_4.1: missing file knotplot/knot_4.1/knot_4.1_ab.xml
+        - knot_5.1: missing file knotplot/knot_5.1/knot_5.1_ab.xml
+        - knot_5.2: missing file knotplot/knot_5.2/knot_5.2_ab.xml
+        - knot_6.1: missing file knotplot/knot_6.1/knot_6.1_ab.xml
+        - knot_7.1: missing file knotplot/knot_7.1/knot_7.1_ab.xml
+        - link_0.2.1: missing file knotplot/link_0.2.1/link_0.2.1_ab.xml
+        - link_0.3.1: missing file knotplot/link_0.3.1/link_0.3.1_ab.xml
+        - link_2.2.1: missing file knotplot/link_2.2.1/link_2.2.1_ab.xml
+        - link_5.2.1: missing file knotplot/link_5.2.1/link_5.2.1_ab.xml
+        - link_6.2.1: missing file knotplot/link_6.2.1/link_6.2.1_ab.xml
+        - link_6.3.1: missing file knotplot/link_6.3.1/link_6.3.1_ab.xml
+        - link_6.3.2: missing file knotplot/link_6.3.2/link_6.3.2_ab.xml
+        - link_7.2.6: missing file knotplot/link_7.2.6/link_7.2.6_ab.xml
+        - link_7.2.8: missing file knotplot/link_7.2.8/link_7.2.8_ab.xml
+        - link_8.2.1: missing file knotplot/link_8.2.1/link_8.2.1_ab.xml
+        - link_9.2.20: missing file knotplot/link_9.2.20/link_9.2.20_ab.xml
+        - link_9.2.40: missing file knotplot/link_9.2.40/link_9.2.40_ab.xml
+        - torus_3.3: missing file knotplot/torus_3.3/torus_3.3_ab.xml
+        - torus_6.9: missing file knotplot/torus_6.9/torus_6.9_ab.xml
+    assert not ['knot_0.1: missing file knotplot/knot_0.1/knot_0.1_ab.xml', 'knot_3.1: missing file knotplot/knot_3.1/knot_3.1_ab.xml..._5.2: missing file knotplot/knot_5.2/knot_5.2_ab.xml', 'knot_6.1: missing file knotplot/knot_6.1/knot_6.1_ab.xml', ...]
+C:\workspace\projects\SSTcore\tests\test_resource_inventory.py:81: AssertionError: Missing resource files:
+E   AssertionError: get_knotplot_ideal_path('knot_0.1') returned None
+    assert None is not None
+C:\workspace\projects\SSTcore\tests\test_resource_inventory.py:100: AssertionError: get_knotplot_ideal_path('knot_0.1') returned None
+E   AssertionError: knotplot directory is not resolved by SSTcore
+    assert None is not None
+C:\workspace\projects\SSTcore\tests\test_knotplot_resources_install.py:23: AssertionError: knotplot directory is not resolved by SSTcore
+============================== warnings summary ===============================
+tests/test_resource_inventory.py::test_knotplot_ids_resolve_via_api
+  C:\workspace\projects\SSTcore\tests\test_resource_inventory.py:99: DeprecationWarning: SSTcore.get_knotplot_ideal_path is deprecated; use get_knotplot_ab_path (deelplan res-4).
+    path = sstcore.get_knotplot_ideal_path(kid)
+
+tests/test_trefoil_three_sources.py::test_ideal_mass_scale_unity
+  C:\workspace\projects\SSTcore\tests\test_trefoil_three_sources.py:131: DeprecationWarning: SSTcore.get_knotplot_ideal_path is deprecated; use get_knotplot_ab_path (deelplan res-4).
+    kp_path = sstcore.get_knotplot_ideal_path("knot_3.1")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=================================== PASSES ====================================
+=========================== short test summary info ===========================
+PASSED tests/test_resource_inventory.py::test_resources_dir_resolves
+PASSED tests/test_resource_inventory.py::test_manifest_not_empty
+PASSED tests/test_resource_inventory.py::test_ideal_keys_resolve_via_api
+PASSED tests/test_resource_inventory.py::test_fseries_stems_loadable
+PASSED tests/test_ideal_resources.py::test_import_shims
+PASSED tests/test_ideal_resources.py::test_resources_dir_and_ideal_txt
+PASSED tests/test_ideal_resources.py::test_find_ideal_ab_block_by_id_trefoil
+PASSED tests/test_ideal_resources.py::test_find_ideal_ab_block_by_id_missing_returns_none
+PASSED tests/test_ideal_resources.py::test_get_ideal_ab_matches_find
+PASSED tests/test_ideal_resources.py::test_particle_evaluator_trefoil
+PASSED tests/test_ideal_resources.py::test_particle_evaluator_rejects_knotplot_style_id
+PASSED tests/test_knot_registry.py::test_resolve_knot_ref_ideal_trefoil
+PASSED tests/test_knot_registry.py::test_resolve_knot_ref_fremlin_role
+PASSED tests/test_knot_registry.py::test_particle_evaluator_rejects_knotplot_id
+PASSED tests/test_knot_registry.py::test_particle_evaluator_research_flag_allows_non_ab_id
+PASSED tests/test_trefoil_three_sources.py::test_ideal_mass_scale_unity
+PASSED tests/test_trefoil_three_sources.py::test_fremlin_default_mass_scale
+PASSED tests/test_trefoil_three_sources.py::test_fremlin_torus_u_mass_scale
+PASSED tests/test_knotplot_resources_install.py::test_resources_dir_available_after_install
+ERROR tests/test_knotplot_index.py::test_index_schema - assert None is not None
+ERROR tests/test_knotplot_index.py::test_files_match_sha256 - assert None is ...
+ERROR tests/test_knotplot_index.py::test_relaxed_have_geometry_and_ab - asser...
+ERROR tests/test_knotplot_index.py::test_stubs_have_kpc_no_geometry - assert ...
+ERROR tests/test_knotplot_index.py::test_no_monopole_or_pyd_or_rr - assert No...
+ERROR tests/test_knotplot_index.py::test_legacy_aliases_resolve - assert None...
+ERROR tests/test_knotplot_api.py::test_list_and_entry - Failed: resources/kno...
+ERROR tests/test_knotplot_api.py::test_getters_relaxed_vs_stub - Failed: reso...
+ERROR tests/test_knotplot_api.py::test_id_normalization - Failed: resources/k...
+ERROR tests/test_knotplot_api.py::test_deprecation_shims_warn_once - Failed: ...
+ERROR tests/test_knotplot_api.py::test_resolve_relaxed_import - Failed: resou...
+ERROR tests/test_ideal_resources.py::test_knotplot_ideal_not_used_for_ab_lookup
+ERROR tests/test_knot_registry.py::test_resolve_knot_ref_knotplot_legacy - Fa...
+ERROR tests/test_knot_registry.py::test_assert_canon_ideal_rejects_knotplot
+ERROR tests/test_trefoil_three_sources.py::test_knotplot_raw_length_factor - ...
+FAILED tests/test_resource_inventory.py::test_every_manifest_entry_exists_with_matching_sha256
+FAILED tests/test_resource_inventory.py::test_knotplot_ids_resolve_via_api - ...
+FAILED tests/test_knotplot_resources_install.py::test_knotplot_ideal_files_load_via_public_api
+3 failed, 19 passed, 2 warnings, 15 errors in 1.02s

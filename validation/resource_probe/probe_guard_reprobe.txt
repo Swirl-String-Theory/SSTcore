@@ -1,0 +1,74 @@
+EEEEF..F.F.                                                              [100%]
+=================================== ERRORS ====================================
+________ ERROR at setup of test_knotplot_ideal_not_used_for_ab_lookup _________
+E   Failed: knotplot directory not resolved via get_knotplot_dir() (deelplan res-0/res-3). Expected resources/knotplot/.
+___________ ERROR at setup of test_resolve_knot_ref_knotplot_legacy ___________
+E   Failed: knotplot directory not resolved via get_knotplot_dir() (deelplan res-0/res-3). Expected resources/knotplot/.
+_________ ERROR at setup of test_assert_canon_ideal_rejects_knotplot __________
+E   Failed: knotplot directory not resolved via get_knotplot_dir() (deelplan res-0/res-3). Expected resources/knotplot/.
+______________ ERROR at setup of test_knotplot_raw_length_factor ______________
+E   Failed: knotplot directory not resolved via get_knotplot_dir() (deelplan res-0/res-3). Expected resources/knotplot/.
+================================== FAILURES ===================================
+E   AssertionError: knotplot directory is not resolved by SSTcore
+    assert None is not None
+C:\workspace\projects\SSTcore\tests\test_knotplot_resources_install.py:31: AssertionError: knotplot directory is not resolved by SSTcore
+E   AssertionError: Missing resource files:
+        - knot_0.2.1: missing file knotplot/knot_0.2.1/knot_0.2.1_ideal.txt
+        - knot_0.3.1: missing file knotplot/knot_0.3.1/knot_0.3.1_ideal.txt
+        - knot_10.1: missing file knotplot/knot_10.1/knot_10.1_ideal.txt
+        - knot_10.123: missing file knotplot/knot_10.123/knot_10.123_ideal.txt
+        - knot_2.2.1: missing file knotplot/knot_2.2.1/knot_2.2.1_ideal.txt
+        - knot_3.1: missing file knotplot/knot_3.1/knot_3.1_ideal.txt
+        - knot_4.1: missing file knotplot/knot_4.1/knot_4.1_ideal.txt
+        - knot_4.2.1: missing file knotplot/knot_4.2.1/knot_4.2.1_ideal.txt
+        - knot_5.1: missing file knotplot/knot_5.1/knot_5.1_ideal.txt
+        - knot_5.2: missing file knotplot/knot_5.2/knot_5.2_ideal.txt
+        - knot_5.2.1: missing file knotplot/knot_5.2.1/knot_5.2.1_ideal.txt
+        - knot_6.1: missing file knotplot/knot_6.1/knot_6.1_ideal.txt
+        - knot_6.2: missing file knotplot/knot_6.2/knot_6.2_ideal.txt
+        - knot_6.2.1: missing file knotplot/knot_6.2.1/knot_6.2.1_ideal.txt
+        - knot_6.3: missing file knotplot/knot_6.3/knot_6.3_ideal.txt
+        - knot_6.3.1: missing file knotplot/knot_6.3.1/knot_6.3.1_ideal.txt
+        - knot_6.3.2: missing file knotplot/knot_6.3.2/knot_6.3.2_ideal.txt
+        - knot_6.3.3: missing file knotplot/knot_6.3.3/knot_6.3.3_ideal.txt
+        - knot_7.1: missing file knotplot/knot_7.1/knot_7.1_ideal.txt
+        - knot_7.2: missing file knotplot/knot_7.2/knot_7.2_ideal.txt
+        - knot_7.2.5: missing file knotplot/knot_7.2.5/knot_7.2.5_ideal.txt
+        - knot_7.2.6: missing file knotplot/knot_7.2.6/knot_7.2.6_ideal.txt
+        - knot_7.2.8: missing file knotplot/knot_7.2.8/knot_7.2.8_ideal.txt
+        - knot_7.3: missing file knotplot/knot_7.3/knot_7.3_ideal.txt
+        - knot_7.4: missing file knotplot/knot_7.4/knot_7.4_ideal.txt
+        - knot_8.1: missing file knotplot/knot_8.1/knot_8.1_ideal.txt
+        - knot_8.17: missing file knotplot/knot_8.17/knot_8.17_ideal.txt
+        - knot_8.18: missing file knotplot/knot_8.18/knot_8.18_ideal.txt
+        - knot_8.2.1: missing file knotplot/knot_8.2.1/knot_8.2.1_ideal.txt
+        - knot_9.1: missing file knotplot/knot_9.1/knot_9.1_ideal.txt
+        - knot_9.2: missing file knotplot/knot_9.2/knot_9.2_ideal.txt
+        - knot_9.2.20: missing file knotplot/knot_9.2.20/knot_9.2.20_ideal.txt
+        - knot_9.2.40: missing file knotplot/knot_9.2.40/knot_9.2.40_ideal.txt
+        - knot_9.35: missing file knotplot/knot_9.35/knot_9.35_ideal.txt
+        - knot_T2.3: missing file knotplot/knot_T2.3/knot_T2.3_ideal.txt
+        - knot_T2.5: missing file knotplot/knot_T2.5/knot_T2.5_ideal.txt
+        - knot_T2.7: missing file knotplot/knot_T2.7/knot_T2.7_ideal.txt
+        - knot_TL2.4: missing file knotplot/knot_TL2.4/knot_TL2.4_ideal.txt
+        - knot_TL2.6: missing file knotplot/knot_TL2.6/knot_TL2.6_ideal.txt
+        - knot_TL2.8: missing file knotplot/knot_TL2.8/knot_TL2.8_ideal.txt
+        - knot_TL3.3_Gear: missing file knotplot/knot_TL3.3_Gear/knot_TL3.3_Gear_ideal.txt
+        - knot_TL3.6: missing file knotplot/knot_TL3.6/knot_TL3.6_ideal.txt
+        - knot_TL3.9: missing file knotplot/knot_TL3.9/knot_TL3.9_ideal.txt
+        - knot_TL6.15: missing file knotplot/knot_TL6.15/knot_TL6.15_ideal.txt
+        - knot_TL6.9: missing file knotplot/knot_TL6.9/knot_TL6.9_ideal.txt
+    assert not ['knot_0.2.1: missing file knotplot/knot_0.2.1/knot_0.2.1_ideal.txt', 'knot_0.3.1: missing file knotplot/knot_0.3.1/kn...ing file knotplot/knot_2.2.1/knot_2.2.1_ideal.txt', 'knot_3.1: missing file knotplot/knot_3.1/knot_3.1_ideal.txt', ...]
+C:\workspace\projects\SSTcore\tests\test_resource_inventory.py:81: AssertionError: Missing resource files:
+E   AssertionError: get_knotplot_ideal_path('knot_0.2.1') returned None
+    assert None is not None
+C:\workspace\projects\SSTcore\tests\test_resource_inventory.py:100: AssertionError: get_knotplot_ideal_path('knot_0.2.1') returned None
+=========================== short test summary info ===========================
+FAILED tests/test_knotplot_resources_install.py::test_knotplot_ideal_files_load_via_public_api
+FAILED tests/test_resource_inventory.py::test_every_manifest_entry_exists_with_matching_sha256
+FAILED tests/test_resource_inventory.py::test_knotplot_ids_resolve_via_api - ...
+ERROR tests/test_ideal_resources.py::test_knotplot_ideal_not_used_for_ab_lookup
+ERROR tests/test_knot_registry.py::test_resolve_knot_ref_knotplot_legacy - Fa...
+ERROR tests/test_knot_registry.py::test_assert_canon_ideal_rejects_knotplot
+ERROR tests/test_trefoil_three_sources.py::test_knotplot_raw_length_factor - ...
+3 failed, 4 passed, 4 errors in 0.90s

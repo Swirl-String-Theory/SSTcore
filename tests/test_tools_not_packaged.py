@@ -16,6 +16,10 @@ REPO = Path(__file__).resolve().parent.parent
 def test_tools_dir_exists_with_importer() -> None:
     importer = REPO / "tools" / "knotplot" / "import_workbench_knotplot.py"
     assert importer.is_file(), "importer missing — deelplan res-2"
+    vendored = REPO / "tools" / "knotplot" / "VENDORED.md"
+    assert vendored.is_file(), "VENDORED.md missing — deelplan res-5"
+    rr = REPO / "tools" / "knotplot" / "ridgerunner"
+    assert rr.is_dir() and any(rr.glob("*.py")), "ridgerunner scripts missing — deelplan res-5"
 
 
 def test_manifest_in_prunes_tools() -> None:
@@ -41,9 +45,14 @@ def test_sdist_excludes_tools(tmp_path: Path) -> None:
 
 def test_npm_pack_dry_run_excludes_tools() -> None:
     """npm pack --dry-run --json should not list tools/ paths."""
+    import shutil
+
+    npm = shutil.which("npm") or shutil.which("npm.cmd")
+    if not npm:
+        pytest.skip("npm not on PATH")
     try:
         proc = subprocess.run(
-            ["npm", "pack", "--dry-run", "--json"],
+            [npm, "pack", "--dry-run", "--json"],
             cwd=REPO,
             capture_output=True,
             text=True,

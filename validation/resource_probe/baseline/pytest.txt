@@ -1,0 +1,129 @@
+............................................ss.......................... [ 83%]
+sss...........                                                           [100%]
+=================================== PASSES ====================================
+__________________________ test_export_resources_cli __________________________
+---------------------------- Captured stdout call -----------------------------
+Manifest written: C:\Users\oscar\AppData\Local\Temp\pytest-of-oscar\pytest-196\test_export_resources_cli0\manifest.json
+Exported 3954 files to C:\Users\oscar\AppData\Local\Temp\pytest-of-oscar\pytest-196\test_export_resources_cli0\out
+---------------------------- Captured stderr call -----------------------------
+  copied 500/3954...
+  copied 1000/3954...
+  copied 1500/3954...
+  copied 2000/3954...
+  copied 2500/3954...
+  copied 3000/3954...
+  copied 3500/3954...
+_________________________ test_build_source_zip_smoke _________________________
+---------------------------- Captured stdout call -----------------------------
+ok: C:\Users\oscar\AppData\Local\Temp\pytest-of-oscar\pytest-196\test_build_source_zip_smoke0\SSTcore_source_test.zip (519 source files + 3 nested archives)
+____________________________ test_unpack_roundtrip ____________________________
+---------------------------- Captured stdout call -----------------------------
+ok: C:\Users\oscar\AppData\Local\Temp\pytest-of-oscar\pytest-196\test_unpack_roundtrip0\bundle.zip (519 source files + 3 nested archives)
+=========================== short test summary info ===========================
+PASSED tests/test_audit_binding_examples.py::test_all_binding_modules_have_examples_demo
+PASSED tests/test_audit_binding_examples.py::test_audit_generates_summary
+PASSED tests/test_audit_binding_examples.py::test_example_bootstrap_importable
+PASSED tests/test_binding_defaults_canon.py::test_swirl_clock_default_matches_canon_c
+PASSED tests/test_binding_defaults_canon.py::test_bernoulli_pressure_default_rho_matches_canon
+PASSED tests/test_binding_defaults_canon.py::test_sst_mass_scale_context_from_values
+PASSED tests/test_binding_manifest.py::test_binding_manifest_summary_nonzero
+PASSED tests/test_binding_manifest.py::test_binding_manifest_load_helper
+PASSED tests/test_binding_manifest.py::test_binding_manifest_runtime_presence
+PASSED tests/test_binding_manifest.py::test_gen_binding_manifest_check
+PASSED tests/test_canon_v0_8_12_alignment.py::test_alpha_codata2018
+PASSED tests/test_canon_v0_8_12_alignment.py::test_vorticity_is_twice_omega
+PASSED tests/test_canon_v0_8_12_alignment.py::test_rho_horn_alias
+PASSED tests/test_canon_v0_8_12_alignment.py::test_horn_envelope_density_alias
+PASSED tests/test_canon_v0_8_12_alignment.py::test_gate_lambda_c_over_pi_rc_vs_four_over_alpha
+PASSED tests/test_canon_v0_8_12_alignment.py::test_chronos_swirl_clock_vorticity_round_trip
+PASSED tests/test_canon_v0_8_12_alignment.py::test_chronos_kelvin_invariant_uses_vorticity_convention
+PASSED tests/test_delay_mode_selector.py::test_phase_lock_residual_matches_canon_sign
+PASSED tests/test_delay_mode_selector.py::test_newton_derivative_matches_canon
+PASSED tests/test_delay_mode_selector.py::test_phase_lock_stability_slope_is_kappa_tau_cos
+PASSED tests/test_ideal_gilbert_formats.py::test_find_ideal_by_id_ab_trefoil
+PASSED tests/test_ideal_gilbert_formats.py::test_find_ideal_by_id_ht_k11a1
+PASSED tests/test_ideal_gilbert_formats.py::test_find_ideal_by_id_ht_k11n1_string_wrapper
+PASSED tests/test_ideal_gilbert_formats.py::test_find_ideal_by_id_tl_l10a1
+PASSED tests/test_ideal_gilbert_formats.py::test_get_ideal_12_points_12a4
+PASSED tests/test_ideal_gilbert_formats.py::test_parse_ideal_gilbert_ht_components
+PASSED tests/test_ideal_gilbert_formats.py::test_ideal_txt_priority_over_other_sources_for_ab
+PASSED tests/test_ideal_gilbert_formats.py::test_particle_evaluator_still_ab_only_regression
+PASSED tests/test_ideal_resources.py::test_import_shims
+PASSED tests/test_ideal_resources.py::test_resources_dir_and_ideal_txt
+PASSED tests/test_ideal_resources.py::test_find_ideal_ab_block_by_id_trefoil
+PASSED tests/test_ideal_resources.py::test_find_ideal_ab_block_by_id_missing_returns_none
+PASSED tests/test_ideal_resources.py::test_get_ideal_ab_matches_find
+PASSED tests/test_ideal_resources.py::test_particle_evaluator_trefoil
+PASSED tests/test_ideal_resources.py::test_particle_evaluator_rejects_knotplot_style_id
+PASSED tests/test_ideal_resources.py::test_knotplot_ideal_not_used_for_ab_lookup
+PASSED tests/test_knot_registry.py::test_resolve_knot_ref_ideal_trefoil
+PASSED tests/test_knot_registry.py::test_resolve_knot_ref_fremlin_role
+PASSED tests/test_knot_registry.py::test_resolve_knot_ref_knotplot_legacy
+PASSED tests/test_knot_registry.py::test_assert_canon_ideal_rejects_knotplot
+PASSED tests/test_knot_registry.py::test_particle_evaluator_rejects_knotplot_id
+PASSED tests/test_knot_registry.py::test_particle_evaluator_research_flag_allows_non_ab_id
+PASSED tests/test_knotplot_resources_install.py::test_resources_dir_available_after_install
+PASSED tests/test_knotplot_resources_install.py::test_knotplot_ideal_files_load_via_public_api
+PASSED tests/test_patch_c_cli.py::test_list_ideal_source_files
+PASSED tests/test_patch_c_cli.py::test_load_ideal_ab_embedded_trefoil
+PASSED tests/test_patch_c_cli.py::test_list_embedded_fseries_ids_includes_trefoil
+PASSED tests/test_patch_c_cli.py::test_export_resources_cli
+PASSED tests/test_patch_c_cli.py::test_module_casing_shim
+PASSED tests/test_resolved_tube_geometry.py::test_basic_length_edge_stats_and_turning_angle
+PASSED tests/test_resolved_tube_geometry.py::test_minrad_kink_and_global_minrad
+PASSED tests/test_resolved_tube_geometry.py::test_segment_distance_and_dcsd_candidates
+PASSED tests/test_resolved_tube_geometry.py::test_analyze_ropelength_radius_and_diameter_conventions
+PASSED tests/test_resolved_tube_geometry.py::test_lower_bound_and_convention_converters
+PASSED tests/test_resolved_tube_geometry.py::test_rigidity_matrix_gradient_columns_and_nnls_kkt_solver
+PASSED tests/test_resolved_tube_geometry.py::test_knot_particle_gate_uses_full_compton_wavelength
+PASSED tests/test_resolved_tube_geometry.py::test_master_equation_horn_baseline_is_separate_from_rho_m_baseline
+PASSED tests/test_resolved_tube_geometry.py::test_projected_gradient_and_tightening_loop_smoke
+PASSED tests/test_source_zip.py::test_should_exclude_file[build/foo.obj]
+PASSED tests/test_source_zip.py::test_should_exclude_file[tests/__pycache__/x.pyc]
+PASSED tests/test_source_zip.py::test_should_exclude_file[resources/knotplot/knot_3.1/knot_3.1_ideal.txt]
+PASSED tests/test_source_zip.py::test_should_exclude_file[resources/Knots_FourierSeries/3_1/knot.3_1.stl]
+PASSED tests/test_source_zip.py::test_should_exclude_file[resources/Results/knotplot/knot_3.1/knot_3.1_ideal.txt]
+PASSED tests/test_source_zip.py::test_should_exclude_file[SST_Dashboard/gui_tabs/foo.py]
+PASSED tests/test_source_zip.py::test_should_exclude_file[ideal_database.txt]
+PASSED tests/test_source_zip.py::test_should_include_canonical_paths
+PASSED tests/test_source_zip.py::test_collect_source_files_includes_readme
+PASSED tests/test_source_zip.py::test_repo_rel_path_uses_forward_slashes
+PASSED tests/test_source_zip.py::test_build_source_zip_smoke
+PASSED tests/test_source_zip.py::test_unpack_roundtrip
+PASSED tests/test_trefoil_three_sources.py::test_ideal_mass_scale_unity
+PASSED tests/test_trefoil_three_sources.py::test_knotplot_raw_length_factor
+PASSED tests/test_trefoil_three_sources.py::test_fremlin_default_mass_scale
+PASSED tests/test_trefoil_three_sources.py::test_fremlin_torus_u_mass_scale
+PASSED tests/test_vortexlab_kernels.py::test_resample_closed_curve_preserves_length_order
+PASSED tests/test_vortexlab_kernels.py::test_polygonal_gauss_hopf_link
+PASSED tests/test_vortexlab_kernels.py::test_continuous_reach_unit_circle
+PASSED tests/test_vortexlab_kernels.py::test_continuous_reach_two_circles
+PASSED tests/test_vortexlab_kernels.py::test_topology_clearance_positive
+PASSED tests/test_vortexlab_kernels.py::test_filament_velocity_and_rk4_smoke
+PASSED tests/test_vortexlab_kernels.py::test_intrinsic_frame_and_rigid_motion
+SKIPPED [1] tests\test_bindings_basic.py:5: could not import 'sstcore': dynamic module does not define module export function (PyInit_sstcore)
+SKIPPED [1] tests\test_biot_savart.py:6: could not import 'sstcore': dynamic module does not define module export function (PyInit_sstcore)
+SKIPPED [1] tests\test_biot_savart_comprehensive.py:10: could not import 'sstcore': dynamic module does not define module export function (PyInit_sstcore)
+SKIPPED [1] tests\test_field_kernels_comprehensive.py:10: could not import 'sstcore': dynamic module does not define module export function (PyInit_sstcore)
+SKIPPED [1] tests\test_field_ops_comprehensive.py:10: could not import 'sstcore': dynamic module does not define module export function (PyInit_sstcore)
+SKIPPED [1] tests\test_fluid_dynamics_comprehensive.py:10: could not import 'sstcore': dynamic module does not define module export function (PyInit_sstcore)
+SKIPPED [1] tests\test_frenet_helicity.py:7: could not import 'sstcore': dynamic module does not define module export function (PyInit_sstcore)
+SKIPPED [1] tests\test_frenet_helicity_comprehensive.py:10: could not import 'sstcore': dynamic module does not define module export function (PyInit_sstcore)
+SKIPPED [1] tests\test_hyperbolic_volume_comprehensive.py:10: could not import 'sstcore': dynamic module does not define module export function (PyInit_sstcore)
+SKIPPED [1] tests\test_knot_comprehensive.py:10: could not import 'sstcore': dynamic module does not define module export function (PyInit_sstcore)
+SKIPPED [1] tests\test_potential_timefield.py:2: example script
+SKIPPED [1] tests\test_potential_timefield_comprehensive.py:10: could not import 'sstcore': dynamic module does not define module export function (PyInit_sstcore)
+SKIPPED [1] tests\test_radiation_flow_comprehensive.py:10: could not import 'sstcore': dynamic module does not define module export function (PyInit_sstcore)
+SKIPPED [1] tests\test_sst_gravity_comprehensive.py:10: could not import 'sstcore': dynamic module does not define module export function (PyInit_sstcore)
+SKIPPED [1] tests\test_swirl_field_comprehensive.py:10: could not import 'sstcore': dynamic module does not define module export function (PyInit_sstcore)
+SKIPPED [1] tests\test_thermo_dynamics_comprehensive.py:10: could not import 'sstcore': dynamic module does not define module export function (PyInit_sstcore)
+SKIPPED [1] tests\test_time_evolution_comprehensive.py:10: could not import 'sstcore': dynamic module does not define module export function (PyInit_sstcore)
+SKIPPED [1] tests\test_trefoil.py:2: example script
+SKIPPED [1] tests\test_vortex_ring_comprehensive.py:10: could not import 'sstcore': dynamic module does not define module export function (PyInit_sstcore)
+SKIPPED [1] tests\test_vorticity_dynamics_comprehensive.py:10: could not import 'sstcore': dynamic module does not define module export function (PyInit_sstcore)
+SKIPPED [1] tests\test_knots_simple.py:12: could not import 'sstcore': dynamic module does not define module export function (PyInit_sstcore)
+SKIPPED [1] tests\test_knots_simple.py:17: could not import 'sstcore': dynamic module does not define module export function (PyInit_sstcore)
+SKIPPED [1] tests\test_sst_helicity_imports.py:21: could not import 'sst_helicity': No module named 'sst_helicity'
+SKIPPED [1] tests\test_sst_helicity_imports.py:30: could not import 'sst_helicity': No module named 'sst_helicity'
+SKIPPED [1] tests\test_sst_helicity_imports.py:40: could not import 'HelicityCalculationVAMcore': No module named 'HelicityCalculationVAMcore'
+81 passed, 25 skipped in 21.24s
