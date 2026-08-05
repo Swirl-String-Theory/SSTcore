@@ -51,11 +51,11 @@ def test_particle_evaluator_rejects_knotplot_style_id():
         sstcore.ParticleEvaluator("knot_3.1", 200)
 
 
-def test_knotplot_ideal_not_used_for_ab_lookup():
+def test_knotplot_ideal_not_used_for_ab_lookup(require_knotplot):
     """knotplot *_ideal.txt must not satisfy AB lookup for canon trefoil id."""
+    sstcore = require_knotplot
     kp_path = sstcore.get_knotplot_ideal_path("knot_3.1")
-    if kp_path is None:
-        pytest.skip("knotplot trefoil ideal not present in resources")
+    assert kp_path is not None
     kp_text = kp_path.read_text(encoding="utf-8", errors="replace")
     assert 'Id="3:1:1"' in kp_text or "<AB" in kp_text
     block = sstcore.find_ideal_ab_block_by_id("3:1:1")

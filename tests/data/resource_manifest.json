@@ -1,0 +1,391 @@
+{
+  "version": 1,
+  "description": "API-driven resource inventory for deelplan res-0. Regenerate with: python tests/data/regen_resource_manifest.py",
+  "entries": [
+    {
+      "id": "ideal",
+      "kind": "ideal",
+      "relpath": "ideal.txt",
+      "sha256": "48f84139c05eff8f6832b7f0d80961ab7537b8539edde5cd2aae23b9d4d151cc",
+      "bytes": 5651135
+    },
+    {
+      "id": "ideal_11a",
+      "kind": "ideal",
+      "relpath": "ideal_11a.txt",
+      "sha256": "4f92e38ce17b87651f7933ed51c84449c1c83a4415dbc95642b9adb5c983a2d7",
+      "bytes": 7898908
+    },
+    {
+      "id": "ideal_11n",
+      "kind": "ideal",
+      "relpath": "ideal_11n.txt",
+      "sha256": "dd645752272ebd2c53e73161ef83c190a29e92d6703def1b651aaa541aa69eb2",
+      "bytes": 3993955
+    },
+    {
+      "id": "idealLinks",
+      "kind": "ideal",
+      "relpath": "idealLinks.txt",
+      "sha256": "a7481f263d8f152723277d0301372d86cc664c211ea5a50f01d6ac49b7d335de",
+      "bytes": 5455438
+    },
+    {
+      "id": "idealLinks_10a",
+      "kind": "ideal",
+      "relpath": "idealLinks_10a.txt",
+      "sha256": "2958f9f02b7ca7537e53f19cb14566b05f2ecf3079f7f0d154ffe1fb74d9f598",
+      "bytes": 7227805
+    },
+    {
+      "id": "idealLinks_10n",
+      "kind": "ideal",
+      "relpath": "idealLinks_10n.txt",
+      "sha256": "f4dd601b7cf7e932b21455ee6bf00177a61ebc3fc734ff81cf4835c3e4fd7fed",
+      "bytes": 5125321
+    },
+    {
+      "id": "ideal_short",
+      "kind": "ideal",
+      "relpath": "ideal_short.txt",
+      "sha256": "139737bd4028d9ac85b71094a1d7c209ebbbaf85d160cb668767420198a3ea47",
+      "bytes": 57796
+    },
+    {
+      "id": "knot_0.2.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_0.2.1/knot_0.2.1_ideal.txt",
+      "sha256": "2900ef3b96a85094214e7b124ccbb594bfa8211ae88c4a1b55d098b64f81eed4",
+      "bytes": 11090
+    },
+    {
+      "id": "knot_0.3.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_0.3.1/knot_0.3.1_ideal.txt",
+      "sha256": "59c42cc459be32fc46ff1ae3dc01dcb99076cff40355cd11466e55acc38ba142",
+      "bytes": 11091
+    },
+    {
+      "id": "knot_10.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_10.1/knot_10.1_ideal.txt",
+      "sha256": "1e4f11cd48afb3f39cb99e71fc1e2220ce3b0f678496d100363ed2aa7835e254",
+      "bytes": 11086
+    },
+    {
+      "id": "knot_10.123",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_10.123/knot_10.123_ideal.txt",
+      "sha256": "b3a205fb21b786733f56a3958f814adff3844d8134a80cdf0f48f085dde9f56d",
+      "bytes": 11088
+    },
+    {
+      "id": "knot_2.2.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_2.2.1/knot_2.2.1_ideal.txt",
+      "sha256": "cf100e2c418e3371e7b019d5fd82488c490604acc141def64432eb8e4bb94ae5",
+      "bytes": 11089
+    },
+    {
+      "id": "knot_3.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_3.1/knot_3.1_ideal.txt",
+      "sha256": "99e868922fd698d059b4031625e264b646ad0d7b46b8ba2ae76ae5de3ba7b33a",
+      "bytes": 11084
+    },
+    {
+      "id": "knot_4.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_4.1/knot_4.1_ideal.txt",
+      "sha256": "502492b8c2b419938b3c263008f7e3806b6768787b275a94c1c8722d30819926",
+      "bytes": 11084
+    },
+    {
+      "id": "knot_4.2.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_4.2.1/knot_4.2.1_ideal.txt",
+      "sha256": "4c56a5976df7a5e1a0deec480baab3a239a03eb80b016cc11a1f459b7c759873",
+      "bytes": 11090
+    },
+    {
+      "id": "knot_5.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_5.1/knot_5.1_ideal.txt",
+      "sha256": "c22c751d4d4c0b6c3c8c26cb756b19a3560ab5a545c902096d7f2ff0a434b8c1",
+      "bytes": 11084
+    },
+    {
+      "id": "knot_5.2",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_5.2/knot_5.2_ideal.txt",
+      "sha256": "b78c032387fbb00b427d912f077acf327075dea790175df40eec96ea94757368",
+      "bytes": 11084
+    },
+    {
+      "id": "knot_5.2.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_5.2.1/knot_5.2.1_ideal.txt",
+      "sha256": "3b881751614095884be03ca0bc862d89e06b6538d73200dc747b91e244437afd",
+      "bytes": 11090
+    },
+    {
+      "id": "knot_6.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_6.1/knot_6.1_ideal.txt",
+      "sha256": "c56d1bd6470caf9eb74e6be58e5457732ad516024360517998eec91ed7fb2ecb",
+      "bytes": 11085
+    },
+    {
+      "id": "knot_6.2",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_6.2/knot_6.2_ideal.txt",
+      "sha256": "136b1afbbfa8225d69f296062c17225f22f24004a834f63d178898d987cbabe2",
+      "bytes": 11085
+    },
+    {
+      "id": "knot_6.2.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_6.2.1/knot_6.2.1_ideal.txt",
+      "sha256": "c472ec99ce53bcb132a5f1ef16d0f032cff29abd5bba39d34e0fae77a46682dd",
+      "bytes": 11090
+    },
+    {
+      "id": "knot_6.3",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_6.3/knot_6.3_ideal.txt",
+      "sha256": "34e5b5083f809a2197ec97d9d1582c0a3970b8fca6b19a844f9c0c798fa70318",
+      "bytes": 11085
+    },
+    {
+      "id": "knot_6.3.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_6.3.1/knot_6.3.1_ideal.txt",
+      "sha256": "b2bc5a61bd5ecf253de9d62c2cde0341f80f393ad29945edd2ffd0bf6092a94f",
+      "bytes": 11090
+    },
+    {
+      "id": "knot_6.3.2",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_6.3.2/knot_6.3.2_ideal.txt",
+      "sha256": "4c3543225b0656a6ccbf406398f4e7246d37fd0e554a4fe3765a5b1afbb0e26f",
+      "bytes": 11090
+    },
+    {
+      "id": "knot_6.3.3",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_6.3.3/knot_6.3.3_ideal.txt",
+      "sha256": "cff0080c5c756cf1fad3478039220b4c55576c41747cbc07dbf120b7d914522d",
+      "bytes": 11090
+    },
+    {
+      "id": "knot_7.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_7.1/knot_7.1_ideal.txt",
+      "sha256": "e71f2ac1ff877102da905c1d49ec8c3ecc3fae6d73a17a1958b65ce78c52de2b",
+      "bytes": 11085
+    },
+    {
+      "id": "knot_7.2",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_7.2/knot_7.2_ideal.txt",
+      "sha256": "bfaad7371a07e6099e45c4b18afeecd439eaa4250e50efb35cd402252a2f4d36",
+      "bytes": 11085
+    },
+    {
+      "id": "knot_7.2.5",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_7.2.5/knot_7.2.5_ideal.txt",
+      "sha256": "056662af070ebf4e8e5df01eaf8d5e127d3a6dec47354106457393a4d3d6ccf5",
+      "bytes": 11090
+    },
+    {
+      "id": "knot_7.2.6",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_7.2.6/knot_7.2.6_ideal.txt",
+      "sha256": "4a8443d25563afc8e07b283604ed45a98c1c04cbabb876ca1d688d0075f241ca",
+      "bytes": 11090
+    },
+    {
+      "id": "knot_7.2.8",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_7.2.8/knot_7.2.8_ideal.txt",
+      "sha256": "036918dc2776daa4059e2012cb7e6879b9a60617f36bce53b6ebbfcf6a8e7c8e",
+      "bytes": 11090
+    },
+    {
+      "id": "knot_7.3",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_7.3/knot_7.3_ideal.txt",
+      "sha256": "dca175dff611380fd887457181d7824dbd987aa4f5d6e6e5069206a1539e69ae",
+      "bytes": 11085
+    },
+    {
+      "id": "knot_7.4",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_7.4/knot_7.4_ideal.txt",
+      "sha256": "fb3410066067b3680c9334026e5281a585fca1c123a4e97988bcbd6cfc4f8d11",
+      "bytes": 11085
+    },
+    {
+      "id": "knot_8.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_8.1/knot_8.1_ideal.txt",
+      "sha256": "03b2c46e8e03d1eddcbcbab06e3000e67c04b70adeda106e5b32a62d573dd7d0",
+      "bytes": 11085
+    },
+    {
+      "id": "knot_8.17",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_8.17/knot_8.17_ideal.txt",
+      "sha256": "24006165da80290807344f5503a343a3d5c8a629f3164ed6d737617a2e32d300",
+      "bytes": 11086
+    },
+    {
+      "id": "knot_8.18",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_8.18/knot_8.18_ideal.txt",
+      "sha256": "98debe99947236dabfcfa4f2695dab300850320b0cc941706530b8feb6c6cc3c",
+      "bytes": 11086
+    },
+    {
+      "id": "knot_8.2.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_8.2.1/knot_8.2.1_ideal.txt",
+      "sha256": "714842714664b25dc14004ca7095a9c8d52923321862d5b39c6470ba59fcee6e",
+      "bytes": 11090
+    },
+    {
+      "id": "knot_9.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_9.1/knot_9.1_ideal.txt",
+      "sha256": "6785b25ecb083b2b3330fb26383413d5be21180506e6804c036100594aa49027",
+      "bytes": 11085
+    },
+    {
+      "id": "knot_9.2",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_9.2/knot_9.2_ideal.txt",
+      "sha256": "8b01d7ea1668e9270dfd2c67e1a3c8f28d0e6ade5eb42c0aa9ba8dcd9ed504ac",
+      "bytes": 11085
+    },
+    {
+      "id": "knot_9.2.20",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_9.2.20/knot_9.2.20_ideal.txt",
+      "sha256": "6984d214444d4da74ff5d7f0ca02f7deea2c29d162b968d274eae6f415fb3cfe",
+      "bytes": 11091
+    },
+    {
+      "id": "knot_9.2.40",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_9.2.40/knot_9.2.40_ideal.txt",
+      "sha256": "c9aa4e49c5860d34a28e0901445b039d279c56fbb1a37d189d7495c7d99edd13",
+      "bytes": 11091
+    },
+    {
+      "id": "knot_9.35",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_9.35/knot_9.35_ideal.txt",
+      "sha256": "76af8093331e817e93c246d1383d83cc343dbbd3f91946fd97cda436f44bd848",
+      "bytes": 11086
+    },
+    {
+      "id": "knot_T2.3",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_T2.3/knot_T2.3_ideal.txt",
+      "sha256": "ce99504939213c95c483c0d477acce81ff7949acc443af7cd4f0d821af94cb91",
+      "bytes": 11088
+    },
+    {
+      "id": "knot_T2.5",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_T2.5/knot_T2.5_ideal.txt",
+      "sha256": "4fb44cc2ead60d6bbc3ab546da8ff5608b3c5e62825dc1d65614aaf817be15c3",
+      "bytes": 11088
+    },
+    {
+      "id": "knot_T2.7",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_T2.7/knot_T2.7_ideal.txt",
+      "sha256": "92411dd87df22bd2b1247542d536ec0efae0a30c4a3370433308e95346f9755e",
+      "bytes": 11088
+    },
+    {
+      "id": "knot_TL2.4",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_TL2.4/knot_TL2.4_ideal.txt",
+      "sha256": "4fe10c598401f3db16fb6f14de933abd4463b329d26304c86b2ad8d29f04eb44",
+      "bytes": 11089
+    },
+    {
+      "id": "knot_TL2.6",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_TL2.6/knot_TL2.6_ideal.txt",
+      "sha256": "ced3f73bec82595ec8d61938067fc3d9367e5b4518fa20738730e4f40fbc0761",
+      "bytes": 11090
+    },
+    {
+      "id": "knot_TL2.8",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_TL2.8/knot_TL2.8_ideal.txt",
+      "sha256": "75e2cdece3fa0012153266ad21a18f89edb6bf9eb8c8f0abcbecbde006159b5f",
+      "bytes": 11090
+    },
+    {
+      "id": "knot_TL3.3_Gear",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_TL3.3_Gear/knot_TL3.3_Gear_ideal.txt",
+      "sha256": "aca1e57c1c5a9b65398a31f2835803d0a19cb6b6be44c34bb017200543738443",
+      "bytes": 11095
+    },
+    {
+      "id": "knot_TL3.6",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_TL3.6/knot_TL3.6_ideal.txt",
+      "sha256": "f6032205f0931c576fad169dd70a7b374769ac733b87967856233490a093c748",
+      "bytes": 11090
+    },
+    {
+      "id": "knot_TL3.9",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_TL3.9/knot_TL3.9_ideal.txt",
+      "sha256": "09dbba718727cddaa9ad046fa022bc54b2eefaf6ab23391c0f4a06e482b350d5",
+      "bytes": 11090
+    },
+    {
+      "id": "knot_TL6.15",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_TL6.15/knot_TL6.15_ideal.txt",
+      "sha256": "36977c2423a73f846bbbaa6f5e2dc1d625b49df256c42ba5739aea41c79e1702",
+      "bytes": 11091
+    },
+    {
+      "id": "knot_TL6.9",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_TL6.9/knot_TL6.9_ideal.txt",
+      "sha256": "a2c0dec3cca6d7f5eeb76cdd617c22caf7e5f3e107836ad912f2b9708704be61",
+      "bytes": 11090
+    },
+    {
+      "id": "3_1",
+      "kind": "fseries",
+      "relpath": "Knots_FourierSeries/3_1/knot.3_1.fseries",
+      "sha256": "f29c73b439fe4d645e67e8577ce0700cb006d393526e8674d251fe5b95583c4d",
+      "bytes": 397
+    },
+    {
+      "id": "4_1",
+      "kind": "fseries",
+      "relpath": "Knots_FourierSeries/4_1/knot.4_1.fseries",
+      "sha256": "2a603bb0e169a0217daeabfa179d43abd1ec42372dd51c5605926ddab4412c61",
+      "bytes": 999
+    },
+    {
+      "id": "5_1",
+      "kind": "fseries",
+      "relpath": "Knots_FourierSeries/5_1/knot.5_1.fseries",
+      "sha256": "fe0e3bafc612fd517b5e54083f53e58caa8fc8ad424ea3baae0c0eae02da3638",
+      "bytes": 562
+    }
+  ]
+}

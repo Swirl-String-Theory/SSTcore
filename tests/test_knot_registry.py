@@ -26,20 +26,20 @@ def test_resolve_knot_ref_fremlin_role():
     assert res.fremlin_label == "3_1"
 
 
-def test_resolve_knot_ref_knotplot_legacy():
+def test_resolve_knot_ref_knotplot_legacy(require_knotplot):
+    sstcore = require_knotplot
     kp_path = sstcore.get_knotplot_ideal_path("knot_3.1")
-    if kp_path is None:
-        pytest.skip("knotplot trefoil not in resources")
+    assert kp_path is not None
     res = sstcore.resolve_knot_ref("knot_3.1", source="knotplot")
     assert res is not None
     assert res.role == sstcore.KnotCurveRole.LEGACY_IMPORT
     assert res.native_length == pytest.approx(57.006641704311, rel=1e-4)
 
 
-def test_assert_canon_ideal_rejects_knotplot():
+def test_assert_canon_ideal_rejects_knotplot(require_knotplot):
+    sstcore = require_knotplot
     kp_path = sstcore.get_knotplot_ideal_path("knot_3.1")
-    if kp_path is None:
-        pytest.skip("knotplot trefoil not in resources")
+    assert kp_path is not None
     res = sstcore.resolve_knot_ref("knot_3.1", source="knotplot")
     with pytest.raises(ValueError, match="canon_mass"):
         sstcore.assert_canon_ideal(res, sstcore.CalculationRole.CANON_MASS)

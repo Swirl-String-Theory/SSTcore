@@ -165,10 +165,10 @@ def test_ideal_mass_scale_unity(trefoil_rows):
     assert row["mass_scale_factor_vs_ideal"] == pytest.approx(1.0, rel=1e-4)
 
 
-def test_knotplot_raw_length_factor(trefoil_rows):
+def test_knotplot_raw_length_factor(trefoil_rows, require_knotplot):
+    _ = require_knotplot  # hard-fail if knotplot resources missing
     row = _row(trefoil_rows, "knotplot")
-    if row is None:
-        pytest.skip("knotplot trefoil not in resources")
+    assert row is not None, "knotplot trefoil metrics missing despite require_knotplot"
     assert row["raw_length_factor_vs_ideal"] > 3.0
     assert row["mass_scale_factor_vs_ideal"] == pytest.approx(1.090, rel=0.03)
 
