@@ -101,13 +101,16 @@ def validate_main_zip(zf: zipfile.ZipFile, version: str, manifest: dict) -> None
 
     required = [
         "src/SSTcore/__init__.py",
-        "resources/ideal.txt",
+        "resources/ideal/ideal.txt",
         "resources/README.md",
         f"resources/{MANIFEST_NAME}",
         "setup.py",
     ]
     for r in required:
         if not has(r):
+            # Flat legacy path during transition
+            if r == "resources/ideal/ideal.txt" and has("resources/ideal.txt"):
+                continue
             raise RuntimeError(f"source zip missing {prefix}{r}")
 
     for spec in NESTED_SPECS:
@@ -124,7 +127,12 @@ def validate_main_zip(zf: zipfile.ZipFile, version: str, manifest: dict) -> None
             raise RuntimeError(f"bytecode in source zip: {n}")
         if "/src/SSTcore/resources/" in n:
             raise RuntimeError(f"junction leak in source zip: {n}")
-        for loose_prefix in ("ideal_12_data/", "knotplot/", "Knots_FourierSeries/"):
+        for loose_prefix in (
+            "ideal/ideal_12_data/",
+            "ideal_12_data/",
+            "knotplot/",
+            "Knots_FourierSeries/",
+        ):
             marker = f"/resources/{loose_prefix}"
             if marker in n and not n.endswith(".zip"):
                 tail = n.split(marker, 1)[-1]

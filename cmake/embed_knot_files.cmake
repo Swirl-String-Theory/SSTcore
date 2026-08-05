@@ -2,7 +2,7 @@
 # Embeds:
 #   - all .fseries files recursively from resources/Knots_FourierSeries
 #   - all ideal*.txt files recursively from resources/
-#   - all .txt files recursively from resources/ideal_12_data (if present)
+#   - all .txt files recursively from resources/ideal/ideal_12_data (if present)
 #   - knotplot per-knot ideals: resources/knotplot/**/knot_*_ideal.txt
 #
 # Generates:
@@ -15,7 +15,10 @@
 
 set(KNOTS_FOURIER_DIR "${CMAKE_SOURCE_DIR}/resources/Knots_FourierSeries")
 set(RESOURCES_DIR     "${CMAKE_SOURCE_DIR}/resources")
-set(IDEAL12_DIR       "${RESOURCES_DIR}/ideal_12_data")
+set(IDEAL12_DIR       "${RESOURCES_DIR}/ideal/ideal_12_data")
+if(NOT EXISTS "${IDEAL12_DIR}")
+    set(IDEAL12_DIR "${RESOURCES_DIR}/ideal_12_data")
+endif()
 set(KNOTPLOT_DIR      "${RESOURCES_DIR}/knotplot")
 
 set(OUTPUT_FILE "${CMAKE_BINARY_DIR}/generated/knot_files_embedded.cpp")

@@ -4,7 +4,7 @@ SSTcore distinguishes three representation layers. **Do not mix them** for canon
 
 | Layer | Bundle | Role | Typical use |
 |-------|--------|------|-------------|
-| **ideal.txt** (Brian Gilbert AB `n:m:k`) | `resources/ideal.txt` | **CanonIdeal** | Mass, L_K, A_K, electron benchmark |
+| **ideal.txt** (Brian Gilbert AB `n:m:k`) | `resources/ideal/ideal.txt` | **CanonIdeal** | Mass, L_K, A_K, electron benchmark |
 | **KnotPlot** (`knot_*/*_ideal.txt`) | `resources/knotplot/` | **LegacyImport** | Visualization, parser tests, legacy comparison |
 | **Fremlin** (`knot.n_m.fseries`) | `resources/Knots_FourierSeries/` | **AnalyticTest** | Unit tests, fast analytic evaluation |
 

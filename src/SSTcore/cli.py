@@ -13,7 +13,16 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 # Default Gilbert ideal files and resource directories to export.
+# Paths are relative to resources/; prefer the consolidated ideal/ layout.
 DEFAULT_IDEAL_FILES = (
+    "ideal/ideal.txt",
+    "ideal/ideal_short.txt",
+    "ideal/ideal_11a.txt",
+    "ideal/ideal_11n.txt",
+    "ideal/idealLinks.txt",
+    "ideal/idealLinks_10a.txt",
+    "ideal/idealLinks_10n.txt",
+    # Flat legacy fallbacks (pre-res-1 layout)
     "ideal.txt",
     "ideal_short.txt",
     "ideal_11a.txt",
@@ -27,6 +36,7 @@ DEFAULT_IDEAL_FILES = (
 DEFAULT_RESOURCE_DIRS = (
     "Knots_FourierSeries",
     "knotplot",
+    "ideal/ideal_12_data",
     "ideal_12_data",
 )
 

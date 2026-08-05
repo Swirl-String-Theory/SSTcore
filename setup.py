@@ -332,7 +332,10 @@ def _validate_package_data_payload(package_data_files):
     if not os.path.isdir(repo_res):
         return
     relset = set(package_data_files)
-    required = ["resources/ideal.txt", "resources/binding_manifest.json"]
+    required = ["resources/ideal/ideal.txt", "resources/binding_manifest.json"]
+    # Back-compat: accept flat layout during transition / older checkouts.
+    if "resources/ideal/ideal.txt" not in relset and "resources/ideal.txt" in relset:
+        required = ["resources/ideal.txt", "resources/binding_manifest.json"]
     missing = [p for p in required if p not in relset]
     has_kfs_payload = any(p.startswith("resources/Knots_FourierSeries/") for p in relset)
     if missing or not has_kfs_payload:
@@ -698,14 +701,16 @@ def _collect_ideal_rel_paths(resources_dir: Path):
             if rel not in seen:
                 seen.add(rel)
                 rels.append(rel)
-    ideal12 = resources_dir / "ideal_12_data"
-    if ideal12.is_dir():
-        for p in sorted(ideal12.rglob("*.txt")):
-            if p.is_file():
-                rel = p.relative_to(resources_dir).as_posix()
-                if rel not in seen:
-                    seen.add(rel)
-                    rels.append(rel)
+    for ideal12_name in ("ideal/ideal_12_data", "ideal_12_data"):
+        ideal12 = resources_dir / ideal12_name
+        if ideal12.is_dir():
+            for p in sorted(ideal12.rglob("*.txt")):
+                if p.is_file():
+                    rel = p.relative_to(resources_dir).as_posix()
+                    if rel not in seen:
+                        seen.add(rel)
+                        rels.append(rel)
+            break
     knotplot = resources_dir / "knotplot"
     if knotplot.is_dir():
         for p in sorted(knotplot.rglob("knot_*_ideal.txt")):

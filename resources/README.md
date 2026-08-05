@@ -18,10 +18,14 @@ The manifest `resources/source_bundle_manifest.json` (inside the source ZIP) lis
 
 | Archive | Expands to |
 |---------|------------|
-| `resources/ideal_12_data.zip` | `resources/ideal_12_data/` |
+| `resources/ideal_12_data.zip` | `resources/ideal/ideal_12_data/` |
 | `resources/knotplot.zip` | `resources/knotplot/` |
 | `resources/Knots_FourierSeries.zip` | `resources/Knots_FourierSeries/` |
 | `resources/Results.zip` | `resources/Results/` (optional; dashboard/export outputs) |
+
+### Ideal layout
+
+Gilbert databases live under **`resources/ideal/`** (`ideal.txt`, `idealLinks*.txt`, `ideal_12_data/`, …). Resolvers still accept the older flat `resources/ideal.txt` path as a legacy fallback.
 
 ### Knotplot canonical path
 
@@ -38,5 +42,5 @@ Wheels embed unpacked resources; you do **not** need this step after `pip instal
 
 ### Quick verification after unpack
 
-- `resources/ideal.txt` exists
+- `resources/ideal/ideal.txt` exists (or legacy `resources/ideal.txt`)
 - At least one `.fseries` file under `resources/Knots_FourierSeries/`

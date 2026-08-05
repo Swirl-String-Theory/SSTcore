@@ -1,55 +1,62 @@
 {
   "version": 1,
-  "description": "API-driven resource inventory for deelplan res-0. Regenerate with: python tests/data/regen_resource_manifest.py",
+  "description": "API-driven resource inventory for deelplan res-0. Regenerate with: python -m tests.data.regen_resource_manifest",
   "entries": [
     {
       "id": "ideal",
       "kind": "ideal",
-      "relpath": "ideal.txt",
+      "relpath": "ideal/ideal.txt",
       "sha256": "48f84139c05eff8f6832b7f0d80961ab7537b8539edde5cd2aae23b9d4d151cc",
       "bytes": 5651135
     },
     {
       "id": "ideal_11a",
       "kind": "ideal",
-      "relpath": "ideal_11a.txt",
+      "relpath": "ideal/ideal_11a.txt",
       "sha256": "4f92e38ce17b87651f7933ed51c84449c1c83a4415dbc95642b9adb5c983a2d7",
       "bytes": 7898908
     },
     {
       "id": "ideal_11n",
       "kind": "ideal",
-      "relpath": "ideal_11n.txt",
+      "relpath": "ideal/ideal_11n.txt",
       "sha256": "dd645752272ebd2c53e73161ef83c190a29e92d6703def1b651aaa541aa69eb2",
       "bytes": 3993955
     },
     {
       "id": "idealLinks",
       "kind": "ideal",
-      "relpath": "idealLinks.txt",
+      "relpath": "ideal/idealLinks.txt",
       "sha256": "a7481f263d8f152723277d0301372d86cc664c211ea5a50f01d6ac49b7d335de",
       "bytes": 5455438
     },
     {
       "id": "idealLinks_10a",
       "kind": "ideal",
-      "relpath": "idealLinks_10a.txt",
+      "relpath": "ideal/idealLinks_10a.txt",
       "sha256": "2958f9f02b7ca7537e53f19cb14566b05f2ecf3079f7f0d154ffe1fb74d9f598",
       "bytes": 7227805
     },
     {
       "id": "idealLinks_10n",
       "kind": "ideal",
-      "relpath": "idealLinks_10n.txt",
+      "relpath": "ideal/idealLinks_10n.txt",
       "sha256": "f4dd601b7cf7e932b21455ee6bf00177a61ebc3fc734ff81cf4835c3e4fd7fed",
       "bytes": 5125321
     },
     {
       "id": "ideal_short",
       "kind": "ideal",
-      "relpath": "ideal_short.txt",
+      "relpath": "ideal/ideal_short.txt",
       "sha256": "139737bd4028d9ac85b71094a1d7c209ebbbaf85d160cb668767420198a3ea47",
       "bytes": 57796
+    },
+    {
+      "id": "ideal_favorites.txt",
+      "kind": "ideal_aux",
+      "relpath": "ideal/ideal_favorites.txt",
+      "sha256": "942cb24b2a461b66cc3d35352f0723de97718a0e579ec524b8bb1c7ac4b9ad27",
+      "bytes": 786423
     },
     {
       "id": "knot_0.2.1",

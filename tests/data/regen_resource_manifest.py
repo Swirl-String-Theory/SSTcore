@@ -56,13 +56,18 @@ def build_manifest() -> dict:
             }
         )
 
-    favorites = root / "ideal_favorites.txt"
-    if favorites.is_file():
+    favorites = None
+    for candidate in (root / "ideal" / "ideal_favorites.txt", root / "ideal_favorites.txt"):
+        if candidate.is_file():
+            favorites = candidate
+            break
+    if favorites is not None:
+        rel = favorites.resolve().relative_to(root.resolve()).as_posix()
         entries.append(
             {
                 "id": "ideal_favorites.txt",
                 "kind": "ideal_aux",
-                "relpath": "ideal_favorites.txt",
+                "relpath": rel,
                 "sha256": _sha256(favorites),
                 "bytes": favorites.stat().st_size,
             }
@@ -119,10 +124,20 @@ def build_manifest() -> dict:
 
 
 def main() -> int:
+    # Prefer the checkout src/ tree so regen matches pytest's pythonpath=["src"].
+    src = str(_REPO / "src")
+    if src not in sys.path:
+        sys.path.insert(0, src)
+    for name in ("SSTcore", "sstcore"):
+        sys.modules.pop(name, None)
+
     manifest = build_manifest()
     out = Path(__file__).resolve().parent / "resource_manifest.json"
     out.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     print(f"wrote {out} ({len(manifest['entries'])} entries)")
+    sample = next((e for e in manifest["entries"] if e["kind"] == "ideal"), None)
+    if sample:
+        print(f"sample ideal relpath: {sample['relpath']}")
     return 0
 
 

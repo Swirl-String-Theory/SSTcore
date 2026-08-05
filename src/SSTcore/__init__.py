@@ -10,7 +10,10 @@ from enum import Enum
 
 __version__ = "0.8.18"
 
-# Known ideal-style files in resources/ (knots: AB/HT, links: TL).
+# Known ideal-style files (knots: AB/HT, links: TL). Basenames only;
+# resolution probes resources/ideal/ first, then the flat legacy path.
+IDEAL_SUBDIR = "ideal"
+
 IDEAL_SOURCE_FILES = {
     "ideal": "ideal.txt",           # knots 3–10 crossings, <AB Id="n:m:k">
     "ideal_11a": "ideal_11a.txt",   # 11-crossing alternating, <HT Id="K11a1">
@@ -163,8 +166,11 @@ def get_ideal_file_path(source: str) -> Optional[Path]:
     name = IDEAL_SOURCE_FILES.get(source) or source
     if "/" in name or "\\" in name:
         return None
-    p = root / name
-    return p.resolve() if p.is_file() else None
+    # Prefer resources/ideal/<name>, then flat legacy resources/<name>.
+    for candidate in (root / IDEAL_SUBDIR / name, root / name):
+        if candidate.is_file():
+            return candidate.resolve()
+    return None
 
 
 def get_ideal_txt_path() -> Optional[Path]:
@@ -182,8 +188,10 @@ def get_ideal_12_data_dir() -> Optional[Path]:
     root = get_resources_dir()
     if root is None:
         return None
-    d = root / "ideal_12_data"
-    return d.resolve() if d.is_dir() else None
+    for candidate in (root / IDEAL_SUBDIR / "ideal_12_data", root / "ideal_12_data"):
+        if candidate.is_dir():
+            return candidate.resolve()
+    return None
 
 
 def get_knotplot_dir() -> Optional[Path]:

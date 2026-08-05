@@ -46,12 +46,17 @@ pyproject.toml
 
 # Large / non-embed resources (keep .fseries + small ideal txt for CMake embed)
 resources/knotplot/**
+resources/ideal/ideal_12_data/**
 resources/ideal_12_data/**
 resources/Results/**
 resources/**/*.zip
 **/*.stl
 resources/*.csv
 resources/fseries_batch_results.csv
+resources/ideal/ideal_11a.txt
+resources/ideal/ideal_11n.txt
+resources/ideal/idealLinks_10a.txt
+resources/ideal/idealLinks_10n.txt
 resources/ideal_11a.txt
 resources/ideal_11n.txt
 resources/idealLinks_10a.txt
