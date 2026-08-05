@@ -1,0 +1,43 @@
+{
+  "status": "near-ideal-candidate",
+  "ideal": false,
+  "strict_near_ideal": false,
+  "folder": "knot_3.1",
+  "reference": {
+    "ropelength": 32.743274,
+    "source": "Brian-Gilbert-3:1:1"
+  },
+  "epsilon_R": 0.00035488204386649393,
+  "primary_polish": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_3.1\\knot_3.1_trial_002k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+  "primary_metrics": {
+    "residual": 0.00999506,
+    "ropelength": 32.754894,
+    "thickness": 0.499984,
+    "edge_length_ratio": 1.33311492845113,
+    "edge_length_cv": 0.025020566920727197
+  },
+  "checks": {
+    "topology": "pass",
+    "residual_candidate": "pass",
+    "residual_strict": "fail",
+    "ropelength_excess": "pass",
+    "raw_edge_ratio": "warn",
+    "raw_edge_cv": "warn",
+    "thickness": "pass",
+    "multistart_spread": "pass",
+    "resolution_convergence": "not-tested",
+    "uniform_mesh": "pass",
+    "constraint_anomalies": "pass"
+  },
+  "reason": [
+    "topology verified",
+    "residual \u2264 0.01",
+    "residual above 0.005",
+    "ropelength threshold passed",
+    "raw edge-ratio 1.333 (warn only)",
+    "raw edge-CV 2.5021% (warn only)",
+    "multi-start ropelength spread OK",
+    "resolution convergence not yet demonstrated",
+    "VortexLab uniform mesh OK"
+  ]
+}

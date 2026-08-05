@@ -322,8 +322,13 @@ def apply_plan(plan: dict[str, Any], *, dry_run: bool) -> dict[str, Any]:
                     continue
                 text = ab_xml_from_centerline(Path(uniform), ab_id=item["ab_id"])
                 if not dry_run:
-                    out_path.write_text(text, encoding="utf-8")
-                digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
+                    out_path.write_text(text, encoding="utf-8", newline="\n")
+                    digest = sha256_file(out_path)
+                    size = out_path.stat().st_size
+                else:
+                    payload = text.encode("utf-8")
+                    digest = hashlib.sha256(payload).hexdigest()
+                    size = len(payload)
                 ab_relpath = f"{entity['id']}/{dest_name}"
                 copied.append(
                     {
@@ -331,7 +336,7 @@ def apply_plan(plan: dict[str, Any], *, dry_run: bool) -> dict[str, Any]:
                         "relpath": ab_relpath,
                         "source": str(uniform),
                         "sha256": digest,
-                        "bytes": len(text.encode("utf-8")),
+                        "bytes": size,
                     }
                 )
                 continue

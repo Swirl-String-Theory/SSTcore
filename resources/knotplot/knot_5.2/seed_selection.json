@@ -1,0 +1,281 @@
+{
+  "selected": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.2\\knot_5.2_trial_001k.txt",
+  "selection_status": "best-so-far-no-plateau",
+  "plateau_detected": false,
+  "scan_limit": 15000,
+  "topology_status": "topology-verified",
+  "quality_class": "A",
+  "reason": "class A, R_proxy=60.56507043515673, k=1",
+  "checkpoints": [
+    {
+      "k": 1,
+      "file": "knot_5.2_trial_001k.txt",
+      "length": 334.9667264871304,
+      "gain": null,
+      "edge_ratio": 1.0114813424876783,
+      "edge_cv": 0.0034425857178940226,
+      "flatness_min": 0.33048157048850524,
+      "component_flatness": [
+        0.33048157048850524
+      ],
+      "D_proxy": 5.530691602939,
+      "R_proxy": 60.56507043515673,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 2,
+      "file": "knot_5.2_trial_002k.txt",
+      "length": 336.34503916144223,
+      "gain": -0.004114774887543256,
+      "edge_ratio": 1.0039194665294908,
+      "edge_cv": 0.0011997528400960618,
+      "flatness_min": 0.3322033235679904,
+      "component_flatness": [
+        0.3322033235679904
+      ],
+      "D_proxy": 5.541643864169375,
+      "R_proxy": 60.69409139337688,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 3,
+      "file": "knot_5.2_trial_003k.txt",
+      "length": 336.53798861849026,
+      "gain": -0.0005736652383192022,
+      "edge_ratio": 1.0024458238119116,
+      "edge_cv": 0.0007798659026873688,
+      "flatness_min": 0.33242298762945577,
+      "component_flatness": [
+        0.33242298762945577
+      ],
+      "D_proxy": 5.542292119982004,
+      "R_proxy": 60.721806309188736,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 4,
+      "file": "knot_5.2_trial_004k.txt",
+      "length": 336.57495967413024,
+      "gain": -0.00010985700542084254,
+      "edge_ratio": 1.0021921027143454,
+      "edge_cv": 0.0007129115742709188,
+      "flatness_min": 0.3324045049505826,
+      "component_flatness": [
+        0.3324045049505826
+      ],
+      "D_proxy": 5.542170021324014,
+      "R_proxy": 60.72981492432149,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 5,
+      "file": "knot_5.2_trial_005k.txt",
+      "length": 336.587146525703,
+      "gain": -3.6208432096605034e-05,
+      "edge_ratio": 1.002146811577138,
+      "edge_cv": 0.0007024315103520193,
+      "flatness_min": 0.3323209573789368,
+      "component_flatness": [
+        0.3323209573789368
+      ],
+      "D_proxy": 5.542288937687905,
+      "R_proxy": 60.73071077851783,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 6,
+      "file": "knot_5.2_trial_006k.txt",
+      "length": 336.59442906685547,
+      "gain": -2.1636420842627048e-05,
+      "edge_ratio": 1.0021377269986085,
+      "edge_cv": 0.0007010824878431505,
+      "flatness_min": 0.3322072991044403,
+      "component_flatness": [
+        0.3322072991044403
+      ],
+      "D_proxy": 5.54240954143469,
+      "R_proxy": 60.730703234847155,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 7,
+      "file": "knot_5.2_trial_007k.txt",
+      "length": 336.6002147190801,
+      "gain": -1.7188793767831363e-05,
+      "edge_ratio": 1.0021358357141303,
+      "edge_cv": 0.0007012963769043967,
+      "flatness_min": 0.3320750439790015,
+      "component_flatness": [
+        0.3320750439790015
+      ],
+      "D_proxy": 5.542597834363839,
+      "R_proxy": 60.729683945707734,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 8,
+      "file": "knot_5.2_trial_008k.txt",
+      "length": 336.6052428905926,
+      "gain": -1.4938111423038978e-05,
+      "edge_ratio": 1.0021365040337993,
+      "edge_cv": 0.0007018069787822667,
+      "flatness_min": 0.33193016447957824,
+      "component_flatness": [
+        0.33193016447957824
+      ],
+      "D_proxy": 5.542894300374185,
+      "R_proxy": 60.72734290961842,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 9,
+      "file": "knot_5.2_trial_009k.txt",
+      "length": 336.60975832552396,
+      "gain": -1.341463042163926e-05,
+      "edge_ratio": 1.0021389360207822,
+      "edge_cv": 0.000702376857302052,
+      "flatness_min": 0.3317765614275648,
+      "component_flatness": [
+        0.3317765614275648
+      ],
+      "D_proxy": 5.543246653937407,
+      "R_proxy": 60.72429739102944,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 10,
+      "file": "knot_5.2_trial_010k.txt",
+      "length": 336.61388402423034,
+      "gain": -1.2256622407241915e-05,
+      "edge_ratio": 1.0021419841705808,
+      "edge_cv": 0.0007029481067494948,
+      "flatness_min": 0.33161701874070476,
+      "component_flatness": [
+        0.33161701874070476
+      ],
+      "D_proxy": 5.543487192892332,
+      "R_proxy": 60.72240672907571,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 11,
+      "file": "knot_5.2_trial_011k.txt",
+      "length": 336.6176977160979,
+      "gain": -1.1329573878404185e-05,
+      "edge_ratio": 1.0021447456980417,
+      "edge_cv": 0.0007034999608560065,
+      "flatness_min": 0.3314536018975586,
+      "component_flatness": [
+        0.3314536018975586
+      ],
+      "D_proxy": 5.543769605210524,
+      "R_proxy": 60.72000131457752,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 12,
+      "file": "knot_5.2_trial_012k.txt",
+      "length": 336.6212536423482,
+      "gain": -1.0563693693037693e-05,
+      "edge_ratio": 1.0021474486820787,
+      "edge_cv": 0.0007040225405679418,
+      "flatness_min": 0.3312878781414206,
+      "component_flatness": [
+        0.3312878781414206
+      ],
+      "D_proxy": 5.544079675531178,
+      "R_proxy": 60.71724674665621,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 13,
+      "file": "knot_5.2_trial_013k.txt",
+      "length": 336.624591598972,
+      "gain": -9.916060223998605e-06,
+      "edge_ratio": 1.0021496648933648,
+      "edge_cv": 0.0007045107721414085,
+      "flatness_min": 0.33112105538127706,
+      "component_flatness": [
+        0.33112105538127706
+      ],
+      "D_proxy": 5.544407385627731,
+      "R_proxy": 60.71426000758416,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 14,
+      "file": "knot_5.2_trial_014k.txt",
+      "length": 336.62774177157286,
+      "gain": -9.358117854303759e-06,
+      "edge_ratio": 1.0021514167051433,
+      "edge_cv": 0.0007049623025649395,
+      "flatness_min": 0.3309540754791358,
+      "component_flatness": [
+        0.3309540754791358
+      ],
+      "D_proxy": 5.544745612554816,
+      "R_proxy": 60.711124602246116,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 15,
+      "file": "knot_5.2_trial_015k.txt",
+      "length": 336.6307276639385,
+      "gain": -8.870012762256375e-06,
+      "edge_ratio": 1.0021527415973113,
+      "edge_cv": 0.000705376466195295,
+      "flatness_min": 0.33078767927194536,
+      "component_flatness": [
+        0.33078767927194536
+      ],
+      "D_proxy": 5.545089259809868,
+      "R_proxy": 60.70790061105004,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    }
+  ]
+}

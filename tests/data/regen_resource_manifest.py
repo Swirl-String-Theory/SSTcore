@@ -75,21 +75,46 @@ def build_manifest() -> dict:
 
     kp = sst.get_knotplot_dir()
     if kp is not None and kp.is_dir():
-        for knot_dir in sorted(p for p in kp.glob("knot_*") if p.is_dir()):
-            kid = knot_dir.name
-            resolved = sst.get_knotplot_ideal_path(kid)
-            if resolved is None or not resolved.is_file():
-                continue
-            rel = resolved.resolve().relative_to(root.resolve()).as_posix()
-            entries.append(
-                {
-                    "id": kid,
-                    "kind": "knotplot_ideal",
-                    "relpath": rel,
-                    "sha256": _sha256(resolved),
-                    "bytes": resolved.stat().st_size,
-                }
-            )
+        index_path = kp / "INDEX.json"
+        if index_path.is_file():
+            import json as _json
+
+            index = _json.loads(index_path.read_text(encoding="utf-8"))
+            for entry in index.get("entries") or []:
+                if not entry.get("relaxed"):
+                    continue
+                kid = entry["id"]
+                resolved = sst.get_knotplot_ideal_path(kid)
+                if resolved is None or not resolved.is_file():
+                    continue
+                rel = resolved.resolve().relative_to(root.resolve()).as_posix()
+                entries.append(
+                    {
+                        "id": kid,
+                        "kind": "knotplot_ideal",
+                        "relpath": rel,
+                        "sha256": _sha256(resolved),
+                        "bytes": resolved.stat().st_size,
+                    }
+                )
+        else:
+            for knot_dir in sorted(
+                p for p in kp.iterdir() if p.is_dir() and p.name != "__pycache__"
+            ):
+                kid = knot_dir.name
+                resolved = sst.get_knotplot_ideal_path(kid)
+                if resolved is None or not resolved.is_file():
+                    continue
+                rel = resolved.resolve().relative_to(root.resolve()).as_posix()
+                entries.append(
+                    {
+                        "id": kid,
+                        "kind": "knotplot_ideal",
+                        "relpath": rel,
+                        "sha256": _sha256(resolved),
+                        "bytes": resolved.stat().st_size,
+                    }
+                )
 
     kfs = sst.get_knots_fourier_series_dir()
     if kfs is not None and kfs.is_dir():

@@ -1,0 +1,201 @@
+% build_link_6.3.2.kpc
+reset all
+load 6.3.2
+refine nbeads 900
+mode cb
+
+centre
+fitto mindist 1.05
+
+collision fast
+close = 1.0
+max-dr = 0.01
+
+mechforce = on
+elecforce = on
+bendforce = on
+bencon = 1.0
+
+stusplit = 0
+dstep = 1
+
+bradius = 0.1
+cradius = 0.05
+
+energy model MD
+energy
+
+echo CHECKPOINT analytic_D1
+safe
+dowker
+lnknum
+length
+distance
+angle
+acn
+save knots/link_6.3.2/link_6.3.2_analytic_D1.txt
+
+ago 1000
+echo CHECKPOINT trial_001k
+safe
+dowker
+lnknum
+length
+distance
+angle
+acn
+save knots/link_6.3.2/link_6.3.2_trial_001k.txt
+
+ago 1000
+echo CHECKPOINT trial_002k
+safe
+dowker
+lnknum
+length
+distance
+angle
+acn
+save knots/link_6.3.2/link_6.3.2_trial_002k.txt
+
+ago 1000
+echo CHECKPOINT trial_003k
+safe
+dowker
+lnknum
+length
+distance
+angle
+acn
+save knots/link_6.3.2/link_6.3.2_trial_003k.txt
+
+ago 1000
+echo CHECKPOINT trial_004k
+safe
+dowker
+lnknum
+length
+distance
+angle
+acn
+save knots/link_6.3.2/link_6.3.2_trial_004k.txt
+
+ago 1000
+echo CHECKPOINT trial_005k
+safe
+dowker
+lnknum
+length
+distance
+angle
+acn
+save knots/link_6.3.2/link_6.3.2_trial_005k.txt
+
+ago 1000
+echo CHECKPOINT trial_006k
+safe
+dowker
+lnknum
+length
+distance
+angle
+acn
+save knots/link_6.3.2/link_6.3.2_trial_006k.txt
+
+ago 1000
+echo CHECKPOINT trial_007k
+safe
+dowker
+lnknum
+length
+distance
+angle
+acn
+save knots/link_6.3.2/link_6.3.2_trial_007k.txt
+
+ago 1000
+echo CHECKPOINT trial_008k
+safe
+dowker
+lnknum
+length
+distance
+angle
+acn
+save knots/link_6.3.2/link_6.3.2_trial_008k.txt
+
+ago 1000
+echo CHECKPOINT trial_009k
+safe
+dowker
+lnknum
+length
+distance
+angle
+acn
+save knots/link_6.3.2/link_6.3.2_trial_009k.txt
+
+ago 1000
+echo CHECKPOINT trial_010k
+safe
+dowker
+lnknum
+length
+distance
+angle
+acn
+save knots/link_6.3.2/link_6.3.2_trial_010k.txt
+
+ago 1000
+echo CHECKPOINT trial_011k
+safe
+dowker
+lnknum
+length
+distance
+angle
+acn
+save knots/link_6.3.2/link_6.3.2_trial_011k.txt
+
+ago 1000
+echo CHECKPOINT trial_012k
+safe
+dowker
+lnknum
+length
+distance
+angle
+acn
+save knots/link_6.3.2/link_6.3.2_trial_012k.txt
+
+ago 1000
+echo CHECKPOINT trial_013k
+safe
+dowker
+lnknum
+length
+distance
+angle
+acn
+save knots/link_6.3.2/link_6.3.2_trial_013k.txt
+
+ago 1000
+echo CHECKPOINT trial_014k
+safe
+dowker
+lnknum
+length
+distance
+angle
+acn
+save knots/link_6.3.2/link_6.3.2_trial_014k.txt
+
+ago 1000
+echo CHECKPOINT trial_015k
+safe
+dowker
+lnknum
+length
+distance
+angle
+acn
+save knots/link_6.3.2/link_6.3.2_trial_015k.txt

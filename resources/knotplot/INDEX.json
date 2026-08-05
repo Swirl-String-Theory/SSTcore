@@ -1,0 +1,2446 @@
+{
+  "version": 1,
+  "generated_at": "2026-08-05T15:51:03.251605+00:00",
+  "min_status": "relaxed-seed",
+  "workbench_root": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot",
+  "counts": {
+    "total": 49,
+    "relaxed": 21,
+    "stub": 28
+  },
+  "legacy_aliases": {
+    "knot_T2.3": "torus_2.3",
+    "knot_T2.5": "torus_2.5",
+    "knot_T2.7": "torus_2.7",
+    "knot_TL2.4": "torus_2.4",
+    "knot_TL2.6": "torus_2.6",
+    "knot_TL2.8": "torus_2.8",
+    "knot_TL3.3_Gear": "torus_3.3",
+    "knot_TL3.6": "torus_3.6",
+    "knot_TL3.9": "torus_3.9",
+    "knot_TL6.15": "torus_6.15",
+    "knot_TL6.9": "torus_6.9",
+    "knot_0.2.1": "link_0.2.1",
+    "knot_0.3.1": "link_0.3.1",
+    "knot_2.2.1": "link_2.2.1",
+    "knot_4.2.1": "link_4.2.1",
+    "knot_5.2.1": "link_5.2.1",
+    "knot_6.2.1": "link_6.2.1",
+    "knot_6.3.1": "link_6.3.1",
+    "knot_6.3.2": "link_6.3.2",
+    "knot_6.3.3": "link_6.3.3",
+    "knot_7.2.5": "link_7.2.5",
+    "knot_7.2.6": "link_7.2.6",
+    "knot_7.2.8": "link_7.2.8",
+    "knot_8.2.1": "link_8.2.1",
+    "knot_9.2.20": "link_9.2.20",
+    "knot_9.2.40": "link_9.2.40"
+  },
+  "entries": [
+    {
+      "id": "knot_0.1",
+      "kind": "knot",
+      "status": "relaxed-seed",
+      "relaxed": true,
+      "epsilon_R": 0.0,
+      "ab_xml": "knot_0.1/knot_0.1_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "knot_0.1/build_knot_0.1.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_0.1\\build_knot_0.1.kpc",
+          "source_name": "build_knot_0.1.kpc",
+          "sha256": "9c6e4f14be0887b00c161eb998c10d42f2296241796c72aeb95b5997f519ba60",
+          "bytes": 2280
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "knot_0.1/knot_0.1_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_0.1\\knot_0.1_analytic_D1.txt",
+          "source_name": "knot_0.1_analytic_D1.txt",
+          "sha256": "8f1b2d364d6aefbbeb0558950052e2408880ee5ac46f0921663da892bfaa7c48",
+          "bytes": 11047
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "knot_0.1/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_0.1\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "f710efccc406b42f458c097c4b319db3fccd8715dde9f8df401d3ac5fcbe6cbf",
+          "bytes": 1316
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "knot_0.1/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_0.1\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "0b09e38cdf1a3cb845757d4dc9b38da6daa6a6201d559de72ed538a08c3f6332",
+          "bytes": 8518
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "knot_0.1/knot_0.1_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_0.1\\knot_0.1_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "source_name": "knot_0.1_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "sha256": "eddd10c298b9fd1d9a45084e231ef4653b9f569ef0dd66e3cb0d441648a20b58",
+          "bytes": 13207
+        },
+        {
+          "role": "resample",
+          "relpath": "knot_0.1/knot_0.1_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_0.1\\knot_0.1_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "source_name": "knot_0.1_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "sha256": "824130842b52ecb37918c98310a77f53cdf6dcf0ad793967517634274317514f",
+          "bytes": 1069
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "knot_0.1/knot_0.1_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_0.1\\knot_0.1_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "source_name": "knot_0.1_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "sha256": "6f89c421965ed6cc2ae690cdf9f6a39f80ca4faeb0d9cbb331d81e47a624c1fc",
+          "bytes": 13181
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "knot_0.1/knot_0.1_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_0.1\\knot_0.1_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "source_name": "knot_0.1_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "sha256": "feb1c1b9fca7ceb265f78013490a65c6bf54d069b2202111d5452e871a24c273",
+          "bytes": 13390
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "knot_0.1/knot_0.1_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_0.1\\knot_0.1_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "source_name": "knot_0.1_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "sha256": "5396b0d624156b0fd0f4c1f558d47cf7bf2a0f378e7e678814d3c383042d1bf4",
+          "bytes": 1412
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "knot_0.1/knot_0.1_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_0.1\\knot_0.1_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "sha256": "e5724577ff4ba1109307986bc277e885020a01b04452606001630cd66228ff51",
+          "bytes": 7106
+        }
+      ]
+    },
+    {
+      "id": "knot_10.1",
+      "kind": "knot",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "knot_10.1/build_knot_10.1.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_10.1\\build_knot_10.1.kpc",
+          "source_name": "build_knot_10.1.kpc",
+          "sha256": "ac4d473c9177a50e52b96b284d8e6f1edf8dd62ace10450763bc56644c3cc439",
+          "bytes": 2315
+        }
+      ]
+    },
+    {
+      "id": "knot_10.123",
+      "kind": "knot",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "knot_10.123/build_knot_10.123.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_10.123\\build_knot_10.123.kpc",
+          "source_name": "build_knot_10.123.kpc",
+          "sha256": "c229b6bab3973ca62f15a91b25e4eea8e6fdf65f7ff70333e8ee30a899ced995",
+          "bytes": 2383
+        }
+      ]
+    },
+    {
+      "id": "knot_3.1",
+      "kind": "knot",
+      "status": "near-ideal-candidate",
+      "relaxed": true,
+      "epsilon_R": 0.00035488204386649393,
+      "ab_xml": "knot_3.1/knot_3.1_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "knot_3.1/build_knot_3.1.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_3.1\\build_knot_3.1.kpc",
+          "source_name": "build_knot_3.1.kpc",
+          "sha256": "95a4338c254af276e95ba102eed7f9f54a6781be47793c50356cab2623d74517",
+          "bytes": 2280
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "knot_3.1/knot_3.1_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_3.1\\knot_3.1_analytic_D1.txt",
+          "source_name": "knot_3.1_analytic_D1.txt",
+          "sha256": "5eb935192e343a8d3447bdd0ae17b9d9ce9132f44268c126d05369367e42bbc5",
+          "bytes": 15703
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "knot_3.1/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_3.1\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "3950190f108f4464b57880627509951365e844ed6783e08325b39a547b361c33",
+          "bytes": 1347
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "knot_3.1/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_3.1\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "5f8e23dbf370b31cb98d64a80e76713686fdeb3793860fb8ad0d3c9b864a19a5",
+          "bytes": 8180
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "knot_3.1/knot_3.1_trial_002k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_3.1\\knot_3.1_trial_002k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "source_name": "knot_3.1_trial_002k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "sha256": "69e9e4c0af4c0e74339920f1dc249ed4aa20c7cc513333559ba1e34459250b40",
+          "bytes": 18563
+        },
+        {
+          "role": "resample",
+          "relpath": "knot_3.1/knot_3.1_trial_002k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_3.1\\knot_3.1_trial_002k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "source_name": "knot_3.1_trial_002k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "sha256": "b9e2e7569b2068cdcddb9ce5de88d24ec5d4357039730d88311fdb23813e2b42",
+          "bytes": 1067
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "knot_3.1/knot_3.1_trial_002k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_3.1\\knot_3.1_trial_002k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "source_name": "knot_3.1_trial_002k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "sha256": "0301d9112581299b98294f80e0bb7d214f9b6de04ab76f587e278fa3f3ee9732",
+          "bytes": 18467
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "knot_3.1/knot_3.1_trial_002k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_3.1\\knot_3.1_trial_002k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "source_name": "knot_3.1_trial_002k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "sha256": "1ef9ced21943e4d87addf3a2988e29b0eaf5afbdab334641a469049605a743ef",
+          "bytes": 18655
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "knot_3.1/knot_3.1_trial_002k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_3.1\\knot_3.1_trial_002k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "source_name": "knot_3.1_trial_002k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "sha256": "ca89a6edaece042db61436ba03b51dcc1d0837511689462a33d136abc6454b66",
+          "bytes": 1408
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "knot_3.1/knot_3.1_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_3.1\\knot_3.1_trial_002k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "sha256": "596537bd293a001e8a25afff06668f3ec8fd4e2e528ba51451f49cc8d1156920",
+          "bytes": 7107
+        }
+      ]
+    },
+    {
+      "id": "knot_4.1",
+      "kind": "knot",
+      "status": "near-ideal-candidate",
+      "relaxed": true,
+      "epsilon_R": 0.0,
+      "ab_xml": "knot_4.1/knot_4.1_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "knot_4.1/build_knot_4.1.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_4.1\\build_knot_4.1.kpc",
+          "source_name": "build_knot_4.1.kpc",
+          "sha256": "724e3a03e546048c8aa6d915145e59fb417285029a27ea4577625d0f7cca6e27",
+          "bytes": 2281
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "knot_4.1/knot_4.1_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_4.1\\knot_4.1_analytic_D1.txt",
+          "source_name": "knot_4.1_analytic_D1.txt",
+          "sha256": "a22c8e20c964e1826cab64376d488ad31881472df9095385eef54ff4a7cfd188",
+          "bytes": 15701
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "knot_4.1/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_4.1\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "a953a6befe256ce6167b2cd2d07a567c0b51e7bba0e5a81ce3a218ce5ac9fbe4",
+          "bytes": 1326
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "knot_4.1/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_4.1\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "068f12ebba4f9c478db7b58baf69b14c701c630c84eb5dcbca313f34b9c25eb7",
+          "bytes": 8186
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "knot_4.1/knot_4.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_4.1\\knot_4.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "source_name": "knot_4.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "sha256": "0d3a82015852426ab780d1079595d14804c8b3c2435e85ba4205a7fdd8fab1f9",
+          "bytes": 18529
+        },
+        {
+          "role": "resample",
+          "relpath": "knot_4.1/knot_4.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_4.1\\knot_4.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "source_name": "knot_4.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "sha256": "3347cd7a35eb4261521013a15371e1d916240de51574e2a7b2c16d8f138dd083",
+          "bytes": 1061
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "knot_4.1/knot_4.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_4.1\\knot_4.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "source_name": "knot_4.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "sha256": "edc6781b9ed771d49631ad89e250aaa22fcd153797b5a23e4949af9bbf4d18f3",
+          "bytes": 18349
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "knot_4.1/knot_4.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_4.1\\knot_4.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "source_name": "knot_4.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "sha256": "00163fc27d1020441351ebbb86665eb0a80d8b7a17fe41a3fbfc29512ad931be",
+          "bytes": 18588
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "knot_4.1/knot_4.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_4.1\\knot_4.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "source_name": "knot_4.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "sha256": "678110bb7c7994ed4c36232afd7fe88782eb3b8aab5122a31cfe1e635b4d04c4",
+          "bytes": 1404
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "knot_4.1/knot_4.1_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_4.1\\knot_4.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "sha256": "b626d5c36443c3b42665db0d3ef59e3bc69be567610e99f5667d326639f19de6",
+          "bytes": 7107
+        }
+      ]
+    },
+    {
+      "id": "knot_5.1",
+      "kind": "knot",
+      "status": "relaxed-seed",
+      "relaxed": true,
+      "epsilon_R": 0.0,
+      "ab_xml": "knot_5.1/knot_5.1_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "knot_5.1/build_knot_5.1.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.1\\build_knot_5.1.kpc",
+          "source_name": "build_knot_5.1.kpc",
+          "sha256": "4f97f70f8eaed6d5beed4eeead92728bf901fd9f4a7989523b65cf4d6517cb40",
+          "bytes": 2281
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "knot_5.1/knot_5.1_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.1\\knot_5.1_analytic_D1.txt",
+          "source_name": "knot_5.1_analytic_D1.txt",
+          "sha256": "8c70eb26ab667ee22d4df29d42ad7aa20c696ca6dbae5b0dde0a042209786462",
+          "bytes": 15699
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "knot_5.1/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.1\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "21807fe9e917837377f24e1458749b8f7b1a1abf3b740b34331e35270734386f",
+          "bytes": 1318
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "knot_5.1/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.1\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "94e2f66a3bcdd2239546f68e71df8c8e65ad65276eec99b4caedb7abab03461a",
+          "bytes": 8199
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "knot_5.1/knot_5.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.1\\knot_5.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "source_name": "knot_5.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "sha256": "31b622e62761a8759e36d1e5e7d87a4264caee2b34f41a1d8cddeb0aae7805c2",
+          "bytes": 18532
+        },
+        {
+          "role": "resample",
+          "relpath": "knot_5.1/knot_5.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.1\\knot_5.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "source_name": "knot_5.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "sha256": "f2f0f6411a5d1c704b4e6b369c50a00a55b88222bef5971847aa7bb1a62b35ec",
+          "bytes": 1065
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "knot_5.1/knot_5.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.1\\knot_5.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "source_name": "knot_5.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "sha256": "d54052906876c24f94e2975ff42a4a73de955b3c6fa66d0c19cf3aff56ab7f6a",
+          "bytes": 18404
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "knot_5.1/knot_5.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.1\\knot_5.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "source_name": "knot_5.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "sha256": "0a9717e0d99f129be76f7fe5943e1d207b24174d1221325313e4fd46496a52db",
+          "bytes": 18589
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "knot_5.1/knot_5.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.1\\knot_5.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "source_name": "knot_5.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "sha256": "b6f92d02d825920da06bd19fb821322eb2476e455f74b64114c189c6c1641270",
+          "bytes": 1411
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "knot_5.1/knot_5.1_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.1\\knot_5.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "sha256": "e9b360f04fdd0b0e34b2751128e803f4c2cb81c410ceb450bc5fb8f24866b8b8",
+          "bytes": 7107
+        }
+      ]
+    },
+    {
+      "id": "knot_5.2",
+      "kind": "knot",
+      "status": "relaxed-seed",
+      "relaxed": true,
+      "epsilon_R": 0.0,
+      "ab_xml": "knot_5.2/knot_5.2_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "knot_5.2/build_knot_5.2.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.2\\build_knot_5.2.kpc",
+          "source_name": "build_knot_5.2.kpc",
+          "sha256": "ee8b5d41eee2bd55e2d020545bf2d18740e53b42585865f528f2650d5b883f20",
+          "bytes": 2281
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "knot_5.2/knot_5.2_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.2\\knot_5.2_analytic_D1.txt",
+          "source_name": "knot_5.2_analytic_D1.txt",
+          "sha256": "988788e5a28263c74ae77a5ab538f6fdae0e13e9c2a2552eca6d6d1ce0212d41",
+          "bytes": 15716
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "knot_5.2/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.2\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "2c908ff77d9c8f0258861159004acfe4b70feef848f3dd5be0c43d635c020f33",
+          "bytes": 1316
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "knot_5.2/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.2\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "28e16eb773a4b71b8cbaaa56f53de66318ec6a6d791fd2a05f108e122cd247a9",
+          "bytes": 8190
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "knot_5.2/knot_5.2_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.2\\knot_5.2_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "source_name": "knot_5.2_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "sha256": "509a9c18f23c5bd42d69b9ce371c59c76f0c4cd4d1fd19455e27cdb647221d86",
+          "bytes": 18453
+        },
+        {
+          "role": "resample",
+          "relpath": "knot_5.2/knot_5.2_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.2\\knot_5.2_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "source_name": "knot_5.2_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "sha256": "a5943c9ea289937685727ac0335b1511f9307de5506215115398d0ff95bc6bd1",
+          "bytes": 1059
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "knot_5.2/knot_5.2_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.2\\knot_5.2_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "source_name": "knot_5.2_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "sha256": "97b268e68edccf6878ebbece4f714c4f4dd4037eb21a8599dd65d505e068d1b0",
+          "bytes": 18301
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "knot_5.2/knot_5.2_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.2\\knot_5.2_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "source_name": "knot_5.2_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "sha256": "9caf386ecb107beaa0f70b92035601514d8c1af0799c229403d3e3cb70cb87f3",
+          "bytes": 18515
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "knot_5.2/knot_5.2_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.2\\knot_5.2_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "source_name": "knot_5.2_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "sha256": "0bd4f4d6455448d925029378e852439f4f9c68f18742fd00bd08e7b670132dc7",
+          "bytes": 1405
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "knot_5.2/knot_5.2_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.2\\knot_5.2_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "sha256": "e7bcb1b90679f13a2590b4c71599741119215318526e73b9d1b13367f4179988",
+          "bytes": 7107
+        }
+      ]
+    },
+    {
+      "id": "knot_6.1",
+      "kind": "knot",
+      "status": "relaxed-seed",
+      "relaxed": true,
+      "epsilon_R": 0.0,
+      "ab_xml": "knot_6.1/knot_6.1_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "knot_6.1/build_knot_6.1.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_6.1\\build_knot_6.1.kpc",
+          "source_name": "build_knot_6.1.kpc",
+          "sha256": "d308e1e4c5fa7c71945523a8e808ff9fcf94fe6e32bd207edd199152c11bfe34",
+          "bytes": 2281
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "knot_6.1/knot_6.1_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_6.1\\knot_6.1_analytic_D1.txt",
+          "source_name": "knot_6.1_analytic_D1.txt",
+          "sha256": "ae697f000920465f9e9bd7093d711d2aebb75048eb5ffc2191350ed2d2148cfd",
+          "bytes": 15719
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "knot_6.1/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_6.1\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "bb270d703c2d53a0beab6ed8a6926c2e8154ffed45e8eb82b47ba409650f32e6",
+          "bytes": 1316
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "knot_6.1/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_6.1\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "3212e617df54a5ef92e78396dcd71d32661b07918b3a071874513377c4ddc119",
+          "bytes": 8189
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "knot_6.1/knot_6.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_6.1\\knot_6.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "source_name": "knot_6.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "sha256": "72034e1de2a3d44578993d6eafc339926ad80edea430945d205c9aa8438b64eb",
+          "bytes": 18422
+        },
+        {
+          "role": "resample",
+          "relpath": "knot_6.1/knot_6.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_6.1\\knot_6.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "source_name": "knot_6.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "sha256": "1e99cf7c89c95ddefcb4c39c29b8dedd829b2d29570cd7b912b319a5f1291ce0",
+          "bytes": 1065
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "knot_6.1/knot_6.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_6.1\\knot_6.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "source_name": "knot_6.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "sha256": "44e5a96d7022d54c0abc39e9f9dbd08397e526c52000e2f8de8061d6d0f4bf13",
+          "bytes": 18280
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "knot_6.1/knot_6.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_6.1\\knot_6.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "source_name": "knot_6.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "sha256": "5f5efbbb1b9cce7ea64eecac254d9c193799e8010b545b8c62d6b0d6c6c801da",
+          "bytes": 18497
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "knot_6.1/knot_6.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_6.1\\knot_6.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "source_name": "knot_6.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "sha256": "78fc39418f83627c911eb7ae51e576c8b1f7e6286f7b384d1917f07ce89e75f2",
+          "bytes": 1408
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "knot_6.1/knot_6.1_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_6.1\\knot_6.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "sha256": "5cb7202bafe46594469f15ab3c9d0c233ad15cefd1c94163754bd3f214fae04c",
+          "bytes": 7107
+        }
+      ]
+    },
+    {
+      "id": "knot_6.2",
+      "kind": "knot",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "knot_6.2/build_knot_6.2.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_6.2\\build_knot_6.2.kpc",
+          "source_name": "build_knot_6.2.kpc",
+          "sha256": "c1c916e21c31e691c3254b9edd1b0bce2940339b88c50f6c7b1c6a28151df8dd",
+          "bytes": 2281
+        }
+      ]
+    },
+    {
+      "id": "knot_6.3",
+      "kind": "knot",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "knot_6.3/build_knot_6.3.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_6.3\\build_knot_6.3.kpc",
+          "source_name": "build_knot_6.3.kpc",
+          "sha256": "2848f2db7b476fe42c370e4efc7321ce2dd32aad990e5a7519fcd878ed86a44c",
+          "bytes": 2281
+        }
+      ]
+    },
+    {
+      "id": "knot_7.1",
+      "kind": "knot",
+      "status": "near-ideal-candidate",
+      "relaxed": true,
+      "epsilon_R": 0.0,
+      "ab_xml": "knot_7.1/knot_7.1_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "knot_7.1/build_knot_7.1.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_7.1\\build_knot_7.1.kpc",
+          "source_name": "build_knot_7.1.kpc",
+          "sha256": "58dc15abc9bc05118d199fff9d6c2f5e3f60c3a9016598085eb844a15d0048bd",
+          "bytes": 2281
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "knot_7.1/knot_7.1_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_7.1\\knot_7.1_analytic_D1.txt",
+          "source_name": "knot_7.1_analytic_D1.txt",
+          "sha256": "efb9917dce89aeee5d78b51d8e9ffa9a554c004570f15e974532a458a0810edf",
+          "bytes": 15712
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "knot_7.1/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_7.1\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "f85e7fafa8e222f63878e4c8b60eae91deef22a08a528c69c8e71ffeb9f0d6cb",
+          "bytes": 1327
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "knot_7.1/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_7.1\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "763d11f85a5f4844a589d3d4763dd11900186c83fcd4b80a707a9823092f7ccd",
+          "bytes": 8202
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "knot_7.1/knot_7.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_7.1\\knot_7.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "source_name": "knot_7.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "sha256": "d38e6efcf9cd8208c72e5553d39153c3da1ed00fe41d5065ec58510dd6ddd122",
+          "bytes": 18428
+        },
+        {
+          "role": "resample",
+          "relpath": "knot_7.1/knot_7.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_7.1\\knot_7.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "source_name": "knot_7.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "sha256": "a882d08a15e0d74e154df01121bae269063f6b1bc37d2278babdf39150d5e8bd",
+          "bytes": 1063
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "knot_7.1/knot_7.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_7.1\\knot_7.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "source_name": "knot_7.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "sha256": "79b66c2d6bb799e8fe933ebcdf41957b275f577a82eec0c770ac55a81461516e",
+          "bytes": 18273
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "knot_7.1/knot_7.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_7.1\\knot_7.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "source_name": "knot_7.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "sha256": "3b7b2082feef822d3a60b26581a2605c76786baf1f5e25261b30f75f2e5ad85f",
+          "bytes": 18484
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "knot_7.1/knot_7.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_7.1\\knot_7.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "source_name": "knot_7.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "sha256": "52b4206e65cc4487755ba15e2d60b178bebadcf75753ccf1023ae4855fc49eeb",
+          "bytes": 1409
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "knot_7.1/knot_7.1_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_7.1\\knot_7.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "sha256": "1d5907165c2aba81b73c4521746817edba366a7e2aafd8c023c733fd13fb158b",
+          "bytes": 7107
+        }
+      ]
+    },
+    {
+      "id": "knot_7.2",
+      "kind": "knot",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "knot_7.2/build_knot_7.2.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_7.2\\build_knot_7.2.kpc",
+          "source_name": "build_knot_7.2.kpc",
+          "sha256": "55068d2a63be6f3b77aeff24eca194548ab84a8949f6de916875cd14913aaf77",
+          "bytes": 2281
+        }
+      ]
+    },
+    {
+      "id": "knot_7.3",
+      "kind": "knot",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "knot_7.3/build_knot_7.3.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_7.3\\build_knot_7.3.kpc",
+          "source_name": "build_knot_7.3.kpc",
+          "sha256": "2d695cf9a685e34327ae19e8a1b2673221f58060ebaf6a8a6825106e0027b5f1",
+          "bytes": 2281
+        }
+      ]
+    },
+    {
+      "id": "knot_7.4",
+      "kind": "knot",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "knot_7.4/build_knot_7.4.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_7.4\\build_knot_7.4.kpc",
+          "source_name": "build_knot_7.4.kpc",
+          "sha256": "a4578c654da8935605552acb399d8a2d4b0ead7d78e6e029a2bc63c8c58acbf9",
+          "bytes": 2281
+        }
+      ]
+    },
+    {
+      "id": "knot_8.1",
+      "kind": "knot",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "knot_8.1/build_knot_8.1.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_8.1\\build_knot_8.1.kpc",
+          "source_name": "build_knot_8.1.kpc",
+          "sha256": "2592d891bff63fb47e13ed290c9479270cf36d30423d112174091d314ae71067",
+          "bytes": 2281
+        }
+      ]
+    },
+    {
+      "id": "knot_8.17",
+      "kind": "knot",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "knot_8.17/build_knot_8.17.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_8.17\\build_knot_8.17.kpc",
+          "source_name": "build_knot_8.17.kpc",
+          "sha256": "2cc819f7bd4fe253f97a609175fa4a3fd9a24dda66435771878d9486d535c773",
+          "bytes": 2315
+        }
+      ]
+    },
+    {
+      "id": "knot_8.18",
+      "kind": "knot",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "knot_8.18/build_knot_8.18.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_8.18\\build_knot_8.18.kpc",
+          "source_name": "build_knot_8.18.kpc",
+          "sha256": "6fa6f0e8eb649e8870c1cfe5eac2140dbe227ace499c35edccfe764b114cef4d",
+          "bytes": 2315
+        }
+      ]
+    },
+    {
+      "id": "knot_9.1",
+      "kind": "knot",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "knot_9.1/build_knot_9.1.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_9.1\\build_knot_9.1.kpc",
+          "source_name": "build_knot_9.1.kpc",
+          "sha256": "72677392a4bfe1e362eadc4ec7cf781065dd14cc78d789f2484613cffc3041f3",
+          "bytes": 2281
+        }
+      ]
+    },
+    {
+      "id": "knot_9.2",
+      "kind": "knot",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "knot_9.2/build_knot_9.2.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_9.2\\build_knot_9.2.kpc",
+          "source_name": "build_knot_9.2.kpc",
+          "sha256": "c6d8986d70cecf7f8c688fc891f84792292e90979eacb78c4b0015cee6f04052",
+          "bytes": 2281
+        }
+      ]
+    },
+    {
+      "id": "knot_9.35",
+      "kind": "knot",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "knot_9.35/build_knot_9.35.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_9.35\\build_knot_9.35.kpc",
+          "source_name": "build_knot_9.35.kpc",
+          "sha256": "c1095dce76b84d6de8c8eff6dc30cfc7f92e40e27e579c021578408ad1ee2eb0",
+          "bytes": 2315
+        }
+      ]
+    },
+    {
+      "id": "link_0.2.1",
+      "kind": "link",
+      "status": "relaxed-seed",
+      "relaxed": true,
+      "epsilon_R": 0.0,
+      "ab_xml": "link_0.2.1/link_0.2.1_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "link_0.2.1/build_link_0.2.1.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.2.1\\build_link_0.2.1.kpc",
+          "source_name": "build_link_0.2.1.kpc",
+          "sha256": "d7cb56f09256340a851fdd3635eeee9ee02e9d2da033db8074dc464bf55139e6",
+          "bytes": 2349
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "link_0.2.1/link_0.2.1_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.2.1\\link_0.2.1_analytic_D1.txt",
+          "source_name": "link_0.2.1_analytic_D1.txt",
+          "sha256": "77921df46a5112575bd4554d6952e59f1e2a4d36409dd969c9c8cd659d2d8a19",
+          "bytes": 31387
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "link_0.2.1/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.2.1\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "8aa4c034a3575691cfd09a494fd35ed58f5fb997a21f61ae9057423b944855b8",
+          "bytes": 1277
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "link_0.2.1/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.2.1\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "8cdaea9f7fdd7c1e720e5a70bc7469c8ed975faa0bf52edbb280dac3f0cc3e56",
+          "bytes": 8761
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "link_0.2.1/link_0.2.1_trial_015k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.2.1\\link_0.2.1_trial_015k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source_name": "link_0.2.1_trial_015k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "c7e61ec163839196d8795de38896b638a9a29b8dc052f162a05dd06091b1dce9",
+          "bytes": 36111
+        },
+        {
+          "role": "resample",
+          "relpath": "link_0.2.1/link_0.2.1_trial_015k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.2.1\\link_0.2.1_trial_015k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source_name": "link_0.2.1_trial_015k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "sha256": "2482c05866b3b186c31e0dfa402b487172bb777c0e46596562c46c5c4519f362",
+          "bytes": 2693
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "link_0.2.1/link_0.2.1_trial_015k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.2.1\\link_0.2.1_trial_015k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source_name": "link_0.2.1_trial_015k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "sha256": "da65b64ff17e69faaa8592c0010946fb03a8f6261e71842049224723eb7b8e6a",
+          "bytes": 35550
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "link_0.2.1/link_0.2.1_trial_015k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.2.1\\link_0.2.1_trial_015k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source_name": "link_0.2.1_trial_015k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "sha256": "b8e6705d461647ec3f1b8298aee7fa31939778a59915b6729547e6ceacf013ff",
+          "bytes": 35827
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "link_0.2.1/link_0.2.1_trial_015k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.2.1\\link_0.2.1_trial_015k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source_name": "link_0.2.1_trial_015k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "sha256": "c98597dd0069578aa658e61575320222e739d39c45e7655c531bb0d6fbeff53e",
+          "bytes": 1502
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "link_0.2.1/link_0.2.1_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.2.1\\link_0.2.1_trial_015k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "d37b69d1b7df89a9bc1e7802e199fb22ccebe90d6f2b9b3fd82bb71242708567",
+          "bytes": 7111
+        }
+      ]
+    },
+    {
+      "id": "link_0.3.1",
+      "kind": "link",
+      "status": "relaxed-seed",
+      "relaxed": true,
+      "epsilon_R": 0.0,
+      "ab_xml": "link_0.3.1/link_0.3.1_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "link_0.3.1/build_link_0.3.1.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.3.1\\build_link_0.3.1.kpc",
+          "source_name": "build_link_0.3.1.kpc",
+          "sha256": "10d5420c0072cb4c98429e5b8b5ffc78f6aa3df73aa0208940f4b95fc06ea832",
+          "bytes": 2349
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "link_0.3.1/link_0.3.1_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.3.1\\link_0.3.1_analytic_D1.txt",
+          "source_name": "link_0.3.1_analytic_D1.txt",
+          "sha256": "92d2677969d29808092a7a7a1e9d76ceccf923ded812a7c5735f0002b5dcd346",
+          "bytes": 46958
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "link_0.3.1/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.3.1\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "9fa591b75767e3b9c8fc1b2c9189dbf7590cb5d0dafa4f4f43c06082eec83568",
+          "bytes": 1317
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "link_0.3.1/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.3.1\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "ad544f2158cdcfed8696bead7fbfebf36055ef357adc9c480dab5f3f431a7c69",
+          "bytes": 3323
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "link_0.3.1/link_0.3.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.3.1\\link_0.3.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source_name": "link_0.3.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "7ec9fffe677c1b23e36e1af84bed529c96448e4a759870a12e1c12f780ac6dbe",
+          "bytes": 53790
+        },
+        {
+          "role": "resample",
+          "relpath": "link_0.3.1/link_0.3.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.3.1\\link_0.3.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source_name": "link_0.3.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "sha256": "510317f8d65487e411218da65f5763d823a26c9100df8b93c6c54b6e5c843597",
+          "bytes": 3223
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "link_0.3.1/link_0.3.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.3.1\\link_0.3.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source_name": "link_0.3.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "sha256": "2ee9f61985e229322d6d038c39c22ee21259c1bbc0d2a7c2acfd51dfb51dbdcf",
+          "bytes": 53102
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "link_0.3.1/link_0.3.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.3.1\\link_0.3.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source_name": "link_0.3.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "sha256": "f4aba7dd576d3823be73bf2dfea7fe28d9103caccfa4e3eaa7727603686ae0df",
+          "bytes": 53370
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "link_0.3.1/link_0.3.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.3.1\\link_0.3.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source_name": "link_0.3.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "sha256": "6f71e87a9b50f645fc80afeec03de07c63e0720e2a9e02c16ff0f13111869983",
+          "bytes": 1515
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "link_0.3.1/link_0.3.1_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.3.1\\link_0.3.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "fb497bb2ddf37575e9f027f0ec0dd8fb6c9060248b14096ef8a0e70506135207",
+          "bytes": 7111
+        }
+      ]
+    },
+    {
+      "id": "link_2.2.1",
+      "kind": "link",
+      "status": "relaxed-seed",
+      "relaxed": true,
+      "epsilon_R": 0.0,
+      "ab_xml": "link_2.2.1/link_2.2.1_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "link_2.2.1/build_link_2.2.1.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_2.2.1\\build_link_2.2.1.kpc",
+          "source_name": "build_link_2.2.1.kpc",
+          "sha256": "5a8f006a41c380d5e0ebbaf61e4521cc17a38df8974de308ba78199d73eae5d8",
+          "bytes": 2349
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "link_2.2.1/link_2.2.1_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_2.2.1\\link_2.2.1_analytic_D1.txt",
+          "source_name": "link_2.2.1_analytic_D1.txt",
+          "sha256": "c7b5edc57a2914c433ff85b1d3ff71ed6a54b0e6527906dbea9612a2e113fcc5",
+          "bytes": 31352
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "link_2.2.1/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_2.2.1\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "e5690010b704bd7cd04468a2ceeca0a430cd0153f74f10c6326a8a017740349a",
+          "bytes": 1237
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "link_2.2.1/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_2.2.1\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "9cbcc2737f279dc16d2078a51813bb3475f05a0dd3643cdc892f9442d6093396",
+          "bytes": 3155
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "link_2.2.1/link_2.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_2.2.1\\link_2.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source_name": "link_2.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "4862a1b00e655e12e5b9f5586f0de45549611159dbc2501e4e78a5728ed0ecd1",
+          "bytes": 36200
+        },
+        {
+          "role": "resample",
+          "relpath": "link_2.2.1/link_2.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_2.2.1\\link_2.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source_name": "link_2.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "sha256": "2a966e3a66fa6f0cf3c047bf4e7c7128b90794e72e216f6fabd6cc931d914785",
+          "bytes": 2691
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "link_2.2.1/link_2.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_2.2.1\\link_2.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source_name": "link_2.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "sha256": "e8b1dd43b21640afe852dd45e4b5223c82734e5446cd60a5b37225d37c2dd0a2",
+          "bytes": 35803
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "link_2.2.1/link_2.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_2.2.1\\link_2.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source_name": "link_2.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "sha256": "99ee036c4eb419a1ecbc2fb29b836a465609f278050f3bccaadf08eae17c641f",
+          "bytes": 36080
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "link_2.2.1/link_2.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_2.2.1\\link_2.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source_name": "link_2.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "sha256": "567378605a3dfb8a558a398a3f194122b492d1ef743fd761ad6404c3c1f8ddfc",
+          "bytes": 1499
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "link_2.2.1/link_2.2.1_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_2.2.1\\link_2.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "c53d509baa5620d2f6f0bf7856261b842aa2b86f0b82894d666b2fd6fa81a439",
+          "bytes": 7112
+        }
+      ]
+    },
+    {
+      "id": "link_4.2.1",
+      "kind": "link",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "link_4.2.1/build_link_4.2.1.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_4.2.1\\build_link_4.2.1.kpc",
+          "source_name": "build_link_4.2.1.kpc",
+          "sha256": "f5eb8c66997890525bee4c6b25d3c6e7bb054ebab4f7559b4f3c2b92c6c73f3a",
+          "bytes": 2349
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "link_4.2.1/link_4.2.1_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_4.2.1\\link_4.2.1_analytic_D1.txt",
+          "source_name": "link_4.2.1_analytic_D1.txt",
+          "sha256": "201e0e96a0b5f546a9acb642ae0c7612ab5bb1a04c29c1112c1ffcc2f30125c5",
+          "bytes": 31336
+        }
+      ]
+    },
+    {
+      "id": "link_5.2.1",
+      "kind": "link",
+      "status": "relaxed-seed",
+      "relaxed": true,
+      "epsilon_R": 0.0,
+      "ab_xml": "link_5.2.1/link_5.2.1_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "link_5.2.1/build_link_5.2.1.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_5.2.1\\build_link_5.2.1.kpc",
+          "source_name": "build_link_5.2.1.kpc",
+          "sha256": "706e28dfa785d84972b16f827860303b5534479f19ab10d519956c7b44f58264",
+          "bytes": 2349
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "link_5.2.1/link_5.2.1_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_5.2.1\\link_5.2.1_analytic_D1.txt",
+          "source_name": "link_5.2.1_analytic_D1.txt",
+          "sha256": "61f674199784bb451613594798cfa5c17c2d9b7409416fbe764744b7ef9e305f",
+          "bytes": 31317
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "link_5.2.1/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_5.2.1\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "ba49ddcc3d72e58d0bb498eac08c0b2189376340849d20c7b7c316920f41fd49",
+          "bytes": 1322
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "link_5.2.1/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_5.2.1\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "ca2a4f6f17dda198789214f892a11d8e33061faccd8a05f0b97a4418223d689c",
+          "bytes": 3115
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "link_5.2.1/link_5.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_5.2.1\\link_5.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source_name": "link_5.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "14f017705868d06236f09da2027b335df5eeaf713ebc89810439192687e4410a",
+          "bytes": 36899
+        },
+        {
+          "role": "resample",
+          "relpath": "link_5.2.1/link_5.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_5.2.1\\link_5.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source_name": "link_5.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "sha256": "87fc30057bef40bbca22757c8334baddc82ba0cee62a0cad6ad8887341ececb0",
+          "bytes": 2693
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "link_5.2.1/link_5.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_5.2.1\\link_5.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source_name": "link_5.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "sha256": "4a0a23b265bc3b70d522f6060887f4f18ee2bc7c7f376b467412bb7d4081ee4e",
+          "bytes": 36647
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "link_5.2.1/link_5.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_5.2.1\\link_5.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source_name": "link_5.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "sha256": "a9b979d85a98e9c343351f4e6273c0611150cc29205285555de40d3dd84fcf1d",
+          "bytes": 36874
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "link_5.2.1/link_5.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_5.2.1\\link_5.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source_name": "link_5.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "sha256": "e5da281842116fda791eec9d5d86c5f24630a65843f7a9deec0da36418bc1043",
+          "bytes": 1503
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "link_5.2.1/link_5.2.1_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_5.2.1\\link_5.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "8071b9a7a377afd6d5793fbbcce9038acdd7830031cff14feb232f693a63036c",
+          "bytes": 7112
+        }
+      ]
+    },
+    {
+      "id": "link_6.2.1",
+      "kind": "link",
+      "status": "relaxed-seed",
+      "relaxed": true,
+      "epsilon_R": 0.0,
+      "ab_xml": "link_6.2.1/link_6.2.1_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "link_6.2.1/build_link_6.2.1.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.2.1\\build_link_6.2.1.kpc",
+          "source_name": "build_link_6.2.1.kpc",
+          "sha256": "690822d2bc013a66eaaaef52f9d0f966a7eb06b301ce79c0f70aa93a46b96a49",
+          "bytes": 2349
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "link_6.2.1/link_6.2.1_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.2.1\\link_6.2.1_analytic_D1.txt",
+          "source_name": "link_6.2.1_analytic_D1.txt",
+          "sha256": "114c4d2b6f0414fe29b04c97946b324335ac1911e0e2bb935bf910c006eb85d2",
+          "bytes": 31387
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "link_6.2.1/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.2.1\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "c28960abc548b969de81d1d8febefbc504150e5f52cd91eb4a93f54f16390def",
+          "bytes": 1320
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "link_6.2.1/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.2.1\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "3f8a70a3731c1adf54e4e6563e4a3eeedc1e053b4420cc62b03e7e29a81651b8",
+          "bytes": 3132
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "link_6.2.1/link_6.2.1_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.2.1\\link_6.2.1_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source_name": "link_6.2.1_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "9c338c1009b6a98daf95c0cc421baf262f40d59887f58a4ffadc747b22e5ea62",
+          "bytes": 36697
+        },
+        {
+          "role": "resample",
+          "relpath": "link_6.2.1/link_6.2.1_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.2.1\\link_6.2.1_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source_name": "link_6.2.1_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "sha256": "f40892fe8e529aceb831913806e087d559d3d34f6a9c35a2433577d929163e11",
+          "bytes": 2704
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "link_6.2.1/link_6.2.1_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.2.1\\link_6.2.1_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source_name": "link_6.2.1_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "sha256": "d936b148d0e687d306a2640d9f2e48393d4152b9eede67fa1bdeb9e61c3ebbdc",
+          "bytes": 36295
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "link_6.2.1/link_6.2.1_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.2.1\\link_6.2.1_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source_name": "link_6.2.1_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "sha256": "54c56b3848ed24f23e56e63382c5c8725e141adbca9cc02e595d49ecc0fdc4e8",
+          "bytes": 36561
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "link_6.2.1/link_6.2.1_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.2.1\\link_6.2.1_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source_name": "link_6.2.1_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "sha256": "aba6b111d2ea7ecdd63b3c4a7d9865ae6db3b33bda4a8c77ff311159748cda6a",
+          "bytes": 1507
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "link_6.2.1/link_6.2.1_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.2.1\\link_6.2.1_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "6e4e11268f31127fb07cb9bff199d0306784682c35b6b3d9b1d41df1c2f8922a",
+          "bytes": 7112
+        }
+      ]
+    },
+    {
+      "id": "link_6.3.1",
+      "kind": "link",
+      "status": "relaxed-seed",
+      "relaxed": true,
+      "epsilon_R": 0.0,
+      "ab_xml": "link_6.3.1/link_6.3.1_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "link_6.3.1/build_link_6.3.1.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.1\\build_link_6.3.1.kpc",
+          "source_name": "build_link_6.3.1.kpc",
+          "sha256": "7f582affc4326e3fdda9c1d48af73199ecc9d9abc671440be3e237b9182f1fe7",
+          "bytes": 2349
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "link_6.3.1/link_6.3.1_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.1\\link_6.3.1_analytic_D1.txt",
+          "source_name": "link_6.3.1_analytic_D1.txt",
+          "sha256": "0617d5bf7a77097779342690d982e0685e3ea888a400eb3b62420092fcc4e930",
+          "bytes": 47044
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "link_6.3.1/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.1\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "24b51ebdcc1ed8929b6f1e72ccf29cd75d2ad14a8f0a18e019e3033c1616e01a",
+          "bytes": 1323
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "link_6.3.1/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.1\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "ee8d3b73b60ec2747b7a9011e4390871b438322c531bbb72bc458a3a63e806ec",
+          "bytes": 3256
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "link_6.3.1/link_6.3.1_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.1\\link_6.3.1_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source_name": "link_6.3.1_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "cf83af151c5f2e5095e482a456a4c919251738c4e403af97853758692151e257",
+          "bytes": 54407
+        },
+        {
+          "role": "resample",
+          "relpath": "link_6.3.1/link_6.3.1_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.1\\link_6.3.1_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source_name": "link_6.3.1_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "sha256": "4da012b35b3379e35febe3e6e1f438fdf17b977577edd6cc07ea54673376804b",
+          "bytes": 3230
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "link_6.3.1/link_6.3.1_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.1\\link_6.3.1_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source_name": "link_6.3.1_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "sha256": "fd6d8b516996753f3993b4ba2b2584e4443ea03f18918c049ec413fe1b08e1e9",
+          "bytes": 53953
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "link_6.3.1/link_6.3.1_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.1\\link_6.3.1_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source_name": "link_6.3.1_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "sha256": "fba8c913c2fa2549ae6c7d861de7239a62271dff06fee24dccd161d142f95ceb",
+          "bytes": 54179
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "link_6.3.1/link_6.3.1_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.1\\link_6.3.1_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source_name": "link_6.3.1_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "sha256": "af1acab7a4f6ff2a278ef137d35406f7a6ee7409e3305af8b7cdb1e9d907da6a",
+          "bytes": 1513
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "link_6.3.1/link_6.3.1_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.1\\link_6.3.1_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "a361ab86ee4db5dd6b884914754106d228ef71055f845d5ddcb753a7343e9f7b",
+          "bytes": 7112
+        }
+      ]
+    },
+    {
+      "id": "link_6.3.2",
+      "kind": "link",
+      "status": "relaxed-seed",
+      "relaxed": true,
+      "epsilon_R": 0.0,
+      "ab_xml": "link_6.3.2/link_6.3.2_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "link_6.3.2/build_link_6.3.2.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.2\\build_link_6.3.2.kpc",
+          "source_name": "build_link_6.3.2.kpc",
+          "sha256": "19d4cd244a89c956d575905b3d1beb13c1920741e6d0c74378d1269a5ed35cca",
+          "bytes": 2349
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "link_6.3.2/link_6.3.2_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.2\\link_6.3.2_analytic_D1.txt",
+          "source_name": "link_6.3.2_analytic_D1.txt",
+          "sha256": "8510093f43ef6cd2b0766ea6a437dd3c907b1fcdbacfbdbd612288a66f37eee7",
+          "bytes": 46895
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "link_6.3.2/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.2\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "3b32f05be6ce8e8816f1dbaac60814ece1a0bce206627a899270ce798a576ebe",
+          "bytes": 1322
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "link_6.3.2/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.2\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "f8392e7189c1b043e4a093832e329ce62a1d4a811bd4c5b71b41b87904224975",
+          "bytes": 3266
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "link_6.3.2/link_6.3.2_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.2\\link_6.3.2_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source_name": "link_6.3.2_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "af03c6bd1352c06acc567a9417241522d29c4f9f061eda975dc23f42dfa2eb3c",
+          "bytes": 55085
+        },
+        {
+          "role": "resample",
+          "relpath": "link_6.3.2/link_6.3.2_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.2\\link_6.3.2_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source_name": "link_6.3.2_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "sha256": "3dd253a94452490c88f7e71bb5ef5b7526a1b8a9be2f49d4210382a9d32434d0",
+          "bytes": 3241
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "link_6.3.2/link_6.3.2_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.2\\link_6.3.2_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source_name": "link_6.3.2_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "sha256": "7d93cf48217b1dfa710599820cf6a86d5ad531a9cc64e251ca4667722f0abbd6",
+          "bytes": 54589
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "link_6.3.2/link_6.3.2_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.2\\link_6.3.2_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source_name": "link_6.3.2_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "sha256": "a717d2a6775a9ea5ca6dd3525d70d5d657b6852825f6844899f2eeef8e9bc37f",
+          "bytes": 54867
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "link_6.3.2/link_6.3.2_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.2\\link_6.3.2_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source_name": "link_6.3.2_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "sha256": "f9b93c8b495394fece8a750153f95ec02f01cab12bd5f0aec0a2b6b4b7162b8c",
+          "bytes": 1516
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "link_6.3.2/link_6.3.2_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.2\\link_6.3.2_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "9be4e82e4e60b7707d309781d214a72986b7ba8bc19680800083aae95901d2be",
+          "bytes": 7112
+        }
+      ]
+    },
+    {
+      "id": "link_6.3.3",
+      "kind": "link",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "link_6.3.3/build_link_6.3.3.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.3\\build_link_6.3.3.kpc",
+          "source_name": "build_link_6.3.3.kpc",
+          "sha256": "ca480b2eb599806848b03a1e5acbd1b3ef3f07511137518bb2f6bce504108e03",
+          "bytes": 2349
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "link_6.3.3/link_6.3.3_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_6.3.3\\link_6.3.3_analytic_D1.txt",
+          "source_name": "link_6.3.3_analytic_D1.txt",
+          "sha256": "4b0638e2040e5be3054b611a61d241545c0c5f5ef06034d729eeee1097a60766",
+          "bytes": 46973
+        }
+      ]
+    },
+    {
+      "id": "link_7.2.5",
+      "kind": "link",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "link_7.2.5/build_link_7.2.5.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.5\\build_link_7.2.5.kpc",
+          "source_name": "build_link_7.2.5.kpc",
+          "sha256": "8b6b8c87b1cc53d6b61e8746e69b5e82c0b91c233ef7999d43de410135d6a41e",
+          "bytes": 2349
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "link_7.2.5/link_7.2.5_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.5\\link_7.2.5_analytic_D1.txt",
+          "source_name": "link_7.2.5_analytic_D1.txt",
+          "sha256": "6a972ddc1a8b9f5ca6a65fab7537d8d4ee0fe341a561f83a8635fa748d71206e",
+          "bytes": 31386
+        }
+      ]
+    },
+    {
+      "id": "link_7.2.6",
+      "kind": "link",
+      "status": "relaxed-seed",
+      "relaxed": true,
+      "epsilon_R": 0.0,
+      "ab_xml": "link_7.2.6/link_7.2.6_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "link_7.2.6/build_link_7.2.6.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.6\\build_link_7.2.6.kpc",
+          "source_name": "build_link_7.2.6.kpc",
+          "sha256": "b5e86e8f2c406a838027f1596cc20bf869b8cbfb3a9952b0f58f9a2eabd529e5",
+          "bytes": 2349
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "link_7.2.6/link_7.2.6_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.6\\link_7.2.6_analytic_D1.txt",
+          "source_name": "link_7.2.6_analytic_D1.txt",
+          "sha256": "35ed98399b4bfb9e9f2264fffd66d997e2585bb86ddd8915b9c3a328f3904d0d",
+          "bytes": 31387
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "link_7.2.6/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.6\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "12e1fc624a73790c51124cc8f5736e43edd649f3c56b45c18b7d8b9cd0828f7a",
+          "bytes": 1322
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "link_7.2.6/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.6\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "c15f78b581b07be6fcf81364694a1ae90848127e2f2c63fc8b8287d94f5259b6",
+          "bytes": 3120
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "link_7.2.6/link_7.2.6_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.6\\link_7.2.6_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source_name": "link_7.2.6_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "ce0687dd9ad01a9125cab73f04b9eb8bc4d5b4d283b6b334c28e59d24e95ed59",
+          "bytes": 36760
+        },
+        {
+          "role": "resample",
+          "relpath": "link_7.2.6/link_7.2.6_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.6\\link_7.2.6_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source_name": "link_7.2.6_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "sha256": "e0bbd4b3872f3a01ae4dea3216325269a1ce2d33ec6a3498238673b1a9ac517d",
+          "bytes": 2698
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "link_7.2.6/link_7.2.6_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.6\\link_7.2.6_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source_name": "link_7.2.6_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "sha256": "46e9eef6b2f1b233cd044b8c4da50bcc9d71b03682ed265ab1bc50fbcf3b886f",
+          "bytes": 36276
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "link_7.2.6/link_7.2.6_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.6\\link_7.2.6_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source_name": "link_7.2.6_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "sha256": "c54328972fa4ef4610f72c8b0019978c36cd5da6314489ba1bafa8786dabb724",
+          "bytes": 36577
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "link_7.2.6/link_7.2.6_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.6\\link_7.2.6_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source_name": "link_7.2.6_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "sha256": "1dce08c88d16450cf970dfd8a2f800e385d8b62c2f793d3edd30430affd9718a",
+          "bytes": 1505
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "link_7.2.6/link_7.2.6_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.6\\link_7.2.6_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "83abd637458a8286f0c58775169b409d0fbbfb19fa9c00ff9fb1c46e2a90a98b",
+          "bytes": 7112
+        }
+      ]
+    },
+    {
+      "id": "link_7.2.8",
+      "kind": "link",
+      "status": "relaxed-seed",
+      "relaxed": true,
+      "epsilon_R": 0.0,
+      "ab_xml": "link_7.2.8/link_7.2.8_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "link_7.2.8/build_link_7.2.8.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.8\\build_link_7.2.8.kpc",
+          "source_name": "build_link_7.2.8.kpc",
+          "sha256": "7ec8f6d144cf931ea83f935faee9c339427c6b40087718ecd05be5bf433540cf",
+          "bytes": 2349
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "link_7.2.8/link_7.2.8_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.8\\link_7.2.8_analytic_D1.txt",
+          "source_name": "link_7.2.8_analytic_D1.txt",
+          "sha256": "8d843c068b61151b029ed320b2862d30c5db428d5ac2048b49b9f23485176a04",
+          "bytes": 31312
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "link_7.2.8/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.8\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "9a8cb0ad5f9e5cb71bd3d66ee68a4970da2c6a483b7de5c9f1d54112274b289c",
+          "bytes": 1322
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "link_7.2.8/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.8\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "6d616ed14ec228ebcd324a6c49c6085a46313966d261d201624805066e2683fd",
+          "bytes": 3118
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "link_7.2.8/link_7.2.8_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.8\\link_7.2.8_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source_name": "link_7.2.8_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "d66a1ba9484a7c58ec89535d063444c919944b684421d461ca8a6301a9af51cc",
+          "bytes": 36541
+        },
+        {
+          "role": "resample",
+          "relpath": "link_7.2.8/link_7.2.8_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.8\\link_7.2.8_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source_name": "link_7.2.8_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "sha256": "2c7fc9f8bf0fd8b53bb837423a9fc87fd6b0ae4e41c90b3c34c763ff72251b79",
+          "bytes": 2695
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "link_7.2.8/link_7.2.8_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.8\\link_7.2.8_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source_name": "link_7.2.8_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "sha256": "366810d9d04b1de7c8cf6f8ee01237400740cb205a6095dfe08697af75e48a9e",
+          "bytes": 36255
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "link_7.2.8/link_7.2.8_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.8\\link_7.2.8_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source_name": "link_7.2.8_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "sha256": "0cb35eb4849324860c2daa9f7370d578a69a8a08376346f5ebf671e68c77dd23",
+          "bytes": 36432
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "link_7.2.8/link_7.2.8_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.8\\link_7.2.8_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source_name": "link_7.2.8_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "sha256": "3a94201c3fc52143cad2cebae6dc2a3f2ca2d7bacacf26f1f331d907ed25e2f1",
+          "bytes": 1506
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "link_7.2.8/link_7.2.8_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.8\\link_7.2.8_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "72899879179cf8367a47a4a6c5347daff9d129c24bde1dc7c1a1f3f98bd67db3",
+          "bytes": 7112
+        }
+      ]
+    },
+    {
+      "id": "link_8.2.1",
+      "kind": "link",
+      "status": "relaxed-seed",
+      "relaxed": true,
+      "epsilon_R": 0.0,
+      "ab_xml": "link_8.2.1/link_8.2.1_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "link_8.2.1/build_link_8.2.1.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_8.2.1\\build_link_8.2.1.kpc",
+          "source_name": "build_link_8.2.1.kpc",
+          "sha256": "4c142bf161048f28b064c3d6167c62b06b4028d93ccd40eb7f1f00b88c0a62db",
+          "bytes": 2349
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "link_8.2.1/link_8.2.1_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_8.2.1\\link_8.2.1_analytic_D1.txt",
+          "source_name": "link_8.2.1_analytic_D1.txt",
+          "sha256": "4a469ef38c391aa23ee3d1283f3183e6f3306a748a3f8b73d7a0b3748cd1a837",
+          "bytes": 31393
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "link_8.2.1/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_8.2.1\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "382dba43ef965019e1950cfa8b8d2cf0eb5d68d213173742f13939121509391e",
+          "bytes": 1322
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "link_8.2.1/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_8.2.1\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "e151db480e4c91e67691206093160e3fcc71a31a6731621cd8774b69615ecf81",
+          "bytes": 3126
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "link_8.2.1/link_8.2.1_trial_001k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_8.2.1\\link_8.2.1_trial_001k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source_name": "link_8.2.1_trial_001k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "e1358b590280a0601a07652e5c43ac345b86d562ab406195caf6bc7ecb0529ae",
+          "bytes": 36590
+        },
+        {
+          "role": "resample",
+          "relpath": "link_8.2.1/link_8.2.1_trial_001k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_8.2.1\\link_8.2.1_trial_001k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source_name": "link_8.2.1_trial_001k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "sha256": "e32a24f0517a7a627132cc1b672feedaa122cc0af47af836fd51980dc8c3282a",
+          "bytes": 2701
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "link_8.2.1/link_8.2.1_trial_001k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_8.2.1\\link_8.2.1_trial_001k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source_name": "link_8.2.1_trial_001k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "sha256": "773b5e67a82396c72fc455fe58f14bace99bcf00ccd61a052cf087d00e7c8a55",
+          "bytes": 36249
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "link_8.2.1/link_8.2.1_trial_001k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_8.2.1\\link_8.2.1_trial_001k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source_name": "link_8.2.1_trial_001k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "sha256": "c18661ade6723a610b97e8b3dbb1d35167e428162812d5605325d1c0e71e2804",
+          "bytes": 36549
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "link_8.2.1/link_8.2.1_trial_001k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_8.2.1\\link_8.2.1_trial_001k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source_name": "link_8.2.1_trial_001k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "sha256": "0879a1dbf184d429d433c448d039d69f862edd5a8c394ff1c6704548c3c26474",
+          "bytes": 1506
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "link_8.2.1/link_8.2.1_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_8.2.1\\link_8.2.1_trial_001k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "8c841d1215d1a329e0dea34ef907aacda241e260bea287fbc998461bc984ef90",
+          "bytes": 7112
+        }
+      ]
+    },
+    {
+      "id": "link_9.2.20",
+      "kind": "link",
+      "status": "relaxed-seed",
+      "relaxed": true,
+      "epsilon_R": 0.0,
+      "ab_xml": "link_9.2.20/link_9.2.20_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "link_9.2.20/build_link_9.2.20.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.20\\build_link_9.2.20.kpc",
+          "source_name": "build_link_9.2.20.kpc",
+          "sha256": "271471734441331f8c0bb09f83902f32f6bab9d9e26ab2179246d0e07106aadb",
+          "bytes": 2383
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "link_9.2.20/link_9.2.20_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.20\\link_9.2.20_analytic_D1.txt",
+          "source_name": "link_9.2.20_analytic_D1.txt",
+          "sha256": "bf9a5e0e31ed0816e6acb98aa555ea419fa69c5bfedc60c98c2407be7023618f",
+          "bytes": 31399
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "link_9.2.20/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.20\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "969d8ef49b8a219deb0b4cb3aba40a1d5496426deae8e37d97df8ae23e501b45",
+          "bytes": 1326
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "link_9.2.20/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.20\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "e588f6dac7db4e11adb431bbb82ce646dfc5f566e730ac3746811a89be9865d0",
+          "bytes": 3139
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "link_9.2.20/link_9.2.20_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.20\\link_9.2.20_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source_name": "link_9.2.20_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "624170ef126dc5730e8eb4c28d351b5e74cf2f376567ff785edbecef3f06f236",
+          "bytes": 36666
+        },
+        {
+          "role": "resample",
+          "relpath": "link_9.2.20/link_9.2.20_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.20\\link_9.2.20_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source_name": "link_9.2.20_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "sha256": "fdbad39a90431fa73d1ec5e0ce2a578cb59b6e13348e6157641ea924736c2885",
+          "bytes": 2703
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "link_9.2.20/link_9.2.20_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.20\\link_9.2.20_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source_name": "link_9.2.20_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "sha256": "66bac3fbecd8197e4655d031fa1344c8b96009e17f17424daf46507912a776f5",
+          "bytes": 36364
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "link_9.2.20/link_9.2.20_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.20\\link_9.2.20_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source_name": "link_9.2.20_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "sha256": "5b4e527babde6871a57d2f437f5c20bdd77a474239ebfcd25d9d0afe0c8c3f33",
+          "bytes": 36653
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "link_9.2.20/link_9.2.20_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.20\\link_9.2.20_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source_name": "link_9.2.20_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "sha256": "f21b02c652c8187dab6a90c69e742ceca6d9fd8edb02af13f47e8c12993af7e0",
+          "bytes": 1514
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "link_9.2.20/link_9.2.20_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.20\\link_9.2.20_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "7207b8fa424f55e825158d556c5603c21a04d8a4c1f10efadcd72a6b2a72ce59",
+          "bytes": 7113
+        }
+      ]
+    },
+    {
+      "id": "link_9.2.40",
+      "kind": "link",
+      "status": "relaxed-seed",
+      "relaxed": true,
+      "epsilon_R": 0.0,
+      "ab_xml": "link_9.2.40/link_9.2.40_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "link_9.2.40/build_link_9.2.40.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.40\\build_link_9.2.40.kpc",
+          "source_name": "build_link_9.2.40.kpc",
+          "sha256": "379b8e9d85df640bea06e45a03bd316d6473ef13dbf00cbd4b11820cdf1d1554",
+          "bytes": 2383
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "link_9.2.40/link_9.2.40_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.40\\link_9.2.40_analytic_D1.txt",
+          "source_name": "link_9.2.40_analytic_D1.txt",
+          "sha256": "e0cbd52043add39fa44b79de7ecc33db72e5ba08550c5004244ed07641b31069",
+          "bytes": 31337
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "link_9.2.40/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.40\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "04fa0c0330e31c1a010782b625883666b58b8d8c6b4f1b9a69afe04b69569709",
+          "bytes": 1325
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "link_9.2.40/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.40\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "123c41ee7eabc9a158e4d1988809bd8750006b2e8f3a8deb40fdd865530a6bb1",
+          "bytes": 3135
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "link_9.2.40/link_9.2.40_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.40\\link_9.2.40_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "source_name": "link_9.2.40_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "26182cf334254f5b9bbdb911fdc35edfae21a90f04475375cf9c3ea0c7745846",
+          "bytes": 36607
+        },
+        {
+          "role": "resample",
+          "relpath": "link_9.2.40/link_9.2.40_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.40\\link_9.2.40_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "source_name": "link_9.2.40_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.resample.json",
+          "sha256": "dc95ec684243563795291f55b9a7070693930a700a6624c70bb9c8cb3753021c",
+          "bytes": 2700
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "link_9.2.40/link_9.2.40_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.40\\link_9.2.40_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "source_name": "link_9.2.40_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+          "sha256": "6ae57b85756b4b2ae242e228e0b19319f124b8c4a8a0dfaf70ba154f5daa15b3",
+          "bytes": 36311
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "link_9.2.40/link_9.2.40_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.40\\link_9.2.40_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "source_name": "link_9.2.40_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.vect",
+          "sha256": "395a267ce04c6542b98ce7953cb9b4efd1ef0bfc96ac63462deb425971c3c430",
+          "bytes": 36570
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "link_9.2.40/link_9.2.40_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.40\\link_9.2.40_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "source_name": "link_9.2.40_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
+          "sha256": "65a5d7add1caf5bef99882946c9c453520c89c55be30eb0d425b0f51f5c7c9cf",
+          "bytes": 1515
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "link_9.2.40/link_9.2.40_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.40\\link_9.2.40_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+          "sha256": "b1b6aa5d6fe9180dcc8a261c8151fe6a5157982b3453232d8dc4a57ca5492b1c",
+          "bytes": 7113
+        }
+      ]
+    },
+    {
+      "id": "torus_2.11",
+      "kind": "torus",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "torus_2.11/build_torus_2.11.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_2.11\\build_torus_2.11.kpc",
+          "source_name": "build_torus_2.11.kpc",
+          "sha256": "d3c5e8be873566bd07f2f164b66270f76a1c78f8cef66c7577fb2ab9419e212d",
+          "bytes": 2335
+        }
+      ]
+    },
+    {
+      "id": "torus_2.3",
+      "kind": "torus",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "torus_2.3/build_torus_2.3.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_2.3\\build_torus_2.3.kpc",
+          "source_name": "build_torus_2.3.kpc",
+          "sha256": "97f118c7a7d2764af8398fe3f321f0fe03b6f24bf0ad86eeffc2cc949df4f686",
+          "bytes": 2301
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "torus_2.3/torus_2.3_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_2.3\\torus_2.3_analytic_D1.txt",
+          "source_name": "torus_2.3_analytic_D1.txt",
+          "sha256": "7512a9678c7de912189ecd903f411c6043efd608890e8aefd6bba3165aee8bdc",
+          "bytes": 15714
+        }
+      ]
+    },
+    {
+      "id": "torus_2.4",
+      "kind": "torus",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "torus_2.4/build_torus_2.4.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_2.4\\build_torus_2.4.kpc",
+          "source_name": "build_torus_2.4.kpc",
+          "sha256": "1b34d2cefca41018c537eb3961d7b3c6a7053bfd11749210a7f63bd5b0ad1809",
+          "bytes": 2301
+        }
+      ]
+    },
+    {
+      "id": "torus_2.5",
+      "kind": "torus",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "torus_2.5/build_torus_2.5.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_2.5\\build_torus_2.5.kpc",
+          "source_name": "build_torus_2.5.kpc",
+          "sha256": "0d5170655eec581e6f5f4ded985d2dc397deb8fc2e9b505646d5ba5c80eb13ce",
+          "bytes": 2301
+        }
+      ]
+    },
+    {
+      "id": "torus_2.6",
+      "kind": "torus",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "torus_2.6/build_torus_2.6.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_2.6\\build_torus_2.6.kpc",
+          "source_name": "build_torus_2.6.kpc",
+          "sha256": "ac36765a7e6f60b3c2aa28358e0f32cdf60ae97017d392f53618c7364dddd4fe",
+          "bytes": 2301
+        }
+      ]
+    },
+    {
+      "id": "torus_2.7",
+      "kind": "torus",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "torus_2.7/build_torus_2.7.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_2.7\\build_torus_2.7.kpc",
+          "source_name": "build_torus_2.7.kpc",
+          "sha256": "ae3c8102c78d622e9ddefec8a5629a35133d278bda7dc88af75ea709c6dfc167",
+          "bytes": 2301
+        }
+      ]
+    },
+    {
+      "id": "torus_2.8",
+      "kind": "torus",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "torus_2.8/build_torus_2.8.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_2.8\\build_torus_2.8.kpc",
+          "source_name": "build_torus_2.8.kpc",
+          "sha256": "d6fded249aad9e506018c4d46737d6d81c8aa04f1e89e3c7c467ba979e3fea05",
+          "bytes": 2301
+        }
+      ]
+    },
+    {
+      "id": "torus_2.9",
+      "kind": "torus",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "torus_2.9/build_torus_2.9.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_2.9\\build_torus_2.9.kpc",
+          "source_name": "build_torus_2.9.kpc",
+          "sha256": "5bed21617f404e3e29b2a9b3fb20486acdd20367c0c658ca193395b5193041b6",
+          "bytes": 2301
+        }
+      ]
+    },
+    {
+      "id": "torus_3.3",
+      "kind": "torus",
+      "status": "relaxed-seed",
+      "relaxed": true,
+      "epsilon_R": 0.0,
+      "ab_xml": "torus_3.3/torus_3.3_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "torus_3.3/build_torus_3.3.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_3.3\\build_torus_3.3.kpc",
+          "source_name": "build_torus_3.3.kpc",
+          "sha256": "4656b8f12ee39c2e1f88115269cd8460db0232df30e1eb80c5824bdeafd7a076",
+          "bytes": 2301
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "torus_3.3/torus_3.3_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_3.3\\torus_3.3_analytic_D1.txt",
+          "source_name": "torus_3.3_analytic_D1.txt",
+          "sha256": "a46451251a597d6788964e8e82afc35b8b6f12bf709c9b1556c5307219e26038",
+          "bytes": 47048
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "torus_3.3/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_3.3\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "caac24943b22dde64484c746535b10ca895d313f054c6a0bebec544fc85bd433",
+          "bytes": 1318
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "torus_3.3/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_3.3\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "528fa552d33e02fe8a84d01103a416716524386f2e5d44ebea0d672a5608f2c1",
+          "bytes": 9801
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "torus_3.3/torus_3.3_trial_004k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_3.3\\torus_3.3_trial_004k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "source_name": "torus_3.3_trial_004k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "sha256": "00958bcb01de5c392bc451e61c318774e9c41d03539dd37b5bf657649bc63b1a",
+          "bytes": 55630
+        },
+        {
+          "role": "resample",
+          "relpath": "torus_3.3/torus_3.3_trial_004k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_3.3\\torus_3.3_trial_004k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "source_name": "torus_3.3_trial_004k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "sha256": "bbfd33d4764b507bc924e3d9dc6053cf20947bb81deede5d68f927e570c46686",
+          "bytes": 1791
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "torus_3.3/torus_3.3_trial_004k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_3.3\\torus_3.3_trial_004k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "source_name": "torus_3.3_trial_004k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "sha256": "61b9e1f84f79883b7e94d69db26ebeb5b005dea9c4612fe6f77b3709636c1e47",
+          "bytes": 55281
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "torus_3.3/torus_3.3_trial_004k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_3.3\\torus_3.3_trial_004k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "source_name": "torus_3.3_trial_004k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "sha256": "42a440bee3ae740cc594721f6c32857973333060d229f23c2adb42e9b2d67115",
+          "bytes": 55536
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "torus_3.3/torus_3.3_trial_004k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_3.3\\torus_3.3_trial_004k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "source_name": "torus_3.3_trial_004k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "sha256": "492c740e5577c93d395ff7892b1c497f5f652fedfc91d10703856e89761ec870",
+          "bytes": 1436
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "torus_3.3/torus_3.3_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_3.3\\torus_3.3_trial_004k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "sha256": "4f0fdefb8f6adb74a5b1f27115d71851e40516134b1c993f92c11a97ca2c936a",
+          "bytes": 7110
+        }
+      ]
+    },
+    {
+      "id": "torus_3.6",
+      "kind": "torus",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "torus_3.6/build_torus_3.6.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_3.6\\build_torus_3.6.kpc",
+          "source_name": "build_torus_3.6.kpc",
+          "sha256": "60f1bf9d8e38be83844a86fdb894bc4c754508f60b99b8d6a3064fb8223aff52",
+          "bytes": 2301
+        }
+      ]
+    },
+    {
+      "id": "torus_3.9",
+      "kind": "torus",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "torus_3.9/build_torus_3.9.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_3.9\\build_torus_3.9.kpc",
+          "source_name": "build_torus_3.9.kpc",
+          "sha256": "ac8d8d24a7beea52eb09cf6747b2986db3d1b540cfc640806b7acd9722abbf2b",
+          "bytes": 2301
+        }
+      ]
+    },
+    {
+      "id": "torus_6.15",
+      "kind": "torus",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "torus_6.15/build_torus_6.15.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.15\\build_torus_6.15.kpc",
+          "source_name": "build_torus_6.15.kpc",
+          "sha256": "e54483e41a4d6c41cd2d61cf3041d531ec1de3f1924c52419f0f4f0ce965ea4e",
+          "bytes": 2335
+        }
+      ]
+    },
+    {
+      "id": "torus_6.21",
+      "kind": "torus",
+      "status": "stub",
+      "relaxed": false,
+      "epsilon_R": null,
+      "ab_xml": null,
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "torus_6.21/build_torus_6.21.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.21\\build_torus_6.21.kpc",
+          "source_name": "build_torus_6.21.kpc",
+          "sha256": "0d7ad07bb75c87ea36e35816496a9949680ff5cb24b91942e92a492a8aa11fcf",
+          "bytes": 2334
+        }
+      ]
+    },
+    {
+      "id": "torus_6.9",
+      "kind": "torus",
+      "status": "relaxed-seed",
+      "relaxed": true,
+      "epsilon_R": 0.0,
+      "ab_xml": "torus_6.9/torus_6.9_ab.xml",
+      "files": [
+        {
+          "role": "build_script",
+          "relpath": "torus_6.9/build_torus_6.9.kpc",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.9\\build_torus_6.9.kpc",
+          "source_name": "build_torus_6.9.kpc",
+          "sha256": "bf5e60c1bcee63b8b4b1a1128932a8cd2929f0a8b845b9bc4e7d032ee4a82239",
+          "bytes": 2301
+        },
+        {
+          "role": "analytic_seed",
+          "relpath": "torus_6.9/torus_6.9_analytic_D1.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.9\\torus_6.9_analytic_D1.txt",
+          "source_name": "torus_6.9_analytic_D1.txt",
+          "sha256": "b1b591a177861bc2e2a99beeee24aff8a0ffc95e970d47088cedd7e7b2ddb54e",
+          "bytes": 47119
+        },
+        {
+          "role": "catalog_status",
+          "relpath": "torus_6.9/catalog_status.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.9\\catalog_status.json",
+          "source_name": "catalog_status.json",
+          "sha256": "3a7369b44e0ab9446f481cdaf11ff8ef86456279bcb8be0c60dcc7f4d5b4d27e",
+          "bytes": 1279
+        },
+        {
+          "role": "seed_selection",
+          "relpath": "torus_6.9/seed_selection.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.9\\seed_selection.json",
+          "source_name": "seed_selection.json",
+          "sha256": "b3c59e447831eaa87cf85331147b2f3ece8150dc441b69295d2fb62c0265407e",
+          "bytes": 9084
+        },
+        {
+          "role": "uniform_n300",
+          "relpath": "torus_6.9/torus_6.9_trial_003k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.9\\torus_6.9_trial_003k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "source_name": "torus_6.9_trial_003k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "sha256": "8927def039b6f3e995f5b1e6a6ba9f15a238c6b9a60426dec373ae0456835002",
+          "bytes": 54566
+        },
+        {
+          "role": "resample",
+          "relpath": "torus_6.9/torus_6.9_trial_003k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.9\\torus_6.9_trial_003k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "source_name": "torus_6.9_trial_003k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.resample.json",
+          "sha256": "b3664e25e751a962ae5f7e6c28dd0cd677a97b018a0089bbd45a92d2ae478c21",
+          "bytes": 1785
+        },
+        {
+          "role": "audit_polish",
+          "relpath": "torus_6.9/torus_6.9_trial_003k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.9\\torus_6.9_trial_003k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "source_name": "torus_6.9_trial_003k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.txt",
+          "sha256": "fc915c04a6cf2946d0a7d4b9a53c42aba018557b1db35b76d60b5b3102b94734",
+          "bytes": 54045
+        },
+        {
+          "role": "audit_vect",
+          "relpath": "torus_6.9/torus_6.9_trial_003k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.9\\torus_6.9_trial_003k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "source_name": "torus_6.9_trial_003k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.vect",
+          "sha256": "15456b8629dd73a4394cad151ce692ca3ca1c9e55c5f01b6cfa08e538b9ddb30",
+          "bytes": 54353
+        },
+        {
+          "role": "audit_metrics",
+          "relpath": "torus_6.9/torus_6.9_trial_003k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.9\\torus_6.9_trial_003k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "source_name": "torus_6.9_trial_003k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+          "sha256": "80a15fd838bc3a96a26d842a5f1371ab73b97247c49db22ba54c5c4c12dd7a5b",
+          "bytes": 1435
+        },
+        {
+          "role": "ab_xml",
+          "relpath": "torus_6.9/torus_6.9_ab.xml",
+          "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.9\\torus_6.9_trial_003k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish_uniform_N300.txt",
+          "sha256": "88e89c474d3b6630327e429a9079da5cf24241355f7c8fc88aca2f0e2d1d88ea",
+          "bytes": 7111
+        }
+      ]
+    }
+  ]
+}

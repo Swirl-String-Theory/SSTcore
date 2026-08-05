@@ -1,6 +1,7 @@
 """SSTcore: canonical Python package API (native bindings + resource helpers)."""
 
 from pathlib import Path
+import json
 import os
 import sys
 import re
@@ -205,9 +206,9 @@ def get_knotplot_dir() -> Optional[Path]:
 
 def get_knotplot_ideal_path(knot_id: str) -> Optional[Path]:
     """
-    Resolve knotplot ideal file path for IDs like:
-    - "knot_TL3.9" -> knotplot/knot_TL3.9/knot_TL3.9_ideal.txt
-    - "knot_6.3.3" -> knotplot/knot_6.3.3/knot_6.3.3_ideal.txt
+    Resolve knotplot geometry/AB file path for IDs like:
+    - "knot_3.1" / "3.1" → knotplot/knot_3.1/knot_3.1_ab.xml (or legacy *_ideal.txt)
+    - "link_0.2.1" / "torus_6.9" → matching folder under resources/knotplot/
     """
     base = (knot_id or "").strip().strip("\"' ")
     if not base:
@@ -219,14 +220,32 @@ def get_knotplot_ideal_path(knot_id: str) -> Optional[Path]:
     if knotplot_root is None:
         return None
 
+    # Optional INDEX.json legacy alias map (knot_T2.3 → torus_2.3, …).
+    index_path = knotplot_root / "INDEX.json"
+    aliases: Dict[str, str] = {}
+    if index_path.is_file():
+        try:
+            aliases = dict(json.loads(index_path.read_text(encoding="utf-8")).get("legacy_aliases") or {})
+        except (OSError, json.JSONDecodeError, TypeError):
+            aliases = {}
+
     candidates = [base]
-    if not base.startswith("knot_"):
+    if base in aliases:
+        candidates.append(aliases[base])
+    if not base.startswith(("knot_", "link_", "torus_")):
         candidates.append(f"knot_{base}")
+        # three-part ids are usually links in the new layout
+        if base.count(".") >= 2:
+            candidates.append(f"link_{base}")
 
     for candidate in candidates:
-        p = knotplot_root / candidate / f"{candidate}_ideal.txt"
-        if p.is_file():
-            return p.resolve()
+        folder = knotplot_root / candidate
+        if not folder.is_dir():
+            continue
+        for name in (f"{candidate}_ab.xml", f"{candidate}_ideal.txt"):
+            p = folder / name
+            if p.is_file():
+                return p.resolve()
     return None
 
 

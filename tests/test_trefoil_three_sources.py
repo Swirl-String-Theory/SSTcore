@@ -133,7 +133,7 @@ def _load_curves():
         kp_ab = kp_path.read_text(encoding="utf-8", errors="replace")
         attrs, coeffs = parse_ab_coeffs_text(kp_ab, "3:1:1")
         curves.append(
-            ("knotplot", "legacy_import", coeffs, float(attrs["L"]), float(attrs["D"]))
+            ("knotplot", "relaxed_import", coeffs, float(attrs["L"]), float(attrs["D"]))
         )
 
     for name, role in [
@@ -166,11 +166,19 @@ def test_ideal_mass_scale_unity(trefoil_rows):
 
 
 def test_knotplot_raw_length_factor(trefoil_rows, require_knotplot):
-    _ = require_knotplot  # hard-fail if knotplot resources missing
+    sst = require_knotplot
     row = _row(trefoil_rows, "knotplot")
     assert row is not None, "knotplot trefoil metrics missing despite require_knotplot"
-    assert row["raw_length_factor_vs_ideal"] > 3.0
-    assert row["mass_scale_factor_vs_ideal"] == pytest.approx(1.090, rel=0.03)
+    # Relaxed trefoil sits near ideal; bound excess by INDEX epsilon_R (plus margin).
+    from pathlib import Path
+    import json
+
+    index = json.loads((sst.get_knotplot_dir() / "INDEX.json").read_text(encoding="utf-8"))
+    entry = next(e for e in index["entries"] if e["id"] == "knot_3.1")
+    eps = float(entry.get("epsilon_R") or 0.05)
+    # raw_length_factor is L_raw/L_ideal; for near-ideal expect close to 1.
+    assert row["raw_length_factor_vs_ideal"] < 1.0 + max(0.05, 10.0 * eps)
+    assert row["mass_scale_factor_vs_ideal"] == pytest.approx(1.0, rel=max(0.05, 10.0 * eps))
 
 
 def test_fremlin_default_mass_scale(trefoil_rows):

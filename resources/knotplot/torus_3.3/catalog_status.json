@@ -1,0 +1,43 @@
+{
+  "status": "relaxed-seed",
+  "ideal": false,
+  "strict_near_ideal": false,
+  "folder": "torus_3.3",
+  "reference": {
+    "ropelength": 51.292347,
+    "source": "best-known numerical"
+  },
+  "epsilon_R": 0.0,
+  "primary_polish": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_3.3\\torus_3.3_trial_004k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+  "primary_metrics": {
+    "residual": 0.21793,
+    "ropelength": 51.292347,
+    "thickness": 0.4999959,
+    "edge_length_ratio": 1.1298257531806628,
+    "edge_length_cv": 0.013753544482920592
+  },
+  "checks": {
+    "topology": "pass",
+    "residual_candidate": "fail",
+    "residual_strict": "fail",
+    "ropelength_excess": "pass",
+    "raw_edge_ratio": "warn",
+    "raw_edge_cv": "warn",
+    "thickness": "pass",
+    "multistart_spread": "not-tested",
+    "resolution_convergence": "not-tested",
+    "uniform_mesh": "pass",
+    "constraint_anomalies": "pass"
+  },
+  "reason": [
+    "topology verified",
+    "residual above 0.01",
+    "residual above 0.005",
+    "ropelength threshold passed",
+    "raw edge-ratio 1.13 (warn only)",
+    "raw edge-CV 1.3754% (warn only)",
+    "multi-start not tested",
+    "resolution convergence not yet demonstrated",
+    "VortexLab uniform mesh OK"
+  ]
+}
