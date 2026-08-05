@@ -44,6 +44,9 @@ extern/
 setup.py
 pyproject.toml
 
+# Repo-only tooling (not shipped in npm tarball)
+tools/
+
 # Large / non-embed resources (keep .fseries + small ideal txt for CMake embed)
 resources/knotplot/**
 resources/ideal/ideal_12_data/**
