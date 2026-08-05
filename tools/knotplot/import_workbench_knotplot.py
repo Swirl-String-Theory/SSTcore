@@ -382,7 +382,10 @@ def apply_plan(plan: dict[str, Any], *, dry_run: bool) -> dict[str, Any]:
 
     if not dry_run:
         dest.mkdir(parents=True, exist_ok=True)
-        (dest / "INDEX.json").write_text(json.dumps(index, indent=2) + "\n", encoding="utf-8")
+        # resources/ is checked out verbatim (.gitattributes -text), so keep LF on Windows too.
+        (dest / "INDEX.json").write_text(
+            json.dumps(index, indent=2) + "\n", encoding="utf-8", newline="\n"
+        )
 
     return index
 

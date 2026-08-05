@@ -1,0 +1,5 @@
+# Resource payloads are pinned by byte-exact sha256 in tests/data/resource_manifest.json
+# and resources/knotplot/INDEX.json. EOL conversion on checkout would make those digests
+# platform dependent (Windows CRLF vs Linux/macOS LF), so git must hand out the stored
+# bytes verbatim. `-text` disables conversion while keeping textual diffs.
+resources/** -text

@@ -18,7 +18,6 @@ import sys
 from pathlib import Path
 
 _TESTS = Path(__file__).resolve().parent.parent
-_REPO = _TESTS.parent
 if str(_TESTS) not in sys.path:
     sys.path.insert(0, str(_TESTS))
 
@@ -149,13 +148,8 @@ def build_manifest() -> dict:
 
 
 def main() -> int:
-    # Prefer the checkout src/ tree so regen matches pytest's pythonpath=["src"].
-    src = str(_REPO / "src")
-    if src not in sys.path:
-        sys.path.insert(0, src)
-    for name in ("SSTcore", "sstcore"):
-        sys.modules.pop(name, None)
-
+    # load_sstcore_package() front-loads the checkout src/ tree, so regen hashes the same
+    # files as pytest (pythonpath=["src"]) instead of an installed wheel's stale copy.
     manifest = build_manifest()
     out = Path(__file__).resolve().parent / "resource_manifest.json"
     out.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")

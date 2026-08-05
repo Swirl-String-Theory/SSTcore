@@ -6,57 +6,57 @@
       "id": "ideal",
       "kind": "ideal",
       "relpath": "ideal/ideal.txt",
-      "sha256": "48f84139c05eff8f6832b7f0d80961ab7537b8539edde5cd2aae23b9d4d151cc",
-      "bytes": 5651135
+      "sha256": "a16c0f6e9175fdd54ee8c50b3b32e23caa3b256e7da21145be00a5a58e08cc51",
+      "bytes": 5587284
     },
     {
       "id": "ideal_11a",
       "kind": "ideal",
       "relpath": "ideal/ideal_11a.txt",
-      "sha256": "4f92e38ce17b87651f7933ed51c84449c1c83a4415dbc95642b9adb5c983a2d7",
-      "bytes": 7898908
+      "sha256": "53b8597dfd845d2f655a108b633d4310db9dd484518a485487eded33e95b6390",
+      "bytes": 7809725
     },
     {
       "id": "ideal_11n",
       "kind": "ideal",
       "relpath": "ideal/ideal_11n.txt",
-      "sha256": "dd645752272ebd2c53e73161ef83c190a29e92d6703def1b651aaa541aa69eb2",
-      "bytes": 3993955
+      "sha256": "f640786a1fd76343cb1e1594ca1f83e7a00c9e54d008189393fa8e6c6af0c32f",
+      "bytes": 3948742
     },
     {
       "id": "idealLinks",
       "kind": "ideal",
       "relpath": "ideal/idealLinks.txt",
-      "sha256": "a7481f263d8f152723277d0301372d86cc664c211ea5a50f01d6ac49b7d335de",
-      "bytes": 5455438
+      "sha256": "542aad3915b9b2aa3aa554720a5457b362550bc66f6f950c9bb31b253b7c575a",
+      "bytes": 5393494
     },
     {
       "id": "idealLinks_10a",
       "kind": "ideal",
       "relpath": "ideal/idealLinks_10a.txt",
-      "sha256": "2958f9f02b7ca7537e53f19cb14566b05f2ecf3079f7f0d154ffe1fb74d9f598",
-      "bytes": 7227805
+      "sha256": "b2be5888d5f2e085a034b016ada7d6d537dad71a53928a6a0bbb4d32e44bf9ef",
+      "bytes": 7145724
     },
     {
       "id": "idealLinks_10n",
       "kind": "ideal",
       "relpath": "ideal/idealLinks_10n.txt",
-      "sha256": "f4dd601b7cf7e932b21455ee6bf00177a61ebc3fc734ff81cf4835c3e4fd7fed",
-      "bytes": 5125321
+      "sha256": "81b9aaa6aaef48107f6c4cc90c1423046ed4dd4cf83b6fe478dd8fd90f4df92c",
+      "bytes": 5067129
     },
     {
       "id": "ideal_short",
       "kind": "ideal",
       "relpath": "ideal/ideal_short.txt",
-      "sha256": "139737bd4028d9ac85b71094a1d7c209ebbbaf85d160cb668767420198a3ea47",
-      "bytes": 57796
+      "sha256": "aea0bfcb753124b07da54a46e948541f1b3e51f5214c28a5b5634f027f16959c",
+      "bytes": 57130
     },
     {
       "id": "ideal_favorites.txt",
       "kind": "ideal_aux",
       "relpath": "ideal/ideal_favorites.txt",
-      "sha256": "942cb24b2a461b66cc3d35352f0723de97718a0e579ec524b8bb1c7ac4b9ad27",
-      "bytes": 786423
+      "sha256": "b554d8a505b031ef9f3a57e69f4265002d7fcf19c6f8c9942173cff754f07e34",
+      "bytes": 777768
     },
     {
       "id": "knot_0.1",
@@ -209,22 +209,22 @@
       "id": "3_1",
       "kind": "fseries",
       "relpath": "Knots_FourierSeries/3_1/knot.3_1.fseries",
-      "sha256": "f29c73b439fe4d645e67e8577ce0700cb006d393526e8674d251fe5b95583c4d",
-      "bytes": 397
+      "sha256": "82599a293f38a8547747091dbe6a9a58d5585b4bd2a8cb972665143043a722f6",
+      "bytes": 391
     },
     {
       "id": "4_1",
       "kind": "fseries",
       "relpath": "Knots_FourierSeries/4_1/knot.4_1.fseries",
-      "sha256": "2a603bb0e169a0217daeabfa179d43abd1ec42372dd51c5605926ddab4412c61",
-      "bytes": 999
+      "sha256": "0b06340868928cca992b2594e5cf3fd1710c3ec3afb83a4450510f1954f5ce3d",
+      "bytes": 983
     },
     {
       "id": "5_1",
       "kind": "fseries",
       "relpath": "Knots_FourierSeries/5_1/knot.5_1.fseries",
-      "sha256": "fe0e3bafc612fd517b5e54083f53e58caa8fc8ad424ea3baae0c0eae02da3638",
-      "bytes": 562
+      "sha256": "1635e12e4e2911f9eb8a4bc3cdd27c615b15627987a539d8ef8f0427fd6b5d4e",
+      "bytes": 554
     }
   ]
 }
