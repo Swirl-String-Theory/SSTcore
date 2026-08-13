@@ -1,43 +1,56 @@
 {
-  "status": "near-ideal-candidate",
+  "status": "converged-local-candidate",
   "ideal": false,
   "strict_near_ideal": false,
   "folder": "knot_7.1",
-  "reference": {
-    "ropelength": 61.473119,
-    "source": "best-known numerical"
+  "reference": null,
+  "campaign_reference": {
+    "ropelength": 61.468208,
+    "source": "campaign-best"
   },
-  "epsilon_R": 0.0,
+  "epsilon_R": null,
   "primary_polish": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_7.1\\knot_7.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
   "primary_metrics": {
-    "residual": 0.00999204,
-    "ropelength": 61.473119,
-    "thickness": 0.4999575,
-    "edge_length_ratio": 1.8062796671450427,
-    "edge_length_cv": 0.06309107383403918
+    "residual": 0.00496858,
+    "ropelength": 61.468208,
+    "thickness": 0.4999592,
+    "edge_length_ratio": 2.343319668296846,
+    "edge_length_cv": 0.06907909914660906,
+    "stop_reason": "residual",
+    "residual_converged": true,
+    "analytic": false
   },
   "checks": {
     "topology": "pass",
     "residual_candidate": "pass",
-    "residual_strict": "fail",
-    "ropelength_excess": "pass",
+    "residual_strict": "pass",
+    "ropelength_excess": "not-tested",
     "raw_edge_ratio": "warn",
     "raw_edge_cv": "warn",
     "thickness": "pass",
-    "multistart_spread": "not-tested",
+    "multistart_spread": "fail",
     "resolution_convergence": "not-tested",
     "uniform_mesh": "pass",
-    "constraint_anomalies": "pass"
+    "constraint_anomalies": "pass",
+    "residual_converged": "pass"
   },
   "reason": [
     "topology verified",
-    "residual \u2264 0.01",
-    "residual above 0.005",
-    "ropelength threshold passed",
-    "raw edge-ratio 1.806 (warn only)",
-    "raw edge-CV 6.3091% (warn only)",
-    "multi-start not tested",
+    "residual <= 0.01",
+    "ropelength_excess not tested (no external reference; campaign-best is not proof of near-ideal)",
+    "raw edge-ratio 2.343 (warn only)",
+    "raw edge-CV 6.9079% (warn only)",
+    "multi-start / mirror spread above 0.02%",
     "resolution convergence not yet demonstrated",
-    "VortexLab uniform mesh OK"
-  ]
+    "VortexLab uniform mesh OK",
+    "residual-converged local minimum without independent near-ideal proof"
+  ],
+  "chirality": null,
+  "catalog_aliases": [
+    "7_1",
+    "T_2_7"
+  ],
+  "dowker_code": "8 10 12 14 2 4 6",
+  "equivalent_group": "septafoil_7_1",
+  "final_snapshot": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_7.1\\build_knot_7.1_final_normal_20260813_171005.txt"
 }

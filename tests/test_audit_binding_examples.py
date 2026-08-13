@@ -47,11 +47,12 @@ def test_all_binding_modules_have_examples_demo():
 
 
 def test_audit_generates_summary(audit_report):
-    assert audit_report["summary"]["binding_modules"] == 30
+    expected = len(BINDING_MODULES)
+    assert audit_report["summary"]["binding_modules"] == expected
     assert audit_report["summary"]["missing_example_files"] == 0
-    assert audit_report["summary"]["example_files"] == 30
+    assert audit_report["summary"]["example_files"] == expected
     # Compat aliases
-    assert audit_report["summary"]["src_example_files"] == 30
+    assert audit_report["summary"]["src_example_files"] == expected
     assert audit_report["summary"]["missing_src_example_files"] == 0
 
 

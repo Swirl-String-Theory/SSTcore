@@ -23,9 +23,9 @@ def kp():
 def test_list_and_entry(kp) -> None:
     ids = kp.list_knotplot_ids()
     assert "knot_3.1" in ids
-    assert "knot_9.2" in ids  # stub
-    near = kp.list_knotplot_ids(status="near-ideal-candidate")
-    assert "knot_3.1" in near
+    assert "knot_9.35" in ids  # stub (no polish / shared final)
+    converged = kp.list_knotplot_ids(status="converged-local-candidate")
+    assert "knot_3.1" in converged
     entry = kp.get_knotplot_entry("knot_3.1")
     assert entry is not None
     assert entry["relaxed"] is True
@@ -37,9 +37,9 @@ def test_getters_relaxed_vs_stub(kp) -> None:
     assert kp.get_knotplot_ab("knot_3.1")
     assert kp.get_knotplot_build_script("knot_3.1") is not None
 
-    assert kp.get_knotplot_polish_path("knot_9.2") is None
-    assert kp.get_knotplot_ab_path("knot_9.2") is None
-    assert kp.get_knotplot_build_script("knot_9.2") is not None
+    assert kp.get_knotplot_polish_path("knot_9.35") is None
+    assert kp.get_knotplot_ab_path("knot_9.35") is None
+    assert kp.get_knotplot_build_script("knot_9.35") is not None
 
 
 def test_id_normalization(kp) -> None:

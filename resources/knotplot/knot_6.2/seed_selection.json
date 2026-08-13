@@ -1,0 +1,281 @@
+{
+  "selected": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_6.2\\knot_6.2_trial_015k.txt",
+  "selection_status": "best-so-far-no-plateau",
+  "plateau_detected": false,
+  "scan_limit": 15000,
+  "topology_status": "topology-verified",
+  "quality_class": "A",
+  "reason": "class A, R_proxy=60.76948973587486, k=15",
+  "checkpoints": [
+    {
+      "k": 1,
+      "file": "knot_6.2_trial_001k.txt",
+      "length": 335.9706943075352,
+      "gain": null,
+      "edge_ratio": 1.0067382575128445,
+      "edge_cv": 0.001967816243406134,
+      "flatness_min": 0.3029891663744309,
+      "component_flatness": [
+        0.3029891663744309
+      ],
+      "D_proxy": 5.523139139574822,
+      "R_proxy": 60.82966331595959,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 2,
+      "file": "knot_6.2_trial_002k.txt",
+      "length": 336.7434466508398,
+      "gain": -0.002300058774165743,
+      "edge_ratio": 1.0031410771611313,
+      "edge_cv": 0.0008760384963796434,
+      "flatness_min": 0.30418221530818734,
+      "component_flatness": [
+        0.30418221530818734
+      ],
+      "D_proxy": 5.526253158577624,
+      "R_proxy": 60.935219033199814,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 3,
+      "file": "knot_6.2_trial_003k.txt",
+      "length": 336.8185762081942,
+      "gain": -0.0002231062195912216,
+      "edge_ratio": 1.0027860758673324,
+      "edge_cv": 0.0007672159953630141,
+      "flatness_min": 0.3039937821542455,
+      "component_flatness": [
+        0.3039937821542455
+      ],
+      "D_proxy": 5.526792648389803,
+      "R_proxy": 60.94286462987249,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 4,
+      "file": "knot_6.2_trial_004k.txt",
+      "length": 336.8420708420969,
+      "gain": -6.975456688645394e-05,
+      "edge_ratio": 1.0027277552515121,
+      "edge_cv": 0.0007502409181950318,
+      "flatness_min": 0.30359755862155335,
+      "component_flatness": [
+        0.30359755862155335
+      ],
+      "D_proxy": 5.528550453707531,
+      "R_proxy": 60.927737507795634,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 5,
+      "file": "knot_6.2_trial_005k.txt",
+      "length": 336.85780835862687,
+      "gain": -4.672075697257559e-05,
+      "edge_ratio": 1.0027007213819346,
+      "edge_cv": 0.0007435557667091744,
+      "flatness_min": 0.3031182919397529,
+      "component_flatness": [
+        0.3031182919397529
+      ],
+      "D_proxy": 5.530635903658298,
+      "R_proxy": 60.90760885846937,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 6,
+      "file": "knot_6.2_trial_006k.txt",
+      "length": 336.87057736394803,
+      "gain": -3.790621741374832e-05,
+      "edge_ratio": 1.0026801596063009,
+      "edge_cv": 0.0007394600086938509,
+      "flatness_min": 0.30258997977458924,
+      "component_flatness": [
+        0.30258997977458924
+      ],
+      "D_proxy": 5.532713084769303,
+      "R_proxy": 60.887049843828024,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 7,
+      "file": "knot_6.2_trial_007k.txt",
+      "length": 336.8815238153557,
+      "gain": -3.2494530965967765e-05,
+      "edge_ratio": 1.0026629215709468,
+      "edge_cv": 0.0007366595145930267,
+      "flatness_min": 0.30203029179094953,
+      "component_flatness": [
+        0.30203029179094953
+      ],
+      "D_proxy": 5.534669600235333,
+      "R_proxy": 60.867503961037094,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 8,
+      "file": "knot_6.2_trial_008k.txt",
+      "length": 336.8911750601467,
+      "gain": -2.8648780383286787e-05,
+      "edge_ratio": 1.002647009373749,
+      "edge_cv": 0.0007346602029471404,
+      "flatness_min": 0.3014505352653184,
+      "component_flatness": [
+        0.3014505352653184
+      ],
+      "D_proxy": 5.536473863361305,
+      "R_proxy": 60.849411263293355,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 9,
+      "file": "knot_6.2_trial_009k.txt",
+      "length": 336.8998444632374,
+      "gain": -2.573354166719646e-05,
+      "edge_ratio": 1.0026318292638807,
+      "edge_cv": 0.000733189213044399,
+      "flatness_min": 0.30085847224469403,
+      "component_flatness": [
+        0.30085847224469403
+      ],
+      "D_proxy": 5.53812443983623,
+      "R_proxy": 60.83284117631708,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 10,
+      "file": "knot_6.2_trial_010k.txt",
+      "length": 336.90773659571374,
+      "gain": -2.342575280471519e-05,
+      "edge_ratio": 1.0026171360441776,
+      "edge_cv": 0.0007320836331520254,
+      "flatness_min": 0.300259629217451,
+      "component_flatness": [
+        0.300259629217451
+      ],
+      "D_proxy": 5.539630877316585,
+      "R_proxy": 60.81772306802379,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 11,
+      "file": "knot_6.2_trial_011k.txt",
+      "length": 336.91499230842345,
+      "gain": -2.1536200928546294e-05,
+      "edge_ratio": 1.002602914538702,
+      "edge_cv": 0.0007312444265378369,
+      "flatness_min": 0.29965803768322585,
+      "component_flatness": [
+        0.29965803768322585
+      ],
+      "D_proxy": 5.541006111462328,
+      "R_proxy": 60.803938045018356,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 12,
+      "file": "knot_6.2_trial_012k.txt",
+      "length": 336.92171269014966,
+      "gain": -1.9946817089276568e-05,
+      "edge_ratio": 1.0025890981879095,
+      "edge_cv": 0.0007306102500178776,
+      "flatness_min": 0.29905669000957563,
+      "component_flatness": [
+        0.29905669000957563
+      ],
+      "D_proxy": 5.542263427171515,
+      "R_proxy": 60.791356657346235,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 13,
+      "file": "knot_6.2_trial_013k.txt",
+      "length": 336.92797296701343,
+      "gain": -1.8580805652996178e-05,
+      "edge_ratio": 1.0025756988556362,
+      "edge_cv": 0.000730141770470111,
+      "flatness_min": 0.29845783478235155,
+      "component_flatness": [
+        0.29845783478235155
+      ],
+      "D_proxy": 5.543415289625644,
+      "R_proxy": 60.779854180790906,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 14,
+      "file": "knot_6.2_trial_014k.txt",
+      "length": 336.9338309506201,
+      "gain": -1.7386456681238045e-05,
+      "edge_ratio": 1.002562741158147,
+      "edge_cv": 0.0007298123583068787,
+      "flatness_min": 0.2978631755841734,
+      "component_flatness": [
+        0.2978631755841734
+      ],
+      "D_proxy": 5.544319287335288,
+      "R_proxy": 60.771000638485475,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 15,
+      "file": "knot_6.2_trial_015k.txt",
+      "length": 336.9393323484575,
+      "gain": -1.632782858843461e-05,
+      "edge_ratio": 1.002550243699085,
+      "edge_cv": 0.0007296026794586765,
+      "flatness_min": 0.29727400896283146,
+      "component_flatness": [
+        0.29727400896283146
+      ],
+      "D_proxy": 5.5445476638509215,
+      "R_proxy": 60.76948973587486,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    }
+  ]
+}

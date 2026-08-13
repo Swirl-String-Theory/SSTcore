@@ -1,0 +1,98 @@
+{
+  "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_3.9\\torus_3.9_trial_005k_rr_010k_coarse_rr_050k_eqfinal_rr_030k_polish.txt",
+  "output": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_3.9\\torus_3.9_trial_005k_rr_010k_coarse_rr_050k_eqfinal_rr_030k_polish_uniform_N300.txt",
+  "method_requested": "linear",
+  "method_per_component": [
+    "linear",
+    "linear",
+    "linear"
+  ],
+  "strict": false,
+  "upsampled": true,
+  "component_count": 3,
+  "vertices_per_component_in": [
+    297,
+    304,
+    299
+  ],
+  "vertices_per_component_out": [
+    300,
+    300,
+    300
+  ],
+  "length_in": 55.705118567598944,
+  "length_out": 55.68912397152363,
+  "relative_length_change": -0.0002871297375645402,
+  "D_proxy_in": 0.9999994144941907,
+  "D_proxy_out": 0.905640632213593,
+  "R_proxy_in": 55.705151183288564,
+  "R_proxy_out": 61.491415016800495,
+  "relative_rop_change": 0.10387304783489748,
+  "relative_rop_proxy_change": 0.10387304783489748,
+  "relative_rop_minrad_change": 0.10666130206835334,
+  "rop_gate": "proxy",
+  "components": [
+    {
+      "index": 0,
+      "vertices_in": 297,
+      "vertices_out": 300,
+      "length_in": 17.471533985821676,
+      "length_out": 17.466947493430336,
+      "minrad_in": 0.5792828862294376,
+      "minrad_out": 0.5547520705861896,
+      "minrad_ratio": 0.9576531324739809,
+      "edge_min": 0.05814866694787407,
+      "edge_max": 0.058238446619407594,
+      "edge_mean": 0.05822315831143445,
+      "edge_ratio": 1.0015439678370273,
+      "edge_cv": 0.00021218686426752618
+    },
+    {
+      "index": 1,
+      "vertices_in": 304,
+      "vertices_out": 300,
+      "length_in": 19.49285770181877,
+      "length_out": 19.48675809583182,
+      "minrad_in": 0.5078654517914383,
+      "minrad_out": 0.5795628469055613,
+      "minrad_ratio": 1.1411739957132712,
+      "edge_min": 0.06485125972875302,
+      "edge_max": 0.06497619233939758,
+      "edge_mean": 0.0649558603194394,
+      "edge_ratio": 1.001926448478674,
+      "edge_cv": 0.00023099522352423334
+    },
+    {
+      "index": 2,
+      "vertices_in": 299,
+      "vertices_out": 300,
+      "length_in": 18.740726879958498,
+      "length_out": 18.735418382261475,
+      "minrad_in": 0.49999778613776524,
+      "minrad_out": 0.4516776912415927,
+      "minrad_ratio": 0.9033593823096272,
+      "edge_min": 0.062313095766405625,
+      "edge_max": 0.06246908959986548,
+      "edge_mean": 0.06245139460753825,
+      "edge_ratio": 1.0025033876353155,
+      "edge_cv": 0.00026378130451891967
+    }
+  ],
+  "validation_warnings": [
+    "MinRad-Rop change 10.666130% (diagnostic only; not a fail gate)",
+    "global_ds_ratio=1.11564 > 1.02 (prefer \u2264 1.02)",
+    "global_ds_ratio=1.11564 > 1.05",
+    "centerline drift 0.217733%D (prefer \u2264 0.10%D)",
+    "Rop change 10.387305% (prefer |d| < 0.1%)",
+    "Rop change 10.387305% >= 0.100% (collapse)"
+  ],
+  "validation_errors": [],
+  "gates": {
+    "edge_ratio_max": 1.05,
+    "length_rel_max": 0.005,
+    "minrad_ratio_min": 0.9,
+    "rop_rel_max": 0.001,
+    "rop_gate_mode": "collapse_only"
+  },
+  "notes": "Ladder upsample uses spline_repair (cubic spline + MinRad restore). Strict Rop gate is one-sided: error only if Rop increases (>= 0.1%, collapse); negative dR (apparent thickening) warns only. Metric: thickness proxy for spline_repair, else MinRad-Rop. Bare spline / subdivide sidecars are treated as stale."
+}

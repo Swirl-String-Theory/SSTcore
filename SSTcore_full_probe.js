@@ -32,17 +32,22 @@ const {
 } = require('./resources/load_knot_catalogs');
 
 // ---------------------------------------------------------------------
-// Canon-v0.8.x constants used only for numerical sanity checks.
+// Canon-v0.8.36 constants used only for numerical sanity checks.
+// rho_f_kg_m3 is the legacy rho_ref (Canon 0.8.32); not a calibrated primitive.
 // ---------------------------------------------------------------------
 
 const SST_CONSTANTS = {
   v_swirl_m_s: 1.09384563e6,
   r_c_m: 1.40897017e-15,
-  rho_f_kg_m3: 7.0e-7,
+  rho_ref_kg_m3: 7.0e-7,
+  rho_f_kg_m3: 7.0e-7, // legacy alias of rho_ref
   rho_core_kg_m3: 3.8934358266918687e18,
   rho_E_J_m3: 3.49924562e35,
   c_m_s: 299792458.0,
   joule_per_MeV: 1.602176634e-13,
+  F_swirl_max_N: 29.053507,
+  high_res_LD: 16.3714672385,
+  gilbert_LD: 16.371637,
 };
 
 const TOPOLOGY_CANDIDATES = [
@@ -176,7 +181,7 @@ function printKv(key, value) {
 function parseArgs(argv) {
   const args = {
     install: false,
-    package: 'sst-core@0.8.18',
+    package: 'sst-core@0.8.36',
     jsonOut: '',
     csvOut: '',
     quiet: false,
@@ -199,7 +204,7 @@ function parseArgs(argv) {
 
 Options:
   --install              npm install --package before probing
-  --package <spec>       npm package spec (default: sst-core@0.8.18)
+  --package <spec>       npm package spec (default: sst-core@0.8.36)
   --json-out <path>      write JSON report
   --csv-out <prefix>     write CSV tables (prefix or directory)
   --quiet                suppress summary printing
@@ -818,7 +823,7 @@ function probeExamplesCoverage() {
         `example_${stem.replace(/_mass$/, '')}.ts`,
         `example_${stem.replace(/_dynamics$/, '_rotation')}.ts`,
       ];
-      // known renames
+      // known renames / shared Canon smoke examples
       const special = {
         fluid_dynamics: 'example_fluid_rotation.ts',
         potential_timefield: 'example_potential_flow.ts',
@@ -826,6 +831,25 @@ function probeExamplesCoverage() {
         ab_initio_mass: 'example_ab_initio.ts',
         knot_dynamics: 'example_knot.ts',
         hyperbolic_volume: 'example_hyperbolic_volume.ts',
+        density_ontology: 'example_density_ontology.ts',
+        rotor_participation: 'example_density_ontology.ts',
+        scaling_audit: 'example_density_ontology.ts',
+        worldsheet_guards: 'example_maxwell_canon.ts',
+        ideal_knot_regime: 'example_maxwell_canon.ts',
+        transverse_projector: 'example_maxwell_canon.ts',
+        spectro_response: 'example_maxwell_canon.ts',
+        maxwell_kinetic: 'example_maxwell_canon.ts',
+        mechanical_falsifier: 'example_maxwell_canon.ts',
+        swirl_tonic: 'example_maxwell_canon.ts',
+        value_origin: 'example_value_origin.ts',
+        sst_action_phase: 'example_action_phase.ts',
+        operational_spacetime: 'example_operational_spacetime.ts',
+        qss_spectroscopy: 'example_qss_spectroscopy.ts',
+        sst_kam_diagnostics: 'example_kam_diagnostics.ts',
+        geometry_certificate: 'example_geometry_certificate.ts',
+        pipeline_provenance: 'example_pipeline_provenance.ts',
+        evidence_report: 'example_evidence_report.ts',
+        core_torsion: 'example_core_torsion.ts',
       };
       if (special[stem]) candidates.unshift(special[stem]);
       if (!candidates.some((c) => ts.includes(c))) {
@@ -836,6 +860,125 @@ function probeExamplesCoverage() {
   }
   result.coverage_ok = (result.missing_vs_node_binds || []).length === 0;
   return result;
+}
+
+function canonCall(label, fn, ...args) {
+  const row = {
+    label,
+    available: typeof fn === 'function',
+    ok: false,
+    value: null,
+    error: null,
+  };
+  if (typeof fn !== 'function') {
+    row.error = 'missing';
+    return row;
+  }
+  try {
+    row.value = jsonable(fn(...args));
+    row.ok = true;
+  } catch (exc) {
+    row.error = `${exc && exc.name}: ${exc && exc.message}`;
+  }
+  return row;
+}
+
+function probeCanonApis(sst) {
+  /** Smoke-test Canon 0.8.20–0.8.36 dual-bind APIs (Node camelCase surface). */
+  const checks = [];
+
+  // --- value origin / action phase ---
+  checks.push(canonCall('fmaxSnapshot', sst.fmaxSnapshot));
+  checks.push(canonCall(
+    'bareMassRatioFromDimensionlessLength',
+    sst.bareMassRatioFromDimensionlessLength,
+    SST_CONSTANTS.gilbert_LD,
+  ));
+  checks.push(canonCall('compareFmaxSnapshotToRecomputed', sst.compareFmaxSnapshotToRecomputed));
+  checks.push(canonCall('massShellHamiltonian', sst.massShellHamiltonian, 3.0, 4.0, 1.0));
+  checks.push(canonCall('gammaFromMassShell', sst.gammaFromMassShell, 3.0, 4.0, 1.0));
+
+  // --- operational / QSS / KAM / CheckKind ---
+  checks.push(canonCall('radarInterval', sst.radarInterval, 1.0, 3.0, 1.0));
+  checks.push(canonCall('qssEigen2x2', sst.qssEigen2x2, [2.0, 0.0, 0.0, 5.0]));
+  checks.push(canonCall('kamStage1', sst.kamStage1, true, [1.0, Math.SQRT2], [2, 0, 0, 3], 1e-4));
+  checks.push(canonCall('checkKindExportString', sst.checkKindExportString, 6));
+  checks.push(canonCall('evaluateProvenanceChain', sst.evaluateProvenanceChain, []));
+
+  // --- density / rotor / scaling ---
+  checks.push(canonCall('rhoFAliasesRhoEff', sst.rhoFAliasesRhoEff));
+  // EnergyDensityForm: 0 allowed, 1 allowed Jω, 2 forbidden rho_f|ω|²
+  checks.push(canonCall('validateEnergyDensityForm.forbidden', sst.validateEnergyDensityForm, 2));
+  checks.push(canonCall('validateEnergyDensityForm.allowed_jomega', sst.validateEnergyDensityForm, 1));
+  checks.push(canonCall('evaluateRotorParticipation', sst.evaluateRotorParticipation));
+  checks.push(canonCall('rhoRefLegacy', sst.rhoRefLegacy));
+  checks.push(canonCall('classifyPrimitiveSymbol.rho_ref', sst.classifyPrimitiveSymbol, 'rho_ref'));
+  checks.push(canonCall('classifyObservableScaling.acceleration', sst.classifyObservableScaling, 'acceleration'));
+  checks.push(canonCall('classifyObservableScaling.absolute_mass', sst.classifyObservableScaling, 'absolute_mass'));
+
+  // --- worldsheet / ideal / projector / Maxwell ---
+  checks.push(canonCall('evaluateWorldsheetGuards', sst.evaluateWorldsheetGuards, 3, 1.0, 1e-8, false, false));
+  checks.push(canonCall(
+    'evaluateIdealKnotRegime',
+    sst.evaluateIdealKnotRegime,
+    1.0, 1.0, 1.0, 2.0, 3.0, 1.0, 0.01,
+  ));
+  checks.push(canonCall('moffattRiccaHelicity', sst.moffattRiccaHelicity, 2.0, 3.0, 1.0));
+  checks.push(canonCall('projectorSphereIntegral', sst.projectorSphereIntegral));
+  checks.push(canonCall('leadingResponseR0', sst.leadingResponseR0, SST_CONSTANTS.high_res_LD));
+  checks.push(canonCall(
+    'evaluateTransverseProjector',
+    sst.evaluateTransverseProjector,
+    SST_CONSTANTS.high_res_LD, 0.0, 0.0, 1.0, 10.0, 0.0, 0.0, 4.0, 3.0,
+  ));
+  checks.push(canonCall(
+    'spectroLinearResponseDeltaNu',
+    sst.spectroLinearResponseDeltaNu,
+    6.626e-34, [1.0], [1e-34],
+  ));
+  checks.push(canonCall('maxwellThreeGate', sst.maxwellThreeGate, 1.0, 2.0, 1.0, 0.1, 1.0));
+  checks.push(canonCall(
+    'evaluateMechanicalFalsifier',
+    sst.evaluateMechanicalFalsifier,
+    3.0, 1.0, 7e-7, 1e3,
+  ));
+  checks.push(canonCall(
+    'evaluateSwirlTonic',
+    sst.evaluateSwirlTonic,
+    [1.0, 0.0], [0.0, 1.0], [0.0, 0.0],
+    [1.0, 0.0], [0.0, 1.0], [0.0, 0.0],
+    1.0, false,
+  ));
+
+  // geometry certificate (tube evaluate may be heavy; presence + hash if exposed)
+  if (typeof sst.evaluateTubeGeometry === 'function') {
+    checks.push({
+      label: 'evaluateTubeGeometry',
+      available: true,
+      ok: true,
+      value: '<present>',
+      error: null,
+    });
+  } else {
+    checks.push({
+      label: 'evaluateTubeGeometry',
+      available: false,
+      ok: false,
+      value: null,
+      error: 'missing',
+    });
+  }
+
+  const available = checks.filter((c) => c.available).length;
+  const ok = checks.filter((c) => c.ok).length;
+  return {
+    canon_target: '0.8.36',
+    checks_total: checks.length,
+    checks_available: available,
+    checks_ok: ok,
+    coverage_ok: available > 0 && ok === available,
+    checks,
+  };
 }
 
 function probeNativeBindings(sst) {
@@ -1231,6 +1374,7 @@ function makeReport(sst, importInfo, opts = {}) {
     knotplot_catalog: probeKnotplotCatalog(),
     binding_catalog: probeBindingCatalog(sst),
     examples_coverage: probeExamplesCoverage(),
+    canon_apis: probeCanonApis(sst),
     native_bindings: probeNativeBindings(sst),
     topology_candidates: probeTopologies(sst),
     particle_evaluator: probeParticleEvaluator(sst),
@@ -1362,6 +1506,29 @@ function printReportSummary(report) {
   printKv('example_ts_files', ec.example_ts_files);
   printKv('example_py_files', ec.example_py_files);
   printKv('coverage_ok', ec.coverage_ok);
+  if (ec.missing_vs_node_binds && ec.missing_vs_node_binds.length) {
+    console.log('missing_vs_node_binds:', ec.missing_vs_node_binds.join(', '));
+  }
+
+  const ca = report.canon_apis || {};
+  if (ca.checks_total != null) {
+    printHeader('Canon API smoke (0.8.20–0.8.36)');
+    printKv('canon_target', ca.canon_target);
+    printKv('checks_total', ca.checks_total);
+    printKv('checks_available', ca.checks_available);
+    printKv('checks_ok', ca.checks_ok);
+    printKv('coverage_ok', ca.coverage_ok);
+    const failed = (ca.checks || []).filter((c) => c.available && !c.ok);
+    const missing = (ca.checks || []).filter((c) => !c.available);
+    if (failed.length) {
+      console.log('Failed checks:');
+      for (const row of failed.slice(0, 20)) console.log(`  - ${row.label}: ${row.error}`);
+    }
+    if (missing.length) {
+      console.log('Missing APIs:');
+      for (const row of missing.slice(0, 20)) console.log(`  - ${row.label}`);
+    }
+  }
 
   if (report.binding_tests) {
     printHeader('Binding tests (npm test)');
@@ -1411,7 +1578,7 @@ function printReportSummary(report) {
     );
   }
 
-  printHeader('Canon-v0.8.x numerical sanity checks');
+  printHeader('Canon-v0.8.36 numerical sanity checks');
   const cc = report.constant_checks;
   for (const key of [
     'omega_c_s_inv',
@@ -1522,5 +1689,6 @@ module.exports = {
   makeReport,
   printReportSummary,
   computeConstantChecks,
+  probeCanonApis,
   jsonable,
 };

@@ -14,7 +14,7 @@ Designed for:
     - conda / venv environments
 
 Typical Colab usage (recommended — keeps __file__ and full binding inventory):
-    !pip install -q --upgrade SSTcore==0.8.18
+    !pip install -q --upgrade SSTcore==0.8.36
     !wget -q -O SSTcore_full_probe.py \\
         https://raw.githubusercontent.com/Swirl-String-Theory/SSTcore/main/SSTcore_full_probe.py
     !python SSTcore_full_probe.py --json-out sstcore_probe_report.json
@@ -106,17 +106,22 @@ except ImportError:
 
 
 # ---------------------------------------------------------------------
-# Canon-v0.8.x constants used only for numerical sanity checks.
+# Canon-v0.8.36 constants used only for numerical sanity checks.
+# rho_f_kg_m3 is the legacy rho_ref (Canon 0.8.32); not a calibrated primitive.
 # ---------------------------------------------------------------------
 
 SST_CONSTANTS = {
     "v_swirl_m_s": 1.09384563e6,
     "r_c_m": 1.40897017e-15,
-    "rho_f_kg_m3": 7.0e-7,
+    "rho_ref_kg_m3": 7.0e-7,
+    "rho_f_kg_m3": 7.0e-7,  # legacy alias of rho_ref
     "rho_core_kg_m3": 3.8934358266918687e18,
     "rho_E_J_m3": 3.49924562e35,
     "c_m_s": 299792458.0,
     "joule_per_MeV": 1.602176634e-13,
+    "F_swirl_max_N": 29.053507,
+    "high_res_LD": 16.3714672385,
+    "gilbert_LD": 16.371637,
 }
 
 TOPOLOGY_CANDIDATES = [
@@ -1389,10 +1394,11 @@ def probe_trefoil_triad(sst: Any) -> Dict[str, Any]:
 
 
 def probe_examples_coverage() -> Dict[str, Any]:
-    """Summary: canonical src/*_example.py files vs binding modules."""
+    """Summary: examples/ demos vs binding modules (Canon paired py/ts preferred)."""
     result: Dict[str, Any] = {
-        "modules_expected": 30,
+        "modules_expected": None,
         "src_example_files": 0,
+        "example_files": 0,
         "missing_modules": [],
         "present_modules": [],
         "audit_available": _AUDIT_EXAMPLES_AVAILABLE,
@@ -1400,32 +1406,51 @@ def probe_examples_coverage() -> Dict[str, Any]:
         "errors": [],
     }
     src_dir = _PROBE_ROOT / "src"
+    examples_dir = _PROBE_ROOT / "examples"
     if not src_dir.is_dir():
         result["errors"].append(f"src directory not found: {src_dir}")
         return result
 
-    modules = list(BINDING_MODULES) if _AUDIT_EXAMPLES_AVAILABLE else []
-    if not modules:
+    if _AUDIT_EXAMPLES_AVAILABLE:
+        try:
+            from audit_binding_examples import resolved_example_paths  # type: ignore[import-not-found]
+        except Exception:
+            resolved_example_paths = None  # type: ignore[assignment]
+        modules = list(BINDING_MODULES)
+        result["modules_expected"] = len(modules)
+        for mod in modules:
+            paths = (
+                resolved_example_paths(examples_dir, mod)
+                if resolved_example_paths is not None
+                else []
+            )
+            if paths:
+                result["present_modules"].append(mod)
+            else:
+                # Legacy fallback: src/<mod>_example.py
+                if (src_dir / f"{mod}_example.py").is_file():
+                    result["present_modules"].append(mod)
+                else:
+                    result["missing_modules"].append(mod)
+    else:
         modules = sorted(
             p.name.replace("_example.py", "")
             for p in src_dir.glob("*_example.py")
             if p.name != "_example_bootstrap.py"
         )
         result["modules_expected"] = len(modules)
-
-    for mod in modules if modules else []:
-        path = src_dir / f"{mod}_example.py"
-        if path.is_file():
-            result["present_modules"].append(mod)
-        else:
-            result["missing_modules"].append(mod)
+        for mod in modules:
+            if (src_dir / f"{mod}_example.py").is_file():
+                result["present_modules"].append(mod)
+            else:
+                result["missing_modules"].append(mod)
 
     result["src_example_files"] = len(result["present_modules"])
+    result["example_files"] = result["src_example_files"]
     result["coverage_ok"] = len(result["missing_modules"]) == 0
 
     if _AUDIT_EXAMPLES_AVAILABLE:
         try:
-            examples_dir = _PROBE_ROOT / "examples"
             manifest_path = default_manifest_path(_PROBE_ROOT)
             if manifest_path.is_file():
                 import json as _json
@@ -1440,6 +1465,265 @@ def probe_examples_coverage() -> Dict[str, Any]:
             result["errors"].append(f"audit summary failed: {type(exc).__name__}: {exc}")
 
     return result
+
+
+def _canon_call(label: str, fn: Any, *args: Any, **kwargs: Any) -> Dict[str, Any]:
+    """Invoke one Canon API smoke check; never raises."""
+    row: Dict[str, Any] = {
+        "label": label,
+        "available": callable(fn),
+        "ok": False,
+        "value": None,
+        "error": None,
+    }
+    if not callable(fn):
+        row["error"] = "missing"
+        return row
+    try:
+        value = fn(*args, **kwargs)
+        row["ok"] = True
+        row["value"] = jsonable(value)
+    except Exception as exc:
+        row["error"] = f"{type(exc).__name__}: {exc}"
+    return row
+
+
+def probe_canon_apis(sst: Any) -> Dict[str, Any]:
+    """Smoke-test Canon 0.8.20–0.8.36 dual-bind APIs (Python surface)."""
+    checks: List[Dict[str, Any]] = []
+
+    # --- 0.8.26 value_origin / 0.8.29 guards ---
+    vo = getattr(sst, "ValueOriginAPI", None)
+    if vo is not None:
+        checks.append(_canon_call("value_origin.fmax_snapshot", getattr(vo, "fmax_snapshot", None)))
+        checks.append(_canon_call(
+            "value_origin.rho_f_two_sigfig",
+            getattr(vo, "rho_f_two_sigfig", None),
+            6.8398588e-07,
+        ))
+        checks.append(_canon_call(
+            "value_origin.rho_f_is_two_sigfig_calibration",
+            getattr(vo, "rho_f_is_two_sigfig_calibration", None),
+            7.0e-7,
+        ))
+        checks.append(_canon_call(
+            "value_origin.rho_eff_rescale_preserves_calibrated_primitives",
+            getattr(vo, "rho_eff_rescale_preserves_calibrated_primitives", None),
+            1.0, 2.0, 3.0, 4.0, 1.0, 2.0, 3.0, 4.0,
+        ))
+        checks.append(_canon_call(
+            "value_origin.reject_vam_line_inertia_as_rho_f_derivation",
+            getattr(vo, "reject_vam_line_inertia_as_rho_f_derivation", None),
+            1e-11, 7e-7,
+        ))
+        checks.append(_canon_call(
+            "value_origin.bare_mass_ratio",
+            getattr(vo, "bare_mass_ratio_from_dimensionless_length", None),
+            SST_CONSTANTS["gilbert_LD"],
+        ))
+    else:
+        checks.append({"label": "ValueOriginAPI", "available": False, "ok": False, "value": None, "error": "missing"})
+
+    # --- 0.8.28 action_phase ---
+    ap = getattr(sst, "ActionPhaseAPI", None)
+    if ap is not None:
+        checks.append(_canon_call(
+            "action_phase.mass_shell_hamiltonian",
+            getattr(ap, "mass_shell_hamiltonian", None),
+            3.0, 4.0, 1.0,
+        ))
+        checks.append(_canon_call(
+            "action_phase.gamma_from_mass_shell",
+            getattr(ap, "gamma_from_mass_shell", None),
+            3.0, 4.0, 1.0,
+        ))
+    else:
+        checks.append({"label": "ActionPhaseAPI", "available": False, "ok": False, "value": None, "error": "missing"})
+
+    # --- 0.8.20–0.8.22 geometry / operational spacetime / QSS ---
+    geo = getattr(sst, "GeometryCertificateAPI", None)
+    if geo is not None and hasattr(geo, "sha256_hex_of_points"):
+        checks.append(_canon_call(
+            "geometry.sha256_hex_of_points",
+            geo.sha256_hex_of_points,
+            [[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0]],
+        ))
+    ost = getattr(sst, "OperationalSpacetimeAPI", None)
+    if ost is not None:
+        checks.append(_canon_call("operational_spacetime.radar_interval", ost.radar_interval, 1.0, 3.0, 1.0))
+        if hasattr(ost, "minkowski_interval2"):
+            checks.append(_canon_call(
+                "operational_spacetime.minkowski_interval2",
+                ost.minkowski_interval2,
+                [1.0, 0.0, 0.0, 0.0],
+                [0.0, 0.0, 0.0, 0.0],
+            ))
+    qss = getattr(sst, "QSSSpectroscopyAPI", None)
+    if qss is not None and hasattr(qss, "eigen_2x2"):
+        checks.append(_canon_call("qss.eigen_2x2", qss.eigen_2x2, [2.0, 0.0, 0.0, 5.0]))
+
+    # --- 0.8.24 / 0.8.25 ---
+    ct = getattr(sst, "CoreTorsionAPI", None)
+    if ct is not None and hasattr(ct, "torsion_inertial_mass"):
+        checks.append(_canon_call("core_torsion.torsion_inertial_mass", ct.torsion_inertial_mass, 2.0, 3.0, 1.0))
+    lf = getattr(sst, "LinkFieldGateAPI", None)
+    if lf is not None and hasattr(lf, "evaluate"):
+        checks.append(_canon_call("link_field.evaluate", lf.evaluate, 1.0, 1.0, 1.0, 0.0))
+    kam = getattr(sst, "KAMDiagnosticsAPI", None)
+    if kam is not None and hasattr(kam, "stage1"):
+        sector = getattr(getattr(sst, "KAMSector", None), "S", 0)
+        checks.append(_canon_call(
+            "kam.stage1",
+            kam.stage1,
+            sector,
+            [1.0, math.sqrt(2.0)],
+            [2.0, 0.0, 0.0, 3.0],
+            1e-4,
+        ))
+    pp = getattr(sst, "PipelineProvenanceAPI", None)
+    if pp is not None and hasattr(pp, "evaluate_chain"):
+        checks.append(_canon_call("provenance.evaluate_chain_empty", pp.evaluate_chain, []))
+
+    # --- 0.8.27 CheckKind ---
+    ck = getattr(sst, "CheckKind", None)
+    if hasattr(sst, "check_kind_export_string") and callable(sst.check_kind_export_string):
+        kind_arg = getattr(ck, "SyntheticDiagnostic", 6) if ck is not None else 6
+        checks.append(_canon_call("check_kind_export_string", sst.check_kind_export_string, kind_arg))
+    if ck is not None:
+        checks.append({
+            "label": "CheckKind.enum",
+            "available": True,
+            "ok": True,
+            "value": [x for x in dir(ck) if not x.startswith("_")],
+            "error": None,
+        })
+
+    # --- 0.8.30 density ontology ---
+    dens = getattr(sst, "DensityOntologyAPI", None)
+    if dens is not None:
+        checks.append(_canon_call("density.rho_f_aliases_rho_eff", dens.rho_f_aliases_rho_eff))
+        form = getattr(sst, "EnergyDensityForm", None)
+        if form is not None:
+            checks.append(_canon_call(
+                "density.validate_forbidden_form",
+                dens.validate_energy_density_form,
+                form.HalfRhoFOmegaSquaredNoLength,
+            ))
+            checks.append(_canon_call(
+                "density.validate_allowed_j_omega",
+                dens.validate_energy_density_form,
+                form.HalfJOmegaOmegaSquared,
+            ))
+    else:
+        checks.append({"label": "DensityOntologyAPI", "available": False, "ok": False, "value": None, "error": "missing"})
+
+    # --- 0.8.31 rotor ---
+    rot = getattr(sst, "RotorParticipationAPI", None)
+    if rot is not None:
+        checks.append(_canon_call("rotor.evaluate", rot.evaluate))
+    else:
+        checks.append({"label": "RotorParticipationAPI", "available": False, "ok": False, "value": None, "error": "missing"})
+
+    # --- 0.8.32 scaling ---
+    sc = getattr(sst, "ScalingAuditAPI", None)
+    if sc is not None:
+        checks.append(_canon_call("scaling.rho_ref_legacy", sc.rho_ref_legacy))
+        checks.append(_canon_call("scaling.classify_symbol.rho_ref", sc.classify_symbol, "rho_ref"))
+        checks.append(_canon_call("scaling.classify_observable.acceleration", sc.classify_observable, "acceleration"))
+        checks.append(_canon_call("scaling.classify_observable.absolute_mass", sc.classify_observable, "absolute_mass"))
+    else:
+        checks.append({"label": "ScalingAuditAPI", "available": False, "ok": False, "value": None, "error": "missing"})
+
+    # --- 0.8.33 worldsheet ---
+    ws = getattr(sst, "WorldsheetGuardsAPI", None)
+    if ws is not None:
+        checks.append(_canon_call("worldsheet.evaluate", ws.evaluate, 3, 1.0, 1e-8, False, False))
+        checks.append(_canon_call("worldsheet.ladder_stage_name", ws.ladder_stage_name, 0))
+    else:
+        checks.append({"label": "WorldsheetGuardsAPI", "available": False, "ok": False, "value": None, "error": "missing"})
+
+    # --- 0.8.34 ideal knot regime ---
+    ik = getattr(sst, "IdealKnotRegimeAPI", None)
+    if ik is not None:
+        checks.append(_canon_call(
+            "ideal_knot.evaluate_compact",
+            ik.evaluate, 1.0, 1.0, 1.0, 2.0, 3.0, 1.0, 0.01,
+        ))
+        checks.append(_canon_call(
+            "ideal_knot.moffatt_ricca_helicity",
+            ik.moffatt_ricca_helicity, 2.0, 3.0, 1.0,
+        ))
+    else:
+        checks.append({"label": "IdealKnotRegimeAPI", "available": False, "ok": False, "value": None, "error": "missing"})
+
+    # --- 0.8.35 transverse projector ---
+    tp = getattr(sst, "TransverseProjectorAPI", None)
+    if tp is not None:
+        checks.append(_canon_call("projector.sphere_integral", tp.projector_sphere_integral))
+        ld = SST_CONSTANTS["high_res_LD"]
+        if hasattr(tp, "high_res_ld"):
+            try:
+                ld = float(tp.high_res_ld())
+            except Exception:
+                pass
+        checks.append(_canon_call("projector.leading_response_R0", tp.leading_response_R0, ld))
+        checks.append(_canon_call(
+            "projector.evaluate",
+            tp.evaluate, ld, 0.0, 0.0, 1.0, 10.0, 0.0, 0.0, 4.0, 3.0,
+        ))
+    else:
+        checks.append({"label": "TransverseProjectorAPI", "available": False, "ok": False, "value": None, "error": "missing"})
+
+    # --- 0.8.36 Maxwell stack ---
+    sr = getattr(sst, "SpectroResponseAPI", None)
+    if sr is not None:
+        checks.append(_canon_call(
+            "spectro.evaluate",
+            sr.evaluate, 2.0, 1.0, 6.626e-34, [1.0], [1e-34], False,
+        ))
+    else:
+        checks.append({"label": "SpectroResponseAPI", "available": False, "ok": False, "value": None, "error": "missing"})
+
+    mk = getattr(sst, "MaxwellKineticAPI", None)
+    if mk is not None:
+        checks.append(_canon_call(
+            "maxwell.three_gate_condition",
+            mk.three_gate_condition, 1.0, 2.0, 1.0, 0.1, 1.0,
+        ))
+    else:
+        checks.append({"label": "MaxwellKineticAPI", "available": False, "ok": False, "value": None, "error": "missing"})
+
+    mf = getattr(sst, "MechanicalFalsifierAPI", None)
+    if mf is not None:
+        checks.append(_canon_call(
+            "mechanical_falsifier.evaluate",
+            mf.evaluate, 3.0, 1.0, 7e-7, 1e3,
+        ))
+    else:
+        checks.append({"label": "MechanicalFalsifierAPI", "available": False, "ok": False, "value": None, "error": "missing"})
+
+    st = getattr(sst, "SwirlTonicAPI", None)
+    if st is not None:
+        checks.append(_canon_call(
+            "swirl_tonic.evaluate",
+            st.evaluate,
+            [1.0, 0.0], [0.0, 1.0], [0.0, 0.0],
+            [1.0, 0.0], [0.0, 1.0], [0.0, 0.0],
+            1.0, False,
+        ))
+    else:
+        checks.append({"label": "SwirlTonicAPI", "available": False, "ok": False, "value": None, "error": "missing"})
+
+    available = sum(1 for c in checks if c.get("available"))
+    ok = sum(1 for c in checks if c.get("ok"))
+    return {
+        "canon_target": "0.8.36",
+        "checks_total": len(checks),
+        "checks_available": available,
+        "checks_ok": ok,
+        "coverage_ok": available > 0 and ok == available,
+        "checks": checks,
+    }
 
 
 def make_report(
@@ -1459,6 +1743,7 @@ def make_report(
     report["knotplot_catalog"] = probe_knotplot_catalog(sst)
     report["binding_catalog"] = probe_binding_catalog(sst)
     report["examples_coverage"] = probe_examples_coverage()
+    report["canon_apis"] = probe_canon_apis(sst)
     report["native_bindings"] = probe_native_bindings(sst)
     report["topology_candidates"] = probe_topologies(sst)
     report["particle_evaluator"] = probe_particle_evaluator(sst)
@@ -1597,13 +1882,32 @@ def print_report_summary(report: Dict[str, Any]) -> None:
 
     ec = report.get("examples_coverage") or {}
     if ec:
-        print_header("Examples coverage (src/*_example.py)")
+        print_header("Examples coverage (examples/ demos)")
         print_kv("modules_expected", ec.get("modules_expected"))
-        print_kv("src_example_files", ec.get("src_example_files"))
+        print_kv("example_files", ec.get("example_files", ec.get("src_example_files")))
         print_kv("coverage_ok", ec.get("coverage_ok"))
         print_kv("bound_without_example_total", ec.get("bound_without_example_total"))
         if ec.get("missing_modules"):
             print("missing_modules:", ", ".join(ec["missing_modules"]))
+
+    ca = report.get("canon_apis") or {}
+    if ca:
+        print_header("Canon API smoke (0.8.20–0.8.36)")
+        print_kv("canon_target", ca.get("canon_target"))
+        print_kv("checks_total", ca.get("checks_total"))
+        print_kv("checks_available", ca.get("checks_available"))
+        print_kv("checks_ok", ca.get("checks_ok"))
+        print_kv("coverage_ok", ca.get("coverage_ok"))
+        failed = [c for c in (ca.get("checks") or []) if c.get("available") and not c.get("ok")]
+        missing = [c for c in (ca.get("checks") or []) if not c.get("available")]
+        if failed:
+            print("Failed checks:")
+            for row in failed[:20]:
+                print(f"  - {row.get('label')}: {row.get('error')}")
+        if missing:
+            print("Missing APIs:")
+            for row in missing[:20]:
+                print(f"  - {row.get('label')}")
 
     bt = report.get("binding_tests")
     if bt is not None:
@@ -1669,7 +1973,7 @@ def print_report_summary(report: Dict[str, Any]) -> None:
         if row.get("canon_mass_error"):
             print(f"  canon_mass: {row['canon_mass_error']}")
 
-    print_header("Canon-v0.8.x numerical sanity checks")
+    print_header("Canon-v0.8.36 numerical sanity checks")
     cc = report["constant_checks"]
     for key in [
         "omega_c_s_inv",
@@ -1753,12 +2057,12 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser.add_argument(
         "--install",
         action="store_true",
-        help="Run pip install --upgrade SSTcore==0.8.0 before importing.",
+        help="Run pip install --upgrade SSTcore==0.8.36 before importing.",
     )
     parser.add_argument(
         "--package",
-        default="SSTcore==0.8.0",
-        help="Package spec used when --install is passed. Default: SSTcore==0.8.0",
+        default="SSTcore==0.8.36",
+        help="Package spec used when --install is passed. Default: SSTcore==0.8.36",
     )
     parser.add_argument(
         "--json-out",

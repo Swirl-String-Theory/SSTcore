@@ -21,6 +21,28 @@ export interface Capabilities {
   magnusIntegrator: boolean;
   sstIntegrator: boolean;
   resolvedTubeGeometry?: boolean;
+  geometryCertificate?: boolean;
+  polygonalSmoothCertificate?: boolean;
+  biotSavartGate?: boolean;
+  operationalSpacetime?: boolean;
+  qssSpectroscopy?: boolean;
+  pipelineProvenance?: boolean;
+  coreTorsion?: boolean;
+  linkFieldGate?: boolean;
+  kamDiagnostics?: boolean;
+  valueOrigin?: boolean;
+  evidenceReport?: boolean;
+  actionPhase?: boolean;
+  densityOntology?: boolean;
+  rotorParticipation?: boolean;
+  scalingAudit?: boolean;
+  worldsheetGuards?: boolean;
+  idealKnotRegime?: boolean;
+  transverseProjector?: boolean;
+  spectroResponse?: boolean;
+  maxwellKinetic?: boolean;
+  mechanicalFalsifier?: boolean;
+  swirlTonic?: boolean;
   continuousReach: boolean;
   polygonalGauss?: boolean;
   filamentVelocity?: boolean;
@@ -252,6 +274,38 @@ export interface SSTcoreModule {
     omega: Vec3;
     reconstructionRelativeError: number;
   };
+
+  // Canon 0.8.20–0.8.28 Node surface (explicit; avoid relying solely on index signature)
+  radarInterval?: (Tminus: number, Tplus: number, c?: number) => object;
+  lorentzBoostX?: (event: number[], v: number, c?: number) => object;
+  lorentzBoost?: (event: number[], velocity: number[], c?: number) => object;
+  qssEigen2x2?: (matrixRowMajor: number[]) => object;
+  massShellHamiltonian?: (P: number, E0: number, c: number) => number;
+  velocityFromMassShell?: (P: number, E0: number, c: number) => number;
+  gammaFromMassShell?: (P: number, E0: number, c: number) => number;
+  properTimeRate?: (P: number, E0: number, c: number) => number;
+  internalPhaseRateAtFixedMomentum?: (P: number, E0: number, c: number, Omega0: number) => number;
+  actionPhaseResiduals?: (P: number, E0: number, c: number, Omega0: number) => object;
+  fixedVPhaseErrorFactor?: (P: number, E0: number, c: number) => number;
+  deltaShapeSeparability?: (P: number, E0: number, dE0_dq: number, c: number) => number;
+
+  // Canon 0.8.29–0.8.36
+  rhoRefLegacy?: () => number;
+  classifyObservableScaling?: (tag: string) => string;
+  classifyPrimitiveSymbol?: (name: string) => object;
+  evaluateRotorParticipation?: () => object;
+  validateEnergyDensityForm?: (form: number) => object;
+  rhoFAliasesRhoEff?: () => boolean;
+  evaluateWorldsheetGuards?: (formDegreeH: number, qB: number, gamma0: number, claimedBIsAEm: boolean, claimedVIsAEff: boolean) => object;
+  evaluateIdealKnotRegime?: (aCore: number, kappaMax: number, dSep: number, gamma: number, writhe: number, twist: number, kkt?: number) => object;
+  moffattRiccaHelicity?: (gamma: number, writhe: number, twist: number) => number;
+  projectorSphereIntegral?: () => number;
+  leadingResponseR0?: (LoverD: number) => number;
+  evaluateTransverseProjector?: (...args: number[]) => object;
+  spectroLinearResponseDeltaNu?: (h: number, dDeltaEdq: number[], dq: number[]) => number;
+  maxwellThreeGate?: (G: number, Edrive: number, gap: number, tau: number, tObs: number) => boolean;
+  evaluateMechanicalFalsifier?: (pPerp: number, pParallel: number, rhoF: number, vRef: number) => object;
+  evaluateSwirlTonic?: (vx: number[], vy: number[], vz: number[], dx: number[], dy: number[], dz: number[], gamma0: number, claimedIdentity: boolean) => object;
 
   [key: string]: any;
 }

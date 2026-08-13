@@ -1,5 +1,5 @@
 {
-  "status": "near-ideal-candidate",
+  "status": "converged-local-candidate",
   "ideal": false,
   "strict_near_ideal": false,
   "folder": "knot_3.1",
@@ -7,19 +7,26 @@
     "ropelength": 32.743274,
     "source": "Brian-Gilbert-3:1:1"
   },
-  "epsilon_R": 0.00035488204386649393,
+  "campaign_reference": {
+    "ropelength": 32.75388,
+    "source": "campaign-best"
+  },
+  "epsilon_R": 0.00034339876946935154,
   "primary_polish": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_3.1\\knot_3.1_trial_002k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
   "primary_metrics": {
-    "residual": 0.00999506,
-    "ropelength": 32.754894,
-    "thickness": 0.499984,
-    "edge_length_ratio": 1.33311492845113,
-    "edge_length_cv": 0.025020566920727197
+    "residual": 0.00499103,
+    "ropelength": 32.754518,
+    "thickness": 0.4999791,
+    "edge_length_ratio": 1.4403033033809889,
+    "edge_length_cv": 0.03265510753546953,
+    "stop_reason": "residual",
+    "residual_converged": true,
+    "analytic": false
   },
   "checks": {
     "topology": "pass",
     "residual_candidate": "pass",
-    "residual_strict": "fail",
+    "residual_strict": "pass",
     "ropelength_excess": "pass",
     "raw_edge_ratio": "warn",
     "raw_edge_cv": "warn",
@@ -27,17 +34,27 @@
     "multistart_spread": "pass",
     "resolution_convergence": "not-tested",
     "uniform_mesh": "pass",
-    "constraint_anomalies": "pass"
+    "constraint_anomalies": "pass",
+    "residual_converged": "pass"
   },
   "reason": [
     "topology verified",
-    "residual \u2264 0.01",
-    "residual above 0.005",
-    "ropelength threshold passed",
-    "raw edge-ratio 1.333 (warn only)",
-    "raw edge-CV 2.5021% (warn only)",
-    "multi-start ropelength spread OK",
+    "residual <= 0.01",
+    "ropelength threshold passed (external reference)",
+    "raw edge-ratio 1.44 (warn only)",
+    "raw edge-CV 3.2655% (warn only)",
+    "multi-start / mirror ropelength spread OK",
     "resolution convergence not yet demonstrated",
-    "VortexLab uniform mesh OK"
-  ]
+    "VortexLab uniform mesh OK",
+    "residual-converged local minimum; strict near-ideal gates incomplete"
+  ],
+  "chirality": "R",
+  "catalog_aliases": [
+    "3_1",
+    "T_2_3",
+    "3_1_R"
+  ],
+  "dowker_code": "4 6 2",
+  "equivalent_group": "trefoil_3_1",
+  "final_snapshot": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_3.1\\build_knot_3.1_final_normal_20260813_151623.txt"
 }

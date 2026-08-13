@@ -1,42 +1,53 @@
 {
-  "status": "relaxed-seed",
+  "status": "stalled-not-converged",
   "ideal": false,
   "strict_near_ideal": false,
   "folder": "link_0.2.1",
-  "reference": {
+  "reference": null,
+  "campaign_reference": {
     "ropelength": 37.678962,
-    "source": "best-known numerical"
+    "source": "campaign-best"
   },
-  "epsilon_R": 0.0,
+  "epsilon_R": null,
   "primary_polish": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.2.1\\link_0.2.1_trial_015k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
   "primary_metrics": {
     "residual": 1.0,
     "ropelength": 37.678962,
     "thickness": 0.5016683,
     "edge_length_ratio": 1.0726519288662804,
-    "edge_length_cv": 0.018043038454798932
+    "edge_length_cv": 0.018043038454798932,
+    "stop_reason": null,
+    "residual_converged": null,
+    "analytic": false
   },
   "checks": {
     "topology": "pass",
     "residual_candidate": "fail",
     "residual_strict": "fail",
-    "ropelength_excess": "pass",
+    "ropelength_excess": "not-tested",
     "raw_edge_ratio": "pass",
     "raw_edge_cv": "warn",
     "thickness": "fail",
     "multistart_spread": "not-tested",
     "resolution_convergence": "not-tested",
     "uniform_mesh": "pass",
-    "constraint_anomalies": "pass"
+    "constraint_anomalies": "pass",
+    "residual_converged": "fail"
   },
   "reason": [
     "topology verified",
     "residual above 0.01",
     "residual above 0.005",
-    "ropelength threshold passed",
+    "ropelength_excess not tested (no external reference; campaign-best is not proof of near-ideal)",
     "raw edge-CV 1.8043% (warn only)",
     "multi-start not tested",
     "resolution convergence not yet demonstrated",
-    "VortexLab uniform mesh OK"
-  ]
+    "VortexLab uniform mesh OK",
+    "stopped without residual convergence (stalled)"
+  ],
+  "chirality": null,
+  "catalog_aliases": [],
+  "dowker_code": "-146 -144 -142 -140 -138 -136 -134 -132 -130 -128 -126 -124 -122 -120 -118 -116 -114 -112 -110 -108 -106 -104 -102 -100 -98 -96 -94 -92 -90 -88 -86 -84 -82 -80 -78 -76 -74 72 70 68 66 64 62 60 58 56 54 52 50 48 46 44 42 40 38 36 34 32 30 28 26 24 22 20 18 16 14 12 10 8 6 4 2 |-292 -290 -288 -286 -284 -282 -280 -278 -276 -274 -272 -270 -268 -266 -264 -262 -260 -258 -256 -254 -252 -250 -248 -246 -244 -242 -240 -238 -236 -234 -232 -230 -228 -226 -224 -222 -220 218 216 214 212 210 208 206 204 202 200 198 196 194 192 190 188 186 184 182 180 178 176 174 172 170 168 166 164 162 160 158 156 154 152 150 148",
+  "equivalent_group": null,
+  "final_snapshot": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_0.2.1\\build_link_0.2.1_final_finalize_20260813_103659.txt"
 }

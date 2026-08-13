@@ -121,6 +121,7 @@ add_library(sstcore_lib STATIC
         src/filament/integrator.cpp
         src/geometry/periodic_spline.cpp
         src/geometry/continuous_reach.cpp
+        src/geometry/smooth_tube_metrics.cpp
         src/geometry/polygonal_clearance.cpp
         src/topology/topology_guard.cpp
         src/analysis/intrinsic_frame.cpp
@@ -144,6 +145,29 @@ add_library(sstcore_lib STATIC
         src/sst_gravity.cpp
         src/sst_extensions.cpp
         src/sst_integrator.cpp
+        src/geometry_certificate.cpp
+        src/polygonal_smooth_certificate.cpp
+        src/biot_savart_gate.cpp
+        src/operational_spacetime.cpp
+        src/qss_spectroscopy.cpp
+        src/pipeline_provenance.cpp
+        src/core_torsion.cpp
+        src/link_field_gate.cpp
+        src/sst_kam_diagnostics.cpp
+        src/value_origin.cpp
+        src/evidence_report.cpp
+        src/sst_action_phase.cpp
+        src/density_ontology.cpp
+        src/rotor_participation.cpp
+        src/scaling_audit.cpp
+        src/worldsheet_guards.cpp
+        src/ideal_knot_regime.cpp
+        src/transverse_projector.cpp
+        src/spectro_response.cpp
+        src/maxwell_kinetic.cpp
+        src/mechanical_falsifier.cpp
+        src/swirl_tonic.cpp
+        src/sst_sha256.cpp
         ${CMAKE_BINARY_DIR}/generated/knot_files_embedded.cpp
 )
 
@@ -192,6 +216,26 @@ if(SST_BUILD_PYTHON_BINDINGS)
             src/vortex_ring_py.cpp
             src/vorticity_dynamics_py.cpp
             src/vortexlab_kernels_py.cpp
+            src/geometry_certificate_py.cpp
+            src/polygonal_smooth_certificate_py.cpp
+            src/operational_spacetime_py.cpp
+            src/qss_spectroscopy_py.cpp
+            src/pipeline_provenance_py.cpp
+            src/core_torsion_py.cpp
+            src/sst_kam_diagnostics_py.cpp
+            src/value_origin_py.cpp
+            src/evidence_report_py.cpp
+            src/sst_action_phase_py.cpp
+            src/density_ontology_py.cpp
+            src/rotor_participation_py.cpp
+            src/scaling_audit_py.cpp
+            src/worldsheet_guards_py.cpp
+            src/ideal_knot_regime_py.cpp
+            src/transverse_projector_py.cpp
+            src/spectro_response_py.cpp
+            src/maxwell_kinetic_py.cpp
+            src/mechanical_falsifier_py.cpp
+            src/swirl_tonic_py.cpp
             src/sst_gravity_py.cpp
             src/sst_extensions_py.cpp
             src/sst_integrator_py.cpp)
@@ -208,6 +252,12 @@ if(SST_BUILD_PYTHON_BINDINGS)
     )
 
     if(IS_LINUX)
+        # --no-undefined requires explicit Python link so Py* symbols resolve at link time.
+        if(TARGET Python::Python)
+            target_link_libraries(sstcore PRIVATE Python::Python)
+        elseif(TARGET Python::Module)
+            target_link_libraries(sstcore PRIVATE Python::Module)
+        endif()
         set_target_properties(sstcore PROPERTIES
             LINK_FLAGS "-Wl,--no-undefined"
         )
@@ -408,6 +458,26 @@ if(NODE_EXECUTABLE)
             src/vortex_ring_node.cpp
             src/vorticity_dynamics_node.cpp
             src/vortexlab_kernels_node.cpp
+            src/geometry_certificate_node.cpp
+            src/polygonal_smooth_certificate_node.cpp
+            src/operational_spacetime_node.cpp
+            src/qss_spectroscopy_node.cpp
+            src/pipeline_provenance_node.cpp
+            src/core_torsion_node.cpp
+            src/sst_kam_diagnostics_node.cpp
+            src/value_origin_node.cpp
+            src/evidence_report_node.cpp
+            src/sst_action_phase_node.cpp
+            src/density_ontology_node.cpp
+            src/rotor_participation_node.cpp
+            src/scaling_audit_node.cpp
+            src/worldsheet_guards_node.cpp
+            src/ideal_knot_regime_node.cpp
+            src/transverse_projector_node.cpp
+            src/spectro_response_node.cpp
+            src/maxwell_kinetic_node.cpp
+            src/mechanical_falsifier_node.cpp
+            src/swirl_tonic_node.cpp
     )
 
         target_include_directories(sstcore_node PRIVATE

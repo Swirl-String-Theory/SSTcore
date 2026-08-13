@@ -1,7 +1,7 @@
 {
   "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_2.2.1\\link_2.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
   "output": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_2.2.1\\link_2.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
-  "method_requested": "auto",
+  "method_requested": "linear",
   "method_per_component": [
     "linear",
     "linear"
@@ -24,10 +24,12 @@
   "D_proxy_out": 1.1352802073407378,
   "R_proxy_in": 33.09845657582108,
   "R_proxy_out": 33.100222171790776,
-  "relative_rop_change": -0.30437464982890006,
+  "relative_rop_change": 5.3343755339385623e-05,
   "relative_rop_proxy_change": 5.3343755339385623e-05,
   "relative_rop_minrad_change": -0.30437464982890006,
-  "rop_gate": "minrad",
+  "rop_gate": "proxy",
+  "global_ds_ratio": 1.000719882203524,
+  "centerline_drift_over_D": 0.0010406926960779806,
   "components": [
     {
       "index": 0,
@@ -61,7 +63,8 @@
     }
   ],
   "validation_warnings": [
-    "Rop change -30.437465% (prefer |d| < 0.1%)"
+    "MinRad-Rop change -30.437465% (diagnostic only; not a fail gate)",
+    "centerline drift 0.104069%D (prefer <= 0.10%D)"
   ],
   "validation_errors": [],
   "gates": {
@@ -69,7 +72,9 @@
     "length_rel_max": 0.005,
     "minrad_ratio_min": 0.9,
     "rop_rel_max": 0.001,
-    "rop_gate_mode": "collapse_only"
+    "global_ds_ratio_max": 1.05,
+    "centerline_drift_max": 0.005,
+    "rop_gate_mode": "proxy_collapse_only"
   },
-  "notes": "Ladder upsample uses spline_repair (cubic spline + MinRad restore). Strict Rop gate is one-sided: error only if Rop increases (>= 0.1%, collapse); negative dR (apparent thickening) warns only. Metric: thickness proxy for spline_repair, else MinRad-Rop. Bare spline / subdivide sidecars are treated as stale."
+  "notes": "Default: N=300 for 1-comp; preserve Ni for multi-comp. MinRad-Rop is diagnostic only. Primary gates: length, proxy-Rop collapse, edge ratio/CV, global_ds_ratio, centerline drift/D."
 }

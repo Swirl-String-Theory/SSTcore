@@ -42,6 +42,18 @@ npm run examples:node:all
 | `ab_initio_mass_node.cpp` | `example_ab_initio.ts` | `example_ab_initio.py` |
 | `sst_integrator_node.cpp` | `example_sst_integrator.ts` | `example_sst_integrator.py` |
 | `magnus_integrator_node.cpp` | `example_magnus_integrator.ts` | `example_magnus_integrator.py` |
+| `geometry_certificate_node.cpp` | `example_geometry_certificate.ts` | `example_geometry_certificate.py` |
+| `polygonal_smooth_certificate_node.cpp` (+ Biot gate) | `example_polygonal_smooth_certificate.ts` | `example_polygonal_smooth_certificate.py` |
+| `operational_spacetime_node.cpp` | `example_operational_spacetime.ts` | `example_operational_spacetime.py` |
+| qss spectroscopy (via spacetime/qss bind) | `example_qss_spectroscopy.ts` | `example_qss_spectroscopy.py` |
+| `pipeline_provenance_node.cpp` | `example_pipeline_provenance.ts` | `example_pipeline_provenance.py` |
+| `core_torsion_node.cpp` (+ link gate) | `example_core_torsion.ts` | `example_core_torsion.py` |
+| `sst_kam_diagnostics_node.cpp` | `example_kam_diagnostics.ts` | `example_kam_diagnostics.py` |
+| `value_origin_node.cpp` | `example_value_origin.ts` | `example_value_origin.py` |
+| `evidence_report_node.cpp` | `example_evidence_report.ts` | `example_evidence_report.py` |
+| `sst_action_phase_node.cpp` | `example_action_phase.ts` | `example_action_phase.py` |
+| density / rotor / scaling | `example_density_ontology.ts` | `example_density_ontology.py` |
+| worldsheet / ideal / projector / Maxwell | `example_maxwell_canon.ts` | `example_maxwell_canon.py` |
 
 If a binding is still a stub, the TypeScript example prints `[SKIP]` and exits 0.
 

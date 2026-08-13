@@ -87,6 +87,15 @@ struct ContinuousReachResult {
     PairWitness inter_witness;
     double orth_residual = 0.0;
     std::size_t component_count = 0;
+
+    // Search / audit diagnostics (numerical certificate metadata).
+    std::size_t curvature_intervals_examined = 0;
+    std::size_t dcsd_seed_count = 0;
+    std::size_t dcsd_refined_count = 0;
+    std::size_t dcsd_rejected_count = 0;
+    double search_resolution = 0.0;
+    double refinement_tolerance = 1e-13;
+    bool search_converged = false;
 };
 
 struct TopologyClearanceResult {

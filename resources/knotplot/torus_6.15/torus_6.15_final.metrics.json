@@ -1,0 +1,40 @@
+{
+  "checkpoint_tag": "030k",
+  "component_count": 3,
+  "edge_length_cv": 0.2265100168082869,
+  "edge_length_max": 0.28159940840679626,
+  "edge_length_mean": 0.1670252227364096,
+  "edge_length_min": 0.10217689929980102,
+  "edge_length_ratio": 2.755998766223518,
+  "edge_length_variance": 0.00142552,
+  "elapsed_s": 3754.378593200003,
+  "final_vect": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.15\\torus_6.15_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_030k_polish.rr\\torus_6.15_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_030k_polish.final.vect",
+  "flatness": 0.73817558864817,
+  "length": 150.3227,
+  "mr_struts": 0,
+  "output_txt": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.15\\torus_6.15_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_030k_polish.txt",
+  "residual": 0.373873,
+  "residual_converged": false,
+  "ridgerunner_args": [
+    "-c",
+    "--EqOn",
+    "-s",
+    "30000",
+    "--StopResidual=0.005",
+    "--Threads=8",
+    "--NoOutputFiles"
+  ],
+  "ropelength": 300.64624,
+  "rr_dir": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.15\\torus_6.15_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_030k_polish.rr",
+  "source_txt": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.15\\torus_6.15_trial_001k_rr_010k_coarse_rr_050k_eqfinal.txt",
+  "steps": 30000,
+  "stop_reason": "max_steps",
+  "strutcount": 1059.0,
+  "thickness": 0.4999986,
+  "vertices_per_component": [
+    300,
+    300,
+    300
+  ],
+  "walltime": null
+}

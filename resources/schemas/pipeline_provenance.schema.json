@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sstcore.local/schemas/pipeline_provenance.schema.json",
+  "title": "SSTcore Pipeline Provenance Record",
+  "type": "object",
+  "required": [
+    "stage",
+    "certification",
+    "tool_name",
+    "tool_version",
+    "input_sha256",
+    "output_sha256",
+    "parameter_sha256",
+    "coordinate_convention",
+    "scale_convention",
+    "timestamp_utc"
+  ],
+  "properties": {
+    "stage": {
+      "type": "string",
+      "enum": ["KnotPlot", "Ridgerunner", "Smoothing", "SSTcore", "VortexLab"]
+    },
+    "certification": {
+      "type": "string",
+      "enum": ["Unknown", "Candidate", "Certified"]
+    },
+    "tool_name": { "type": "string", "minLength": 1 },
+    "tool_version": { "type": "string", "minLength": 1 },
+    "input_sha256": { "type": "string", "minLength": 8 },
+    "output_sha256": { "type": "string", "minLength": 8 },
+    "parameter_sha256": { "type": "string", "minLength": 8 },
+    "parent_record_sha256": { "type": "string" },
+    "coordinate_convention": { "type": "string", "minLength": 1 },
+    "scale_convention": { "type": "string", "minLength": 1 },
+    "timestamp_utc": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": false
+}

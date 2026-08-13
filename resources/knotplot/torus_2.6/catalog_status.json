@@ -1,0 +1,51 @@
+{
+  "status": "converged-local-candidate",
+  "ideal": false,
+  "strict_near_ideal": false,
+  "folder": "torus_2.6",
+  "reference": null,
+  "campaign_reference": {
+    "ropelength": 56.117953,
+    "source": "campaign-best"
+  },
+  "epsilon_R": null,
+  "primary_polish": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_2.6\\torus_2.6_trial_004k_rr_010k_coarse_rr_050k_eqfinal_rr_030k_polish.metrics.json",
+  "primary_metrics": {
+    "residual": 0.00496134,
+    "ropelength": 56.117953,
+    "thickness": 0.499964,
+    "edge_length_ratio": 1.0563976939344475,
+    "edge_length_cv": 0.008661190751399709,
+    "stop_reason": "residual",
+    "residual_converged": true,
+    "analytic": false
+  },
+  "checks": {
+    "topology": "pass",
+    "residual_candidate": "pass",
+    "residual_strict": "pass",
+    "ropelength_excess": "not-tested",
+    "raw_edge_ratio": "pass",
+    "raw_edge_cv": "pass",
+    "thickness": "pass",
+    "multistart_spread": "not-tested",
+    "resolution_convergence": "not-tested",
+    "uniform_mesh": "pass",
+    "constraint_anomalies": "pass",
+    "residual_converged": "pass"
+  },
+  "reason": [
+    "topology verified",
+    "residual <= 0.01",
+    "ropelength_excess not tested (no external reference; campaign-best is not proof of near-ideal)",
+    "multi-start not tested",
+    "resolution convergence not yet demonstrated",
+    "VortexLab uniform mesh OK",
+    "residual-converged local minimum without independent near-ideal proof"
+  ],
+  "chirality": null,
+  "catalog_aliases": [],
+  "dowker_code": "-12 -8 -10 |-2 -4 -6",
+  "equivalent_group": null,
+  "final_snapshot": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_2.6\\build_torus_2.6_final_finalize_20260813_103714.txt"
+}

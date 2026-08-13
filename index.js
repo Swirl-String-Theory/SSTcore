@@ -4,7 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 
-let pkgVersion = '0.8.18';
+let pkgVersion = '0.8.36';
 try {
     pkgVersion = JSON.parse(fs.readFileSync(path.join(__dirname, 'package.json'), 'utf8')).version || pkgVersion;
 } catch (_) { /* keep default */ }
@@ -191,9 +191,10 @@ function listBindings(pattern, includePrivate) {
 
 function wrapEngineInfo(nativeInfo) {
     const base = nativeInfo && typeof nativeInfo === 'object' ? Object.assign({}, nativeInfo) : {};
+    // Optie A: package, engine, and canon versions stay identical.
     base.packageVersion = pkgVersion;
-    if (!base.engineVersion) base.engineVersion = pkgVersion;
-    if (!base.canonVersion) base.canonVersion = '0.8.20';
+    base.engineVersion = pkgVersion;
+    base.canonVersion = pkgVersion;
     if (base.nodeApiVersion == null) base.nodeApiVersion = 1;
     if (!base.numericProfile) base.numericProfile = 'deterministic';
     if (!base.platform && isNode) base.platform = process.platform;
@@ -228,8 +229,8 @@ function attachMeta(exportsObj) {
 
     exportsObj.engineInfo = function engineInfo() {
         return wrapEngineInfo(nativeEngineInfo || {
-            engineVersion: exportsObj.engineVersion || pkgVersion,
-            canonVersion: exportsObj.canonVersion || '0.8.20',
+            engineVersion: pkgVersion,
+            canonVersion: pkgVersion,
             nodeApiVersion: exportsObj.nodeApiVersion || 1,
             numericProfile: exportsObj.numericProfile || 'deterministic',
             compiler: 'unknown',

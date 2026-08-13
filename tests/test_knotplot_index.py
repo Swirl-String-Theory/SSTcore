@@ -63,9 +63,9 @@ def test_relaxed_have_geometry_and_ab(knotplot_index: dict) -> None:
     assert len(relaxed) >= 1
     for entry in relaxed:
         roles = {f["role"] for f in entry.get("files") or []}
-        assert "uniform_n300" in roles, entry["id"]
+        assert "uniform_n300" in roles or "shared_final" in roles, entry["id"]
         assert "ab_xml" in roles, entry["id"]
-        assert "audit_metrics" in roles or "audit_polish" in roles, entry["id"]
+        assert "audit_metrics" in roles or "audit_polish" in roles or "shared_final" in roles, entry["id"]
         ab = root / entry["id"] / f"{entry['id']}_ab.xml"
         assert ab.is_file()
 
@@ -79,10 +79,12 @@ def test_stubs_have_kpc_no_geometry(knotplot_index: dict) -> None:
         roles = {f["role"] for f in entry.get("files") or []}
         assert "build_script" in roles, entry["id"]
         assert "uniform_n300" not in roles, entry["id"]
+        assert "shared_final" not in roles, entry["id"]
         assert "ab_xml" not in roles, entry["id"]
         folder = root / entry["id"]
         assert not list(folder.glob("*uniform*"))
         assert not list(folder.glob("*_ab.xml"))
+        assert not list(folder.glob("*_final.txt"))
 
 
 def test_no_monopole_or_pyd_or_rr(knotplot_index: dict) -> None:

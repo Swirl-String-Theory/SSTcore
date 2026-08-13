@@ -235,7 +235,7 @@ def _windows_msvc_toolset_defaults() -> None:
 
 _windows_msvc_toolset_defaults()
 
-__version__ = "0.8.18"
+__version__ = "0.8.36"
 base_dir = os.path.dirname(os.path.abspath(__file__))
 # Python import package: src/SSTcore/ (repo root is not the import package).
 _PYTHON_PKG = "SSTcore"
@@ -942,6 +942,7 @@ src_files = [
     "src/filament/integrator.cpp",
     "src/geometry/periodic_spline.cpp",
     "src/geometry/continuous_reach.cpp",
+    "src/geometry/smooth_tube_metrics.cpp",
     "src/geometry/polygonal_clearance.cpp",
     "src/topology/topology_guard.cpp",
     "src/analysis/intrinsic_frame.cpp",
@@ -965,6 +966,29 @@ src_files = [
     "src/sst_gravity.cpp",
     "src/sst_extensions.cpp",
     "src/sst_integrator.cpp",
+    "src/geometry_certificate.cpp",
+    "src/polygonal_smooth_certificate.cpp",
+    "src/biot_savart_gate.cpp",
+    "src/operational_spacetime.cpp",
+    "src/qss_spectroscopy.cpp",
+    "src/pipeline_provenance.cpp",
+    "src/core_torsion.cpp",
+    "src/link_field_gate.cpp",
+    "src/sst_kam_diagnostics.cpp",
+    "src/value_origin.cpp",
+    "src/evidence_report.cpp",
+    "src/sst_action_phase.cpp",
+    "src/density_ontology.cpp",
+    "src/rotor_participation.cpp",
+    "src/scaling_audit.cpp",
+    "src/worldsheet_guards.cpp",
+    "src/ideal_knot_regime.cpp",
+    "src/transverse_projector.cpp",
+    "src/spectro_response.cpp",
+    "src/maxwell_kinetic.cpp",
+    "src/mechanical_falsifier.cpp",
+    "src/swirl_tonic.cpp",
+    "src/sst_sha256.cpp",
 ]
 
 # Generated embedded files will be added by CustomBuildExt during build
@@ -1049,7 +1073,8 @@ setup(
     description="SSTcore - Swirl String Theory Canonical Core. High-performance C++ library for knot dynamics, vortex systems, and fluid mechanics",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    license="CC BY-NC 4.0",
+    license="CC-BY-NC-4.0",
+    license_files=["LICENSE"],
     url="https://github.com/Swirl-String-Theory/SSTcore",
     project_urls={
         "Bug Tracker": "https://github.com/Swirl-String-Theory/SSTcore/issues",

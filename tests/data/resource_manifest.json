@@ -62,148 +62,337 @@
       "id": "knot_0.1",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/knot_0.1/knot_0.1_ab.xml",
-      "sha256": "e5724577ff4ba1109307986bc277e885020a01b04452606001630cd66228ff51",
-      "bytes": 7106
+      "sha256": "eff6e97d3f48faefa17107eb731f0073e6d11ca8fb2499871d96b8c0346e7b8f",
+      "bytes": 7121
+    },
+    {
+      "id": "knot_10.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_10.1/knot_10.1_ab.xml",
+      "sha256": "a733a8d05f8c522155293cb40084e263bc711e997f062012a5a5054ac3fb8db4",
+      "bytes": 7123
+    },
+    {
+      "id": "knot_10.123",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_10.123/knot_10.123_ab.xml",
+      "sha256": "65ae5817d7965acaf806e21d18b0735942705019edb40f2175f56aafa0e7f517",
+      "bytes": 7125
     },
     {
       "id": "knot_3.1",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/knot_3.1/knot_3.1_ab.xml",
-      "sha256": "596537bd293a001e8a25afff06668f3ec8fd4e2e528ba51451f49cc8d1156920",
-      "bytes": 7107
+      "sha256": "5831f16d6f3865094974b34cc60698ac3a51ddb808b82ecca1dc5c5aa6cd3b3e",
+      "bytes": 7122
     },
     {
       "id": "knot_4.1",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/knot_4.1/knot_4.1_ab.xml",
-      "sha256": "b626d5c36443c3b42665db0d3ef59e3bc69be567610e99f5667d326639f19de6",
-      "bytes": 7107
+      "sha256": "af0f3aeaa5f282ddbfec0f559527ac32f1b4226c05e7438b6432f2457a348e4f",
+      "bytes": 7122
     },
     {
       "id": "knot_5.1",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/knot_5.1/knot_5.1_ab.xml",
-      "sha256": "e9b360f04fdd0b0e34b2751128e803f4c2cb81c410ceb450bc5fb8f24866b8b8",
-      "bytes": 7107
+      "sha256": "18e3bec5e5f00108c2fd5180eb13455e66a57091a6b8c46a4b64e13c04077e97",
+      "bytes": 7122
     },
     {
       "id": "knot_5.2",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/knot_5.2/knot_5.2_ab.xml",
-      "sha256": "e7bcb1b90679f13a2590b4c71599741119215318526e73b9d1b13367f4179988",
-      "bytes": 7107
+      "sha256": "b4ddd6dce94be5ef84c95faa3217df6cae05d59cdac00eae5ce019ef58cf0369",
+      "bytes": 7122
     },
     {
       "id": "knot_6.1",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/knot_6.1/knot_6.1_ab.xml",
-      "sha256": "5cb7202bafe46594469f15ab3c9d0c233ad15cefd1c94163754bd3f214fae04c",
-      "bytes": 7107
+      "sha256": "113815f5a42ae953a55792909089ee7bffd18037d8f02a19822f960148e270af",
+      "bytes": 7122
+    },
+    {
+      "id": "knot_6.2",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_6.2/knot_6.2_ab.xml",
+      "sha256": "fadc762cfa0d64706396567443e2813d82da867394daab48a6fafc8626145376",
+      "bytes": 7122
+    },
+    {
+      "id": "knot_6.3",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_6.3/knot_6.3_ab.xml",
+      "sha256": "28063f65f33f80e93960debfb4db405dbe2bf2df623eed31f0e3680d3a5aca96",
+      "bytes": 7122
     },
     {
       "id": "knot_7.1",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/knot_7.1/knot_7.1_ab.xml",
-      "sha256": "1d5907165c2aba81b73c4521746817edba366a7e2aafd8c023c733fd13fb158b",
-      "bytes": 7107
+      "sha256": "c3053dad813042fa6dacce43fa5004afc07333ac5becbe5b8bb6cf9b41b7f840",
+      "bytes": 7122
+    },
+    {
+      "id": "knot_7.2",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_7.2/knot_7.2_ab.xml",
+      "sha256": "28098a1e580ba7139e17fd225f6d88bea2e78cc89d79fd01156cc43a42a6e449",
+      "bytes": 7122
+    },
+    {
+      "id": "knot_7.3",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_7.3/knot_7.3_ab.xml",
+      "sha256": "4bda4e88f2ba342d691d1c6a0738f5e0046397ca72b248fa21ed68fee9dbeb07",
+      "bytes": 7122
+    },
+    {
+      "id": "knot_7.4",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_7.4/knot_7.4_ab.xml",
+      "sha256": "ce3f08e12bc1fb999696e3e375575f022e6438f60698ff8029a142bd598620f8",
+      "bytes": 7122
+    },
+    {
+      "id": "knot_8.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_8.1/knot_8.1_ab.xml",
+      "sha256": "ed9072231ae7c4e4cbd3bf69f602885109fcf5ace606a4863975f8343761e839",
+      "bytes": 7122
+    },
+    {
+      "id": "knot_8.17",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_8.17/knot_8.17_ab.xml",
+      "sha256": "5b3a02e099940e7a0432e8b94c095a6fdacdb105a0a0a83c5cb5a57e7a90f638",
+      "bytes": 7123
+    },
+    {
+      "id": "knot_8.18",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_8.18/knot_8.18_ab.xml",
+      "sha256": "533ff9ef75784793be47ef2ea3e6abc4bb4ca36dd7b10ed2c0a95c9c279f6e18",
+      "bytes": 7123
+    },
+    {
+      "id": "knot_9.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_9.1/knot_9.1_ab.xml",
+      "sha256": "98086219fc35baa3f84bbd9ff031bcd839ea7cb2282b7c8418da8e2b4891ea4d",
+      "bytes": 7122
+    },
+    {
+      "id": "knot_9.2",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_9.2/knot_9.2_ab.xml",
+      "sha256": "bc460c26bdf48fd282ab8dd4ada05e10ceab7ad23206d47a8fa1ecc8ee8682ec",
+      "bytes": 7122
     },
     {
       "id": "link_0.2.1",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/link_0.2.1/link_0.2.1_ab.xml",
-      "sha256": "d37b69d1b7df89a9bc1e7802e199fb22ccebe90d6f2b9b3fd82bb71242708567",
-      "bytes": 7111
+      "sha256": "d25fef367c92aceb9244e0274ad19378175070c3aede5ef9d220d90399567644",
+      "bytes": 7126
     },
     {
       "id": "link_0.3.1",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/link_0.3.1/link_0.3.1_ab.xml",
-      "sha256": "fb497bb2ddf37575e9f027f0ec0dd8fb6c9060248b14096ef8a0e70506135207",
-      "bytes": 7111
+      "sha256": "7c36e3d2c169b443c0656ed955b99645e916eb31fc4dcbb954b08c28d2e90bf8",
+      "bytes": 7126
     },
     {
       "id": "link_2.2.1",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/link_2.2.1/link_2.2.1_ab.xml",
-      "sha256": "c53d509baa5620d2f6f0bf7856261b842aa2b86f0b82894d666b2fd6fa81a439",
-      "bytes": 7112
+      "sha256": "8bc5f637c5a17f490e962a897b1d0a9dcff0d84df0a8f29941d7e1394f292728",
+      "bytes": 7127
+    },
+    {
+      "id": "link_4.2.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/link_4.2.1/link_4.2.1_ab.xml",
+      "sha256": "b3b0cca4d152fe71c5de119d5c2dd07019ac61f5b762c472e7b22b48041b9429",
+      "bytes": 7127
     },
     {
       "id": "link_5.2.1",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/link_5.2.1/link_5.2.1_ab.xml",
-      "sha256": "8071b9a7a377afd6d5793fbbcce9038acdd7830031cff14feb232f693a63036c",
-      "bytes": 7112
+      "sha256": "5ffe55bcbc3f48f8bed9324e539a3b11e22dbe46bf396bd7250b6c166b0c3501",
+      "bytes": 7127
     },
     {
       "id": "link_6.2.1",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/link_6.2.1/link_6.2.1_ab.xml",
-      "sha256": "6e4e11268f31127fb07cb9bff199d0306784682c35b6b3d9b1d41df1c2f8922a",
-      "bytes": 7112
+      "sha256": "b775f707152585b2249be6f96f33ea0fd00af5aa3f4e1586cccd1cb18d37650e",
+      "bytes": 7127
     },
     {
       "id": "link_6.3.1",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/link_6.3.1/link_6.3.1_ab.xml",
-      "sha256": "a361ab86ee4db5dd6b884914754106d228ef71055f845d5ddcb753a7343e9f7b",
-      "bytes": 7112
+      "sha256": "abe2aa9cc045d9d1edd26e7ec437224e949fdfbd0194662c31e1754698c2d454",
+      "bytes": 7127
     },
     {
       "id": "link_6.3.2",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/link_6.3.2/link_6.3.2_ab.xml",
-      "sha256": "9be4e82e4e60b7707d309781d214a72986b7ba8bc19680800083aae95901d2be",
-      "bytes": 7112
+      "sha256": "901ba50a2615d25e98e8f730dfbc8cedae3f195ac0fe926cfb0b818bcf0a40ca",
+      "bytes": 7127
+    },
+    {
+      "id": "link_6.3.3",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/link_6.3.3/link_6.3.3_ab.xml",
+      "sha256": "71615bbe373dc4185106eb36e78a47e2ebcd0c13291805c39d2cd8d99406453c",
+      "bytes": 7126
+    },
+    {
+      "id": "link_7.2.5",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/link_7.2.5/link_7.2.5_ab.xml",
+      "sha256": "fdb60812a94b7eef997ea488d1f24e50a8382f10fe48b1dcd464edb8bf696af9",
+      "bytes": 7127
     },
     {
       "id": "link_7.2.6",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/link_7.2.6/link_7.2.6_ab.xml",
-      "sha256": "83abd637458a8286f0c58775169b409d0fbbfb19fa9c00ff9fb1c46e2a90a98b",
-      "bytes": 7112
+      "sha256": "eb18c11b957dc91b1ea1803837f0eeb6191b646060a0cd66e1b5163fda051003",
+      "bytes": 7127
     },
     {
       "id": "link_7.2.8",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/link_7.2.8/link_7.2.8_ab.xml",
-      "sha256": "72899879179cf8367a47a4a6c5347daff9d129c24bde1dc7c1a1f3f98bd67db3",
-      "bytes": 7112
+      "sha256": "c568d898be47927c7af07c141da7b31ddf645c612e8b7ac57a455fe338c1f2d0",
+      "bytes": 7127
     },
     {
       "id": "link_8.2.1",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/link_8.2.1/link_8.2.1_ab.xml",
-      "sha256": "8c841d1215d1a329e0dea34ef907aacda241e260bea287fbc998461bc984ef90",
-      "bytes": 7112
+      "sha256": "43a72cc61e7b25d297578a5fba543316ea000b65ddb072e7a0584c5c2ff48d2b",
+      "bytes": 7127
     },
     {
       "id": "link_9.2.20",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/link_9.2.20/link_9.2.20_ab.xml",
-      "sha256": "7207b8fa424f55e825158d556c5603c21a04d8a4c1f10efadcd72a6b2a72ce59",
-      "bytes": 7113
+      "sha256": "f272b7100da0043aa3c1af2bc3e7a7bc9f0fcbb3a66c4c0021a083d7812808b2",
+      "bytes": 7128
     },
     {
       "id": "link_9.2.40",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/link_9.2.40/link_9.2.40_ab.xml",
-      "sha256": "b1b6aa5d6fe9180dcc8a261c8151fe6a5157982b3453232d8dc4a57ca5492b1c",
-      "bytes": 7113
+      "sha256": "d097be65741b893317fc373a06189569556382db3404d372b27be39c9faa9018",
+      "bytes": 7128
+    },
+    {
+      "id": "torus_2.11",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/torus_2.11/torus_2.11_ab.xml",
+      "sha256": "4c7a9f6b2bf82724d847571aac56ea2c9dd784fde1ef19c39799ea9566c23144",
+      "bytes": 7127
+    },
+    {
+      "id": "torus_2.3",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/torus_2.3/torus_2.3_ab.xml",
+      "sha256": "f8a2a02e3ddca519b46f89cbbe459d30ba8925b8b2e0fe8faba0e1ab5a9b6b5a",
+      "bytes": 7122
+    },
+    {
+      "id": "torus_2.4",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/torus_2.4/torus_2.4_ab.xml",
+      "sha256": "b85d1fa2420b476507d582a7f6dd98fac38f0babaed26a3a88fc89bdd85e3e47",
+      "bytes": 7126
+    },
+    {
+      "id": "torus_2.5",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/torus_2.5/torus_2.5_ab.xml",
+      "sha256": "0439995fea153db74f22bfe0b37bba9cd4046620989d9c92ff4964918dcafe56",
+      "bytes": 7126
+    },
+    {
+      "id": "torus_2.6",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/torus_2.6/torus_2.6_ab.xml",
+      "sha256": "4f2d8b735c1f138fdc3907984629b90cb7261d6992d502b24b212dd093459954",
+      "bytes": 7126
+    },
+    {
+      "id": "torus_2.7",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/torus_2.7/torus_2.7_ab.xml",
+      "sha256": "786065f7f4e851389254adead6eefe40af04585799d5022152c4afee8fe32528",
+      "bytes": 7126
+    },
+    {
+      "id": "torus_2.8",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/torus_2.8/torus_2.8_ab.xml",
+      "sha256": "35b07b88f3624186213c28375335f15d7bd75648c429333c3c88f27d12d7fa1b",
+      "bytes": 7126
+    },
+    {
+      "id": "torus_2.9",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/torus_2.9/torus_2.9_ab.xml",
+      "sha256": "af0f59551c7adfd30f92d7a330e7ee63b6f8e70565db9aca590f35e65b4f60d9",
+      "bytes": 7126
     },
     {
       "id": "torus_3.3",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/torus_3.3/torus_3.3_ab.xml",
-      "sha256": "4f0fdefb8f6adb74a5b1f27115d71851e40516134b1c993f92c11a97ca2c936a",
-      "bytes": 7110
+      "sha256": "bd24c1b8e6dac173315e11039c20adedbe0c8f8b57bb190ab0900fbad0656775",
+      "bytes": 7125
+    },
+    {
+      "id": "torus_3.6",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/torus_3.6/torus_3.6_ab.xml",
+      "sha256": "f0062157dd04a4617134b1fa236e54575563457e8838908a5ff5c3bd50254a7b",
+      "bytes": 7126
+    },
+    {
+      "id": "torus_3.9",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/torus_3.9/torus_3.9_ab.xml",
+      "sha256": "4934e8a86e83718778579b946c85586313175ff6d4a2e391de7c4b9fb62ed1be",
+      "bytes": 7126
+    },
+    {
+      "id": "torus_6.15",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/torus_6.15/torus_6.15_ab.xml",
+      "sha256": "7a4d75a88fc9a39a3ef694efaf304006cc3963d9464cb31f4882038e5f5c658c",
+      "bytes": 7127
+    },
+    {
+      "id": "torus_6.21",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/torus_6.21/torus_6.21_ab.xml",
+      "sha256": "d71fe83855740f3f85fdc0aa14d0d1d8710e9f0b302bd2c26c0964f94afcc8ad",
+      "bytes": 7127
     },
     {
       "id": "torus_6.9",
       "kind": "knotplot_ideal",
       "relpath": "knotplot/torus_6.9/torus_6.9_ab.xml",
-      "sha256": "88e89c474d3b6630327e429a9079da5cf24241355f7c8fc88aca2f0e2d1d88ea",
-      "bytes": 7111
+      "sha256": "288dca7c60d7a2fb0b67e7c5aa3e0ad49524997bff1f5bc2980f4a3927d1af91",
+      "bytes": 7126
     },
     {
       "id": "3_1",

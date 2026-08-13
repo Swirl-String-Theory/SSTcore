@@ -1,0 +1,5 @@
+[*] SST integrator: 4000 points (ring), chi_spin=2
+    M_core  : 855849 MeV/c^2
+    M_fluid : 1.68217e-23 MeV/c^2
+    M_total : 855849 MeV/c^2
+[+] Done.

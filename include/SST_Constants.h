@@ -39,9 +39,13 @@ namespace SST {
         // Horn-envelope density closure m_e c^2 / (2 pi v_swirl^2 r_c^3)
         // (canon v0.8.12 rho_horn; legacy symbol RHO_CORE retained for compatibility).
         constexpr long double RHO_CORE  = 3.8934358266918687e18L;   // [kg/m^3] Horn-envelope density
-        constexpr long double RHO_FLUID_CANON   = 7.0e-7L;          // [kg/m^3] Canon v0.8.x rounded effective fluid density
+        constexpr long double RHO_HORN  = RHO_CORE;                 // canon alias (v0.8.26+)
+        // Canon v0.8.32+: 7.0e-7 is a LEGACY REFERENCE (rho_ref), not a calibrated primitive.
+        // Physical rho_eff ≡ rho_f remains numerically unfixed until a C/Q pin is established.
+        constexpr long double RHO_REF          = 7.0e-7L;           // [kg/m^3] [LEGACY REFERENCE]
+        constexpr long double RHO_FLUID_CANON   = RHO_REF;          // legacy alias of rho_ref
         constexpr long double RHO_FLUID_DERIVED = 6.8398588e-07L;   // [kg/m^3] CODATA-derived electron anchor value
-        constexpr long double RHO_FLUID = RHO_FLUID_CANON;          // backward-compatible alias
+        constexpr long double RHO_FLUID = RHO_FLUID_CANON;          // backward-compatible alias (= rho_ref)
 
         // Derived from quantization: Gamma_0 = h / m_eff
         constexpr long double GAMMA_0   = 9.68361918e-09L;          // [m^2/s] Circulation Quantum, 2*pi*r_c*v_swirl

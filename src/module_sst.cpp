@@ -2,6 +2,7 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <algorithm>
+#include <Python.h>
 
 namespace py = pybind11;
 
@@ -37,6 +38,26 @@ void bind_extensions(py::module_& m);
 void bind_trefoil_operator(py::module_& m);
 void bind_resolved_tube_geometry(py::module_& m);
 void bind_vortexlab_kernels(py::module_& m);
+void bind_geometry_certificate(py::module_& m);
+void bind_polygonal_smooth_certificate(py::module_& m);
+void bind_operational_spacetime(py::module_& m);
+void bind_qss_spectroscopy(py::module_& m);
+void bind_pipeline_provenance(py::module_& m);
+void bind_core_torsion(py::module_& m);
+void bind_kam_diagnostics(py::module_& m);
+void bind_value_origin(py::module_& m);
+void bind_evidence_report(py::module_& m);
+void bind_action_phase(py::module_& m);
+void bind_density_ontology(py::module_& m);
+void bind_rotor_participation(py::module_& m);
+void bind_scaling_audit(py::module_& m);
+void bind_worldsheet_guards(py::module_& m);
+void bind_ideal_knot_regime(py::module_& m);
+void bind_transverse_projector(py::module_& m);
+void bind_spectro_response(py::module_& m);
+void bind_maxwell_kinetic(py::module_& m);
+void bind_mechanical_falsifier(py::module_& m);
+void bind_swirl_tonic(py::module_& m);
 
 
 // Pip/setuptools wheels use SSTcore._native; CMake builds keep the sstcore module name.
@@ -77,6 +98,26 @@ PYBIND11_MODULE(sstcore, m) {
   bind_trefoil_operator(m);
   bind_resolved_tube_geometry(m);
   bind_vortexlab_kernels(m);
+  bind_geometry_certificate(m);
+  bind_polygonal_smooth_certificate(m);
+  bind_operational_spacetime(m);
+  bind_qss_spectroscopy(m);
+  bind_pipeline_provenance(m);
+  bind_core_torsion(m);
+  bind_kam_diagnostics(m);
+  bind_value_origin(m);
+  bind_evidence_report(m);
+  bind_action_phase(m);
+  bind_density_ontology(m);
+  bind_rotor_participation(m);
+  bind_scaling_audit(m);
+  bind_worldsheet_guards(m);
+  bind_ideal_knot_regime(m);
+  bind_transverse_projector(m);
+  bind_spectro_response(m);
+  bind_maxwell_kinetic(m);
+  bind_mechanical_falsifier(m);
+  bind_swirl_tonic(m);
  // module-wide listing utility
     m.def(
         "list_bindings",
@@ -101,10 +142,10 @@ PYBIND11_MODULE(sstcore, m) {
                 }
 
                 if (const py::object obj = m.attr(name.c_str());
-                    py::isinstance<py::function>(obj)) {
-                    funcs.append(py::str(name));
-                } else if (py::isinstance<py::type>(obj)) {
+                    PyType_Check(obj.ptr()) || py::isinstance<py::type>(obj)) {
                     classes.append(py::str(name));
+                } else if (py::isinstance<py::function>(obj)) {
+                    funcs.append(py::str(name));
                 } else {
                     attrs.append(py::str(name));
                 }

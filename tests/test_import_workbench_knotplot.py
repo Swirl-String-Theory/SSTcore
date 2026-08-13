@@ -27,7 +27,7 @@ def _write_xyz(path: Path, n: int = 32, radius: float = 1.0) -> None:
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-def _make_relaxed(entity: Path, *, status: str = "relaxed-seed") -> None:
+def _make_relaxed(entity: Path, *, status: str = "relaxed-seed") -> Path:
     entity.mkdir(parents=True)
     (entity / f"build_{entity.name}.kpc").write_text("% build\n", encoding="utf-8")
     (entity / "build_effort_active.kpc").write_text("% effort\n", encoding="utf-8")
@@ -56,6 +56,7 @@ def _make_relaxed(entity: Path, *, status: str = "relaxed-seed") -> None:
     (entity / "junk.dat").write_text("x", encoding="utf-8")
     (entity / "foo_rr").mkdir()
     (entity / "foo_rr" / "snap.dat").write_text("x", encoding="utf-8")
+    return polish
 
 
 def _make_stub(entity: Path, *, with_analytic: bool = False) -> None:
@@ -84,6 +85,7 @@ def test_classify_relaxed_vs_stub(synthetic_wb: Path) -> None:
     assert by_id["torus_2.4"]["relaxed"] is False
     assert plan["counts"]["relaxed"] == 2
     assert plan["counts"]["stub"] == 2
+    assert "final" not in by_id
 
 
 def test_min_status_filters(synthetic_wb: Path) -> None:
@@ -93,8 +95,19 @@ def test_min_status_filters(synthetic_wb: Path) -> None:
     assert by_id["link_0.2.1"]["relaxed"] is False  # only relaxed-seed
 
 
+def test_converged_local_candidate_is_relaxed(synthetic_wb: Path) -> None:
+    knots = synthetic_wb / "knots"
+    _make_relaxed(knots / "knot_8.1", status="converged-local-candidate")
+    stalled = knots / "knot_stalled"
+    _make_relaxed(stalled, status="stalled-not-converged")
+    plan = imp.build_plan(synthetic_wb, synthetic_wb / "out", "relaxed-seed")
+    by_id = {e["id"]: e for e in plan["entities"]}
+    assert by_id["knot_8.1"]["relaxed"] is True
+    assert by_id["knot_stalled"]["relaxed"] is False
+
+
 def test_copy_filter_and_effort_kpc_dropped(synthetic_wb: Path, tmp_path: Path) -> None:
-    dest = tmp_path / "knotplot"
+    dest = tmp_path / "resources_knotplot"
     plan = imp.build_plan(synthetic_wb, dest, "relaxed-seed")
     index = imp.apply_plan(plan, dry_run=False)
 
@@ -118,8 +131,71 @@ def test_copy_filter_and_effort_kpc_dropped(synthetic_wb: Path, tmp_path: Path) 
     assert index["counts"]["relaxed"] == 2
 
 
+def test_shared_final_preferred_for_ab_and_copied(tmp_path: Path) -> None:
+    wb = tmp_path / "KnotPlot"
+    knots = wb / "knots"
+    polish = _make_relaxed(knots / "knot_3.1", status="converged-local-candidate")
+    final_dir = knots / "final"
+    final_dir.mkdir(parents=True)
+    final_txt = final_dir / "knot_3.1_final.txt"
+    _write_xyz(final_txt, radius=1.25)
+    (final_dir / "knot_3.1_final.metrics.json").write_text('{"ropelength": 32.75}\n', encoding="utf-8")
+    (final_dir / "knot_3.1_final.alias.json").write_text(
+        json.dumps(
+            {
+                "polish_path": str(polish),
+                "shared_final": str(final_txt),
+                "build_id": "knot_3.1",
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    # fseries-like tree must never be scanned as an entity source
+    (wb / "ridgerunner" / "out" / "fseries" / "3_1").mkdir(parents=True)
+    (wb / "ridgerunner" / "out" / "fseries" / "3_1" / "n300.txt").write_text("0 0 0\n", encoding="utf-8")
+
+    dest = tmp_path / "resources_knotplot"
+    plan = imp.build_plan(wb, dest, "relaxed-seed")
+    assert all("fseries" not in str(f.get("src") or "") for e in plan["entities"] for f in e["files"])
+    index = imp.apply_plan(plan, dry_run=False)
+
+    knot_dir = dest / "knot_3.1"
+    assert (knot_dir / "knot_3.1_final.txt").is_file()
+    assert (knot_dir / "knot_3.1_final.alias.json").is_file()
+    assert (knot_dir / polish.with_suffix(".vect").name).is_file()
+    assert not (knot_dir / "foo_rr").exists()
+    entry = next(e for e in index["entries"] if e["id"] == "knot_3.1")
+    roles = {f["role"] for f in entry["files"]}
+    assert "shared_final" in roles
+    assert "audit_vect" in roles
+    ab_src = next(f["source"] for f in entry["files"] if f["role"] == "ab_xml")
+    assert Path(ab_src).name == "knot_3.1_final.txt"
+
+
+def test_vect_falls_back_to_rr_final_vect_file(tmp_path: Path) -> None:
+    wb = tmp_path / "KnotPlot"
+    knots = wb / "knots"
+    entity = knots / "knot_4.1"
+    polish = _make_relaxed(entity, status="relaxed-seed")
+    sibling = entity / f"{polish.stem}.vect"
+    sibling.unlink()
+    rr_dir = entity / f"{polish.stem}.rr"
+    rr_dir.mkdir(parents=True)
+    (rr_dir / f"{polish.stem}.final.vect").write_text("VECT final\n", encoding="utf-8")
+    (rr_dir / "noise.dat").write_text("x", encoding="utf-8")
+
+    dest = tmp_path / "resources_knotplot"
+    plan = imp.build_plan(wb, dest, "relaxed-seed")
+    imp.apply_plan(plan, dry_run=False)
+    knot_dir = dest / "knot_4.1"
+    assert (knot_dir / f"{polish.stem}.vect").is_file()
+    assert (knot_dir / f"{polish.stem}.vect").read_text(encoding="utf-8") == "VECT final\n"
+    assert not (knot_dir / f"{polish.stem}.rr").exists()
+
+
 def test_ab_xml_roundtrip_parses_id_l_d(synthetic_wb: Path, tmp_path: Path) -> None:
-    dest = tmp_path / "knotplot"
+    dest = tmp_path / "resources_knotplot"
     plan = imp.build_plan(synthetic_wb, dest, "relaxed-seed")
     imp.apply_plan(plan, dry_run=False)
     ab = (dest / "knot_3.1" / "knot_3.1_ab.xml").read_text(encoding="utf-8")
@@ -140,14 +216,14 @@ def re_search_l(text: str) -> str | None:
 
 
 def test_dry_run_writes_nothing(synthetic_wb: Path, tmp_path: Path) -> None:
-    dest = tmp_path / "knotplot_out"
+    dest = tmp_path / "resources_knotplot_out"
     plan = imp.build_plan(synthetic_wb, dest, "relaxed-seed")
     imp.apply_plan(plan, dry_run=True)
     assert not dest.exists() or not any(dest.rglob("*"))
 
 
 def test_idempotent_second_run(synthetic_wb: Path, tmp_path: Path) -> None:
-    dest = tmp_path / "knotplot"
+    dest = tmp_path / "resources_knotplot"
     plan = imp.build_plan(synthetic_wb, dest, "relaxed-seed")
     imp.apply_plan(plan, dry_run=False)
     first = (dest / "INDEX.json").read_text(encoding="utf-8")
@@ -163,6 +239,65 @@ def test_idempotent_second_run(synthetic_wb: Path, tmp_path: Path) -> None:
     digests1 = {(f["relpath"], f["sha256"]) for e in idx1["entries"] for f in e["files"]}
     digests2 = {(f["relpath"], f["sha256"]) for e in idx2["entries"] for f in e["files"]}
     assert digests1 == digests2
+
+
+def test_shared_final_imports_even_when_catalog_stalled(tmp_path: Path) -> None:
+    wb = tmp_path / "KnotPlot"
+    knots = wb / "knots"
+    entity = knots / "knot_5.2"
+    polish = _make_relaxed(entity, status="stalled-not-converged")
+    # Overwrite status to stalled (helper wrote relaxed geometry)
+    (entity / "catalog_status.json").write_text(
+        json.dumps(
+            {
+                "status": "stalled-not-converged",
+                "epsilon_R": None,
+                "primary_polish": str(polish.with_suffix(".metrics.json")),
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    final_dir = knots / "final"
+    final_dir.mkdir(parents=True)
+    final_txt = final_dir / "knot_5.2_final.txt"
+    _write_xyz(final_txt, radius=1.1)
+    (final_dir / "knot_5.2_final.alias.json").write_text(
+        json.dumps({"polish_path": str(polish), "shared_final": str(final_txt)}) + "\n",
+        encoding="utf-8",
+    )
+    dest = tmp_path / "resources_knotplot"
+    plan = imp.build_plan(wb, dest, "relaxed-seed")
+    by_id = {e["id"]: e for e in plan["entities"]}
+    assert by_id["knot_5.2"]["relaxed"] is True
+    assert by_id["knot_5.2"]["status"] == "stalled-not-converged"
+    index = imp.apply_plan(plan, dry_run=False)
+    roles = {f["role"] for e in index["entries"] if e["id"] == "knot_5.2" for f in e["files"]}
+    assert "shared_final" in roles
+    assert "ab_xml" in roles
+
+
+def test_status_without_geometry_stays_stub(tmp_path: Path) -> None:
+    wb = tmp_path / "KnotPlot"
+    entity = wb / "knots" / "knot_9.35"
+    entity.mkdir(parents=True)
+    (entity / "build_knot_9.35.kpc").write_text("% build\n", encoding="utf-8")
+    (entity / "catalog_status.json").write_text(
+        json.dumps(
+            {
+                "status": "relaxed-seed",
+                "primary_polish": None,
+                "reason": ["no ridgerunner polish metrics found"],
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    plan = imp.build_plan(wb, tmp_path / "resources_knotplot", "relaxed-seed")
+    by_id = {e["id"]: e for e in plan["entities"]}
+    assert by_id["knot_9.35"]["relaxed"] is False
+    roles = {f["role"] for f in by_id["knot_9.35"]["files"]}
+    assert roles == {"build_script"}
 
 
 def test_dft_circle_has_nonzero_coeffs() -> None:

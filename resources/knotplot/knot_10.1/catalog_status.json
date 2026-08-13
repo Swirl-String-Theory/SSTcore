@@ -1,0 +1,54 @@
+{
+  "status": "stalled-not-converged",
+  "ideal": false,
+  "strict_near_ideal": false,
+  "folder": "knot_10.1",
+  "reference": null,
+  "campaign_reference": {
+    "ropelength": 87.847262,
+    "source": "campaign-best"
+  },
+  "epsilon_R": null,
+  "primary_polish": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_10.1\\knot_10.1_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_030k_polish.metrics.json",
+  "primary_metrics": {
+    "residual": 0.0665496,
+    "ropelength": 87.847262,
+    "thickness": 0.4999811,
+    "edge_length_ratio": 1.3836254218864368,
+    "edge_length_cv": 0.03162647623484045,
+    "stop_reason": "max_steps",
+    "residual_converged": false,
+    "analytic": false
+  },
+  "checks": {
+    "topology": "pass",
+    "residual_candidate": "fail",
+    "residual_strict": "fail",
+    "ropelength_excess": "not-tested",
+    "raw_edge_ratio": "warn",
+    "raw_edge_cv": "warn",
+    "thickness": "pass",
+    "multistart_spread": "not-tested",
+    "resolution_convergence": "not-tested",
+    "uniform_mesh": "pass",
+    "constraint_anomalies": "pass",
+    "residual_converged": "fail"
+  },
+  "reason": [
+    "topology verified",
+    "residual above 0.01",
+    "residual above 0.005",
+    "ropelength_excess not tested (no external reference; campaign-best is not proof of near-ideal)",
+    "raw edge-ratio 1.384 (warn only)",
+    "raw edge-CV 3.1626% (warn only)",
+    "multi-start not tested",
+    "resolution convergence not yet demonstrated",
+    "VortexLab uniform mesh OK",
+    "stopped without residual convergence (stalled)"
+  ],
+  "chirality": null,
+  "catalog_aliases": [],
+  "dowker_code": "18 16 14 12 20 8 6 4 2 10",
+  "equivalent_group": null,
+  "final_snapshot": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_10.1\\build_knot_10.1_final_normal_20260813_144511.txt"
+}

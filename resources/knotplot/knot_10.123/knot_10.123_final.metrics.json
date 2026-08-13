@@ -1,0 +1,38 @@
+{
+  "checkpoint_tag": "030k",
+  "component_count": 1,
+  "edge_length_cv": 0.14586954600390678,
+  "edge_length_max": 0.23284217146895386,
+  "edge_length_mean": 0.15427320110770049,
+  "edge_length_min": 0.08421697126451098,
+  "edge_length_ratio": 2.764789186465003,
+  "edge_length_variance": 0.000506419,
+  "elapsed_s": 102.17977359999895,
+  "final_vect": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_10.123\\knot_10.123_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_030k_polish.rr\\knot_10.123_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_030k_polish.final.vect",
+  "flatness": 0.8539926816406331,
+  "length": 46.28196,
+  "mr_struts": 7,
+  "output_txt": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_10.123\\knot_10.123_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_030k_polish.txt",
+  "residual": 0.00499112,
+  "residual_converged": true,
+  "ridgerunner_args": [
+    "-c",
+    "--EqOn",
+    "-s",
+    "30000",
+    "--StopResidual=0.005",
+    "--Threads=8",
+    "--NoOutputFiles"
+  ],
+  "ropelength": 92.567568,
+  "rr_dir": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_10.123\\knot_10.123_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_030k_polish.rr",
+  "source_txt": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_10.123\\knot_10.123_trial_015k_rr_010k_coarse_rr_050k_eqfinal.txt",
+  "steps": 30000,
+  "stop_reason": "residual",
+  "strutcount": 409.0,
+  "thickness": 0.4999803,
+  "vertices_per_component": [
+    300
+  ],
+  "walltime": null
+}

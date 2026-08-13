@@ -14,6 +14,8 @@ public:
     [[nodiscard]] static double length(const std::vector<Vec3>& pts);
     [[nodiscard]] static double edge_length_mean(const std::vector<Vec3>& pts);
     [[nodiscard]] static double edge_length_relative_std(const std::vector<Vec3>& pts);
+    /** Canon ε_eq: max_i |ℓ_i / ℓ̄ − 1|. */
+    [[nodiscard]] static double edge_length_max_relative_deviation(const std::vector<Vec3>& pts);
 
     [[nodiscard]] static double turning_angle(const Vec3& a, const Vec3& b, const Vec3& c);
     [[nodiscard]] static double minrad_at_vertex(const std::vector<Vec3>& pts, std::size_t i);

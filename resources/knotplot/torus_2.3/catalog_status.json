@@ -1,0 +1,60 @@
+{
+  "status": "converged-local-candidate",
+  "ideal": false,
+  "strict_near_ideal": false,
+  "folder": "torus_2.3",
+  "reference": {
+    "ropelength": 32.743274,
+    "source": "Brian-Gilbert-3:1:1"
+  },
+  "campaign_reference": {
+    "ropelength": 32.753136,
+    "source": "campaign-best"
+  },
+  "epsilon_R": 0.00030119162793550397,
+  "primary_polish": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_2.3\\torus_2.3_trial_006k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+  "primary_metrics": {
+    "residual": 0.00485359,
+    "ropelength": 32.753136,
+    "thickness": 0.4999981,
+    "edge_length_ratio": 1.2487600304900695,
+    "edge_length_cv": 0.023550012209466772,
+    "stop_reason": null,
+    "residual_converged": null,
+    "analytic": false
+  },
+  "checks": {
+    "topology": "pass",
+    "residual_candidate": "pass",
+    "residual_strict": "pass",
+    "ropelength_excess": "pass",
+    "raw_edge_ratio": "warn",
+    "raw_edge_cv": "warn",
+    "thickness": "pass",
+    "multistart_spread": "pass",
+    "resolution_convergence": "not-tested",
+    "uniform_mesh": "pass",
+    "constraint_anomalies": "pass",
+    "residual_converged": "not-tested"
+  },
+  "reason": [
+    "topology verified",
+    "residual <= 0.01",
+    "ropelength threshold passed (external reference)",
+    "raw edge-ratio 1.249 (warn only)",
+    "raw edge-CV 2.3550% (warn only)",
+    "multi-start / mirror ropelength spread OK",
+    "resolution convergence not yet demonstrated",
+    "VortexLab uniform mesh OK",
+    "residual-converged local minimum; strict near-ideal gates incomplete"
+  ],
+  "chirality": "L",
+  "catalog_aliases": [
+    "3_1",
+    "T_2_3",
+    "3_1_L"
+  ],
+  "dowker_code": "-4 -6 -2",
+  "equivalent_group": "trefoil_3_1",
+  "final_snapshot": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_2.3\\build_torus_2.3_final_finalize_20260813_103712.txt"
+}

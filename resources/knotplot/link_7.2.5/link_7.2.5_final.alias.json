@@ -1,0 +1,15 @@
+{
+  "stem": "build_link_7.2.5",
+  "tag": "finalize",
+  "suffix": null,
+  "polish_path": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.5\\link_7.2.5_trial_011k_rr_010k_coarse_rr_050k_eqfinal_rr_030k_polish.txt",
+  "final_txt": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.5\\build_link_7.2.5_final_finalize_20260813_103708.txt",
+  "final_metrics": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.5\\build_link_7.2.5_final_finalize_20260813_103708.metrics.json",
+  "timestamp": "20260813_103708",
+  "rop": 72.551094,
+  "pick": "seed_selection",
+  "source": "run_finalize_knotplot",
+  "build_id": "link_7.2.5",
+  "source_final": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.5\\build_link_7.2.5_final_finalize_20260813_103708.txt",
+  "shared_final": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\final\\link_7.2.5_final.txt"
+}
