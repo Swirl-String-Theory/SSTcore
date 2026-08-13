@@ -29,6 +29,18 @@ Legend: **Y** present · **—** absent · **via** exposed only through another 
 | field_ops | — (bind-only) | Y | Y |
 | fluid_dynamics | Y | Y | Y |
 | frenet_helicity | Y | Y | Y |
+| geometry_certificate | Y | Y | Y |
+| polygonal_smooth_certificate | Y | Y | Y |
+| biot_savart_gate | Y | via polygonal_smooth_certificate | via polygonal_smooth_certificate |
+| operational_spacetime | Y | Y | Y |
+| qss_spectroscopy | Y | Y | Y |
+| pipeline_provenance | Y | Y | Y |
+| core_torsion | Y | Y | Y |
+| link_field_gate | Y | via core_torsion | via core_torsion |
+| sst_kam_diagnostics | Y | Y | Y |
+| value_origin | Y | Y | Y |
+| evidence_report | Y | Y | Y |
+| sst_action_phase | Y | Y | Y |
 | hyperbolic_volume | Y | Y | Y |
 | knot_dynamics | Y (+ `src/knot/*`) | Y | Y |
 | magnus_integrator | Y | Y | Y |

@@ -1,14 +1,14 @@
 {
   "manifest_version": 1,
-  "generated_at": "2026-07-19T16:26:33.143045+00:00",
+  "generated_at": "2026-07-29T02:50:39.400583+00:00",
   "summary": {
     "cpp_public": 208,
-    "py_bound": 513,
+    "py_bound": 590,
     "cpp_unbound": 91,
-    "binding_without_cpp_match": 89,
-    "node_modules": 30,
-    "py_modules": 31,
-    "both_py_node": 30,
+    "binding_without_cpp_match": 141,
+    "node_modules": 40,
+    "py_modules": 41,
+    "both_py_node": 40,
     "py_only_modules": 1,
     "node_only_modules": 0
   },
@@ -20,27 +20,37 @@
       "canonical_constants",
       "chronos_kelvin_transport",
       "clock_field_eft",
+      "core_torsion",
       "delay_mode_selector",
+      "evidence_report",
       "field_kernels",
       "field_ops",
       "fluid_dynamics",
       "frenet_helicity",
+      "geometry_certificate",
       "hyperbolic_volume",
       "knot_dynamics",
       "magnus_integrator",
       "multisector_fitter",
+      "operational_spacetime",
+      "pipeline_provenance",
+      "polygonal_smooth_certificate",
       "potential_timefield",
+      "qss_spectroscopy",
       "radiation_flow",
       "spectroscopic_gap",
+      "sst_action_phase",
       "sst_extensions",
       "sst_gravity",
       "sst_integrator",
+      "sst_kam_diagnostics",
       "sst_master_equation",
       "sst_tension_scales",
       "swirl_field",
       "thermo_dynamics",
       "time_evolution",
       "trefoil_operator",
+      "value_origin",
       "vortex_ring",
       "vortexlab_kernels",
       "vorticity_dynamics"
@@ -56,27 +66,37 @@
       "canonical_constants_node.cpp",
       "chronos_kelvin_transport_node.cpp",
       "clock_field_eft_node.cpp",
+      "core_torsion_node.cpp",
       "delay_mode_selector_node.cpp",
+      "evidence_report_node.cpp",
       "field_kernels_node.cpp",
       "field_ops_node.cpp",
       "fluid_dynamics_node.cpp",
       "frenet_helicity_node.cpp",
+      "geometry_certificate_node.cpp",
       "hyperbolic_volume_node.cpp",
       "knot_dynamics_node.cpp",
       "magnus_integrator_node.cpp",
       "multisector_fitter_node.cpp",
+      "operational_spacetime_node.cpp",
+      "pipeline_provenance_node.cpp",
+      "polygonal_smooth_certificate_node.cpp",
       "potential_timefield_node.cpp",
+      "qss_spectroscopy_node.cpp",
       "radiation_flow_node.cpp",
       "spectroscopic_gap_node.cpp",
+      "sst_action_phase_node.cpp",
       "sst_extensions_node.cpp",
       "sst_gravity_node.cpp",
       "sst_integrator_node.cpp",
+      "sst_kam_diagnostics_node.cpp",
       "sst_master_equation_node.cpp",
       "sst_tension_scales_node.cpp",
       "swirl_field_node.cpp",
       "thermo_dynamics_node.cpp",
       "time_evolution_node.cpp",
       "trefoil_operator_node.cpp",
+      "value_origin_node.cpp",
       "vortex_ring_node.cpp",
       "vortexlab_kernels_node.cpp",
       "vorticity_dynamics_node.cpp"
@@ -1224,6 +1244,56 @@
       "py_name": "unit_timelike_from_gradient_minkowski"
     },
     {
+      "module": "core_torsion",
+      "cpp_symbol": "CoreTorsionAPI::torsion_inertial_mass",
+      "py_export": "CoreTorsionAPI.torsion_inertial_mass",
+      "export_kind": "class_static",
+      "binding_file": "core_torsion_py.cpp",
+      "header_file": null,
+      "py_class": "CoreTorsionAPI",
+      "py_name": "torsion_inertial_mass"
+    },
+    {
+      "module": "core_torsion",
+      "cpp_symbol": "CoreTorsionAPI::torsion_inertial_mass_legacy_factor2",
+      "py_export": "CoreTorsionAPI.torsion_inertial_mass_legacy_factor2",
+      "export_kind": "class_static",
+      "binding_file": "core_torsion_py.cpp",
+      "header_file": null,
+      "py_class": "CoreTorsionAPI",
+      "py_name": "torsion_inertial_mass_legacy_factor2"
+    },
+    {
+      "module": "core_torsion",
+      "cpp_symbol": "CoreTorsionAPI::anisotropy_residuals",
+      "py_export": "CoreTorsionAPI.anisotropy_residuals",
+      "export_kind": "class_static",
+      "binding_file": "core_torsion_py.cpp",
+      "header_file": null,
+      "py_class": "CoreTorsionAPI",
+      "py_name": "anisotropy_residuals"
+    },
+    {
+      "module": "core_torsion",
+      "cpp_symbol": "LinkFieldGateAPI::failure_name",
+      "py_export": "LinkFieldGateAPI.failure_name",
+      "export_kind": "class_static",
+      "binding_file": "core_torsion_py.cpp",
+      "header_file": null,
+      "py_class": "LinkFieldGateAPI",
+      "py_name": "failure_name"
+    },
+    {
+      "module": "core_torsion",
+      "cpp_symbol": "LinkFieldGateAPI::evaluate",
+      "py_export": "LinkFieldGateAPI.evaluate",
+      "export_kind": "class_static",
+      "binding_file": "core_torsion_py.cpp",
+      "header_file": null,
+      "py_class": "LinkFieldGateAPI",
+      "py_name": "evaluate"
+    },
+    {
       "module": "delay_mode_selector",
       "cpp_symbol": null,
       "py_export": "DelayModeResult.omega",
@@ -1342,6 +1412,196 @@
       "header_file": "delay_mode_selector.h",
       "py_class": "DelayModeSelector",
       "py_name": "solve_phase_locked_frequency"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "CheckResult.name",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "CheckResult",
+      "py_name": "name"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "CheckResult.passed",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "CheckResult",
+      "py_name": "passed"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "CheckResult.kind",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "CheckResult",
+      "py_name": "kind"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "CheckResult.residual",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "CheckResult",
+      "py_name": "residual"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "CheckResult.tolerance",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "CheckResult",
+      "py_name": "tolerance"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "CheckResult.supports_empirical_claim",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "CheckResult",
+      "py_name": "supports_empirical_claim"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "CheckResult.message",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "CheckResult",
+      "py_name": "message"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "CheckResult.__init__",
+      "export_kind": "constructor",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "CheckResult",
+      "py_name": "__init__"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "EvidenceReportMeta.sstcore_version",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "EvidenceReportMeta",
+      "py_name": "sstcore_version"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "EvidenceReportMeta.canon_version",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "EvidenceReportMeta",
+      "py_name": "canon_version"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "EvidenceReportMeta.git_commit",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "EvidenceReportMeta",
+      "py_name": "git_commit"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "EvidenceReportMeta.numeric_profile",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "EvidenceReportMeta",
+      "py_name": "numeric_profile"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "EvidenceReportMeta.compiler",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "EvidenceReportMeta",
+      "py_name": "compiler"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "EvidenceReportMeta.platform",
+      "export_kind": "property",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "EvidenceReportMeta",
+      "py_name": "platform"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": null,
+      "py_export": "EvidenceReportMeta.__init__",
+      "export_kind": "constructor",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "EvidenceReportMeta",
+      "py_name": "__init__"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": "EvidenceReportAPI::build_report_json",
+      "py_export": "EvidenceReportAPI.build_report_json",
+      "export_kind": "class_static",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "EvidenceReportAPI",
+      "py_name": "build_report_json"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": "EvidenceReportAPI::write_evidence_report",
+      "py_export": "EvidenceReportAPI.write_evidence_report",
+      "export_kind": "class_static",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": "EvidenceReportAPI",
+      "py_name": "write_evidence_report"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": "check_kind_export_string",
+      "py_export": "check_kind_export_string",
+      "export_kind": "module_function",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": null,
+      "py_name": "check_kind_export_string"
+    },
+    {
+      "module": "evidence_report",
+      "cpp_symbol": "check_kind_from_export_string",
+      "py_export": "check_kind_from_export_string",
+      "export_kind": "module_function",
+      "binding_file": "evidence_report_py.cpp",
+      "header_file": null,
+      "py_class": null,
+      "py_name": "check_kind_from_export_string"
     },
     {
       "module": "field_kernels",
@@ -1742,6 +2002,56 @@
       "header_file": "frenet_helicity.h",
       "py_class": null,
       "py_name": "rk4_integrate"
+    },
+    {
+      "module": "geometry_certificate",
+      "cpp_symbol": "GeometryCertificateAPI::evaluate_tube_geometry",
+      "py_export": "GeometryCertificateAPI.evaluate_tube_geometry",
+      "export_kind": "class_static",
+      "binding_file": "geometry_certificate_py.cpp",
+      "header_file": null,
+      "py_class": "GeometryCertificateAPI",
+      "py_name": "evaluate_tube_geometry"
+    },
+    {
+      "module": "geometry_certificate",
+      "cpp_symbol": "GeometryCertificateAPI::evaluate_contact_saturation",
+      "py_export": "GeometryCertificateAPI.evaluate_contact_saturation",
+      "export_kind": "class_static",
+      "binding_file": "geometry_certificate_py.cpp",
+      "header_file": null,
+      "py_class": "GeometryCertificateAPI",
+      "py_name": "evaluate_contact_saturation"
+    },
+    {
+      "module": "geometry_certificate",
+      "cpp_symbol": "GeometryCertificateAPI::chronos_first_hitting",
+      "py_export": "GeometryCertificateAPI.chronos_first_hitting",
+      "export_kind": "class_static",
+      "binding_file": "geometry_certificate_py.cpp",
+      "header_file": null,
+      "py_class": "GeometryCertificateAPI",
+      "py_name": "chronos_first_hitting"
+    },
+    {
+      "module": "geometry_certificate",
+      "cpp_symbol": "GeometryCertificateAPI::rank9_from_singular_values",
+      "py_export": "GeometryCertificateAPI.rank9_from_singular_values",
+      "export_kind": "class_static",
+      "binding_file": "geometry_certificate_py.cpp",
+      "header_file": null,
+      "py_class": "GeometryCertificateAPI",
+      "py_name": "rank9_from_singular_values"
+    },
+    {
+      "module": "geometry_certificate",
+      "cpp_symbol": "GeometryCertificateAPI::sha256_hex_of_points",
+      "py_export": "GeometryCertificateAPI.sha256_hex_of_points",
+      "export_kind": "class_static",
+      "binding_file": "geometry_certificate_py.cpp",
+      "header_file": null,
+      "py_class": "GeometryCertificateAPI",
+      "py_name": "sha256_hex_of_points"
     },
     {
       "module": "hyperbolic_volume",
@@ -3444,6 +3754,256 @@
       "py_name": "phase_invariants"
     },
     {
+      "module": "operational_spacetime",
+      "cpp_symbol": "OperationalSpacetimeAPI::radar_interval",
+      "py_export": "OperationalSpacetimeAPI.radar_interval",
+      "export_kind": "class_static",
+      "binding_file": "operational_spacetime_py.cpp",
+      "header_file": null,
+      "py_class": "OperationalSpacetimeAPI",
+      "py_name": "radar_interval"
+    },
+    {
+      "module": "operational_spacetime",
+      "cpp_symbol": "OperationalSpacetimeAPI::lorentz_boost_x",
+      "py_export": "OperationalSpacetimeAPI.lorentz_boost_x",
+      "export_kind": "class_static",
+      "binding_file": "operational_spacetime_py.cpp",
+      "header_file": null,
+      "py_class": "OperationalSpacetimeAPI",
+      "py_name": "lorentz_boost_x"
+    },
+    {
+      "module": "operational_spacetime",
+      "cpp_symbol": "OperationalSpacetimeAPI::lorentz_boost",
+      "py_export": "OperationalSpacetimeAPI.lorentz_boost",
+      "export_kind": "class_static",
+      "binding_file": "operational_spacetime_py.cpp",
+      "header_file": null,
+      "py_class": "OperationalSpacetimeAPI",
+      "py_name": "lorentz_boost"
+    },
+    {
+      "module": "operational_spacetime",
+      "cpp_symbol": "OperationalSpacetimeAPI::minkowski_interval2",
+      "py_export": "OperationalSpacetimeAPI.minkowski_interval2",
+      "export_kind": "class_static",
+      "binding_file": "operational_spacetime_py.cpp",
+      "header_file": null,
+      "py_class": "OperationalSpacetimeAPI",
+      "py_name": "minkowski_interval2"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.stage",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "stage"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.certification",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "certification"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.tool_name",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "tool_name"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.tool_version",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "tool_version"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.input_sha256",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "input_sha256"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.output_sha256",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "output_sha256"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.parameter_sha256",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "parameter_sha256"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.parent_record_sha256",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "parent_record_sha256"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.coordinate_convention",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "coordinate_convention"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.scale_convention",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "scale_convention"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.timestamp_utc",
+      "export_kind": "property",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "timestamp_utc"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": null,
+      "py_export": "ProvenanceRecord.__init__",
+      "export_kind": "constructor",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "ProvenanceRecord",
+      "py_name": "__init__"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": "PipelineProvenanceAPI::stage_name",
+      "py_export": "PipelineProvenanceAPI.stage_name",
+      "export_kind": "class_static",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "PipelineProvenanceAPI",
+      "py_name": "stage_name"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": "PipelineProvenanceAPI::certification_name",
+      "py_export": "PipelineProvenanceAPI.certification_name",
+      "export_kind": "class_static",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "PipelineProvenanceAPI",
+      "py_name": "certification_name"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": "PipelineProvenanceAPI::fingerprint_hex",
+      "py_export": "PipelineProvenanceAPI.fingerprint_hex",
+      "export_kind": "class_static",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "PipelineProvenanceAPI",
+      "py_name": "fingerprint_hex"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": "PipelineProvenanceAPI::record_fingerprint",
+      "py_export": "PipelineProvenanceAPI.record_fingerprint",
+      "export_kind": "class_static",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "PipelineProvenanceAPI",
+      "py_name": "record_fingerprint"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": "PipelineProvenanceAPI::evaluate_chain",
+      "py_export": "PipelineProvenanceAPI.evaluate_chain",
+      "export_kind": "class_static",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "PipelineProvenanceAPI",
+      "py_name": "evaluate_chain"
+    },
+    {
+      "module": "pipeline_provenance",
+      "cpp_symbol": "PipelineProvenanceAPI::record_complete",
+      "py_export": "PipelineProvenanceAPI.record_complete",
+      "export_kind": "class_static",
+      "binding_file": "pipeline_provenance_py.cpp",
+      "header_file": null,
+      "py_class": "PipelineProvenanceAPI",
+      "py_name": "record_complete"
+    },
+    {
+      "module": "polygonal_smooth_certificate",
+      "cpp_symbol": "PolygonalSmoothCertificateAPI::evaluate",
+      "py_export": "PolygonalSmoothCertificateAPI.evaluate",
+      "export_kind": "class_static",
+      "binding_file": "polygonal_smooth_certificate_py.cpp",
+      "header_file": null,
+      "py_class": "PolygonalSmoothCertificateAPI",
+      "py_name": "evaluate"
+    },
+    {
+      "module": "polygonal_smooth_certificate",
+      "cpp_symbol": "PolygonalSmoothCertificateAPI::fingerprint_points",
+      "py_export": "PolygonalSmoothCertificateAPI.fingerprint_points",
+      "export_kind": "class_static",
+      "binding_file": "polygonal_smooth_certificate_py.cpp",
+      "header_file": null,
+      "py_class": "PolygonalSmoothCertificateAPI",
+      "py_name": "fingerprint_points"
+    },
+    {
+      "module": "polygonal_smooth_certificate",
+      "cpp_symbol": "BiotSavartGateAPI::evaluate",
+      "py_export": "BiotSavartGateAPI.evaluate",
+      "export_kind": "class_static",
+      "binding_file": "polygonal_smooth_certificate_py.cpp",
+      "header_file": null,
+      "py_class": "BiotSavartGateAPI",
+      "py_name": "evaluate"
+    },
+    {
       "module": "potential_timefield",
       "cpp_symbol": "TimeField::compute_gravitational_potential_gradient",
       "py_export": "compute_gravitational_potential_gradient",
@@ -3502,6 +4062,26 @@
       "header_file": "potential_timefield.h",
       "py_class": null,
       "py_name": "compute_time_dilation_map"
+    },
+    {
+      "module": "qss_spectroscopy",
+      "cpp_symbol": "QSSSpectroscopyAPI::eigen_2x2",
+      "py_export": "QSSSpectroscopyAPI.eigen_2x2",
+      "export_kind": "class_static",
+      "binding_file": "qss_spectroscopy_py.cpp",
+      "header_file": null,
+      "py_class": "QSSSpectroscopyAPI",
+      "py_name": "eigen_2x2"
+    },
+    {
+      "module": "qss_spectroscopy",
+      "cpp_symbol": "QSSSpectroscopyAPI::pseudospectrum_diag_2x2",
+      "py_export": "QSSSpectroscopyAPI.pseudospectrum_diag_2x2",
+      "export_kind": "class_static",
+      "binding_file": "qss_spectroscopy_py.cpp",
+      "header_file": null,
+      "py_class": "QSSSpectroscopyAPI",
+      "py_name": "pseudospectrum_diag_2x2"
     },
     {
       "module": "radiation_flow",
@@ -3602,6 +4182,96 @@
       "header_file": "spectroscopic_gap.h",
       "py_class": "SpectroscopicGap",
       "py_name": "gap_ratio"
+    },
+    {
+      "module": "sst_action_phase",
+      "cpp_symbol": "ActionPhaseAPI::mass_shell_hamiltonian",
+      "py_export": "ActionPhaseAPI.mass_shell_hamiltonian",
+      "export_kind": "class_static",
+      "binding_file": "sst_action_phase_py.cpp",
+      "header_file": null,
+      "py_class": "ActionPhaseAPI",
+      "py_name": "mass_shell_hamiltonian"
+    },
+    {
+      "module": "sst_action_phase",
+      "cpp_symbol": "ActionPhaseAPI::velocity_from_mass_shell",
+      "py_export": "ActionPhaseAPI.velocity_from_mass_shell",
+      "export_kind": "class_static",
+      "binding_file": "sst_action_phase_py.cpp",
+      "header_file": null,
+      "py_class": "ActionPhaseAPI",
+      "py_name": "velocity_from_mass_shell"
+    },
+    {
+      "module": "sst_action_phase",
+      "cpp_symbol": "ActionPhaseAPI::gamma_from_mass_shell",
+      "py_export": "ActionPhaseAPI.gamma_from_mass_shell",
+      "export_kind": "class_static",
+      "binding_file": "sst_action_phase_py.cpp",
+      "header_file": null,
+      "py_class": "ActionPhaseAPI",
+      "py_name": "gamma_from_mass_shell"
+    },
+    {
+      "module": "sst_action_phase",
+      "cpp_symbol": "ActionPhaseAPI::proper_time_rate",
+      "py_export": "ActionPhaseAPI.proper_time_rate",
+      "export_kind": "class_static",
+      "binding_file": "sst_action_phase_py.cpp",
+      "header_file": null,
+      "py_class": "ActionPhaseAPI",
+      "py_name": "proper_time_rate"
+    },
+    {
+      "module": "sst_action_phase",
+      "cpp_symbol": "ActionPhaseAPI::internal_phase_rate_at_fixed_momentum",
+      "py_export": "ActionPhaseAPI.internal_phase_rate_at_fixed_momentum",
+      "export_kind": "class_static",
+      "binding_file": "sst_action_phase_py.cpp",
+      "header_file": null,
+      "py_class": "ActionPhaseAPI",
+      "py_name": "internal_phase_rate_at_fixed_momentum"
+    },
+    {
+      "module": "sst_action_phase",
+      "cpp_symbol": "ActionPhaseAPI::action_phase_residuals",
+      "py_export": "ActionPhaseAPI.action_phase_residuals",
+      "export_kind": "class_static",
+      "binding_file": "sst_action_phase_py.cpp",
+      "header_file": null,
+      "py_class": "ActionPhaseAPI",
+      "py_name": "action_phase_residuals"
+    },
+    {
+      "module": "sst_action_phase",
+      "cpp_symbol": "ActionPhaseAPI::delta_shape_separability",
+      "py_export": "ActionPhaseAPI.delta_shape_separability",
+      "export_kind": "class_static",
+      "binding_file": "sst_action_phase_py.cpp",
+      "header_file": null,
+      "py_class": "ActionPhaseAPI",
+      "py_name": "delta_shape_separability"
+    },
+    {
+      "module": "sst_action_phase",
+      "cpp_symbol": "ActionPhaseAPI::coupled_shape_residual",
+      "py_export": "ActionPhaseAPI.coupled_shape_residual",
+      "export_kind": "class_static",
+      "binding_file": "sst_action_phase_py.cpp",
+      "header_file": null,
+      "py_class": "ActionPhaseAPI",
+      "py_name": "coupled_shape_residual"
+    },
+    {
+      "module": "sst_action_phase",
+      "cpp_symbol": "ActionPhaseAPI::fixed_v_phase_error_factor",
+      "py_export": "ActionPhaseAPI.fixed_v_phase_error_factor",
+      "export_kind": "class_static",
+      "binding_file": "sst_action_phase_py.cpp",
+      "header_file": null,
+      "py_class": "ActionPhaseAPI",
+      "py_name": "fixed_v_phase_error_factor"
     },
     {
       "module": "sst_extensions",
@@ -4212,6 +4882,46 @@
       "header_file": "sst_integrator.h",
       "py_class": null,
       "py_name": "compute_sst_mass"
+    },
+    {
+      "module": "sst_kam_diagnostics",
+      "cpp_symbol": "KAMDiagnosticsAPI::sector_name",
+      "py_export": "KAMDiagnosticsAPI.sector_name",
+      "export_kind": "class_static",
+      "binding_file": "sst_kam_diagnostics_py.cpp",
+      "header_file": null,
+      "py_class": "KAMDiagnosticsAPI",
+      "py_name": "sector_name"
+    },
+    {
+      "module": "sst_kam_diagnostics",
+      "cpp_symbol": "KAMDiagnosticsAPI::stage_name",
+      "py_export": "KAMDiagnosticsAPI.stage_name",
+      "export_kind": "class_static",
+      "binding_file": "sst_kam_diagnostics_py.cpp",
+      "header_file": null,
+      "py_class": "KAMDiagnosticsAPI",
+      "py_name": "stage_name"
+    },
+    {
+      "module": "sst_kam_diagnostics",
+      "cpp_symbol": "KAMDiagnosticsAPI::stage1",
+      "py_export": "KAMDiagnosticsAPI.stage1",
+      "export_kind": "class_static",
+      "binding_file": "sst_kam_diagnostics_py.cpp",
+      "header_file": null,
+      "py_class": "KAMDiagnosticsAPI",
+      "py_name": "stage1"
+    },
+    {
+      "module": "sst_kam_diagnostics",
+      "cpp_symbol": "KAMDiagnosticsAPI::golden_ratio_null_test",
+      "py_export": "KAMDiagnosticsAPI.golden_ratio_null_test",
+      "export_kind": "class_static",
+      "binding_file": "sst_kam_diagnostics_py.cpp",
+      "header_file": null,
+      "py_class": "KAMDiagnosticsAPI",
+      "py_name": "golden_ratio_null_test"
     },
     {
       "module": "sst_master_equation",
@@ -5174,6 +5884,106 @@
       "py_name": "nearest_eigenvalues_to_targets"
     },
     {
+      "module": "value_origin",
+      "cpp_symbol": "ValueOriginAPI::origin_name",
+      "py_export": "ValueOriginAPI.origin_name",
+      "export_kind": "class_static",
+      "binding_file": "value_origin_py.cpp",
+      "header_file": null,
+      "py_class": "ValueOriginAPI",
+      "py_name": "origin_name"
+    },
+    {
+      "module": "value_origin",
+      "cpp_symbol": "ValueOriginAPI::fmax_snapshot",
+      "py_export": "ValueOriginAPI.fmax_snapshot",
+      "export_kind": "class_static",
+      "binding_file": "value_origin_py.cpp",
+      "header_file": null,
+      "py_class": "ValueOriginAPI",
+      "py_name": "fmax_snapshot"
+    },
+    {
+      "module": "value_origin",
+      "cpp_symbol": "ValueOriginAPI::fmax_recompute_from_primitives",
+      "py_export": "ValueOriginAPI.fmax_recompute_from_primitives",
+      "export_kind": "class_static",
+      "binding_file": "value_origin_py.cpp",
+      "header_file": null,
+      "py_class": "ValueOriginAPI",
+      "py_name": "fmax_recompute_from_primitives"
+    },
+    {
+      "module": "value_origin",
+      "cpp_symbol": "ValueOriginAPI::fmax_rydberg_16pi2",
+      "py_export": "ValueOriginAPI.fmax_rydberg_16pi2",
+      "export_kind": "class_static",
+      "binding_file": "value_origin_py.cpp",
+      "header_file": null,
+      "py_class": "ValueOriginAPI",
+      "py_name": "fmax_rydberg_16pi2"
+    },
+    {
+      "module": "value_origin",
+      "cpp_symbol": "ValueOriginAPI::fmax_rydberg_32pi2",
+      "py_export": "ValueOriginAPI.fmax_rydberg_32pi2",
+      "export_kind": "class_static",
+      "binding_file": "value_origin_py.cpp",
+      "header_file": null,
+      "py_class": "ValueOriginAPI",
+      "py_name": "fmax_rydberg_32pi2"
+    },
+    {
+      "module": "value_origin",
+      "cpp_symbol": "ValueOriginAPI::compare_fmax_snapshot_to_recomputed",
+      "py_export": "ValueOriginAPI.compare_fmax_snapshot_to_recomputed",
+      "export_kind": "class_static",
+      "binding_file": "value_origin_py.cpp",
+      "header_file": null,
+      "py_class": "ValueOriginAPI",
+      "py_name": "compare_fmax_snapshot_to_recomputed"
+    },
+    {
+      "module": "value_origin",
+      "cpp_symbol": "ValueOriginAPI::bare_mass_ratio_from_dimensionless_length",
+      "py_export": "ValueOriginAPI.bare_mass_ratio_from_dimensionless_length",
+      "export_kind": "class_static",
+      "binding_file": "value_origin_py.cpp",
+      "header_file": null,
+      "py_class": "ValueOriginAPI",
+      "py_name": "bare_mass_ratio_from_dimensionless_length"
+    },
+    {
+      "module": "value_origin",
+      "cpp_symbol": "ValueOriginAPI::bare_mass_from_dimensionless_length",
+      "py_export": "ValueOriginAPI.bare_mass_from_dimensionless_length",
+      "export_kind": "class_static",
+      "binding_file": "value_origin_py.cpp",
+      "header_file": null,
+      "py_class": "ValueOriginAPI",
+      "py_name": "bare_mass_from_dimensionless_length"
+    },
+    {
+      "module": "value_origin",
+      "cpp_symbol": "ValueOriginAPI::rho_f_two_sigfig",
+      "py_export": "ValueOriginAPI.rho_f_two_sigfig",
+      "export_kind": "class_static",
+      "binding_file": "value_origin_py.cpp",
+      "header_file": null,
+      "py_class": "ValueOriginAPI",
+      "py_name": "rho_f_two_sigfig"
+    },
+    {
+      "module": "value_origin",
+      "cpp_symbol": "ValueOriginAPI::make_canonical_value",
+      "py_export": "ValueOriginAPI.make_canonical_value",
+      "export_kind": "class_static",
+      "binding_file": "value_origin_py.cpp",
+      "header_file": null,
+      "py_class": "ValueOriginAPI",
+      "py_name": "make_canonical_value"
+    },
+    {
       "module": "vortex_ring",
       "cpp_symbol": "GoldenNLSClosure::infer_effective_base",
       "py_export": "GoldenNLSClosure.infer_effective_base",
@@ -5422,6 +6232,16 @@
       "header_file": null,
       "py_class": null,
       "py_name": "compute_continuous_reach"
+    },
+    {
+      "module": "vortexlab_kernels",
+      "cpp_symbol": null,
+      "py_export": "analyze_smooth_resolved_tube",
+      "export_kind": "module_function",
+      "binding_file": "vortexlab_kernels_py.cpp",
+      "header_file": null,
+      "py_class": null,
+      "py_name": "analyze_smooth_resolved_tube"
     },
     {
       "module": "vortexlab_kernels",
@@ -6210,6 +7030,60 @@
         "binding_file": "atomic_bridge_model_py.cpp"
       },
       {
+        "module": "core_torsion",
+        "cpp_symbol": "CoreTorsionAPI::torsion_inertial_mass",
+        "py_export": "CoreTorsionAPI.torsion_inertial_mass",
+        "binding_file": "core_torsion_py.cpp"
+      },
+      {
+        "module": "core_torsion",
+        "cpp_symbol": "CoreTorsionAPI::torsion_inertial_mass_legacy_factor2",
+        "py_export": "CoreTorsionAPI.torsion_inertial_mass_legacy_factor2",
+        "binding_file": "core_torsion_py.cpp"
+      },
+      {
+        "module": "core_torsion",
+        "cpp_symbol": "CoreTorsionAPI::anisotropy_residuals",
+        "py_export": "CoreTorsionAPI.anisotropy_residuals",
+        "binding_file": "core_torsion_py.cpp"
+      },
+      {
+        "module": "core_torsion",
+        "cpp_symbol": "LinkFieldGateAPI::failure_name",
+        "py_export": "LinkFieldGateAPI.failure_name",
+        "binding_file": "core_torsion_py.cpp"
+      },
+      {
+        "module": "core_torsion",
+        "cpp_symbol": "LinkFieldGateAPI::evaluate",
+        "py_export": "LinkFieldGateAPI.evaluate",
+        "binding_file": "core_torsion_py.cpp"
+      },
+      {
+        "module": "evidence_report",
+        "cpp_symbol": "EvidenceReportAPI::build_report_json",
+        "py_export": "EvidenceReportAPI.build_report_json",
+        "binding_file": "evidence_report_py.cpp"
+      },
+      {
+        "module": "evidence_report",
+        "cpp_symbol": "EvidenceReportAPI::write_evidence_report",
+        "py_export": "EvidenceReportAPI.write_evidence_report",
+        "binding_file": "evidence_report_py.cpp"
+      },
+      {
+        "module": "evidence_report",
+        "cpp_symbol": "check_kind_export_string",
+        "py_export": "check_kind_export_string",
+        "binding_file": "evidence_report_py.cpp"
+      },
+      {
+        "module": "evidence_report",
+        "cpp_symbol": "check_kind_from_export_string",
+        "py_export": "check_kind_from_export_string",
+        "binding_file": "evidence_report_py.cpp"
+      },
+      {
         "module": "field_kernels",
         "cpp_symbol": "dipole_ring_field_grid_np",
         "py_export": "biot_savart_wire_grid",
@@ -6220,6 +7094,36 @@
         "cpp_symbol": "dipole_ring_field_grid_np",
         "py_export": "dipole_ring_field_grid",
         "binding_file": "field_kernels_py.cpp"
+      },
+      {
+        "module": "geometry_certificate",
+        "cpp_symbol": "GeometryCertificateAPI::evaluate_tube_geometry",
+        "py_export": "GeometryCertificateAPI.evaluate_tube_geometry",
+        "binding_file": "geometry_certificate_py.cpp"
+      },
+      {
+        "module": "geometry_certificate",
+        "cpp_symbol": "GeometryCertificateAPI::evaluate_contact_saturation",
+        "py_export": "GeometryCertificateAPI.evaluate_contact_saturation",
+        "binding_file": "geometry_certificate_py.cpp"
+      },
+      {
+        "module": "geometry_certificate",
+        "cpp_symbol": "GeometryCertificateAPI::chronos_first_hitting",
+        "py_export": "GeometryCertificateAPI.chronos_first_hitting",
+        "binding_file": "geometry_certificate_py.cpp"
+      },
+      {
+        "module": "geometry_certificate",
+        "cpp_symbol": "GeometryCertificateAPI::rank9_from_singular_values",
+        "py_export": "GeometryCertificateAPI.rank9_from_singular_values",
+        "binding_file": "geometry_certificate_py.cpp"
+      },
+      {
+        "module": "geometry_certificate",
+        "cpp_symbol": "GeometryCertificateAPI::sha256_hex_of_points",
+        "py_export": "GeometryCertificateAPI.sha256_hex_of_points",
+        "binding_file": "geometry_certificate_py.cpp"
       },
       {
         "module": "knot_dynamics",
@@ -6354,6 +7258,96 @@
         "binding_file": "magnus_integrator_py.cpp"
       },
       {
+        "module": "operational_spacetime",
+        "cpp_symbol": "OperationalSpacetimeAPI::radar_interval",
+        "py_export": "OperationalSpacetimeAPI.radar_interval",
+        "binding_file": "operational_spacetime_py.cpp"
+      },
+      {
+        "module": "operational_spacetime",
+        "cpp_symbol": "OperationalSpacetimeAPI::lorentz_boost_x",
+        "py_export": "OperationalSpacetimeAPI.lorentz_boost_x",
+        "binding_file": "operational_spacetime_py.cpp"
+      },
+      {
+        "module": "operational_spacetime",
+        "cpp_symbol": "OperationalSpacetimeAPI::lorentz_boost",
+        "py_export": "OperationalSpacetimeAPI.lorentz_boost",
+        "binding_file": "operational_spacetime_py.cpp"
+      },
+      {
+        "module": "operational_spacetime",
+        "cpp_symbol": "OperationalSpacetimeAPI::minkowski_interval2",
+        "py_export": "OperationalSpacetimeAPI.minkowski_interval2",
+        "binding_file": "operational_spacetime_py.cpp"
+      },
+      {
+        "module": "pipeline_provenance",
+        "cpp_symbol": "PipelineProvenanceAPI::stage_name",
+        "py_export": "PipelineProvenanceAPI.stage_name",
+        "binding_file": "pipeline_provenance_py.cpp"
+      },
+      {
+        "module": "pipeline_provenance",
+        "cpp_symbol": "PipelineProvenanceAPI::certification_name",
+        "py_export": "PipelineProvenanceAPI.certification_name",
+        "binding_file": "pipeline_provenance_py.cpp"
+      },
+      {
+        "module": "pipeline_provenance",
+        "cpp_symbol": "PipelineProvenanceAPI::fingerprint_hex",
+        "py_export": "PipelineProvenanceAPI.fingerprint_hex",
+        "binding_file": "pipeline_provenance_py.cpp"
+      },
+      {
+        "module": "pipeline_provenance",
+        "cpp_symbol": "PipelineProvenanceAPI::record_fingerprint",
+        "py_export": "PipelineProvenanceAPI.record_fingerprint",
+        "binding_file": "pipeline_provenance_py.cpp"
+      },
+      {
+        "module": "pipeline_provenance",
+        "cpp_symbol": "PipelineProvenanceAPI::evaluate_chain",
+        "py_export": "PipelineProvenanceAPI.evaluate_chain",
+        "binding_file": "pipeline_provenance_py.cpp"
+      },
+      {
+        "module": "pipeline_provenance",
+        "cpp_symbol": "PipelineProvenanceAPI::record_complete",
+        "py_export": "PipelineProvenanceAPI.record_complete",
+        "binding_file": "pipeline_provenance_py.cpp"
+      },
+      {
+        "module": "polygonal_smooth_certificate",
+        "cpp_symbol": "PolygonalSmoothCertificateAPI::evaluate",
+        "py_export": "PolygonalSmoothCertificateAPI.evaluate",
+        "binding_file": "polygonal_smooth_certificate_py.cpp"
+      },
+      {
+        "module": "polygonal_smooth_certificate",
+        "cpp_symbol": "PolygonalSmoothCertificateAPI::fingerprint_points",
+        "py_export": "PolygonalSmoothCertificateAPI.fingerprint_points",
+        "binding_file": "polygonal_smooth_certificate_py.cpp"
+      },
+      {
+        "module": "polygonal_smooth_certificate",
+        "cpp_symbol": "BiotSavartGateAPI::evaluate",
+        "py_export": "BiotSavartGateAPI.evaluate",
+        "binding_file": "polygonal_smooth_certificate_py.cpp"
+      },
+      {
+        "module": "qss_spectroscopy",
+        "cpp_symbol": "QSSSpectroscopyAPI::eigen_2x2",
+        "py_export": "QSSSpectroscopyAPI.eigen_2x2",
+        "binding_file": "qss_spectroscopy_py.cpp"
+      },
+      {
+        "module": "qss_spectroscopy",
+        "cpp_symbol": "QSSSpectroscopyAPI::pseudospectrum_diag_2x2",
+        "py_export": "QSSSpectroscopyAPI.pseudospectrum_diag_2x2",
+        "binding_file": "qss_spectroscopy_py.cpp"
+      },
+      {
         "module": "radiation_flow",
         "cpp_symbol": "RadiationFlow::radiation_force",
         "py_export": "radiation_force",
@@ -6412,6 +7406,84 @@
         "cpp_symbol": "SpectroscopicGap::gap_ratio",
         "py_export": "SpectroscopicGap.gap_ratio",
         "binding_file": "spectroscopic_gap_py.cpp"
+      },
+      {
+        "module": "sst_action_phase",
+        "cpp_symbol": "ActionPhaseAPI::mass_shell_hamiltonian",
+        "py_export": "ActionPhaseAPI.mass_shell_hamiltonian",
+        "binding_file": "sst_action_phase_py.cpp"
+      },
+      {
+        "module": "sst_action_phase",
+        "cpp_symbol": "ActionPhaseAPI::velocity_from_mass_shell",
+        "py_export": "ActionPhaseAPI.velocity_from_mass_shell",
+        "binding_file": "sst_action_phase_py.cpp"
+      },
+      {
+        "module": "sst_action_phase",
+        "cpp_symbol": "ActionPhaseAPI::gamma_from_mass_shell",
+        "py_export": "ActionPhaseAPI.gamma_from_mass_shell",
+        "binding_file": "sst_action_phase_py.cpp"
+      },
+      {
+        "module": "sst_action_phase",
+        "cpp_symbol": "ActionPhaseAPI::proper_time_rate",
+        "py_export": "ActionPhaseAPI.proper_time_rate",
+        "binding_file": "sst_action_phase_py.cpp"
+      },
+      {
+        "module": "sst_action_phase",
+        "cpp_symbol": "ActionPhaseAPI::internal_phase_rate_at_fixed_momentum",
+        "py_export": "ActionPhaseAPI.internal_phase_rate_at_fixed_momentum",
+        "binding_file": "sst_action_phase_py.cpp"
+      },
+      {
+        "module": "sst_action_phase",
+        "cpp_symbol": "ActionPhaseAPI::action_phase_residuals",
+        "py_export": "ActionPhaseAPI.action_phase_residuals",
+        "binding_file": "sst_action_phase_py.cpp"
+      },
+      {
+        "module": "sst_action_phase",
+        "cpp_symbol": "ActionPhaseAPI::delta_shape_separability",
+        "py_export": "ActionPhaseAPI.delta_shape_separability",
+        "binding_file": "sst_action_phase_py.cpp"
+      },
+      {
+        "module": "sst_action_phase",
+        "cpp_symbol": "ActionPhaseAPI::coupled_shape_residual",
+        "py_export": "ActionPhaseAPI.coupled_shape_residual",
+        "binding_file": "sst_action_phase_py.cpp"
+      },
+      {
+        "module": "sst_action_phase",
+        "cpp_symbol": "ActionPhaseAPI::fixed_v_phase_error_factor",
+        "py_export": "ActionPhaseAPI.fixed_v_phase_error_factor",
+        "binding_file": "sst_action_phase_py.cpp"
+      },
+      {
+        "module": "sst_kam_diagnostics",
+        "cpp_symbol": "KAMDiagnosticsAPI::sector_name",
+        "py_export": "KAMDiagnosticsAPI.sector_name",
+        "binding_file": "sst_kam_diagnostics_py.cpp"
+      },
+      {
+        "module": "sst_kam_diagnostics",
+        "cpp_symbol": "KAMDiagnosticsAPI::stage_name",
+        "py_export": "KAMDiagnosticsAPI.stage_name",
+        "binding_file": "sst_kam_diagnostics_py.cpp"
+      },
+      {
+        "module": "sst_kam_diagnostics",
+        "cpp_symbol": "KAMDiagnosticsAPI::stage1",
+        "py_export": "KAMDiagnosticsAPI.stage1",
+        "binding_file": "sst_kam_diagnostics_py.cpp"
+      },
+      {
+        "module": "sst_kam_diagnostics",
+        "cpp_symbol": "KAMDiagnosticsAPI::golden_ratio_null_test",
+        "py_export": "KAMDiagnosticsAPI.golden_ratio_null_test",
+        "binding_file": "sst_kam_diagnostics_py.cpp"
       },
       {
         "module": "sst_tension_scales",
@@ -6526,6 +7598,66 @@
         "cpp_symbol": "Grid1D::spacing",
         "py_export": "Grid1D.spacing",
         "binding_file": "trefoil_operator_py.cpp"
+      },
+      {
+        "module": "value_origin",
+        "cpp_symbol": "ValueOriginAPI::origin_name",
+        "py_export": "ValueOriginAPI.origin_name",
+        "binding_file": "value_origin_py.cpp"
+      },
+      {
+        "module": "value_origin",
+        "cpp_symbol": "ValueOriginAPI::fmax_snapshot",
+        "py_export": "ValueOriginAPI.fmax_snapshot",
+        "binding_file": "value_origin_py.cpp"
+      },
+      {
+        "module": "value_origin",
+        "cpp_symbol": "ValueOriginAPI::fmax_recompute_from_primitives",
+        "py_export": "ValueOriginAPI.fmax_recompute_from_primitives",
+        "binding_file": "value_origin_py.cpp"
+      },
+      {
+        "module": "value_origin",
+        "cpp_symbol": "ValueOriginAPI::fmax_rydberg_16pi2",
+        "py_export": "ValueOriginAPI.fmax_rydberg_16pi2",
+        "binding_file": "value_origin_py.cpp"
+      },
+      {
+        "module": "value_origin",
+        "cpp_symbol": "ValueOriginAPI::fmax_rydberg_32pi2",
+        "py_export": "ValueOriginAPI.fmax_rydberg_32pi2",
+        "binding_file": "value_origin_py.cpp"
+      },
+      {
+        "module": "value_origin",
+        "cpp_symbol": "ValueOriginAPI::compare_fmax_snapshot_to_recomputed",
+        "py_export": "ValueOriginAPI.compare_fmax_snapshot_to_recomputed",
+        "binding_file": "value_origin_py.cpp"
+      },
+      {
+        "module": "value_origin",
+        "cpp_symbol": "ValueOriginAPI::bare_mass_ratio_from_dimensionless_length",
+        "py_export": "ValueOriginAPI.bare_mass_ratio_from_dimensionless_length",
+        "binding_file": "value_origin_py.cpp"
+      },
+      {
+        "module": "value_origin",
+        "cpp_symbol": "ValueOriginAPI::bare_mass_from_dimensionless_length",
+        "py_export": "ValueOriginAPI.bare_mass_from_dimensionless_length",
+        "binding_file": "value_origin_py.cpp"
+      },
+      {
+        "module": "value_origin",
+        "cpp_symbol": "ValueOriginAPI::rho_f_two_sigfig",
+        "py_export": "ValueOriginAPI.rho_f_two_sigfig",
+        "binding_file": "value_origin_py.cpp"
+      },
+      {
+        "module": "value_origin",
+        "cpp_symbol": "ValueOriginAPI::make_canonical_value",
+        "py_export": "ValueOriginAPI.make_canonical_value",
+        "binding_file": "value_origin_py.cpp"
       },
       {
         "module": "vorticity_dynamics",

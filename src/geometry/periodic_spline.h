@@ -18,12 +18,21 @@ struct SplineEval {
     double u = 0.0;
 };
 
+/** True cubic-spline arclength ∫‖γ′(u)‖ du with a numerical error estimate. */
+struct SplineLengthResult {
+    double length = 0.0;
+    double absolute_error_estimate = 0.0;
+    std::size_t interval_count = 0;
+    bool converged = false;
+};
+
 class PeriodicCubicSpline3D {
 public:
     PeriodicCubicSpline3D() = default;
     explicit PeriodicCubicSpline3D(const std::vector<Vec3>& points);
 
     std::size_t n() const { return n_; }
+    /** Chord-sum parameter domain length (not true spline arclength). */
     double length() const { return L_; }
     /** Arc-length knot at index i ∈ [0, n]; parameter_at(n) == length(). */
     double parameter_at(std::size_t i) const {
@@ -32,6 +41,14 @@ public:
         return s_[i];
     }
     SplineEval eval(double u) const;
+
+    /**
+     * Integrate ‖γ′(u)‖ over the chord-parameter domain with adaptive
+     * Gauss–Kronrod quadrature. Does not change length() semantics.
+     */
+    SplineLengthResult integrated_arclength(
+        double abs_tol = 1e-10,
+        double rel_tol = 1e-10) const;
 
 private:
     std::size_t n_ = 0;

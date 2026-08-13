@@ -1,0 +1,85 @@
+{
+  "generated_utc": "2026-07-28T19:32:17.552319+00:00",
+  "files": [
+    {
+      "filename": "deelplan_0_8_27_epistemica.plan.md",
+      "frontmatter_unchanged": true,
+      "headings_unchanged": true,
+      "original_bytes": 1789,
+      "expanded_bytes": 4464,
+      "sha256": "873cb24bd2c40a83726be4848349744d59540c93d078ddc830cfe450e549c095"
+    },
+    {
+      "filename": "deelplan_0_8_28_action_phase.plan.md",
+      "frontmatter_unchanged": true,
+      "headings_unchanged": true,
+      "original_bytes": 2595,
+      "expanded_bytes": 5276,
+      "sha256": "61e2e9942007a37a98ebd2bde6648fbb0429232ae5af8c456f6421826447be20"
+    },
+    {
+      "filename": "deelplan_0_baseline.plan.md",
+      "frontmatter_unchanged": true,
+      "headings_unchanged": true,
+      "original_bytes": 1818,
+      "expanded_bytes": 3968,
+      "sha256": "d07e669b45a6af0c0a2621b7cc791a665ed28ce6812bf4bcade4d40d8eb5b16d"
+    },
+    {
+      "filename": "deelplan_0_8_20_geometry_contact.plan.md",
+      "frontmatter_unchanged": true,
+      "headings_unchanged": true,
+      "original_bytes": 2364,
+      "expanded_bytes": 5056,
+      "sha256": "9ef211f598b266036d522a01b8bbb9f2fcf27eac9ab314a67e6ea8223b3e9ad0"
+    },
+    {
+      "filename": "deelplan_0_8_21_certification_biot.plan.md",
+      "frontmatter_unchanged": true,
+      "headings_unchanged": true,
+      "original_bytes": 1947,
+      "expanded_bytes": 4045,
+      "sha256": "02390f51416190975a472aff2bc77902344afbdd1d16db81254faa0bd8bc538c"
+    },
+    {
+      "filename": "deelplan_0_8_22_spacetime_qss.plan.md",
+      "frontmatter_unchanged": true,
+      "headings_unchanged": true,
+      "original_bytes": 1872,
+      "expanded_bytes": 3865,
+      "sha256": "1196d1a7b95a9366b99225248ad5d4473223fad3fb1dafd617bd95d3d5269dc3"
+    },
+    {
+      "filename": "deelplan_0_8_23_provenance.plan.md",
+      "frontmatter_unchanged": true,
+      "headings_unchanged": true,
+      "original_bytes": 1661,
+      "expanded_bytes": 3783,
+      "sha256": "5ed0fa62e6166d90d49cd61ce5d67780ae0ec58dde4f4749af13bf14f562fc59"
+    },
+    {
+      "filename": "deelplan_0_8_24_core_torsion.plan.md",
+      "frontmatter_unchanged": true,
+      "headings_unchanged": true,
+      "original_bytes": 1926,
+      "expanded_bytes": 3961,
+      "sha256": "c42c980267a1e0870500452722f5f7c3afd7398d16389610d205d792e8000809"
+    },
+    {
+      "filename": "deelplan_0_8_25_kam.plan.md",
+      "frontmatter_unchanged": true,
+      "headings_unchanged": true,
+      "original_bytes": 1833,
+      "expanded_bytes": 3997,
+      "sha256": "5d229a40be284bd5eb5f4494ef0179333e5c5ce16e68c14d4967b697ff903905"
+    },
+    {
+      "filename": "deelplan_0_8_26_fmax_provenance.plan.md",
+      "frontmatter_unchanged": true,
+      "headings_unchanged": true,
+      "original_bytes": 2216,
+      "expanded_bytes": 4591,
+      "sha256": "82c66d822af0d72a829af52aa051c11d661ba12ae9e17a283563b26b000f2319"
+    }
+  ]
+}

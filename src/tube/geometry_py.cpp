@@ -35,6 +35,7 @@ void bind_resolved_tube_geometry(py::module_& m) {
         .def_readwrite("ropelength_diam", &sst::ResolvedTubeMetrics::ropelength_diam)
         .def_readwrite("edge_length_mean", &sst::ResolvedTubeMetrics::edge_length_mean)
         .def_readwrite("edge_length_rel_std", &sst::ResolvedTubeMetrics::edge_length_rel_std)
+        .def_readwrite("edge_length_max_rel_dev", &sst::ResolvedTubeMetrics::edge_length_max_rel_dev)
         .def_readwrite("equilateral_ok", &sst::ResolvedTubeMetrics::equilateral_ok)
         .def_readwrite("lower_bound_ok", &sst::ResolvedTubeMetrics::lower_bound_ok)
         .def_readwrite("struts", &sst::ResolvedTubeMetrics::struts)
@@ -163,6 +164,8 @@ void bind_resolved_tube_geometry(py::module_& m) {
         .def_static("length", &sst::ResolvedTubeGeometry::length, py::arg("points"))
         .def_static("edge_length_mean", &sst::ResolvedTubeGeometry::edge_length_mean, py::arg("points"))
         .def_static("edge_length_relative_std", &sst::ResolvedTubeGeometry::edge_length_relative_std, py::arg("points"))
+        .def_static("edge_length_max_relative_deviation",
+                    &sst::ResolvedTubeGeometry::edge_length_max_relative_deviation, py::arg("points"))
         .def_static("turning_angle", &sst::ResolvedTubeGeometry::turning_angle,
                     py::arg("a"), py::arg("b"), py::arg("c"))
         .def_static("minrad_at_vertex", &sst::ResolvedTubeGeometry::minrad_at_vertex,

@@ -1,0 +1,14 @@
+VERSION 0.8.28 0.8.28
+KAM_SINGULAR_3X3 CertificateStatus.Pass KAMStage.KAM1 1.0 0.04988805276465946
+LOWER_TRIANGLE_ANISO True 1.0 0.0
+PROVENANCE_BOGUS_CHAIN PipelineCertificationStatus.Certified 40a606fcdb1fb4f8 16
+EVIDENCE_REPR 'git_commit": "x\x01y",\n  "'
+EVIDENCE_JSON_VALID False JSONDecodeError Invalid control character at: line 4 column 19 (char 80)
+UNKNOWN_CHECK_KIND OPEN_RESEARCH_GATE
+QSS_DEFECTIVE [(1+0j), (1+0j)] 1.0 0.0
+ACTION (3.0, 4.0, 1.0, 2.0) ok True Hres 0.0 Vres 0.0
+ACTION (1e+308, 1.0, 1.0, 1.0) ok False Hres nan Vres 0.0
+ACTION (1e+154, 1.0, 1e+154, 1.0) ok False Hres nan Vres nan
+LIST_BINDINGS_COUNTS {'functions': 291, 'classes': 0, 'attributes': 5}
+ACTION_IN_FUNCTIONS True ACTION_IN_CLASSES False
+RESOURCES /mnt/data/SSTcore-source-bundle-0.8.28_extracted/resources

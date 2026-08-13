@@ -1,6 +1,6 @@
 {
   "name": "sst-core",
-  "version": "0.8.18",
+  "version": "0.8.28",
   "description": "SSTcore - Swirl String Theory Canonical Core. High-performance C++ library for knot dynamics, vortex systems, and fluid mechanics (Node native addon + optional WASM). Same project as pip install SSTcore.",
   "main": "index.js",
   "module": "index.js",
@@ -60,7 +60,8 @@
     "install": "node scripts/install-native.js",
     "prepack": "node scripts/prepack-clean.js",
     "prepublishOnly": "npm run build:all",
-    "test": "node tests/test_basic.js",
+    "test": "node scripts/run_node_tests.js",
+    "test:basic": "node tests/test_basic.js",
     "test:parity": "node tests/test_python_node_parity.js",
     "test:pack": "node scripts/smoke_packaged_tarball.js",
     "pack:check": "node scripts/check_npm_pack_size.js",

@@ -1,0 +1,239 @@
+{
+  "artifact": {
+    "filename": "SSTcore-source-bundle-0.8.28.zip",
+    "sha256": "8bb4a575456d771f546f579a05538ca189948b17882d010061e0b107f4418168",
+    "file_count": 9806,
+    "directory_count": 308,
+    "extracted_bytes": 470616160
+  },
+  "verdict": {
+    "release_ready": false,
+    "recommended_label": "v0.8.28-rc1",
+    "native_cpp_tests": "3/3 passed",
+    "python_reduced_suite": {
+      "passed": 139,
+      "skipped": 25
+    },
+    "severity_counts": {
+      "BLOCKER": 5,
+      "HIGH": 8,
+      "MEDIUM": 6,
+      "POSITIVE": 4
+    }
+  },
+  "plan_matrix": [
+    {
+      "deelplan": "0 / 0.8.19",
+      "status": "PARTIAL",
+      "assessment": "Version sync is complete, but the archive cannot execute its full documented CI and omits the planned management/coverage documents."
+    },
+    {
+      "deelplan": "0.8.20",
+      "status": "PARTIAL",
+      "assessment": "Geometry/contact/Chronos APIs exist; threshold semantics and rank-conditioning need strengthening."
+    },
+    {
+      "deelplan": "0.8.21",
+      "status": "PARTIAL / OVERCLAIM",
+      "assessment": "Biot and polygonal-smooth gates exist, but current evidence is diagnostic rather than rigorous certification."
+    },
+    {
+      "deelplan": "0.8.22",
+      "status": "PARTIAL",
+      "assessment": "Spacetime/QSS scaffolding exists; QSS Node wiring is absent and conditioning is misnamed."
+    },
+    {
+      "deelplan": "0.8.23",
+      "status": "FAILS CORE CONTRACT",
+      "assessment": "Provenance records exist, but SHA-256, canonical serialization, strict continuity and validation are not implemented."
+    },
+    {
+      "deelplan": "0.8.24",
+      "status": "PARTIAL",
+      "assessment": "The factor-2-free formula exists; tensor/residual validation is incomplete."
+    },
+    {
+      "deelplan": "0.8.25",
+      "status": "FAILS MATHEMATICAL GUARD",
+      "assessment": "The n>2 KAM proxy can falsely return Pass."
+    },
+    {
+      "deelplan": "0.8.26",
+      "status": "MOSTLY IMPLEMENTED",
+      "assessment": "Snapshot/recompute separation, density metadata and M0 helpers exist; precision/package semantics need refinement."
+    },
+    {
+      "deelplan": "0.8.27",
+      "status": "PARTIAL",
+      "assessment": "CheckKind/evidence exist, but JSON robustness, schema and parity are incomplete."
+    },
+    {
+      "deelplan": "0.8.28",
+      "status": "PARTIAL",
+      "assessment": "Core formulas exist; the discriminating shape/fixed-V/countermodel guards are absent."
+    }
+  ],
+  "findings": [
+    {
+      "id": "B-001",
+      "severity": "BLOCKER",
+      "area": "Bundle completeness",
+      "finding": "The source bundle omits scripts/, lib/, docs/, README.md, LICENSE, dist/ and prebuilds/ although package.json and tests reference them.",
+      "required_action": "Regenerate the archive from a checked manifest and fail CI on missing referenced paths."
+    },
+    {
+      "id": "B-002",
+      "severity": "BLOCKER",
+      "area": "Node QSS wiring",
+      "finding": "src/module_node.cpp declares/calls bind_qss_spectroscopy, but qss_spectroscopy_node.cpp does not exist and is absent from the CMake Node source list.",
+      "required_action": "Add and wire the binder, or remove the Node capability until it exists."
+    },
+    {
+      "id": "B-003",
+      "severity": "BLOCKER",
+      "area": "Python CMake link",
+      "finding": "The original Linux CMake build combines -Wl,--no-undefined with a Python extension that is not linked to Python::Python, producing unresolved Py* symbols.",
+      "required_action": "Link Python::Python when using that linker guard, or adopt an extension-appropriate platform policy."
+    },
+    {
+      "id": "B-004",
+      "severity": "BLOCKER",
+      "area": "Provenance hash contract",
+      "finding": "APIs and fields named SHA-256 use 64-bit FNV-1a; geometry hashes use raw native double bytes.",
+      "required_action": "Implement real SHA-256 over canonical serialization and validate 64-hex fields."
+    },
+    {
+      "id": "B-005",
+      "severity": "BLOCKER",
+      "area": "KAM false positive",
+      "finding": "For n>2, Hessian 'determinant' is the product of diagonal entries. A singular 3x3 Hessian was returned as determinant=1 and Pass/KAM1.",
+      "required_action": "Use LU/QR/SVD rank and non-degeneracy diagnostics; return Indeterminate when a rigorous result is unavailable."
+    },
+    {
+      "id": "H-001",
+      "severity": "HIGH",
+      "area": "Action-phase completeness",
+      "finding": "Mass-shell, V, gamma, proper-time and fixed-P phase are present, but delta_shape_separability, the coupled countermodel and fixed-V gamma^2-1 guard are missing.",
+      "required_action": "Implement the planned discriminating residuals and regression tests."
+    },
+    {
+      "id": "H-002",
+      "severity": "HIGH",
+      "area": "Action-phase stability",
+      "finding": "P*c, P*c*c and absolute dimensionful residuals can overflow even for finite inputs; ok only means residuals are finite.",
+      "required_action": "Scale arithmetic, use V=c*((P*c)/H), normalize residuals and separate finite/valid/tolerance status."
+    },
+    {
+      "id": "H-003",
+      "severity": "HIGH",
+      "area": "Provenance certification validation",
+      "finding": "Only non-empty strings are checked; malformed hashes/timestamps and skipped stages can be certified.",
+      "required_action": "Validate hash/timestamp formats, exact stage transitions and coordinate/scale compatibility."
+    },
+    {
+      "id": "H-004",
+      "severity": "HIGH",
+      "area": "Polygonal-smooth overclaim",
+      "finding": "Sampled distances, index-paired tangents and curvature radius alone are reported as a Pass certificate without reach/self-distance/isotopy bounds.",
+      "required_action": "Rename current output Diagnostic/Candidate and reserve Pass for rigorous topology/thickness guards."
+    },
+    {
+      "id": "H-005",
+      "severity": "HIGH",
+      "area": "Core torsion anisotropy",
+      "finding": "dimensional_residual is hard-coded zero; anisotropy ignores the lower matrix triangle and does not validate symmetry.",
+      "required_action": "Validate/symmetrize the tensor, include all entries and define a real dimensionless diagnostic."
+    },
+    {
+      "id": "H-006",
+      "severity": "HIGH",
+      "area": "Evidence JSON",
+      "finding": "Manual serialization can emit invalid JSON for control characters and NaN/Inf, and default precision is lossy.",
+      "required_action": "Use a JSON library, reject/encode non-finite values, set full precision and add schema/version/input hashes."
+    },
+    {
+      "id": "H-007",
+      "severity": "HIGH",
+      "area": "QSS conditioning",
+      "finding": "The field conditioning is an eigenvalue-magnitude ratio, not eigenproblem conditioning; a defective matrix returned conditioning=1.",
+      "required_action": "Rename the metric and add left/right eigenvector or resolvent-based conditioning with normalized residuals."
+    },
+    {
+      "id": "H-008",
+      "severity": "HIGH",
+      "area": "Python resource discovery",
+      "finding": "Source-checkout lookup resolves to src/resources rather than repository-root resources; six tests fail without SSTCORE_RESOURCES.",
+      "required_action": "Add a correct repository-root path and test clean editable/source checkouts."
+    },
+    {
+      "id": "M-001",
+      "severity": "MEDIUM",
+      "area": "Operational spacetime",
+      "finding": "Only x-axis boosts exist and invariant residual divides by abs(s2)+1.0, introducing an undeclared unit scale.",
+      "required_action": "Add arbitrary-direction boosts and dimensionally consistent normalization."
+    },
+    {
+      "id": "M-002",
+      "severity": "MEDIUM",
+      "area": "Contact/rank diagnostics",
+      "finding": "One epsilon mixes pressure and dimensionless ratio tolerances; negative pressures are accepted; rank-9 Pass lacks a conditioning ceiling.",
+      "required_action": "Separate tolerances, validate domains and gate on conditioning."
+    },
+    {
+      "id": "M-003",
+      "severity": "MEDIUM",
+      "area": "Node tests/types",
+      "finding": "npm test runs only test_basic.js; new module tests are not part of the default command; index.d.ts largely hides gaps behind an index signature.",
+      "required_action": "Use a unified Node test runner and explicitly type the new APIs."
+    },
+    {
+      "id": "M-004",
+      "severity": "MEDIUM",
+      "area": "Binding introspection",
+      "finding": "list_bindings reports 291 functions and 0 classes, misclassifying pybind classes.",
+      "required_action": "Use PyType_Check or equivalent and add expected-class tests."
+    },
+    {
+      "id": "M-005",
+      "severity": "MEDIUM",
+      "area": "Wheel/package configuration",
+      "finding": "The wheel audit did not finish; it exposed stale py_modules, ambiguous resource package discovery and deprecated license metadata.",
+      "required_action": "Clean package discovery/metadata and pre-generate or cache embedded resources."
+    },
+    {
+      "id": "M-006",
+      "severity": "MEDIUM",
+      "area": "Archive timestamps",
+      "finding": "Future mtimes triggered unnecessary CMake rebuild behavior.",
+      "required_action": "Normalize archive mtimes for reproducible builds."
+    },
+    {
+      "id": "P-001",
+      "severity": "POSITIVE",
+      "area": "Version synchronization",
+      "finding": "package.json, setup.py, Python __version__ and sstcore_version.h agree on 0.8.28.",
+      "required_action": "Keep the version guard."
+    },
+    {
+      "id": "P-002",
+      "severity": "POSITIVE",
+      "area": "Native core",
+      "finding": "The static C++ library builds and test_frenet, test_sst_integrator and test_resolved_tube_geometry all pass.",
+      "required_action": "Preserve these as mandatory CI gates."
+    },
+    {
+      "id": "P-003",
+      "severity": "POSITIVE",
+      "area": "Python regression surface",
+      "finding": "With an audit-only CMake link fix and correct resource path, 139 tests pass and 25 skip.",
+      "required_action": "Use this as the remediation baseline."
+    },
+    {
+      "id": "P-004",
+      "severity": "POSITIVE",
+      "area": "Upgrade breadth",
+      "finding": "The planned C++/Python modules for 0.8.20 through 0.8.28 are substantially present.",
+      "required_action": "Focus next work on rigor, bindings and release completeness rather than rewriting."
+    }
+  ]
+}

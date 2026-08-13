@@ -1,0 +1,12 @@
+.........F..................................ss.......................... [ 79%]
+.sss...............                                                      [100%]
+================================== FAILURES ===================================
+E   AssertionError: ERROR: manifest out of date: C:\workspace\projects\SSTcore\src\SSTcore\resources\binding_manifest.json
+      Run: python scripts/gen_binding_manifest.py
+      
+    assert 1 == 0
+     +  where 1 = CompletedProcess(args=['C:\\Program Files\\Python313\\python.exe', 'C:\\workspace\\projects\\SSTcore\\scripts\\gen_bin...ace\\projects\\SSTcore\\src\\SSTcore\\resources\\binding_manifest.json\nRun: python scripts/gen_binding_manifest.py\n').returncode
+C:\workspace\projects\SSTcore\tests\test_binding_manifest.py:81: AssertionError: ERROR: manifest out of date: C:\workspace\projects\SSTcore\src\SSTcore\resources\binding_manifest.json
+=========================== short test summary info ===========================
+FAILED tests/test_binding_manifest.py::test_gen_binding_manifest_check - Asse...
+1 failed, 85 passed, 25 skipped in 21.90s

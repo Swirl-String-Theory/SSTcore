@@ -1,0 +1,38 @@
+
+==================================== ERRORS ====================================
+____________ ERROR collecting tests/test_audit_binding_examples.py _____________
+ImportError while importing test module '/mnt/data/SSTcore-source-bundle-0.8.28_extracted/tests/test_audit_binding_examples.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_audit_binding_examples.py:19: in <module>
+    from audit_binding_examples import (  # noqa: E402
+E   ModuleNotFoundError: No module named 'audit_binding_examples'
+_______________ ERROR collecting tests/test_binding_manifest.py ________________
+ImportError while importing test module '/mnt/data/SSTcore-source-bundle-0.8.28_extracted/tests/test_binding_manifest.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_binding_manifest.py:16: in <module>
+    from binding_inventory import (  # noqa: E402
+E   ModuleNotFoundError: No module named 'binding_inventory'
+__________________ ERROR collecting tests/test_source_zip.py ___________________
+ImportError while importing test module '/mnt/data/SSTcore-source-bundle-0.8.28_extracted/tests/test_source_zip.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_source_zip.py:17: in <module>
+    from source_zip_common import (  # noqa: E402
+E   ModuleNotFoundError: No module named 'source_zip_common'
+=========================== short test summary info ============================
+ERROR tests/test_audit_binding_examples.py
+ERROR tests/test_binding_manifest.py
+ERROR tests/test_source_zip.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 3 errors during collection !!!!!!!!!!!!!!!!!!!!
+20 skipped, 3 errors in 0.35s

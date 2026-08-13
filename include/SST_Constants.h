@@ -39,6 +39,7 @@ namespace SST {
         // Horn-envelope density closure m_e c^2 / (2 pi v_swirl^2 r_c^3)
         // (canon v0.8.12 rho_horn; legacy symbol RHO_CORE retained for compatibility).
         constexpr long double RHO_CORE  = 3.8934358266918687e18L;   // [kg/m^3] Horn-envelope density
+        constexpr long double RHO_HORN  = RHO_CORE;                 // canon alias (v0.8.26+)
         constexpr long double RHO_FLUID_CANON   = 7.0e-7L;          // [kg/m^3] Canon v0.8.x rounded effective fluid density
         constexpr long double RHO_FLUID_DERIVED = 6.8398588e-07L;   // [kg/m^3] CODATA-derived electron anchor value
         constexpr long double RHO_FLUID = RHO_FLUID_CANON;          // backward-compatible alias

@@ -67,6 +67,16 @@ void bind_sst_master_equation(Napi::Env env, Napi::Object exports);
 void bind_sst_tension_scales(Napi::Env env, Napi::Object exports);
 void bind_extensions(Napi::Env env, Napi::Object exports);
 void bind_vortexlab_kernels(Napi::Env env, Napi::Object exports);
+void bind_geometry_certificate(Napi::Env env, Napi::Object exports);
+void bind_polygonal_smooth_certificate(Napi::Env env, Napi::Object exports);
+void bind_operational_spacetime(Napi::Env env, Napi::Object exports);
+void bind_qss_spectroscopy(Napi::Env env, Napi::Object exports);
+void bind_pipeline_provenance(Napi::Env env, Napi::Object exports);
+void bind_core_torsion(Napi::Env env, Napi::Object exports);
+void bind_kam_diagnostics(Napi::Env env, Napi::Object exports);
+void bind_value_origin(Napi::Env env, Napi::Object exports);
+void bind_evidence_report(Napi::Env env, Napi::Object exports);
+void bind_action_phase(Napi::Env env, Napi::Object exports);
 
 static Napi::Object EngineInfo(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
@@ -102,6 +112,18 @@ static Napi::Object GetCapabilities(const Napi::CallbackInfo& info) {
     o.Set("trefoilOperator", true);
     o.Set("multisectorFitter", true);
     o.Set("resolvedTubeGeometry", true);
+    o.Set("geometryCertificate", true);
+    o.Set("polygonalSmoothCertificate", true);
+    o.Set("biotSavartGate", true);
+    o.Set("operationalSpacetime", true);
+    o.Set("qssSpectroscopy", true);
+    o.Set("pipelineProvenance", true);
+    o.Set("coreTorsion", true);
+    o.Set("linkFieldGate", true);
+    o.Set("kamDiagnostics", true);
+    o.Set("valueOrigin", true);
+    o.Set("evidenceReport", true);
+    o.Set("actionPhase", true);
     o.Set("continuousReach", true);
     o.Set("polygonalGauss", true);
     o.Set("filamentVelocity", true);
@@ -152,6 +174,16 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
     bind_sst_tension_scales(env, exports);
     bind_extensions(env, exports);
     bind_vortexlab_kernels(env, exports);
+    bind_geometry_certificate(env, exports);
+    bind_polygonal_smooth_certificate(env, exports);
+    bind_operational_spacetime(env, exports);
+    bind_qss_spectroscopy(env, exports);
+    bind_pipeline_provenance(env, exports);
+    bind_core_torsion(env, exports);
+    bind_kam_diagnostics(env, exports);
+    bind_value_origin(env, exports);
+    bind_evidence_report(env, exports);
+    bind_action_phase(env, exports);
 
     exports.Set("engineInfo", Napi::Function::New(env, EngineInfo));
     exports.Set("getCapabilities", Napi::Function::New(env, GetCapabilities));

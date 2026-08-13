@@ -1,0 +1,32 @@
+{
+  "pipeline": "KnotPlot→Ridgerunner→Smoothing→SSTcore",
+  "records": [
+    {
+      "stage": "KnotPlot",
+      "certification": "Candidate",
+      "tool_name": "KnotPlot",
+      "tool_version": "1.0",
+      "input_sha256": "in0",
+      "output_sha256": "out0",
+      "parameter_sha256": "par0",
+      "parent_record_sha256": "",
+      "coordinate_convention": "xyz_right_handed",
+      "scale_convention": "ropelength_radius_1",
+      "timestamp_utc": "2026-07-28T00:00:00Z"
+    },
+    {
+      "stage": "Ridgerunner",
+      "certification": "Candidate",
+      "tool_name": "ridgerunner",
+      "tool_version": "0.9",
+      "input_sha256": "out0",
+      "output_sha256": "out1",
+      "parameter_sha256": "par1",
+      "parent_record_sha256": "<fingerprint of previous record>",
+      "coordinate_convention": "xyz_right_handed",
+      "scale_convention": "ropelength_radius_1",
+      "timestamp_utc": "2026-07-28T00:01:00Z"
+    }
+  ],
+  "notes": "Replace parent_record_sha256 with PipelineProvenanceAPI.record_fingerprint of the previous record before evaluate_chain."
+}

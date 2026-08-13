@@ -39,6 +39,8 @@ struct ResolvedTubeMetrics {
     double ropelength_diam = 0.0;
     double edge_length_mean = 0.0;
     double edge_length_rel_std = 0.0;
+    /** Canon ε_eq = max_i |ℓ_i/ℓ̄ − 1| (normative equilateral gate). */
+    double edge_length_max_rel_dev = 0.0;
     bool equilateral_ok = false;
     bool lower_bound_ok = true;
     std::vector<SegmentPair> struts;
