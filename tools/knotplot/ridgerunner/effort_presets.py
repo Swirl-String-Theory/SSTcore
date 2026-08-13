@@ -14,6 +14,12 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 
+_KNOTPLOT_DIR = Path(__file__).resolve().parent.parent
+if str(_KNOTPLOT_DIR) not in sys.path:
+    sys.path.insert(0, str(_KNOTPLOT_DIR))
+
+from io_text import write_text_lf  # noqa: E402
+
 
 def format_checkpoint_tag(steps: int) -> str:
     """Match run_knotplot_txt.format_checkpoint_tag for step-based tags."""
@@ -169,7 +175,7 @@ def truncate_build_kpc(
         f"{src.stem}_effort_{max_ago // 1000:03d}k{src.suffix}"
     )
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(kept, encoding="utf-8", newline="\n")
+    write_text_lf(out, kept)
     return out
 
 

@@ -34,6 +34,8 @@ import math
 import sys
 from typing import Iterable
 
+from io_text import write_text_lf
+
 Point = tuple[float, float, float]
 
 DEFAULT_COLORS: tuple[tuple[float, float, float, float], ...] = (
@@ -305,7 +307,7 @@ def convert_one(
     )
     report = validate_vect_text(text)
 
-    output_path.write_text(text, encoding="utf-8", newline="\n")
+    write_text_lf(output_path, text)
     return report
 
 

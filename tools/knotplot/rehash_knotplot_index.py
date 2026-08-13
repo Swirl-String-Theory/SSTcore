@@ -19,6 +19,8 @@ import json
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from io_text import write_text_lf
+
 DEFAULT_INDEX = Path(__file__).resolve().parents[2] / "resources" / "knotplot" / "INDEX.json"
 
 
@@ -69,7 +71,7 @@ def rehash_index(index: dict, root: Path) -> tuple[dict, RehashReport]:
 
 def write_index(index: dict, path: Path) -> None:
     """Write the index as LF-terminated JSON (resources/ is checked out verbatim)."""
-    path.write_text(json.dumps(index, indent=2) + "\n", encoding="utf-8", newline="\n")
+    write_text_lf(path, json.dumps(index, indent=2) + "\n")
 
 
 def main(argv: list[str] | None = None) -> int:

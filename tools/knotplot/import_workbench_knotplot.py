@@ -24,6 +24,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable, Optional
 
+from io_text import write_text_lf
+
 try:
     import numpy as np
 except ImportError as exc:  # pragma: no cover
@@ -322,7 +324,7 @@ def apply_plan(plan: dict[str, Any], *, dry_run: bool) -> dict[str, Any]:
                     continue
                 text = ab_xml_from_centerline(Path(uniform), ab_id=item["ab_id"])
                 if not dry_run:
-                    out_path.write_text(text, encoding="utf-8", newline="\n")
+                    write_text_lf(out_path, text)
                     digest = sha256_file(out_path)
                     size = out_path.stat().st_size
                 else:
@@ -383,9 +385,7 @@ def apply_plan(plan: dict[str, Any], *, dry_run: bool) -> dict[str, Any]:
     if not dry_run:
         dest.mkdir(parents=True, exist_ok=True)
         # resources/ is checked out verbatim (.gitattributes -text), so keep LF on Windows too.
-        (dest / "INDEX.json").write_text(
-            json.dumps(index, indent=2) + "\n", encoding="utf-8", newline="\n"
-        )
+        write_text_lf(dest / "INDEX.json", json.dumps(index, indent=2) + "\n")
 
     return index
 
