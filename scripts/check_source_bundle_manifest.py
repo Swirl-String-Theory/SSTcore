@@ -21,7 +21,7 @@ REQUIRED = [
     "binding.gyp",
     "src/",
     "include/",
-    "resources/ideal.txt",
+    "resources/ideal/ideal.txt",
     "resources/Knots_FourierSeries/",
 ]
 
@@ -40,9 +40,18 @@ def _exists_ci(rel: str) -> bool:
     return False
 
 
+def _ideal_present() -> bool:
+    """Nested resources/ideal/ideal.txt, or flat legacy resources/ideal.txt."""
+    return _exists_ci("resources/ideal/ideal.txt") or _exists_ci("resources/ideal.txt")
+
+
 def main() -> int:
     missing: list[str] = []
     for rel in REQUIRED:
+        if rel == "resources/ideal/ideal.txt":
+            if not _ideal_present():
+                missing.append(rel)
+            continue
         if not _exists_ci(rel):
             missing.append(rel)
     if not _exists_ci("README.md"):

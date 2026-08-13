@@ -1,0 +1,62 @@
+{
+  "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_6.2\\knot_6.2_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_030k_polish.txt",
+  "output": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_6.2\\knot_6.2_trial_015k_rr_010k_coarse_rr_050k_eqfinal_rr_030k_polish_uniform_N300.txt",
+  "method_requested": "linear",
+  "method_per_component": [
+    "linear"
+  ],
+  "strict": false,
+  "upsampled": false,
+  "component_count": 1,
+  "vertices_per_component_in": [
+    300
+  ],
+  "vertices_per_component_out": [
+    300
+  ],
+  "length_in": 28.532157142448032,
+  "length_out": 28.52911154606376,
+  "relative_length_change": -0.0001067425911425715,
+  "D_proxy_in": 0.9999912713175506,
+  "D_proxy_out": 0.9989796110124186,
+  "R_proxy_in": 28.53240619276121,
+  "R_proxy_out": 28.55825207198259,
+  "relative_rop_change": 0.0009058429578903127,
+  "relative_rop_proxy_change": 0.0009058429578903127,
+  "relative_rop_minrad_change": -0.07516955594611452,
+  "rop_gate": "proxy",
+  "global_ds_ratio": 1.0,
+  "centerline_drift_over_D": 0.0022835988338686646,
+  "components": [
+    {
+      "index": 0,
+      "vertices_in": 300,
+      "vertices_out": 300,
+      "length_in": 28.532157142448032,
+      "length_out": 28.52911154606376,
+      "minrad_in": 0.49999559539716637,
+      "minrad_out": 0.5405771704273876,
+      "minrad_ratio": 1.0811638650496225,
+      "edge_min": 0.09489723837946755,
+      "edge_max": 0.09510719047483113,
+      "edge_mean": 0.0950970384868792,
+      "edge_ratio": 1.0022124152288188,
+      "edge_cv": 0.00028963880060759524
+    }
+  ],
+  "validation_warnings": [
+    "MinRad-Rop change -7.516956% (diagnostic only; not a fail gate)",
+    "centerline drift 0.228360%D (prefer <= 0.10%D)"
+  ],
+  "validation_errors": [],
+  "gates": {
+    "edge_ratio_max": 1.05,
+    "length_rel_max": 0.005,
+    "minrad_ratio_min": 0.9,
+    "rop_rel_max": 0.001,
+    "global_ds_ratio_max": 1.05,
+    "centerline_drift_max": 0.005,
+    "rop_gate_mode": "proxy_collapse_only"
+  },
+  "notes": "Default: N=300 for 1-comp; preserve Ni for multi-comp. MinRad-Rop is diagnostic only. Primary gates: length, proxy-Rop collapse, edge ratio/CV, global_ds_ratio, centerline drift/D."
+}

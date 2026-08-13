@@ -1,0 +1,103 @@
+{
+  "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.21\\torus_6.21_trial_005k_rr_010k_coarse_rr_050k_eqfinal_rr_030k_polish.txt",
+  "output": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.21\\torus_6.21_trial_005k_rr_010k_coarse_rr_050k_eqfinal_rr_030k_polish_uniform_N300.txt",
+  "method_requested": "linear",
+  "method_per_component": [
+    "linear",
+    "linear",
+    "linear"
+  ],
+  "strict": false,
+  "upsampled": false,
+  "component_count": 3,
+  "vertices_per_component_in": [
+    300,
+    300,
+    300
+  ],
+  "vertices_per_component_out": [
+    300,
+    300,
+    300
+  ],
+  "length_in": 223.04102450227631,
+  "length_out": 222.88062817358718,
+  "relative_length_change": -0.0007191337515018206,
+  "D_proxy_in": 0.9999571554481764,
+  "D_proxy_out": 0.9951403873600934,
+  "R_proxy_in": 223.05058100445353,
+  "R_proxy_out": 223.96903090713107,
+  "relative_rop_change": 0.004117675455233227,
+  "relative_rop_proxy_change": 0.004117675455233227,
+  "relative_rop_minrad_change": -0.004352362588799008,
+  "rop_gate": "proxy",
+  "global_ds_ratio": 1.0671061869324145,
+  "centerline_drift_over_D": 0.010092186632543455,
+  "components": [
+    {
+      "index": 0,
+      "vertices_in": 300,
+      "vertices_out": 300,
+      "length_in": 75.93986220662963,
+      "length_out": 75.88421364053356,
+      "minrad_in": 1.155593496611801,
+      "minrad_out": 1.1597564261174003,
+      "minrad_ratio": 1.0036024168687387,
+      "edge_min": 0.25231150571821437,
+      "edge_max": 0.253132874022114,
+      "edge_mean": 0.25294737880177853,
+      "edge_ratio": 1.0032553739535641,
+      "edge_cv": 0.0007739110431320413
+    },
+    {
+      "index": 1,
+      "vertices_in": 300,
+      "vertices_out": 300,
+      "length_in": 71.16127228010566,
+      "length_out": 71.11217385072815,
+      "minrad_in": 1.4167744284893191,
+      "minrad_out": 1.4285355700841968,
+      "minrad_ratio": 1.0083013508420098,
+      "edge_min": 0.23672139193069386,
+      "edge_max": 0.23720424093369286,
+      "edge_mean": 0.23704057950242718,
+      "edge_ratio": 1.0020397353997494,
+      "edge_cv": 0.0006591866619896499
+    },
+    {
+      "index": 2,
+      "vertices_in": 300,
+      "vertices_out": 300,
+      "length_in": 75.93989001554102,
+      "length_out": 75.88424068232548,
+      "minrad_in": 1.1555202279470782,
+      "minrad_out": 1.15973684962779,
+      "minrad_ratio": 1.003649111091896,
+      "edge_min": 0.25231098919608885,
+      "edge_max": 0.253132966718526,
+      "edge_mean": 0.25294746894108494,
+      "edge_ratio": 1.0032577951719666,
+      "edge_cv": 0.0007739121012025979
+    }
+  ],
+  "validation_warnings": [
+    "MinRad-Rop change -0.435236% (diagnostic only; not a fail gate)",
+    "global_ds_ratio=1.06711 > 1.02 (prefer <= 1.02)",
+    "global_ds_ratio=1.06711 > 1.05",
+    "centerline drift 1.009219%D (prefer <= 0.10%D)",
+    "centerline drift 1.009219%D > 0.50%D",
+    "Rop change 0.411768% (prefer |d| < 0.1%)",
+    "Rop change 0.411768% >= 0.100% (collapse)"
+  ],
+  "validation_errors": [],
+  "gates": {
+    "edge_ratio_max": 1.05,
+    "length_rel_max": 0.005,
+    "minrad_ratio_min": 0.9,
+    "rop_rel_max": 0.001,
+    "global_ds_ratio_max": 1.05,
+    "centerline_drift_max": 0.005,
+    "rop_gate_mode": "proxy_collapse_only"
+  },
+  "notes": "Default: N=300 for 1-comp; preserve Ni for multi-comp. MinRad-Rop is diagnostic only. Primary gates: length, proxy-Rop collapse, edge ratio/CV, global_ds_ratio, centerline drift/D."
+}

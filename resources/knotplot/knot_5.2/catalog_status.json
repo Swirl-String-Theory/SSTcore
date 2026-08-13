@@ -1,43 +1,54 @@
 {
-  "status": "relaxed-seed",
+  "status": "stalled-not-converged",
   "ideal": false,
   "strict_near_ideal": false,
   "folder": "knot_5.2",
-  "reference": {
-    "ropelength": 51.984454,
-    "source": "best-known numerical"
+  "reference": null,
+  "campaign_reference": {
+    "ropelength": 50.4378,
+    "source": "campaign-best"
   },
-  "epsilon_R": 0.0,
+  "epsilon_R": null,
   "primary_polish": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.2\\knot_5.2_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
   "primary_metrics": {
     "residual": 0.0361876,
     "ropelength": 51.984454,
     "thickness": 0.499998,
     "edge_length_ratio": 1.886569592737841,
-    "edge_length_cv": 0.044365215411575266
+    "edge_length_cv": 0.044365215411575266,
+    "stop_reason": null,
+    "residual_converged": null,
+    "analytic": false
   },
   "checks": {
     "topology": "pass",
     "residual_candidate": "fail",
     "residual_strict": "fail",
-    "ropelength_excess": "pass",
+    "ropelength_excess": "not-tested",
     "raw_edge_ratio": "warn",
     "raw_edge_cv": "warn",
     "thickness": "pass",
-    "multistart_spread": "not-tested",
+    "multistart_spread": "fail",
     "resolution_convergence": "not-tested",
     "uniform_mesh": "pass",
-    "constraint_anomalies": "pass"
+    "constraint_anomalies": "pass",
+    "residual_converged": "fail"
   },
   "reason": [
     "topology verified",
     "residual above 0.01",
     "residual above 0.005",
-    "ropelength threshold passed",
+    "ropelength_excess not tested (no external reference; campaign-best is not proof of near-ideal)",
     "raw edge-ratio 1.887 (warn only)",
     "raw edge-CV 4.4365% (warn only)",
-    "multi-start not tested",
+    "multi-start / mirror spread above 0.02%",
     "resolution convergence not yet demonstrated",
-    "VortexLab uniform mesh OK"
-  ]
+    "VortexLab uniform mesh OK",
+    "stopped without residual convergence (stalled)"
+  ],
+  "chirality": null,
+  "catalog_aliases": [],
+  "dowker_code": "6 8 10 4 2",
+  "equivalent_group": null,
+  "final_snapshot": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.2\\build_knot_5.2_final_normal_20260813_154112.txt"
 }

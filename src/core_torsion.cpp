@@ -1,5 +1,6 @@
 #include "sst_core_torsion.h"
 
+#include <algorithm>
 #include <cmath>
 #include <limits>
 

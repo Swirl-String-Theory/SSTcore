@@ -1,43 +1,54 @@
 {
-  "status": "relaxed-seed",
+  "status": "stalled-not-converged",
   "ideal": false,
   "strict_near_ideal": false,
   "folder": "link_9.2.20",
-  "reference": {
+  "reference": null,
+  "campaign_reference": {
     "ropelength": 98.030268,
-    "source": "best-known numerical"
+    "source": "campaign-best"
   },
-  "epsilon_R": 0.0,
+  "epsilon_R": null,
   "primary_polish": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.20\\link_9.2.20_trial_004k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
   "primary_metrics": {
     "residual": 0.823225,
     "ropelength": 98.030268,
     "thickness": 0.4999987,
     "edge_length_ratio": 1.2843937473674043,
-    "edge_length_cv": 0.049991785893472765
+    "edge_length_cv": 0.049991785893472765,
+    "stop_reason": null,
+    "residual_converged": null,
+    "analytic": false
   },
   "checks": {
     "topology": "pass",
     "residual_candidate": "fail",
     "residual_strict": "fail",
-    "ropelength_excess": "pass",
+    "ropelength_excess": "not-tested",
     "raw_edge_ratio": "warn",
     "raw_edge_cv": "warn",
     "thickness": "pass",
     "multistart_spread": "not-tested",
     "resolution_convergence": "not-tested",
     "uniform_mesh": "pass",
-    "constraint_anomalies": "pass"
+    "constraint_anomalies": "pass",
+    "residual_converged": "fail"
   },
   "reason": [
     "topology verified",
     "residual above 0.01",
     "residual above 0.005",
-    "ropelength threshold passed",
+    "ropelength_excess not tested (no external reference; campaign-best is not proof of near-ideal)",
     "raw edge-ratio 1.284 (warn only)",
     "raw edge-CV 4.9992% (warn only)",
     "multi-start not tested",
     "resolution convergence not yet demonstrated",
-    "VortexLab uniform mesh OK"
-  ]
+    "VortexLab uniform mesh OK",
+    "stopped without residual convergence (stalled)"
+  ],
+  "chirality": null,
+  "catalog_aliases": [],
+  "dowker_code": "-18 -14 -12 |-6 -16 -8 -4 -2 -10",
+  "equivalent_group": null,
+  "final_snapshot": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_9.2.20\\build_link_9.2.20_final_finalize_20260813_103711.txt"
 }

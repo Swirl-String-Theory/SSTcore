@@ -1,14 +1,10 @@
 #!/usr/bin/env python3
 """Import filtered SST-Workbench KnotPlot exports into SSTcore resources/knotplot/.
 
-Deelplan res-2: dry-run by default for review; omit --dry-run in res-3 to write.
-
-Classification
---------------
-- Relaxed: has catalog_status.json at/above --min-status → geometry + AB-XML + rebuild inputs
-- Stub: otherwise → only build_*.kpc and optional *_analytic_D1.txt
-
-Never copies .rr/, .dat, intermediate coarse/eqfinal stages, or build_effort_active.kpc.
+Prefer knots/final/{id}_final.txt (shared best snapshot) as the canonical centerline.
+Matching VECT is resolved from the entity folder via alias.polish_path (sibling .vect,
+else {stem}.rr/{stem}.final.vect). Never copies .rr/ workspaces, .dat, intermediate
+coarse/eqfinal stages, build_effort_active.kpc, or ridgerunner/out/fseries trees.
 """
 
 from __future__ import annotations
@@ -32,10 +28,14 @@ except ImportError as exc:  # pragma: no cover
     raise SystemExit("numpy is required for AB-XML regeneration") from exc
 
 DEFAULT_WB = Path(r"c:\workspace\projects\SST-Workbench\KnotPlot")
+# Aligned with SST-Workbench KnotPlot/ridgerunner/classify_catalog_status.py
 STATUS_RANK = {
+    "stalled-not-converged": 0,
     "relaxed-seed": 1,
     "near-ideal-candidate": 2,
-    "near-ideal": 3,
+    "converged-local-candidate": 3,
+    "near-ideal": 4,
+    "certified-ideal": 5,
 }
 
 # Historical SSTcore knot_* prefixes → Workbench folder names.
@@ -67,6 +67,18 @@ LEGACY_ALIASES = {
     "knot_9.2.20": "link_9.2.20",
     "knot_9.2.40": "link_9.2.40",
 }
+
+SKIP_ENTITY_DIRS = frozenset({"final", "__pycache__"})
+TEXT_SUFFIXES = frozenset({".txt", ".json", ".xml", ".kpc", ".vect", ".js", ".md", ".csv"})
+
+
+def copy_resource_file(src: Path, out_path: Path) -> None:
+    """Copy resource bytes; normalize text payloads to LF for cross-platform sha256."""
+    if src.suffix.lower() in TEXT_SUFFIXES:
+        data = src.read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+        out_path.write_bytes(data)
+    else:
+        shutil.copy2(src, out_path)
 
 
 def sha256_file(path: Path) -> str:
@@ -146,7 +158,8 @@ def ab_xml_from_centerline(
     coeffs = dft_coefficients(primary, max_harmonic=max_harmonic)
     # Skip DC term I=0 for Gilbert AB compatibility (legacy files start at I=1).
     lines = [
-        '<DATA Title="Generated from Ridgerunner uniform N300" Author="import_workbench_knotplot.py" Date="generated locally">',
+        '<DATA Title="Generated from Ridgerunner shared final / uniform N300" '
+        'Author="import_workbench_knotplot.py" Date="generated locally">',
         f'  <AB Id="{ab_id}" Conway="" L="{length:.12f}" D="1.000000">',
     ]
     for row in coeffs:
@@ -186,34 +199,103 @@ def entity_kind(name: str) -> str:
 def status_ok(status: Optional[str], min_status: str) -> bool:
     if not status:
         return False
-    return STATUS_RANK.get(status, 0) >= STATUS_RANK.get(min_status, 1)
+    return STATUS_RANK.get(status, -1) >= STATUS_RANK.get(min_status, 1)
 
 
 def list_entity_dirs(knots_root: Path) -> list[Path]:
     return sorted(
         p
         for p in knots_root.iterdir()
-        if p.is_dir() and p.name != "__pycache__" and not p.name.startswith(".")
+        if p.is_dir() and p.name not in SKIP_ENTITY_DIRS and not p.name.startswith(".")
     )
 
 
-def pick_primary_uniform(entity_dir: Path, catalog: dict) -> Optional[Path]:
+def load_final_alias(final_dir: Path, entity_id: str) -> Optional[dict[str, Any]]:
+    alias_path = final_dir / f"{entity_id}_final.alias.json"
+    if not alias_path.is_file():
+        return None
+    return json.loads(alias_path.read_text(encoding="utf-8"))
+
+
+def resolve_shared_final(
+    final_dir: Path, entity_id: str
+) -> tuple[Optional[Path], Optional[dict[str, Any]]]:
+    """Prefer knots/final/{id}_final.txt; fall back to alias path pointers."""
+    alias = load_final_alias(final_dir, entity_id)
+    shared = final_dir / f"{entity_id}_final.txt"
+    if shared.is_file():
+        return shared, alias
+    if alias:
+        for key in ("shared_final", "source_final", "final_txt"):
+            cand = alias.get(key)
+            if cand:
+                path = Path(str(cand))
+                if path.is_file():
+                    return path, alias
+    return None, alias
+
+
+def polish_stem_from_alias_or_catalog(
+    entity_dir: Path,
+    catalog: dict,
+    alias: Optional[dict[str, Any]],
+) -> Optional[str]:
+    if alias:
+        polish_path = alias.get("polish_path")
+        if polish_path:
+            stem = Path(str(polish_path)).stem
+            if stem:
+                return stem
+    primary = catalog.get("primary_polish") or ""
+    if primary:
+        stem = Path(primary).name
+        stem = stem.replace(".metrics.json", "").replace(".json", "")
+        if stem.endswith(".txt"):
+            stem = stem[: -len(".txt")]
+        if stem:
+            return stem
+    uniforms = sorted(entity_dir.glob("*_polish_uniform_N300.txt"))
+    if uniforms:
+        return uniforms[-1].name.replace("_uniform_N300.txt", "")
+    return None
+
+
+def resolve_audit_vect(entity_dir: Path, polish_stem: str) -> Optional[Path]:
+    """Sibling {stem}.vect first; else single file {stem}.rr/{stem}.final.vect."""
+    sibling = entity_dir / f"{polish_stem}.vect"
+    if sibling.is_file():
+        return sibling
+    rr_final = entity_dir / f"{polish_stem}.rr" / f"{polish_stem}.final.vect"
+    if rr_final.is_file():
+        return rr_final
+    return None
+
+
+def pick_primary_uniform(entity_dir: Path, catalog: dict, polish_stem: Optional[str]) -> Optional[Path]:
+    if polish_stem:
+        candidate = entity_dir / f"{polish_stem}_uniform_N300.txt"
+        if candidate.is_file():
+            return candidate
     uniforms = sorted(entity_dir.glob("*_polish_uniform_N300.txt"))
     if not uniforms:
         return None
     primary = catalog.get("primary_polish") or ""
     if primary:
         stem = Path(primary).name
-        # ..._polish.metrics.json → ..._polish_uniform_N300.txt
         stem = stem.replace(".metrics.json", "").replace(".json", "")
         if stem.endswith("_polish"):
             candidate = entity_dir / f"{stem}_uniform_N300.txt"
             if candidate.is_file():
                 return candidate
-    return uniforms[-1]  # highest trial number typically last alphabetically for padded trials
+    return uniforms[-1]
 
 
-def classify_entity(entity_dir: Path, min_status: str) -> dict[str, Any]:
+def classify_entity(
+    entity_dir: Path,
+    min_status: str,
+    *,
+    final_dir: Path,
+) -> dict[str, Any]:
     catalog_path = entity_dir / "catalog_status.json"
     catalog = None
     status = None
@@ -221,7 +303,7 @@ def classify_entity(entity_dir: Path, min_status: str) -> dict[str, Any]:
         catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
         status = catalog.get("status")
 
-    relaxed = status_ok(status, min_status)
+    status_qualifies = status_ok(status, min_status)
     files: list[dict[str, Any]] = []
 
     def add(src: Path, role: str, dest_name: Optional[str] = None) -> None:
@@ -244,38 +326,80 @@ def classify_entity(entity_dir: Path, min_status: str) -> dict[str, Any]:
     for analytic in sorted(entity_dir.glob("*_analytic_D1.txt")):
         add(analytic, "analytic_seed")
 
-    if relaxed and catalog is not None:
-        add(catalog_path, "catalog_status")
-        add(entity_dir / "seed_selection.json", "seed_selection")
+    centerline: Optional[Path] = None
+    shared_txt, alias = resolve_shared_final(final_dir, entity_dir.name)
+    # Shared finals are the curated best snapshots — import even if catalog status
+    # is still below --min-status (e.g. stalled-not-converged with a final/).
+    import_geometry = (status_qualifies and catalog is not None) or shared_txt is not None
+    if import_geometry:
+        geom: list[dict[str, Any]] = []
 
-        uniform = pick_primary_uniform(entity_dir, catalog)
+        def add_geom(src: Path, role: str, dest_name: Optional[str] = None) -> None:
+            if not src.is_file():
+                return
+            geom.append(
+                {
+                    "src": src,
+                    "role": role,
+                    "dest_name": dest_name or src.name,
+                }
+            )
+
+        if shared_txt is not None:
+            add_geom(shared_txt, "shared_final", dest_name=f"{entity_dir.name}_final.txt")
+            metrics = final_dir / f"{entity_dir.name}_final.metrics.json"
+            if not metrics.is_file() and alias and alias.get("final_metrics"):
+                metrics = Path(str(alias["final_metrics"]))
+            add_geom(metrics, "shared_final_metrics", dest_name=f"{entity_dir.name}_final.metrics.json")
+            if alias is not None:
+                alias_src = final_dir / f"{entity_dir.name}_final.alias.json"
+                if alias_src.is_file():
+                    add_geom(alias_src, "shared_final_alias", dest_name=f"{entity_dir.name}_final.alias.json")
+            centerline = shared_txt
+
+        catalog_for_pick = catalog or {}
+        polish_stem = polish_stem_from_alias_or_catalog(entity_dir, catalog_for_pick, alias)
+        uniform = pick_primary_uniform(entity_dir, catalog_for_pick, polish_stem)
         if uniform is not None:
-            add(uniform, "uniform_n300")
-            add(Path(str(uniform).replace(".txt", ".resample.json")), "resample")
-            # Audit polish: strip _uniform_N300 before .txt
-            polish_stem = uniform.name.replace("_uniform_N300.txt", "")
-            polish_txt = entity_dir / f"{polish_stem}.txt"
-            add(polish_txt, "audit_polish")
-            add(entity_dir / f"{polish_stem}.vect", "audit_vect")
-            add(entity_dir / f"{polish_stem}.metrics.json", "audit_metrics")
+            add_geom(uniform, "uniform_n300")
+            add_geom(Path(str(uniform).replace(".txt", ".resample.json")), "resample")
+            if centerline is None:
+                centerline = uniform
 
-        ab_id = guess_ab_id(entity_dir.name, catalog)
-        files.append(
-            {
-                "src": None,
-                "role": "ab_xml",
-                "dest_name": f"{entity_dir.name}_ab.xml",
-                "ab_id": ab_id,
-                "uniform": uniform,
-            }
-        )
+        if polish_stem:
+            polish_txt = entity_dir / f"{polish_stem}.txt"
+            add_geom(polish_txt, "audit_polish")
+            add_geom(entity_dir / f"{polish_stem}.metrics.json", "audit_metrics")
+            vect = resolve_audit_vect(entity_dir, polish_stem)
+            if vect is not None:
+                add_geom(vect, "audit_vect", dest_name=f"{polish_stem}.vect")
+            if centerline is None and polish_txt.is_file():
+                centerline = polish_txt
+
+        # Placeholder catalogs (status without polish/final) stay stubs.
+        if centerline is not None:
+            if catalog_path.is_file():
+                add(catalog_path, "catalog_status")
+            add(entity_dir / "seed_selection.json", "seed_selection")
+            files.extend(geom)
+            files.append(
+                {
+                    "src": None,
+                    "role": "ab_xml",
+                    "dest_name": f"{entity_dir.name}_ab.xml",
+                    "ab_id": guess_ab_id(entity_dir.name, catalog),
+                    "centerline": centerline,
+                }
+            )
+
+    relaxed = centerline is not None
 
     return {
         "id": entity_dir.name,
         "kind": entity_kind(entity_dir.name),
-        "status": status or "stub",
+        "status": status or ("shared-final" if relaxed else "stub"),
         "relaxed": relaxed,
-        "epsilon_R": (catalog or {}).get("epsilon_R"),
+        "epsilon_R": (catalog or {}).get("epsilon_R") if relaxed else None,
         "files": files,
         "catalog": catalog,
     }
@@ -285,8 +409,11 @@ def build_plan(workbench_root: Path, dest: Path, min_status: str) -> dict[str, A
     knots_root = workbench_root / "knots"
     if not knots_root.is_dir():
         raise SystemExit(f"Workbench knots dir missing: {knots_root}")
+    final_dir = knots_root / "final"
 
-    entities = [classify_entity(d, min_status) for d in list_entity_dirs(knots_root)]
+    entities = [
+        classify_entity(d, min_status, final_dir=final_dir) for d in list_entity_dirs(knots_root)
+    ]
     return {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "workbench_root": str(workbench_root),
@@ -303,14 +430,35 @@ def build_plan(workbench_root: Path, dest: Path, min_status: str) -> dict[str, A
 
 
 def apply_plan(plan: dict[str, Any], *, dry_run: bool) -> dict[str, Any]:
-    dest = Path(plan["dest"])
+    dest = Path(plan["dest"]).resolve()
+    workbench_root = Path(plan["workbench_root"]).resolve()
     index_entries: list[dict[str, Any]] = []
+    planned_ids = {e["id"] for e in plan["entities"]}
+
+    # Windows paths are case-insensitive: refuse dest that collides with the Workbench tree.
+    try:
+        dest.relative_to(workbench_root)
+        raise SystemExit(
+            f"refusing to write dest inside workbench_root (case-insensitive collision?): "
+            f"dest={dest} workbench_root={workbench_root}"
+        )
+    except ValueError:
+        pass
+
+    if not dry_run:
+        dest.mkdir(parents=True, exist_ok=True)
+        # Drop orphan entity dirs left from a previous import layout.
+        for child in list(dest.iterdir()):
+            if child.is_dir() and child.name not in planned_ids and child.name != "__pycache__":
+                shutil.rmtree(child)
 
     for entity in plan["entities"]:
         entity_dest = dest / entity["id"]
         copied: list[dict[str, Any]] = []
         ab_relpath = None
         if not dry_run:
+            if entity_dest.is_dir():
+                shutil.rmtree(entity_dest)
             entity_dest.mkdir(parents=True, exist_ok=True)
 
         for item in entity["files"]:
@@ -319,10 +467,10 @@ def apply_plan(plan: dict[str, Any], *, dry_run: bool) -> dict[str, Any]:
             out_path = entity_dest / dest_name
 
             if role == "ab_xml":
-                uniform = item.get("uniform")
-                if uniform is None or not Path(uniform).is_file():
+                centerline = item.get("centerline")
+                if centerline is None or not Path(centerline).is_file():
                     continue
-                text = ab_xml_from_centerline(Path(uniform), ab_id=item["ab_id"])
+                text = ab_xml_from_centerline(Path(centerline), ab_id=item["ab_id"])
                 if not dry_run:
                     write_text_lf(out_path, text)
                     digest = sha256_file(out_path)
@@ -336,19 +484,26 @@ def apply_plan(plan: dict[str, Any], *, dry_run: bool) -> dict[str, Any]:
                     {
                         "role": role,
                         "relpath": ab_relpath,
-                        "source": str(uniform),
+                        "source": str(centerline),
                         "sha256": digest,
                         "bytes": size,
                     }
                 )
                 continue
 
-            src = Path(item["src"])
+            src_raw = item.get("src")
+            if src_raw is None:
+                continue
+            src = Path(src_raw)
             if not src.is_file():
                 continue
             if not dry_run:
-                shutil.copy2(src, out_path)
-            digest = sha256_file(src) if dry_run else sha256_file(out_path if out_path.is_file() else src)
+                copy_resource_file(src, out_path)
+            digest = (
+                sha256_file(src)
+                if dry_run
+                else sha256_file(out_path if out_path.is_file() else src)
+            )
             copied.append(
                 {
                     "role": role,

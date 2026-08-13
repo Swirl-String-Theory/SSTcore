@@ -1,0 +1,281 @@
+{
+  "selected": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_8.18\\knot_8.18_trial_015k.txt",
+  "selection_status": "best-so-far-no-plateau",
+  "plateau_detected": false,
+  "scan_limit": 15000,
+  "topology_status": "topology-verified",
+  "quality_class": "A",
+  "reason": "class A, R_proxy=61.8683184694554, k=15",
+  "checkpoints": [
+    {
+      "k": 1,
+      "file": "knot_8.18_trial_001k.txt",
+      "length": 338.2351204683719,
+      "gain": null,
+      "edge_ratio": 1.0088720040170407,
+      "edge_cv": 0.002566255171255007,
+      "flatness_min": 0.30467230970163733,
+      "component_flatness": [
+        0.30467230970163733
+      ],
+      "D_proxy": 5.4354556078119955,
+      "R_proxy": 62.22755641353238,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 2,
+      "file": "knot_8.18_trial_002k.txt",
+      "length": 338.4696948614086,
+      "gain": -0.0006935246485103,
+      "edge_ratio": 1.0078491880093694,
+      "edge_cv": 0.0023238175599639326,
+      "flatness_min": 0.3034000295166635,
+      "component_flatness": [
+        0.3034000295166635
+      ],
+      "D_proxy": 5.443219447781674,
+      "R_proxy": 62.18189402585051,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 3,
+      "file": "knot_8.18_trial_003k.txt",
+      "length": 338.53106634221155,
+      "gain": -0.00018132046010231652,
+      "edge_ratio": 1.007926443159856,
+      "edge_cv": 0.002348680675727997,
+      "flatness_min": 0.3020024797971836,
+      "component_flatness": [
+        0.3020024797971836
+      ],
+      "D_proxy": 5.449845967417532,
+      "R_proxy": 62.11754760889658,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 4,
+      "file": "knot_8.18_trial_004k.txt",
+      "length": 338.58133436322186,
+      "gain": -0.00014848864995892658,
+      "edge_ratio": 1.0081054291428715,
+      "edge_cv": 0.0023851802478791974,
+      "flatness_min": 0.3007382490364114,
+      "component_flatness": [
+        0.3007382490364114
+      ],
+      "D_proxy": 5.455173478300949,
+      "R_proxy": 62.06609848614298,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 5,
+      "file": "knot_8.18_trial_005k.txt",
+      "length": 338.6234877120601,
+      "gain": -0.00012449991939912487,
+      "edge_ratio": 1.008250972584855,
+      "edge_cv": 0.0024183031291756057,
+      "flatness_min": 0.2995946201254111,
+      "component_flatness": [
+        0.2995946201254111
+      ],
+      "D_proxy": 5.459374437771561,
+      "R_proxy": 62.026060233062424,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 6,
+      "file": "knot_8.18_trial_006k.txt",
+      "length": 338.6624399904227,
+      "gain": -0.00011503123609570778,
+      "edge_ratio": 1.0083847686778822,
+      "edge_cv": 0.00245562410405171,
+      "flatness_min": 0.29857102995623325,
+      "component_flatness": [
+        0.29857102995623325
+      ],
+      "D_proxy": 5.462832717800657,
+      "R_proxy": 61.99392466968467,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 7,
+      "file": "knot_8.18_trial_007k.txt",
+      "length": 338.69358370128367,
+      "gain": -9.196092386822919e-05,
+      "edge_ratio": 1.0084994369600588,
+      "edge_cv": 0.002484432345730446,
+      "flatness_min": 0.2976458163733048,
+      "component_flatness": [
+        0.2976458163733048
+      ],
+      "D_proxy": 5.465696717376295,
+      "R_proxy": 61.96713817371616,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 8,
+      "file": "knot_8.18_trial_008k.txt",
+      "length": 338.7207594037669,
+      "gain": -8.023683881539439e-05,
+      "edge_ratio": 1.0086013721439249,
+      "edge_cv": 0.0025108582640603495,
+      "flatness_min": 0.29681293547807347,
+      "component_flatness": [
+        0.29681293547807347
+      ],
+      "D_proxy": 5.467640590289668,
+      "R_proxy": 61.95007769993564,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 9,
+      "file": "knot_8.18_trial_009k.txt",
+      "length": 338.7435765411023,
+      "gain": -6.736267766860267e-05,
+      "edge_ratio": 1.0086895853112328,
+      "edge_cv": 0.002534580730393267,
+      "flatness_min": 0.2960609948969801,
+      "component_flatness": [
+        0.2960609948969801
+      ],
+      "D_proxy": 5.469676251491824,
+      "R_proxy": 61.93119317596026,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 10,
+      "file": "knot_8.18_trial_010k.txt",
+      "length": 338.7632485431606,
+      "gain": -5.807343200182386e-05,
+      "edge_ratio": 1.0087605789645429,
+      "edge_cv": 0.0025557449534996165,
+      "flatness_min": 0.2953872098178271,
+      "component_flatness": [
+        0.2953872098178271
+      ],
+      "D_proxy": 5.471276132507134,
+      "R_proxy": 61.916679096203325,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 11,
+      "file": "knot_8.18_trial_011k.txt",
+      "length": 338.78060186763804,
+      "gain": -5.122552269779432e-05,
+      "edge_ratio": 1.008817743071548,
+      "edge_cv": 0.0025746236153049748,
+      "flatness_min": 0.2947833513405591,
+      "component_flatness": [
+        0.2947833513405591
+      ],
+      "D_proxy": 5.472667690499098,
+      "R_proxy": 61.90410619226577,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 12,
+      "file": "knot_8.18_trial_012k.txt",
+      "length": 338.79439012208405,
+      "gain": -4.069965744791876e-05,
+      "edge_ratio": 1.0088653330386441,
+      "edge_cv": 0.0025897844676339996,
+      "flatness_min": 0.29423614830772155,
+      "component_flatness": [
+        0.29423614830772155
+      ],
+      "D_proxy": 5.473886012925147,
+      "R_proxy": 61.89284711484855,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 13,
+      "file": "knot_8.18_trial_013k.txt",
+      "length": 338.8076052553625,
+      "gain": -3.900635212310921e-05,
+      "edge_ratio": 1.0089050194014164,
+      "edge_cv": 0.0026056873670974637,
+      "flatness_min": 0.2937487313752832,
+      "component_flatness": [
+        0.2937487313752832
+      ],
+      "D_proxy": 5.474930047620737,
+      "R_proxy": 61.883458292330054,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 14,
+      "file": "knot_8.18_trial_014k.txt",
+      "length": 338.818018695026,
+      "gain": -3.073555463926036e-05,
+      "edge_ratio": 1.0089379659988564,
+      "edge_cv": 0.002616498025475948,
+      "flatness_min": 0.29331005713022135,
+      "component_flatness": [
+        0.29331005713022135
+      ],
+      "D_proxy": 5.4758246937377715,
+      "R_proxy": 61.87524941813842,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 15,
+      "file": "knot_8.18_trial_015k.txt",
+      "length": 338.82766071476567,
+      "gain": -2.8457812771572734e-05,
+      "edge_ratio": 1.0089645500174649,
+      "edge_cv": 0.0026281216959871713,
+      "flatness_min": 0.2929186038751764,
+      "component_flatness": [
+        0.2929186038751764
+      ],
+      "D_proxy": 5.476593983753511,
+      "R_proxy": 61.8683184694554,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    }
+  ]
+}

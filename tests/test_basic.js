@@ -183,8 +183,16 @@ if (typeof sst.evaluatePolygonalSmoothCertificate !== 'function') {
     const t = (i / 48) * 2 * Math.PI;
     ring.push([Math.cos(t), Math.sin(t), 0]);
   }
+  // Diagnostic-only: Pass reserved for reach/isotopy (audit H-004).
   const ok = sst.evaluatePolygonalSmoothCertificate(ring, ring, 0.05, 1e-9, 1e-9, 1e-6);
-  assert.strictEqual(ok.status, 'Pass');
+  assert.strictEqual(ok.status, 'Indeterminate');
+  const scaled = [];
+  for (let i = 0; i < 64; i++) {
+    const t = (i / 64) * 2 * Math.PI;
+    scaled.push([1.5 * Math.cos(t), 1.5 * Math.sin(t), 0]);
+  }
+  const coarse = sst.evaluatePolygonalSmoothCertificate(ring, scaled, 0.05, 0.01, 0.01, 0.01);
+  assert.strictEqual(coarse.status, 'Fail');
   console.log('✓ evaluatePolygonalSmoothCertificate');
 }
 

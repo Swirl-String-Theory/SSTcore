@@ -15,5 +15,11 @@ def test_get_resources_dir_finds_repo_root_without_env(monkeypatch):
     monkeypatch.delenv("SSTCORE_RESOURCES", raising=False)
     root = sst.get_resources_dir()
     assert root is not None
-    assert (Path(root) / "ideal.txt").is_file()
     assert Path(root).name == "resources"
+    # Nested (res-1) or flat legacy marker under the resolved resources root.
+    nested = Path(root) / "ideal" / "ideal.txt"
+    flat = Path(root) / "ideal.txt"
+    assert nested.is_file() or flat.is_file()
+    ideal = sst.get_ideal_txt_path()
+    assert ideal is not None
+    assert ideal.is_file()

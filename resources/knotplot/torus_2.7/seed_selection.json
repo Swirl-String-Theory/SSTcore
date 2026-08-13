@@ -1,0 +1,281 @@
+{
+  "selected": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_2.7\\torus_2.7_trial_015k.txt",
+  "selection_status": "best-so-far-no-plateau",
+  "plateau_detected": false,
+  "scan_limit": 15000,
+  "topology_status": "topology-verified",
+  "quality_class": "A",
+  "reason": "class A, R_proxy=60.92419884818498, k=15",
+  "checkpoints": [
+    {
+      "k": 1,
+      "file": "torus_2.7_trial_001k.txt",
+      "length": 337.1434362860358,
+      "gain": null,
+      "edge_ratio": 1.000442143279891,
+      "edge_cv": 0.00015450312590213353,
+      "flatness_min": 0.3000778780019189,
+      "component_flatness": [
+        0.3000778780019189
+      ],
+      "D_proxy": 5.525697435849869,
+      "R_proxy": 61.01373450140455,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 2,
+      "file": "torus_2.7_trial_002k.txt",
+      "length": 337.03542720256286,
+      "gain": 0.0003203653752325001,
+      "edge_ratio": 1.0003190869616092,
+      "edge_cv": 0.00011765633651744373,
+      "flatness_min": 0.3007247087316835,
+      "component_flatness": [
+        0.3007247087316835
+      ],
+      "D_proxy": 5.524238258868842,
+      "R_proxy": 61.01029886997943,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 3,
+      "file": "torus_2.7_trial_003k.txt",
+      "length": 337.0489977310225,
+      "gain": -4.0264397639961695e-05,
+      "edge_ratio": 1.0002584186587395,
+      "edge_cv": 9.849435644765957e-05,
+      "flatness_min": 0.3011752120927718,
+      "component_flatness": [
+        0.3011752120927718
+      ],
+      "D_proxy": 5.525077232060545,
+      "R_proxy": 61.00349073406927,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 4,
+      "file": "torus_2.7_trial_004k.txt",
+      "length": 337.0613345794882,
+      "gain": -3.6602537164417425e-05,
+      "edge_ratio": 1.0002180968714949,
+      "edge_cv": 8.364061115502582e-05,
+      "flatness_min": 0.3013793636086736,
+      "component_flatness": [
+        0.3013793636086736
+      ],
+      "D_proxy": 5.526047701512989,
+      "R_proxy": 60.995009957515094,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 5,
+      "file": "torus_2.7_trial_005k.txt",
+      "length": 337.0726667904917,
+      "gain": -3.362061987230359e-05,
+      "edge_ratio": 1.0001843180709962,
+      "edge_cv": 7.13070682028775e-05,
+      "flatness_min": 0.30139893147997615,
+      "component_flatness": [
+        0.30139893147997615
+      ],
+      "D_proxy": 5.527067601908984,
+      "R_proxy": 60.9858049635707,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 6,
+      "file": "torus_2.7_trial_006k.txt",
+      "length": 337.08333761830613,
+      "gain": -3.165735126497453e-05,
+      "edge_ratio": 1.000157322356486,
+      "edge_cv": 6.058316032069905e-05,
+      "flatness_min": 0.30127514458373944,
+      "component_flatness": [
+        0.30127514458373944
+      ],
+      "D_proxy": 5.5280812534874455,
+      "R_proxy": 60.976552652089495,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 7,
+      "file": "torus_2.7_trial_007k.txt",
+      "length": 337.0934887660662,
+      "gain": -3.0114653046231824e-05,
+      "edge_ratio": 1.000135143262695,
+      "edge_cv": 5.101825272329242e-05,
+      "flatness_min": 0.3010371071370772,
+      "component_flatness": [
+        0.3010371071370772
+      ],
+      "D_proxy": 5.529049520491994,
+      "R_proxy": 60.967710185397365,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 8,
+      "file": "torus_2.7_trial_008k.txt",
+      "length": 337.1031787680037,
+      "gain": -2.8745740456194775e-05,
+      "edge_ratio": 1.000116484423719,
+      "edge_cv": 4.2428286104503066e-05,
+      "flatness_min": 0.3007064625302118,
+      "component_flatness": [
+        0.3007064625302118
+      ],
+      "D_proxy": 5.529942777559007,
+      "R_proxy": 60.95961429040424,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 9,
+      "file": "torus_2.7_trial_009k.txt",
+      "length": 337.1124319022356,
+      "gain": -2.744896760002792e-05,
+      "edge_ratio": 1.0001005708817996,
+      "edge_cv": 3.480799061668238e-05,
+      "flatness_min": 0.3002999468470743,
+      "component_flatness": [
+        0.3002999468470743
+      ],
+      "D_proxy": 5.530757040985199,
+      "R_proxy": 60.95231256844098,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 10,
+      "file": "torus_2.7_trial_010k.txt",
+      "length": 337.12125917476726,
+      "gain": -2.6184951061773795e-05,
+      "edge_ratio": 1.000086848883636,
+      "edge_cv": 2.8310436187345098e-05,
+      "flatness_min": 0.29983090871499846,
+      "component_flatness": [
+        0.29983090871499846
+      ],
+      "D_proxy": 5.5314884340845545,
+      "R_proxy": 60.945849058899796,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 11,
+      "file": "torus_2.7_trial_011k.txt",
+      "length": 337.1296677856235,
+      "gain": -2.494239276638705e-05,
+      "edge_ratio": 1.000074939297182,
+      "edge_cv": 2.3269183701574443e-05,
+      "flatness_min": 0.2993102339573001,
+      "component_flatness": [
+        0.2993102339573001
+      ],
+      "D_proxy": 5.532138680311348,
+      "R_proxy": 60.94020545534297,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 12,
+      "file": "torus_2.7_trial_012k.txt",
+      "length": 337.13766541193377,
+      "gain": -2.3722701009382474e-05,
+      "edge_ratio": 1.0000645600936935,
+      "edge_cv": 2.0178807654378197e-05,
+      "flatness_min": 0.2987469471053632,
+      "component_flatness": [
+        0.2987469471053632
+      ],
+      "D_proxy": 5.532716214920507,
+      "R_proxy": 60.935289705036446,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 13,
+      "file": "torus_2.7_trial_013k.txt",
+      "length": 337.1452619680647,
+      "gain": -2.2532504998035336e-05,
+      "edge_ratio": 1.0000701010147997,
+      "edge_cv": 1.9417535578077043e-05,
+      "flatness_min": 0.29814861629631806,
+      "component_flatness": [
+        0.29814861629631806
+      ],
+      "D_proxy": 5.533226364182941,
+      "R_proxy": 60.931044525927135,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 14,
+      "file": "torus_2.7_trial_014k.txt",
+      "length": 337.15247008409375,
+      "gain": -2.137985266939629e-05,
+      "edge_ratio": 1.0000796815885622,
+      "edge_cv": 2.077630850918611e-05,
+      "flatness_min": 0.297521641294161,
+      "component_flatness": [
+        0.297521641294161
+      ],
+      "D_proxy": 5.533677354799416,
+      "R_proxy": 60.92738128139653,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 15,
+      "file": "torus_2.7_trial_015k.txt",
+      "length": 337.15930494063434,
+      "gain": -2.0272301546205217e-05,
+      "edge_ratio": 1.000090468550231,
+      "edge_cv": 2.353298597442068e-05,
+      "flatness_min": 0.2968714603250603,
+      "component_flatness": [
+        0.2968714603250603
+      ],
+      "D_proxy": 5.534078597911326,
+      "R_proxy": 60.92419884818498,
+      "quality_class": "A",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    }
+  ]
+}

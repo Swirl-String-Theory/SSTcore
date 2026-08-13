@@ -1,0 +1,15 @@
+{
+  "stem": "build_torus_6.15",
+  "tag": "finalize",
+  "suffix": null,
+  "polish_path": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.15\\torus_6.15_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_030k_polish.txt",
+  "final_txt": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.15\\build_torus_6.15_final_finalize_20260813_103720.txt",
+  "final_metrics": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.15\\build_torus_6.15_final_finalize_20260813_103720.metrics.json",
+  "timestamp": "20260813_103720",
+  "rop": 300.64624,
+  "pick": "seed_selection",
+  "source": "run_finalize_knotplot",
+  "build_id": "torus_6.15",
+  "source_final": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_6.15\\build_torus_6.15_final_finalize_20260813_103720.txt",
+  "shared_final": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\final\\torus_6.15_final.txt"
+}

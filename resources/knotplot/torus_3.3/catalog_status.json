@@ -1,43 +1,54 @@
 {
-  "status": "relaxed-seed",
+  "status": "stalled-not-converged",
   "ideal": false,
   "strict_near_ideal": false,
   "folder": "torus_3.3",
-  "reference": {
+  "reference": null,
+  "campaign_reference": {
     "ropelength": 51.292347,
-    "source": "best-known numerical"
+    "source": "campaign-best"
   },
-  "epsilon_R": 0.0,
+  "epsilon_R": null,
   "primary_polish": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_3.3\\torus_3.3_trial_004k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
   "primary_metrics": {
-    "residual": 0.21793,
-    "ropelength": 51.292347,
-    "thickness": 0.4999959,
-    "edge_length_ratio": 1.1298257531806628,
-    "edge_length_cv": 0.013753544482920592
+    "residual": 0.216789,
+    "ropelength": 51.2924,
+    "thickness": 0.4999948,
+    "edge_length_ratio": 1.1298984244249117,
+    "edge_length_cv": 0.01376164455025492,
+    "stop_reason": null,
+    "residual_converged": null,
+    "analytic": false
   },
   "checks": {
     "topology": "pass",
     "residual_candidate": "fail",
     "residual_strict": "fail",
-    "ropelength_excess": "pass",
+    "ropelength_excess": "not-tested",
     "raw_edge_ratio": "warn",
     "raw_edge_cv": "warn",
     "thickness": "pass",
-    "multistart_spread": "not-tested",
+    "multistart_spread": "pass",
     "resolution_convergence": "not-tested",
     "uniform_mesh": "pass",
-    "constraint_anomalies": "pass"
+    "constraint_anomalies": "pass",
+    "residual_converged": "fail"
   },
   "reason": [
     "topology verified",
     "residual above 0.01",
     "residual above 0.005",
-    "ropelength threshold passed",
+    "ropelength_excess not tested (no external reference; campaign-best is not proof of near-ideal)",
     "raw edge-ratio 1.13 (warn only)",
-    "raw edge-CV 1.3754% (warn only)",
-    "multi-start not tested",
+    "raw edge-CV 1.3762% (warn only)",
+    "multi-start / mirror ropelength spread OK",
     "resolution convergence not yet demonstrated",
-    "VortexLab uniform mesh OK"
-  ]
+    "VortexLab uniform mesh OK",
+    "stopped without residual convergence (stalled)"
+  ],
+  "chirality": null,
+  "catalog_aliases": [],
+  "dowker_code": "0 1 2",
+  "equivalent_group": null,
+  "final_snapshot": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_3.3\\build_torus_3.3_final_finalize_20260813_103716.txt"
 }

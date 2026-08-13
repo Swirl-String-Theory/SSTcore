@@ -1,43 +1,54 @@
 {
-  "status": "relaxed-seed",
+  "status": "stalled-not-converged",
   "ideal": false,
   "strict_near_ideal": false,
   "folder": "link_5.2.1",
-  "reference": {
+  "reference": null,
+  "campaign_reference": {
     "ropelength": 56.001628,
-    "source": "best-known numerical"
+    "source": "campaign-best"
   },
-  "epsilon_R": 0.0,
+  "epsilon_R": null,
   "primary_polish": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_5.2.1\\link_5.2.1_trial_005k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.metrics.json",
   "primary_metrics": {
     "residual": 0.550768,
     "ropelength": 56.001628,
     "thickness": 0.4999958,
     "edge_length_ratio": 1.2007100778908135,
-    "edge_length_cv": 0.03499340780793153
+    "edge_length_cv": 0.03499340780793153,
+    "stop_reason": null,
+    "residual_converged": null,
+    "analytic": false
   },
   "checks": {
     "topology": "pass",
     "residual_candidate": "fail",
     "residual_strict": "fail",
-    "ropelength_excess": "pass",
+    "ropelength_excess": "not-tested",
     "raw_edge_ratio": "warn",
     "raw_edge_cv": "warn",
     "thickness": "pass",
     "multistart_spread": "not-tested",
     "resolution_convergence": "not-tested",
     "uniform_mesh": "pass",
-    "constraint_anomalies": "pass"
+    "constraint_anomalies": "pass",
+    "residual_converged": "fail"
   },
   "reason": [
     "topology verified",
     "residual above 0.01",
     "residual above 0.005",
-    "ropelength threshold passed",
+    "ropelength_excess not tested (no external reference; campaign-best is not proof of near-ideal)",
     "raw edge-ratio 1.201 (warn only)",
     "raw edge-CV 3.4993% (warn only)",
     "multi-start not tested",
     "resolution convergence not yet demonstrated",
-    "VortexLab uniform mesh OK"
-  ]
+    "VortexLab uniform mesh OK",
+    "stopped without residual convergence (stalled)"
+  ],
+  "chirality": null,
+  "catalog_aliases": [],
+  "dowker_code": "-5 -9 |1 10 3",
+  "equivalent_group": null,
+  "final_snapshot": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_5.2.1\\build_link_5.2.1_final_finalize_20260813_103703.txt"
 }
