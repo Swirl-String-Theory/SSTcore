@@ -1,6 +1,7 @@
 #include "sst_value_origin.h"
 #include "canonical_constants.h"
 
+#include <algorithm>
 #include <cmath>
 #include <limits>
 
@@ -76,7 +77,7 @@ bool ValueOriginAPI::rho_eff_rescale_preserves_calibrated_primitives(
     double v_swirl_after, double omega_c_after, double r_c_after, double gamma_0_after,
     double rel_tol) {
     auto close = [rel_tol](double a, double b) {
-        const double scale = std::max({1.0, std::abs(a), std::abs(b)});
+        const double scale = std::max(1.0, std::max(std::abs(a), std::abs(b)));
         return std::abs(a - b) <= rel_tol * scale;
     };
     return close(v_swirl_before, v_swirl_after)
