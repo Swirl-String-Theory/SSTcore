@@ -1,0 +1,43 @@
+{
+  "status": "relaxed-seed",
+  "ideal": false,
+  "strict_near_ideal": false,
+  "folder": "knot_5.1",
+  "reference": {
+    "ropelength": 47.384097,
+    "source": "best-known numerical"
+  },
+  "epsilon_R": 0.0,
+  "primary_polish": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\knot_5.1\\knot_5.1_trial_001k_rr_010k_coarse_rr_050k_eqfinal_rr_020k_polish.metrics.json",
+  "primary_metrics": {
+    "residual": 0.0486732,
+    "ropelength": 47.384097,
+    "thickness": 0.4999952,
+    "edge_length_ratio": 1.5780035054854304,
+    "edge_length_cv": 0.027234653318243835
+  },
+  "checks": {
+    "topology": "pass",
+    "residual_candidate": "fail",
+    "residual_strict": "fail",
+    "ropelength_excess": "pass",
+    "raw_edge_ratio": "warn",
+    "raw_edge_cv": "warn",
+    "thickness": "pass",
+    "multistart_spread": "not-tested",
+    "resolution_convergence": "not-tested",
+    "uniform_mesh": "pass",
+    "constraint_anomalies": "pass"
+  },
+  "reason": [
+    "topology verified",
+    "residual above 0.01",
+    "residual above 0.005",
+    "ropelength threshold passed",
+    "raw edge-ratio 1.578 (warn only)",
+    "raw edge-CV 2.7235% (warn only)",
+    "multi-start not tested",
+    "resolution convergence not yet demonstrated",
+    "VortexLab uniform mesh OK"
+  ]
+}

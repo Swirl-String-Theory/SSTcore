@@ -1,0 +1,8 @@
+
+> sst-core@0.8.18 build:node
+> node scripts/install-native.js
+
+[SSTcore install] platform=win32 arch=x64 node=v24.14.0
+[SSTcore install] Checking prebuilt: C:\workspace\projects\SSTcore\prebuilds\win32-x64\sstcore.node
+[SSTcore install] Prebuilt not usable: file missing
+[SSTcore install] Using existing native addon at C:\workspace\projects\SSTcore\build\Release\sstcore.node

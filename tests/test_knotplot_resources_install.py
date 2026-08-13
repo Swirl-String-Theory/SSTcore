@@ -1,23 +1,15 @@
 #!/usr/bin/env python3
-"""Validate installed SSTcore resources, including knotplot ideal files."""
+"""Validate installed SSTcore resources, including knotplot exports via INDEX.json."""
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pytest
 
 
 SST = pytest.importorskip("SSTcore", exc_type=ImportError)
-
-
-def _discover_knotplot_dirs(knotplot_dir: Path) -> list[Path]:
-    return sorted(p for p in knotplot_dir.glob("knot_*") if p.is_dir())
-
-
-def _extract_knot_id(knot_dir: Path) -> str:
-    # Strip "knot_" prefix because API accepts both "knot_X" and "X".
-    return knot_dir.name[5:] if knot_dir.name.startswith("knot_") else knot_dir.name
 
 
 def test_resources_dir_available_after_install() -> None:
@@ -31,24 +23,25 @@ def test_knotplot_ideal_files_load_via_public_api() -> None:
     assert knotplot_dir is not None, "knotplot directory is not resolved by SSTcore"
     assert knotplot_dir.is_dir(), f"knotplot path is not a directory: {knotplot_dir}"
 
-    knot_dirs = _discover_knotplot_dirs(knotplot_dir)
-    assert knot_dirs, "No knot_* directories found under resources/knotplot"
+    index_path = knotplot_dir / "INDEX.json"
+    assert index_path.is_file(), "resources/knotplot/INDEX.json missing"
+
+    index = json.loads(index_path.read_text(encoding="utf-8"))
+    entries = index.get("entries") or []
+    assert entries, "INDEX.json has no entries"
 
     checked = 0
-    for knot_dir in knot_dirs:
-        expected = knot_dir / f"{knot_dir.name}_ideal.txt"
-        if not expected.is_file():
-            # Some directories may contain alternate assets only; skip those.
+    for entry in entries:
+        if not entry.get("relaxed"):
             continue
+        kid = entry["id"]
+        resolved_path = SST.get_knotplot_ideal_path(kid)
+        assert resolved_path is not None, f"API did not resolve knotplot path for {kid}"
+        assert resolved_path.is_file(), f"Resolved path is not a file for {kid}: {resolved_path}"
 
-        knot_id = _extract_knot_id(knot_dir)
-        resolved_path = SST.get_knotplot_ideal_path(knot_id)
-        assert resolved_path is not None, f"API did not resolve knotplot path for {knot_id}"
-        assert resolved_path.is_file(), f"Resolved path is not a file for {knot_id}: {resolved_path}"
-
-        text = SST.knotplot(knot_id)
-        assert text is not None, f"knotplot() returned None for {knot_id}"
-        assert text.strip(), f"knotplot() returned empty content for {knot_id}"
+        text = SST.knotplot(kid)
+        assert text is not None, f"knotplot() returned None for {kid}"
+        assert text.strip(), f"knotplot() returned empty content for {kid}"
         checked += 1
 
-    assert checked > 0, "No knot_*/knot_*_ideal.txt files were validated"
+    assert checked > 0, "No relaxed INDEX entries were validated"

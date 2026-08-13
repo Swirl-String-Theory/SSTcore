@@ -1,0 +1,188 @@
+
+> sst-core@0.8.18 install
+> node scripts/install-native.js
+
+[SSTcore install] platform=win32 arch=x64 node=v24.14.0
+[SSTcore install] Checking prebuilt: C:\workspace\projects\SSTcore\prebuilds\win32-x64\sstcore.node
+[SSTcore install] Prebuilt not usable: file missing
+[SSTcore install] Node headers found: C:\Users\oscar\AppData\Local\node-gyp\Cache\24.14.0\include\node
+[SSTcore install] Building native addon via CMake (profile=deterministic)...
+[SSTcore install] $ cmake -S . -B build_node -DSST_BUILD_PYTHON_BINDINGS=OFF -DSST_BUILD_CPP_TESTS=OFF -DSST_COPY_RUNTIME_RESOURCES=OFF -DSST_NUMERIC_PROFILE=deterministic -DNODE_CORE_INCLUDE_DIR=C:\Users\oscar\AppData\Local\node-gyp\Cache\24.14.0\include\node
+-- Building for: Visual Studio 17 2022
+-- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.26200.
+-- The CXX compiler identification is MSVC 19.44.35228.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- SST_NUMERIC_PROFILE=deterministic
+-- SST_BUILD_PYTHON_BINDINGS=OFF: skipping pybind11 (embed/Node-only configure)
+-- Embedded 78 .fseries files from C:/workspace/projects/SSTcore/resources/Knots_FourierSeries
+-- Embedded 2205 ideal text files from C:/workspace/projects/SSTcore/resources
+-- SST_COPY_RUNTIME_RESOURCES=OFF: skipping resource tree copy
+-- SST_BUILD_CPP_TESTS=OFF: skipping C++ test executables
+-- Skipping examples/atoms (set SST_BUILD_ATOMS=ON and install GLFW3 to build)
+-- Node library from node-gyp cache: C:/Users/oscar/AppData/Local/node-gyp/Cache/24.14.0/x64/node.lib
+-- Node library for addon: C:/Users/oscar/AppData/Local/node-gyp/Cache/24.14.0/x64/node.lib
+-- Node.js native addon build enabled (links sstcore_lib)
+-- Emscripten not detected, skipping WASM build
+-- Configuring done (36.4s)
+-- Generating done (0.1s)
+-- Build files have been written to: C:/workspace/projects/SSTcore/build_node
+[SSTcore install] $ cmake --build build_node --target knot_files_embedded --config Release
+MSBuild version 17.14.51+25f168cee for .NET Framework
+
+  1>Checking Build System
+  Ensuring knot files are embedded
+  Building Custom Rule C:/workspace/projects/SSTcore/CMakeLists.txt
+[SSTcore install] $ cmake --build build_node --target sstcore_node --config Release
+MSBuild version 17.14.51+25f168cee for .NET Framework
+
+  Ensuring knot files are embedded
+  Building Custom Rule C:/workspace/projects/SSTcore/CMakeLists.txt
+  ab_initio_mass.cpp
+  canonical_constants.cpp
+  sst_master_equation.cpp
+  chronos_kelvin_transport.cpp
+  sst_tension_scales.cpp
+  delay_mode_selector.cpp
+  atomic_bridge_model.cpp
+  spectroscopic_gap.cpp
+  clock_field_eft.cpp
+  trefoil_closure_kernels.cpp
+  biot_savart.cpp
+  fluid_dynamics.cpp
+  field_kernels.cpp
+  frenet_helicity.cpp
+  potential_timefield.cpp
+  magnus_integrator.cpp
+  multisector_fitter.cpp
+  trefoil_operator.cpp
+  hyperbolic_volume.cpp
+  resource_loader.cpp
+  Generating Code...
+  Compiling...
+  fourier_parser.cpp
+  ideal_parser.cpp
+  fourier_eval.cpp
+  invariants.cpp
+  invariants_bridge.cpp
+  xi_model.cpp
+  mass_functional.cpp
+  knot_particle_model.cpp
+  vortex_knot_system.cpp
+  evolution.cpp
+  velocity_solver.cpp
+  integrator.cpp
+  periodic_spline.cpp
+  continuous_reach.cpp
+  polygonal_clearance.cpp
+  topology_guard.cpp
+  intrinsic_frame.cpp
+  rigid_motion.cpp
+  sampling.cpp
+  knot_catalog.cpp
+  Generating Code...
+  Compiling...
+  polygonal_gauss.cpp
+  common.cpp
+  geometry_core.cpp
+  rigidity_matrix.cpp
+  nnls.cpp
+  io.cpp
+  contact_stress.cpp
+  tightener.cpp
+  radiation_flow.cpp
+  swirl_field.cpp
+  thermo_dynamics.cpp
+  time_evolution.cpp
+  vortex_ring.cpp
+  vorticity_dynamics.cpp
+  sst_gravity.cpp
+  sst_extensions.cpp
+  sst_integrator.cpp
+  knot_files_embedded.cpp
+  Generating Code...
+  sstcore_lib.vcxproj -> C:\workspace\projects\SSTcore\build_node\Release\sstcore_lib.lib
+  Building Custom Rule C:/workspace/projects/SSTcore/CMakeLists.txt
+  module_node.cpp
+  ab_initio_mass_node.cpp
+  atomic_bridge_model_node.cpp
+  biot_savart_node.cpp
+  canonical_constants_node.cpp
+  chronos_kelvin_transport_node.cpp
+  clock_field_eft_node.cpp
+  delay_mode_selector_node.cpp
+  field_kernels_node.cpp
+  field_ops_node.cpp
+  fluid_dynamics_node.cpp
+  frenet_helicity_node.cpp
+  hyperbolic_volume_node.cpp
+  knot_dynamics_node.cpp
+  magnus_integrator_node.cpp
+  multisector_fitter_node.cpp
+  potential_timefield_node.cpp
+  radiation_flow_node.cpp
+  spectroscopic_gap_node.cpp
+  trefoil_operator_node.cpp
+  Generating Code...
+  Compiling...
+  geometry_node.cpp
+  sst_extensions_node.cpp
+  sst_gravity_node.cpp
+  sst_integrator_node.cpp
+  sst_master_equation_node.cpp
+  sst_tension_scales_node.cpp
+  swirl_field_node.cpp
+  thermo_dynamics_node.cpp
+  time_evolution_node.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(3630,35): warning C4996: 'sst::TimeEvolution::TimeEvolution': Use sst::FilamentEvolution [C:\workspace\projects\SSTcore\build_node\sstcore_node.vcxproj]
+  (compiling source file '../src/time_evolution_node.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(3630,35):
+      the template instantiation context (the oldest one first) is
+          C:\workspace\projects\SSTcore\src\time_evolution_node.cpp(28,20):
+          see reference to function template instantiation 'std::unique_ptr<sst::TimeEvolution,std::default_delete<sst::TimeEvolution>> std::make_unique<sst::TimeEvolution,std::vector<sst::Vec3,std::allocator<sst::Vec3>>&,std::vector<sst::Vec3,std::allocator<sst::Vec3>>&,double&,0>(std::vector<sst::Vec3,std::allocator<sst::Vec3>> &,std::vector<sst::Vec3,std::allocator<sst::Vec3>> &,double &)' being compiled
+  
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(3309,9): warning C4996: 'sst::TimeEvolution::~TimeEvolution': Use sst::FilamentEvolution [C:\workspace\projects\SSTcore\build_node\sstcore_node.vcxproj]
+  (compiling source file '../src/time_evolution_node.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(3309,9):
+      the template instantiation context (the oldest one first) is
+          C:\workspace\projects\SSTcore\src\time_evolution_node.cpp(32,41):
+          see reference to class template instantiation 'std::unique_ptr<sst::TimeEvolution,std::default_delete<sst::TimeEvolution>>' being compiled
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(3352,92):
+          see reference to class template instantiation 'std::default_delete<sst::TimeEvolution>' being compiled
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(3307,23):
+          while compiling class template member function 'void std::default_delete<sst::TimeEvolution>::operator ()(_Ty *) noexcept const'
+          with
+          [
+              _Ty=sst::TimeEvolution
+          ]
+              C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\memory(3427,33):
+              see the first reference to 'std::default_delete<sst::TimeEvolution>::operator ()' in 'std::unique_ptr<sst::TimeEvolution,std::default_delete<sst::TimeEvolution>>::~unique_ptr'
+              C:\workspace\projects\SSTcore\src\time_evolution_node.cpp(20,53):
+              see the first reference to 'std::unique_ptr<sst::TimeEvolution,std::default_delete<sst::TimeEvolution>>::~unique_ptr' in '`anonymous-namespace'::TimeEvolutionWrap::TimeEvolutionWrap'
+  
+  vortex_ring_node.cpp
+  vorticity_dynamics_node.cpp
+  vortexlab_kernels_node.cpp
+  Generating Code...
+     Creating library C:/workspace/projects/SSTcore/build_node/Release/sstcore_node.lib and object C:/workspace/projects/SSTcore/build_node/Release/sstcore_node.exp
+  sstcore_node.vcxproj -> C:\workspace\projects\SSTcore\build_node\Release\sstcore_node.node
+  Copying Node.js addon to build/Release
+[SSTcore install] Native CMake install OK (sstcore.node loads)
+
+added 106 packages, and audited 107 packages in 2m
+
+16 packages are looking for funding
+  run `npm fund` for details
+
+8 vulnerabilities (1 low, 6 high, 1 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.

@@ -37,11 +37,13 @@ def test_export_resources_cli(tmp_path):
 
     manifest = tmp_path / "manifest.json"
     report = export_resources(tmp_path / "out", manifest_path=manifest)
-    assert (tmp_path / "out" / "ideal.txt").is_file()
+    out = tmp_path / "out"
+    assert (out / "ideal" / "ideal.txt").is_file() or (out / "ideal.txt").is_file()
     assert manifest.is_file()
     data = json.loads(manifest.read_text(encoding="utf-8"))
     assert data["files"]
-    assert any(f["path"] == "ideal.txt" for f in data["files"])
+    paths = {f["path"] for f in data["files"]}
+    assert "ideal/ideal.txt" in paths or "ideal.txt" in paths
     assert report["file_count"] > 0
 
 

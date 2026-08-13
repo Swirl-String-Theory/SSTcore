@@ -1,0 +1,35 @@
+...................................................................ss... [ 57%]
+...............................sss..........F.........                   [100%]
+============================== warnings summary ===============================
+tests/test_ideal_resources.py::test_knotplot_ideal_not_used_for_ab_lookup
+  C:\workspace\projects\SSTcore\tests\test_ideal_resources.py:57: DeprecationWarning: SSTcore.get_knotplot_ideal_path is deprecated; use get_knotplot_ab_path (deelplan res-4).
+    kp_path = sstcore.get_knotplot_ideal_path("knot_3.1")
+
+tests/test_knot_registry.py::test_resolve_knot_ref_knotplot_legacy
+  C:\workspace\projects\SSTcore\tests\test_knot_registry.py:31: DeprecationWarning: SSTcore.get_knotplot_ideal_path is deprecated; use get_knotplot_ab_path (deelplan res-4).
+    kp_path = sstcore.get_knotplot_ideal_path("knot_3.1")
+
+tests/test_knot_registry.py::test_assert_canon_ideal_rejects_knotplot
+  C:\workspace\projects\SSTcore\tests\test_knot_registry.py:48: DeprecationWarning: SSTcore.get_knotplot_ideal_path is deprecated; use get_knotplot_ab_path (deelplan res-4).
+    kp_path = sstcore.get_knotplot_ideal_path("knot_3.1")
+
+tests/test_knotplot_index.py::test_legacy_aliases_resolve
+  C:\workspace\projects\SSTcore\tests\test_knotplot_index.py:111: DeprecationWarning: SSTcore.get_knotplot_ideal_path is deprecated; use get_knotplot_ab_path (deelplan res-4).
+    path = sstcore.get_knotplot_ideal_path(legacy)
+
+tests/test_knotplot_resources_install.py::test_knotplot_ideal_files_load_via_public_api
+  C:\workspace\projects\SSTcore\tests\test_knotplot_resources_install.py:42: DeprecationWarning: SSTcore.knotplot is deprecated; use get_knotplot_ab (deelplan res-4).
+    text = SST.knotplot(kid)
+
+tests/test_resource_inventory.py::test_knotplot_ids_resolve_via_api
+  C:\workspace\projects\SSTcore\tests\test_resource_inventory.py:99: DeprecationWarning: SSTcore.get_knotplot_ideal_path is deprecated; use get_knotplot_ab_path (deelplan res-4).
+    path = sstcore.get_knotplot_ideal_path(kid)
+
+tests/test_trefoil_three_sources.py::test_ideal_mass_scale_unity
+  C:\workspace\projects\SSTcore\tests\test_trefoil_three_sources.py:131: DeprecationWarning: SSTcore.get_knotplot_ideal_path is deprecated; use get_knotplot_ab_path (deelplan res-4).
+    kp_path = sstcore.get_knotplot_ideal_path("knot_3.1")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_vendored_tooling.py::test_no_bin_out_or_caches - AssertionE...
+1 failed, 120 passed, 25 skipped, 7 warnings in 23.54s

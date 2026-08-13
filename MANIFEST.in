@@ -1,6 +1,9 @@
 # Resource tree at repo root (see setup.py: junction SSTcore/resources -> ../resources for wheels)
 graft resources
 
+# Repo-only tooling (ridgerunner pipeline / importers) — never ship in sdist
+prune tools
+
 # Native extension sources (required for sdist → wheel; must match setup.py src_files + bindings)
 recursive-include src *.cpp
 recursive-include src *.h

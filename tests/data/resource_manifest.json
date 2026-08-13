@@ -1,0 +1,230 @@
+{
+  "version": 1,
+  "description": "API-driven resource inventory for deelplan res-0. Regenerate with: python -m tests.data.regen_resource_manifest",
+  "entries": [
+    {
+      "id": "ideal",
+      "kind": "ideal",
+      "relpath": "ideal/ideal.txt",
+      "sha256": "a16c0f6e9175fdd54ee8c50b3b32e23caa3b256e7da21145be00a5a58e08cc51",
+      "bytes": 5587284
+    },
+    {
+      "id": "ideal_11a",
+      "kind": "ideal",
+      "relpath": "ideal/ideal_11a.txt",
+      "sha256": "53b8597dfd845d2f655a108b633d4310db9dd484518a485487eded33e95b6390",
+      "bytes": 7809725
+    },
+    {
+      "id": "ideal_11n",
+      "kind": "ideal",
+      "relpath": "ideal/ideal_11n.txt",
+      "sha256": "f640786a1fd76343cb1e1594ca1f83e7a00c9e54d008189393fa8e6c6af0c32f",
+      "bytes": 3948742
+    },
+    {
+      "id": "idealLinks",
+      "kind": "ideal",
+      "relpath": "ideal/idealLinks.txt",
+      "sha256": "542aad3915b9b2aa3aa554720a5457b362550bc66f6f950c9bb31b253b7c575a",
+      "bytes": 5393494
+    },
+    {
+      "id": "idealLinks_10a",
+      "kind": "ideal",
+      "relpath": "ideal/idealLinks_10a.txt",
+      "sha256": "b2be5888d5f2e085a034b016ada7d6d537dad71a53928a6a0bbb4d32e44bf9ef",
+      "bytes": 7145724
+    },
+    {
+      "id": "idealLinks_10n",
+      "kind": "ideal",
+      "relpath": "ideal/idealLinks_10n.txt",
+      "sha256": "81b9aaa6aaef48107f6c4cc90c1423046ed4dd4cf83b6fe478dd8fd90f4df92c",
+      "bytes": 5067129
+    },
+    {
+      "id": "ideal_short",
+      "kind": "ideal",
+      "relpath": "ideal/ideal_short.txt",
+      "sha256": "aea0bfcb753124b07da54a46e948541f1b3e51f5214c28a5b5634f027f16959c",
+      "bytes": 57130
+    },
+    {
+      "id": "ideal_favorites.txt",
+      "kind": "ideal_aux",
+      "relpath": "ideal/ideal_favorites.txt",
+      "sha256": "b554d8a505b031ef9f3a57e69f4265002d7fcf19c6f8c9942173cff754f07e34",
+      "bytes": 777768
+    },
+    {
+      "id": "knot_0.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_0.1/knot_0.1_ab.xml",
+      "sha256": "e5724577ff4ba1109307986bc277e885020a01b04452606001630cd66228ff51",
+      "bytes": 7106
+    },
+    {
+      "id": "knot_3.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_3.1/knot_3.1_ab.xml",
+      "sha256": "596537bd293a001e8a25afff06668f3ec8fd4e2e528ba51451f49cc8d1156920",
+      "bytes": 7107
+    },
+    {
+      "id": "knot_4.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_4.1/knot_4.1_ab.xml",
+      "sha256": "b626d5c36443c3b42665db0d3ef59e3bc69be567610e99f5667d326639f19de6",
+      "bytes": 7107
+    },
+    {
+      "id": "knot_5.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_5.1/knot_5.1_ab.xml",
+      "sha256": "e9b360f04fdd0b0e34b2751128e803f4c2cb81c410ceb450bc5fb8f24866b8b8",
+      "bytes": 7107
+    },
+    {
+      "id": "knot_5.2",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_5.2/knot_5.2_ab.xml",
+      "sha256": "e7bcb1b90679f13a2590b4c71599741119215318526e73b9d1b13367f4179988",
+      "bytes": 7107
+    },
+    {
+      "id": "knot_6.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_6.1/knot_6.1_ab.xml",
+      "sha256": "5cb7202bafe46594469f15ab3c9d0c233ad15cefd1c94163754bd3f214fae04c",
+      "bytes": 7107
+    },
+    {
+      "id": "knot_7.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/knot_7.1/knot_7.1_ab.xml",
+      "sha256": "1d5907165c2aba81b73c4521746817edba366a7e2aafd8c023c733fd13fb158b",
+      "bytes": 7107
+    },
+    {
+      "id": "link_0.2.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/link_0.2.1/link_0.2.1_ab.xml",
+      "sha256": "d37b69d1b7df89a9bc1e7802e199fb22ccebe90d6f2b9b3fd82bb71242708567",
+      "bytes": 7111
+    },
+    {
+      "id": "link_0.3.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/link_0.3.1/link_0.3.1_ab.xml",
+      "sha256": "fb497bb2ddf37575e9f027f0ec0dd8fb6c9060248b14096ef8a0e70506135207",
+      "bytes": 7111
+    },
+    {
+      "id": "link_2.2.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/link_2.2.1/link_2.2.1_ab.xml",
+      "sha256": "c53d509baa5620d2f6f0bf7856261b842aa2b86f0b82894d666b2fd6fa81a439",
+      "bytes": 7112
+    },
+    {
+      "id": "link_5.2.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/link_5.2.1/link_5.2.1_ab.xml",
+      "sha256": "8071b9a7a377afd6d5793fbbcce9038acdd7830031cff14feb232f693a63036c",
+      "bytes": 7112
+    },
+    {
+      "id": "link_6.2.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/link_6.2.1/link_6.2.1_ab.xml",
+      "sha256": "6e4e11268f31127fb07cb9bff199d0306784682c35b6b3d9b1d41df1c2f8922a",
+      "bytes": 7112
+    },
+    {
+      "id": "link_6.3.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/link_6.3.1/link_6.3.1_ab.xml",
+      "sha256": "a361ab86ee4db5dd6b884914754106d228ef71055f845d5ddcb753a7343e9f7b",
+      "bytes": 7112
+    },
+    {
+      "id": "link_6.3.2",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/link_6.3.2/link_6.3.2_ab.xml",
+      "sha256": "9be4e82e4e60b7707d309781d214a72986b7ba8bc19680800083aae95901d2be",
+      "bytes": 7112
+    },
+    {
+      "id": "link_7.2.6",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/link_7.2.6/link_7.2.6_ab.xml",
+      "sha256": "83abd637458a8286f0c58775169b409d0fbbfb19fa9c00ff9fb1c46e2a90a98b",
+      "bytes": 7112
+    },
+    {
+      "id": "link_7.2.8",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/link_7.2.8/link_7.2.8_ab.xml",
+      "sha256": "72899879179cf8367a47a4a6c5347daff9d129c24bde1dc7c1a1f3f98bd67db3",
+      "bytes": 7112
+    },
+    {
+      "id": "link_8.2.1",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/link_8.2.1/link_8.2.1_ab.xml",
+      "sha256": "8c841d1215d1a329e0dea34ef907aacda241e260bea287fbc998461bc984ef90",
+      "bytes": 7112
+    },
+    {
+      "id": "link_9.2.20",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/link_9.2.20/link_9.2.20_ab.xml",
+      "sha256": "7207b8fa424f55e825158d556c5603c21a04d8a4c1f10efadcd72a6b2a72ce59",
+      "bytes": 7113
+    },
+    {
+      "id": "link_9.2.40",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/link_9.2.40/link_9.2.40_ab.xml",
+      "sha256": "b1b6aa5d6fe9180dcc8a261c8151fe6a5157982b3453232d8dc4a57ca5492b1c",
+      "bytes": 7113
+    },
+    {
+      "id": "torus_3.3",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/torus_3.3/torus_3.3_ab.xml",
+      "sha256": "4f0fdefb8f6adb74a5b1f27115d71851e40516134b1c993f92c11a97ca2c936a",
+      "bytes": 7110
+    },
+    {
+      "id": "torus_6.9",
+      "kind": "knotplot_ideal",
+      "relpath": "knotplot/torus_6.9/torus_6.9_ab.xml",
+      "sha256": "88e89c474d3b6630327e429a9079da5cf24241355f7c8fc88aca2f0e2d1d88ea",
+      "bytes": 7111
+    },
+    {
+      "id": "3_1",
+      "kind": "fseries",
+      "relpath": "Knots_FourierSeries/3_1/knot.3_1.fseries",
+      "sha256": "82599a293f38a8547747091dbe6a9a58d5585b4bd2a8cb972665143043a722f6",
+      "bytes": 391
+    },
+    {
+      "id": "4_1",
+      "kind": "fseries",
+      "relpath": "Knots_FourierSeries/4_1/knot.4_1.fseries",
+      "sha256": "0b06340868928cca992b2594e5cf3fd1710c3ec3afb83a4450510f1954f5ce3d",
+      "bytes": 983
+    },
+    {
+      "id": "5_1",
+      "kind": "fseries",
+      "relpath": "Knots_FourierSeries/5_1/knot.5_1.fseries",
+      "sha256": "1635e12e4e2911f9eb8a4bc3cdd27c615b15627987a539d8ef8f0427fd6b5d4e",
+      "bytes": 554
+    }
+  ]
+}

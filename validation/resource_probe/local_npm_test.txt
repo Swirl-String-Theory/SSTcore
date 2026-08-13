@@ -1,0 +1,20 @@
+
+> sst-core@0.8.18 test
+> node tests/test_basic.js
+
+Testing SSTcore npm package...
+Version: 0.8.18
+Available: true
+Is Native: true
+Is WASM: false
+nativeAddonName: sstcore
+engineInfo: {"packageVersion":"0.8.18","engineVersion":"0.8.18","canonVersion":"0.8.20","nodeApiVersion":1,"numericProfile":"deterministic","compiler":"msvc","platform":"win32","architecture":"x64"}
+getCapabilities: {"biotSavart":true,"knotGeometry":true,"frenetHelicity":true,"magnusIntegrator":true,"sstIntegrator":true,"atomicBridgeModel":true,"canonicalConstants":true,"chronosKelvinTransport":true,"clockFieldEft":true,"delayModeSelector":true,"spectroscopicGap":true,"sstMasterEquation":true,"sstTensionScales":true,"trefoilOperator":true,"multisectorFitter":true,"resolvedTubeGeometry":true,"continuousReach":true,"polygonalGauss":true,"filamentVelocity":true,"filamentIntegrator":true,"topologyGuard":true,"intrinsicFrame":true,"rigidMotion":true,"wasmFallback":false}
+listBindings counts: { functions: 217, classes: 16, attributes: 36 }
+Sample exports: AtomicBridgeModel, ChronosKelvinTransport, ClockFieldEFT, ContactStressMap, DelayModeSelector, MultisectorFitter, MultisectorFitterV2, NodeAnalyzer ...
+Γ£ô computeVelocity
+Γ£ô computeSstMass: 8.290432235622376e-11, 8.249932083001101e-26
+Γ£ô rk4Integrate present
+Γ£ô computeWrithe (sample ring): 0
+
+Basic test completed OK

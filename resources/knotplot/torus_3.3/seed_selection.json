@@ -1,0 +1,331 @@
+{
+  "selected": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\torus_3.3\\torus_3.3_trial_004k.txt",
+  "selection_status": "settled-after-local-minimum",
+  "plateau_detected": true,
+  "scan_limit": 15000,
+  "topology_status": "topology-verified",
+  "quality_class": "C",
+  "reason": "class C, R_proxy=180.10992750854976, k=4",
+  "checkpoints": [
+    {
+      "k": 1,
+      "file": "torus_3.3_trial_001k.txt",
+      "length": 1284.2236481988439,
+      "gain": null,
+      "edge_ratio": 1.5661282774591847,
+      "edge_cv": 0.1585914362424937,
+      "flatness_min": 0.04610683987340545,
+      "component_flatness": [
+        0.04610683987340605,
+        0.04610683987340578,
+        0.04610683987340545
+      ],
+      "D_proxy": 6.848781229096036,
+      "R_proxy": 187.51126736871214,
+      "quality_class": "C",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 2,
+      "file": "torus_3.3_trial_002k.txt",
+      "length": 1242.1229092380586,
+      "gain": 0.03278302733315388,
+      "edge_ratio": 1.405266340139626,
+      "edge_cv": 0.12114961560130143,
+      "flatness_min": 0.04370131060666901,
+      "component_flatness": [
+        0.04370131060666901,
+        0.043701310606671116,
+        0.043701310606670866
+      ],
+      "D_proxy": 6.891673969700948,
+      "R_proxy": 180.23529765032666,
+      "quality_class": "C",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 3,
+      "file": "torus_3.3_trial_003k.txt",
+      "length": 1208.3200388458515,
+      "gain": 0.027213788700622535,
+      "edge_ratio": 1.2978724234344807,
+      "edge_cv": 0.09324405240442961,
+      "flatness_min": 0.041542462459669686,
+      "component_flatness": [
+        0.04154246245967239,
+        0.041542462459669686,
+        0.04154246245967073
+      ],
+      "D_proxy": 6.7085498612738546,
+      "R_proxy": 180.1164281152722,
+      "quality_class": "C",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 4,
+      "file": "torus_3.3_trial_004k.txt",
+      "length": 1180.219774388017,
+      "gain": 0.023255647141857405,
+      "edge_ratio": 1.2222729833268007,
+      "edge_cv": 0.07205082628824437,
+      "flatness_min": 0.03958544652988381,
+      "component_flatness": [
+        0.039585446529886735,
+        0.03958544652988381,
+        0.039585446529887776
+      ],
+      "D_proxy": 6.552774689957012,
+      "R_proxy": 180.10992750854976,
+      "quality_class": "C",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 5,
+      "file": "torus_3.3_trial_005k.txt",
+      "length": 1156.3795959733893,
+      "gain": 0.02019977883101439,
+      "edge_ratio": 1.1674073952515918,
+      "edge_cv": 0.05577005381183112,
+      "flatness_min": 0.037820079854098944,
+      "component_flatness": [
+        0.03782007985409913,
+        0.037820079854098944,
+        0.03782007985410027
+      ],
+      "D_proxy": 6.420179443570692,
+      "R_proxy": 180.11639801305134,
+      "quality_class": "C",
+      "disqualified": false,
+      "warnings": [],
+      "dq_reasons": []
+    },
+    {
+      "k": 6,
+      "file": "torus_3.3_trial_006k.txt",
+      "length": 1135.9141717277328,
+      "gain": 0.01769784274724223,
+      "edge_ratio": 1.1267690598810522,
+      "edge_cv": 0.04317534484856616,
+      "flatness_min": 0.03624237633987409,
+      "component_flatness": [
+        0.03624237633987409,
+        0.03624237633987719,
+        0.036242376339876994
+      ],
+      "D_proxy": 6.30663961878471,
+      "R_proxy": 180.11401322890612,
+      "quality_class": "C",
+      "disqualified": true,
+      "warnings": [],
+      "dq_reasons": [
+        "hard flatness collapse drop=0.214 with proxy worsen"
+      ]
+    },
+    {
+      "k": 7,
+      "file": "torus_3.3_trial_007k.txt",
+      "length": 1118.2320990137857,
+      "gain": 0.01556638094148653,
+      "edge_ratio": 1.0962537336884028,
+      "edge_cv": 0.03339549179885461,
+      "flatness_min": 0.03484558669720936,
+      "component_flatness": [
+        0.03484558669720936,
+        0.03484558669721093,
+        0.03484558669721073
+      ],
+      "D_proxy": 6.208837849387079,
+      "R_proxy": 180.1032860157839,
+      "quality_class": "C",
+      "disqualified": true,
+      "warnings": [],
+      "dq_reasons": [
+        "hard flatness collapse drop=0.244 with proxy worsen"
+      ]
+    },
+    {
+      "k": 8,
+      "file": "torus_3.3_trial_008k.txt",
+      "length": 1102.907568572118,
+      "gain": 0.013704248389205694,
+      "edge_ratio": 1.0731431559314366,
+      "edge_cv": 0.02579192904496672,
+      "flatness_min": 0.03361907982692705,
+      "component_flatness": [
+        0.03361907982692705,
+        0.03361907982693246,
+        0.03361907982693227
+      ],
+      "D_proxy": 6.1242222022943915,
+      "R_proxy": 180.0894108902388,
+      "quality_class": "C",
+      "disqualified": true,
+      "warnings": [],
+      "dq_reasons": [
+        "hard flatness collapse drop=0.271 with proxy worsen"
+      ]
+    },
+    {
+      "k": 9,
+      "file": "torus_3.3_trial_009k.txt",
+      "length": 1089.613503687201,
+      "gain": 0.012053652784456,
+      "edge_ratio": 1.0555603041695987,
+      "edge_cv": 0.019884488291299067,
+      "flatness_min": 0.03254950266043007,
+      "component_flatness": [
+        0.03254950266043007,
+        0.03254950266043187,
+        0.03254950266043165
+      ],
+      "D_proxy": 6.050828727015344,
+      "R_proxy": 180.07673871553595,
+      "quality_class": "C",
+      "disqualified": true,
+      "warnings": [],
+      "dq_reasons": [
+        "hard flatness collapse drop=0.294 with proxy worsen"
+      ]
+    },
+    {
+      "k": 10,
+      "file": "torus_3.3_trial_010k.txt",
+      "length": 1078.0851716382228,
+      "gain": 0.010580202989378219,
+      "edge_ratio": 1.0421760789912045,
+      "edge_cv": 0.015304556559720954,
+      "flatness_min": 0.03162218089964802,
+      "component_flatness": [
+        0.03162218089964802,
+        0.03162218089964994,
+        0.03162218089965388
+      ],
+      "D_proxy": 5.9871150486155615,
+      "R_proxy": 180.06755555624662,
+      "quality_class": "C",
+      "disqualified": true,
+      "warnings": [],
+      "dq_reasons": [
+        "hard flatness collapse drop=0.314 with proxy worsen"
+      ]
+    },
+    {
+      "k": 11,
+      "file": "torus_3.3_trial_011k.txt",
+      "length": 1068.0998129493498,
+      "gain": 0.00926212413598046,
+      "edge_ratio": 1.0321199388000033,
+      "edge_cv": 0.01176474678280941,
+      "flatness_min": 0.0308222012104889,
+      "component_flatness": [
+        0.0308222012104889,
+        0.030822201210490882,
+        0.030822201210492842
+      ],
+      "D_proxy": 5.931832708273894,
+      "R_proxy": 180.06236276008474,
+      "quality_class": "B",
+      "disqualified": true,
+      "warnings": [],
+      "dq_reasons": [
+        "hard flatness collapse drop=0.332 with proxy worsen"
+      ]
+    },
+    {
+      "k": 12,
+      "file": "torus_3.3_trial_012k.txt",
+      "length": 1059.4650048148974,
+      "gain": 0.0080842708048128,
+      "edge_ratio": 1.0245683353821122,
+      "edge_cv": 0.009038741368885902,
+      "flatness_min": 0.030135121889386104,
+      "component_flatness": [
+        0.030135121889386104,
+        0.030135121889388175,
+        0.030135121889392463
+      ],
+      "D_proxy": 5.88204963868197,
+      "R_proxy": 180.11833797653887,
+      "quality_class": "B",
+      "disqualified": true,
+      "warnings": [],
+      "dq_reasons": [
+        "hard flatness collapse drop=0.346 with proxy worsen"
+      ]
+    },
+    {
+      "k": 13,
+      "file": "torus_3.3_trial_013k.txt",
+      "length": 1052.0118715307312,
+      "gain": 0.007034808370540095,
+      "edge_ratio": 1.0188790592827213,
+      "edge_cv": 0.006947428047974281,
+      "flatness_min": 0.029547391497178874,
+      "component_flatness": [
+        0.02954739149717907,
+        0.029547391497178874,
+        0.029547391497180997
+      ],
+      "D_proxy": 5.8410418728053894,
+      "R_proxy": 180.10688751071413,
+      "quality_class": "B",
+      "disqualified": true,
+      "warnings": [],
+      "dq_reasons": [
+        "hard flatness collapse drop=0.359 with proxy worsen"
+      ]
+    },
+    {
+      "k": 14,
+      "file": "torus_3.3_trial_014k.txt",
+      "length": 1045.590986294443,
+      "gain": 0.006103434200742997,
+      "edge_ratio": 1.0145818478478918,
+      "edge_cv": 0.005348943180257591,
+      "flatness_min": 0.0290465656182022,
+      "component_flatness": [
+        0.0290465656182022,
+        0.029046565618203225,
+        0.029046565618206614
+      ],
+      "D_proxy": 5.805637817838752,
+      "R_proxy": 180.09924475166142,
+      "quality_class": "B",
+      "disqualified": true,
+      "warnings": [],
+      "dq_reasons": [
+        "hard flatness collapse drop=0.370 with proxy worsen"
+      ]
+    },
+    {
+      "k": 15,
+      "file": "torus_3.3_trial_015k.txt",
+      "length": 1040.0697455795803,
+      "gain": 0.005280497620230859,
+      "edge_ratio": 1.0113291839233352,
+      "edge_cv": 0.004131187998231082,
+      "flatness_min": 0.028621392201101575,
+      "component_flatness": [
+        0.028621392201101575,
+        0.028621392201105097,
+        0.02862139220110363
+      ],
+      "D_proxy": 5.775151266178688,
+      "R_proxy": 180.09393999263597,
+      "quality_class": "A",
+      "disqualified": true,
+      "warnings": [],
+      "dq_reasons": [
+        "hard flatness collapse drop=0.379 with proxy worsen"
+      ]
+    }
+  ]
+}

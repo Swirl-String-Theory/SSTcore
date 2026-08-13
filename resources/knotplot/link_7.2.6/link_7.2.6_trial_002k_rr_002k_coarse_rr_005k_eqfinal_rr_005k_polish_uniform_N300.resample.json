@@ -1,0 +1,75 @@
+{
+  "source": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.6\\link_7.2.6_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish.txt",
+  "output": "C:\\workspace\\projects\\SST-Workbench\\KnotPlot\\knots\\link_7.2.6\\link_7.2.6_trial_002k_rr_002k_coarse_rr_005k_eqfinal_rr_005k_polish_uniform_N300.txt",
+  "method_requested": "auto",
+  "method_per_component": [
+    "spline_repair",
+    "linear"
+  ],
+  "strict": true,
+  "upsampled": true,
+  "component_count": 2,
+  "vertices_per_component_in": [
+    160,
+    440
+  ],
+  "vertices_per_component_out": [
+    300,
+    300
+  ],
+  "length_in": 45.82510946223929,
+  "length_out": 45.815804460528526,
+  "relative_length_change": -0.00020305465322307203,
+  "D_proxy_in": 0.9999929587134271,
+  "D_proxy_out": 0.9974102858889832,
+  "R_proxy_in": 45.825432132239264,
+  "R_proxy_out": 45.93476236280565,
+  "relative_rop_change": -0.16263884584962263,
+  "relative_rop_proxy_change": 0.002385798136085082,
+  "relative_rop_minrad_change": -0.16263884584962263,
+  "rop_gate": "minrad",
+  "components": [
+    {
+      "index": 0,
+      "vertices_in": 160,
+      "vertices_out": 300,
+      "length_in": 12.101049279371695,
+      "length_out": 12.102054754570108,
+      "minrad_in": 0.8547112939414665,
+      "minrad_out": 0.8569470205678827,
+      "minrad_ratio": 1.0026157682041457,
+      "edge_min": 0.040333214786103404,
+      "edge_max": 0.04034168747863013,
+      "edge_mean": 0.0403401825152337,
+      "edge_ratio": 1.0002100673742884,
+      "edge_cv": 3.432045222584977e-05
+    },
+    {
+      "index": 1,
+      "vertices_in": 440,
+      "vertices_out": 300,
+      "length_in": 33.724060182867596,
+      "length_out": 33.71374970595841,
+      "minrad_in": 0.6129268400800173,
+      "minrad_out": 0.731825663748194,
+      "minrad_ratio": 1.1939853435895458,
+      "edge_min": 0.11221588731190923,
+      "edge_max": 0.11241341588650072,
+      "edge_mean": 0.11237916568652805,
+      "edge_ratio": 1.00176025498103,
+      "edge_cv": 0.00026361424765731947
+    }
+  ],
+  "validation_warnings": [
+    "Rop change -16.263885% (prefer |d| < 0.1%)"
+  ],
+  "validation_errors": [],
+  "gates": {
+    "edge_ratio_max": 1.05,
+    "length_rel_max": 0.005,
+    "minrad_ratio_min": 0.9,
+    "rop_rel_max": 0.001,
+    "rop_gate_mode": "collapse_only"
+  },
+  "notes": "Ladder upsample uses spline_repair (cubic spline + MinRad restore). Strict Rop gate is one-sided: error only if Rop increases (>= 0.1%, collapse); negative dR (apparent thickening) warns only. Metric: thickness proxy for spline_repair, else MinRad-Rop. Bare spline / subdivide sidecars are treated as stale."
+}

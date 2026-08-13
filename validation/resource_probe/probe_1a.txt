@@ -1,0 +1,107 @@
+.F..........FF.......s..ss...s..                                         [100%]
+================================== FAILURES ===================================
+________________ test_knotplot_ideal_files_load_via_public_api ________________
+
+    def test_knotplot_ideal_files_load_via_public_api() -> None:
+        knotplot_dir = SST.get_knotplot_dir()
+>       assert knotplot_dir is not None, "knotplot directory is not resolved by SSTcore"
+E       AssertionError: knotplot directory is not resolved by SSTcore
+E       assert None is not None
+
+tests\test_knotplot_resources_install.py:31: AssertionError
+_________________________ test_build_source_zip_smoke _________________________
+
+tmp_path = WindowsPath('C:/Users/oscar/AppData/Local/Temp/pytest-of-oscar/pytest-197/test_build_source_zip_smoke0')
+
+    def test_build_source_zip_smoke(tmp_path: Path) -> None:
+        if not (REPO_ROOT / "resources" / "ideal.txt").is_file():
+            pytest.skip("resources/ideal.txt missing")
+        out = tmp_path / "SSTcore_source_test.zip"
+>       build_source_zip(REPO_ROOT, out)
+
+tests\test_source_zip.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\make_source_zip.py:180: in build_source_zip
+    entry = build_nested_archive(repo_root, spec, staging_resources)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo_root = WindowsPath('C:/workspace/projects/SSTcore')
+spec = NestedArchiveSpec(rel_dir='resources/knotplot', optional=False, zip_name='resources/knotplot.zip', target='resources/knotplot')
+staging_resources = WindowsPath('C:/Users/oscar/AppData/Local/Temp/sstcore_source_zip_of03spl8/resources')
+
+    def build_nested_archive(repo_root: Path, spec, staging_resources: Path) -> dict | None:
+        files = list(iter_files_for_nested_dir(repo_root, spec.rel_dir))
+        if not files:
+            if spec.optional:
+                return None
+>           raise RuntimeError(f"required resource dir empty or missing: {spec.rel_dir}")
+E           RuntimeError: required resource dir empty or missing: resources/knotplot
+
+scripts\make_source_zip.py:59: RuntimeError
+____________________________ test_unpack_roundtrip ____________________________
+
+tmp_path = WindowsPath('C:/Users/oscar/AppData/Local/Temp/pytest-of-oscar/pytest-197/test_unpack_roundtrip0')
+
+    def test_unpack_roundtrip(tmp_path: Path) -> None:
+        if not (REPO_ROOT / "resources" / "ideal.txt").is_file():
+            pytest.skip("resources/ideal.txt missing")
+    
+        out = tmp_path / "bundle.zip"
+>       build_source_zip(REPO_ROOT, out)
+
+tests\test_source_zip.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\make_source_zip.py:180: in build_source_zip
+    entry = build_nested_archive(repo_root, spec, staging_resources)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+repo_root = WindowsPath('C:/workspace/projects/SSTcore')
+spec = NestedArchiveSpec(rel_dir='resources/knotplot', optional=False, zip_name='resources/knotplot.zip', target='resources/knotplot')
+staging_resources = WindowsPath('C:/Users/oscar/AppData/Local/Temp/sstcore_source_zip_n58h6t6y/resources')
+
+    def build_nested_archive(repo_root: Path, spec, staging_resources: Path) -> dict | None:
+        files = list(iter_files_for_nested_dir(repo_root, spec.rel_dir))
+        if not files:
+            if spec.optional:
+                return None
+>           raise RuntimeError(f"required resource dir empty or missing: {spec.rel_dir}")
+E           RuntimeError: required resource dir empty or missing: resources/knotplot
+
+scripts\make_source_zip.py:59: RuntimeError
+=================================== PASSES ====================================
+=========================== short test summary info ===========================
+PASSED tests/test_knotplot_resources_install.py::test_resources_dir_available_after_install
+PASSED tests/test_source_zip.py::test_should_exclude_file[build/foo.obj]
+PASSED tests/test_source_zip.py::test_should_exclude_file[tests/__pycache__/x.pyc]
+PASSED tests/test_source_zip.py::test_should_exclude_file[resources/knotplot/knot_3.1/knot_3.1_ideal.txt]
+PASSED tests/test_source_zip.py::test_should_exclude_file[resources/Knots_FourierSeries/3_1/knot.3_1.stl]
+PASSED tests/test_source_zip.py::test_should_exclude_file[resources/Results/knotplot/knot_3.1/knot_3.1_ideal.txt]
+PASSED tests/test_source_zip.py::test_should_exclude_file[SST_Dashboard/gui_tabs/foo.py]
+PASSED tests/test_source_zip.py::test_should_exclude_file[ideal_database.txt]
+PASSED tests/test_source_zip.py::test_should_include_canonical_paths
+PASSED tests/test_source_zip.py::test_collect_source_files_includes_readme
+PASSED tests/test_source_zip.py::test_repo_rel_path_uses_forward_slashes
+PASSED tests/test_ideal_resources.py::test_import_shims
+PASSED tests/test_ideal_resources.py::test_resources_dir_and_ideal_txt
+PASSED tests/test_ideal_resources.py::test_find_ideal_ab_block_by_id_trefoil
+PASSED tests/test_ideal_resources.py::test_find_ideal_ab_block_by_id_missing_returns_none
+PASSED tests/test_ideal_resources.py::test_get_ideal_ab_matches_find
+PASSED tests/test_ideal_resources.py::test_particle_evaluator_trefoil
+PASSED tests/test_ideal_resources.py::test_particle_evaluator_rejects_knotplot_style_id
+PASSED tests/test_knot_registry.py::test_resolve_knot_ref_ideal_trefoil
+PASSED tests/test_knot_registry.py::test_resolve_knot_ref_fremlin_role
+PASSED tests/test_knot_registry.py::test_particle_evaluator_rejects_knotplot_id
+PASSED tests/test_knot_registry.py::test_particle_evaluator_research_flag_allows_non_ab_id
+PASSED tests/test_trefoil_three_sources.py::test_ideal_mass_scale_unity
+PASSED tests/test_trefoil_three_sources.py::test_fremlin_default_mass_scale
+PASSED tests/test_trefoil_three_sources.py::test_fremlin_torus_u_mass_scale
+SKIPPED [1] tests\test_ideal_resources.py:58: knotplot trefoil ideal not present in resources
+SKIPPED [1] tests\test_knot_registry.py:32: knotplot trefoil not in resources
+SKIPPED [1] tests\test_knot_registry.py:42: knotplot trefoil not in resources
+SKIPPED [1] tests\test_trefoil_three_sources.py:171: knotplot trefoil not in resources
+FAILED tests/test_knotplot_resources_install.py::test_knotplot_ideal_files_load_via_public_api
+FAILED tests/test_source_zip.py::test_build_source_zip_smoke - RuntimeError: ...
+FAILED tests/test_source_zip.py::test_unpack_roundtrip - RuntimeError: requir...
+3 failed, 25 passed, 4 skipped in 2.67s

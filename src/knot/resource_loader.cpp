@@ -98,32 +98,41 @@ namespace sst {
         }
 
         std::string find_ideal_file_path(const std::string& filename, const std::string& explicit_base) {
+                // Probe resources/ideal/<file> before flat resources/<file> (legacy).
+                auto probe_pair = [&](const std::string& base) -> std::string {
+                        std::string under_ideal = base + "/ideal/" + filename;
+                        if (path_exists(under_ideal)) return under_ideal;
+                        std::string flat = base + "/" + filename;
+                        if (path_exists(flat)) return flat;
+                        return {};
+                };
+
                 // 1) Explicit path parameter
                 if (!explicit_base.empty()) {
-                        std::string p = explicit_base + "/" + filename;
-                        if (path_exists(p)) return p;
-                        p = explicit_base + "/resources/" + filename;
-                        if (path_exists(p)) return p;
+                        std::string hit = probe_pair(explicit_base);
+                        if (!hit.empty()) return hit;
+                        hit = probe_pair(explicit_base + "/resources");
+                        if (!hit.empty()) return hit;
                 }
 
                 // 2) Env SST_RESOURCE_DIR
                 if (const char* env = std::getenv("SST_RESOURCE_DIR")) {
                         std::string base(env);
-                        std::string p = base + "/" + filename;
-                        if (path_exists(p)) return p;
-                        p = base + "/resources/" + filename;
-                        if (path_exists(p)) return p;
+                        std::string hit = probe_pair(base);
+                        if (!hit.empty()) return hit;
+                        hit = probe_pair(base + "/resources");
+                        if (!hit.empty()) return hit;
                 }
                 if (const char* env = std::getenv("SST_KNOT_DATA_DIR")) {
-                        std::string p = std::string(env) + "/../" + filename;
-                        if (path_exists(p)) return p;
+                        std::string hit = probe_pair(std::string(env) + "/..");
+                        if (!hit.empty()) return hit;
                 }
 
                 // 3) Build tree / 4) Installed share
 #ifdef SST_DEFAULT_RESOURCE_SUBDIR
                 {
-                        std::string p = std::string(SST_DEFAULT_RESOURCE_SUBDIR) + "/" + filename;
-                        if (path_exists(p)) return p;
+                        std::string hit = probe_pair(std::string(SST_DEFAULT_RESOURCE_SUBDIR));
+                        if (!hit.empty()) return hit;
                 }
 #endif
                 // 5) Legacy
@@ -134,8 +143,8 @@ namespace sst {
                         "share/swirl_string_core/resources",
                 };
                 for (const auto& base : legacy) {
-                        std::string p = base + "/" + filename;
-                        if (path_exists(p)) return p;
+                        std::string hit = probe_pair(base);
+                        if (!hit.empty()) return hit;
                 }
                 return {};
         }

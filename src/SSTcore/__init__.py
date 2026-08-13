@@ -1,6 +1,7 @@
 """SSTcore: canonical Python package API (native bindings + resource helpers)."""
 
 from pathlib import Path
+import json
 import os
 import sys
 import re
@@ -10,7 +11,10 @@ from enum import Enum
 
 __version__ = "0.8.18"
 
-# Known ideal-style files in resources/ (knots: AB/HT, links: TL).
+# Known ideal-style files (knots: AB/HT, links: TL). Basenames only;
+# resolution probes resources/ideal/ first, then the flat legacy path.
+IDEAL_SUBDIR = "ideal"
+
 IDEAL_SOURCE_FILES = {
     "ideal": "ideal.txt",           # knots 3–10 crossings, <AB Id="n:m:k">
     "ideal_11a": "ideal_11a.txt",   # 11-crossing alternating, <HT Id="K11a1">
@@ -40,6 +44,13 @@ __all__ = [
     "get_ideal_12_data_dir",
     "get_knotplot_dir",
     "get_knotplot_ideal_path",
+    "get_knotplot_ab_path",
+    "get_knotplot_ab",
+    "get_knotplot_polish_path",
+    "get_knotplot_build_script",
+    "list_knotplot_ids",
+    "get_knotplot_entry",
+    "normalize_knotplot_id",
     "get_knot_fseries",
     "knotplot",
     "find_ideal_ab_block_by_id",
@@ -163,8 +174,11 @@ def get_ideal_file_path(source: str) -> Optional[Path]:
     name = IDEAL_SOURCE_FILES.get(source) or source
     if "/" in name or "\\" in name:
         return None
-    p = root / name
-    return p.resolve() if p.is_file() else None
+    # Prefer resources/ideal/<name>, then flat legacy resources/<name>.
+    for candidate in (root / IDEAL_SUBDIR / name, root / name):
+        if candidate.is_file():
+            return candidate.resolve()
+    return None
 
 
 def get_ideal_txt_path() -> Optional[Path]:
@@ -182,8 +196,10 @@ def get_ideal_12_data_dir() -> Optional[Path]:
     root = get_resources_dir()
     if root is None:
         return None
-    d = root / "ideal_12_data"
-    return d.resolve() if d.is_dir() else None
+    for candidate in (root / IDEAL_SUBDIR / "ideal_12_data", root / "ideal_12_data"):
+        if candidate.is_dir():
+            return candidate.resolve()
+    return None
 
 
 def get_knotplot_dir() -> Optional[Path]:
@@ -195,42 +211,181 @@ def get_knotplot_dir() -> Optional[Path]:
     return d.resolve() if d.is_dir() else None
 
 
-def get_knotplot_ideal_path(knot_id: str) -> Optional[Path]:
-    """
-    Resolve knotplot ideal file path for IDs like:
-    - "knot_TL3.9" -> knotplot/knot_TL3.9/knot_TL3.9_ideal.txt
-    - "knot_6.3.3" -> knotplot/knot_6.3.3/knot_6.3.3_ideal.txt
-    """
-    base = (knot_id or "").strip().strip("\"' ")
-    if not base:
-        return None
-    if "/" in base or "\\" in base:
-        return None
+_knotplot_index_cache: Optional[Dict[str, Any]] = None
+_knotplot_deprecation_warned: set = set()
 
-    knotplot_root = get_knotplot_dir()
-    if knotplot_root is None:
+
+def _load_knotplot_index() -> Dict[str, Any]:
+    global _knotplot_index_cache
+    if _knotplot_index_cache is not None:
+        return _knotplot_index_cache
+    root = get_knotplot_dir()
+    empty: Dict[str, Any] = {"entries": [], "legacy_aliases": {}, "counts": {}}
+    if root is None:
+        _knotplot_index_cache = empty
+        return _knotplot_index_cache
+    path = root / "INDEX.json"
+    if not path.is_file():
+        _knotplot_index_cache = empty
+        return _knotplot_index_cache
+    try:
+        _knotplot_index_cache = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        _knotplot_index_cache = empty
+    return _knotplot_index_cache
+
+
+def normalize_knotplot_id(knot_id: str) -> Optional[str]:
+    """Map knot_3.1 / 3.1 / 3_1 / knot_T2.3 → canonical INDEX id, or None."""
+    base = (knot_id or "").strip().strip("\"' ")
+    if not base or "/" in base or "\\" in base:
         return None
+    index = _load_knotplot_index()
+    aliases = dict(index.get("legacy_aliases") or {})
+    ids = {e.get("id") for e in index.get("entries") or [] if e.get("id")}
 
     candidates = [base]
-    if not base.startswith("knot_"):
+    if base in aliases:
+        candidates.append(aliases[base])
+    dotted = base.replace("_", ".", 1) if base.count("_") == 1 and not base.startswith(("knot_", "link_", "torus_")) else base
+    if dotted != base:
+        candidates.append(dotted)
+        candidates.append(f"knot_{dotted}")
+    if not base.startswith(("knot_", "link_", "torus_")):
         candidates.append(f"knot_{base}")
+        if base.count(".") >= 2 or base.count("_") >= 2:
+            candidates.append(f"link_{base.replace('_', '.')}")
+            candidates.append(f"torus_{base.replace('_', '.')}")
+    # Underscore form of known ids: knot_3_1 → knot_3.1
+    if "_" in base and base.startswith("knot_"):
+        candidates.append("knot_" + base[5:].replace("_", ".", 1))
 
-    for candidate in candidates:
-        p = knotplot_root / candidate / f"{candidate}_ideal.txt"
-        if p.is_file():
-            return p.resolve()
+    for c in candidates:
+        if c in ids:
+            return c
+        if c in aliases and aliases[c] in ids:
+            return aliases[c]
+    # Fall back to first candidate that exists on disk
+    root = get_knotplot_dir()
+    if root is None:
+        return None
+    for c in candidates:
+        if (root / c).is_dir():
+            return c
     return None
 
 
-def knotplot(knot_id: str) -> Optional[str]:
-    """Return contents of a knotplot `*_ideal.txt` file by knotplot ID."""
-    path = get_knotplot_ideal_path(knot_id)
+def list_knotplot_ids(status: Optional[str] = None) -> List[str]:
+    index = _load_knotplot_index()
+    out = []
+    for entry in index.get("entries") or []:
+        kid = entry.get("id")
+        if not kid:
+            continue
+        if status is not None and entry.get("status") != status:
+            continue
+        out.append(kid)
+    return out
+
+
+def get_knotplot_entry(knot_id: str) -> Optional[Dict[str, Any]]:
+    canon = normalize_knotplot_id(knot_id)
+    if canon is None:
+        return None
+    for entry in _load_knotplot_index().get("entries") or []:
+        if entry.get("id") == canon:
+            return dict(entry)
+    return None
+
+
+def _knotplot_file_by_role(knot_id: str, role: str) -> Optional[Path]:
+    entry = get_knotplot_entry(knot_id)
+    root = get_knotplot_dir()
+    if entry is None or root is None:
+        return None
+    for f in entry.get("files") or []:
+        if f.get("role") == role:
+            p = root / f["relpath"]
+            if p.is_file():
+                return p.resolve()
+    return None
+
+
+def get_knotplot_polish_path(knot_id: str, uniform: bool = True) -> Optional[Path]:
+    return _knotplot_file_by_role(knot_id, "uniform_n300" if uniform else "audit_polish")
+
+
+def get_knotplot_ab_path(knot_id: str) -> Optional[Path]:
+    p = _knotplot_file_by_role(knot_id, "ab_xml")
+    if p is not None:
+        return p
+    # Legacy fallback
+    return _resolve_knotplot_ab_or_ideal(knot_id)
+
+
+def get_knotplot_ab(knot_id: str) -> Optional[str]:
+    path = get_knotplot_ab_path(knot_id)
     if path is None:
         return None
     try:
         return path.read_text(encoding="utf-8", errors="replace")
     except OSError:
         return None
+
+
+def get_knotplot_build_script(knot_id: str) -> Optional[Path]:
+    return _knotplot_file_by_role(knot_id, "build_script")
+
+
+def _resolve_knotplot_ab_or_ideal(knot_id: str) -> Optional[Path]:
+    canon = normalize_knotplot_id(knot_id)
+    if canon is None:
+        base = (knot_id or "").strip().strip("\"' ")
+        if not base or "/" in base or "\\" in base:
+            return None
+        canon = base
+    knotplot_root = get_knotplot_dir()
+    if knotplot_root is None:
+        return None
+    folder = knotplot_root / canon
+    if not folder.is_dir():
+        return None
+    for name in (f"{canon}_ab.xml", f"{canon}_ideal.txt"):
+        p = folder / name
+        if p.is_file():
+            return p.resolve()
+    return None
+
+
+def get_knotplot_ideal_path(knot_id: str) -> Optional[Path]:
+    """Deprecated: use get_knotplot_ab_path(). Resolves to AB-XML (or legacy *_ideal.txt)."""
+    key = "get_knotplot_ideal_path"
+    if key not in _knotplot_deprecation_warned:
+        _knotplot_deprecation_warned.add(key)
+        import warnings
+
+        warnings.warn(
+            "SSTcore.get_knotplot_ideal_path is deprecated; use get_knotplot_ab_path "
+            "(deelplan res-4).",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+    return get_knotplot_ab_path(knot_id)
+
+
+def knotplot(knot_id: str) -> Optional[str]:
+    """Deprecated: use get_knotplot_ab(). Return AB-XML / legacy ideal text by id."""
+    key = "knotplot"
+    if key not in _knotplot_deprecation_warned:
+        _knotplot_deprecation_warned.add(key)
+        import warnings
+
+        warnings.warn(
+            "SSTcore.knotplot is deprecated; use get_knotplot_ab (deelplan res-4).",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+    return get_knotplot_ab(knot_id)
 
 
 def get_knot_fseries(knot_id: str) -> Optional[str]:

@@ -1,0 +1,9 @@
+
+> sst-core@0.8.18 test:parity
+> node tests/test_python_node_parity.js
+
+Python/Node parity check (optional)...
+Tolerance: |a-b| <= atol + rtol*max(|a|,|b|) with atol=1e-9, rtol=1e-9
+Γ£ô computeVelocity parity (atol=1e-9, rtol=1e-9)
+Γ£ô computeWrithe parity (atol=1e-9, rtol=1e-9)
+Parity OK (or no overlapping metrics)

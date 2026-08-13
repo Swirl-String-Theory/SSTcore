@@ -19,11 +19,21 @@ def load_sstcore_package():
     if not (_SRC / "SSTcore" / "__init__.py").is_file():
         raise ImportError(f"Expected src/SSTcore/__init__.py under {_ROOT}")
 
+    # The editable install (__editable__.sstcore-*.pth) appends src/ *after* site-packages,
+    # so a plain "insert if absent" leaves an installed wheel shadowing the checkout.
     src = str(_SRC.resolve())
-    if src not in sys.path:
-        sys.path.insert(0, src)
+    while src in sys.path:
+        sys.path.remove(src)
+    sys.path.insert(0, src)
 
     for name in ("SSTcore", "sstcore"):
         sys.modules.pop(name, None)
 
-    return importlib.import_module("SSTcore")
+    module = importlib.import_module("SSTcore")
+    origin = Path(getattr(module, "__file__", "") or "").resolve()
+    if not origin.is_relative_to(_SRC):
+        raise ImportError(
+            f"Imported SSTcore from {origin} instead of the checkout under {_SRC}. "
+            "Set SST_WHEEL_TEST=1 to test an installed wheel on purpose."
+        )
+    return module

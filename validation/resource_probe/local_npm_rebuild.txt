@@ -1,0 +1,88 @@
+
+> sst-core@0.8.18 build:node
+> node scripts/install-native.js
+
+[SSTcore install] platform=win32 arch=x64 node=v24.14.0
+[SSTcore install] Checking prebuilt: C:\workspace\projects\SSTcore\prebuilds\win32-x64\sstcore.node
+[SSTcore install] Prebuilt not usable: file missing
+[SSTcore install] Node headers found: C:\Users\oscar\AppData\Local\node-gyp\Cache\24.14.0\include\node
+[SSTcore install] Building native addon via CMake (profile=deterministic)...
+[SSTcore install] $ cmake -S . -B build_node -DSST_BUILD_PYTHON_BINDINGS=OFF -DSST_BUILD_CPP_TESTS=OFF -DSST_COPY_RUNTIME_RESOURCES=OFF -DSST_NUMERIC_PROFILE=deterministic -DNODE_CORE_INCLUDE_DIR=C:\Users\oscar\AppData\Local\node-gyp\Cache\24.14.0\include\node
+-- Building for: Visual Studio 17 2022
+-- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.26200.
+-- The CXX compiler identification is MSVC 19.44.35228.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- SST_NUMERIC_PROFILE=deterministic
+-- SST_BUILD_PYTHON_BINDINGS=OFF: skipping pybind11 (embed/Node-only configure)
+-- Embedded 78 .fseries files from C:/workspace/projects/SSTcore/resources/Knots_FourierSeries
+-- Embedded 2205 ideal text files from C:/workspace/projects/SSTcore/resources
+-- SST_COPY_RUNTIME_RESOURCES=OFF: skipping resource tree copy
+-- SST_BUILD_CPP_TESTS=OFF: skipping C++ test executables
+-- Skipping examples/atoms (set SST_BUILD_ATOMS=ON and install GLFW3 to build)
+-- Node library from node-gyp cache: C:/Users/oscar/AppData/Local/node-gyp/Cache/24.14.0/x64/node.lib
+-- Node library for addon: C:/Users/oscar/AppData/Local/node-gyp/Cache/24.14.0/x64/node.lib
+-- Node.js native addon build enabled (links sstcore_lib)
+-- Emscripten not detected, skipping WASM build
+-- Configuring done (28.7s)
+-- Generating done (0.1s)
+-- Build files have been written to: C:/workspace/projects/SSTcore/build_node
+[SSTcore install] $ cmake --build build_node --target knot_files_embedded --config Release
+MSBuild version 17.14.51+25f168cee for .NET Framework
+
+  1>Checking Build System
+  Ensuring knot files are embedded
+  Building Custom Rule C:/workspace/projects/SSTcore/CMakeLists.txt
+[SSTcore install] $ cmake --build build_node --target sstcore_node --config Release
+MSBuild version 17.14.51+25f168cee for .NET Framework
+
+  Ensuring knot files are embedded
+  Building Custom Rule C:/workspace/projects/SSTcore/CMakeLists.txt
+  ab_initio_mass.cpp
+  canonical_constants.cpp
+  sst_master_equation.cpp
+  chronos_kelvin_transport.cpp
+  sst_tension_scales.cpp
+  delay_mode_selector.cpp
+  atomic_bridge_model.cpp
+  spectroscopic_gap.cpp
+  clock_field_eft.cpp
+  trefoil_closure_kernels.cpp
+  biot_savart.cpp
+  fluid_dynamics.cpp
+  field_kernels.cpp
+  frenet_helicity.cpp
+  potential_timefield.cpp
+  magnus_integrator.cpp
+  multisector_fitter.cpp
+  trefoil_operator.cpp
+  hyperbolic_volume.cpp
+  resource_loader.cpp
+  Generating Code...
+  Compiling...
+  fourier_parser.cpp
+  ideal_parser.cpp
+  fourier_eval.cpp
+  invariants.cpp
+  invariants_bridge.cpp
+  xi_model.cpp
+  mass_functional.cpp
+  knot_particle_model.cpp
+  vortex_knot_system.cpp
+  evolution.cpp
+  velocity_solver.cpp
+  integrator.cpp
+  periodic_spline.cpp
+  continuous_reach.cpp
+  polygonal_clearance.cpp
+  topology_guard.cpp
+  intrinsic_frame.cpp
+  rigid_motion.cpp
+  sampling.cpp
+  knot_catalog.cpp
+  Generating Code...
+C:\workspace\projects\SSTcore\src\catalog\knot_catalog.cpp(1,1): error C1083: Cannot open compiler generated file: 'C:\workspace\projects\SSTcore\build_node\sstcore_lib.dir\Release\knot_catalog.obj': No such file or directory [C:\workspace\projects\SSTcore\build_node\sstcore_lib.vcxproj]
+[SSTcore install] ERROR: cmake exited with code 1

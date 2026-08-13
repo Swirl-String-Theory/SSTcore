@@ -36,22 +36,32 @@ pip install SSTcore
 ```
 
 **Resources na pip install (via import)**  
-Na `pip install` kun je het resources-pad (o.a. `Knots_FourierSeries`, `ideal.txt`) zo aanroepen:
+Na `pip install` kun je het resources-pad (o.a. `Knots_FourierSeries`, `ideal.txt`, knotplot) zo aanroepen:
 
 ```python
-from SSTcore import get_ideal_txt_path, get_knots_fourier_series_dir, get_resources_dir
+from SSTcore import (
+    get_ideal_txt_path,
+    get_knots_fourier_series_dir,
+    get_resources_dir,
+    get_knotplot_ab_path,
+    list_knotplot_ids,
+)
 
-# Basis resources-map (ideal.txt, Knots_FourierSeries, …)
+# Basis resources-map (ideal/, Knots_FourierSeries/, knotplot/, …)
 resources_dir = get_resources_dir()
 
 # Alleen Knots_FourierSeries-map
 kfs_dir = get_knots_fourier_series_dir()
 
-# Pad naar ideal.txt
+# Pad naar ideal.txt (resolves resources/ideal/ first, flat legacy second)
 ideal_path = get_ideal_txt_path()
+
+# Knotplot AB-XML (INDEX-backed; prefer over deprecated get_knotplot_ideal_path / knotplot)
+ab_path = get_knotplot_ab_path("knot_3.1")
+kp_ids = list_knotplot_ids()
 ```
 
-Optioneel: stel `SSTCORE_RESOURCES` in om een vaste map te forceren.
+Optioneel: stel `SSTCORE_RESOURCES` in om een vaste map te forceren. Gilbert ideal data lives under `resources/ideal/`. Repo-only ridgerunner tooling is under `tools/knotplot/` (not packaged).
 
 ### SSTCORE Installation Guide (Windows)
 

@@ -12,8 +12,9 @@ from typing import Iterable, Iterator, Optional
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
 # Directories whose loose files are packed into resources/<name>.zip instead.
+# Zip basename stays ideal_12_data.zip; target expands under resources/ideal/.
 NESTED_RESOURCE_DIRS: tuple[tuple[str, bool], ...] = (
-    ("resources/ideal_12_data", False),
+    ("resources/ideal/ideal_12_data", False),
     ("resources/knotplot", False),
     ("resources/Knots_FourierSeries", False),
     ("resources/Results", True),

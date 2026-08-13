@@ -1,0 +1,59 @@
+..FF..EE.EE.F......                                                      [100%]
+=================================== ERRORS ====================================
+_______ ERROR at setup of test_ideal_sources_resolve_under_ideal_subdir _______
+E   Failed: Gilbert ideal.txt not resolved via get_ideal_txt_path() (deelplan res-0/res-1). Expected resources/ideal.txt or resources/ideal/ideal.txt.
+__________ ERROR at setup of test_ideal_txt_and_12_data_under_ideal ___________
+E   Failed: Gilbert ideal.txt not resolved via get_ideal_txt_path() (deelplan res-0/res-1). Expected resources/ideal.txt or resources/ideal/ideal.txt.
+_________ ERROR at setup of test_find_ideal_ab_still_works_after_move _________
+E   Failed: Gilbert ideal.txt not resolved via get_ideal_txt_path() (deelplan res-0/res-1). Expected resources/ideal.txt or resources/ideal/ideal.txt.
+__________ ERROR at setup of test_traversal_guard_rejects_slash_keys __________
+E   Failed: Gilbert ideal.txt not resolved via get_ideal_txt_path() (deelplan res-0/res-1). Expected resources/ideal.txt or resources/ideal/ideal.txt.
+================================== FAILURES ===================================
+E   AssertionError: Missing resource files:
+        - ideal: missing file ideal/ideal.txt
+        - ideal_11a: missing file ideal/ideal_11a.txt
+        - ideal_11n: missing file ideal/ideal_11n.txt
+        - idealLinks: missing file ideal/idealLinks.txt
+        - idealLinks_10a: missing file ideal/idealLinks_10a.txt
+        - idealLinks_10n: missing file ideal/idealLinks_10n.txt
+        - ideal_short: missing file ideal/ideal_short.txt
+        - ideal_favorites.txt: missing file ideal/ideal_favorites.txt
+    assert not ['ideal: missing file ideal/ideal.txt', 'ideal_11a: missing file ideal/ideal_11a.txt', 'ideal_11n: missing file ideal/... 'idealLinks_10a: missing file ideal/idealLinks_10a.txt', 'idealLinks_10n: missing file ideal/idealLinks_10n.txt', ...]
+C:\workspace\projects\SSTcore\tests\test_resource_inventory.py:81: AssertionError: Missing resource files:
+E   AssertionError: get_ideal_file_path('ideal') returned None
+    assert None is not None
+C:\workspace\projects\SSTcore\tests\test_resource_inventory.py:90: AssertionError: get_ideal_file_path('ideal') returned None
+E   assert None is not None
+C:\workspace\projects\SSTcore\tests\test_ideal_resources.py:21: assert None is not None
+============================== warnings summary ===============================
+tests/test_resource_inventory.py::test_knotplot_ids_resolve_via_api
+  C:\workspace\projects\SSTcore\tests\test_resource_inventory.py:99: DeprecationWarning: SSTcore.get_knotplot_ideal_path is deprecated; use get_knotplot_ab_path (deelplan res-4).
+    path = sstcore.get_knotplot_ideal_path(kid)
+
+tests/test_ideal_resources.py::test_knotplot_ideal_not_used_for_ab_lookup
+  C:\workspace\projects\SSTcore\tests\test_ideal_resources.py:57: DeprecationWarning: SSTcore.get_knotplot_ideal_path is deprecated; use get_knotplot_ab_path (deelplan res-4).
+    kp_path = sstcore.get_knotplot_ideal_path("knot_3.1")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=================================== PASSES ====================================
+=========================== short test summary info ===========================
+PASSED tests/test_resource_inventory.py::test_resources_dir_resolves
+PASSED tests/test_resource_inventory.py::test_manifest_not_empty
+PASSED tests/test_resource_inventory.py::test_knotplot_ids_resolve_via_api
+PASSED tests/test_resource_inventory.py::test_fseries_stems_loadable
+PASSED tests/test_ideal_layout_migration.py::test_flat_legacy_shim_via_sstcore_resources
+PASSED tests/test_ideal_resources.py::test_import_shims
+PASSED tests/test_ideal_resources.py::test_find_ideal_ab_block_by_id_trefoil
+PASSED tests/test_ideal_resources.py::test_find_ideal_ab_block_by_id_missing_returns_none
+PASSED tests/test_ideal_resources.py::test_get_ideal_ab_matches_find
+PASSED tests/test_ideal_resources.py::test_particle_evaluator_trefoil
+PASSED tests/test_ideal_resources.py::test_particle_evaluator_rejects_knotplot_style_id
+PASSED tests/test_ideal_resources.py::test_knotplot_ideal_not_used_for_ab_lookup
+ERROR tests/test_ideal_layout_migration.py::test_ideal_sources_resolve_under_ideal_subdir
+ERROR tests/test_ideal_layout_migration.py::test_ideal_txt_and_12_data_under_ideal
+ERROR tests/test_ideal_layout_migration.py::test_find_ideal_ab_still_works_after_move
+ERROR tests/test_ideal_layout_migration.py::test_traversal_guard_rejects_slash_keys
+FAILED tests/test_resource_inventory.py::test_every_manifest_entry_exists_with_matching_sha256
+FAILED tests/test_resource_inventory.py::test_ideal_keys_resolve_via_api - As...
+FAILED tests/test_ideal_resources.py::test_resources_dir_and_ideal_txt - asse...
+3 failed, 12 passed, 2 warnings, 4 errors in 0.20s

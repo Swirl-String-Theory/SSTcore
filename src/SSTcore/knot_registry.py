@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+import json
 import re
 from dataclasses import dataclass
 from enum import Enum
+from pathlib import Path
 from typing import List, Optional, Union
 
 _AB_ID_RE = re.compile(r"^\d+(:\d+)+$")
@@ -24,6 +26,7 @@ class KnotSource(str, Enum):
 class KnotCurveRole(str, Enum):
     CANON_IDEAL = "canon_ideal"
     LEGACY_IMPORT = "legacy_import"
+    RELAXED_IMPORT = "relaxed_import"
     ANALYTIC_TEST = "analytic_test"
 
 
@@ -87,7 +90,15 @@ def _normalize_ref(ref: str) -> str:
 def _resolve_triple_gear(ref: str) -> str:
     key = ref.lower().replace(" ", "-")
     if key in _TRIPLE_GEAR_ALIASES or key == "knot_tl3.3_gear":
-        return "knot_TL3.3_Gear"
+        # Prefer INDEX alias target when present (torus_3.3).
+        try:
+            sst = _sstcore_package()
+            normalized = sst.normalize_knotplot_id("knot_TL3.3_Gear")
+            if normalized:
+                return normalized
+        except Exception:
+            pass
+        return "torus_3.3"
     return ref
 
 
@@ -187,16 +198,29 @@ def resolve_knot_ref(
         ab_m = re.search(r'Id="(\d+(:\d+)+)"', xml)
         ab_id = ab_m.group(1) if ab_m else None
         native_l, rope_l = _parse_ab_header_ld(xml)
+        knotplot_name = name if name.startswith(("knot_", "link_", "torus_")) else f"knot_{name}"
+        role = KnotCurveRole.LEGACY_IMPORT
+        # Prefer INDEX.json status when present.
+        try:
+            index = Path(path).resolve().parents[1] / "INDEX.json"
+            if index.is_file():
+                data = json.loads(index.read_text(encoding="utf-8"))
+                for entry in data.get("entries") or []:
+                    if entry.get("id") in (knotplot_name, name) and entry.get("relaxed"):
+                        role = KnotCurveRole.RELAXED_IMPORT
+                        break
+        except (OSError, json.JSONDecodeError, TypeError, IndexError):
+            pass
         return KnotResolution(
             ref=ref,
             source=KnotSource.KNOTPLOT,
-            role=KnotCurveRole.LEGACY_IMPORT,
+            role=role,
             canonical_ab_id=ab_id,
             native_length=native_l,
             ropelength=rope_l,
             closure_gap=None,
             fremlin_label=None,
-            knotplot_name=name if name.startswith("knot_") else f"knot_{name}",
+            knotplot_name=knotplot_name,
             ideal_xml=xml,
             bundle_path=str(path),
         )

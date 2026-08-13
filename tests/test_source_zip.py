@@ -41,7 +41,8 @@ def test_should_exclude_file(rel: str) -> None:
 
 
 def test_should_include_canonical_paths() -> None:
-    assert not should_exclude_file("resources/ideal.txt")
+    assert not should_exclude_file("resources/ideal/ideal.txt")
+    assert not should_exclude_file("resources/ideal.txt")  # legacy flat
     assert not should_exclude_file("src/SSTcore/__init__.py")
     assert not should_exclude_file("resources/README.md")
 
@@ -56,18 +57,23 @@ def test_collect_source_files_includes_readme() -> None:
 
 
 def test_repo_rel_path_uses_forward_slashes(tmp_path: Path) -> None:
-    nested = tmp_path / "resources" / "ideal_12_data"
+    nested = tmp_path / "resources" / "ideal" / "ideal_12_data"
     nested.mkdir(parents=True)
     sample = nested / "12a1.txt"
     sample.write_text("x", encoding="utf-8")
-    resolved = repo_rel_path(tmp_path, "resources/ideal_12_data/12a1.txt")
+    resolved = repo_rel_path(tmp_path, "resources/ideal/ideal_12_data/12a1.txt")
     assert resolved == sample
     assert resolved.is_file()
 
 
+def _ideal_txt_present() -> bool:
+    root = REPO_ROOT / "resources"
+    return (root / "ideal" / "ideal.txt").is_file() or (root / "ideal.txt").is_file()
+
+
 def test_build_source_zip_smoke(tmp_path: Path) -> None:
-    if not (REPO_ROOT / "resources" / "ideal.txt").is_file():
-        pytest.skip("resources/ideal.txt missing")
+    if not _ideal_txt_present():
+        pytest.skip("resources ideal.txt missing")
     out = tmp_path / "SSTcore_source_test.zip"
     build_source_zip(REPO_ROOT, out)
     assert out.is_file()
@@ -76,7 +82,10 @@ def test_build_source_zip_smoke(tmp_path: Path) -> None:
     prefix = f"SSTcore-v{version}/"
     with zipfile.ZipFile(out) as zf:
         names = {n.replace("\\", "/") for n in zf.namelist()}
-        assert f"{prefix}resources/ideal.txt" in names
+        assert (
+            f"{prefix}resources/ideal/ideal.txt" in names
+            or f"{prefix}resources/ideal.txt" in names
+        )
         assert f"{prefix}resources/README.md" in names
         assert f"{prefix}resources/ideal_12_data.zip" in names
         assert f"{prefix}resources/knotplot.zip" in names
@@ -90,8 +99,8 @@ def test_build_source_zip_smoke(tmp_path: Path) -> None:
 
 
 def test_unpack_roundtrip(tmp_path: Path) -> None:
-    if not (REPO_ROOT / "resources" / "ideal.txt").is_file():
-        pytest.skip("resources/ideal.txt missing")
+    if not _ideal_txt_present():
+        pytest.skip("resources ideal.txt missing")
 
     out = tmp_path / "bundle.zip"
     build_source_zip(REPO_ROOT, out)
@@ -127,7 +136,13 @@ def test_unpack_roundtrip(tmp_path: Path) -> None:
     from unpack_source_resources import unpack_resources  # noqa: E402
 
     unpack_resources(work, force=True, quiet=True)
-    assert (work / "resources" / "ideal.txt").is_file()
+    assert (
+        (work / "resources" / "ideal" / "ideal.txt").is_file()
+        or (work / "resources" / "ideal.txt").is_file()
+    )
+    assert (work / "resources" / "ideal" / "ideal_12_data").is_dir() or (
+        work / "resources" / "ideal_12_data"
+    ).is_dir()
     fseries = list((work / "resources" / "Knots_FourierSeries").rglob("*.fseries"))
     assert fseries, "expected .fseries after unpack"
     assert not any(p.suffix.lower() == ".stl" for p in (work / "resources" / "Knots_FourierSeries").rglob("*"))
