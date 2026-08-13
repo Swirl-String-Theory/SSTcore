@@ -157,6 +157,16 @@ add_library(sstcore_lib STATIC
         src/value_origin.cpp
         src/evidence_report.cpp
         src/sst_action_phase.cpp
+        src/density_ontology.cpp
+        src/rotor_participation.cpp
+        src/scaling_audit.cpp
+        src/worldsheet_guards.cpp
+        src/ideal_knot_regime.cpp
+        src/transverse_projector.cpp
+        src/spectro_response.cpp
+        src/maxwell_kinetic.cpp
+        src/mechanical_falsifier.cpp
+        src/swirl_tonic.cpp
         src/sst_sha256.cpp
         ${CMAKE_BINARY_DIR}/generated/knot_files_embedded.cpp
 )
@@ -216,6 +226,16 @@ if(SST_BUILD_PYTHON_BINDINGS)
             src/value_origin_py.cpp
             src/evidence_report_py.cpp
             src/sst_action_phase_py.cpp
+            src/density_ontology_py.cpp
+            src/rotor_participation_py.cpp
+            src/scaling_audit_py.cpp
+            src/worldsheet_guards_py.cpp
+            src/ideal_knot_regime_py.cpp
+            src/transverse_projector_py.cpp
+            src/spectro_response_py.cpp
+            src/maxwell_kinetic_py.cpp
+            src/mechanical_falsifier_py.cpp
+            src/swirl_tonic_py.cpp
             src/sst_gravity_py.cpp
             src/sst_extensions_py.cpp
             src/sst_integrator_py.cpp)
@@ -448,6 +468,16 @@ if(NODE_EXECUTABLE)
             src/value_origin_node.cpp
             src/evidence_report_node.cpp
             src/sst_action_phase_node.cpp
+            src/density_ontology_node.cpp
+            src/rotor_participation_node.cpp
+            src/scaling_audit_node.cpp
+            src/worldsheet_guards_node.cpp
+            src/ideal_knot_regime_node.cpp
+            src/transverse_projector_node.cpp
+            src/spectro_response_node.cpp
+            src/maxwell_kinetic_node.cpp
+            src/mechanical_falsifier_node.cpp
+            src/swirl_tonic_node.cpp
     )
 
         target_include_directories(sstcore_node PRIVATE

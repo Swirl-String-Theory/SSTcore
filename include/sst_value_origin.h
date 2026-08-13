@@ -48,6 +48,20 @@ public:
     // Round rho_f to 2 significant figures (canonical display policy).
     [[nodiscard]] static double rho_f_two_sigfig(double rho_f);
 
+    // Canon v0.8.29: rho_f is a 2-sf calibration; not a derived uncertainty band.
+    [[nodiscard]] static bool rho_f_is_two_sigfig_calibration(double rho_f);
+
+    // Dependency guard: rescaling rho_eff must not alter calibrated triad primitives.
+    // Returns true when (v_swirl, omega_c, r_c, gamma_0) are unchanged under a rho rescale.
+    [[nodiscard]] static bool rho_eff_rescale_preserves_calibrated_primitives(
+        double v_swirl_before, double omega_c_before, double r_c_before, double gamma_0_before,
+        double v_swirl_after, double omega_c_after, double r_c_after, double gamma_0_after,
+        double rel_tol = 0.0);
+
+    // Block treating a VAM line-inertia (kg/m) expression as a derivation of rho_f (kg/m^3).
+    [[nodiscard]] static bool reject_vam_line_inertia_as_rho_f_derivation(
+        double proposed_kg_per_m, double proposed_rho_f_kg_per_m3);
+
     [[nodiscard]] static CanonicalValue make_canonical_value(
         const std::string& name, double value, ValueOrigin origin, int significant_figures = -1);
 };

@@ -65,6 +65,34 @@ double ValueOriginAPI::rho_f_two_sigfig(double rho_f) {
     return std::round(rho_f / scale) * scale;
 }
 
+bool ValueOriginAPI::rho_f_is_two_sigfig_calibration(double rho_f) {
+    if (!(rho_f > 0.0) || !std::isfinite(rho_f)) return false;
+    const double rounded = rho_f_two_sigfig(rho_f);
+    return std::abs(rounded - rho_f) <= 1e-30 * std::max(1.0, std::abs(rho_f));
+}
+
+bool ValueOriginAPI::rho_eff_rescale_preserves_calibrated_primitives(
+    double v_swirl_before, double omega_c_before, double r_c_before, double gamma_0_before,
+    double v_swirl_after, double omega_c_after, double r_c_after, double gamma_0_after,
+    double rel_tol) {
+    auto close = [rel_tol](double a, double b) {
+        const double scale = std::max({1.0, std::abs(a), std::abs(b)});
+        return std::abs(a - b) <= rel_tol * scale;
+    };
+    return close(v_swirl_before, v_swirl_after)
+        && close(omega_c_before, omega_c_after)
+        && close(r_c_before, r_c_after)
+        && close(gamma_0_before, gamma_0_after);
+}
+
+bool ValueOriginAPI::reject_vam_line_inertia_as_rho_f_derivation(
+    double proposed_kg_per_m, double proposed_rho_f_kg_per_m3) {
+    // Dimensional mismatch: kg/m cannot derive kg/m^3 without an explicit length bridge.
+    (void)proposed_kg_per_m;
+    (void)proposed_rho_f_kg_per_m3;
+    return true; // always reject unsupported provenance
+}
+
 CanonicalValue ValueOriginAPI::make_canonical_value(
     const std::string& name, double value, ValueOrigin origin, int significant_figures) {
     return CanonicalValue{name, value, origin, significant_figures};

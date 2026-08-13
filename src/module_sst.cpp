@@ -48,6 +48,16 @@ void bind_kam_diagnostics(py::module_& m);
 void bind_value_origin(py::module_& m);
 void bind_evidence_report(py::module_& m);
 void bind_action_phase(py::module_& m);
+void bind_density_ontology(py::module_& m);
+void bind_rotor_participation(py::module_& m);
+void bind_scaling_audit(py::module_& m);
+void bind_worldsheet_guards(py::module_& m);
+void bind_ideal_knot_regime(py::module_& m);
+void bind_transverse_projector(py::module_& m);
+void bind_spectro_response(py::module_& m);
+void bind_maxwell_kinetic(py::module_& m);
+void bind_mechanical_falsifier(py::module_& m);
+void bind_swirl_tonic(py::module_& m);
 
 
 // Pip/setuptools wheels use SSTcore._native; CMake builds keep the sstcore module name.
@@ -98,6 +108,16 @@ PYBIND11_MODULE(sstcore, m) {
   bind_value_origin(m);
   bind_evidence_report(m);
   bind_action_phase(m);
+  bind_density_ontology(m);
+  bind_rotor_participation(m);
+  bind_scaling_audit(m);
+  bind_worldsheet_guards(m);
+  bind_ideal_knot_regime(m);
+  bind_transverse_projector(m);
+  bind_spectro_response(m);
+  bind_maxwell_kinetic(m);
+  bind_mechanical_falsifier(m);
+  bind_swirl_tonic(m);
  // module-wide listing utility
     m.def(
         "list_bindings",

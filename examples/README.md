@@ -52,6 +52,8 @@ npm run examples:node:all
 | `value_origin_node.cpp` | `example_value_origin.ts` | `example_value_origin.py` |
 | `evidence_report_node.cpp` | `example_evidence_report.ts` | `example_evidence_report.py` |
 | `sst_action_phase_node.cpp` | `example_action_phase.ts` | `example_action_phase.py` |
+| density / rotor / scaling | `example_density_ontology.ts` | `example_density_ontology.py` |
+| worldsheet / ideal / projector / Maxwell | `example_maxwell_canon.ts` | `example_maxwell_canon.py` |
 
 If a binding is still a stub, the TypeScript example prints `[SKIP]` and exits 0.
 

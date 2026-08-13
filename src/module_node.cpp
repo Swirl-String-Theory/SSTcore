@@ -77,6 +77,16 @@ void bind_kam_diagnostics(Napi::Env env, Napi::Object exports);
 void bind_value_origin(Napi::Env env, Napi::Object exports);
 void bind_evidence_report(Napi::Env env, Napi::Object exports);
 void bind_action_phase(Napi::Env env, Napi::Object exports);
+void bind_density_ontology(Napi::Env env, Napi::Object exports);
+void bind_rotor_participation(Napi::Env env, Napi::Object exports);
+void bind_scaling_audit(Napi::Env env, Napi::Object exports);
+void bind_worldsheet_guards(Napi::Env env, Napi::Object exports);
+void bind_ideal_knot_regime(Napi::Env env, Napi::Object exports);
+void bind_transverse_projector(Napi::Env env, Napi::Object exports);
+void bind_spectro_response(Napi::Env env, Napi::Object exports);
+void bind_maxwell_kinetic(Napi::Env env, Napi::Object exports);
+void bind_mechanical_falsifier(Napi::Env env, Napi::Object exports);
+void bind_swirl_tonic(Napi::Env env, Napi::Object exports);
 
 static Napi::Object EngineInfo(const Napi::CallbackInfo& info) {
     Napi::Env env = info.Env();
@@ -124,6 +134,16 @@ static Napi::Object GetCapabilities(const Napi::CallbackInfo& info) {
     o.Set("valueOrigin", true);
     o.Set("evidenceReport", true);
     o.Set("actionPhase", true);
+    o.Set("densityOntology", true);
+    o.Set("rotorParticipation", true);
+    o.Set("scalingAudit", true);
+    o.Set("worldsheetGuards", true);
+    o.Set("idealKnotRegime", true);
+    o.Set("transverseProjector", true);
+    o.Set("spectroResponse", true);
+    o.Set("maxwellKinetic", true);
+    o.Set("mechanicalFalsifier", true);
+    o.Set("swirlTonic", true);
     o.Set("continuousReach", true);
     o.Set("polygonalGauss", true);
     o.Set("filamentVelocity", true);
@@ -184,6 +204,16 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
     bind_value_origin(env, exports);
     bind_evidence_report(env, exports);
     bind_action_phase(env, exports);
+    bind_density_ontology(env, exports);
+    bind_rotor_participation(env, exports);
+    bind_scaling_audit(env, exports);
+    bind_worldsheet_guards(env, exports);
+    bind_ideal_knot_regime(env, exports);
+    bind_transverse_projector(env, exports);
+    bind_spectro_response(env, exports);
+    bind_maxwell_kinetic(env, exports);
+    bind_mechanical_falsifier(env, exports);
+    bind_swirl_tonic(env, exports);
 
     exports.Set("engineInfo", Napi::Function::New(env, EngineInfo));
     exports.Set("getCapabilities", Napi::Function::New(env, GetCapabilities));

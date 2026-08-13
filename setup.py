@@ -235,7 +235,7 @@ def _windows_msvc_toolset_defaults() -> None:
 
 _windows_msvc_toolset_defaults()
 
-__version__ = "0.8.28"
+__version__ = "0.8.36"
 base_dir = os.path.dirname(os.path.abspath(__file__))
 # Python import package: src/SSTcore/ (repo root is not the import package).
 _PYTHON_PKG = "SSTcore"
@@ -978,6 +978,16 @@ src_files = [
     "src/value_origin.cpp",
     "src/evidence_report.cpp",
     "src/sst_action_phase.cpp",
+    "src/density_ontology.cpp",
+    "src/rotor_participation.cpp",
+    "src/scaling_audit.cpp",
+    "src/worldsheet_guards.cpp",
+    "src/ideal_knot_regime.cpp",
+    "src/transverse_projector.cpp",
+    "src/spectro_response.cpp",
+    "src/maxwell_kinetic.cpp",
+    "src/mechanical_falsifier.cpp",
+    "src/swirl_tonic.cpp",
     "src/sst_sha256.cpp",
 ]
 

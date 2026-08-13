@@ -9,7 +9,7 @@ from typing import Optional, List, Tuple, Dict, Any, Union
 from dataclasses import dataclass
 from enum import Enum
 
-__version__ = "0.8.28"
+__version__ = "0.8.36"
 # Optie A: alias of __version__ (same string; not a separate compat channel).
 CANON_VERSION = __version__
 

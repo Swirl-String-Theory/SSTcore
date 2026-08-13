@@ -37,6 +37,18 @@ void bind_value_origin(py::module_& m) {
                     &sst::ValueOriginAPI::bare_mass_from_dimensionless_length,
                     py::arg("L_tot"), py::arg("m_e"))
         .def_static("rho_f_two_sigfig", &sst::ValueOriginAPI::rho_f_two_sigfig, py::arg("rho_f"))
+        .def_static("rho_f_is_two_sigfig_calibration", &sst::ValueOriginAPI::rho_f_is_two_sigfig_calibration,
+                    py::arg("rho_f"))
+        .def_static("rho_eff_rescale_preserves_calibrated_primitives",
+                    &sst::ValueOriginAPI::rho_eff_rescale_preserves_calibrated_primitives,
+                    py::arg("v_swirl_before"), py::arg("omega_c_before"), py::arg("r_c_before"),
+                    py::arg("gamma_0_before"),
+                    py::arg("v_swirl_after"), py::arg("omega_c_after"), py::arg("r_c_after"),
+                    py::arg("gamma_0_after"),
+                    py::arg("rel_tol") = 0.0)
+        .def_static("reject_vam_line_inertia_as_rho_f_derivation",
+                    &sst::ValueOriginAPI::reject_vam_line_inertia_as_rho_f_derivation,
+                    py::arg("proposed_kg_per_m"), py::arg("proposed_rho_f_kg_per_m3"))
         .def_static("make_canonical_value", &sst::ValueOriginAPI::make_canonical_value,
                     py::arg("name"), py::arg("value"), py::arg("origin"),
                     py::arg("significant_figures") = -1);

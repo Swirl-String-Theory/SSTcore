@@ -25,10 +25,10 @@ if (typeof sst.engineInfo !== 'function') {
 }
 const info = sst.engineInfo();
 console.log('engineInfo:', JSON.stringify(info));
-assert.strictEqual(info.engineVersion, '0.8.28', 'engineVersion must be 0.8.28');
+assert.strictEqual(info.engineVersion, '0.8.36', 'engineVersion must be 0.8.36');
 assert.ok(info.canonVersion, 'canonVersion must be present');
-assert.strictEqual(info.canonVersion, '0.8.28', 'canonVersion must equal package (Optie A)');
-assert.strictEqual(info.packageVersion, '0.8.28', 'packageVersion must be 0.8.28');
+assert.strictEqual(info.canonVersion, '0.8.36', 'canonVersion must equal package (Optie A)');
+assert.strictEqual(info.packageVersion, '0.8.36', 'packageVersion must be 0.8.36');
 assert.strictEqual(info.canonVersion, info.packageVersion, 'canonVersion must equal packageVersion');
 assert.ok(info.numericProfile, 'numericProfile must be present');
 assert.notStrictEqual(
@@ -67,6 +67,16 @@ assert.strictEqual(caps.kamDiagnostics, true);
 assert.strictEqual(caps.valueOrigin, true);
 assert.strictEqual(caps.evidenceReport, true);
 assert.strictEqual(caps.actionPhase, true);
+assert.strictEqual(caps.densityOntology, true);
+assert.strictEqual(caps.rotorParticipation, true);
+assert.strictEqual(caps.scalingAudit, true);
+assert.strictEqual(caps.worldsheetGuards, true);
+assert.strictEqual(caps.idealKnotRegime, true);
+assert.strictEqual(caps.transverseProjector, true);
+assert.strictEqual(caps.spectroResponse, true);
+assert.strictEqual(caps.maxwellKinetic, true);
+assert.strictEqual(caps.mechanicalFalsifier, true);
+assert.strictEqual(caps.swirlTonic, true);
 
 if (typeof sst.listBindings === 'function') {
   const lb = sst.listBindings();
@@ -263,6 +273,32 @@ if (typeof sst.massShellHamiltonian !== 'function') fail('massShellHamiltonian m
 {
   assert.ok(Math.abs(sst.massShellHamiltonian(3,4,1) - 5) < 1e-12);
   console.log('✓ massShellHamiltonian');
+}
+
+if (typeof sst.rhoRefLegacy !== 'function') fail('rhoRefLegacy missing');
+{
+  assert.strictEqual(sst.rhoRefLegacy(), 7.0e-7);
+  assert.strictEqual(sst.classifyObservableScaling('acceleration'), 'A');
+  console.log('✓ rhoRefLegacy/scaling');
+}
+
+if (typeof sst.evaluateRotorParticipation !== 'function') fail('evaluateRotorParticipation missing');
+{
+  const r = sst.evaluateRotorParticipation();
+  assert.ok(r.jOmegaRot > 0);
+  console.log('✓ evaluateRotorParticipation');
+}
+
+if (typeof sst.projectorSphereIntegral !== 'function') fail('projectorSphereIntegral missing');
+{
+  assert.ok(Math.abs(sst.projectorSphereIntegral() - (8 * Math.PI / 3)) < 1e-12);
+  console.log('✓ projectorSphereIntegral');
+}
+
+if (typeof sst.maxwellThreeGate !== 'function') fail('maxwellThreeGate missing');
+{
+  assert.strictEqual(sst.maxwellThreeGate(1, 2, 1, 0.1, 1), true);
+  console.log('✓ maxwellThreeGate');
 }
 
 console.log('\nBasic test completed OK');

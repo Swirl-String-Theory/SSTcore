@@ -25,6 +25,8 @@ def test_bernoulli_pressure_default_rho_matches_canon() -> None:
 
 def test_sst_mass_scale_context_from_values() -> None:
   # SSTMassScaleContext is C++ only in P1; verify Python canon values route exists.
+  # Canon 0.8.32+: values().rho_f returns legacy rho_ref (=7e-7), not a calibrated primitive.
     v = sstcore.SSTCanonicalConstants.values()
     assert math.isclose(v.rho_f, 7.0e-7, rel_tol=0.0, abs_tol=0.0)
+    assert math.isclose(sstcore.ScalingAuditAPI.rho_ref_legacy(), 7.0e-7, rel_tol=0.0, abs_tol=0.0)
     assert math.isclose(v.c, 299792458.0, rel_tol=0.0, abs_tol=0.0)

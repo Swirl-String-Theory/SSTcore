@@ -52,6 +52,14 @@ SSTcore v0.8.XX: <korte why — canon deelplan>
 | 0.8.26 | `SSTcore v0.8.26: Fmax provenance and M0(T) helpers` |
 | 0.8.27 | `SSTcore v0.8.27: CheckKind and evidence export` |
 | 0.8.28 | `SSTcore v0.8.28: action–phase mass-shell clock` |
+| 0.8.29 | `SSTcore v0.8.29: rho_f provenance and dependency guards` |
+| 0.8.30 | `SSTcore v0.8.30: density ontology and dimensional validator` |
+| 0.8.31 | `SSTcore v0.8.31: rotor participation and phi_dyn diagnostics` |
+| 0.8.32 | `SSTcore v0.8.32: rho_ref legacy and scaling audit` |
+| 0.8.33 | `SSTcore v0.8.33: worldsheet form-degree guards` |
+| 0.8.34 | `SSTcore v0.8.34: ideal-knot regime and Moffatt–Ricca` |
+| 0.8.35 | `SSTcore v0.8.35: transverse projector 8pi/3 response` |
+| 0.8.36 | `SSTcore v0.8.36: Maxwell spectro / kinetic / falsifier / swirl-tonic` |
 
 ## Canon-bronpaden
 
@@ -123,6 +131,14 @@ Menselijke labels (alleen toelichting, geen machine-enum):
 | Snapshot vs recompute | 0.8.26 | — |
 | `CheckKind` + evidence-export | 0.8.27 | retrofit eerdere modules |
 | Action–phase mass-shell | **0.8.28** | — |
+| ρ_f dependency / provenance guards | **0.8.29** | hergebruik value_origin |
+| Density ontology (`ρ_sub`/`ρ_eff`/`J_ω`/`μ_ℓ`) | **0.8.30** | — |
+| Rotor / `φ_dyn` / `ℓ_ρ,eq` | **0.8.31** | — |
+| `ρ_ref` legacy + A/B/C/Q/X scaling | **0.8.32** | breaking vs 0.8.28 defaults |
+| Worldsheet two-form guards | **0.8.33** | — |
+| Ideal-knot regime + Moffatt–Ricca | **0.8.34** | hergebruik writhe/twist/KKT |
+| Transverse projector `8π/3` | **0.8.35** | — |
+| Maxwell spectro / kinetic / falsifier / swirl-tonic | **0.8.36** | — |
 
 ## Wiring checklist (elk nieuw C++-module)
 
