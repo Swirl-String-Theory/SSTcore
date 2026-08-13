@@ -1396,7 +1396,7 @@ def probe_trefoil_triad(sst: Any) -> Dict[str, Any]:
 def probe_examples_coverage() -> Dict[str, Any]:
     """Summary: examples/ demos vs binding modules (Canon paired py/ts preferred)."""
     result: Dict[str, Any] = {
-        "modules_expected": 30,
+        "modules_expected": None,
         "src_example_files": 0,
         "example_files": 0,
         "missing_modules": [],
